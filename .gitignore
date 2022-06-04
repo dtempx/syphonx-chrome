@@ -4,9 +4,12 @@ node_modules
 *.d.ts
 *.log
 *.out
-*.txt
 .env
 .env.*
+.parcel-cache
 .DS_Store
 Thumbs.db
 private
+dist
+!build/jquery.slim.js
+!build/syphonx.js

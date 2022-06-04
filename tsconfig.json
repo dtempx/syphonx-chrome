@@ -1,8 +1,16 @@
 {
     "compilerOptions": {
-      "target": "ES2021",
-      "module": "None",
-      "outDir": "./build",
+
+      // old
+      //"target": "ES2021",
+      //"module": "None",
+      //"outDir": "./build",
+
+      // new
+      "target": "ESNext",
+      "module": "ESNext",
+      "moduleResolution": "node",
+
       "strict": true,
       "skipLibCheck": true
     }
