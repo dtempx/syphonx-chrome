@@ -1,4 +1,3 @@
-
 const background = chrome.runtime.connect({ name: "devtools" });
 
 background.onMessage.addListener(message => {
@@ -10,6 +9,7 @@ background.postMessage({
     tabId: chrome.devtools.inspectedWindow.tabId
 });
 
+// https://developer.chrome.com/docs/extensions/reference/devtools_panels/#method-create
 chrome.devtools.panels.create("SyphonX", "icon16.png", "panel.html", panel => {
     console.log("panel created");
 });

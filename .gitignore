@@ -10,6 +10,4 @@ node_modules
 .DS_Store
 Thumbs.db
 private
-dist
-!build/jquery.slim.js
-!build/syphonx.js
+!dist/*.js

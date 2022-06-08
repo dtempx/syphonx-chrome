@@ -1,6 +1,5 @@
-copy node_modules\jquery\dist\jquery.slim.js build
-copy node_modules\syphonx-core\index.js build\syphonx.js
-
-
-npx parcel build test1.ts --dist-dir dist/ --no-source-maps --no-optimize
-npx parcel build test1.html --dist-dir dist/ --no-source-maps --no-optimize
+REM copy node_modules\jquery\dist\jquery.slim.js build
+REM copy node_modules\syphonx-core\index.js build\syphonx.js
+CALL npx parcel build --no-source-maps --no-optimize --no-content-hash src/panel/panel.html
+CALL npx parcel build --no-source-maps --no-optimize --no-content-hash src/devtools.html
+CALL npx parcel build --no-source-maps --no-optimize src/background.ts

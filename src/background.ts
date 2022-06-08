@@ -1,3 +1,5 @@
+import * as syphonx from "syphonx-core";
+
 async function onDevToolsMessage(message: any, port: chrome.runtime.Port) {
     console.log("DEVTOOLS MESSAGE", message, port);
     if (message.key === "load") {
@@ -52,6 +54,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 /*
 //TEST #2 WORKING!
+declare var $: any;
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("MESSAGE", message);
     if (message.key === "submit") {
@@ -71,3 +74,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }    
 });
 */
+
+//TEST #3
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    console.log("MESSAGE", message);
+    if (message.key === "submit") {
+        const { selector, script } = message;
+        executeScript(message.tabId, syphonx.extract as any, script)
+            .then(result => {
+                console.log("MESSAGE", message, result);
+                sendResponse({ status: "OK", result });
+            });
+        return true;
+    }
+    else {
+        return false;
+    }
+});
