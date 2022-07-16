@@ -1,3 +1,10 @@
+npx parcel build --no-source-maps --no-optimize --no-content-hash src/panel/panel.html
+npx parcel build --no-source-maps --no-optimize --no-content-hash src/devtools.html
+npx parcel build --no-source-maps --no-optimize src/background.ts
+npx http-server dist -c-1 -o
+
+
+
 https://v4.mui.com/
 
 https://developer.chrome.com/docs/extensions/mv3/devtools/

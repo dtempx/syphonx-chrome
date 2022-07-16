@@ -17,8 +17,10 @@ const defaultScript = `[
 
 export interface AppState {
     script: string;
+    selected: string;
     data: unknown;
     setScript: React.Dispatch<React.SetStateAction<string>>;
+    setSelected: React.Dispatch<React.SetStateAction<string>>;
     setData: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -30,12 +32,15 @@ export function useApp() {
 
 export function AppProvider({ children }: { children: JSX.Element }) {
     const [script, setScript] = useState(defaultScript);
+    const [selected, setSelected] = useState("");
     const [data, setData] = useState("");
 
     const value = {
         script,
+        selected,
         data,
         setScript,
+        setSelected,
         setData
     };
 

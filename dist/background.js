@@ -1,5 +1,10 @@
 (() => {
-async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: actions1 , root: root , debug: debug1 , nodes: nodes1 = false , params: params1 = {}  }) {
+const $c762165c71c37c57$var$defaultState = {
+    params: {},
+    log: [],
+    errors: []
+};
+async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , url: url1 , state: state1 , step: step1 , root: root , params: params , debug: debug = false , nodes: nodes1 = false  }) {
     function collapseWhitespace(text, newlines = true) {
         if (typeof text === "string" && text.trim().length === 0) return null;
         else if (typeof text === "string" && newlines) return text.replace(/\s*\n\s*/gm, "\n").replace(/\n{2,}/gm, "\n").replace(/\s{2,}/gm, " ").trim();
@@ -13,7 +18,10 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
         else return null;
     }
     function combineUrl(url, path) {
-        return `${rtrim(url, "/")}/${ltrim(path, "/")}`;
+        if (url && path) return `${rtrim(url, "/")}/${ltrim(path, "/")}`;
+        else if (url) return url;
+        else if (path) return path;
+        else return "";
     }
     function createRegExp(value) {
         if (typeof value === "string" && value.startsWith("/")) {
@@ -45,11 +53,14 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
         } else return input;
     }
     function formatStringValue(value, format, origin) {
-        if (format === "href" && typeof value === "string" && origin) return combineUrl(origin, value);
+        if (format === "href" && typeof value === "string" && origin && !isAbsoluteUrl(value)) return combineUrl(origin, value);
         else if (format === "multiline") return collapseWhitespace(value, true);
         else if (format === "singleline") return collapseWhitespace(value, false);
         else if (format === "none") return value;
         else return value;
+    }
+    function isAbsoluteUrl(url) {
+        return url.startsWith("http://") || url.startsWith("https://");
     }
     function isEmpty(obj) {
         if (obj === undefined || obj === null) return true;
@@ -155,7 +166,7 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
         }
         return text;
     }
-    function trunc(obj, max = 40) {
+    function trunc(obj, max = 80) {
         const text = JSON.stringify(obj);
         if (typeof text === "string") return text.length <= max ? text : `${text[0]}${text.slice(1, max)}…${text[text.length - 1]}`;
         else return "";
@@ -213,29 +224,19 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
         }
     }
     class ExtractContext {
-        constructor(jquery, url, actions, params, debug){
-            const { domain: domain , origin: origin  } = parseUrl(url);
-            if (!domain || !origin) throw new Error("Invalid url");
-            this.actions = actions;
+        constructor(jquery, url, actions, state){
             this.jquery = jquery;
-            this.url = url;
-            this.params = params;
-            this.domain = domain;
-            this.origin = origin;
+            this.actions = actions;
+            this.state = state;
             this.online = typeof jquery.noConflict === "function";
-            this.debug = debug;
-            this.logs = [];
-            this.errors = [];
-            this.data = undefined;
-            this.state = {};
         }
         break({ active: active , when: when  }) {
             if (this.online && (active ?? true)) {
                 if (this.when(when, "BREAK")) {
                     this.log(`BREAK ${when}`);
                     return true;
-                } else this.log(`BREAK BYPASSED ${when}`);
-            } else this.log(`BREAK SKIPPED ${when}`);
+                } else this.log(`BREAK SKIPPED ${when}`);
+            } else this.log(`BREAK BYPASSED ${when}`);
             return false;
         }
         async click({ $: $ , waitfor: waitfor , snooze: snooze , required: required , retry: retry , active: active , when: when  }) {
@@ -252,64 +253,79 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                     });
                     if (result && result.nodes.length > 0) {
                         this.log(`CLICK ${$statements($)}`);
-                        result.nodes[0].click();
+                        const [node] = result.nodes;
+                        node.click();
                         if (waitfor) {
-                            const ok = await this.waitfor(waitfor, "CLICK");
-                            if (ok) {
+                            const code = await this.waitfor(waitfor, "CLICK");
+                            if (!code) {
                                 if (snooze && (mode === "after" || mode === "before-and-after")) {
                                     const seconds = snooze[0];
                                     this.log(`CLICK SNOOZE AFTER (${seconds}s) ${$statements($)}`);
                                     await sleep(seconds * 1000);
                                 }
-                            } else this.error("click-timeout", `Timeout waiting for click result. ${trunc(waitfor.$)}`);
+                            } else if (code === "timeout") {
+                                this.error("click-timeout", `Timeout waiting for click result. ${trunc(waitfor.$)}${waitfor.pattern ? `, pattern=${waitfor.pattern}` : ""}`);
+                                return "timeout";
+                            } else code;
                         }
-                    } else if (required) this.error("click-required", `Required click target not found. ${trunc($)}`);
-                } else this.log(`CLICK BYPASSED ${$statements($)}`);
-            } else this.log(`CLICK SKIPPED ${$statements($)}`);
+                    } else {
+                        if (required) this.error("click-required", `Required click target not found. ${trunc($)}`);
+                        return "not-found";
+                    }
+                } else this.log(`CLICK SKIPPED ${$statements($)}`);
+            } else this.log(`CLICK BYPASSED ${$statements($)}`);
+            return null;
         }
-        async dispatch(action) {
+        async dispatch(action, step) {
             if (action.hasOwnProperty("select")) {
                 const data = this.select(action.select);
-                this.data = merge(this.data, data);
+                this.state.data = merge(this.state.data, data);
             } else if (action.hasOwnProperty("break")) {
-                if (this.break(action.break)) return {
-                    break: true
-                };
-            } else if (action.hasOwnProperty("click")) await this.click(action.click);
-            else if (action.hasOwnProperty("do")) await this.do(action.do);
-            else if (action.hasOwnProperty("repeat")) await this.repeat(action.repeat);
+                if (this.break(action.break)) return "break";
+            } else if (action.hasOwnProperty("click")) {
+                const required = action.click.required;
+                const code = await this.click(action.click);
+                if (code === "timeout" && required) return "timeout";
+                else if (code === "not-found" && required) return "required";
+            } else if (action.hasOwnProperty("repeat")) await this.repeat(action.repeat);
             else if (action.hasOwnProperty("snooze")) await this.snooze(action.snooze);
-            else if (action.hasOwnProperty("waitfor")) await this.waitfor(action.waitfor);
-            return {};
-        }
-        async do({ $: $ , active: active , when: when  }) {
-            if (this.online && (active ?? true)) {
-                if (this.when(when, "DO")) for (const query of $){
-                    const selector = query[0];
-                    const ops = query.slice(1);
-                    if (selector === "{window}" && ops[0][0] === "scrollBottom") {
-                        this.log(`DO ${$statement(query)}`);
-                        await $scrollToBottom();
-                    } else {
-                        this.log(`DO ${$statement(query)}`);
-                        this.resolveQuery(query, "string", false, false, null);
-                    }
+            else if (action.hasOwnProperty("transform")) await this.transform(action.transform);
+            else if (action.hasOwnProperty("waitfor")) {
+                const required = action.waitfor.required;
+                const code = await this.waitfor(action.waitfor);
+                if (code === "timeout" && required) return "timeout";
+            } else if (action.hasOwnProperty("yield")) {
+                const waitfor = this.yield(action.yield || {});
+                if (waitfor) {
+                    this.state.yield = {
+                        step: step,
+                        waitfor: waitfor
+                    };
+                    return "yield";
                 }
-                else this.log(`DO BYPASSED ${$statements($)}`);
-            } else this.log(`DO SKIPPED ${$statements($)}`);
+            }
+            return null;
         }
         error(code, message) {
-            this.errors.push({
+            this.state.errors.push({
                 code: code,
                 message: message
             });
             this.log(`ERROR (${code}): ${message}`);
         }
-        async execute(actions) {
+        async execute(actions, start = 1) {
             for (const action of actions){
-                const result = await this.dispatch(action);
-                if (result.break) break;
+                const step = actions.indexOf(action) + 1;
+                if (step >= start) {
+                    this.log(`step ${step}/${actions.length}`);
+                    const code = await this.dispatch(action, step);
+                    if (code) {
+                        this.log(`break at step ${step}/${actions.length}, code=${code}`);
+                        return;
+                    }
+                }
             }
+            this.log(`${actions.length} steps completed`);
         }
         formatResult(result, type, all, limit, format = "multiline", pattern) {
             const regexp = createRegExp(pattern);
@@ -318,10 +334,10 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 result.value = result.value.slice(0, limit);
             }
             if (type === "string" && result.value instanceof Array) {
-                result.value = result.value.map((value)=>formatStringValue(coerceValue(value, "string"), format, this.origin));
+                result.value = result.value.map((value)=>formatStringValue(coerceValue(value, "string"), format, this.state.origin));
                 if (regexp && !isEmpty(result.value)) result.valid = result.value.every((value)=>regexp.test(value));
             } else if (type === "string") {
-                result.value = formatStringValue(coerceValue(result.value, "string"), format, this.origin);
+                result.value = formatStringValue(coerceValue(result.value, "string"), format, this.state.origin);
                 if (regexp && !isEmpty(result.value)) result.valid = regexp.test(result.value);
             } else if (type === "boolean" && result.value instanceof Array && result.value.length === 0) result.value = false;
             else if (type === "boolean" && result.value instanceof Array && all) result.value = result.value.every((value)=>coerceValue(value, "boolean") === true);
@@ -337,18 +353,25 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
             if (typeof value === "string") {
                 if (type === "number") return parseNumber(value);
                 else if (type === "boolean") return value.trim().length > 0;
-                else if (format === "href" && typeof value === "string" && this.origin) return combineUrl(this.origin, value);
+                else if (format === "href" && typeof value === "string" && this.state.origin) return combineUrl(this.state.origin, value);
                 else if (format === "multiline") return collapseWhitespace(value, true);
                 else if (format === "singleline") return collapseWhitespace(value, false);
                 else if (format === "none") return value;
             }
             return value;
         }
+        html() {
+            if (this.online) return window.document.documentElement.outerHTML;
+            else {
+                const cheerio = this.jquery;
+                return cheerio.html();
+            }
+        }
         keypath(name, context) {
             return context ? `${context.name}.${name || "."}` : `${name || ""}`;
         }
         log(text) {
-            if (this.debug) this.logs.push(text);
+            if (this.state.debug) this.state.log.push(text);
         }
         mergeQueryResult(source, target) {
             if (source && target) {
@@ -402,21 +425,29 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 }
             }
         }
-        async repeat(actions) {
+        async repeat({ actions: actions , limit: limit = 100 , errors: errors = 1  }) {
+            let errorCount = 0;
+            let baselineErrorCount = this.state.errors.length;
             let i = 0;
-            let done = false;
-            while(!done){
-                this.log(`REPEAT #${++i}`);
-                if (i >= 25) {
-                    this.log(`REPEAT MAX`);
-                    break;
-                }
+            while(i < limit){
+                this.log(`REPEAT #${++i} (limit=${limit})`);
                 this.state._page = i;
                 for (const action of actions){
-                    const result = await this.dispatch(action);
-                    if (result.break) break;
+                    const step = actions.indexOf(action) + 1;
+                    const code = await this.dispatch(action, step);
+                    if (code) {
+                        this.log(`REPEAT #${i} -> break at step ${step}/${actions.length}, code=${code}`);
+                        break;
+                    }
+                }
+                this.log(`REPEAT #${i} -> ${actions.length} steps completed`);
+                errorCount = this.state.errors.length - baselineErrorCount;
+                if (errorCount >= errors) {
+                    this.error("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`);
+                    break;
                 }
             }
+            this.log(`REPEAT ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
         }
         resolveQuery(query, type, repeated, all, limit, format, pattern, context) {
             const selector = query[0];
@@ -485,6 +516,10 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                     if (typeof result.value === "string") result.value = cut(result.value, splitter, n, limit);
                     else if (result.value instanceof Array && result.value.every((value)=>typeof value === "string")) result.value = result.value.map((value)=>cut(value, splitter, n, limit));
                     else result.value = null;
+                } else if (operator === "endsWith" && operands[0]) {
+                    const pattern = operands[0];
+                    result.nodes = this.jquery(result.nodes.toArray().filter((element)=>this.jquery(element).text().trim().endsWith(pattern)));
+                    result.value = this.text(result.nodes, format);
                 } else if (operator === "extract") {
                     if (!this.validateOperands(operator, operands, [
                         "string"
@@ -537,7 +572,8 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                         const cheerio = this.jquery;
                         result.value = result.nodes.toArray().map((element)=>cheerio.html(element));
                     }
-                } else if (operator === "last") {
+                } else if (operator === "html" && operands[0] === "inner") result.value = result.nodes.html();
+                else if (operator === "last") {
                     result.nodes = this.jquery(result.nodes.toArray()[result.nodes.length - 1]);
                     result.value = result.value instanceof Array ? result.value[result.value.length - 1] : null;
                 } else if (operator === "ltrim") {
@@ -743,16 +779,15 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                             ...subselect
                         }, item, context);
                         else if (subselect.value) item = this.selectResolveValue(subselect);
-                    } else this.log(`UNION BYPASSED ${this.keypath(select.name, context)} ${union.indexOf(subselect) + 1}/${union.length}`);
-                } else this.log(`UNION SKIPPED ${this.keypath(select.name, context)} ${union.indexOf(subselect) + 1}/${union.length}`);
+                    } else this.log(`UNION SKIPPED ${this.keypath(select.name, context)} ${union.indexOf(subselect) + 1}/${union.length}`);
+                } else this.log(`UNION BYPASSED ${this.keypath(select.name, context)} ${union.indexOf(subselect) + 1}/${union.length}`);
             }
             return item;
         }
         selectResolveValue(select, data) {
             const obj = {
-                data: merge(this.data, data),
-                params: this.params,
-                ...this.state
+                ...this.state,
+                data: merge(this.state.data, data)
             };
             const value = coerceValue(expandTokens(select.value, obj), select.type || "string");
             return {
@@ -782,6 +817,22 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 return nodes.toArray().map((element)=>this.jquery(element).text().trim().replace(/[ ]{2,}/g, " "));
             }
         }
+        async transform(transforms) {
+            for (const transform of transforms)if (transform.active ?? true) {
+                if (this.when(transform.when, "TRANSFORM")) for (const query of transform.$){
+                    const selector = query[0];
+                    const ops = query.slice(1);
+                    if (selector === "{window}" && ops[0][0] === "scrollBottom") {
+                        this.log(`TRANSFORM ${$statement(query)}`);
+                        await $scrollToBottom();
+                    } else {
+                        this.log(`TRANSFORM ${$statement(query)}`);
+                        this.resolveQuery(query, "string", false, false, null);
+                    }
+                }
+                else this.log(`TRANSFORM SKIPPED ${$statements(transform.$)}`);
+            } else this.log(`TRANSFORM BYPASSED ${$statements(transform.$)}`);
+        }
         validateOperands(operator, operands, required, optional = []) {
             for(let i = 0; i < required.length; ++i)if (typeof operands[i] !== required[i]) {
                 this.error("invalid-operand", `'${operator}' operand #${i + 1} is invalid: "${operands[i]}" is not a ${required[i]}`);
@@ -801,17 +852,23 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 if (this.when(when, "WAITFOR")) {
                     if (timeout === undefined) timeout = 30;
                     else if (timeout === null || timeout <= 0) timeout = Infinity;
-                    let pass = false;
+                    let code = null;
                     if ($) {
                         this.log(`${context ? `${context} ` : ""}WAITFOR QUERY ${trunc($)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
-                        pass = await this.waitforQuery($, on, timeout, pattern, context);
+                        code = await this.waitforQuery($, on, timeout, pattern, context);
                     } else if (select) {
                         this.log(`${context ? `${context} ` : ""}WAITFOR SELECT ${trunc(select)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
-                        pass = await this.waitforSelect(select, on, timeout, pattern, context);
+                        code = await this.waitforSelect(select, on, timeout, pattern, context);
                     }
-                    return pass;
-                } else this.log(`${context ? `${context} ` : ""}WAITFOR BYPASSSED ${$statements($)}`);
-            } else this.log(`${context ? `${context} ` : ""}WAITFOR SKIPPED ${$statements($)}`);
+                    return code;
+                } else {
+                    this.log(`${context ? `${context} ` : ""}WAITFOR BYPASSSED ${$statements($)}`);
+                    return null;
+                }
+            } else {
+                this.log(`${context ? `${context} ` : ""}WAITFOR SKIPPED ${$statements($)}`);
+                return null;
+            }
         }
         async waitforQuery($, on, timeout, pattern, context) {
             const t0 = new Date().valueOf();
@@ -842,13 +899,18 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 if (!pass) await sleep(100);
                 elapsed = (new Date().valueOf() - t0) / 1000;
             }
-            this.log(`${context ? `${context} ` : ""}WAITFOR QUERY ${$statements($)} -> ${trunc(result?.value)}${pattern ? ` (valid=${result?.valid})` : ""} -> on=${on} -> ${pass} (${elapsed}s${elapsed > timeout ? " TIMEOUT" : ""})`);
-            return pass;
+            const message = `${context ? `${context} ` : ""}WAITFOR QUERY ${$statements($)} -> ${trunc(result?.value)}${pattern ? ` (valid=${result?.valid})` : ""} -> on=${on} -> ${pass} (${elapsed}s${elapsed > timeout ? " TIMEOUT" : ""})`;
+            this.log(message);
+            if (pass) return null;
+            else {
+                this.error("waitfor-timeout", message);
+                return "timeout";
+            }
         }
         async waitforSelect(selects, on, timeout, pattern, context) {
             for (const select of selects)if (!select.name || !select.name.startsWith("_") || !(!select.type || select.type === "boolean") || select.repeated) {
                 this.error("invalid-select", "waitfor select must all be internal, boolean, and not repeated");
-                return true;
+                return "invalid";
             }
             const t0 = new Date().valueOf();
             let elapsed = 0;
@@ -879,8 +941,13 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
                 if (!pass) await sleep(100);
                 elapsed = (new Date().valueOf() - t0) / 1000;
             }
-            this.log(`${context ? `${context} ` : ""}WAITFOR SELECT ${JSON.stringify(state)}${pattern ? "valid=???" : ""} -> on=${on} -> ${pass} (${elapsed}s${elapsed > timeout ? " TIMEOUT" : ""})`);
-            return pass;
+            const message = `${context ? `${context} ` : ""}WAITFOR SELECT ${JSON.stringify(state)}${pattern ? "valid=???" : ""} -> on=${on} -> ${pass} (${elapsed}s${elapsed > timeout ? " TIMEOUT" : ""})`;
+            this.log(message);
+            if (pass) return null;
+            else {
+                this.error("waitfor-timeout", message);
+                return "timeout";
+            }
         }
         when(when, context) {
             if (when && /^\{\!?_[a-z0-9_]+\}$/i.test(when)) {
@@ -894,23 +961,43 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ url: url1 , actions: 
             } else if (when !== undefined) this.log(`${context ? `${context} ` : ""}WHEN ${JSON.stringify(when)} -> invalid`);
             return true;
         }
+        yield({ active: active , when: when , waitfor: waitfor = "load"  }) {
+            if (this.online && (active ?? true)) {
+                if (this.when(when, "YIELD")) {
+                    this.log(`YIELD ${when} -> ${waitfor}`);
+                    return waitfor;
+                } else this.log(`YIELD SKIPPED ${when}`);
+            } else this.log(`YIELD BYPASSED ${when}`);
+            return undefined;
+        }
     }
     if (!url1) url1 = window.location.href;
-    const obj1 = new ExtractContext(root || $, url1, actions1, params1, !!debug1);
+    const { domain: domain , origin: origin1  } = parseUrl(url1);
+    if (!domain || !origin1) throw new Error("Invalid url");
+    const obj1 = new ExtractContext(root || $, url1 || window.location.href, actions1, {
+        params: {},
+        log: [],
+        errors: [],
+        data: null,
+        ...state1,
+        url: url1,
+        domain: domain,
+        origin: origin1,
+        debug: debug
+    });
     try {
-        await obj1.execute(obj1.actions);
+        await obj1.execute(obj1.actions, step1);
     } catch (err) {
-        if (err instanceof ExtractError) obj1.errors.push(err);
+        if (err instanceof ExtractError) obj1.state.errors.push(err);
         else obj1.error("unknown-error", err instanceof Error ? err.message : "Unknown error.");
     }
     return {
-        url: url1,
-        domain: obj1.domain,
-        data: !nodes1 ? unwrapValue(obj1.data) : obj1.data,
+        ...obj1.state,
+        ok: obj1.state.errors.length === 0,
         online: obj1.online,
-        ok: obj1.errors.length === 0,
-        errors: obj1.errors,
-        log: obj1.debug ? obj1.logs.join("\n") : undefined
+        log: obj1.state.debug ? obj1.state.log.join("\n") : undefined,
+        html: obj1.state.debug ? obj1.html() : undefined,
+        data: !nodes1 ? unwrapValue(obj1.state.data) : obj1.state.data
     };
 } //# sourceMappingURL=index.js.map
 
