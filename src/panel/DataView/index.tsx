@@ -1,16 +1,32 @@
-import React from "react";
-import { TextField } from "@material-ui/core";
-import { useApp } from '../AppContext';
+import React, { useState } from "react";
+import { AppBar, Box, Grid, Tab, Tabs } from "@material-ui/core";
+import JsonView from "./JsonView";
+import ResponseView from "./ResponseView";
+import TableView from "./TableView";
 
 export default () => {
-    const { data } = useApp();
+    const [tab, setTab] = useState(0);
 
     return (
-        <TextField
-            multiline
-            fullWidth
-            value={data}
-            variant="outlined"
-        />
+        <Grid container>
+            <Grid item xs={12}>
+                <AppBar position="static" color="default" style={{ marginBottom: 12 }}>
+                    <Tabs value={tab} onChange={(event, value) => setTab(value)}>
+                        <Tab label="RESULTS"></Tab>
+                        <Tab label="JSON"></Tab>
+                        <Tab label="RESPONSE"></Tab>
+                    </Tabs>
+                </AppBar>
+                <Box component="div" display={tab === 0 ? "block" : "none"}>
+                    <TableView />
+                </Box>
+                <Box component="div" display={tab === 1 ? "block" : "none"}>
+                    <JsonView />
+                </Box>
+                <Box component="div" display={tab === 2 ? "block" : "none"}>
+                    <ResponseView />
+                </Box>
+            </Grid>
+        </Grid>
     );
 }

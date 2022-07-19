@@ -1,10 +1,5 @@
 (() => {
-const $c762165c71c37c57$var$defaultState = {
-    params: {},
-    log: [],
-    errors: []
-};
-async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , url: url1 , state: state1 , step: step1 , root: root , params: params , debug: debug = false , nodes: nodes1 = false  }) {
+async function $c762165c71c37c57$export$f9380c9a627682d3(state1) {
     function collapseWhitespace(text, newlines = true) {
         if (typeof text === "string" && text.trim().length === 0) return null;
         else if (typeof text === "string" && newlines) return text.replace(/\s*\n\s*/gm, "\n").replace(/\n{2,}/gm, "\n").replace(/\s{2,}/gm, " ").trim();
@@ -123,6 +118,17 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
         if (typeof text === "string") return text.replace(regexp, replace);
         else return text;
     }
+    function removeDOMRefs(obj) {
+        if (obj instanceof Array) return obj.map((item)=>removeDOMRefs(item));
+        else if (isObject(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return removeDOMRefs(obj.value);
+        else if (isObject(obj)) {
+            const source = obj;
+            const target = {};
+            for (const key of Object.keys(obj))if (isObject(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = removeDOMRefs(source[key].value);
+            else target[key] = removeDOMRefs(source[key]);
+            return target;
+        } else return obj;
+    }
     function resolveProperty(dictionary, key) {
         if (typeof key === "string") return key.split(".").reduce((result, prop)=>typeof result === "object" && result !== null ? result[prop] : undefined, dictionary);
     }
@@ -181,17 +187,6 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
         else if (typeof obj === "object") return "object";
         else return "unknown";
     }
-    function unwrapValue(obj) {
-        if (obj instanceof Array) return obj.map((item)=>unwrapValue(item));
-        else if (isObject(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return unwrapValue(obj.value);
-        else if (isObject(obj)) {
-            const source = obj;
-            const target = {};
-            for (const key of Object.keys(obj))if (isObject(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = unwrapValue(source[key].value);
-            else target[key] = unwrapValue(source[key]);
-            return target;
-        } else return obj;
-    }
     function $scrollToBottom() {
         return new Promise((resolve)=>{
             let totalHeight = 0;
@@ -224,11 +219,20 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
         }
     }
     class ExtractContext {
-        constructor(jquery, url, actions, state){
-            this.jquery = jquery;
-            this.actions = actions;
+        constructor(state){
+            this.jquery = state.root || $, this.online = typeof this.jquery.noConflict === "function";
+            state.params = state.params || {};
+            state.vars = state.vars || {
+                _iteration: 0
+            };
+            state.errors = state.errors || [];
+            state.debug = state.debug || false;
+            state.log = state.log || "";
+            if (this.online) state.url = window.location.href;
+            const { domain: domain , origin: origin  } = parseUrl(state.url);
+            state.domain = domain || "";
+            state.origin = origin || "";
             this.state = state;
-            this.online = typeof jquery.noConflict === "function";
         }
         break({ active: active , when: when  }) {
             if (this.online && (active ?? true)) {
@@ -295,11 +299,11 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                 const code = await this.waitfor(action.waitfor);
                 if (code === "timeout" && required) return "timeout";
             } else if (action.hasOwnProperty("yield")) {
-                const waitfor = this.yield(action.yield || {});
-                if (waitfor) {
+                const y = this.yield(action.yield || {});
+                if (y) {
                     this.state.yield = {
-                        step: step,
-                        waitfor: waitfor
+                        step: step + 1,
+                        timeout: y.timeout
                     };
                     return "yield";
                 }
@@ -313,14 +317,20 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
             });
             this.log(`ERROR (${code}): ${message}`);
         }
-        async execute(actions, start = 1) {
+        async execute(actions) {
+            const resumeStep = this.state.yield?.step || 0;
+            if (this.state.yield) {
+                this.log(`YIELD SKIPPING TO STEP #${this.state.yield.step}`);
+                this.state.yield = undefined;
+            }
             for (const action of actions){
                 const step = actions.indexOf(action) + 1;
-                if (step >= start) {
-                    this.log(`step ${step}/${actions.length}`);
+                if (step >= resumeStep) {
+                    this.log(`STEP #${step}/${actions.length}`);
+                    this.state.vars._step = step;
                     const code = await this.dispatch(action, step);
                     if (code) {
-                        this.log(`break at step ${step}/${actions.length}, code=${code}`);
+                        this.log(`BREAK AT STEP #${step}/${actions.length}, code=${code}`);
                         return;
                     }
                 }
@@ -347,31 +357,11 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
             else if (type === "number") result.value = coerceValue(result.value, "number");
             return result;
         }
-        formatValue(value, type, format) {
-            type = type?.toLowerCase();
-            format = format?.toLowerCase();
-            if (typeof value === "string") {
-                if (type === "number") return parseNumber(value);
-                else if (type === "boolean") return value.trim().length > 0;
-                else if (format === "href" && typeof value === "string" && this.state.origin) return combineUrl(this.state.origin, value);
-                else if (format === "multiline") return collapseWhitespace(value, true);
-                else if (format === "singleline") return collapseWhitespace(value, false);
-                else if (format === "none") return value;
-            }
-            return value;
-        }
-        html() {
-            if (this.online) return window.document.documentElement.outerHTML;
-            else {
-                const cheerio = this.jquery;
-                return cheerio.html();
-            }
-        }
         keypath(name, context) {
             return context ? `${context.name}.${name || "."}` : `${name || ""}`;
         }
         log(text) {
-            if (this.state.debug) this.state.log.push(text);
+            if (this.state.debug) this.state.log += text + "\n";
         }
         mergeQueryResult(source, target) {
             if (source && target) {
@@ -431,7 +421,7 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
             let i = 0;
             while(i < limit){
                 this.log(`REPEAT #${++i} (limit=${limit})`);
-                this.state._page = i;
+                this.state.vars._page = i;
                 for (const action of actions){
                     const step = actions.indexOf(action) + 1;
                     const code = await this.dispatch(action, step);
@@ -545,7 +535,7 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                         result.value = values;
                     } else if (typeof result.value === "string") result.value = regexpExtract(result.value.trim(), regexp);
                     else result.value = null;
-                } else if (operator === "filterText") {
+                } else if (operator === "accept") {
                     if (!this.validateOperands(operator, operands, [
                         "string"
                     ])) {
@@ -563,6 +553,9 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                         result.nodes = this.jquery(elements);
                         result.value = values;
                     }
+                } else if (operator === "blank") {
+                    result.nodes = this.jquery(result.nodes.toArray().filter((element)=>this.jquery(element).text().trim().length === 0));
+                    result.value = this.text(result.nodes, format);
                 } else if (operator === "first") {
                     result.nodes = this.jquery(result.nodes.toArray()[0]);
                     result.value = result.value instanceof Array ? result.value[0] : null;
@@ -584,6 +577,27 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                         break;
                     }
                     result.value = resolveQueryStringValue(result.value, (text)=>ltrim(text, createRegExp(operands[0]) || operands[0]));
+                } else if (operator === "nonblank") {
+                    result.nodes = this.jquery(result.nodes.toArray().filter((element)=>this.jquery(element).text().trim().length > 0));
+                    result.value = this.text(result.nodes, format);
+                } else if (operator === "reject") {
+                    if (!this.validateOperands(operator, operands, [
+                        "string"
+                    ])) {
+                        result.value = null;
+                        break;
+                    }
+                    const regexp = createRegExp(operands[0]);
+                    if (regexp && result.value instanceof Array && result.value.length === result.nodes.length && result.value.every((value)=>typeof value === "string")) {
+                        const elements = result.nodes.toArray();
+                        const values = result.value;
+                        for(let i = result.value.length - 1; i >= 0; --i)if (regexp.test(result.value[i])) {
+                            elements.splice(i, 1);
+                            values.splice(i, 1);
+                        }
+                        result.nodes = this.jquery(elements);
+                        result.value = values;
+                    }
                 } else if (operator === "replace") {
                     if (!this.validateOperands(operator, operands, [
                         "string",
@@ -634,9 +648,6 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                         break;
                     }
                     result.value = resolveQueryStringValue(result.value, (text)=>trim1(text, createRegExp(operands[0]) || operands[0]));
-                } else if (operator === ":not(:blank)") {
-                    result.nodes = this.jquery(result.nodes.toArray().filter((element)=>this.jquery(element).text().trim().length > 0));
-                    result.value = this.text(result.nodes, format);
                 } else if (isInvocableFrom(result.nodes, operator)) {
                     const delegate1 = result.nodes;
                     const obj2 = delegate1[operator](...operands);
@@ -662,12 +673,12 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                 let item = null;
                 if (this.when(select.when)) {
                     if (select.pivot) item = this.selectResolvePivot(select, item, context);
-                    else if (select.$) item = this.selectResolve(select, item, context);
                     else if (select.union) item = this.selectResolveUnion(select, item, context, data);
+                    else if (select.$) item = this.selectResolve(select, item, context);
                     else if (select.value) item = this.selectResolveValue(select, data);
                 }
                 if (isEmpty(item?.value) && select.required) this.error("select-required", `Required select '${context?.name ? `${context.name}.${select.name}` : select.name}' not found`);
-                if (select.name?.startsWith("_") && item) this.state[select.name] = item.value;
+                if (select.name?.startsWith("_") && item) this.state.vars[select.name] = item.value;
                 else if (select.name) data[select.name] = item;
                 else return item;
             }
@@ -786,8 +797,9 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
         }
         selectResolveValue(select, data) {
             const obj = {
+                ...this.state.vars,
                 ...this.state,
-                data: merge(this.state.data, data)
+                data: removeDOMRefs(merge(this.state.data, data))
             };
             const value = coerceValue(expandTokens(select.value, obj), select.type || "string");
             return {
@@ -930,7 +942,7 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                     });
                     if (result && result.valid !== false) {
                         state[select.name] = result.value;
-                        this.state[select.name] = result.value;
+                        this.state.vars[select.name] = result.value;
                         if (result.value) n += 1;
                     }
                 }
@@ -954,51 +966,35 @@ async function $c762165c71c37c57$export$f9380c9a627682d3({ actions: actions1 , u
                 const i = when.indexOf("_");
                 const key = when.slice(i, -1);
                 const negate = when.includes("!");
-                const value = this.state[key];
+                const value = this.state.vars[key];
                 const result = negate ? !value : !!value;
                 this.log(`${context ? `${context} ` : ""}WHEN ${JSON.stringify(when)} -> ${JSON.stringify(value)} -> ${result}`);
                 return result;
             } else if (when !== undefined) this.log(`${context ? `${context} ` : ""}WHEN ${JSON.stringify(when)} -> invalid`);
             return true;
         }
-        yield({ active: active , when: when , waitfor: waitfor = "load"  }) {
+        yield({ active: active , when: when , timeout: timeout  }) {
             if (this.online && (active ?? true)) {
                 if (this.when(when, "YIELD")) {
-                    this.log(`YIELD ${when} -> ${waitfor}`);
-                    return waitfor;
+                    this.log(`YIELD ${when || "(default)"} -> timeout=${timeout || "(default)"}`);
+                    return {
+                        timeout: timeout
+                    };
                 } else this.log(`YIELD SKIPPED ${when}`);
             } else this.log(`YIELD BYPASSED ${when}`);
             return undefined;
         }
     }
-    if (!url1) url1 = window.location.href;
-    const { domain: domain , origin: origin1  } = parseUrl(url1);
-    if (!domain || !origin1) throw new Error("Invalid url");
-    const obj1 = new ExtractContext(root || $, url1 || window.location.href, actions1, {
-        params: {},
-        log: [],
-        errors: [],
-        data: null,
-        ...state1,
-        url: url1,
-        domain: domain,
-        origin: origin1,
-        debug: debug
-    });
+    const obj1 = new ExtractContext(state1);
+    obj1.state.vars._iteration += 1;
+    obj1.log(`ITERATION #${obj1.state.vars._iteration}${obj1.online ? ` ${window.location.href}` : ""}`);
     try {
-        await obj1.execute(obj1.actions, step1);
+        await obj1.execute(obj1.state.actions);
     } catch (err) {
         if (err instanceof ExtractError) obj1.state.errors.push(err);
         else obj1.error("unknown-error", err instanceof Error ? err.message : "Unknown error.");
     }
-    return {
-        ...obj1.state,
-        ok: obj1.state.errors.length === 0,
-        online: obj1.online,
-        log: obj1.state.debug ? obj1.state.log.join("\n") : undefined,
-        html: obj1.state.debug ? obj1.html() : undefined,
-        data: !nodes1 ? unwrapValue(obj1.state.data) : obj1.state.data
-    };
+    return obj1.state;
 } //# sourceMappingURL=index.js.map
 
 

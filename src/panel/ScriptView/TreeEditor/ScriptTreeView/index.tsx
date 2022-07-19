@@ -1,43 +1,40 @@
-import React, { useState } from "react";
-import { TreeItem, TreeView } from "@material-ui/lab";
-import { useApp } from '../../../AppContext';
-import { parseScript } from "../../../common";
+import React from "react";
+import { Button, Grid, Toolbar } from "@material-ui/core";
+import { useScript } from '../../../ScriptContext';
 import { SelectAction } from "syphonx-core";
-import * as Icons from "@material-ui/icons";
+import ScriptTreeView from "./ScriptTreeView";
 
 export default () => {
-    const { script, selected, setSelected } = useApp();
-    const [expanded, setExpanded] = useState([]);
+    const { script, selected, setSelected, updateScript } = useScript();
+    const select = (script?.actions.find(action => !!(action as SelectAction).select) as SelectAction)?.select || [];
 
-    const actions = parseScript(script);
-    const target = actions.find(action => !!(action as SelectAction).select);
-    const selects = (target as SelectAction)?.select || [];
-    const keypath = "select_1";
-
-    function handleToggle(event: any, nodeIds: any) {
-        setExpanded(nodeIds);
+    function onAddButton() {
+        const name = "unnamed1";
+        select.push({ name });
+        setSelected(name);
+        updateScript();
     }
 
-    function handleSelect(event: any, nodeIds: any) {
-        setSelected(nodeIds);
+    function onRemoveButton() {
+        const i = select.findIndex(obj => obj.name === selected);
+        if (i >= 0) {
+            select.splice(i, 1);
+            setSelected(select[0]?.name || "");
+        }
+        updateScript();
     }
 
     return (
-        <TreeView
-            defaultCollapseIcon={<Icons.ExpandMore />}
-            defaultExpandIcon={<Icons.ChevronRight />}
-            expanded={expanded}
-            selected={selected}
-            onNodeToggle={handleToggle}
-            onNodeSelect={handleSelect}
-        >
-            <TreeItem nodeId="select" label="select">
-                {selects.map(select => {
-                    const key = `${keypath}.${select.name || "*"}`;
-                    const name = select.name || "*";
-                    return (<TreeItem nodeId={key} label={name} />);
-                })}
-            </TreeItem>
-        </TreeView>
+        <Grid container>
+            <Grid item xs={12}>
+                <ScriptTreeView />
+            </Grid>
+            <Grid item xs={12}>
+                <Toolbar>
+                    <Button variant="contained" size="small" color="primary" onClick={onAddButton}>Add</Button>
+                    <Button variant="contained" size="small" color="primary" style={{ marginLeft: 8 }} onClick={onRemoveButton}>Remove</Button>
+                </Toolbar>
+            </Grid>
+        </Grid>
     );
 }

@@ -7577,6 +7577,8 @@ $parcel$export($7747c1d4130d3207$exports, "Box", () => $5bfc78cc6a1c4abb$export$
 $parcel$export($7747c1d4130d3207$exports, "Button", () => $2c1c6c6fa36141b8$export$2e2bcd8739ae039);
 $parcel$export($7747c1d4130d3207$exports, "CssBaseline", () => $ad8ae1c3598ae04e$export$2e2bcd8739ae039);
 $parcel$export($7747c1d4130d3207$exports, "Grid", () => $e799bddccab45dc8$export$2e2bcd8739ae039);
+$parcel$export($7747c1d4130d3207$exports, "IconButton", () => $e8681e2200d9987f$export$2e2bcd8739ae039);
+$parcel$export($7747c1d4130d3207$exports, "InputAdornment", () => $f1952ef37dce84d1$export$2e2bcd8739ae039);
 $parcel$export($7747c1d4130d3207$exports, "MenuItem", () => $f7e0e2773a07f433$export$2e2bcd8739ae039);
 $parcel$export($7747c1d4130d3207$exports, "Select", () => $7858d9edee7e2817$export$2e2bcd8739ae039);
 $parcel$export($7747c1d4130d3207$exports, "Switch", () => $9d34fa129044aaf6$export$2e2bcd8739ae039);
@@ -7784,19 +7786,6 @@ function $fbfd5994acdd12ff$export$c0816ed86df316af(color, coefficient) {
 }
 
 
-var $f177d1dd4dfe1f16$exports = {};
-
-$parcel$export($f177d1dd4dfe1f16$exports, "getThemeProps", () => $7478df45632dfe71$export$2e2bcd8739ae039);
-$parcel$export($f177d1dd4dfe1f16$exports, "makeStyles", () => $b486639d7e5d9fd7$export$2e2bcd8739ae039);
-$parcel$export($f177d1dd4dfe1f16$exports, "mergeClasses", () => $642107d9a4be1a59$export$2e2bcd8739ae039);
-$parcel$export($f177d1dd4dfe1f16$exports, "styled", () => $c5cb65b09b34b928$export$2e2bcd8739ae039);
-$parcel$export($f177d1dd4dfe1f16$exports, "useTheme", () => $6f82fc85fb23b0d7$export$2e2bcd8739ae039);
-$parcel$export($f177d1dd4dfe1f16$exports, "withStyles", () => $396e6e4e9cbef980$export$2e2bcd8739ae039);
-
-
-
-
-
 function $7478df45632dfe71$export$2e2bcd8739ae039(params) {
     var theme = params.theme, name = params.name, props = params.props;
     if (!theme || !theme.props || !theme.props[name]) return props;
@@ -7807,10 +7796,6 @@ function $7478df45632dfe71$export$2e2bcd8739ae039(params) {
     for(propName in defaultProps)if (props[propName] === undefined) props[propName] = defaultProps[propName];
     return props;
 }
-
-
-
-
 
 
 function $9eaf005007fe2da4$export$2e2bcd8739ae039(source, excluded) {
@@ -10842,12 +10827,6 @@ function $b486639d7e5d9fd7$export$2e2bcd8739ae039(stylesOrCreator) {
 
 
 
-
-
-
-
-
-
 var $dZtnC = parcelRequire("dZtnC");
 function $856bf768c2b4fbe7$var$toVal(mix) {
     var k, y, str = "";
@@ -11051,14 +11030,6 @@ function $c5cb65b09b34b928$export$2e2bcd8739ae039(Component) {
 
 
 
-
-
-
-
-
-
-
-
 var $dZtnC = parcelRequire("dZtnC");
 
 
@@ -11117,10 +11088,6 @@ var $396e6e4e9cbef980$var$withStyles = function withStyles(stylesOrCreator) {
     };
 };
 var $396e6e4e9cbef980$export$2e2bcd8739ae039 = $396e6e4e9cbef980$var$withStyles;
-
-
-
-
 
 
 
@@ -11662,21 +11629,6 @@ var $69453ef7ac84818c$var$shape = {
 var $69453ef7ac84818c$export$2e2bcd8739ae039 = $69453ef7ac84818c$var$shape;
 
 
-var $69409c528e4dc6ab$exports = {};
-
-$parcel$export($69409c528e4dc6ab$exports, "borders", () => $827f373189c3cd21$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "compose", () => $c175385bc0b426a8$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "styleFunctionSx", () => $d600d533ddd78a27$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "display", () => $79ef71e13aeeb911$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "flexbox", () => $d434eed0b93887fb$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "grid", () => $ff6c8558340505b4$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "palette", () => $1f938a1eaaf06e3a$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "positions", () => $c80493a73d169ae6$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "shadows", () => $9f81f77e555212b3$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "sizing", () => $67fe2ef6288677b7$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "spacing", () => $1bca1309d1947bca$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "typography", () => $8b7f7d87d6aaaec6$export$2e2bcd8739ae039);
-$parcel$export($69409c528e4dc6ab$exports, "createUnarySpacing", () => $1bca1309d1947bca$export$1def6f833384e3d1);
 
 
 
@@ -11875,10 +11827,6 @@ var $827f373189c3cd21$export$2e2bcd8739ae039 = $827f373189c3cd21$var$borders;
 
 
 
-
-
-
-
 function $d600d533ddd78a27$var$omit(input, fields) {
     var output = {};
     Object.keys(input).forEach(function(prop) {
@@ -11916,8 +11864,6 @@ var $d600d533ddd78a27$export$2e2bcd8739ae039 = $d600d533ddd78a27$var$styleFuncti
 
 
 
-
-
 var $79ef71e13aeeb911$export$95a5c40fb210fe3e = (0, $d595fd7b51905894$export$2e2bcd8739ae039)({
     prop: "displayPrint",
     cssProperty: false,
@@ -11945,7 +11891,6 @@ var $79ef71e13aeeb911$export$9ef81298ca34ad41 = (0, $d595fd7b51905894$export$2e2
     prop: "whiteSpace"
 });
 var $79ef71e13aeeb911$export$2e2bcd8739ae039 = (0, $c175385bc0b426a8$export$2e2bcd8739ae039)($79ef71e13aeeb911$export$95a5c40fb210fe3e, $79ef71e13aeeb911$export$e5efd59aba9975ad, $79ef71e13aeeb911$export$f6530fb6e67e00bd, $79ef71e13aeeb911$export$f00f69a6f0e8c5b6, $79ef71e13aeeb911$export$91fa9ac3f4021ce4, $79ef71e13aeeb911$export$9ef81298ca34ad41);
-
 
 
 
@@ -11993,8 +11938,6 @@ var $d434eed0b93887fb$export$2e2bcd8739ae039 = $d434eed0b93887fb$var$flexbox;
 
 
 
-
-
 var $ff6c8558340505b4$export$62ffeaf1cd78b2a6 = (0, $d595fd7b51905894$export$2e2bcd8739ae039)({
     prop: "gridGap"
 });
@@ -12036,8 +11979,6 @@ var $ff6c8558340505b4$export$2e2bcd8739ae039 = $ff6c8558340505b4$var$grid;
 
 
 
-
-
 var $1f938a1eaaf06e3a$export$35e9368ef982300f = (0, $d595fd7b51905894$export$2e2bcd8739ae039)({
     prop: "color",
     themeKey: "palette"
@@ -12049,8 +11990,6 @@ var $1f938a1eaaf06e3a$export$2506f56c10355b33 = (0, $d595fd7b51905894$export$2e2
 });
 var $1f938a1eaaf06e3a$var$palette = (0, $c175385bc0b426a8$export$2e2bcd8739ae039)($1f938a1eaaf06e3a$export$35e9368ef982300f, $1f938a1eaaf06e3a$export$2506f56c10355b33);
 var $1f938a1eaaf06e3a$export$2e2bcd8739ae039 = $1f938a1eaaf06e3a$var$palette;
-
-
 
 
 
@@ -12076,14 +12015,11 @@ var $c80493a73d169ae6$export$eabcd2c8791e7bf4 = (0, $d595fd7b51905894$export$2e2
 var $c80493a73d169ae6$export$2e2bcd8739ae039 = (0, $c175385bc0b426a8$export$2e2bcd8739ae039)($c80493a73d169ae6$export$5880b8b5730aff45, $c80493a73d169ae6$export$56446adcecbeec34, $c80493a73d169ae6$export$1e95b668f3b82d, $c80493a73d169ae6$export$79ffe56a765070d2, $c80493a73d169ae6$export$40e543e69a8b3fbb, $c80493a73d169ae6$export$eabcd2c8791e7bf4);
 
 
-
-
 var $9f81f77e555212b3$var$boxShadow = (0, $d595fd7b51905894$export$2e2bcd8739ae039)({
     prop: "boxShadow",
     themeKey: "shadows"
 });
 var $9f81f77e555212b3$export$2e2bcd8739ae039 = $9f81f77e555212b3$var$boxShadow;
-
 
 
 
@@ -12129,8 +12065,6 @@ var $67fe2ef6288677b7$export$6ccc93f785106a58 = (0, $d595fd7b51905894$export$2e2
 });
 var $67fe2ef6288677b7$var$sizing = (0, $c175385bc0b426a8$export$2e2bcd8739ae039)($67fe2ef6288677b7$export$7e3df82ee760448c, $67fe2ef6288677b7$export$488fda99655ff65a, $67fe2ef6288677b7$export$ee148fbbe8357dd2, $67fe2ef6288677b7$export$ac607276a8fe9f0a, $67fe2ef6288677b7$export$dc0d8bd0b94f8570, $67fe2ef6288677b7$export$a43cf604e12f3b17, $67fe2ef6288677b7$export$6ccc93f785106a58);
 var $67fe2ef6288677b7$export$2e2bcd8739ae039 = $67fe2ef6288677b7$var$sizing;
-
-
 
 function $c7084590d878d3bf$export$2e2bcd8739ae039(arr) {
     if (Array.isArray(arr)) return arr;
@@ -12307,9 +12241,6 @@ var $1bca1309d1947bca$export$2e2bcd8739ae039 = $1bca1309d1947bca$var$spacing;
 
 
 
-
-
-
 var $8b7f7d87d6aaaec6$export$a5975749f0374264 = (0, $d595fd7b51905894$export$2e2bcd8739ae039)({
     prop: "fontFamily",
     themeKey: "typography"
@@ -12337,8 +12268,6 @@ var $8b7f7d87d6aaaec6$export$a87999391cd10ae9 = (0, $d595fd7b51905894$export$2e2
 });
 var $8b7f7d87d6aaaec6$var$typography = (0, $c175385bc0b426a8$export$2e2bcd8739ae039)($8b7f7d87d6aaaec6$export$a5975749f0374264, $8b7f7d87d6aaaec6$export$85e3c3ca0c6fb93, $8b7f7d87d6aaaec6$export$a827189a08c5a3a3, $8b7f7d87d6aaaec6$export$bc0b29e67df3229e, $8b7f7d87d6aaaec6$export$3eb52878e4502ad1, $8b7f7d87d6aaaec6$export$c9b91427b594e14, $8b7f7d87d6aaaec6$export$a87999391cd10ae9);
 var $8b7f7d87d6aaaec6$export$2e2bcd8739ae039 = $8b7f7d87d6aaaec6$var$typography;
-
-
 
 
 
@@ -15305,6 +15234,198 @@ var $e799bddccab45dc8$export$2e2bcd8739ae039 = $e799bddccab45dc8$var$StyledGrid;
 
 
 
+var $dZtnC = parcelRequire("dZtnC");
+
+
+
+
+
+var $dZtnC = parcelRequire("dZtnC");
+
+
+
+
+var $b8339c93bff31769$export$9dd6ff9ea0189349 = function styles(theme) {
+    return {
+        /* Styles applied to the root element. */ root: {
+            margin: 0
+        },
+        /* Styles applied to the root element if `variant="body2"`. */ body2: theme.typography.body2,
+        /* Styles applied to the root element if `variant="body1"`. */ body1: theme.typography.body1,
+        /* Styles applied to the root element if `variant="caption"`. */ caption: theme.typography.caption,
+        /* Styles applied to the root element if `variant="button"`. */ button: theme.typography.button,
+        /* Styles applied to the root element if `variant="h1"`. */ h1: theme.typography.h1,
+        /* Styles applied to the root element if `variant="h2"`. */ h2: theme.typography.h2,
+        /* Styles applied to the root element if `variant="h3"`. */ h3: theme.typography.h3,
+        /* Styles applied to the root element if `variant="h4"`. */ h4: theme.typography.h4,
+        /* Styles applied to the root element if `variant="h5"`. */ h5: theme.typography.h5,
+        /* Styles applied to the root element if `variant="h6"`. */ h6: theme.typography.h6,
+        /* Styles applied to the root element if `variant="subtitle1"`. */ subtitle1: theme.typography.subtitle1,
+        /* Styles applied to the root element if `variant="subtitle2"`. */ subtitle2: theme.typography.subtitle2,
+        /* Styles applied to the root element if `variant="overline"`. */ overline: theme.typography.overline,
+        /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */ srOnly: {
+            position: "absolute",
+            height: 1,
+            width: 1,
+            overflow: "hidden"
+        },
+        /* Styles applied to the root element if `align="left"`. */ alignLeft: {
+            textAlign: "left"
+        },
+        /* Styles applied to the root element if `align="center"`. */ alignCenter: {
+            textAlign: "center"
+        },
+        /* Styles applied to the root element if `align="right"`. */ alignRight: {
+            textAlign: "right"
+        },
+        /* Styles applied to the root element if `align="justify"`. */ alignJustify: {
+            textAlign: "justify"
+        },
+        /* Styles applied to the root element if `nowrap={true}`. */ noWrap: {
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap"
+        },
+        /* Styles applied to the root element if `gutterBottom={true}`. */ gutterBottom: {
+            marginBottom: "0.35em"
+        },
+        /* Styles applied to the root element if `paragraph={true}`. */ paragraph: {
+            marginBottom: 16
+        },
+        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
+            color: "inherit"
+        },
+        /* Styles applied to the root element if `color="primary"`. */ colorPrimary: {
+            color: theme.palette.primary.main
+        },
+        /* Styles applied to the root element if `color="secondary"`. */ colorSecondary: {
+            color: theme.palette.secondary.main
+        },
+        /* Styles applied to the root element if `color="textPrimary"`. */ colorTextPrimary: {
+            color: theme.palette.text.primary
+        },
+        /* Styles applied to the root element if `color="textSecondary"`. */ colorTextSecondary: {
+            color: theme.palette.text.secondary
+        },
+        /* Styles applied to the root element if `color="error"`. */ colorError: {
+            color: theme.palette.error.main
+        },
+        /* Styles applied to the root element if `display="inline"`. */ displayInline: {
+            display: "inline"
+        },
+        /* Styles applied to the root element if `display="block"`. */ displayBlock: {
+            display: "block"
+        }
+    };
+};
+var $b8339c93bff31769$var$defaultVariantMapping = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h4: "h4",
+    h5: "h5",
+    h6: "h6",
+    subtitle1: "h6",
+    subtitle2: "h6",
+    body1: "p",
+    body2: "p"
+};
+var $b8339c93bff31769$var$Typography = /*#__PURE__*/ $dZtnC.forwardRef(function Typography(props, ref) {
+    var _props$align = props.align, align = _props$align === void 0 ? "inherit" : _props$align, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? "initial" : _props$color, component = props.component, _props$display = props.display, display = _props$display === void 0 ? "initial" : _props$display, _props$gutterBottom = props.gutterBottom, gutterBottom = _props$gutterBottom === void 0 ? false : _props$gutterBottom, _props$noWrap = props.noWrap, noWrap = _props$noWrap === void 0 ? false : _props$noWrap, _props$paragraph = props.paragraph, paragraph = _props$paragraph === void 0 ? false : _props$paragraph, _props$variant = props.variant, variant = _props$variant === void 0 ? "body1" : _props$variant, _props$variantMapping = props.variantMapping, variantMapping = _props$variantMapping === void 0 ? $b8339c93bff31769$var$defaultVariantMapping : _props$variantMapping, other = (0, $3c465c686275a869$export$2e2bcd8739ae039)(props, [
+        "align",
+        "classes",
+        "className",
+        "color",
+        "component",
+        "display",
+        "gutterBottom",
+        "noWrap",
+        "paragraph",
+        "variant",
+        "variantMapping"
+    ]);
+    var Component = component || (paragraph ? "p" : variantMapping[variant] || $b8339c93bff31769$var$defaultVariantMapping[variant]) || "span";
+    return /*#__PURE__*/ $dZtnC.createElement(Component, (0, $358133f21f598270$export$2e2bcd8739ae039)({
+        className: (0, $856bf768c2b4fbe7$export$2e2bcd8739ae039)(classes.root, className, variant !== "inherit" && classes[variant], color !== "initial" && classes["color".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(color))], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== "inherit" && classes["align".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(align))], display !== "initial" && classes["display".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(display))]),
+        ref: ref
+    }, other));
+});
+var $b8339c93bff31769$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2bcd8739ae039)($b8339c93bff31769$export$9dd6ff9ea0189349, {
+    name: "MuiTypography"
+})($b8339c93bff31769$var$Typography);
+
+
+
+
+
+var $dZtnC = parcelRequire("dZtnC");
+/**
+ * @ignore - internal component.
+ */ var $c4e3b531265b6123$var$FormControlContext = $dZtnC.createContext();
+function $c4e3b531265b6123$export$62ecd8ad1bbe1a18() {
+    return $dZtnC.useContext($c4e3b531265b6123$var$FormControlContext);
+}
+var $c4e3b531265b6123$export$2e2bcd8739ae039 = $c4e3b531265b6123$var$FormControlContext;
+
+
+var $f1952ef37dce84d1$export$9dd6ff9ea0189349 = {
+    /* Styles applied to the root element. */ root: {
+        display: "flex",
+        height: "0.01em",
+        // Fix IE 11 flexbox alignment. To remove at some point.
+        maxHeight: "2em",
+        alignItems: "center",
+        whiteSpace: "nowrap"
+    },
+    /* Styles applied to the root element if `variant="filled"`. */ filled: {
+        "&$positionStart:not($hiddenLabel)": {
+            marginTop: 16
+        }
+    },
+    /* Styles applied to the root element if `position="start"`. */ positionStart: {
+        marginRight: 8
+    },
+    /* Styles applied to the root element if `position="end"`. */ positionEnd: {
+        marginLeft: 8
+    },
+    /* Styles applied to the root element if `disablePointerEvents=true`. */ disablePointerEvents: {
+        pointerEvents: "none"
+    },
+    /* Styles applied if the adornment is used inside <FormControl hiddenLabel />. */ hiddenLabel: {},
+    /* Styles applied if the adornment is used inside <FormControl margin="dense" />. */ marginDense: {}
+};
+var $f1952ef37dce84d1$var$InputAdornment = /*#__PURE__*/ $dZtnC.forwardRef(function InputAdornment(props, ref) {
+    var children = props.children, classes = props.classes, className = props.className, _props$component = props.component, Component = _props$component === void 0 ? "div" : _props$component, _props$disablePointer = props.disablePointerEvents, disablePointerEvents = _props$disablePointer === void 0 ? false : _props$disablePointer, _props$disableTypogra = props.disableTypography, disableTypography = _props$disableTypogra === void 0 ? false : _props$disableTypogra, position = props.position, variantProp = props.variant, other = (0, $3c465c686275a869$export$2e2bcd8739ae039)(props, [
+        "children",
+        "classes",
+        "className",
+        "component",
+        "disablePointerEvents",
+        "disableTypography",
+        "position",
+        "variant"
+    ]);
+    var muiFormControl = (0, $c4e3b531265b6123$export$62ecd8ad1bbe1a18)() || {};
+    var variant = variantProp;
+    variantProp && muiFormControl.variant;
+    if (muiFormControl && !variant) variant = muiFormControl.variant;
+    return /*#__PURE__*/ $dZtnC.createElement((0, $c4e3b531265b6123$export$2e2bcd8739ae039).Provider, {
+        value: null
+    }, /*#__PURE__*/ $dZtnC.createElement(Component, (0, $358133f21f598270$export$2e2bcd8739ae039)({
+        className: (0, $856bf768c2b4fbe7$export$2e2bcd8739ae039)(classes.root, className, position === "end" ? classes.positionEnd : classes.positionStart, disablePointerEvents && classes.disablePointerEvents, muiFormControl.hiddenLabel && classes.hiddenLabel, variant === "filled" && classes.filled, muiFormControl.margin === "dense" && classes.marginDense),
+        ref: ref
+    }, other), typeof children === "string" && !disableTypography ? /*#__PURE__*/ $dZtnC.createElement((0, $b8339c93bff31769$export$2e2bcd8739ae039), {
+        color: "textSecondary"
+    }, children) : children));
+});
+var $f1952ef37dce84d1$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2bcd8739ae039)($f1952ef37dce84d1$export$9dd6ff9ea0189349, {
+    name: "MuiInputAdornment"
+})($f1952ef37dce84d1$var$InputAdornment);
+
+
+
+
+
 
 
 
@@ -17370,16 +17491,6 @@ function $326a5edc4639d1e5$export$2e2bcd8739ae039(_ref) {
 
 
 var $dZtnC = parcelRequire("dZtnC");
-
-var $dZtnC = parcelRequire("dZtnC");
-/**
- * @ignore - internal component.
- */ var $c4e3b531265b6123$var$FormControlContext = $dZtnC.createContext();
-function $c4e3b531265b6123$export$62ecd8ad1bbe1a18() {
-    return $dZtnC.useContext($c4e3b531265b6123$var$FormControlContext);
-}
-var $c4e3b531265b6123$export$2e2bcd8739ae039 = $c4e3b531265b6123$var$FormControlContext;
-
 
 function $7b14335aa62a32ec$export$2e2bcd8739ae039() {
     return $dZtnC.useContext((0, $c4e3b531265b6123$export$2e2bcd8739ae039));
@@ -20738,119 +20849,6 @@ var $3f451f93d2ae3d26$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2b
 
 
 
-var $dZtnC = parcelRequire("dZtnC");
-
-
-
-
-var $b8339c93bff31769$export$9dd6ff9ea0189349 = function styles(theme) {
-    return {
-        /* Styles applied to the root element. */ root: {
-            margin: 0
-        },
-        /* Styles applied to the root element if `variant="body2"`. */ body2: theme.typography.body2,
-        /* Styles applied to the root element if `variant="body1"`. */ body1: theme.typography.body1,
-        /* Styles applied to the root element if `variant="caption"`. */ caption: theme.typography.caption,
-        /* Styles applied to the root element if `variant="button"`. */ button: theme.typography.button,
-        /* Styles applied to the root element if `variant="h1"`. */ h1: theme.typography.h1,
-        /* Styles applied to the root element if `variant="h2"`. */ h2: theme.typography.h2,
-        /* Styles applied to the root element if `variant="h3"`. */ h3: theme.typography.h3,
-        /* Styles applied to the root element if `variant="h4"`. */ h4: theme.typography.h4,
-        /* Styles applied to the root element if `variant="h5"`. */ h5: theme.typography.h5,
-        /* Styles applied to the root element if `variant="h6"`. */ h6: theme.typography.h6,
-        /* Styles applied to the root element if `variant="subtitle1"`. */ subtitle1: theme.typography.subtitle1,
-        /* Styles applied to the root element if `variant="subtitle2"`. */ subtitle2: theme.typography.subtitle2,
-        /* Styles applied to the root element if `variant="overline"`. */ overline: theme.typography.overline,
-        /* Styles applied to the root element if `variant="srOnly"`. Only accessible to screen readers. */ srOnly: {
-            position: "absolute",
-            height: 1,
-            width: 1,
-            overflow: "hidden"
-        },
-        /* Styles applied to the root element if `align="left"`. */ alignLeft: {
-            textAlign: "left"
-        },
-        /* Styles applied to the root element if `align="center"`. */ alignCenter: {
-            textAlign: "center"
-        },
-        /* Styles applied to the root element if `align="right"`. */ alignRight: {
-            textAlign: "right"
-        },
-        /* Styles applied to the root element if `align="justify"`. */ alignJustify: {
-            textAlign: "justify"
-        },
-        /* Styles applied to the root element if `nowrap={true}`. */ noWrap: {
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            whiteSpace: "nowrap"
-        },
-        /* Styles applied to the root element if `gutterBottom={true}`. */ gutterBottom: {
-            marginBottom: "0.35em"
-        },
-        /* Styles applied to the root element if `paragraph={true}`. */ paragraph: {
-            marginBottom: 16
-        },
-        /* Styles applied to the root element if `color="inherit"`. */ colorInherit: {
-            color: "inherit"
-        },
-        /* Styles applied to the root element if `color="primary"`. */ colorPrimary: {
-            color: theme.palette.primary.main
-        },
-        /* Styles applied to the root element if `color="secondary"`. */ colorSecondary: {
-            color: theme.palette.secondary.main
-        },
-        /* Styles applied to the root element if `color="textPrimary"`. */ colorTextPrimary: {
-            color: theme.palette.text.primary
-        },
-        /* Styles applied to the root element if `color="textSecondary"`. */ colorTextSecondary: {
-            color: theme.palette.text.secondary
-        },
-        /* Styles applied to the root element if `color="error"`. */ colorError: {
-            color: theme.palette.error.main
-        },
-        /* Styles applied to the root element if `display="inline"`. */ displayInline: {
-            display: "inline"
-        },
-        /* Styles applied to the root element if `display="block"`. */ displayBlock: {
-            display: "block"
-        }
-    };
-};
-var $b8339c93bff31769$var$defaultVariantMapping = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    subtitle1: "h6",
-    subtitle2: "h6",
-    body1: "p",
-    body2: "p"
-};
-var $b8339c93bff31769$var$Typography = /*#__PURE__*/ $dZtnC.forwardRef(function Typography(props, ref) {
-    var _props$align = props.align, align = _props$align === void 0 ? "inherit" : _props$align, classes = props.classes, className = props.className, _props$color = props.color, color = _props$color === void 0 ? "initial" : _props$color, component = props.component, _props$display = props.display, display = _props$display === void 0 ? "initial" : _props$display, _props$gutterBottom = props.gutterBottom, gutterBottom = _props$gutterBottom === void 0 ? false : _props$gutterBottom, _props$noWrap = props.noWrap, noWrap = _props$noWrap === void 0 ? false : _props$noWrap, _props$paragraph = props.paragraph, paragraph = _props$paragraph === void 0 ? false : _props$paragraph, _props$variant = props.variant, variant = _props$variant === void 0 ? "body1" : _props$variant, _props$variantMapping = props.variantMapping, variantMapping = _props$variantMapping === void 0 ? $b8339c93bff31769$var$defaultVariantMapping : _props$variantMapping, other = (0, $3c465c686275a869$export$2e2bcd8739ae039)(props, [
-        "align",
-        "classes",
-        "className",
-        "color",
-        "component",
-        "display",
-        "gutterBottom",
-        "noWrap",
-        "paragraph",
-        "variant",
-        "variantMapping"
-    ]);
-    var Component = component || (paragraph ? "p" : variantMapping[variant] || $b8339c93bff31769$var$defaultVariantMapping[variant]) || "span";
-    return /*#__PURE__*/ $dZtnC.createElement(Component, (0, $358133f21f598270$export$2e2bcd8739ae039)({
-        className: (0, $856bf768c2b4fbe7$export$2e2bcd8739ae039)(classes.root, className, variant !== "inherit" && classes[variant], color !== "initial" && classes["color".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(color))], noWrap && classes.noWrap, gutterBottom && classes.gutterBottom, paragraph && classes.paragraph, align !== "inherit" && classes["align".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(align))], display !== "initial" && classes["display".concat((0, $bf4fc4ee3dfb5ce7$export$2e2bcd8739ae039)(display))]),
-        ref: ref
-    }, other));
-});
-var $b8339c93bff31769$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2bcd8739ae039)($b8339c93bff31769$export$9dd6ff9ea0189349, {
-    name: "MuiTypography"
-})($b8339c93bff31769$var$Typography);
 
 
 
@@ -20864,17 +20862,27 @@ var $b8339c93bff31769$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2b
 
 
 
-
-
-
-
-
-
-parcelRequire("dZtnC");
 
 
 var $dZtnC = parcelRequire("dZtnC");
 
+
+var $dZtnC = parcelRequire("dZtnC");
+
+
+var $003e340a0debbed8$export$2e2bcd8739ae039 = (0, $00d2f40bbfc50dad$export$2e2bcd8739ae039)(/*#__PURE__*/ $dZtnC.createElement("path", {
+    d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+}), "Cancel");
+
+
+var $dZtnC = parcelRequire("dZtnC");
+
+var $ca6d24dc5747e45e$export$2e2bcd8739ae039 = (0, $00d2f40bbfc50dad$export$2e2bcd8739ae039)(/*#__PURE__*/ $dZtnC.createElement("path", {
+    d: "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+}), "Check");
+
+
+var $dZtnC = parcelRequire("dZtnC");
 
 var $0bebc64bf729e814$export$2e2bcd8739ae039 = (0, $00d2f40bbfc50dad$export$2e2bcd8739ae039)(/*#__PURE__*/ $dZtnC.createElement("path", {
     d: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
@@ -20894,45 +20902,65 @@ var $0eaba85a675edfc1$export$2e2bcd8739ae039 = (0, $00d2f40bbfc50dad$export$2e2b
 var $dZtnC = parcelRequire("dZtnC");
 
 
+parcelRequire("dZtnC");
+
+
+
 var $dZtnC = parcelRequire("dZtnC");
-const $ed7f85e399b35790$var$defaultScript = `[
-    { "select": [
-        {
-            "name": "title",
-            "type": "string",
-            "$": [["h1"]]
-        },
-        {
-            "name": "href",
-            "type": "string",
-            "$": [["a",["attr","href"]]]
-        }
-    ]}
-]`;
-const $ed7f85e399b35790$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).createContext({});
-function $ed7f85e399b35790$export$fca13ab91e1a6240() {
-    return (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).useContext($ed7f85e399b35790$var$AppContext);
+function $937380415f352931$export$ff79aa74709dda3a(script) {
+    let text = JSON.stringify(script, null, 2);
+    let i = text.indexOf(`"$": [\n`);
+    while(i >= 0){
+        i = text.indexOf("[", i);
+        const j = $937380415f352931$export$ad9052cdca847332(text, i, "[]");
+        if (j > i) {
+            text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
+            i = text.indexOf(`"$": [\n`);
+        } else break;
+    }
+    return text;
 }
-function $ed7f85e399b35790$export$c7dacf3845253dcf({ children: children  }) {
-    const [script, setScript] = (0, $dZtnC.useState)($ed7f85e399b35790$var$defaultScript);
-    const [selected, setSelected] = (0, $dZtnC.useState)("");
-    const [data, setData] = (0, $dZtnC.useState)("");
-    const value = {
-        script: script,
-        selected: selected,
-        data: data,
-        setScript: setScript,
-        setSelected: setSelected,
-        setData: setData
-    };
-    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($ed7f85e399b35790$var$AppContext.Provider, {
-        value: value,
-        children: children
+function $937380415f352931$export$a6cdc56e425d0d0a(obj) {
+    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+function $937380415f352931$export$ad9052cdca847332(text, i, token) {
+    let n = 0;
+    while((i++) < text.length){
+        if (text[i] === token[1] && --n < 0) return i + 1;
+        else if (text[i] === token[0]) n += 1;
+    }
+    return -1;
+}
+function $937380415f352931$export$de139376c1f60602(obj) {
+    if (obj instanceof Array) return obj.map((item)=>$937380415f352931$export$de139376c1f60602(item));
+    else if ($937380415f352931$export$a6cdc56e425d0d0a(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $937380415f352931$export$de139376c1f60602(obj.value);
+    else if ($937380415f352931$export$a6cdc56e425d0d0a(obj)) {
+        const source = obj;
+        const target = {};
+        for (const key of Object.keys(obj))if ($937380415f352931$export$a6cdc56e425d0d0a(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $937380415f352931$export$de139376c1f60602(source[key].value); // unwrap value
+        else target[key] = $937380415f352931$export$de139376c1f60602(source[key]);
+        return target;
+    } else return obj;
+}
+async function $937380415f352931$export$22b283b94688ae65(script) {
+    return new Promise((resolve, reject)=>{
+        if (typeof chrome === "object" && chrome.devtools) {
+            const message = {
+                key: "submit",
+                script: script,
+                tabId: chrome.devtools.inspectedWindow.tabId
+            };
+            chrome.runtime.sendMessage(message, (response)=>{
+                if (response) resolve(response.result);
+            });
+        } else resolve({
+            data: {
+                title: "Example Domain",
+                href: "https://www.example.com/"
+            }
+        });
     });
 }
-
-
-
 function $937380415f352931$export$a011e92e61f46a0f(text) {
     try {
         return JSON.parse(text);
@@ -20940,24 +20968,99 @@ function $937380415f352931$export$a011e92e61f46a0f(text) {
         return undefined;
     }
 }
-function $937380415f352931$export$a295b4f1f291e064(script) {
-    const obj = $937380415f352931$export$a011e92e61f46a0f(script);
-    return obj ? obj : [];
+
+
+const $32c4b2f9f14d23cc$var$defaultScript = (0, $937380415f352931$export$ff79aa74709dda3a)({
+    "actions": [
+        {
+            "select": [
+                {
+                    "name": "title",
+                    "type": "string",
+                    "$": [
+                        [
+                            "h1"
+                        ]
+                    ]
+                },
+                {
+                    "name": "href",
+                    "type": "string",
+                    "$": [
+                        [
+                            "a",
+                            [
+                                "attr",
+                                "href"
+                            ]
+                        ]
+                    ]
+                }
+            ]
+        }
+    ]
+});
+const $32c4b2f9f14d23cc$var$ScriptContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).createContext({});
+function $32c4b2f9f14d23cc$export$1d3955b0b5cace9c() {
+    return (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).useContext($32c4b2f9f14d23cc$var$ScriptContext);
+}
+function $32c4b2f9f14d23cc$export$ae418ac7934e33ab({ children: children  }) {
+    const [text, setText] = (0, $dZtnC.useState)($32c4b2f9f14d23cc$var$defaultScript);
+    const [selected, setSelected] = (0, $dZtnC.useState)("");
+    const [result1, setResult] = (0, $dZtnC.useState)();
+    const script = (0, $dZtnC.useMemo)(()=>{
+        return (0, $937380415f352931$export$a011e92e61f46a0f)(text) || undefined;
+    }, [
+        text
+    ]);
+    const selectedObj = (0, $dZtnC.useMemo)(()=>{
+        if (script) {
+            const key = selected.split(".").at(-1);
+            const target = script.actions.find((action)=>!!action.select)?.select?.find((obj)=>obj.name === key);
+            return target;
+        }
+    }, [
+        script,
+        selected
+    ]);
+    (0, $dZtnC.useEffect)(()=>{
+        (0, $937380415f352931$export$22b283b94688ae65)(script).then((result)=>setResult(result));
+    }, [
+        script
+    ]);
+    function setSelectedObj(obj) {
+        for (const key of Object.keys(obj))selectedObj[key] = obj[key];
+        setText((0, $937380415f352931$export$ff79aa74709dda3a)(script));
+    }
+    function updateScript() {
+        setText((0, $937380415f352931$export$ff79aa74709dda3a)(script));
+    }
+    const value = {
+        script: script,
+        text: text,
+        selected: selected,
+        selectedObj: selectedObj,
+        result: result1,
+        setText: setText,
+        setSelected: setSelected,
+        setSelectedObj: setSelectedObj,
+        updateScript: updateScript
+    };
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($32c4b2f9f14d23cc$var$ScriptContext.Provider, {
+        value: value,
+        children: children
+    });
 }
 
 
-
-parcelRequire("dZtnC");
-
-
 var $419e4e2d866a1796$export$2e2bcd8739ae039 = ()=>{
-    const { script: script , setScript: setScript  } = (0, $ed7f85e399b35790$export$fca13ab91e1a6240)();
+    const { text: text , setText: setText  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
     return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
         rows: 12,
-        value: script,
-        onChange: (event)=>setScript(event.target.value),
+        value: text,
+        onChange: (event)=>setText(event.target.value),
         variant: "outlined"
     });
 };
@@ -20965,6 +21068,10 @@ var $419e4e2d866a1796$export$2e2bcd8739ae039 = ()=>{
 
 
 parcelRequire("dZtnC");
+
+
+parcelRequire("dZtnC");
+
 
 
 
@@ -21801,14 +21908,10 @@ var $27639ee8709134b6$export$2e2bcd8739ae039 = (0, $4846b5f2a580b07b$export$2e2b
 
 
 
-
-var $83ff122e1e5fa315$export$2e2bcd8739ae039 = ()=>{
-    const { script: script , selected: selected , setSelected: setSelected  } = (0, $ed7f85e399b35790$export$fca13ab91e1a6240)();
+var $9d93fbda5dc385f3$export$2e2bcd8739ae039 = ()=>{
+    const { script: script , selected: selected , setSelected: setSelected  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
     const [expanded, setExpanded] = (0, $dZtnC.useState)([]);
-    const actions = (0, $937380415f352931$export$a295b4f1f291e064)(script);
-    const target = actions.find((action)=>!!action.select);
-    const selects = target?.select || [];
-    const keypath = "select_1";
+    const select1 = script?.actions.find((action)=>!!action.select)?.select || [];
     function handleToggle(event, nodeIds) {
         setExpanded(nodeIds);
     }
@@ -21825,9 +21928,9 @@ var $83ff122e1e5fa315$export$2e2bcd8739ae039 = ()=>{
         children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $289c06915b7519b8$export$2e2bcd8739ae039), {
             nodeId: "select",
             label: "select",
-            children: selects.map((select)=>{
-                const key = `${keypath}.${select.name || "*"}`;
-                const name = select.name || "*";
+            children: select1.map((select)=>{
+                const key = select.name || "(noname)";
+                const name = select.name || "(noname)";
                 return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $289c06915b7519b8$export$2e2bcd8739ae039), {
                     nodeId: key,
                     label: name
@@ -21838,254 +21941,498 @@ var $83ff122e1e5fa315$export$2e2bcd8739ae039 = ()=>{
 };
 
 
+var $83ff122e1e5fa315$export$2e2bcd8739ae039 = ()=>{
+    const { script: script , selected: selected , setSelected: setSelected , updateScript: updateScript  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
+    const select = script?.actions.find((action)=>!!action.select)?.select || [];
+    function onAddButton() {
+        const name = "unnamed1";
+        select.push({
+            name: name
+        });
+        setSelected(name);
+        updateScript();
+    }
+    function onRemoveButton() {
+        const i = select.findIndex((obj)=>obj.name === selected);
+        if (i >= 0) {
+            select.splice(i, 1);
+            setSelected(select[0]?.name || "");
+        }
+        updateScript();
+    }
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+        container: true,
+        children: [
+            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+                item: true,
+                xs: 12,
+                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d93fbda5dc385f3$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+                item: true,
+                xs: 12,
+                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $3f451f93d2ae3d26$export$2e2bcd8739ae039), {
+                    children: [
+                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $2c1c6c6fa36141b8$export$2e2bcd8739ae039), {
+                            variant: "contained",
+                            size: "small",
+                            color: "primary",
+                            onClick: onAddButton,
+                            children: "Add"
+                        }),
+                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $2c1c6c6fa36141b8$export$2e2bcd8739ae039), {
+                            variant: "contained",
+                            size: "small",
+                            color: "primary",
+                            style: {
+                                marginLeft: 8
+                            },
+                            onClick: onRemoveButton,
+                            children: "Remove"
+                        })
+                    ]
+                })
+            })
+        ]
+    });
+};
+
+
 
 parcelRequire("dZtnC");
 
 
 
+
+
+var $dZtnC = parcelRequire("dZtnC");
+
+
+var $d48fa29f1e0acbe9$export$2e2bcd8739ae039 = ({ value: value1 , size: size , onChange: onChange , onValidate: onValidate  })=>{
+    const [input, setInput] = (0, $dZtnC.useState)();
+    const [valid, setValid] = (0, $dZtnC.useState)(true);
+    function validate(value) {
+        setInput(value);
+        if (onValidate) setValid(onValidate(value));
+    }
+    function commit() {
+        if (valid && input !== undefined) {
+            if (onChange) onChange(input);
+            setInput(undefined);
+        }
+    }
+    function cancel() {
+        setInput(undefined);
+        setValid(true);
+    }
+    function keydown(key) {
+        if (key === "Escape") cancel();
+        if (key === "Enter") commit();
+    }
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+        variant: "standard",
+        size: size,
+        error: !valid,
+        value: input !== undefined ? input : value1,
+        onChange: (event)=>validate(event.target.value),
+        onKeyDown: (event)=>keydown(event.key),
+        InputProps: {
+            endAdornment: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $f1952ef37dce84d1$export$2e2bcd8739ae039), {
+                position: "end",
+                style: {
+                    visibility: input !== undefined ? "visible" : "hidden"
+                },
+                children: [
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e8681e2200d9987f$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: commit,
+                        style: {
+                            visibility: input !== undefined && valid ? "visible" : "hidden"
+                        },
+                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($ca6d24dc5747e45e$export$2e2bcd8739ae039, {
+                            fontSize: "small"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e8681e2200d9987f$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: cancel,
+                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($003e340a0debbed8$export$2e2bcd8739ae039, {
+                            fontSize: "small"
+                        })
+                    })
+                ]
+            })
+        }
+    });
+};
+
+
 var $c125d8b45fc8e74f$export$2e2bcd8739ae039 = ()=>{
-    const { script: script , selected: selected  } = (0, $ed7f85e399b35790$export$fca13ab91e1a6240)();
-    if (selected) {
-        const actions = (0, $937380415f352931$export$a295b4f1f291e064)(script);
-        const obj = actions.find((action)=>!!action.select);
-        if (obj) {
-            const selects = obj?.select;
-            const i = selected.lastIndexOf(".");
-            const namekey = selected.substring(i + 1);
-            const target = selects.find(({ name: name  })=>name === namekey);
-            if (target) return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $aee6b99a55b14632$export$2e2bcd8739ae039), {
-                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $8fa048d8918bb19a$export$2e2bcd8739ae039), {
-                    size: "small",
-                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $aded7d3ccb1e018c$export$2e2bcd8739ae039), {
+    const { selectedObj: selectedObj , setSelectedObj: setSelectedObj , setSelected: setSelected  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
+    function commitName(name) {
+        setSelectedObj({
+            name: name
+        });
+        setSelected(name);
+    }
+    function commitSelector(value) {
+        setSelectedObj({
+            $: value ? (0, $937380415f352931$export$a011e92e61f46a0f)(value) : undefined
+        });
+    }
+    function validateSelector(value) {
+        if (!value) return true;
+        const selectors = (0, $937380415f352931$export$a011e92e61f46a0f)(value);
+        if (selectors instanceof Array) {
+            for (const selector of selectors){
+                if (!(selector instanceof Array)) return false;
+                if (selector.length > 0) {
+                    const [operator, operands] = selector;
+                    if (typeof operator !== "string") return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+    if (selectedObj) return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $aee6b99a55b14632$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $8fa048d8918bb19a$export$2e2bcd8739ae039), {
+            size: "small",
+            children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $aded7d3ccb1e018c$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
                         children: [
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        style: {
-                                            width: 100
-                                        },
-                                        children: "Name"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            value: target?.name,
-                                            variant: "standard"
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                style: {
+                                    width: 100
+                                },
+                                children: "Name"
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Type"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $7858d9edee7e2817$export$2e2bcd8739ae039), {
-                                            value: target?.type || "default",
-                                            children: [
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "default",
-                                                    children: "(Default)"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "string",
-                                                    children: "string"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "number",
-                                                    children: "number"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "boolean",
-                                                    children: "boolean"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "object",
-                                                    children: "object"
-                                                })
-                                            ]
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                style: {
+                                    width: 200
+                                },
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $d48fa29f1e0acbe9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    value: selectedObj?.name,
+                                    onValidate: (value)=>!!value,
+                                    onChange: (value)=>commitName(value)
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Repeated"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
-                                            checked: target?.repeated || false
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "The name of the property"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Type"
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Required"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
-                                            checked: target?.required || false
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $7858d9edee7e2817$export$2e2bcd8739ae039), {
+                                    value: selectedObj.type || "default",
+                                    onChange: (event)=>setSelectedObj({
+                                            type: event.target.value !== "default" ? event.target.value : undefined
+                                        }),
+                                    children: [
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "default",
+                                            children: "(default)"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "string",
+                                            children: "string"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "number",
+                                            children: "number"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "boolean",
+                                            children: "boolean"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "object",
+                                            children: "object"
                                         })
-                                    })
-                                ]
+                                    ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Active"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
-                                            checked: target?.active || true
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Determines the type of the property value"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Repeated"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
+                                    checked: selectedObj.repeated || false,
+                                    onChange: (event)=>setSelectedObj({
+                                            repeated: event.target.checked || undefined
                                         })
-                                    })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "All"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
-                                            checked: target?.repeated || false
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Indicates whether the data is single-valued or repeated within an array"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Required"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
+                                    checked: selectedObj.required || false,
+                                    onChange: (event)=>setSelectedObj({
+                                            required: event.target.checked || undefined
                                         })
-                                    })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Collate"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
-                                            checked: target?.collate || false
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Determines whether the property is required which produces an error if a value is not obtained"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Active"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
+                                    checked: selectedObj.active === undefined ? true : selectedObj.active,
+                                    onChange: (event)=>setSelectedObj({
+                                            active: event.target.checked ? undefined : false
                                         })
-                                    })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Selector"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: JSON.stringify(target?.$)
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Determines whether the property is active"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "All"
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        style: {
-                                            width: 100
-                                        },
-                                        children: "Value"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            value: target?.value,
-                                            variant: "standard"
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
+                                    checked: selectedObj.all || false,
+                                    onChange: (event)=>setSelectedObj({
+                                            all: event.target.checked || undefined
                                         })
-                                    })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Format"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $7858d9edee7e2817$export$2e2bcd8739ae039), {
-                                            value: target?.format || "default",
-                                            children: [
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "default",
-                                                    children: "(Default)"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "none",
-                                                    children: "(None)"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "href",
-                                                    children: "href"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "multiline",
-                                                    children: "multiline"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "singleline",
-                                                    children: "singleline"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "innertext",
-                                                    children: "innertext"
-                                                }),
-                                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
-                                                    value: "textcontent",
-                                                    children: "textcontent"
-                                                })
-                                            ]
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Determines whether all matching nodes are returned, false by default when required is false"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Collate"
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Limit"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            value: target?.limit,
-                                            variant: "standard"
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $9d34fa129044aaf6$export$2e2bcd8739ae039), {
+                                    checked: selectedObj.collate || false,
+                                    onChange: (event)=>setSelectedObj({
+                                            collate: event.target.checked || undefined
                                         })
-                                    })
-                                ]
+                                })
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "Pattern"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            value: target?.pattern,
-                                            variant: "standard"
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Combines all selected nodes into a single value"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Selector"
                             }),
-                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: "When"
-                                    }),
-                                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
-                                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            value: target?.when,
-                                            variant: "standard"
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $d48fa29f1e0acbe9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    value: selectedObj.$ ? JSON.stringify(selectedObj.$) : "",
+                                    onValidate: (value)=>validateSelector(value),
+                                    onChange: (value)=>commitSelector(value)
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "A DOM query that determines what data is selected"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                style: {
+                                    width: 100
+                                },
+                                children: "Value"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+                                    variant: "standard",
+                                    size: "small",
+                                    value: selectedObj.value,
+                                    onChange: (event)=>setSelectedObj({
+                                            value: event.target.value || undefined
                                         })
-                                    })
-                                ]
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "A predetermined value, ignored if a selector query is defined"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Format"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $7858d9edee7e2817$export$2e2bcd8739ae039), {
+                                    value: selectedObj.format || "default",
+                                    onChange: (event)=>setSelectedObj({
+                                            format: event.target.value !== "default" ? event.target.value : undefined
+                                        }),
+                                    children: [
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "default",
+                                            children: "(default)"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "none",
+                                            children: "none"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "href",
+                                            children: "href"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "multiline",
+                                            children: "multiline"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "singleline",
+                                            children: "singleline"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "innertext",
+                                            children: "innertext"
+                                        }),
+                                        /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $f7e0e2773a07f433$export$2e2bcd8739ae039), {
+                                            value: "textcontent",
+                                            children: "textcontent"
+                                        })
+                                    ]
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Determines how the selected value is formatted"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Limit"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+                                    variant: "standard",
+                                    size: "small",
+                                    value: selectedObj.limit,
+                                    onChange: (event)=>setSelectedObj({
+                                            limit: event.target.value !== undefined ? parseInt(event.target.value) : undefined
+                                        })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Limits the number of nodes to be selected, unlimited if not specified"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Pattern"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+                                    variant: "standard",
+                                    size: "small",
+                                    value: selectedObj.pattern,
+                                    onChange: (event)=>setSelectedObj({
+                                            pattern: event.target.value || undefined
+                                        })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "A regex pattern for validation, an error will be produced if the value does not match the pattern"
+                                })
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "When"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+                                    variant: "standard",
+                                    size: "small",
+                                    value: selectedObj.when,
+                                    onChange: (event)=>setSelectedObj({
+                                            when: event.target.value || undefined
+                                        })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)("p", {
+                                    children: "Makes value selection conditional based whether the evaluation produces a true result"
+                                })
                             })
                         ]
                     })
-                })
-            });
-        }
-    }
+                ]
+            })
+        })
+    });
     return null;
 };
 
@@ -22108,76 +22455,64 @@ var $5ab10b44a60c1ead$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $6ac8170ffe
 
 
 var $68d399ae6d234469$export$2e2bcd8739ae039 = ()=>{
-    const { script: script , setData: setData  } = (0, $ed7f85e399b35790$export$fca13ab91e1a6240)();
     const [tab, setTab] = (0, $dZtnC.useState)(1);
-    function runScript() {
-        debugger;
-        const actions = (0, $937380415f352931$export$a011e92e61f46a0f)(script);
-        if (actions) {
-            const message = {
-                key: "submit",
-                script: {
-                    actions: actions
-                },
-                tabId: chrome.devtools.inspectedWindow.tabId
-            };
-            chrome.runtime.sendMessage(message, (response)=>{
-                if (response) setData(JSON.stringify(response.result, null, 2));
-            });
-        //elements.status.innerText = "EXECUTING";
-        } else setData("INVALID");
-    }
-    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
         container: true,
-        children: [
-            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
-                item: true,
-                xs: 12,
-                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $09d2b0d6e9230bef$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+            item: true,
+            xs: 12,
+            children: [
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $09d2b0d6e9230bef$export$2e2bcd8739ae039), {
                     position: "static",
-                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $3f451f93d2ae3d26$export$2e2bcd8739ae039), {
-                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $2c1c6c6fa36141b8$export$2e2bcd8739ae039), {
-                            variant: "contained",
-                            color: "primary",
-                            onClick: ()=>runScript(),
-                            children: "Run!"
-                        })
+                    color: "default",
+                    style: {
+                        marginBottom: 12
+                    },
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $3f2b94b2be176434$export$2e2bcd8739ae039), {
+                        value: tab,
+                        onChange: (event, value)=>setTab(value),
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
+                                label: "Tree"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
+                                label: "Code"
+                            })
+                        ]
                     })
+                }),
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: tab === 0 ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5ab10b44a60c1ead$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: tab === 1 ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $419e4e2d866a1796$export$2e2bcd8739ae039), {})
                 })
-            }),
-            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
-                item: true,
-                xs: 12,
-                children: [
-                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $09d2b0d6e9230bef$export$2e2bcd8739ae039), {
-                        position: "static",
-                        color: "default",
-                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $3f2b94b2be176434$export$2e2bcd8739ae039), {
-                            value: tab,
-                            onChange: (event, value)=>setTab(value),
-                            children: [
-                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
-                                    label: "Tree"
-                                }),
-                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
-                                    label: "Code"
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 0 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5ab10b44a60c1ead$export$2e2bcd8739ae039), {})
-                    }),
-                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 1 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $419e4e2d866a1796$export$2e2bcd8739ae039), {})
-                    })
-                ]
-            })
-        ]
+            ]
+        })
+    });
+};
+
+
+
+
+var $dZtnC = parcelRequire("dZtnC");
+
+
+parcelRequire("dZtnC");
+
+
+
+var $89b2cdd282e679d4$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
+        multiline: true,
+        fullWidth: true,
+        value: result && result.data ? JSON.stringify((0, $937380415f352931$export$de139376c1f60602)(result.data), null, 2) : "",
+        variant: "outlined"
     });
 };
 
@@ -22186,13 +22521,112 @@ var $68d399ae6d234469$export$2e2bcd8739ae039 = ()=>{
 parcelRequire("dZtnC");
 
 
-var $53e534335bffb2bc$export$2e2bcd8739ae039 = ()=>{
-    const { data: data  } = (0, $ed7f85e399b35790$export$fca13ab91e1a6240)();
+var $03e7da55b25383ee$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
+    const { actions: actions , ...response } = result || {};
     return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c13f0594261c54e6$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
-        value: data,
+        value: response ? JSON.stringify(response, null, 2) : "",
         variant: "outlined"
+    });
+};
+
+
+
+parcelRequire("dZtnC");
+
+
+
+var $3d7fae2c19672c8a$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $32c4b2f9f14d23cc$export$1d3955b0b5cace9c)();
+    const keys = result && (0, $937380415f352931$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
+    const obj = result && (0, $937380415f352931$export$a6cdc56e425d0d0a)(result.data) ? (0, $937380415f352931$export$de139376c1f60602)(result.data) : {};
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $aee6b99a55b14632$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $8fa048d8918bb19a$export$2e2bcd8739ae039), {
+            size: "small",
+            children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $aded7d3ccb1e018c$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                        style: {
+                            fontWeight: "bold",
+                            backgroundColor: "#f0f8ff"
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Key"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                children: "Value"
+                            })
+                        ]
+                    }),
+                    keys.map((key)=>{
+                        return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $c7da5d73d1abb550$export$2e2bcd8739ae039), {
+                            children: [
+                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                    children: key
+                                }),
+                                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $12dc4b9d61a445a1$export$2e2bcd8739ae039), {
+                                    children: obj[key]
+                                })
+                            ]
+                        });
+                    })
+                ]
+            })
+        })
+    });
+};
+
+
+var $53e534335bffb2bc$export$2e2bcd8739ae039 = ()=>{
+    const [tab, setTab] = (0, $dZtnC.useState)(0);
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+        container: true,
+        children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $e799bddccab45dc8$export$2e2bcd8739ae039), {
+            item: true,
+            xs: 12,
+            children: [
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $09d2b0d6e9230bef$export$2e2bcd8739ae039), {
+                    position: "static",
+                    color: "default",
+                    style: {
+                        marginBottom: 12
+                    },
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $3f2b94b2be176434$export$2e2bcd8739ae039), {
+                        value: tab,
+                        onChange: (event, value)=>setTab(value),
+                        children: [
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
+                                label: "RESULTS"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
+                                label: "JSON"
+                            }),
+                            /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ba5bb3b7ed9c5f83$export$2e2bcd8739ae039), {
+                                label: "RESPONSE"
+                            })
+                        ]
+                    })
+                }),
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: tab === 0 ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $3d7fae2c19672c8a$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: tab === 1 ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $89b2cdd282e679d4$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $5bfc78cc6a1c4abb$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: tab === 2 ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $03e7da55b25383ee$export$2e2bcd8739ae039), {})
+                })
+            ]
+        })
     });
 };
 
@@ -22206,11 +22640,15 @@ const $692ecf87bc238d49$var$useStyles = (0, $751e9eebfedd2ce2$export$2e2bcd8739a
         }
     }));
 var $692ecf87bc238d49$export$2e2bcd8739ae039 = ()=>{
+    const [scriptExpanded, setScriptExpanded] = (0, $dZtnC.useState)(true);
+    const [dataExpanded, setDataExpanded] = (0, $dZtnC.useState)(true);
     const classes = $692ecf87bc238d49$var$useStyles();
     return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)("div", {
         className: classes.root,
         children: [
             /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $a90f411651c6347a$export$2e2bcd8739ae039), {
+                expanded: scriptExpanded,
+                onChange: (event, isExpanded)=>setScriptExpanded(isExpanded),
                 children: [
                     /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $fbb15ec6661e56a1$export$2e2bcd8739ae039), {
                         expandIcon: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($0eaba85a675edfc1$export$2e2bcd8739ae039, {}),
@@ -22227,6 +22665,8 @@ var $692ecf87bc238d49$export$2e2bcd8739ae039 = ()=>{
                 ]
             }),
             /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $a90f411651c6347a$export$2e2bcd8739ae039), {
+                expanded: dataExpanded,
+                onChange: (event, isExpanded)=>setDataExpanded(isExpanded),
                 children: [
                     /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $fbb15ec6661e56a1$export$2e2bcd8739ae039), {
                         expandIcon: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($0eaba85a675edfc1$export$2e2bcd8739ae039, {}),
@@ -22248,11 +22688,33 @@ var $692ecf87bc238d49$export$2e2bcd8739ae039 = ()=>{
 
 
 
+
+var $dZtnC = parcelRequire("dZtnC");
+const $ed7f85e399b35790$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).createContext({});
+function $ed7f85e399b35790$export$fca13ab91e1a6240() {
+    return (0, (/*@__PURE__*/$parcel$interopDefault($dZtnC))).useContext($ed7f85e399b35790$var$AppContext);
+}
+function $ed7f85e399b35790$export$c7dacf3845253dcf({ children: children  }) {
+    const [mode, setMode] = (0, $dZtnC.useState)("");
+    const value = {
+        mode: mode,
+        setMode: setMode
+    };
+    return /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)($ed7f85e399b35790$var$AppContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+
+
+
 var $cd4da5d2ed83979a$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsxs)((0, $6ac8170ffe1babd5$exports.Fragment), {
         children: [
             /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ad8ae1c3598ae04e$export$2e2bcd8739ae039), {}),
             /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $ed7f85e399b35790$export$c7dacf3845253dcf), {
-                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $692ecf87bc238d49$export$2e2bcd8739ae039), {})
+                children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $32c4b2f9f14d23cc$export$ae418ac7934e33ab), {
+                    children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $692ecf87bc238d49$export$2e2bcd8739ae039), {})
+                })
             })
         ]
     });

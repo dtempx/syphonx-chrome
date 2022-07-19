@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Grid } from "@material-ui/core";
 import ScriptTreeView from "./ScriptTreeView";
 import ScriptPropertyTable from "./ScriptPropertyTable";

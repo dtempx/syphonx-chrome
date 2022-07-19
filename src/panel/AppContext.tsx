@@ -1,27 +1,7 @@
 import React, { useState } from "react";
 
-const defaultScript = `[
-    { "select": [
-        {
-            "name": "title",
-            "type": "string",
-            "$": [["h1"]]
-        },
-        {
-            "name": "href",
-            "type": "string",
-            "$": [["a",["attr","href"]]]
-        }
-    ]}
-]`;
-
 export interface AppState {
-    script: string;
-    selected: string;
-    data: unknown;
-    setScript: React.Dispatch<React.SetStateAction<string>>;
-    setSelected: React.Dispatch<React.SetStateAction<string>>;
-    setData: React.Dispatch<React.SetStateAction<string>>;
+    mode: string;
 }
 
 const AppContext = React.createContext<AppState>({} as AppState);
@@ -31,17 +11,11 @@ export function useApp() {
 }
 
 export function AppProvider({ children }: { children: JSX.Element }) {
-    const [script, setScript] = useState(defaultScript);
-    const [selected, setSelected] = useState("");
-    const [data, setData] = useState("");
+    const [mode, setMode] = useState("");
 
     const value = {
-        script,
-        selected,
-        data,
-        setScript,
-        setSelected,
-        setData
+        mode,
+        setMode
     };
 
     return (

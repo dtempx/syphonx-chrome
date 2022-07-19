@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails, Typography, makeStyles } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
 import ScriptView from "./ScriptView";
@@ -15,11 +15,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default () => {
+    const [scriptExpanded, setScriptExpanded] = useState(true);
+    const [dataExpanded, setDataExpanded] = useState(true);
+
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Accordion>
+            <Accordion expanded={scriptExpanded} onChange={(event, isExpanded) => setScriptExpanded(isExpanded)}>
                 <AccordionSummary
                     expandIcon={<Icons.ExpandMore />}
                     aria-controls="script-content"
@@ -31,7 +34,7 @@ export default () => {
                     <ScriptView />
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
+            <Accordion expanded={dataExpanded} onChange={(event, isExpanded) => setDataExpanded(isExpanded)}>
                 <AccordionSummary
                     expandIcon={<Icons.ExpandMore />}
                     aria-controls="data-content"
