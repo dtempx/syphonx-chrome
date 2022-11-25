@@ -1,4 +1,4 @@
-import * as syphonx from "syphonx-core";
+import * as syphonx from "syphonx-lib";
 
 async function onDevToolsMessage(message: any, port: chrome.runtime.Port) {
     console.log("DEVTOOLS MESSAGE", message, port);
@@ -27,6 +27,16 @@ function executeScriptFile(tabId: number, file: string): Promise<unknown> {
                 results.length > 0 ? resolve(results[0].result) : reject({ message: `Failed to execute script file ${file}` })
         )
     );
+}
+
+function tryParseTemplate(text: string): { template?: syphonx.Template, err?: unknown } {
+    try {
+        const template = syphonx.parseTemplate(text);
+        return { template };
+    }
+    catch (err) {
+        return { err };
+    }
 }
 
 chrome.runtime.onConnect.addListener(port => {
@@ -79,12 +89,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("MESSAGE", message);
     if (message.key === "submit") {
-        const { selector, script } = message;
-        executeScript(message.tabId, syphonx.extract as any, script)
+        const { template, err } = tryParseTemplate(message.template);
+        if (template) {
+            executeScript(message.tabId, syphonx.extract as any, template)
             .then(result => {
                 console.log("MESSAGE", message, result);
                 sendResponse({ status: "OK", result });
             });
+        }
         return true;
     }
     else {

@@ -1,4 +1,4 @@
-import * as syphonx from "syphonx-core";
+import * as syphonx from "syphonx-lib";
 
 export function formatScript(script: unknown): string {
     let text = JSON.stringify(script, null, 2);
@@ -59,12 +59,12 @@ export function removeDOMRefs(obj: unknown): unknown {
     }
 }
 
-export async function runScript(script: unknown): Promise<syphonx.ExtractResult> {
+export async function runTemplate(template: unknown): Promise<syphonx.ExtractResult> {
     return new Promise<syphonx.ExtractResult>((resolve, reject) => {
         if (typeof chrome === "object" && chrome.devtools) {
             const message = {
                 key: "submit",
-                script,
+                template,
                 tabId: chrome.devtools.inspectedWindow.tabId
             };
             chrome.runtime.sendMessage(message, response => {

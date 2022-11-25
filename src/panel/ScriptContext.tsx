@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { formatScript, runScript, tryParseJSON } from "./common";
-import * as syphonx from "syphonx-core";
+import { formatScript, runTemplate, tryParseJSON } from "./common";
+import * as syphonx from "syphonx-lib";
 
 const defaultScript = formatScript({
     "actions": [
@@ -61,7 +61,7 @@ export function ScriptProvider({ children }: { children: JSX.Element }) {
     }, [script, selected]);
 
     useEffect(() => {
-        runScript(script).then(result => setResult(result));
+        runTemplate(script).then(result => setResult(result));
     }, [script]);
 
     function setSelectedObj(obj: Record<string, unknown>): void {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Accordion, AccordionSummary, AccordionDetails, Typography, makeStyles } from "@material-ui/core";
 import * as Icons from "@material-ui/icons";
-import ScriptView from "./ScriptView";
+import ScriptView from "./TemplateView";
 import DataView from "./DataView";
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +28,7 @@ export default () => {
                     aria-controls="script-content"
                     id="script"
                 >
-                    <Typography className={classes.heading}>Script</Typography>
+                    <Typography className={classes.heading}>Template</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ScriptView />
