@@ -95,11 +95,16 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             .then(result => {
                 console.log("MESSAGE", message, result);
                 sendResponse({ status: "OK", result });
+            })
+            .catch(reason => {
+                console.warn("ERROR", reason);
+                sendResponse({ status: "ERROR" });
             });
         }
         return true;
     }
     else {
+        console.warn("UNKNOWN MESSAGE", message);
         return false;
     }
 });

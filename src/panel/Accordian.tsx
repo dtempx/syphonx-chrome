@@ -28,7 +28,7 @@ export default () => {
                     aria-controls="script-content"
                     id="script"
                 >
-                    <Typography className={classes.heading}>Template</Typography>
+                    <Typography className={classes.heading}>TemplateX</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ScriptView />

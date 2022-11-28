@@ -22324,7 +22324,7 @@ var $692ecf87bc238d49$export$2e2bcd8739ae039 = ()=>{
                         id: "script",
                         children: /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $b8339c93bff31769$export$2e2bcd8739ae039), {
                             className: classes.heading,
-                            children: "Template"
+                            children: "TemplateX"
                         })
                     }),
                     /*#__PURE__*/ (0, $6ac8170ffe1babd5$exports.jsx)((0, $c2a6cd46b3ea599a$export$2e2bcd8739ae039), {
