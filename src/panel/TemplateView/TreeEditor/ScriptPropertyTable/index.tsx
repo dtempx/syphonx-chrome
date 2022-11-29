@@ -1,12 +1,12 @@
 import React from "react";
-import { useScript } from '../../../ScriptContext';
+import { useTemplate } from '../../../TemplateContext';
 import { MenuItem, Select, Switch, Table, TableContainer, TableBody, TableCell, TableRow, TextField } from "@material-ui/core";
 import { tryParseJSON } from "../../../common";
 import EditField from "./EditField";
 
 
 export default () => {
-    const { selectedObj, setSelectedObj, setSelected } = useScript();
+    const { selectedObj, setSelectedObj, setSelected } = useTemplate();
 
     function commitName(name: string) {
         setSelectedObj({ name });

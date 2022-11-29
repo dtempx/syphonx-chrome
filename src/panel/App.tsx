@@ -2,14 +2,14 @@ import React from "react";
 import { CssBaseline } from "@material-ui/core";
 import Accordian from "./Accordian";
 import { AppProvider } from "./AppContext";
-import { ScriptProvider } from "./ScriptContext";
+import { TemplateProvider } from "./TemplateContext";
 
 export default () => (
 <>
     <CssBaseline />
     <AppProvider>
-        <ScriptProvider>
+        <TemplateProvider>
             <Accordian />
-        </ScriptProvider>
+        </TemplateProvider>
     </AppProvider>
 </>);

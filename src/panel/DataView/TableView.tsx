@@ -1,10 +1,10 @@
 import React from "react";
 import { Table, TableContainer, TableBody, TableCell, TableRow } from "@material-ui/core";
-import { useScript } from '../ScriptContext';
+import { useTemplate } from '../TemplateContext';
 import { isObject, removeDOMRefs } from "../common";
 
 export default () => {
-    const { result } = useScript();
+    const { result } = useTemplate();
 
     const keys = result && isObject(result.data) ? Object.keys(result.data) : [];
     const obj = (result && isObject(result.data) ? removeDOMRefs(result.data) : {}) as Record<string, string>;

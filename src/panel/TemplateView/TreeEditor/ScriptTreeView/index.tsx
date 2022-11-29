@@ -1,18 +1,18 @@
 import React from "react";
 import { Button, Grid, Toolbar } from "@material-ui/core";
-import { useScript } from '../../../ScriptContext';
+import { useTemplate } from '../../../TemplateContext';
 import { SelectAction } from "syphonx-core";
 import ScriptTreeView from "./ScriptTreeView";
 
 export default () => {
-    const { script, selected, setSelected, updateScript } = useScript();
-    const select = (script?.actions.find(action => !!(action as SelectAction).select) as SelectAction)?.select || [];
+    const { template, selected, setSelected, updateTemplate } = useTemplate();
+    const select = (template?.actions.find(action => !!(action as SelectAction).select) as SelectAction)?.select || [];
 
     function onAddButton() {
         const name = "unnamed1";
         select.push({ name });
         setSelected(name);
-        updateScript();
+        updateTemplate();
     }
 
     function onRemoveButton() {
@@ -21,7 +21,7 @@ export default () => {
             select.splice(i, 1);
             setSelected(select[0]?.name || "");
         }
-        updateScript();
+        updateTemplate();
     }
 
     return (

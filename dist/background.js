@@ -6182,18 +6182,6 @@ function $4e435298af185d7b$var$executeScriptFile(tabId, file) {
                 message: `Failed to execute script file ${file}`
             })));
 }
-function $4e435298af185d7b$var$tryParseTemplate(text) {
-    try {
-        const template = $891b4678e7b78b09$export$2e2dbd43b49fd373(text);
-        return {
-            template: template
-        };
-    } catch (err) {
-        return {
-            err: err
-        };
-    }
-}
 chrome.runtime.onConnect.addListener((port)=>{
     port.onMessage.addListener($4e435298af185d7b$var$onDevToolsMessage);
     port.onDisconnect.addListener(()=>port.onMessage.removeListener($4e435298af185d7b$var$onDevToolsMessage));
@@ -6237,19 +6225,37 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 */ //TEST #3
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
-    console.log("MESSAGE", message);
-    debugger;
+    console.log("BACKGROUND", {
+        message: message
+    });
     if (message.key === "submit") {
-        const { template: template , err: err  } = $4e435298af185d7b$var$tryParseTemplate(message.template);
-        if (template) $4e435298af185d7b$var$executeScript(message.tabId, $c762165c71c37c57$export$f9380c9a627682d3, template).then((result)=>{
-            console.log("MESSAGE", message, result);
+        $4e435298af185d7b$var$executeScript(message.tabId, $c762165c71c37c57$export$f9380c9a627682d3, message.template).then((result)=>{
+            console.log("BACKGROUND", {
+                status: "OK",
+                message: message,
+                result: result
+            });
             sendResponse({
                 status: "OK",
                 result: result
             });
+        }).catch((error)=>{
+            console.warn("BACKGROUND", {
+                status: "ERROR",
+                message: message,
+                error: error
+            });
+            sendResponse({
+                status: "ERROR",
+                error: error
+            });
         });
-        return true;
-    } else return false;
+        return true; // async
+    } else console.warn("MESSAGE", {
+        status: "UNKNOWN MESSAGE",
+        message: message
+    });
+    return false; // sync
 });
 
 })();

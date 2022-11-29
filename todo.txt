@@ -4,3 +4,7 @@ datagrid view for data
 dom highlighting from datagrid
 dom picker helper
 json schema/documentation
+
+https://www.npmjs.com/package/monaco-editor
+https://www.npmjs.com/package/monaco-yaml
+https://www.npmjs.com/package/@monaco-editor/react

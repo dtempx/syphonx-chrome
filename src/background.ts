@@ -29,16 +29,6 @@ function executeScriptFile(tabId: number, file: string): Promise<unknown> {
     );
 }
 
-function tryParseTemplate(text: string): { template?: syphonx.Template, err?: unknown } {
-    try {
-        const template = syphonx.parseTemplate(text);
-        return { template };
-    }
-    catch (err) {
-        return { err };
-    }
-}
-
 chrome.runtime.onConnect.addListener(port => {
     port.onMessage.addListener(onDevToolsMessage);
     port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
@@ -87,24 +77,21 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 //TEST #3
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("MESSAGE", message);
+    console.log("BACKGROUND", { message });
     if (message.key === "submit") {
-        const { template, err } = tryParseTemplate(message.template);
-        if (template) {
-            executeScript(message.tabId, syphonx.extract as any, template)
-            .then(result => {
-                console.log("MESSAGE", message, result);
-                sendResponse({ status: "OK", result });
-            })
-            .catch(reason => {
-                console.warn("ERROR", reason);
-                sendResponse({ status: "ERROR" });
-            });
-        }
-        return true;
+        executeScript(message.tabId, syphonx.extract as any, message.template)
+        .then(result => {
+            console.log("BACKGROUND", { status: "OK", message, result });
+            sendResponse({ status: "OK", result });
+        })
+        .catch(error => {
+            console.warn("BACKGROUND", { status: "ERROR", message, error });
+            sendResponse({ status: "ERROR", error });
+        });
+        return true; // async
     }
     else {
-        console.warn("UNKNOWN MESSAGE", message);
-        return false;
+        console.warn("MESSAGE", { status: "UNKNOWN MESSAGE", message });
     }
+    return false; // sync
 });

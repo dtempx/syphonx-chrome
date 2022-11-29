@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { TreeItem, TreeView } from "@material-ui/lab";
-import { useScript } from '../../../ScriptContext';
+import { useTemplate } from '../../../TemplateContext';
 import { SelectAction } from "syphonx-core";
 import * as Icons from "@material-ui/icons";
 
 export default () => {
-    const { script, selected, setSelected } = useScript();
+    const { template, selected, setSelected } = useTemplate();
     const [expanded, setExpanded] = useState([]);
-    const select = (script?.actions.find(action => !!(action as SelectAction).select) as SelectAction)?.select || [];
+    const select = (template?.actions.find(action => !!(action as SelectAction).select) as SelectAction)?.select || [];
 
     function handleToggle(event: any, nodeIds: any) {
         setExpanded(nodeIds);

@@ -1,6 +1,6 @@
 import * as syphonx from "syphonx-lib";
 
-export function formatScript(script: unknown): string {
+export function formatTemplate(script: unknown): string {
     let text = JSON.stringify(script, null, 2);
     let i = text.indexOf(`"$": [\n`);
     while (i >= 0) {
@@ -61,7 +61,10 @@ export function removeDOMRefs(obj: unknown): unknown {
 
 export async function runTemplate(template: unknown): Promise<syphonx.ExtractResult> {
     return new Promise<syphonx.ExtractResult>((resolve, reject) => {
-        if (typeof chrome === "object" && chrome.devtools) {
+        if (typeof template !== "object" || template === null) {
+            reject(new Error("Invalid template"));
+        }
+        else if (typeof chrome === "object" && chrome.devtools) {
             const message = {
                 key: "submit",
                 template,
@@ -85,5 +88,15 @@ export function tryParseJSON(text: string): unknown {
     }
     catch (err) {
         return undefined;
+    }
+}
+
+export function tryParseTemplate(text: string): { template?: syphonx.Template, err?: unknown } {
+    try {
+        const template = syphonx.parseTemplate(text);
+        return { template };
+    }
+    catch (err) {
+        return { err };
     }
 }
