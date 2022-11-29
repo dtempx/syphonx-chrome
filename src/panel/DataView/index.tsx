@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Box, Grid, Tab, Tabs } from "@material-ui/core";
+import { AppBar, Box, Grid, Tab, Tabs } from "@mui/material";
 import JsonView from "./JsonView";
 import ResponseView from "./ResponseView";
 import TableView from "./TableView";

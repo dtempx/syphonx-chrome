@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AppBar, Box, Grid, Tab, Tabs } from "@material-ui/core";
+import { AppBar, Box, Grid, Tab, Tabs } from "@mui/material";
 import CodeEditor from "./CodeEditor";
 import TreeEditor from "./TreeEditor";
 

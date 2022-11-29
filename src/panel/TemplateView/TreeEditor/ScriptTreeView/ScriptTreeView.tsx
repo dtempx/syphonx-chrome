@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { TreeItem, TreeView } from "@material-ui/lab";
+import { TreeItem, TreeView } from "@mui/lab";
 import { useTemplate } from '../../../TemplateContext';
 import { SelectAction } from "syphonx-core";
-import * as Icons from "@material-ui/icons";
+import * as Icons from "@mui/icons-material";
 
 export default () => {
     const { template, selected, setSelected } = useTemplate();

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Accordion, AccordionSummary, AccordionDetails, Typography, makeStyles } from "@material-ui/core";
-import * as Icons from "@material-ui/icons";
+import { Accordion, AccordionSummary, AccordionDetails, Typography/*, makeStyles*/ } from "@mui/material";
+import * as Icons from "@mui/icons-material";
 import ScriptView from "./TemplateView";
 import DataView from "./DataView";
 
-const useStyles = makeStyles(theme => ({
+/*
+const useStyles = makeStyles((theme: any) => ({
     root: {
         width: "100%"
     },
@@ -13,22 +14,23 @@ const useStyles = makeStyles(theme => ({
         //fontWeight: theme.typography.fontWeightRegular
     }
 }));
+*/
 
 export default () => {
     const [scriptExpanded, setScriptExpanded] = useState(true);
     const [dataExpanded, setDataExpanded] = useState(true);
 
-    const classes = useStyles();
+    //const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <div /*className={classes.root}*/>
             <Accordion expanded={scriptExpanded} onChange={(event, isExpanded) => setScriptExpanded(isExpanded)}>
                 <AccordionSummary
                     expandIcon={<Icons.ExpandMore />}
                     aria-controls="script-content"
                     id="script"
                 >
-                    <Typography className={classes.heading}>TemplateX</Typography>
+                    <Typography /*className={classes.heading}*/>Template XYZ</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ScriptView />
@@ -40,7 +42,7 @@ export default () => {
                     aria-controls="data-content"
                     id="data"
                 >
-                    <Typography className={classes.heading}>Data</Typography>
+                    <Typography /*className={classes.heading}*/>Data</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                     <DataView />

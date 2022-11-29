@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Toolbar } from "@material-ui/core";
+import { Button, Grid, Toolbar } from "@mui/material";
 import { useTemplate } from '../../../TemplateContext';
 import { SelectAction } from "syphonx-core";
 import ScriptTreeView from "./ScriptTreeView";

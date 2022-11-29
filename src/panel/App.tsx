@@ -1,5 +1,5 @@
 import React from "react";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
 import Accordian from "./Accordian";
 import { AppProvider } from "./AppContext";
 import { TemplateProvider } from "./TemplateContext";

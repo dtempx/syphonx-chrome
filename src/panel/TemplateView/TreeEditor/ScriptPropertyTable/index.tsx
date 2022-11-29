@@ -1,6 +1,6 @@
 import React from "react";
 import { useTemplate } from '../../../TemplateContext';
-import { MenuItem, Select, Switch, Table, TableContainer, TableBody, TableCell, TableRow, TextField } from "@material-ui/core";
+import { MenuItem, Select, Switch, Table, TableContainer, TableBody, TableCell, TableRow, TextField } from "@mui/material";
 import { tryParseJSON } from "../../../common";
 import EditField from "./EditField";
 
