@@ -1,6 +1,7 @@
 import * as syphonx from "syphonx-lib";
 import { createActionItems, findItem, findNextItem, TemplateItem } from "./TemplateItem";
 import { matchBrace } from "./utilities";
+import * as background from "../../background-proxy";
 
 export class Template {
     obj: Partial<syphonx.Template>;
@@ -37,6 +38,17 @@ export class Template {
         return findItem(this.actions, key);
     }
 
+    async run(): Promise<syphonx.ExtractResult> {
+        if (background.active) {
+            const result = await background.applyTemplate(this.obj as syphonx.Template);
+            return result;
+        }
+        else {
+            return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;
+        }
+    }
+
+    /*
     run(): Promise<syphonx.ExtractResult> {
         return new Promise<syphonx.ExtractResult>((resolve, reject) => {
             if (typeof chrome === "object" && chrome.devtools) {
@@ -49,14 +61,15 @@ export class Template {
                     if (response) {
                         resolve(response.result);
                     }
-                });    
+                });
             }
             else {
                 resolve({ data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult);
             }
         });
     }
-
+    */
+    
     json(): string {
         let text = JSON.stringify(this.obj, null, 2) || "";
         let i = text.indexOf(`"$": [\n`);

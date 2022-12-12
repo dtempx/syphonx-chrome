@@ -1,10 +1,10 @@
-const $c5c3beb62a6d2af0$var$background = chrome.runtime.connect({
+const $89fb1f05f1e0027d$var$background = chrome.runtime.connect({
     name: "devtools"
 });
-$c5c3beb62a6d2af0$var$background.onMessage.addListener((message)=>{
+$89fb1f05f1e0027d$var$background.onMessage.addListener((message)=>{
 // handle reponse from background page
 });
-$c5c3beb62a6d2af0$var$background.postMessage({
+$89fb1f05f1e0027d$var$background.postMessage({
     key: "load",
     tabId: chrome.devtools.inspectedWindow.tabId
 });
@@ -19,3 +19,4 @@ chrome.devtools.panels.elements.createSidebarPane("SyphonX", (sidebar)=>{
 });
 
 
+//# sourceMappingURL=devtools.caffc88d.js.map

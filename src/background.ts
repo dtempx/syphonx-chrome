@@ -1,11 +1,17 @@
 import * as syphonx from "syphonx-lib";
+import * as functions from "./functions";
+
+const scripts: Record<string, Function> = {
+    "applyTemplate": syphonx.extract,
+    "highlightElements": functions.highlightElements
+};
 
 async function onDevToolsMessage(message: any, port: chrome.runtime.Port) {
-    console.log("DEVTOOLS MESSAGE", message, port);
-    if (message.key === "load") {
+    console.log("DEVTOOLS", { message });
+    if (message.key === "load" && typeof message.tabId === "number") {
         const file = "jquery.slim.js";
         await executeScriptFile(message.tabId, file);
-        console.log(`injected ${file}`);
+        console.log(`DEVTOOLS injected ${file}`);
     }
 }
 
@@ -34,72 +40,26 @@ chrome.runtime.onConnect.addListener(port => {
     port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
 });
 
-/*
-//TEST #1 WORKING!
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("MESSAGE", message);
-    if (message.key === "submit") {
-        const { selector, script } = message;
-        sendResponse({
-            status: "OK",
-            result: `*** ${selector} ***`
-        });
+    if (!Object.keys(scripts).includes(message.key)) {
+        console.warn("MESSAGE", { message, error: `Property "key" is invalid: "${message.key}"` });
         return false;
     }
-    else {
-        return false;
-    }
-});
-*/
 
-/*
-//TEST #2 WORKING!
-declare var $: any;
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("MESSAGE", message);
-    if (message.key === "submit") {
-        const { selector, script } = message;
-        executeScript(message.tabId, test, script)
-            .then(result => {
-                console.log("MESSAGE", message, result);
-                sendResponse({ status: "OK", result });
-            });
-        return true;
-    }
-    else {
+    if (typeof message.tabId !== "number") {
+        console.warn("MESSAGE", message.key, { message, error: `Property "tabId" is invalid: "${message.tabId}"` });
         return false;
     }
-    function test() {
-        return $("h1").text();
-    }    
-});
-*/
 
-//TEST #3
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    console.log("BACKGROUND", { message });
-    if (message.key === "submit") {
-        if (message.tabId) {
-            console.warn("BACKGROUND", "message.tabId not specified");
-            return false;
-        }
-        if (typeof message.template !== "object") {
-            console.warn("BACKGROUND", "message.template is invalid or not specified");
-            return false;
-        }
-        executeScript(message.tabId, syphonx.extract as any, message.template)
+    executeScript(message.tabId, scripts[message.key] as () => void, message.params)
         .then(result => {
-            console.log("BACKGROUND", { status: "OK", message, result });
-            sendResponse({ status: "OK", result });
+            console.log("MESSAGE", message.key, { message, result });
+            sendResponse({ result });
         })
         .catch(error => {
-            console.warn("BACKGROUND", { status: "ERROR", message, error });
-            sendResponse({ status: "ERROR", error });
+            console.warn("MESSAGE", message.key, { message, error });
+            sendResponse({ error });
         });
-        return true; // async
-    }
-    else {
-        console.warn("MESSAGE", { status: "UNKNOWN MESSAGE", message });
-    }
-    return false; // sync
+
+    return true;
 });

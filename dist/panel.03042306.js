@@ -4,6 +4,9 @@ function $parcel$export(e, n, v, s) {
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
+}
 var $parcel$global =
 typeof globalThis !== 'undefined'
   ? globalThis
@@ -7557,6 +7560,32 @@ $4723f549251dd88b$exports = (parcelRequire("bgpZC"));
 
 
 parcelRequire("d4J5n");
+var $86049548edbb86a7$exports = {};
+
+$parcel$export($86049548edbb86a7$exports, "colors", () => $f3f6e40c7d4244e9$exports);
+$parcel$export($86049548edbb86a7$exports, "Backdrop", () => $db87bba5d9169082$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Box", () => $7f9bf0f8ac9034c0$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "CssBaseline", () => $5d05c50dc13d9129$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "IconButton", () => $fa1dfc78f8375ab9$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "InputAdornment", () => $224cf55292bca498$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "MenuItem", () => $bde17d13cb330cfa$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Paper", () => $e1c08ee9f6edce16$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Select", () => $5cd693904b0d5801$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "SpeedDial", () => $b264c8406c8bcefb$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "SpeedDialAction", () => $1b105cb8cea10446$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "SpeedDialIcon", () => $7c0a0721aa5192ba$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Stack", () => $ff1b9c20c47218e6$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Switch", () => $d30118e660fee7dd$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Table", () => $795ce8072056b061$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "TableBody", () => $c90d18d433fbb5ef$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "TableCell", () => $4288686d451c9d61$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "TableContainer", () => $6d21e7ab88a61fec$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "TableRow", () => $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "TextField", () => $e00f995e0f3cc83a$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Tooltip", () => $16d648c397460623$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Typography", () => $8588119983b778db$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "ThemeProvider", () => $4feb3478c82adef5$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "createTheme", () => $3de943553a18032e$export$2e2bcd8739ae039);
 var $f3f6e40c7d4244e9$exports = {};
 
 $parcel$export($f3f6e40c7d4244e9$exports, "common", () => $4d29cfa29b5a7bda$export$2e2bcd8739ae039);
@@ -7945,6 +7974,7 @@ const $6e58d8a98215fa0c$var$blueGrey = {
     A700: "#455a64"
 };
 var $6e58d8a98215fa0c$export$2e2bcd8739ae039 = $6e58d8a98215fa0c$var$blueGrey;
+
 
 
 
@@ -10534,6 +10564,11 @@ function $bd40ddda315b2d8b$export$2e2bcd8739ae039(slots, getUtilityClass, classe
 }
 
 
+var $526182804eb2806c$exports = {};
+
+$parcel$defineInteropFlag($526182804eb2806c$exports);
+
+$parcel$export($526182804eb2806c$exports, "default", () => $81a4eb5b0cda9a59$export$2e2bcd8739ae039);
 const $1f94a0ead977c126$var$defaultGenerator = (componentName)=>componentName;
 const $1f94a0ead977c126$var$createClassNameGenerator = ()=>{
     let generate = $1f94a0ead977c126$var$defaultGenerator;
@@ -10570,6 +10605,8 @@ function $81a4eb5b0cda9a59$export$2e2bcd8739ae039(componentName, slot, globalSta
     const globalStateClass = $81a4eb5b0cda9a59$var$globalStateClassesMapping[slot];
     return globalStateClass ? `${globalStatePrefix}-${globalStateClass}` : `${(0, $1f94a0ead977c126$export$2e2bcd8739ae039).generate(componentName)}-${slot}`;
 }
+
+
 
 
 
@@ -12666,6 +12703,28 @@ var $28cddbc9c45fcc54$export$2e2bcd8739ae039 = $28cddbc9c45fcc54$var$styled;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -13767,6 +13826,14 @@ var $db87bba5d9169082$export$2e2bcd8739ae039 = $db87bba5d9169082$var$Backdrop;
 
 
 
+
+
+
+
+
+
+
+
 const $7f9bf0f8ac9034c0$var$defaultTheme = (0, $3de943553a18032e$export$2e2bcd8739ae039)();
 const $7f9bf0f8ac9034c0$var$Box = (0, $f308fb8fc2eca5c5$export$2e2bcd8739ae039)({
     defaultTheme: $7f9bf0f8ac9034c0$var$defaultTheme,
@@ -13774,6 +13841,40 @@ const $7f9bf0f8ac9034c0$var$Box = (0, $f308fb8fc2eca5c5$export$2e2bcd8739ae039)(
     generateClassName: (0, $1f94a0ead977c126$export$2e2bcd8739ae039).generate
 });
 var $7f9bf0f8ac9034c0$export$2e2bcd8739ae039 = $7f9bf0f8ac9034c0$var$Box;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13872,6 +13973,50 @@ const $5d05c50dc13d9129$export$9dd6ff9ea0189349 = (theme, enableColorScheme = fa
     });
 }
 var $5d05c50dc13d9129$export$2e2bcd8739ae039 = $5d05c50dc13d9129$var$CssBaseline;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -14668,6 +14813,16 @@ var $fa1dfc78f8375ab9$export$2e2bcd8739ae039 = $fa1dfc78f8375ab9$var$IconButton;
 
 
 
+
+
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -14972,6 +15127,34 @@ var $224cf55292bca498$export$2e2bcd8739ae039 = $224cf55292bca498$var$InputAdornm
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -15235,6 +15418,24 @@ var $bde17d13cb330cfa$export$2e2bcd8739ae039 = $bde17d13cb330cfa$var$MenuItem;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -15364,6 +15565,22 @@ const $e1c08ee9f6edce16$var$Paper = /*#__PURE__*/ $d4J5n.forwardRef(function Pap
     }, other));
 });
 var $e1c08ee9f6edce16$export$2e2bcd8739ae039 = $e1c08ee9f6edce16$var$Paper;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -15688,6 +15905,11 @@ var $fb0eb384587a3ae4$export$2e2bcd8739ae039 = $fb0eb384587a3ae4$var$MenuList;
 
 
 
+var $653eb297fb09c134$exports = {};
+
+$parcel$defineInteropFlag($653eb297fb09c134$exports);
+
+$parcel$export($653eb297fb09c134$exports, "default", () => $625b48b719d538f0$export$2e2bcd8739ae039);
 
 
 
@@ -15870,6 +16092,12 @@ $28e98a82110f06ff$var$Grow.muiSupportAuto = true;
 var $28e98a82110f06ff$export$2e2bcd8739ae039 = $28e98a82110f06ff$var$Grow;
 
 
+
+var $3fab0efee1ba3066$exports = {};
+
+$parcel$defineInteropFlag($3fab0efee1ba3066$exports);
+
+$parcel$export($3fab0efee1ba3066$exports, "default", () => $fd29e14a923db841$export$2e2bcd8739ae039);
 
 
 
@@ -16701,6 +16929,8 @@ var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
 
 
 
+
+
 function $8a1b01c82aad794b$export$88f455dd56c95edb(slot) {
     return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiPopover", slot);
 }
@@ -16986,6 +17216,10 @@ const $625b48b719d538f0$var$Popover = /*#__PURE__*/ $d4J5n.forwardRef(function P
     }));
 });
 var $625b48b719d538f0$export$2e2bcd8739ae039 = $625b48b719d538f0$var$Popover;
+
+
+
+
 
 
 
@@ -17985,6 +18219,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $3aecab0568aeb1c8$exports = {};
+
+$parcel$defineInteropFlag($3aecab0568aeb1c8$exports);
+
+$parcel$export($3aecab0568aeb1c8$exports, "default", () => $67d9684704896024$export$2e2bcd8739ae039);
+$parcel$export($3aecab0568aeb1c8$exports, "inputBaseClasses", () => $e3d87702158544c9$export$2e2bcd8739ae039);
 
 
 
@@ -18478,6 +18718,9 @@ const $67d9684704896024$var$inputGlobalStyles = /*#__PURE__*/ (0, $17b288f07ec57
     });
 });
 var $67d9684704896024$export$2e2bcd8739ae039 = $67d9684704896024$var$InputBase;
+
+
+
 
 
 
@@ -19301,6 +19544,18 @@ var $5cd693904b0d5801$export$2e2bcd8739ae039 = $5cd693904b0d5801$var$Select;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -19961,6 +20216,8 @@ const $b264c8406c8bcefb$var$SpeedDial = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $b264c8406c8bcefb$export$2e2bcd8739ae039 = $b264c8406c8bcefb$var$SpeedDial;
+
+
 
 
 
@@ -22587,6 +22844,8 @@ var $1b105cb8cea10446$export$2e2bcd8739ae039 = $1b105cb8cea10446$var$SpeedDialAc
 
 
 
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -22732,6 +22991,8 @@ var $7c0a0721aa5192ba$export$2e2bcd8739ae039 = $7c0a0721aa5192ba$var$SpeedDialIc
 
 
 
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -22841,6 +23102,26 @@ const $ff1b9c20c47218e6$var$Stack = /*#__PURE__*/ $d4J5n.forwardRef(function Sta
     }));
 });
 var $ff1b9c20c47218e6$export$2e2bcd8739ae039 = $ff1b9c20c47218e6$var$Stack;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -23268,6 +23549,10 @@ var $d30118e660fee7dd$export$2e2bcd8739ae039 = $d30118e660fee7dd$var$Switch;
 
 
 
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -23376,6 +23661,8 @@ var $795ce8072056b061$export$2e2bcd8739ae039 = $795ce8072056b061$var$Table;
 
 
 
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -23448,6 +23735,8 @@ const $c90d18d433fbb5ef$var$TableBody = /*#__PURE__*/ $d4J5n.forwardRef(function
     });
 });
 var $c90d18d433fbb5ef$export$2e2bcd8739ae039 = $c90d18d433fbb5ef$var$TableBody;
+
+
 
 
 
@@ -23620,6 +23909,8 @@ var $4288686d451c9d61$export$2e2bcd8739ae039 = $4288686d451c9d61$var$TableCell;
 
 
 
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -23677,6 +23968,14 @@ const $6d21e7ab88a61fec$var$TableContainer = /*#__PURE__*/ $d4J5n.forwardRef(fun
     }, other));
 });
 var $6d21e7ab88a61fec$export$2e2bcd8739ae039 = $6d21e7ab88a61fec$var$TableContainer;
+
+
+
+
+
+
+
+
 
 
 
@@ -23785,6 +24084,14 @@ var $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039 = $ed3a5e9ae5a5bf88$var$TableRow;
 
 
 
+
+
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -23804,6 +24111,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $807a1d539ec88b4c$exports = {};
+
+$parcel$defineInteropFlag($807a1d539ec88b4c$exports);
+
+$parcel$export($807a1d539ec88b4c$exports, "default", () => $f8e9b85224d1dbe5$export$2e2bcd8739ae039);
+$parcel$export($807a1d539ec88b4c$exports, "formLabelClasses", () => $02d545d40cf45079$export$2e2bcd8739ae039);
 
 
 
@@ -23946,6 +24259,10 @@ const $f8e9b85224d1dbe5$var$FormLabel = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $f8e9b85224d1dbe5$export$2e2bcd8739ae039 = $f8e9b85224d1dbe5$var$FormLabel;
+
+
+
+
 
 
 
@@ -24661,6 +24978,37 @@ const $e00f995e0f3cc83a$var$TextFieldRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8
     }));
 });
 var $e00f995e0f3cc83a$export$2e2bcd8739ae039 = $e00f995e0f3cc83a$var$TextField;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -30891,6 +31239,30 @@ function $6f0852509a7f7477$export$ad9052cdca847332(text, i, token) {
 }
 
 
+const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
+async function $6767c619f5de943e$export$1656970ae4fe6f6e(selector) {
+    await $6767c619f5de943e$var$executeScript("highlightElements", selector);
+}
+async function $6767c619f5de943e$export$f78a296632f66e69(template) {
+    const result = await $6767c619f5de943e$var$executeScript("applyTemplate", template);
+    return result;
+}
+function $6767c619f5de943e$var$executeScript(key, ...params) {
+    if (!$6767c619f5de943e$export$89da14300d534261) throw new Error("Cannot execute script, not running in Chrome devtools");
+    return new Promise((resolve, reject)=>{
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.runtime.sendMessage({
+            key: key,
+            params: params,
+            tabId: tabId
+        }, (response)=>{
+            if (response.error) reject(response.error);
+            else resolve(response.result);
+        });
+    });
+}
+
+
 
 class $cdcf4841f7561b96$export$14416b8d99d47caa {
     constructor(obj){
@@ -30916,26 +31288,38 @@ class $cdcf4841f7561b96$export$14416b8d99d47caa {
     findItem(key) {
         return (0, $5f4e931e94425ce6$export$a2dea178c28a0308)(this.actions, key);
     }
-    run() {
-        return new Promise((resolve, reject)=>{
+    async run() {
+        if ($6767c619f5de943e$export$89da14300d534261) {
+            const result = await $6767c619f5de943e$export$f78a296632f66e69(this.obj);
+            return result;
+        } else return {
+            data: {
+                title: "Example Domain",
+                href: "https://www.example.com/"
+            }
+        };
+    }
+    /*
+    run(): Promise<syphonx.ExtractResult> {
+        return new Promise<syphonx.ExtractResult>((resolve, reject) => {
             if (typeof chrome === "object" && chrome.devtools) {
                 const message = {
                     key: "submit",
                     template: this.obj,
                     tabId: chrome.devtools.inspectedWindow.tabId
                 };
-                chrome.runtime.sendMessage(message, (response)=>{
-                    if (response) resolve(response.result);
+                chrome.runtime.sendMessage(message, response => {
+                    if (response) {
+                        resolve(response.result);
+                    }
                 });
-            } else resolve({
-                data: {
-                    title: "Example Domain",
-                    href: "https://www.example.com/"
-                }
-            });
+            }
+            else {
+                resolve({ data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult);
+            }
         });
     }
-    json() {
+    */ json() {
         let text = JSON.stringify(this.obj, null, 2) || "";
         let i = text.indexOf(`"$": [\n`);
         while(i >= 0){
@@ -31368,11 +31752,18 @@ var $71b55ed5fcc7e1a3$export$2e2bcd8739ae039 = ({ items: items , columns: column
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
+
 
 
 var $dfbd11d9ea4caa03$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
     const value1 = query1 ? $2263901efccdc215$export$633ae63c2897642e(query1[0]) : "";
+    if ($6767c619f5de943e$export$89da14300d534261) (0, $d4J5n.useEffect)(()=>{
+        $6767c619f5de943e$export$1656970ae4fe6f6e(query1 && query1[0] ? query1[0][0] : "");
+    }, [
+        query1
+    ]);
     function handleChange(event, value) {
         if (value) {
             const query = $d52b36f52b4cad37$export$dd48e276a5eff34c(value);
@@ -31654,6 +32045,104 @@ var $9e41d32715df6971$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
+var $7b42a1209722603f$exports = {};
+
+$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -32501,6 +32990,8 @@ var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
 
 
 
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -33109,6 +33600,13 @@ const $4ed19a9323b6d50c$var$TreeView = /*#__PURE__*/ $d4J5n.forwardRef(function 
     });
 });
 var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
+
+
+
+
+
+
+
 
 
 
