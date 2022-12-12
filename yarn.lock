@@ -1103,11 +1103,6 @@ ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-argparse@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
-  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
-
 assert@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/assert/-/assert-2.0.0.tgz#95fc1c616d48713510680f2eaf2d10dd22e02d32"
@@ -1733,18 +1728,6 @@ jquery@^3.6.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
-  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
-  dependencies:
-    argparse "^2.0.1"
-
-jsep@^1.3.7:
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/jsep/-/jsep-1.3.7.tgz#fee6a03ea2bbf61ae5264313a18231e02ab612b3"
-  integrity sha512-NFbZTr1t13fPKw53swmZFKwBkEDWDnno7uLJk+a+Rw9tGDTkGgnGdZJ8A/o3gR1+XaAXmSsbpfIBIBgqRBZWDA==
-
 json-parse-even-better-errors@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
@@ -2296,21 +2279,6 @@ svgo@^2.4.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
-
-syphonx-core@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.1.3.tgz#182dd96249af2c8a1531bab41f87bdb97a29f869"
-  integrity sha512-u9qsz2/N1kgZ4VMFcZtC3ZC1tAFHf1DSvdAbDmEr6hB3VrCjHbb9WO1bGeL19MK2NBeHWoJ7U0E2AXqU4PlnoA==
-
-syphonx-lib@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.1.3.tgz#3ae23b10eb499fb88a3495cdc7b300251b9564a1"
-  integrity sha512-ReOcDrKFINXbJDE4/0Q/XtEbLw2R6CNFQ8YiZRyHdwJgzOBqoQDGfBhpmqFmBRUZeh3E0aa2jKkLqyP2gzsjew==
-  dependencies:
-    js-yaml "^4.1.0"
-    jsep "^1.3.7"
-    json5 "^2.2.1"
-    syphonx-core "^1.1.3"
 
 term-size@^2.2.1:
   version "2.2.1"

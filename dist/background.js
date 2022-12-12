@@ -6229,6 +6229,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         message: message
     });
     if (message.key === "submit") {
+        if (message.tabId) {
+            console.warn("BACKGROUND", "message.tabId not specified");
+            return false;
+        }
+        if (typeof message.template !== "object") {
+            console.warn("BACKGROUND", "message.template is invalid or not specified");
+            return false;
+        }
         $4e435298af185d7b$var$executeScript(message.tabId, $c762165c71c37c57$export$f9380c9a627682d3, message.template).then((result)=>{
             console.log("BACKGROUND", {
                 status: "OK",

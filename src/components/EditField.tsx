@@ -1,0 +1,74 @@
+import React, { useState } from "react";
+import { BaseTextFieldProps, IconButton, InputAdornment, TextField } from "@mui/material";
+import * as Icons from "@mui/icons-material";
+
+export interface Props extends BaseTextFieldProps {
+    value?: unknown;
+    onChange?: (event: React.SyntheticEvent, value: string) => void
+    onValidate?: (value: string) => boolean
+}
+
+export default ({ value, onChange, onValidate, ...props }: Props) => {
+    const [ input, setInput ] = useState<string | undefined>();
+    const [ valid, setValid ] = useState(true);
+
+    function validate(event: React.ChangeEvent<HTMLInputElement>) {
+        const value = event.target.value;
+        setInput(value);
+        if (onValidate) {
+            setValid(onValidate(value));
+        }
+    }
+
+    function commit(event: React.SyntheticEvent) {
+        if (valid && input !== undefined) {
+            if (onChange)
+                onChange(event, input);
+            setInput(undefined);
+        }
+    }
+
+    function cancel() {
+        setInput(undefined);
+        setValid(true);
+    }
+
+    function keydown(event: React.KeyboardEvent) {
+        if (event.key === "Escape")
+            cancel();
+        if (event.key === "Enter")
+            commit(event);
+    }
+
+    return (
+        <TextField
+            {...props}
+            error={!valid}
+            value={input !== undefined ? input : value !== undefined ? String(value) : ""}
+            onChange={validate}
+            onKeyDown={keydown}
+            onBlur={commit}
+            InputProps={{
+                endAdornment:
+                    <InputAdornment
+                        position="end"
+                        style={{ visibility: input !== undefined ? "visible" : "hidden" }}
+                    >
+                        <IconButton
+                            size="small"
+                            onClick={commit}
+                            style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
+                        >
+                            <Icons.Check fontSize="small" />
+                        </IconButton>
+                        <IconButton
+                            size="small"
+                            onClick={cancel}
+                        >
+                            <Icons.Cancel fontSize="small" />
+                        </IconButton>
+                    </InputAdornment>
+            }}
+        />
+    );
+}

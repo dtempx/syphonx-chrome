@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Accordion, AccordionSummary, AccordionDetails, Typography/*, makeStyles*/ } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails, Box, Typography } from "@mui/material";
 import * as Icons from "@mui/icons-material";
-import ScriptView from "./TemplateView";
+import TemplateView from "./TemplateView/index";
 import DataView from "./DataView";
 
 export default () => {
@@ -9,7 +9,7 @@ export default () => {
     const [dataExpanded, setDataExpanded] = useState(true);
 
     return (
-        <div>
+        <Box>
             <Accordion expanded={scriptExpanded} onChange={(event, isExpanded) => setScriptExpanded(isExpanded)}>
                 <AccordionSummary
                     expandIcon={<Icons.ExpandMore />}
@@ -18,8 +18,8 @@ export default () => {
                 >
                     <Typography>Template XYZ</Typography>
                 </AccordionSummary>
-                <AccordionDetails>
-                    <ScriptView />
+                <AccordionDetails sx={{ backgroundColor: "#ebedf0" }}>
+                    <TemplateView />
                 </AccordionDetails>
             </Accordion>
             <Accordion expanded={dataExpanded} onChange={(event, isExpanded) => setDataExpanded(isExpanded)}>
@@ -34,6 +34,6 @@ export default () => {
                     <DataView />
                 </AccordionDetails>
             </Accordion>
-        </div>
-    );
+        </Box>
+);
 }

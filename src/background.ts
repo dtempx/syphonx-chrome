@@ -79,6 +79,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("BACKGROUND", { message });
     if (message.key === "submit") {
+        if (message.tabId) {
+            console.warn("BACKGROUND", "message.tabId not specified");
+            return false;
+        }
+        if (typeof message.template !== "object") {
+            console.warn("BACKGROUND", "message.template is invalid or not specified");
+            return false;
+        }
         executeScript(message.tabId, syphonx.extract as any, message.template)
         .then(result => {
             console.log("BACKGROUND", { status: "OK", message, result });
