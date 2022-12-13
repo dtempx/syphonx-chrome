@@ -7583,6 +7583,7 @@ $parcel$export($86049548edbb86a7$exports, "AppBar", () => $9ef80e5cd9ca7bff$expo
 $parcel$export($86049548edbb86a7$exports, "Backdrop", () => $db87bba5d9169082$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Box", () => $7f9bf0f8ac9034c0$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "CssBaseline", () => $5d05c50dc13d9129$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Dialog", () => $d2872d03d2a30200$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Drawer", () => $89021ce2ce45d642$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "FormControlLabel", () => $23a46d6993216966$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "FormGroup", () => $d7126578d7ff4afb$export$2e2bcd8739ae039);
@@ -7610,6 +7611,7 @@ $parcel$export($86049548edbb86a7$exports, "TableContainer", () => $6d21e7ab88a61
 $parcel$export($86049548edbb86a7$exports, "TableRow", () => $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Tabs", () => $de9f03f465a99f00$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TextField", () => $e00f995e0f3cc83a$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Toolbar", () => $fb76fa4d2fe2669c$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Tooltip", () => $16d648c397460623$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Typography", () => $8588119983b778db$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "ThemeProvider", () => $4feb3478c82adef5$export$2e2bcd8739ae039);
@@ -14343,19 +14345,8 @@ var $5d05c50dc13d9129$export$2e2bcd8739ae039 = $5d05c50dc13d9129$var$CssBaseline
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 var $d4J5n = parcelRequire("d4J5n");
+
 
 
 
@@ -15190,6 +15181,309 @@ const $fd29e14a923db841$var$ModalBackdrop = (0, $28cddbc9c45fcc54$export$2e2bcd8
     }));
 });
 var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
+
+
+
+
+
+
+
+
+
+
+
+function $ca3ee0292200f2a5$export$2177af0aa15c34c2(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiDialog", slot);
+}
+const $ca3ee0292200f2a5$var$dialogClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiDialog", [
+    "root",
+    "scrollPaper",
+    "scrollBody",
+    "container",
+    "paper",
+    "paperScrollPaper",
+    "paperScrollBody",
+    "paperWidthFalse",
+    "paperWidthXs",
+    "paperWidthSm",
+    "paperWidthMd",
+    "paperWidthLg",
+    "paperWidthXl",
+    "paperFullWidth",
+    "paperFullScreen"
+]);
+var $ca3ee0292200f2a5$export$2e2bcd8739ae039 = $ca3ee0292200f2a5$var$dialogClasses;
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+const $67bd051a112eb158$var$DialogContext = /*#__PURE__*/ (0, $d4J5n.createContext)({});
+var $67bd051a112eb158$export$2e2bcd8739ae039 = $67bd051a112eb158$var$DialogContext;
+
+
+
+
+
+const $d2872d03d2a30200$var$_excluded = [
+    "aria-describedby",
+    "aria-labelledby",
+    "BackdropComponent",
+    "BackdropProps",
+    "children",
+    "className",
+    "disableEscapeKeyDown",
+    "fullScreen",
+    "fullWidth",
+    "maxWidth",
+    "onBackdropClick",
+    "onClose",
+    "open",
+    "PaperComponent",
+    "PaperProps",
+    "scroll",
+    "TransitionComponent",
+    "transitionDuration",
+    "TransitionProps"
+];
+const $d2872d03d2a30200$var$DialogBackdrop = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $db87bba5d9169082$export$2e2bcd8739ae039), {
+    name: "MuiDialog",
+    slot: "Backdrop",
+    overrides: (props, styles)=>styles.backdrop
+})({
+    // Improve scrollable dialog support.
+    zIndex: -1
+});
+const $d2872d03d2a30200$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , scroll: scroll , maxWidth: maxWidth , fullWidth: fullWidth , fullScreen: fullScreen  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ],
+        container: [
+            "container",
+            `scroll${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(scroll)}`
+        ],
+        paper: [
+            "paper",
+            `paperScroll${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(scroll)}`,
+            `paperWidth${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(String(maxWidth))}`,
+            fullWidth && "paperFullWidth",
+            fullScreen && "paperFullScreen"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $ca3ee0292200f2a5$export$2177af0aa15c34c2), classes);
+};
+const $d2872d03d2a30200$var$DialogRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $fd29e14a923db841$export$2e2bcd8739ae039), {
+    name: "MuiDialog",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})({
+    "@media print": {
+        // Use !important to override the Modal inline-style.
+        position: "absolute !important"
+    }
+});
+const $d2872d03d2a30200$var$DialogContainer = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiDialog",
+    slot: "Container",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.container,
+            styles[`scroll${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.scroll)}`]
+        ];
+    }
+})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        height: "100%",
+        "@media print": {
+            height: "auto"
+        },
+        // We disable the focus ring for mouse, touch and keyboard users.
+        outline: 0
+    }, ownerState.scroll === "paper" && {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+    }, ownerState.scroll === "body" && {
+        overflowY: "auto",
+        overflowX: "hidden",
+        textAlign: "center",
+        "&:after": {
+            content: '""',
+            display: "inline-block",
+            verticalAlign: "middle",
+            height: "100%",
+            width: "0"
+        }
+    }));
+const $d2872d03d2a30200$var$DialogPaper = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+    name: "MuiDialog",
+    slot: "Paper",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.paper,
+            styles[`scrollPaper${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.scroll)}`],
+            styles[`paperWidth${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(String(ownerState.maxWidth))}`],
+            ownerState.fullWidth && styles.paperFullWidth,
+            ownerState.fullScreen && styles.paperFullScreen
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        margin: 32,
+        position: "relative",
+        overflowY: "auto",
+        // Fix IE11 issue, to remove at some point.
+        "@media print": {
+            overflowY: "visible",
+            boxShadow: "none"
+        }
+    }, ownerState.scroll === "paper" && {
+        display: "flex",
+        flexDirection: "column",
+        maxHeight: "calc(100% - 64px)"
+    }, ownerState.scroll === "body" && {
+        display: "inline-block",
+        verticalAlign: "middle",
+        textAlign: "left" // 'initial' doesn't work on IE11
+    }, !ownerState.maxWidth && {
+        maxWidth: "calc(100% - 64px)"
+    }, ownerState.maxWidth === "xs" && {
+        maxWidth: theme.breakpoints.unit === "px" ? Math.max(theme.breakpoints.values.xs, 444) : `${theme.breakpoints.values.xs}${theme.breakpoints.unit}`,
+        [`&.${(0, $ca3ee0292200f2a5$export$2e2bcd8739ae039).paperScrollBody}`]: {
+            [theme.breakpoints.down(Math.max(theme.breakpoints.values.xs, 444) + 64)]: {
+                maxWidth: "calc(100% - 64px)"
+            }
+        }
+    }, ownerState.maxWidth && ownerState.maxWidth !== "xs" && {
+        maxWidth: `${theme.breakpoints.values[ownerState.maxWidth]}${theme.breakpoints.unit}`,
+        [`&.${(0, $ca3ee0292200f2a5$export$2e2bcd8739ae039).paperScrollBody}`]: {
+            [theme.breakpoints.down(theme.breakpoints.values[ownerState.maxWidth] + 64)]: {
+                maxWidth: "calc(100% - 64px)"
+            }
+        }
+    }, ownerState.fullWidth && {
+        width: "calc(100% - 64px)"
+    }, ownerState.fullScreen && {
+        margin: 0,
+        width: "100%",
+        maxWidth: "100%",
+        height: "100%",
+        maxHeight: "none",
+        borderRadius: 0,
+        [`&.${(0, $ca3ee0292200f2a5$export$2e2bcd8739ae039).paperScrollBody}`]: {
+            margin: 0,
+            maxWidth: "100%"
+        }
+    }));
+/**
+ * Dialogs are overlaid modal paper based components with a backdrop.
+ */ const $d2872d03d2a30200$var$Dialog = /*#__PURE__*/ $d4J5n.forwardRef(function Dialog(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiDialog"
+    });
+    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
+    const defaultTransitionDuration = {
+        enter: theme.transitions.duration.enteringScreen,
+        exit: theme.transitions.duration.leavingScreen
+    };
+    const { "aria-describedby": ariaDescribedby , "aria-labelledby": ariaLabelledbyProp , BackdropComponent: BackdropComponent , BackdropProps: BackdropProps , children: children , className: className , disableEscapeKeyDown: disableEscapeKeyDown = false , fullScreen: fullScreen = false , fullWidth: fullWidth = false , maxWidth: maxWidth = "sm" , onBackdropClick: onBackdropClick , onClose: onClose , open: open , PaperComponent: PaperComponent = (0, $e1c08ee9f6edce16$export$2e2bcd8739ae039) , PaperProps: PaperProps = {} , scroll: scroll = "paper" , TransitionComponent: TransitionComponent = (0, $536cf0df7d3cd031$export$2e2bcd8739ae039) , transitionDuration: transitionDuration = defaultTransitionDuration , TransitionProps: TransitionProps  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $d2872d03d2a30200$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        disableEscapeKeyDown: disableEscapeKeyDown,
+        fullScreen: fullScreen,
+        fullWidth: fullWidth,
+        maxWidth: maxWidth,
+        scroll: scroll
+    });
+    const classes = $d2872d03d2a30200$var$useUtilityClasses(ownerState);
+    const backdropClick = $d4J5n.useRef();
+    const handleMouseDown = (event)=>{
+        // We don't want to close the dialog when clicking the dialog content.
+        // Make sure the event starts and ends on the same DOM element.
+        backdropClick.current = event.target === event.currentTarget;
+    };
+    const handleBackdropClick = (event)=>{
+        // Ignore the events not coming from the "backdrop".
+        if (!backdropClick.current) return;
+        backdropClick.current = null;
+        if (onBackdropClick) onBackdropClick(event);
+        if (onClose) onClose(event, "backdropClick");
+    };
+    const ariaLabelledby = (0, $172fa5be2acceae0$export$2e2bcd8739ae039)(ariaLabelledbyProp);
+    const dialogContextValue = $d4J5n.useMemo(()=>{
+        return {
+            titleId: ariaLabelledby
+        };
+    }, [
+        ariaLabelledby
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d2872d03d2a30200$var$DialogRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        closeAfterTransition: true,
+        components: {
+            Backdrop: $d2872d03d2a30200$var$DialogBackdrop
+        },
+        componentsProps: {
+            backdrop: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+                transitionDuration: transitionDuration,
+                as: BackdropComponent
+            }, BackdropProps)
+        },
+        disableEscapeKeyDown: disableEscapeKeyDown,
+        onClose: onClose,
+        open: open,
+        ref: ref,
+        onClick: handleBackdropClick,
+        ownerState: ownerState
+    }, other, {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)(TransitionComponent, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            appear: true,
+            in: open,
+            timeout: transitionDuration,
+            role: "presentation"
+        }, TransitionProps, {
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d2872d03d2a30200$var$DialogContainer, {
+                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.container),
+                onMouseDown: handleMouseDown,
+                ownerState: ownerState,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d2872d03d2a30200$var$DialogPaper, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+                    as: PaperComponent,
+                    elevation: 24,
+                    role: "dialog",
+                    "aria-describedby": ariaDescribedby,
+                    "aria-labelledby": ariaLabelledby
+                }, PaperProps, {
+                    className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.paper, PaperProps.className),
+                    ownerState: ownerState,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $67bd051a112eb158$export$2e2bcd8739ae039).Provider, {
+                        value: dialogContextValue,
+                        children: children
+                    })
+                }))
+            })
+        }))
+    }));
+});
+var $d2872d03d2a30200$export$2e2bcd8739ae039 = $d2872d03d2a30200$var$Dialog;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
@@ -28123,6 +28417,94 @@ var $e00f995e0f3cc83a$export$2e2bcd8739ae039 = $e00f995e0f3cc83a$var$TextField;
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $05fa97564f63ab55$export$b12cb262231eef32(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiToolbar", slot);
+}
+const $05fa97564f63ab55$var$toolbarClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiToolbar", [
+    "root",
+    "gutters",
+    "regular",
+    "dense"
+]);
+var $05fa97564f63ab55$export$2e2bcd8739ae039 = $05fa97564f63ab55$var$toolbarClasses;
+
+
+
+const $fb76fa4d2fe2669c$var$_excluded = [
+    "className",
+    "component",
+    "disableGutters",
+    "variant"
+];
+const $fb76fa4d2fe2669c$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , disableGutters: disableGutters , variant: variant  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            !disableGutters && "gutters",
+            variant
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $05fa97564f63ab55$export$b12cb262231eef32), classes);
+};
+const $fb76fa4d2fe2669c$var$ToolbarRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiToolbar",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            !ownerState.disableGutters && styles.gutters,
+            styles[ownerState.variant]
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        position: "relative",
+        display: "flex",
+        alignItems: "center"
+    }, !ownerState.disableGutters && {
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
+        [theme.breakpoints.up("sm")]: {
+            paddingLeft: theme.spacing(3),
+            paddingRight: theme.spacing(3)
+        }
+    }, ownerState.variant === "dense" && {
+        minHeight: 48
+    }), ({ theme: theme , ownerState: ownerState  })=>ownerState.variant === "regular" && theme.mixins.toolbar);
+const $fb76fa4d2fe2669c$var$Toolbar = /*#__PURE__*/ $d4J5n.forwardRef(function Toolbar(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiToolbar"
+    });
+    const { className: className , component: component = "div" , disableGutters: disableGutters = false , variant: variant = "regular"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $fb76fa4d2fe2669c$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        component: component,
+        disableGutters: disableGutters,
+        variant: variant
+    });
+    const classes = $fb76fa4d2fe2669c$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($fb76fa4d2fe2669c$var$ToolbarRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        as: component,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ref: ref,
+        ownerState: ownerState
+    }, other));
+});
+var $fb76fa4d2fe2669c$export$2e2bcd8739ae039 = $fb76fa4d2fe2669c$var$Toolbar;
+
+
+
+
+
 
 
 
@@ -34593,12 +34975,6 @@ var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $be29d9f5149bc99b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
-}), "AccountTree");
-
-
-
 var $9c740d0fb0ef5c42$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
 }), "ArrowDownward");
@@ -34644,6 +35020,12 @@ var $2f0f81fa11552061$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $d26849bb34d8b0e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
 }), "ChevronRight");
+
+
+
+var $4f33b287f8eb5d7f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), "Close");
 
 
 
@@ -34909,6 +35291,17 @@ var $71b55ed5fcc7e1a3$export$2e2bcd8739ae039 = ({ items: items , columns: column
             })
         })
     });
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+const $5339359c895a55f0$export$d5e0bbf39d25920b = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).forwardRef((props, ref)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d360ea8e2a5eccb1$export$2e2bcd8739ae039), {
+        direction: "up",
+        ref: ref,
+        ...props
+    }));
 
 
 
@@ -37211,78 +37604,138 @@ var $5313c1139f7bda04$export$2e2bcd8739ae039 = ()=>{
 
 
 
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
 parcelRequire("d4J5n");
 
 
 
-var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $89021ce2ce45d642$export$2e2bcd8739ae039), {
-        anchor: "left",
+var $3c40423601a78f55$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
+        fullScreen: true,
         open: open,
-        onClose: (event)=>onClose(event),
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-            sx: {
-                width: 250
-            },
-            role: "presentation",
-            onClick: (event)=>onClose(event),
-            onKeyDown: (event)=>onClose(event),
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $842c61f574169e59$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "Open",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($fd19480cde974b2f$export$2e2bcd8739ae039, {}),
-                        (event)=>onClose(event)
-                    ],
-                    [
-                        "Save",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($7d915f92af7d69b5$export$2e2bcd8739ae039, {}),
-                        (event)=>onClose(event)
-                    ],
-                    [
-                        "Save As",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a89a4266ef5a8f10$export$2e2bcd8739ae039, {}),
-                        (event)=>onClose(event)
+        onClose: onClose,
+        TransitionComponent: (0, $5339359c895a55f0$export$d5e0bbf39d25920b),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ef80e5cd9ca7bff$export$2e2bcd8739ae039), {
+                sx: {
+                    position: "relative"
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $fb76fa4d2fe2669c$export$2e2bcd8739ae039), {
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            edge: "start",
+                            color: "inherit",
+                            onClick: (event)=>onClose(event),
+                            "aria-label": "close",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4f33b287f8eb5d7f$export$2e2bcd8739ae039, {})
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            sx: {
+                                ml: 2,
+                                flex: 1
+                            },
+                            variant: "h6",
+                            component: "div",
+                            children: "Open File"
+                        })
                     ]
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ee1e133ccba2d879$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                            primary: "example1"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                            primary: "example2"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                            primary: "example3"
+                        })
+                    })
                 ]
             })
-        })
+        ]
     });
+
+
+var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+    const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3c40423601a78f55$export$2e2bcd8739ae039), {
+                open: fileOpenOpen,
+                onClose: ()=>setFileOpenOpen(false)
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $89021ce2ce45d642$export$2e2bcd8739ae039), {
+                anchor: "left",
+                open: open,
+                onClose: (event)=>onClose(event),
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    sx: {
+                        width: 250
+                    },
+                    role: "presentation",
+                    onClick: (event)=>onClose(event),
+                    onKeyDown: (event)=>onClose(event),
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $842c61f574169e59$export$2e2bcd8739ae039), {
+                        items: [
+                            [
+                                "Open",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($fd19480cde974b2f$export$2e2bcd8739ae039, {}),
+                                (event)=>{
+                                    onClose(event);
+                                    setFileOpenOpen(true);
+                                }
+                            ],
+                            [
+                                "Save",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($7d915f92af7d69b5$export$2e2bcd8739ae039, {}),
+                                (event)=>onClose(event)
+                            ],
+                            [
+                                "Save As",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a89a4266ef5a8f10$export$2e2bcd8739ae039, {}),
+                                (event)=>onClose(event)
+                            ]
+                        ]
+                    })
+                })
+            })
+        ]
+    });
+};
 
 
 
 var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
-    const [open, setOpen] = (0, $d4J5n.useState)(false);
+    const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8a81fae7927c22af$export$2e2bcd8739ae039), {
-                open: open,
-                onClose: ()=>setOpen(false)
+                open: sidebarOpen,
+                onClose: ()=>setSidebarOpen(false)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                 direction: "row",
                 spacing: 0,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: ()=>setOpen(true),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($832969ad3fbafab7$export$2e2bcd8739ae039, {
-                            fontSize: "small"
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($be29d9f5149bc99b$export$2e2bcd8739ae039, {
-                            fontSize: "small"
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($830dc22ac55da04f$export$2e2bcd8739ae039, {
-                            fontSize: "small"
-                        })
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    onClick: ()=>setSidebarOpen(true),
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($832969ad3fbafab7$export$2e2bcd8739ae039, {
+                        fontSize: "small"
                     })
-                ]
+                })
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 sx: {

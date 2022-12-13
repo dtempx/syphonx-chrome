@@ -10,19 +10,13 @@ import { useTemplate } from '../TemplateContext';
 
 export default () => {
     const { template, advanced, setAdvanced } = useTemplate();
-    const [open, setOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (<>
-        <SidebarMenu open={open} onClose={() => setOpen(false)} />
+        <SidebarMenu open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <Stack direction="row" spacing={0}>
-            <IconButton size="small" onClick={() => setOpen(true)}>
+            <IconButton size="small" onClick={() => setSidebarOpen(true)}>
                 <Icons.Menu fontSize="small" />
-            </IconButton>
-            <IconButton size="small">
-                <Icons.AccountTree fontSize="small" />
-            </IconButton>
-            <IconButton size="small">
-                <Icons.DataObject fontSize="small" />
             </IconButton>
         </Stack>
         <Box
