@@ -6202,7 +6202,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         });
         return false;
     }
-    $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scripts[message.key], message.params).then((result)=>{
+    $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scripts[message.key], ...message.params).then((result)=>{
         console.log("MESSAGE", message.key, {
             message: message,
             result: result

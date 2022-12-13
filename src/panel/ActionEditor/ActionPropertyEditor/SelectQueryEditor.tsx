@@ -31,7 +31,13 @@ export default ({ query, onChange }: Props) => {
     
     function validateSelectQuery(value: string): boolean {
         if (value) {
-            return syphonx.parseJQueryExpression(value) !== undefined;
+            let valid = false;
+            try {
+                valid = syphonx.parseJQueryExpression(value) !== undefined;
+            }
+            catch(err) {
+            }
+            return valid;
         }
         else {
             return true;

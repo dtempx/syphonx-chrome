@@ -4,6 +4,7 @@ import * as Icons from "@mui/icons-material";
 import ActionPropertyEditor from "./ActionPropertyEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton";
+import DataView from "../DataView";
 import { useTemplate } from '../TemplateContext';
 
 export default () => {
@@ -13,7 +14,7 @@ export default () => {
         <Box
             sx={{
                 position: "relative",
-                width: 800,
+                width: 1200,
                 height: 400,
                 backgroundColor: "#ebedf0",
                 p: 2
@@ -55,9 +56,15 @@ export default () => {
                 </Paper>
                 <Paper
                     elevation={3}
-                    sx={{ width: 400 }}
+                    sx={{ width: 300 }}
                 >
                     <ActionPropertyEditor item={template.selectedItem()} />
+                </Paper>
+                <Paper
+                    elevation={3}
+                    sx={{ width: 500 }}
+                >
+                    <DataView />
                 </Paper>
             </Box>
         </Box>

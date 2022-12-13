@@ -51,7 +51,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return false;
     }
 
-    executeScript(message.tabId, scripts[message.key] as () => void, message.params)
+    executeScript(message.tabId, scripts[message.key] as () => void, ...message.params)
         .then(result => {
             console.log("MESSAGE", message.key, { message, result });
             sendResponse({ result });
