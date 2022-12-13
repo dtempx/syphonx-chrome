@@ -1,16 +1,30 @@
-import React from "react";
-import { Box, IconButton, Paper, Stack } from "@mui/material";
+import React, { useState } from "react";
+import { Box, FormControlLabel, FormGroup, IconButton, Paper, Stack, Switch } from "@mui/material";
 import * as Icons from "@mui/icons-material";
 import ActionPropertyEditor from "./ActionPropertyEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton";
-import DataView from "../DataView";
+import DataView from "./DataView";
+import SidebarMenu from "./SidebarMenu"
 import { useTemplate } from '../TemplateContext';
 
 export default () => {
-    const { template } = useTemplate();
+    const { template, advanced, setAdvanced } = useTemplate();
+    const [open, setOpen] = useState(false);
 
-    return (
+    return (<>
+        <SidebarMenu open={open} onClose={() => setOpen(false)} />
+        <Stack direction="row" spacing={0}>
+            <IconButton size="small" onClick={() => setOpen(true)}>
+                <Icons.Menu fontSize="small" />
+            </IconButton>
+            <IconButton size="small">
+                <Icons.AccountTree fontSize="small" />
+            </IconButton>
+            <IconButton size="small">
+                <Icons.DataObject fontSize="small" />
+            </IconButton>
+        </Stack>
         <Box
             sx={{
                 position: "relative",
@@ -20,14 +34,6 @@ export default () => {
                 p: 2
             }}
         >
-            <Stack direction="row" spacing={0}>
-                <IconButton size="small">
-                    <Icons.AccountTree fontSize="small" />
-                </IconButton>
-                <IconButton size="small">
-                    <Icons.DataObject fontSize="small" />
-                </IconButton>
-            </Stack>
             <Box
                 sx={{
                     display: "flex",
@@ -58,6 +64,14 @@ export default () => {
                     elevation={3}
                     sx={{ width: 300 }}
                 >
+                    <Stack direction="row" spacing={0} justifyContent="end">
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Switch checked={advanced} onChange={event => setAdvanced(event.target.checked)} />}
+                                label="Advanced"
+                            />
+                        </FormGroup>                        
+                    </Stack>
                     <ActionPropertyEditor item={template.selectedItem()} />
                 </Paper>
                 <Paper
@@ -67,6 +81,7 @@ export default () => {
                     <DataView />
                 </Paper>
             </Box>
+            
         </Box>
-    );
+    </>);
 };
