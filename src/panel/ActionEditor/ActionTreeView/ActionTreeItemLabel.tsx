@@ -2,14 +2,15 @@ import React from "react";
 import { Stack, Typography } from "@mui/material";
 import ActionIcon from "../ActionIcon";
 import ActionTreeItemButtons from "./ActionTreeItemButtons";
-import { useTemplate, TemplateItem } from "../../TemplateContext";
+import { useTemplate } from "../../TemplateContext";
+import { TemplateItem } from "../../../lib";
 
 export interface Props {
     item: TemplateItem;
 }
 
 export default ({ item }: Props) => {
-    const { selected } = useTemplate();
+    const { template } = useTemplate();
 
     return (
         <Stack direction="row" justifyContent="space-between">
@@ -19,7 +20,7 @@ export default ({ item }: Props) => {
                 {item.required ? <Typography variant="caption" sx={{ position: "relative", top: -6, left: 4, color: "primary.light", fontWeight: "bold" }}>!</Typography> : null}
                 {item.repeated ? <ActionIcon name="repeated" fontSize="small" sx={{ color: "primary.light", ml: 1 }} /> : null}
             </Typography>
-            {selected === item.key ? <ActionTreeItemButtons item={item} /> : undefined}
+            {template.selected === item.key ? <ActionTreeItemButtons item={item} /> : undefined}
         </Stack>
     );
 };

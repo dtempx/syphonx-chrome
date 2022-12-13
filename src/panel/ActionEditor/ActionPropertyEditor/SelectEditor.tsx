@@ -1,18 +1,20 @@
 import React from "react";
 import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
-import { useTemplate, TemplateItem } from '../../TemplateContext/index';
+import { useTemplate } from '../../TemplateContext';
+import { TemplateItem } from "../../../lib";
 import { EditField, PropertyGrid } from "../../../components/";
 import SelectQueryEditor from "./SelectQueryEditor";
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
+import DebugView from "./DebugView";
 
 export interface Props {
     item: TemplateItem;
 }
 
 export default ({ item }: Props) => {
-    const { updateTemplate } = useTemplate();
+    const { template, setTemplate } = useTemplate();
     const select = item.obj as syphonx.Select;
 
     function validateName(value: string): boolean {
@@ -32,7 +34,7 @@ export default ({ item }: Props) => {
                         variant="standard"
                         size="small"
                         value={select.name}
-                        onChange={(event, value) => { select.name = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.name = value; setTemplate(template.clone()); }}
                         onValidate={validateName}
                     />,
                     "Determines the name of the selected value"
@@ -41,7 +43,7 @@ export default ({ item }: Props) => {
                     "query",
                     <SelectQueryEditor
                         query={select.query}
-                        onChange={(event, value) => { select.query = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
                     />,
                     "A CSS selector or jQuery expression that determines what data is selected"
                 ],
@@ -49,7 +51,7 @@ export default ({ item }: Props) => {
                     "type",
                     <SelectTypeDropDown
                         value={select.type}
-                        onChange={(event, value) => { select.type = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.type = value; setTemplate(template.clone()); }}
                     />,
                     "Determines the type of the property value"
                 ],
@@ -57,7 +59,7 @@ export default ({ item }: Props) => {
                     "repeated",
                     <Switch
                         checked={select.repeated ?? false}
-                        onChange={(event, value) => { select.repeated = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.repeated = value; setTemplate(template.clone()); }}
                     />,
                     "Indicates whether the data is single-valued or repeated within an array"
                 ],
@@ -65,7 +67,7 @@ export default ({ item }: Props) => {
                     "required",
                     <Switch
                         checked={select.required ?? false}
-                        onChange={(event, value) => { select.required = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
                     />,
                     "Determines whether the property is required which produces an error if a value is not obtained"
                 ],
@@ -75,7 +77,7 @@ export default ({ item }: Props) => {
                         variant="standard"
                         size="small"
                         value={select.value}
-                        onChange={(event, value) => { select.value = value || undefined; updateTemplate(); }}
+                        onChange={(event, value) => { select.value = value || undefined; setTemplate(template.clone()); }}
                         onValidate={validateName}
                     />,
                     "A predetermined or computed value, used if a DOM query is not specified"
@@ -84,7 +86,7 @@ export default ({ item }: Props) => {
                     "all",
                     <Switch
                         checked={select.all ?? false}
-                        onChange={(event, value) => { select.all = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.all = value; setTemplate(template.clone()); }}
                     />,
                     "Determines whether to evaluate all query stages, or stop at the first stage that produces a value"
                 ],
@@ -94,7 +96,7 @@ export default ({ item }: Props) => {
                         variant="standard"
                         size="small"
                         value={select.limit}
-                        onChange={(event, value) => { select.limit = value ? parseInt(value) : undefined; updateTemplate(); }}
+                        onChange={(event, value) => { select.limit = value ? parseInt(value) : undefined; setTemplate(template.clone()); }}
                         onValidate={validateNumber}
                     />,
                     "Limits the number of nodes to be selected, unlimited if not specified"
@@ -103,7 +105,7 @@ export default ({ item }: Props) => {
                     "format",
                     <SelectFormatDropDown
                         value={select.format}
-                        onChange={(event, value) => { select.format = value; updateTemplate();  }}
+                        onChange={(event, value) => { select.format = value; setTemplate(template.clone());  }}
                     />,
                     "Determines how the selected value is formatted"
                 ],
@@ -113,7 +115,7 @@ export default ({ item }: Props) => {
                         variant="standard"
                         size="small"
                         value={select.pattern}
-                        onChange={(event, value) => { select.pattern = value || undefined; updateTemplate(); }}
+                        onChange={(event, value) => { select.pattern = value || undefined; setTemplate(template.clone()); }}
                         onValidate={validateName}
                     />,
                     "A regex pattern for validation, an error will be produced if the value does not match the pattern"
@@ -122,7 +124,7 @@ export default ({ item }: Props) => {
                     "collate",
                     <Switch
                         checked={select.collate ?? false}
-                        onChange={(event, value) => { select.collate = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.collate = value; setTemplate(template.clone()); }}
                     />,
                     "Combines all selected nodes into a single value"
                 ],
@@ -132,7 +134,7 @@ export default ({ item }: Props) => {
                         variant="standard"
                         size="small"
                         value={select.when}
-                        onChange={(event, value) => { select.when = value || undefined; updateTemplate(); }}
+                        onChange={(event, value) => { select.when = value || undefined; setTemplate(template.clone()); }}
                         onValidate={validateName}
                     />,
                     "Makes value selection conditional based whether the evaluation produces a true result"
@@ -141,9 +143,14 @@ export default ({ item }: Props) => {
                     "active",
                     <Switch
                         checked={select.active ?? true}
-                        onChange={(event, value) => { select.active = value; updateTemplate(); }}
+                        onChange={(event, value) => { select.active = value; setTemplate(template.clone()); }}
                     />,
                     "Determines whether the property is active or ignored"
+                ],
+                [
+                    "debug",
+                    <DebugView item={item} />,
+                    "Debug"
                 ]
             ]}
         />

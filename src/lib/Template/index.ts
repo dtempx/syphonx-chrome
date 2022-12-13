@@ -1,14 +1,15 @@
 import * as syphonx from "syphonx-lib";
-import { createActionItems, findItem, findNextItem, TemplateItem } from "./TemplateItem";
-import { matchBrace } from "./utilities";
+import { TemplateItem } from "./TemplateItem";
+import { clone, createActionItems, findItem, firstObj, matchBrace } from "./utilities";
 import * as background from "../../background-proxy";
 
 export class Template {
     obj: Partial<syphonx.Template>;
     error?: string;
-    actions: TemplateItem[];
+    children: TemplateItem[];
+    selected: string;
 
-    constructor(obj: string | syphonx.Template) {
+    constructor(obj?: string | Partial<syphonx.Template>, selected?: string) {
         if (typeof obj === "string") {
             try {
                 this.obj = syphonx.parseTemplate(obj);
@@ -18,58 +19,77 @@ export class Template {
                 this.obj = {};
             }
         }
-        else {
+        else if (typeof obj === "object") {
             this.obj = obj;
         }
-        this.actions = this.obj.actions instanceof Array ? createActionItems(this.obj.actions) : [];
+        else {
+            this.obj = {};
+        }
+        if (!(this.obj.actions instanceof Array))
+            this.obj.actions = []; // ensure actions is an array
+        this.selected = selected || "";
+        this.children = this.actions();
     }
 
-    addAction(action: string, selected: string): string {
-        if (!(this.obj.actions instanceof Array))
-            this.obj.actions = [];
-        const item = findItem(this.actions, selected);
-        const actions = item?.type === "action" ? (item?.parent?.obj as any).actions : this.obj.actions;
-        const obj = { [action]: {}} as syphonx.Action;
-        actions.push(obj);
-        return findNextItem(selected);
+    actions(): TemplateItem[] {
+        return this.obj.actions instanceof Array ? createActionItems(this.obj.actions) : [];
+    }
+
+    addItem(type: TemplateAddItemType): void {
+        const item = findItem(this.children, this.selected);
+        const actions = this.findItemActions(item);
+        const obj = {};
+        if (type === "click") {
+            actions.push({ click: obj as syphonx.Click });
+        }
+        else if (type === "select") {
+            actions.push({ select: [obj] });
+        }
+        else if (type === "item" && item?.type === "action" && item?.name === "select") {
+            const items = item.obj as syphonx.Select[];
+            items.push(obj);
+        }
+        else if (type === "waitfor") {
+            actions.push({ waitfor: obj });
+        }
+        this.selected = this.findObj(obj) || "";
+    }
+
+    clone() {
+        return new Template(clone(this.obj), this.selected);
     }
 
     findItem(key: string): TemplateItem | undefined {
-        return findItem(this.actions, key);
+        return findItem(this.children, key);
     }
 
-    async run(): Promise<syphonx.ExtractResult> {
-        if (background.active) {
-            const result = await background.applyTemplate(this.obj as syphonx.Template);
-            return result;
+    private findItemActions(item: TemplateItem | undefined): syphonx.Action[] {
+        if (!item) {
+            return this.obj.actions!;
+        }
+        else if (item.type === "action" && item.name === "repeat") {
+            const repeat = item.obj as syphonx.Repeat;
+            if (!(repeat.actions instanceof Array))
+                repeat.actions = [];
+            return repeat.actions;
+        }
+        else if (item.type === "action" && item.name === "each") {
+            const each = item.obj as syphonx.Each;
+            if (!(each.actions instanceof Array))
+                each.actions = [];
+            return each.actions;
         }
         else {
-            return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;
+            return this.obj.actions!;
         }
     }
 
-    /*
-    run(): Promise<syphonx.ExtractResult> {
-        return new Promise<syphonx.ExtractResult>((resolve, reject) => {
-            if (typeof chrome === "object" && chrome.devtools) {
-                const message = {
-                    key: "submit",
-                    template: this.obj,
-                    tabId: chrome.devtools.inspectedWindow.tabId
-                };
-                chrome.runtime.sendMessage(message, response => {
-                    if (response) {
-                        resolve(response.result);
-                    }
-                });
-            }
-            else {
-                resolve({ data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult);
-            }
-        });
+    private findObj(obj: unknown): string | undefined {
+        const actions = this.actions();
+        const item = findItem(actions, obj);
+        return item?.key;
     }
-    */
-    
+
     json(): string {
         let text = JSON.stringify(this.obj, null, 2) || "";
         let i = text.indexOf(`"$": [\n`);
@@ -86,7 +106,53 @@ export class Template {
         }
         return text;    
     }
+
+    moveItemDown(item: TemplateItem): Template {
+        debugger;
+        const i = item.collection.findIndex(subitem => firstObj(subitem) === item.obj || (subitem as Record<string, string>).name === item.name); // todo
+        if (i < item.collection.length - 1) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i + 1, 0, item);
+        }
+        return this;
+    }
+
+    moveItemUp(item: TemplateItem): Template {
+        debugger;
+        const i = item.collection.findIndex(subitem => firstObj(subitem) === item.obj || (subitem as Record<string, string>).name === item.name); // todo
+        if (i > 0) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i - 1, 0, item);
+        }
+        return this;
+    }
+
+    removeItem(item: TemplateItem): Template {
+        debugger;
+        const i = item.collection.findIndex(subitem => firstObj(subitem) === item.obj || (subitem as Record<string, string>).name === item.name); // todo
+        if (i >= 0) {
+            item.collection.splice(i, 1);
+            const obj = firstObj(item.collection[i] || item.collection[0]);
+            this.selected = this.findObj(obj) || "";
+        }
+        return this;
+    }
+
+    async run(): Promise<syphonx.ExtractResult> {
+        if (background.active) {
+            const result = await background.applyTemplate(this.obj as syphonx.Template);
+            return result;
+        }
+        else {
+            return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;
+        }
+    }
+
+    selectedItem(): TemplateItem | undefined {
+        return findItem(this.children, this.selected);
+    }
 }
 
+export type TemplateAddItemType = "click" | "item" | "select" | "waitfor";
+export * from "./TemplateItem";
 export default Template;
-export { TemplateItem } from "./TemplateItem";

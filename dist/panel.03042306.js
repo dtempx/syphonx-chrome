@@ -25034,13 +25034,6 @@ function $3557fdd69ecfabc2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-var $d4J5n = parcelRequire("d4J5n");
-const $dc89d8e92506b4eb$export$150b486c2606fb1 = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({});
-
-
-
 
 var $d4J5n = parcelRequire("d4J5n");
 
@@ -31179,7 +31172,10 @@ function $f57f1b6a744976f3$export$2e2dbd43b49fd373(text) {
 
 
 
-function $5f4e931e94425ce6$export$a3d9882fc9361f2d(actions, parent) {
+function $6f0852509a7f7477$export$9cd59f9826255e47(obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+function $6f0852509a7f7477$export$a3d9882fc9361f2d(actions, parent) {
     const n = {};
     return actions.map((action)=>{
         const [name] = Object.keys(action);
@@ -31192,13 +31188,14 @@ function $5f4e931e94425ce6$export$a3d9882fc9361f2d(actions, parent) {
             type: "action",
             icon: name,
             obj: obj,
-            parent: parent
+            parent: parent,
+            collection: actions
         };
-        if (name === "select") item.children = $5f4e931e94425ce6$var$createSelectItems(obj, item);
+        if (name === "select" && obj instanceof Array) item.children = $6f0852509a7f7477$var$createSelectItems(obj, item);
         return item;
     });
 }
-function $5f4e931e94425ce6$var$createSelectItems(obj, parent) {
+function $6f0852509a7f7477$var$createSelectItems(obj, parent) {
     return obj.map((select)=>{
         const key = `${parent.key}.${select.name}`;
         return {
@@ -31209,26 +31206,31 @@ function $5f4e931e94425ce6$var$createSelectItems(obj, parent) {
             required: select.required,
             repeated: select.repeated,
             obj: select,
-            parent: parent
+            parent: parent,
+            collection: obj
         };
     });
 }
-function $5f4e931e94425ce6$export$a2dea178c28a0308(items, key) {
+function $6f0852509a7f7477$export$a2dea178c28a0308(items, key) {
     for (const item of items){
-        if (item.key === key) return item;
+        if (item.key === key || item.obj === key) return item;
         if (item.children) {
-            const subitem = $5f4e931e94425ce6$export$a2dea178c28a0308(item.children, key);
+            const subitem = $6f0852509a7f7477$export$a2dea178c28a0308(item.children, key);
             if (subitem) return subitem;
         }
     }
 }
-function $5f4e931e94425ce6$export$1befd5ecde967db5(key) {
+function $6f0852509a7f7477$export$1befd5ecde967db5(key) {
     const i = key.lastIndexOf(".");
     const n = parseInt(key.slice(i + 1));
     return `${key.slice(0, i)}${n}`;
 }
-
-
+function $6f0852509a7f7477$export$272b18412c726147(obj) {
+    if (typeof obj === "object" && obj !== null) {
+        const [key] = Object.keys(obj);
+        return obj[key];
+    }
+}
 function $6f0852509a7f7477$export$ad9052cdca847332(text, i, token) {
     let n = 0;
     while((i++) < text.length){
@@ -31264,29 +31266,107 @@ function $6767c619f5de943e$var$executeScript(key, ...params) {
 
 
 
+
 class $cdcf4841f7561b96$export$14416b8d99d47caa {
-    constructor(obj){
+    constructor(obj, selected){
         if (typeof obj === "string") try {
             this.obj = $f57f1b6a744976f3$export$2e2dbd43b49fd373(obj);
         } catch (err) {
             this.error = err instanceof Error ? err.message : JSON.stringify(err);
             this.obj = {};
         }
-        else this.obj = obj;
-        this.actions = this.obj.actions instanceof Array ? (0, $5f4e931e94425ce6$export$a3d9882fc9361f2d)(this.obj.actions) : [];
+        else if (typeof obj === "object") this.obj = obj;
+        else this.obj = {};
+        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
+        this.selected = selected || "";
+        this.children = this.actions();
     }
-    addAction(action, selected) {
-        if (!(this.obj.actions instanceof Array)) this.obj.actions = [];
-        const item = (0, $5f4e931e94425ce6$export$a2dea178c28a0308)(this.actions, selected);
-        const actions = item?.type === "action" ? item?.parent?.obj.actions : this.obj.actions;
-        const obj = {
-            [action]: {}
-        };
-        actions.push(obj);
-        return (0, $5f4e931e94425ce6$export$1befd5ecde967db5)(selected);
+    actions() {
+        return this.obj.actions instanceof Array ? (0, $6f0852509a7f7477$export$a3d9882fc9361f2d)(this.obj.actions) : [];
+    }
+    addItem(type) {
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
+        const actions = this.findItemActions(item);
+        const obj = {};
+        if (type === "click") actions.push({
+            click: obj
+        });
+        else if (type === "select") actions.push({
+            select: [
+                obj
+            ]
+        });
+        else if (type === "item" && item?.type === "action" && item?.name === "select") {
+            const items = item.obj;
+            items.push(obj);
+        } else if (type === "waitfor") actions.push({
+            waitfor: obj
+        });
+        this.selected = this.findObj(obj) || "";
+    }
+    clone() {
+        return new $cdcf4841f7561b96$export$14416b8d99d47caa((0, $6f0852509a7f7477$export$9cd59f9826255e47)(this.obj), this.selected);
     }
     findItem(key) {
-        return (0, $5f4e931e94425ce6$export$a2dea178c28a0308)(this.actions, key);
+        return (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, key);
+    }
+    findItemActions(item) {
+        if (!item) return this.obj.actions;
+        else if (item.type === "action" && item.name === "repeat") {
+            const repeat = item.obj;
+            if (!(repeat.actions instanceof Array)) repeat.actions = [];
+            return repeat.actions;
+        } else if (item.type === "action" && item.name === "each") {
+            const each = item.obj;
+            if (!(each.actions instanceof Array)) each.actions = [];
+            return each.actions;
+        } else return this.obj.actions;
+    }
+    findObj(obj) {
+        const actions = this.actions();
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(actions, obj);
+        return item?.key;
+    }
+    json() {
+        let text = JSON.stringify(this.obj, null, 2) || "";
+        let i = text.indexOf(`"$": [\n`);
+        while(i >= 0){
+            i = text.indexOf("[", i);
+            const j = (0, $6f0852509a7f7477$export$ad9052cdca847332)(text, i, "[]");
+            if (j > i) {
+                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
+                i = text.indexOf(`"$": [\n`);
+            } else break;
+        }
+        return text;
+    }
+    moveItemDown(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i < item.collection.length - 1) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i + 1, 0, item);
+        }
+        return this;
+    }
+    moveItemUp(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i > 0) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i - 1, 0, item);
+        }
+        return this;
+    }
+    removeItem(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i >= 0) {
+            item.collection.splice(i, 1);
+            const obj = (0, $6f0852509a7f7477$export$272b18412c726147)(item.collection[i] || item.collection[0]);
+            this.selected = this.findObj(obj) || "";
+        }
+        return this;
     }
     async run() {
         if ($6767c619f5de943e$export$89da14300d534261) {
@@ -31299,38 +31379,8 @@ class $cdcf4841f7561b96$export$14416b8d99d47caa {
             }
         };
     }
-    /*
-    run(): Promise<syphonx.ExtractResult> {
-        return new Promise<syphonx.ExtractResult>((resolve, reject) => {
-            if (typeof chrome === "object" && chrome.devtools) {
-                const message = {
-                    key: "submit",
-                    template: this.obj,
-                    tabId: chrome.devtools.inspectedWindow.tabId
-                };
-                chrome.runtime.sendMessage(message, response => {
-                    if (response) {
-                        resolve(response.result);
-                    }
-                });
-            }
-            else {
-                resolve({ data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult);
-            }
-        });
-    }
-    */ json() {
-        let text = JSON.stringify(this.obj, null, 2) || "";
-        let i = text.indexOf(`"$": [\n`);
-        while(i >= 0){
-            i = text.indexOf("[", i);
-            const j = (0, $6f0852509a7f7477$export$ad9052cdca847332)(text, i, "[]");
-            if (j > i) {
-                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
-                i = text.indexOf(`"$": [\n`);
-            } else break;
-        }
-        return text;
+    selectedItem() {
+        return (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
     }
 }
 var $cdcf4841f7561b96$export$2e2bcd8739ae039 = $cdcf4841f7561b96$export$14416b8d99d47caa;
@@ -31361,106 +31411,31 @@ function $1ed31d4f0443f1de$export$a011e92e61f46a0f(text) {
 
 
 
-
-const $05d82346d6cda289$export$76173758cefa70e5 = `{
-  "actions": [
-    {
-      "click": {
-        "query": [["button"]]
-      }
-    },
-    {
-      "click": {
-        "query": [["button"]]
-      }
-    },
-    {
-      "waitfor": {
-        "query": [["h1"]]
-      }
-    },
-    {
-      "select": [ 
-        {
-          "name": "name",
-           "query": [["h1"]]
-        },
-        {
-          "name": "description",
-          "query": [["p"]]
-        },
-        {
-          "name": "foo",
-          "type": "number",
-          "query": [[]]
-        },
-        {
-          "name": "bar",
-          "type": "boolean",
-          "required": true,
-          "query": [[]]
-        },
-        {
-          "name": "baz",
-          "type": "object",
-          "repeated": true,
-          "required": true,
-          "query": [[]]
-        }
-      ]
-    },
-    {
-      "waitfor": {
-        "query": [["h1"]]
-      }
-    },
-    {
-      "select": [ 
-        {
-          "name": "description",
-          "query": [["p"]]
-        }
-      ]
-    }  
-  ]
-}`;
-
-
-function $a785231b67558f50$export$5abfb1150fa6da6a({ children: children  }) {
-    const [text, setText] = (0, $d4J5n.useState)((0, $05d82346d6cda289$export$76173758cefa70e5));
-    const [selected, setSelected] = (0, $d4J5n.useState)("");
+const $7ca74c155127bdcb$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    template: new (0, $cdcf4841f7561b96$export$14416b8d99d47caa)(),
+    setTemplate: ()=>{},
+    result: undefined
+});
+function $7ca74c155127bdcb$export$5abfb1150fa6da6a({ children: children  }) {
+    const [template, setTemplate] = (0, $d4J5n.useState)(new (0, $cdcf4841f7561b96$export$14416b8d99d47caa)());
     const [result1, setResult] = (0, $d4J5n.useState)();
-    const template = (0, $d4J5n.useMemo)(()=>new (0, $cdcf4841f7561b96$export$14416b8d99d47caa)(text), [
-        text
-    ]);
     (0, $d4J5n.useEffect)(()=>{
-        if (template) template.run().then((result)=>setResult(result));
-        else setResult(undefined);
+        template.run().then((result)=>setResult(result));
     }, [
         template
     ]);
-    function updateTemplate() {
-        if (template) setText(template.json());
-    }
     const value = {
         template: template,
-        text: text,
-        selected: selected,
-        result: result1,
-        setText: setText,
-        setSelected: setSelected,
-        updateTemplate: updateTemplate
+        setTemplate: setTemplate,
+        result: result1
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dc89d8e92506b4eb$export$150b486c2606fb1).Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($7ca74c155127bdcb$var$TemplateContext.Provider, {
         value: value,
         children: children
     });
 }
-
-
-
-function $32bdef35dcd3346d$export$5c3a5f48c762cb34() {
-    return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext((0, $dc89d8e92506b4eb$export$150b486c2606fb1));
+function $7ca74c155127bdcb$export$5c3a5f48c762cb34() {
+    return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext($7ca74c155127bdcb$var$TemplateContext);
 }
 
 
@@ -31858,8 +31833,9 @@ var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     });
 
 
+
 var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
-    const { updateTemplate: updateTemplate  } = (0, $32bdef35dcd3346d$export$5c3a5f48c762cb34)();
+    const { template: template , setTemplate: setTemplate  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
     const select = item.obj;
     function validateName(value) {
         return /^[a-z][a-z0-9_]*$/.test(value);
@@ -31877,7 +31853,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.name,
                     onChange: (event, value)=>{
                         select.name = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     },
                     onValidate: validateName
                 }),
@@ -31889,7 +31865,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     query: select.query,
                     onChange: (event, value)=>{
                         select.query = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "A CSS selector or jQuery expression that determines what data is selected"
@@ -31900,7 +31876,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.type,
                     onChange: (event, value)=>{
                         select.type = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Determines the type of the property value"
@@ -31911,7 +31887,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     checked: select.repeated ?? false,
                     onChange: (event, value)=>{
                         select.repeated = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Indicates whether the data is single-valued or repeated within an array"
@@ -31922,7 +31898,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     checked: select.required ?? false,
                     onChange: (event, value)=>{
                         select.required = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Determines whether the property is required which produces an error if a value is not obtained"
@@ -31935,7 +31911,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.value,
                     onChange: (event, value)=>{
                         select.value = value || undefined;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     },
                     onValidate: validateName
                 }),
@@ -31947,7 +31923,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     checked: select.all ?? false,
                     onChange: (event, value)=>{
                         select.all = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Determines whether to evaluate all query stages, or stop at the first stage that produces a value"
@@ -31960,7 +31936,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.limit,
                     onChange: (event, value)=>{
                         select.limit = value ? parseInt(value) : undefined;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     },
                     onValidate: validateNumber
                 }),
@@ -31972,7 +31948,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.format,
                     onChange: (event, value)=>{
                         select.format = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Determines how the selected value is formatted"
@@ -31985,7 +31961,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.pattern,
                     onChange: (event, value)=>{
                         select.pattern = value || undefined;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     },
                     onValidate: validateName
                 }),
@@ -31997,7 +31973,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     checked: select.collate ?? false,
                     onChange: (event, value)=>{
                         select.collate = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Combines all selected nodes into a single value"
@@ -32010,7 +31986,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     value: select.when,
                     onChange: (event, value)=>{
                         select.when = value || undefined;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     },
                     onValidate: validateName
                 }),
@@ -32022,10 +31998,17 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     checked: select.active ?? true,
                     onChange: (event, value)=>{
                         select.active = value;
-                        updateTemplate();
+                        setTemplate(template.clone());
                     }
                 }),
                 "Determines whether the property is active or ignored"
+            ],
+            [
+                "debug",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {
+                    item: item
+                }),
+                "Debug"
             ]
         ]
     });
@@ -33635,6 +33618,9 @@ var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0e35cf2d20f939f4$export$2e2bcd8739ae039, {
         ...props
     });
+    else if (name === "item") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($344080bf51b4e6c7$export$2e2bcd8739ae039, {
+        ...props
+    });
     else if (name === "number") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($b1faf5f98bbb111e$export$2e2bcd8739ae039, {
         ...props
     });
@@ -33678,13 +33664,19 @@ var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
 parcelRequire("d4J5n");
 
 
-var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+
+var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>{
+    const { template: template , setTemplate: setTemplate  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         spacing: 0,
         justifyContent: "end",
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                 size: "small",
+                onClick: ()=>{
+                    setTemplate(template.clone().moveItemUp(item));
+                },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9e34cee13fe7931$export$2e2bcd8739ae039, {
                     fontSize: "small",
                     sx: {
@@ -33694,6 +33686,9 @@ var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ 
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                 size: "small",
+                onClick: ()=>{
+                    setTemplate(template.clone().moveItemDown(item));
+                },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($9c740d0fb0ef5c42$export$2e2bcd8739ae039, {
                     fontSize: "small",
                     sx: {
@@ -33703,6 +33698,9 @@ var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ 
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                 size: "small",
+                onClick: ()=>{
+                    setTemplate(template.clone().removeItem(item));
+                },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($09e60e810ff3d65b$export$2e2bcd8739ae039, {
                     fontSize: "small",
                     sx: {
@@ -33712,11 +33710,12 @@ var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ 
             })
         ]
     });
+};
 
 
 
 var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
-    const { selected: selected  } = (0, $32bdef35dcd3346d$export$5c3a5f48c762cb34)();
+    const { template: template  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         justifyContent: "space-between",
@@ -33764,7 +33763,7 @@ var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     }) : null
                 ]
             }),
-            selected === item.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9098bacb6c71e32c$export$2e2bcd8739ae039), {
+            template.selected === item.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9098bacb6c71e32c$export$2e2bcd8739ae039), {
                 item: item
             }) : undefined
         ]
@@ -33785,8 +33784,8 @@ function $0fa951d9b2d6a3b3$export$2e2bcd8739ae039({ item: item  }) {
 }
 
 
-var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ({ items: items  })=>{
-    const { selected: selected , setSelected: setSelected  } = (0, $32bdef35dcd3346d$export$5c3a5f48c762cb34)();
+var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ()=>{
+    const { template: template , setTemplate: setTemplate  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ed19a9323b6d50c$export$2e2bcd8739ae039), {
@@ -33801,10 +33800,13 @@ var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ({ items: items  })=>{
                 }
             }),
             expanded: expanded,
-            selected: selected,
+            selected: template.selected,
             onNodeToggle: (event, nodeIds)=>setExpanded(nodeIds),
-            onNodeSelect: (event, nodeIds)=>setSelected(nodeIds),
-            children: items?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0fa951d9b2d6a3b3$export$2e2bcd8739ae039), {
+            onNodeSelect: (event, nodeIds)=>{
+                template.selected = nodeIds;
+                setTemplate(template.clone());
+            },
+            children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0fa951d9b2d6a3b3$export$2e2bcd8739ae039), {
                     item: item
                 }))
         })
@@ -33819,19 +33821,15 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
-    const { template: template , selected: selected , setSelected: setSelected , updateTemplate: updateTemplate  } = (0, $32bdef35dcd3346d$export$5c3a5f48c762cb34)();
+    const { template: template , setTemplate: setTemplate  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
-    const actions = [
-        "select",
-        "waitfor",
-        "click"
-    ];
-    function handleClick(action) {
+    const actions = $4e33c64f8846b04f$var$selectedAddItemTypes(template.selectedItem());
+    function handleClick(type) {
         if (template) {
             debugger;
-            const key = template.addAction(action, selected);
-            setSelected(key);
-            updateTemplate();
+            template.addItem(type);
+            setTemplate(template.clone());
+            setOpen(false);
         }
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $b264c8406c8bcefb$export$2e2bcd8739ae039), {
@@ -33859,12 +33857,30 @@ var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
         ]
     });
 };
+function $4e33c64f8846b04f$var$selectedAddItemTypes(item) {
+    if (item?.type === "action" && item?.name === "select") return [
+        "item",
+        "select",
+        "waitfor",
+        "click"
+    ];
+    else if (item?.type === "select") return [
+        "item",
+        "select",
+        "waitfor",
+        "click"
+    ];
+    else return [
+        "select",
+        "waitfor",
+        "click"
+    ];
+}
 
 
 
 var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , selected: selected  } = (0, $32bdef35dcd3346d$export$5c3a5f48c762cb34)();
-    const selectedItem = template?.findItem(selected);
+    const { template: template  } = (0, $7ca74c155127bdcb$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
             position: "relative",
@@ -33911,9 +33927,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                             width: 300
                         },
                         children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {
-                                items: template?.actions
-                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {}),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e33c64f8846b04f$export$2e2bcd8739ae039), {
                                 sx: {
                                     position: "absolute",
@@ -33929,7 +33943,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                             width: 400
                         },
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {
-                            item: selectedItem
+                            item: template.selectedItem()
                         })
                     })
                 ]
@@ -33953,7 +33967,7 @@ var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5d05c50dc13d9129$export$2e2bcd8739ae039), {}),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3557fdd69ecfabc2$export$c7dacf3845253dcf), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a785231b67558f50$export$5abfb1150fa6da6a), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7ca74c155127bdcb$export$5abfb1150fa6da6a), {
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $14535b517ab613e7$export$2e2bcd8739ae039), {})
                 })
             })

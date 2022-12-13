@@ -1,5 +1,5 @@
 import React from "react";
-import { TemplateItem } from '../../TemplateContext/index';
+import { TemplateItem } from '../../../lib';
 
 export interface Props {
     item?: TemplateItem;

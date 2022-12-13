@@ -1,28 +1,24 @@
 import React, { useState } from "react";
 import { Backdrop, SpeedDial, SpeedDialAction, SpeedDialIcon, SxProps, Theme } from "@mui/material";
 import ActionIcon from "./ActionIcon";
-import { useTemplate } from '../TemplateContext/index';
+import { useTemplate } from '../TemplateContext';
+import { TemplateItem, TemplateAddItemType } from "../../lib/Template";
 
 export interface Props {
     sx?: SxProps<Theme>;
 }
 
 export default (props?: Props) => {
-    const { template, selected, setSelected, updateTemplate } = useTemplate();
+    const { template, setTemplate } = useTemplate();
     const [open, setOpen] = useState(false);
+    const actions = selectedAddItemTypes(template.selectedItem());
 
-    const actions = [
-        "select",
-        "waitfor",
-        "click"
-    ];
-    
-    function handleClick(action: string) {
+    function handleClick(type: TemplateAddItemType) {
         if (template) {
             debugger;
-            const key = template.addAction(action, selected);
-            setSelected(key);
-            updateTemplate();
+            template.addItem(type);
+            setTemplate(template.clone());
+            setOpen(false);
         }
     }
 
@@ -47,4 +43,13 @@ export default (props?: Props) => {
             ))}
         </SpeedDial>
     );
+}
+
+function selectedAddItemTypes(item: TemplateItem | undefined): TemplateAddItemType[] {
+    if (item?.type === "action" && item?.name === "select")
+        return ["item", "select", "waitfor", "click"];
+    else if (item?.type === "select")
+        return ["item", "select", "waitfor", "click"];
+    else
+        return ["select", "waitfor", "click"];
 }

@@ -15,6 +15,8 @@ export default ({ name, ...props }: Props) => {
         return <Icons.AutoAwesome {...props} />;
     else if (name === "error")
         return <Icons.GppMaybe {...props} />;
+    else if (name === "item")
+        return <Icons.Abc {...props} />;
     else if (name === "number")
         return <Icons.Numbers {...props} />;
     else if (name === "object")

@@ -1,2 +1,2 @@
-export * from "./Template/index";
+export * from "./Template";
 export * from "./utilities";

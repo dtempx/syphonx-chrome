@@ -1,14 +1,13 @@
 import React from "react";
 import { Box, IconButton, Paper, Stack } from "@mui/material";
 import * as Icons from "@mui/icons-material";
-import ActionPropertyEditor from "./ActionPropertyEditor/index";
-import ActionTreeView from "./ActionTreeView/index";
+import ActionPropertyEditor from "./ActionPropertyEditor";
+import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton";
-import { useTemplate } from '../TemplateContext/index';
+import { useTemplate } from '../TemplateContext';
 
 export default () => {
-    const { template, selected } = useTemplate();
-    const selectedItem = template?.findItem(selected);
+    const { template } = useTemplate();
 
     return (
         <Box
@@ -45,7 +44,7 @@ export default () => {
                     elevation={3}
                     sx={{ width: 300 }}
                 >
-                    <ActionTreeView items={template?.actions} />
+                    <ActionTreeView />
                     <AddActionButton
                         sx={{
                             position: "absolute",
@@ -58,7 +57,7 @@ export default () => {
                     elevation={3}
                     sx={{ width: 400 }}
                 >
-                    <ActionPropertyEditor item={selectedItem} />
+                    <ActionPropertyEditor item={template.selectedItem()} />
                 </Paper>
             </Box>
         </Box>

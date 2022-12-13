@@ -1,6 +1,6 @@
 import React from "react";
 import { TreeItem } from "@mui/lab";
-import { TemplateItem } from '../../TemplateContext/index';
+import { TemplateItem } from "../../../lib";
 import ActionTreeItemLabel from "./ActionTreeItemLabel";
 
 export interface Props {
