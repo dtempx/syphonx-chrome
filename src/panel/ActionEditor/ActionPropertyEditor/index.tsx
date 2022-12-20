@@ -1,7 +1,7 @@
 import React from "react";
 import DebugView from "./DebugView";
 import SelectEditor from "./SelectEditor";
-import { useTemplate } from '../../TemplateContext';
+import { useTemplate } from '../../context';
 import { TemplateItem } from "../../../lib";
 
 export interface Props {

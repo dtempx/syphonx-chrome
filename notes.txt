@@ -5,6 +5,11 @@ npx http-server dist -c-1 -o
 
 
 
+https://www.npmjs.com/package/monaco-editor
+https://www.npmjs.com/package/monaco-yaml
+https://www.npmjs.com/package/@monaco-editor/react
+
+
 https://v4.mui.com/
 
 How to get the Selected elements in Chrome Panel? [Chrome Extension Development] [XPath Selenium]
@@ -19,4 +24,3 @@ chrome.devtools.panels.elements.createSidebarPane("LetXPath", panel => {
 
 Build XPath Form Selected Node | Chrome Extension Development | XPath Selenium | LetCode
 https://www.youtube.com/watch?v=EuGxrTCj5Ac&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOpcR5&index=12
-

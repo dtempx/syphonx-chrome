@@ -1,6 +1,24 @@
 import React from "react";
-import * as Icons from "@mui/icons-material";
 import { SvgIconProps } from "@mui/material";
+import {
+    Abc as ItemIcon,
+    Abc as StringTypeIcon,
+    AutoAwesome as EachIcon,
+    AutoAwesomeMotionOutlined as RepeatedIcon,
+    Autorenew as RepeatIcon,
+    DataObject as ObjectTypeIcon,
+    ExitToApp as YieldIcon,
+    FlipCameraAndroid as TransformIcon,
+    GppMaybe as ErrorIcon,
+    HourglassTop as WaitforIcon,
+    Numbers as NumberTypeIcon,
+    PriorityHighOutlined as RequiredIcon,
+    QuestionMark as UnknownIcon,
+    Rule as BooleanTypeIcon,
+    TouchApp as ClickIcon,
+    SelectAll as SelectIcon,
+    Timer as SnoozeIcon
+} from "@mui/icons-material";
 
 export interface Props extends SvgIconProps {
     name: string;
@@ -8,37 +26,37 @@ export interface Props extends SvgIconProps {
 
 export default ({ name, ...props }: Props) => {
     if (name === "boolean")
-        return <Icons.Rule {...props} />;
+        return <BooleanTypeIcon {...props} />;
     if (name === "click")
-        return <Icons.TouchApp {...props} />;
+        return <ClickIcon {...props} />;
     else if (name === "each")
-        return <Icons.AutoAwesome {...props} />;
+        return <EachIcon {...props} />;
     else if (name === "error")
-        return <Icons.GppMaybe {...props} />;
+        return <ErrorIcon {...props} />;
     else if (name === "item")
-        return <Icons.Abc {...props} />;
+        return <ItemIcon {...props} />;
     else if (name === "number")
-        return <Icons.Numbers {...props} />;
+        return <NumberTypeIcon {...props} />;
     else if (name === "object")
-        return <Icons.DataObject {...props} />;
+        return <ObjectTypeIcon {...props} />;
     else if (name === "repeat")
-        return <Icons.Autorenew {...props} />;
+        return <RepeatIcon {...props} />;
     else if (name === "repeated")
-        return <Icons.AutoAwesomeMotionOutlined {...props} />;
+        return <RepeatedIcon {...props} />;
     else if (name === "required")
-        return <Icons.PriorityHighOutlined {...props} />;
+        return <RequiredIcon {...props} />;
     else if (name === "select")
-        return <Icons.SelectAll {...props} />;
+        return <SelectIcon {...props} />;
     else if (name === "string")
-        return <Icons.Abc {...props} />;
+        return <StringTypeIcon {...props} />;
     else if (name === "snooze")
-        return <Icons.Timer {...props} />;
+        return <SnoozeIcon {...props} />;
     else if (name === "transform")
-        return <Icons.FlipCameraAndroid {...props} />;
+        return <TransformIcon {...props} />;
     else if (name === "waitfor")
-        return <Icons.HourglassTop {...props} />;
+        return <WaitforIcon {...props} />;
     else if (name === "yield")
-        return <Icons.ExitToApp {...props} />;
+        return <YieldIcon {...props} />;
     else
-        return <Icons.QuestionMark {...props} />;
+        return <UnknownIcon {...props} />;
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton, Stack } from "@mui/material";
-import * as Icons from "@mui/icons-material";
-import { useTemplate } from "../../TemplateContext";
+import { ArrowUpward as UpIcon, ArrowDownward as DownIcon, DeleteOutlined as DeleteIcon } from "@mui/icons-material";
+import { useTemplate } from "../../context";
 import { TemplateItem } from "../../../lib";
 
 export interface Props {
@@ -14,13 +14,13 @@ export default ({ item }: Props) => {
     return (
         <Stack direction="row" spacing={0} justifyContent="end">
             <IconButton size="small" onClick={() => { setTemplate(template.clone().moveItemUp(item)); }}>
-                <Icons.ArrowUpward fontSize="small" sx={{ color: "primary.light" }} />
+                <UpIcon fontSize="small" sx={{ color: "primary.light" }} />
             </IconButton>
             <IconButton size="small" onClick={() => { setTemplate(template.clone().moveItemDown(item)); }}>
-                <Icons.ArrowDownward fontSize="small" sx={{ color: "primary.light" }} />
+                <DownIcon fontSize="small" sx={{ color: "primary.light" }} />
             </IconButton>
             <IconButton size="small" onClick={() => { setTemplate(template.clone().removeItem(item)); }}>
-                <Icons.DeleteOutlined fontSize="small" sx={{ color: "primary.light" }} />
+                <DeleteIcon fontSize="small" sx={{ color: "primary.light" }} />
             </IconButton>
         </Stack>
     );

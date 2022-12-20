@@ -1,15 +1,16 @@
 import React from "react";
-import { Box, Table, TableContainer, TableBody, TableCell, TableRow, Tooltip } from "@mui/material";
+import { Box, Table, TableContainer, TableBody, TableCell, TableRow, Tooltip, SxProps, Theme } from "@mui/material";
 
 export type PropertyGridItem = [JSX.Element | string, JSX.Element | string | number | boolean, string];
 
 export interface Props {
     columns?: Array<{ width: number | string }>,
     items: PropertyGridItem[];
+    sx?: SxProps<Theme>;
 }
 
-export default ({ items, columns = [{ width: 100 }] }: Props) => (
-    <TableContainer>
+export default ({ items, columns = [{ width: 100 }], sx }: Props) => (
+    <TableContainer sx={sx}>
         <Table size="small">
             <TableBody>
                 {items.map(item => (

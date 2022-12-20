@@ -1,6 +1,6 @@
 import React from "react";
 import { FileDialog } from "../../components";
-import { cloudReadTemplateFile, Template } from "../../lib";
+import { cloudCreateTemplateFile } from "../../lib";
 import { useStorage, useTemplate } from "../context";
 
 export interface Props {
@@ -10,13 +10,12 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { files, error, setError } = useStorage();
-    const { setTemplate } = useTemplate();
+    const { template } = useTemplate();
 
-    async function onSelectFile(event: React.SyntheticEvent, file: string) {
+    async function handleSelectFile(event: React.SyntheticEvent, file: string) {
+        const content = template.json();
         try {
-            const content = await cloudReadTemplateFile(file);
-            const template = new Template(content, "", file);
-            setTemplate(template);
+            await cloudCreateTemplateFile(file, content);
             onClose(event);
         }
         catch (err) {
@@ -28,11 +27,12 @@ export default ({ open, onClose }: Props) => {
     return (
         <FileDialog
             files={files}
-            title="Open File"
-            mode="open"
+            title="Save File"
+            mode="save"
             error={error}
             open={open}
-            onSelectFile={onSelectFile}
+            selectedFile={template.file}
+            onSelectFile={handleSelectFile}
             onClearError={() => setError("")}
             onClose={onClose}
         />

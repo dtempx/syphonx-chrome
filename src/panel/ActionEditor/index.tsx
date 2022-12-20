@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Box, FormControlLabel, FormGroup, IconButton, Paper, Stack, Switch } from "@mui/material";
-import * as Icons from "@mui/icons-material";
+import { Box, Chip, FormControlLabel, FormGroup, IconButton, Paper, Stack, Switch } from "@mui/material";
+import { Menu as MenuIcon, InsertDriveFileOutlined as FileIcon } from "@mui/icons-material";
 import ActionPropertyEditor from "./ActionPropertyEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton";
 import DataView from "./DataView";
 import SidebarMenu from "./SidebarMenu"
-import { useTemplate } from '../TemplateContext';
+import { useTemplate } from '../context';
 
 export default () => {
     const { template, advanced, setAdvanced } = useTemplate();
@@ -14,64 +14,75 @@ export default () => {
 
     return (<>
         <SidebarMenu open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
         <Stack direction="row" spacing={0}>
             <IconButton size="small" onClick={() => setSidebarOpen(true)}>
-                <Icons.Menu fontSize="small" />
+                <MenuIcon fontSize="small" />
             </IconButton>
         </Stack>
+
         <Box
             sx={{
                 position: "relative",
-                width: 1200,
-                height: 400,
                 backgroundColor: "#ebedf0",
+                width: 1,
+                height: 1,
                 p: 2
             }}
         >
-            <Box
-                sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    "& > :not(style)": {
-                        overflow: "scroll",
-                        position: "relative",
-                        height: 300,
-                        m: 1,
-                        p: 1
-                    }
-                }}
-            >
-                <Paper
-                    elevation={3}
-                    sx={{ width: 300 }}
+            <Box visibility={template.file ? "visible" : "hidden"}>
+                <Chip
+                    label={template.file}
+                    variant="filled"
+                    color="default"
+                    size="small"
+                    icon={<FileIcon />}
+                    sx={{ ml: 1 }}
+                />
+            </Box>
+
+            <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                "& .panel": {
+                    position: "relative",
+                    overflow: "scroll",
+                    m: 1,
+                    p: 1
+                }
+            }}>
+                <Stack
+                    direction="row"
+                    sx={{
+                        width: 1,
+                        "& > :not(style)": {
+                            height: 300
+                        }    
+                    }}
                 >
-                    <ActionTreeView />
-                    <AddActionButton
-                        sx={{
-                            position: "absolute",
-                            bottom: theme => theme.spacing(2),
-                            right: theme => theme.spacing(2)
-                        }}
-                    />
-                </Paper>
-                <Paper
-                    elevation={3}
-                    sx={{ width: 300 }}
-                >
-                    <Stack direction="row" spacing={0} justifyContent="end">
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<Switch checked={advanced} onChange={event => setAdvanced(event.target.checked)} />}
-                                label="Advanced"
-                            />
-                        </FormGroup>                        
-                    </Stack>
-                    <ActionPropertyEditor item={template.selectedItem()} />
-                </Paper>
-                <Paper
-                    elevation={3}
-                    sx={{ width: 500 }}
-                >
+                    <Paper elevation={3} className="panel" sx={{ width: 400 }}>
+                        <ActionTreeView />
+                        <AddActionButton
+                            sx={{
+                                position: "absolute",
+                                bottom: theme => theme.spacing(2),
+                                right: theme => theme.spacing(2)
+                            }}
+                        />
+                    </Paper>
+                    <Paper elevation={3} className="panel" sx={{ width: 1 }}>
+                        <Stack direction="row" spacing={0} justifyContent="end">
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={<Switch checked={advanced} onChange={event => setAdvanced(event.target.checked)} />}
+                                    label="Advanced"
+                                />
+                            </FormGroup>                        
+                        </Stack>
+                        <ActionPropertyEditor item={template.selectedItem()} />
+                    </Paper>
+                </Stack>
+                <Paper elevation={3} className="panel" sx={{ width: 1 }}>
                     <DataView />
                 </Paper>
             </Box>

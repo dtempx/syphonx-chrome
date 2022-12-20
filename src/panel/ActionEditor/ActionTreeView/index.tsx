@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 import { TreeView } from "@mui/lab";
-import * as Icons from "@mui/icons-material";
-import { useTemplate } from '../../TemplateContext';
+import { ExpandMore as CollapseIcon, ChevronRight as ExpandIcon } from "@mui/icons-material";
+import { useTemplate } from "../../context";
 import ActionTreeItem from "./ActionTreeItem";
 
 export default () => {
@@ -12,8 +12,8 @@ export default () => {
     return (
         <Box>
             <TreeView
-                defaultCollapseIcon={<Icons.ExpandMore sx={{ color: "primary.light" }} />}
-                defaultExpandIcon={<Icons.ChevronRight sx={{ color: "primary.light" }} />}
+                defaultCollapseIcon={<CollapseIcon sx={{ color: "primary.light" }} />}
+                defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
                 expanded={expanded}
                 selected={template.selected}
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}

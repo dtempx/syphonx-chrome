@@ -1,6 +1,4 @@
-export function isObject(obj: unknown): boolean {
-    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
-}
+import { isObject } from ".";
 
 export function removeDOMRefs(obj: unknown): unknown {
     if (obj instanceof Array) {
@@ -24,14 +22,5 @@ export function removeDOMRefs(obj: unknown): unknown {
     }
     else {
         return obj;
-    }
-}
-
-export function tryParseJSON(text: string): any {
-    try {
-        return JSON.parse(text);
-    }
-    catch (err) {
-        return undefined;
     }
 }

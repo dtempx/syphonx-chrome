@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
-import { useTemplate } from '../../TemplateContext';
+import { useTemplate } from '../../context';
 import { TemplateItem } from "../../../lib";
 import { EditField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectQueryEditor from "./SelectQueryEditor";

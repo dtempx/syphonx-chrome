@@ -1,10 +1,35 @@
-load/save scripts to cloud
-action editor
-datagrid view for data
-dom highlighting from datagrid
-dom picker helper
-json schema/documentation
+DONE
+chrome extension setup: react, mui, build, panel
+integrate syphonx engine
+real time updates
+template hierachy view
+add action menu
+template property sheet
+basic expression parser for jquery
+basic dom highlighter
+basic/advanced filter view
+basic data view
+template cloud server
 
-https://www.npmjs.com/package/monaco-editor
-https://www.npmjs.com/package/monaco-yaml
-https://www.npmjs.com/package/@monaco-editor/react
+P1
+integrate template cloud storage (open, save, save as)
+fix contextual/selection bugs
+advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector stacks)
+action views: click, each, error, repeat, snooze, transform, waitfor, yield
+data views: single object view, table view, json view, error view, log view for troubleshooting
+dom highliting for action editor
+dom highlighting for data views
+template tests
+contracts
+view template change history (who, when, what/diffs)
+rollbacks
+css selector gadget (create selectors by pointing at parts of the page)
+
+P2
+edit template as code (yaml)
+editor copy/paste
+disable autorun for non-select-only templates
+switch between autorun and manual
+
+config page: api-key, email
+venom conversion tool

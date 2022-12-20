@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, TableContainer, TableBody, TableCell, TableRow } from "@mui/material";
-import { useTemplate } from '../../TemplateContext';
+import { useTemplate } from "../../context";
 import { isObject, removeDOMRefs } from "../../../lib";
 
 export default () => {

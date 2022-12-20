@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Backdrop, SpeedDial, SpeedDialAction, SpeedDialIcon, SxProps, Theme } from "@mui/material";
 import ActionIcon from "./ActionIcon";
-import { useTemplate } from '../TemplateContext';
-import { TemplateItem, TemplateAddItemType } from "../../lib/Template";
+import { useTemplate } from '../context';
+import { TemplateItem, TemplateAddItemType } from "../../lib";
 
 export interface Props {
     sx?: SxProps<Theme>;
@@ -53,3 +53,22 @@ function selectedAddItemTypes(item: TemplateItem | undefined): TemplateAddItemTy
     else
         return ["select", "waitfor", "click"];
 }
+
+/*
+        <Menu
+            anchorEl={}
+            open={open}
+            onClose={() => setOpen(false)}
+            anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+            }}
+            transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+            }}
+        >
+            <MenuItem onClick={() => alert("select")}>select</MenuItem>
+            <MenuItem onClick={() => alert("waitfor")}>waitfor</MenuItem>
+        </Menu>
+*/

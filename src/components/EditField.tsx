@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BaseTextFieldProps, IconButton, InputAdornment, TextField } from "@mui/material";
-import * as Icons from "@mui/icons-material";
+import { Check as CommitIcon, Cancel as CancelIcon } from "@mui/icons-material";
 
 export interface Props extends BaseTextFieldProps {
     value?: unknown;
@@ -59,13 +59,13 @@ export default ({ value, onChange, onValidate, ...props }: Props) => {
                             onClick={commit}
                             style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
                         >
-                            <Icons.Check fontSize="small" />
+                            <CommitIcon fontSize="small" />
                         </IconButton>
                         <IconButton
                             size="small"
                             onClick={cancel}
                         >
-                            <Icons.Cancel fontSize="small" />
+                            <CancelIcon fontSize="small" />
                         </IconButton>
                     </InputAdornment>
             }}

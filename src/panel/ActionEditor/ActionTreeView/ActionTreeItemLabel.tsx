@@ -2,7 +2,7 @@ import React from "react";
 import { Stack, Typography } from "@mui/material";
 import ActionIcon from "../ActionIcon";
 import ActionTreeItemButtons from "./ActionTreeItemButtons";
-import { useTemplate } from "../../TemplateContext";
+import { useTemplate } from "../../context";
 import { TemplateItem } from "../../../lib";
 
 export interface Props {
@@ -11,7 +11,6 @@ export interface Props {
 
 export default ({ item }: Props) => {
     const { template } = useTemplate();
-
     return (
         <Stack direction="row" justifyContent="space-between">
             <Typography align="left" sx={{ mt: 1 }}>

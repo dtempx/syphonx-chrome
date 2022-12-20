@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { Template } from "../lib";
+import { Template } from "../../lib";
 
 export interface TemplateState {
     template: Template;
@@ -46,5 +46,5 @@ export function TemplateProvider({ children }: { children: JSX.Element }) {
 }
 
 export function useTemplate() {
-    return React.useContext(TemplateContext);
+    return useContext(TemplateContext);
 }
