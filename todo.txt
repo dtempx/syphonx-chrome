@@ -17,6 +17,12 @@ fix contextual/selection bugs
 advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector stacks)
 action views: click, each, error, repeat, snooze, transform, waitfor, yield
 data views: single object view, table view, json view, error view, log view for troubleshooting
+
+add sub-items to repeat
+add sub-items to each
+add sub-items to transform
+add sub-items to waitfor
+
 dom highliting for action editor
 dom highlighting for data views
 template tests

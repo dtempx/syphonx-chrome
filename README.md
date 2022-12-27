@@ -12,12 +12,12 @@ yarn install
 
 
 ## Build/Test
-* `yarn build` to build for unit tests
+* `npx tsc` to build source
 * `yarn test` to run unit tests
 
 
 ## Build/Package
-* `yarn build-package` to build Chrome Extension package
+* `yarn build` to build Chrome Extension package
 * `yarn start` to test UI outside of Chrome
 
 

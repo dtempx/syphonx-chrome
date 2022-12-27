@@ -25,7 +25,7 @@ export function TemplateProvider({ children }: { children: JSX.Element }) {
     const [advanced, setAdvanced] = useState(false);
 
     useEffect(() => {
-        debugger;
+        //debugger;
         template.run()
             .then(result => setResult(result));
     }, [template]);

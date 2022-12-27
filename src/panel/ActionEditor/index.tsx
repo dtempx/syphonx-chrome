@@ -27,6 +27,8 @@ export default () => {
                 backgroundColor: "#ebedf0",
                 width: 1,
                 height: 1,
+                minWidth: 400,
+                overflowX: "scroll",
                 p: 2
             }}
         >

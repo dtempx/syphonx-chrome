@@ -37,14 +37,15 @@ export class Template {
         return this.obj.actions instanceof Array ? createActionItems(this.obj.actions) : [];
     }
 
-    addItem(type: TemplateAddItemType): void {
+    addAction(type: TemplateAddItemType): void {
         const item = findItem(this.children, this.selected);
         const actions = this.findItemActions(item);
-        const obj = {};
+        const obj: any = {};
         if (type === "click") {
             actions.push({ click: obj as syphonx.Click });
         }
         else if (type === "select") {
+            obj.name = "noname";
             actions.push({ select: [obj] });
         }
         else if (type === "item" && item?.type === "action" && item?.name === "select") {
@@ -55,6 +56,14 @@ export class Template {
             actions.push({ waitfor: obj });
         }
         this.selected = this.findObj(obj) || "";
+    }
+
+    addSelector(): void {
+        const item = findItem(this.children, this.selected);
+        if (item?.type === "action" && item?.name === "select") {
+            const selectors = item.obj as syphonx.Select[];
+            selectors.push({ name: "noname" });
+        }
     }
 
     clone() {
@@ -155,5 +164,5 @@ export class Template {
     }
 }
 
-export type TemplateAddItemType = "click" | "item" | "select" | "waitfor";
+export type TemplateAddItemType = "click" | "each" | "error" | "item" | "repeat" | "select" | "snooze" | "transform" | "waitfor" | "yield";
 export * from "./TemplateItem";

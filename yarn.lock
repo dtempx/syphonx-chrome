@@ -2004,12 +2004,17 @@ jquery@^3.6.0:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
 
-js-yaml@4.1.0:
+js-yaml@4.1.0, js-yaml@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
   integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
   dependencies:
     argparse "^2.0.1"
+
+jsep@^1.3.7:
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/jsep/-/jsep-1.3.8.tgz#facb6eb908d085d71d950bd2b24b757c7b8a46d7"
+  integrity sha512-qofGylTGgYj9gZFsHuyWAN4jr35eJ66qJCK4eKDnldohuUoQFbU3iZn2zjvEbd9wOAhP9Wx5DsAAduTyE1PSWQ==
 
 json-parse-even-better-errors@^2.3.0:
   version "2.3.1"
@@ -2735,6 +2740,21 @@ svgo@^2.4.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
+
+syphonx-core@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.1.tgz#4669dd13c74059f6eafd8b42cc34ae4155216737"
+  integrity sha512-n8KAZjZ58YZW0UzcGpenJVulXJ0wPLTb4+Ojz2QEQUyfm9/XEzD3lKGKK6xqS69/6DadoN5w8vWwi12lDhZHIA==
+
+syphonx-lib@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.1.tgz#7c70ef62114bec32ff8a76d61b7d3d1ac9f5f8a1"
+  integrity sha512-Q//mmQA5bHwBGWdjXyO8cYX/MnOaS8sP5M4F/m2srjSmE45PyQahRnyIapJtBDki5BwRbGsjdEnHOPlEcI0OdA==
+  dependencies:
+    js-yaml "^4.1.0"
+    jsep "^1.3.7"
+    json5 "^2.2.1"
+    syphonx-core "^1.2.1"
 
 term-size@^2.2.1:
   version "2.2.1"

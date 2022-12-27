@@ -4,8 +4,7 @@
   "description": "SyphonX is a light weight, no-code web-scraper that runs in any browser",
   "type": "module",
   "scripts": {
-    "build": "npx tsc",
-    "parcel": "bash ./parcel.sh",
+    "build": "bash ./build.sh",
     "start": "npx http-server dist -c-1 -o",
     "test": "npx mocha src/**/*.test.js"
   },
@@ -45,6 +44,7 @@
     "@types/react-dom": "^18.0.9",
     "jquery": "^3.6.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "syphonx-lib": "^1.2.1"
   }
 }

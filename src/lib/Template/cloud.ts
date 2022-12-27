@@ -15,10 +15,7 @@ export interface File {
 export async function cloudFetchTemplateDirectory(): Promise<File[]> {
     const response = await fetch(`${serviceUrl}/templates/`);
     const files = await response.json() as File[];
-    files.forEach(file => {
-        file.name = "/" + file.name;
-        file.timestamp = new Date(file.timestamp);
-    });
+    files.forEach(file => file.timestamp = new Date(file.timestamp));
     return files;
 }
 

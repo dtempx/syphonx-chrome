@@ -3,7 +3,7 @@ import { SvgIconProps } from "@mui/material";
 import {
     Abc as ItemIcon,
     Abc as StringTypeIcon,
-    AutoAwesome as EachIcon,
+    AutoAwesomeMotion as EachIcon,
     AutoAwesomeMotionOutlined as RepeatedIcon,
     Autorenew as RepeatIcon,
     DataObject as ObjectTypeIcon,
