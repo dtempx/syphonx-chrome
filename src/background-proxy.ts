@@ -2,13 +2,17 @@ import * as syphonx from "syphonx-lib";
 
 export const active = typeof chrome === "object" && chrome.devtools;
 
-export async function highlightElements(selector: string) {
+export async function highlightElements(selector: string): Promise<void> {
     await executeScript("highlightElements", selector);
 }
 
 export async function applyTemplate(template: syphonx.Template): Promise<syphonx.ExtractResult> {
     const result = await executeScript<syphonx.ExtractResult>("applyTemplate", template);
     return result;
+}
+
+export function log(message: string) {
+    chrome.runtime.sendMessage({ log: message });
 }
 
 function executeScript<T = unknown>(key: string, ...params: unknown[]): Promise<T> {

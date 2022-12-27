@@ -35915,6 +35915,11 @@ async function $6767c619f5de943e$export$f78a296632f66e69(template) {
     const result = await $6767c619f5de943e$var$executeScript("applyTemplate", template);
     return result;
 }
+function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
+    chrome.runtime.sendMessage({
+        log: message
+    });
+}
 function $6767c619f5de943e$var$executeScript(key, ...params) {
     if (!$6767c619f5de943e$export$89da14300d534261) throw new Error("Cannot execute script, not running in Chrome devtools");
     return new Promise((resolve, reject)=>{

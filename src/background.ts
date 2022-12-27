@@ -6,12 +6,25 @@ const scripts: Record<string, Function> = {
     "highlightElements": functions.highlightElements
 };
 
-async function onDevToolsMessage(message: any, port: chrome.runtime.Port) {
-    console.log("DEVTOOLS", { message });
-    if (message.key === "load" && typeof message.tabId === "number") {
-        const file = "jquery.slim.js";
-        await executeScriptFile(message.tabId, file);
-        console.log(`DEVTOOLS injected ${file}`);
+async function onDevToolsMessage(message: any, port: chrome.runtime.Port): Promise<void> {
+    if (message.log) {
+        console.log("DEVTOOLS", message.log);
+    }
+    else {
+        const url = await getTabUrl(message.tabId);
+        console.log("DEVTOOLS", { message }, url);
+        if (message.key === "load" && typeof message.tabId === "number") {
+            const file = "jquery.slim.js";
+            await executeScriptFile(message.tabId, file);
+            console.log(`DEVTOOLS injected ${file} into ${url}`);
+        }
+    }
+}
+
+async function getTabUrl(tabId: number): Promise<string | undefined> {
+    if (tabId) {
+        const tab = await chrome.tabs.get(tabId);
+        return tab?.url;
     }
 }
 
@@ -41,6 +54,11 @@ chrome.runtime.onConnect.addListener(port => {
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.log) {
+        console.log("MESSAGE", message.log);
+        return false;
+    }
+
     if (!Object.keys(scripts).includes(message.key)) {
         console.warn("MESSAGE", { message, error: `Property "key" is invalid: "${message.key}"` });
         return false;

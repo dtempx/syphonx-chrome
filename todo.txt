@@ -10,23 +10,43 @@ basic dom highlighter
 basic/advanced filter view
 basic data view
 template cloud server
+integrate template cloud storage (open, save, save as)
+
 
 P1
-integrate template cloud storage (open, save, save as)
-fix contextual/selection bugs
 advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector stacks)
-action views: click, each, error, repeat, snooze, transform, waitfor, yield
-data views: single object view, table view, json view, error view, log view for troubleshooting
+
+fix contextual/selection bugs
+
+action view: click
+action view: each
+action view: error
+action view: repeat
+action view: snooze
+action view: transform
+action view: waitfor
+action view: yield
 
 add sub-items to repeat
 add sub-items to each
 add sub-items to transform
 add sub-items to waitfor
 
+data view: single object view
+data view: table view
+data view: json view
+data view: error view
+data view: log view
+
+data contract validation
+data view: data contract view
+
+
 dom highliting for action editor
 dom highlighting for data views
+
 template tests
-contracts
+
 view template change history (who, when, what/diffs)
 rollbacks
 css selector gadget (create selectors by pointing at parts of the page)

@@ -17,6 +17,11 @@ chrome.devtools.panels.elements.createSidebarPane("SyphonX", (sidebar)=>{
         some_data: "Some data to show"
     });
 });
+chrome.devtools.network.onNavigated.addListener((url)=>{
+    $89fb1f05f1e0027d$var$background.postMessage({
+        log: `NAVIGATED ${url}`
+    });
+});
 
 
 //# sourceMappingURL=devtools.caffc88d.js.map

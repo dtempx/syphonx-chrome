@@ -17,3 +17,7 @@ chrome.devtools.panels.create("SyphonX", "icon16.png", "panel.html", panel => {
 chrome.devtools.panels.elements.createSidebarPane("SyphonX", sidebar => {
     sidebar.setObject({ some_data: "Some data to show" });
 });
+
+chrome.devtools.network.onNavigated.addListener(url => {
+    background.postMessage({ log: `Navigated to ${url}`});
+});

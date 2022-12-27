@@ -6211,13 +6211,20 @@ const $07c03eb40a016611$var$scripts = {
     "highlightElements": $3018773038497e4e$export$1656970ae4fe6f6e
 };
 async function $07c03eb40a016611$var$onDevToolsMessage(message, port) {
+    const url = await $07c03eb40a016611$var$getTabUrl(message.tabId);
     console.log("DEVTOOLS", {
         message: message
-    });
+    }, url);
     if (message.key === "load" && typeof message.tabId === "number") {
         const file = "jquery.slim.js";
         await $07c03eb40a016611$var$executeScriptFile(message.tabId, file);
-        console.log(`DEVTOOLS injected ${file}`);
+        console.log(`DEVTOOLS injected ${file} into ${url}`);
+    }
+}
+async function $07c03eb40a016611$var$getTabUrl(tabId) {
+    if (tabId) {
+        const tab = await chrome.tabs.get(tabId);
+        return tab?.url;
     }
 }
 function $07c03eb40a016611$var$executeScript(tabId, func, ...args) {
@@ -6248,6 +6255,10 @@ chrome.runtime.onConnect.addListener((port)=>{
     port.onDisconnect.addListener(()=>port.onMessage.removeListener($07c03eb40a016611$var$onDevToolsMessage));
 });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
+    if (message.log) {
+        console.log(message.log);
+        return false;
+    }
     if (!Object.keys($07c03eb40a016611$var$scripts).includes(message.key)) {
         console.warn("MESSAGE", {
             message: message,
