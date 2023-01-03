@@ -1,0 +1,11 @@
+.sx-hover {
+    outline: 2px dashed red !important;
+}
+
+.sx-select {
+    outline: 2px dashed orange !important;
+}
+
+.sx-click {
+    outline: 3px double magenta !important;
+}

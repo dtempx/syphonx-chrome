@@ -1,34 +1,15 @@
 import * as syphonx from "syphonx-lib";
-import * as functions from "./functions";
+import * as scripts from "./scripts";
 
-const scripts: Record<string, Function> = {
+const scriptMap: Record<string, Function> = {
     "applyTemplate": syphonx.extract,
-    "highlightElements": functions.highlightElements
+    "disableTracking": scripts.disableTracking,
+    "enableTracking": scripts.enableTracking,
+    "queryTracking": scripts.queryTracking,
+    "selectElements": scripts.selectElements,
 };
 
-async function onDevToolsMessage(message: any, port: chrome.runtime.Port): Promise<void> {
-    if (message.log) {
-        console.log("DEVTOOLS", message.log);
-    }
-    else {
-        const url = await getTabUrl(message.tabId);
-        console.log("DEVTOOLS", { message }, url);
-        if (message.key === "load" && typeof message.tabId === "number") {
-            const file = "jquery.slim.js";
-            await executeScriptFile(message.tabId, file);
-            console.log(`DEVTOOLS injected ${file} into ${url}`);
-        }
-    }
-}
-
-async function getTabUrl(tabId: number): Promise<string | undefined> {
-    if (tabId) {
-        const tab = await chrome.tabs.get(tabId);
-        return tab?.url;
-    }
-}
-
-function executeScript(tabId: number, func: () => void, ...args: any): Promise<unknown> {
+function executeScript<T = unknown>(tabId: number, func: () => void, ...args: any): Promise<T> {
     return new Promise((resolve, reject) =>
         chrome.scripting.executeScript(
             { target: { tabId }, func, args },
@@ -38,7 +19,7 @@ function executeScript(tabId: number, func: () => void, ...args: any): Promise<u
     );
 }
 
-function executeScriptFile(tabId: number, file: string): Promise<unknown> {
+function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T> {
     return new Promise((resolve, reject) =>
         chrome.scripting.executeScript(
             { target: { tabId }, files: [file] },
@@ -48,10 +29,22 @@ function executeScriptFile(tabId: number, file: string): Promise<unknown> {
     );
 }
 
-chrome.runtime.onConnect.addListener(port => {
-    port.onMessage.addListener(onDevToolsMessage);
-    port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
-});
+async function getTabUrl(tabId: number): Promise<string | undefined> {
+    if (tabId) {
+        const tab = await chrome.tabs.get(tabId);
+        return tab?.url;
+    }
+}
+
+async function injectAll(tabId: number): Promise<void> {
+    const injected = await executeScript<boolean>(tabId, () => typeof window.sx === "object");
+    if (!injected) {
+        await executeScriptFile(tabId, "jquery.slim.js");
+        await executeScriptFile(tabId, "sx.js");
+        await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
+        console.log(`BACKGROUND sx injected tabId=${tabId}`);
+    }
+}
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.log) {
@@ -59,25 +52,56 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return false;
     }
 
-    if (!Object.keys(scripts).includes(message.key)) {
-        console.warn("MESSAGE", { message, error: `Property "key" is invalid: "${message.key}"` });
+    if (!Object.keys(scriptMap).includes(message.key)) {
+        console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });
         return false;
     }
 
     if (typeof message.tabId !== "number") {
-        console.warn("MESSAGE", message.key, { message, error: `Property "tabId" is invalid: "${message.tabId}"` });
+        console.warn("MESSAGE", message.key, { message, sender, error: `Property "tabId" is invalid: "${message.tabId}"` });
         return false;
     }
 
-    executeScript(message.tabId, scripts[message.key] as () => void, ...message.params)
-        .then(result => {
-            console.log("MESSAGE", message.key, { message, result });
+    (async () => {
+        try {
+            await injectAll(message.tabId);
+            const result = await executeScript(message.tabId, scriptMap[message.key] as () => void, ...message.params);
             sendResponse({ result });
-        })
-        .catch(error => {
-            console.warn("MESSAGE", message.key, { message, error });
+        }
+        catch (error) {
+            console.error("MESSAGE", message.key, { message, sender, error });
             sendResponse({ error });
-        });
-
-    return true;
+        }
+    })();
+    return true; // response will be sent asynchronously
 });
+
+/*
+chrome.runtime.onConnect.addListener(port => {
+    port.onMessage.addListener(onDevToolsMessage);
+    port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
+});
+
+function onDevToolsMessage(message: any, port: chrome.runtime.Port): boolean {
+    if (message.log) {
+        console.log("DEVTOOLS", message.log);
+        return false;
+    }
+    else if (message.key === "load" && typeof message.tabId === "number") {
+        (async () => {
+            try {
+                const url = await getTabUrl(message.tabId);
+                console.log("DEVTOOLS", { message }, url);
+            }
+            catch (error) {
+                console.error("DEVTOOLS", { message, error });
+            }
+        })();
+        return true; // response will be sent asynchronously
+    }
+    else {
+        console.warn("DEVTOOLS UNKNOWN MESSAGE", { message });
+        return false;
+    }
+}
+*/

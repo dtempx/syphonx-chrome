@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Divider, Fab, Menu, MenuItem, SxProps, Theme, Typography } from "@mui/material";
-import { Add as AddIcon, KeyboardDoubleArrowRight as MenuExpandedIcon, KeyboardDoubleArrowLeft as MenuCollapsedIcon } from "@mui/icons-material";
+import { Add as AddIcon, KeyboardDoubleArrowRight as ExpandIcon, KeyboardDoubleArrowLeft as CollapseIcon } from "@mui/icons-material";
 import { useTemplate } from '../context';
 import { TemplateAddItemType } from "../../lib";
 import ActionIcon from "./ActionIcon";
@@ -72,10 +72,10 @@ export default (props?: Props) => {
                 <MenuItem onClick={() => addSelector()}><ActionIcon name="string" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
             ) : null}
             {expanded ? (
-                <MenuItem onClick={() => setExpanded(false)}><MenuCollapsedIcon /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>
+                <MenuItem onClick={() => setExpanded(false)}><CollapseIcon /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>
             ) : (
-                <MenuItem onClick={() => setExpanded(true)}><MenuExpandedIcon /><Typography sx={{ ml: 1 }}>More</Typography></MenuItem>
-            )}            
+                <MenuItem onClick={() => setExpanded(true)}><ExpandIcon /><Typography sx={{ ml: 1 }}>More</Typography></MenuItem>
+            )}
         </Menu>
     </>);
 }

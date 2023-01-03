@@ -11,3 +11,4 @@ node_modules
 Thumbs.db
 private
 !dist/*.js
+!src/sx.d.ts

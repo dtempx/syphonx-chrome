@@ -33,10 +33,10 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={[
-                    ["New", <FileNewIcon />, event => { setTemplate(new Template()); onClose(event); }],
-                    ["Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
-                    ["Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
-                    ["Save As", <FileSaveAsIcon />, event => onClose(event)]
+                    ["File New", <FileNewIcon />, event => { setTemplate(new Template()); onClose(event); }],
+                    ["File Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
+                    ["File Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
+                    ["File Save As", <FileSaveAsIcon />, event => { setFileSaveOpen(true); onClose(event); }]
                 ]} />
             </Box>
         </Drawer>

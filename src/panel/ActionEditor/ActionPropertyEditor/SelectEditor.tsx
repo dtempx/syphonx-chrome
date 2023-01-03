@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { TemplateItem } from "../../../lib";
-import { EditField, PropertyGrid, PropertyGridItem } from "../../../components/";
-import SelectQueryEditor from "./SelectQueryEditor";
+import { EditField, MoreField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
+import QueryBuilder from "./QueryBuilder/index";
 import DebugView from "./DebugView";
 
 export interface Props {
@@ -15,6 +15,8 @@ export interface Props {
 
 export default ({ item }: Props) => {
     const { template, setTemplate, advanced } = useTemplate();
+    const [queryEditorOpen, setQueryEditorOpen] = useState(false);
+
     const select = item.obj as syphonx.Select;
     const items: PropertyGridItem[] = [
         [
@@ -30,10 +32,20 @@ export default ({ item }: Props) => {
         ],
         [
             "query",
-            <SelectQueryEditor
-                query={select.query}
-                onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
-            />,
+            <>
+                <MoreField
+                    variant="standard"
+                    size="small"
+                    value={select.query ? syphonx.formatJQueryExpression(select.query[0]) : ""}
+                    onMore={() => setQueryEditorOpen(true)}
+                />
+                <QueryBuilder
+                    query={select.query}
+                    open={queryEditorOpen}
+                    onClose={() => setQueryEditorOpen(false)}
+                    onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
+                />
+            </>,
             "A CSS selector or jQuery expression that determines what data is selected"
         ]
     ];

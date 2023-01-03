@@ -4,7 +4,7 @@ const $89fb1f05f1e0027d$var$background = chrome.runtime.connect({
 $89fb1f05f1e0027d$var$background.onMessage.addListener((message)=>{
 // handle reponse from background page
 });
-$89fb1f05f1e0027d$var$background.postMessage({
+if (chrome.devtools.inspectedWindow.tabId) $89fb1f05f1e0027d$var$background.postMessage({
     key: "load",
     tabId: chrome.devtools.inspectedWindow.tabId
 });
@@ -19,7 +19,7 @@ chrome.devtools.panels.elements.createSidebarPane("SyphonX", (sidebar)=>{
 });
 chrome.devtools.network.onNavigated.addListener((url)=>{
     $89fb1f05f1e0027d$var$background.postMessage({
-        log: `NAVIGATED ${url}`
+        log: `Navigated to ${url} tabId=${chrome.devtools.inspectedWindow.tabId}`
     });
 });
 

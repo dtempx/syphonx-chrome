@@ -4,10 +4,11 @@ background.onMessage.addListener(message => {
     // handle reponse from background page
 });
 
-background.postMessage({
-    key: "load",
-    tabId: chrome.devtools.inspectedWindow.tabId
-});
+if (chrome.devtools.inspectedWindow.tabId)
+    background.postMessage({
+        key: "load",
+        tabId: chrome.devtools.inspectedWindow.tabId
+    });
 
 // https://developer.chrome.com/docs/extensions/reference/devtools_panels/#method-create
 chrome.devtools.panels.create("SyphonX", "icon16.png", "panel.html", panel => {
@@ -19,5 +20,5 @@ chrome.devtools.panels.elements.createSidebarPane("SyphonX", sidebar => {
 });
 
 chrome.devtools.network.onNavigated.addListener(url => {
-    background.postMessage({ log: `Navigated to ${url}`});
+    background.postMessage({ log: `Navigated to ${url} tabId=${chrome.devtools.inspectedWindow.tabId}`});
 });

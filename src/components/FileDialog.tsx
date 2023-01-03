@@ -84,6 +84,7 @@ export default ({ files, title, mode, open, error, selectedFile, onSelectFile, o
             {mode === "save" ? (
                 <DialogActions>
                     <TextField
+                        variant="outlined"
                         type="text"
                         label=""
                         margin="dense"
@@ -92,7 +93,6 @@ export default ({ files, title, mode, open, error, selectedFile, onSelectFile, o
                         value={text}
                         error={!valid}
                         onChange={handleTextChange}
-                        variant="standard"
                         InputProps={{endAdornment:
                             <IconButton onClick={handleCommit}>
                                 <CommitIcon />

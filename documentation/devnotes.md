@@ -13,6 +13,18 @@ graph TD;
     C-->D;
 ```
 
+## Add jQuery to any page
+```
+(() => {
+    const script = document.createElement('script');
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+    //jQuery.noConflict();
+})();
+```
+
+
+
 How to get the Selected elements in Chrome Panel? [Chrome Extension Development] [XPath Selenium]
 https://www.youtube.com/watch?v=tFpU95kMJ7U&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOpcR5&index=10
 

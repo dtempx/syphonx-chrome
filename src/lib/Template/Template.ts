@@ -152,7 +152,7 @@ export class Template {
     async run(): Promise<syphonx.ExtractResult> {
         if (background.active) {
             const result = await background.applyTemplate(this.obj as syphonx.Template);
-            return result;
+            return result!;
         }
         else {
             return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;

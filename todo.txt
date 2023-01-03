@@ -1,3 +1,81 @@
+BUGS
+CSS Selector not highlighting in DOM on change
+output is only updating the first time
+
+
+CURRENT: QUERY BUILDER
+regex editor
+manual jquery expression editor working
+pass whole selector into editor
+show name, type, repeated in ribbon
+selector list (add, remove, switch)
+support middle mouse click to avoid invoking clicks
+attempt to optimize away interior paths that are tags
+consider partial semantic matching
+use syphonx selector engine
+support finding :contains style selectors (depends on syphonx)
+support repeated selections
+manually set outer context
+
+
+P1
+advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector list management)
+dom highliting for action editor
+(+2d)
+
+fix contextual/selection bugs
+(1d)
+
+action view: click
+action view: each
+action view: error
+action view: repeat
+action view: snooze
+action view: transform
+action view: waitfor
+action view: yield
+(1d)
+
+add sub-items to repeat
+add sub-items to each
+add sub-items to transform
+add sub-items to waitfor
+(1d)
+
+data view: single object view
+data view: table view
+data view: json view
+data view: error view
+data view: log view
+(2d)
+
+data contract validation
+data view: data contract view
+dom highlighting for data views
+(1d)
+
+trials
+(1d)
+
+template test cases
+(1d)
+
+view template change history (who, when, what/diffs)
+rollbacks
+css selector gadget (create selectors by pointing at parts of the page)
+
+P2
+edit template as code (yaml)
+editor copy/paste
+disable autorun for non-select-only templates
+switch between autorun and manual
+selector quality feedback (good, fair, poor)
+
+config page: api-key, email
+venom conversion tool
+
+
+
 DONE
 chrome extension setup: react, mui, build, panel
 integrate syphonx engine
@@ -11,51 +89,3 @@ basic/advanced filter view
 basic data view
 template cloud server
 integrate template cloud storage (open, save, save as)
-
-
-P1
-advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector stacks)
-
-fix contextual/selection bugs
-
-action view: click
-action view: each
-action view: error
-action view: repeat
-action view: snooze
-action view: transform
-action view: waitfor
-action view: yield
-
-add sub-items to repeat
-add sub-items to each
-add sub-items to transform
-add sub-items to waitfor
-
-data view: single object view
-data view: table view
-data view: json view
-data view: error view
-data view: log view
-
-data contract validation
-data view: data contract view
-
-
-dom highliting for action editor
-dom highlighting for data views
-
-template tests
-
-view template change history (who, when, what/diffs)
-rollbacks
-css selector gadget (create selectors by pointing at parts of the page)
-
-P2
-edit template as code (yaml)
-editor copy/paste
-disable autorun for non-select-only templates
-switch between autorun and manual
-
-config page: api-key, email
-venom conversion tool

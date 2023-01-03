@@ -6196,35 +6196,194 @@ function $c69f9b8c799101a6$export$2e2dbd43b49fd373(text) {
 
 
 
-function $3018773038497e4e$export$1656970ae4fe6f6e(selector) {
-    if (window.syphonx?.selector) document.querySelectorAll(window.syphonx.selector).forEach((element)=>element.style.boxShadow = "");
-    if (selector) document.querySelectorAll(selector).forEach((element)=>element.style.boxShadow = "4px 4px 2px yellow, -4px -4px 2px yellow");
-    window.syphonx = {
-        ...window.syphonx,
-        selector: selector
-    };
+function $46d53147699ca8a7$export$f2909722c7f0f932(selectors) {
+    document.querySelectorAll(".sx-hover, .sx-select").forEach((element)=>element.classList.remove("sx-hover", "sx-select"));
+    const result = [];
+    for (const selector of selectors)document.querySelectorAll(selector).forEach((element)=>{
+        element.classList.add("sx-select");
+        result.push(element.textContent);
+    });
+    return result;
 }
 
 
-const $07c03eb40a016611$var$scripts = {
-    "applyTemplate": $818fa7ea367b0594$export$f9380c9a627682d3,
-    "highlightElements": $3018773038497e4e$export$1656970ae4fe6f6e
-};
-async function $07c03eb40a016611$var$onDevToolsMessage(message, port) {
-    const url = await $07c03eb40a016611$var$getTabUrl(message.tabId);
-    console.log("DEVTOOLS", {
-        message: message
-    }, url);
-    if (message.key === "load" && typeof message.tabId === "number") {
-        const file = "jquery.slim.js";
-        await $07c03eb40a016611$var$executeScriptFile(message.tabId, file);
-        console.log(`DEVTOOLS injected ${file} into ${url}`);
+function $b2515d1c013cc4bc$export$e684be5f4b22cc14() {
+    sx.tracking = false;
+    document.querySelectorAll(".sx-hover").forEach((element)=>{
+        element.classList.remove("sx-hover");
+        if (element.classList.length === 0) element.removeAttribute("class");
+    });
+    document.querySelectorAll(".sx-select").forEach((element)=>{
+        element.classList.remove("sx-select");
+        if (element.classList.length === 0) element.removeAttribute("class");
+    });
+    document.querySelectorAll(".sx-click").forEach((element)=>{
+        element.classList.remove("sx-click");
+        if (element.classList.length === 0) element.removeAttribute("class");
+    });
+}
+function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
+    sx.tracking = true;
+    window.addEventListener("beforeunload", (event)=>{
+        if (sx.tracking) {
+            event.preventDefault();
+            event.stopPropagation();
+            return "";
+        }
+    });
+    document.addEventListener("mousemove", (event)=>{
+        document.querySelectorAll(".sx-hover").forEach((element)=>{
+            element.classList.remove("sx-hover");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        document.querySelectorAll(".sx-select").forEach((element)=>{
+            element.classList.remove("sx-select");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        if (sx.tracking) {
+            if (event.target instanceof HTMLElement) event.target.classList.add("sx-hover");
+        }
+    });
+    document.addEventListener("click", onClick);
+    //document.querySelectorAll("a").forEach(element => element.addEventListener("click", onClick));
+    function onClick(event) {
+        document.querySelectorAll(".sx-click").forEach((element)=>{
+            element.classList.remove("sx-click");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        document.querySelectorAll(".sx-hover").forEach((element)=>{
+            element.classList.remove("sx-hover");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        document.querySelectorAll(".sx-select").forEach((element)=>{
+            element.classList.remove("sx-select");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        if (sx.tracking) {
+            if (event.target instanceof HTMLElement) event.target.classList.add("sx-click");
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
     }
 }
-async function $07c03eb40a016611$var$getTabUrl(tabId) {
-    if (tabId) {
-        const tab = await chrome.tabs.get(tabId);
-        return tab?.url;
+function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
+    const element1 = document.querySelector(".sx-click");
+    if (element1) {
+        element1.classList.remove("sx-click");
+        if (element1.classList.length === 0) element1.removeAttribute("class");
+        return singleSelector(element1);
+    } else return [];
+    function semantic(name) {
+        if (!name) return false;
+        name = name.replace(/[^a-z0-9_-]/gi, "") // remove any characters that aren't letters, digits, dashes, or underscores
+        .replace(/^[-_]+|[-_]+$/g, "") // trim "-" or "_" from beginning or end of a string
+        .replace(/_/g, "-") // replace all "_" with "-"
+        .replace(/-{2,}/g, "-") // dedup "-"
+        .replace(/([a-z])([A-Z])/g, "$1-$2") // convert from camel-case
+        .toLowerCase();
+        // reject if any digits are present in the name
+        if (/\d/.test(name)) return false;
+        // split words by "-" including only word lengths greater than 3 
+        const words = name.split("-").filter((word)=>word.length > 3);
+        // reject if any word of length greater than 3 is not in the English dictionary
+        return words.length > 0 && words.every((word)=>sx.dictionary.has(word));
+    }
+    function singleSelector(element) {
+        let open = [];
+        const closed = [];
+        while(element && element.tagName !== "BODY"){
+            const tag = element.tagName.toLowerCase();
+            const paths = open.length > 0 ? open : [
+                ""
+            ];
+            const next = [];
+            function append(target) {
+                for (const path of paths){
+                    const selector = path ? `${target} > ${path}` : target;
+                    if (document.querySelectorAll(selector).length === 1) closed.push(selector);
+                    else if (element.parentElement) {
+                        const n = element.parentElement.querySelectorAll(selector).length;
+                        if (n === 1) next.push(selector);
+                    }
+                }
+            }
+            const id = element.getAttribute("id");
+            if (semantic(id)) append(`#${id}`);
+            // find class-names that don't start with "sx-" and appear to have semantic meaning
+            (element.getAttribute("class") || "").split(" ").filter((className)=>!className.startsWith("sx-") && semantic(className)).forEach((className)=>append(`.${className}`));
+            // find attributes with exceptions
+            Array.from(element.attributes).filter((attr)=>![
+                    "id",
+                    "class",
+                    "style",
+                    "src",
+                    "href",
+                    "title",
+                    "lang"
+                ].includes(attr.name)).forEach((attr)=>append(`[${attr.name}${semantic(attr.value) ? `='${attr.value.replace(/'/g, "\\'")}'` : ""}]`));
+            for (const path1 of paths){
+                let selector = path1 ? `${tag} > ${path1}` : tag;
+                if (document.querySelectorAll(selector).length === 1) closed.push(selector);
+                if (element.parentElement) {
+                    const n = element.parentElement.querySelectorAll(selector).length;
+                    if (n > 1) {
+                        const i = Array.from(element.parentElement.children).findIndex((child)=>child === element);
+                        selector = `${tag}:nth-of-type(${i + 1})${path1 ? ` > ${path1}` : ""}`;
+                    }
+                    next.push(selector);
+                }
+            }
+            if (next.length === 0) break; // no more open paths so nothing left to do (shouldn't ever happen)
+            open = next;
+            element = element.parentElement;
+        }
+        return [
+            ...closed,
+            ...open
+        ].sort((a, b)=>(a.match(/:nth-/g) || []).length - (b.match(/:nth-/g) || []).length || (a.match(/>/g) || []).length - (b.match(/>/g) || []).length || a.length - b.length || a.localeCompare(b));
+    }
+}
+
+
+
+
+const $07c03eb40a016611$var$scriptMap = {
+    "applyTemplate": $818fa7ea367b0594$export$f9380c9a627682d3,
+    "disableTracking": $b2515d1c013cc4bc$export$e684be5f4b22cc14,
+    "enableTracking": $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16,
+    "queryTracking": $b2515d1c013cc4bc$export$225ea495d1fa0d5,
+    "selectElements": $46d53147699ca8a7$export$f2909722c7f0f932
+};
+const $07c03eb40a016611$var$blockedTabIds = new Set();
+function $07c03eb40a016611$var$onDevToolsMessage(message, port) {
+    if (message.log) {
+        console.log("DEVTOOLS", message.log);
+        return false;
+    } else if (message.key === "load" && typeof message.tabId === "number") {
+        (async ()=>{
+            try {
+                const url = await $07c03eb40a016611$var$getTabUrl(message.tabId);
+                console.log("DEVTOOLS", {
+                    message: message
+                }, url);
+            //await executeScriptFile(tabId, "jquery.slim.js");
+            //console.log(`DEVTOOLS injected jquery`);
+            //await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
+            //console.log(`DEVTOOLS injected css`);
+            } catch (error) {
+                console.error("DEVTOOLS", {
+                    message: message,
+                    error: error
+                });
+            }
+        })();
+        return true; // response will be sent asynchronously
+    } else {
+        console.warn("DEVTOOLS UNKNOWN MESSAGE", {
+            message: message
+        });
+        return false;
     }
 }
 function $07c03eb40a016611$var$executeScript(tabId, func, ...args) {
@@ -6250,18 +6409,48 @@ function $07c03eb40a016611$var$executeScriptFile(tabId, file) {
                 message: `Failed to execute script file ${file}`
             })));
 }
-chrome.runtime.onConnect.addListener((port)=>{
+async function $07c03eb40a016611$var$getTabUrl(tabId) {
+    if (tabId) {
+        const tab = await chrome.tabs.get(tabId);
+        return tab?.url;
+    }
+}
+async function $07c03eb40a016611$var$injectAll(tabId) {
+    const injected = await $07c03eb40a016611$var$executeScript(tabId, ()=>typeof window.sx === "object");
+    if (!injected) {
+        await $07c03eb40a016611$var$executeScriptFile(tabId, "jquery.slim.js");
+        await $07c03eb40a016611$var$executeScriptFile(tabId, "sx.js");
+        await chrome.scripting.insertCSS({
+            target: {
+                tabId: tabId
+            },
+            files: [
+                "sx.css"
+            ]
+        });
+        console.log(`BACKGROUND injected sx, jquery tabId=${tabId}`);
+    }
+}
+/*
+chrome.webRequest.onBeforeRequest.addListener(request => {
+    if (blockedTabIds.has(request.tabId)) {
+        console.log("REQUEST BLOCKED", request);
+        return { cancel: true };
+    }    
+}, { urls: ["<all_urls>"]});
+*/ chrome.runtime.onConnect.addListener((port)=>{
     port.onMessage.addListener($07c03eb40a016611$var$onDevToolsMessage);
     port.onDisconnect.addListener(()=>port.onMessage.removeListener($07c03eb40a016611$var$onDevToolsMessage));
 });
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (message.log) {
-        console.log(message.log);
+        console.log("MESSAGE", message.log);
         return false;
     }
-    if (!Object.keys($07c03eb40a016611$var$scripts).includes(message.key)) {
+    if (!Object.keys($07c03eb40a016611$var$scriptMap).includes(message.key)) {
         console.warn("MESSAGE", {
             message: message,
+            sender: sender,
             error: `Property "key" is invalid: "${message.key}"`
         });
         return false;
@@ -6269,29 +6458,45 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (typeof message.tabId !== "number") {
         console.warn("MESSAGE", message.key, {
             message: message,
+            sender: sender,
             error: `Property "tabId" is invalid: "${message.tabId}"`
         });
         return false;
     }
-    $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scripts[message.key], ...message.params).then((result)=>{
-        console.log("MESSAGE", message.key, {
-            message: message,
-            result: result
+    if (message.key === "enableTracking") $07c03eb40a016611$var$blockedTabIds.add(message.tabId);
+    if (message.key === "disableTracking") $07c03eb40a016611$var$blockedTabIds.delete(message.tabId);
+    (async ()=>{
+        try {
+            await $07c03eb40a016611$var$injectAll(message.tabId);
+            const result = await $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scriptMap[message.key], ...message.params);
+            sendResponse({
+                result: result
+            });
+        } catch (error) {
+            console.error("MESSAGE", message.key, {
+                message: message,
+                sender: sender,
+                error: error
+            });
+            sendResponse({
+                error: error
+            });
+        }
+    })();
+    return true; // response will be sent asynchronously
+/*
+    executeScript(message.tabId, scriptMap[message.key] as () => void, ...message.params)
+        .then(result => {
+            console.log("MESSAGE", message.key, { message, sender, result });
+            sendResponse({ result });
+        })
+        .catch(error => {
+            console.warn("MESSAGE", message.key, { message, sender, error });
+            sendResponse({ error });
         });
-        sendResponse({
-            result: result
-        });
-    }).catch((error)=>{
-        console.warn("MESSAGE", message.key, {
-            message: message,
-            error: error
-        });
-        sendResponse({
-            error: error
-        });
-    });
+
     return true;
-});
+    */ });
 
 })();
 //# sourceMappingURL=background.js.map
