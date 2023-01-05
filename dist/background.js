@@ -6355,37 +6355,6 @@ const $07c03eb40a016611$var$scriptMap = {
     "queryTracking": $b2515d1c013cc4bc$export$225ea495d1fa0d5,
     "selectElements": $46d53147699ca8a7$export$f2909722c7f0f932
 };
-const $07c03eb40a016611$var$blockedTabIds = new Set();
-function $07c03eb40a016611$var$onDevToolsMessage(message, port) {
-    if (message.log) {
-        console.log("DEVTOOLS", message.log);
-        return false;
-    } else if (message.key === "load" && typeof message.tabId === "number") {
-        (async ()=>{
-            try {
-                const url = await $07c03eb40a016611$var$getTabUrl(message.tabId);
-                console.log("DEVTOOLS", {
-                    message: message
-                }, url);
-            //await executeScriptFile(tabId, "jquery.slim.js");
-            //console.log(`DEVTOOLS injected jquery`);
-            //await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
-            //console.log(`DEVTOOLS injected css`);
-            } catch (error) {
-                console.error("DEVTOOLS", {
-                    message: message,
-                    error: error
-                });
-            }
-        })();
-        return true; // response will be sent asynchronously
-    } else {
-        console.warn("DEVTOOLS UNKNOWN MESSAGE", {
-            message: message
-        });
-        return false;
-    }
-}
 function $07c03eb40a016611$var$executeScript(tabId, func, ...args) {
     return new Promise((resolve, reject)=>chrome.scripting.executeScript({
             target: {
@@ -6428,20 +6397,9 @@ async function $07c03eb40a016611$var$injectAll(tabId) {
                 "sx.css"
             ]
         });
-        console.log(`BACKGROUND injected sx, jquery tabId=${tabId}`);
+        console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }
-/*
-chrome.webRequest.onBeforeRequest.addListener(request => {
-    if (blockedTabIds.has(request.tabId)) {
-        console.log("REQUEST BLOCKED", request);
-        return { cancel: true };
-    }    
-}, { urls: ["<all_urls>"]});
-*/ chrome.runtime.onConnect.addListener((port)=>{
-    port.onMessage.addListener($07c03eb40a016611$var$onDevToolsMessage);
-    port.onDisconnect.addListener(()=>port.onMessage.removeListener($07c03eb40a016611$var$onDevToolsMessage));
-});
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (message.log) {
         console.log("MESSAGE", message.log);
@@ -6463,8 +6421,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         });
         return false;
     }
-    if (message.key === "enableTracking") $07c03eb40a016611$var$blockedTabIds.add(message.tabId);
-    if (message.key === "disableTracking") $07c03eb40a016611$var$blockedTabIds.delete(message.tabId);
     (async ()=>{
         try {
             await $07c03eb40a016611$var$injectAll(message.tabId);
@@ -6484,19 +6440,35 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         }
     })();
     return true; // response will be sent asynchronously
-/*
-    executeScript(message.tabId, scriptMap[message.key] as () => void, ...message.params)
-        .then(result => {
-            console.log("MESSAGE", message.key, { message, sender, result });
-            sendResponse({ result });
-        })
-        .catch(error => {
-            console.warn("MESSAGE", message.key, { message, sender, error });
-            sendResponse({ error });
-        });
+}); /*
+chrome.runtime.onConnect.addListener(port => {
+    port.onMessage.addListener(onDevToolsMessage);
+    port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
+});
 
-    return true;
-    */ });
+function onDevToolsMessage(message: any, port: chrome.runtime.Port): boolean {
+    if (message.log) {
+        console.log("DEVTOOLS", message.log);
+        return false;
+    }
+    else if (message.key === "load" && typeof message.tabId === "number") {
+        (async () => {
+            try {
+                const url = await getTabUrl(message.tabId);
+                console.log("DEVTOOLS", { message }, url);
+            }
+            catch (error) {
+                console.error("DEVTOOLS", { message, error });
+            }
+        })();
+        return true; // response will be sent asynchronously
+    }
+    else {
+        console.warn("DEVTOOLS UNKNOWN MESSAGE", { message });
+        return false;
+    }
+}
+*/ 
 
 })();
 //# sourceMappingURL=background.js.map

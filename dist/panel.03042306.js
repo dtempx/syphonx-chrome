@@ -7609,6 +7609,7 @@ $parcel$export($86049548edbb86a7$exports, "ListItemText", () => $e892f9464432086
 $parcel$export($86049548edbb86a7$exports, "Menu", () => $245fd332f2f721c7$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "MenuItem", () => $bde17d13cb330cfa$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "MenuList", () => $fb0eb384587a3ae4$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Pagination", () => $45f76937994d9bdb$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Paper", () => $e1c08ee9f6edce16$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Select", () => $5cd693904b0d5801$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Stack", () => $ff1b9c20c47218e6$export$2e2bcd8739ae039);
@@ -26385,6 +26386,597 @@ var $bde17d13cb330cfa$export$2e2bcd8739ae039 = $bde17d13cb330cfa$var$MenuItem;
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $4a0eefb84a14cb3f$export$427f1c1e2e839f85(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiPagination", slot);
+}
+const $4a0eefb84a14cb3f$var$paginationClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiPagination", [
+    "root",
+    "ul",
+    "outlined",
+    "text"
+]);
+var $4a0eefb84a14cb3f$export$2e2bcd8739ae039 = $4a0eefb84a14cb3f$var$paginationClasses;
+
+
+
+
+
+const $39b111758c8bd3e5$var$_excluded = [
+    "boundaryCount",
+    "componentName",
+    "count",
+    "defaultPage",
+    "disabled",
+    "hideNextButton",
+    "hidePrevButton",
+    "onChange",
+    "page",
+    "showFirstButton",
+    "showLastButton",
+    "siblingCount"
+];
+function $39b111758c8bd3e5$export$2e2bcd8739ae039(props = {}) {
+    // keep default values in sync with @default tags in Pagination.propTypes
+    const { boundaryCount: boundaryCount = 1 , componentName: componentName = "usePagination" , count: count = 1 , defaultPage: defaultPage = 1 , disabled: disabled = false , hideNextButton: hideNextButton = false , hidePrevButton: hidePrevButton = false , onChange: handleChange , page: pageProp , showFirstButton: showFirstButton = false , showLastButton: showLastButton = false , siblingCount: siblingCount = 1  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $39b111758c8bd3e5$var$_excluded);
+    const [page, setPageState] = (0, $6a332ca54870ba6b$export$2e2bcd8739ae039)({
+        controlled: pageProp,
+        default: defaultPage,
+        name: componentName,
+        state: "page"
+    });
+    const handleClick = (event, value)=>{
+        if (!pageProp) setPageState(value);
+        if (handleChange) handleChange(event, value);
+    };
+    // https://dev.to/namirsab/comment/2050
+    const range = (start, end)=>{
+        const length = end - start + 1;
+        return Array.from({
+            length: length
+        }, (_, i)=>start + i);
+    };
+    const startPages = range(1, Math.min(boundaryCount, count));
+    const endPages = range(Math.max(count - boundaryCount + 1, boundaryCount + 1), count);
+    const siblingsStart = Math.max(Math.min(// Natural start
+    page - siblingCount, // Lower boundary when page is high
+    count - boundaryCount - siblingCount * 2 - 1), // Greater than startPages
+    boundaryCount + 2);
+    const siblingsEnd = Math.min(Math.max(// Natural end
+    page + siblingCount, // Upper boundary when page is low
+    boundaryCount + siblingCount * 2 + 2), // Less than endPages
+    endPages.length > 0 ? endPages[0] - 2 : count - 1);
+    // Basic list of items to render
+    // e.g. itemList = ['first', 'previous', 1, 'ellipsis', 4, 5, 6, 'ellipsis', 10, 'next', 'last']
+    const itemList = [
+        ...showFirstButton ? [
+            "first"
+        ] : [],
+        ...hidePrevButton ? [] : [
+            "previous"
+        ],
+        ...startPages,
+        // Start ellipsis
+        // eslint-disable-next-line no-nested-ternary
+        ...siblingsStart > boundaryCount + 2 ? [
+            "start-ellipsis"
+        ] : boundaryCount + 1 < count - boundaryCount ? [
+            boundaryCount + 1
+        ] : [],
+        // Sibling pages
+        ...range(siblingsStart, siblingsEnd),
+        // End ellipsis
+        // eslint-disable-next-line no-nested-ternary
+        ...siblingsEnd < count - boundaryCount - 1 ? [
+            "end-ellipsis"
+        ] : count - boundaryCount > boundaryCount ? [
+            count - boundaryCount
+        ] : [],
+        ...endPages,
+        ...hideNextButton ? [] : [
+            "next"
+        ],
+        ...showLastButton ? [
+            "last"
+        ] : []
+    ];
+    // Map the button type to its page number
+    const buttonPage = (type)=>{
+        switch(type){
+            case "first":
+                return 1;
+            case "previous":
+                return page - 1;
+            case "next":
+                return page + 1;
+            case "last":
+                return count;
+            default:
+                return null;
+        }
+    };
+    // Convert the basic item list to PaginationItem props objects
+    const items = itemList.map((item)=>{
+        return typeof item === "number" ? {
+            onClick: (event)=>{
+                handleClick(event, item);
+            },
+            type: "page",
+            page: item,
+            selected: item === page,
+            disabled: disabled,
+            "aria-current": item === page ? "true" : undefined
+        } : {
+            onClick: (event)=>{
+                handleClick(event, buttonPage(item));
+            },
+            type: item,
+            page: buttonPage(item),
+            selected: false,
+            disabled: disabled || item.indexOf("ellipsis") === -1 && (item === "next" || item === "last" ? page >= count : page <= 1)
+        };
+    });
+    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        items: items
+    }, other);
+}
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $909b485b23c50ec9$export$e4ce0a775adf2f74(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiPaginationItem", slot);
+}
+const $909b485b23c50ec9$var$paginationItemClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiPaginationItem", [
+    "root",
+    "page",
+    "sizeSmall",
+    "sizeLarge",
+    "text",
+    "textPrimary",
+    "textSecondary",
+    "outlined",
+    "outlinedPrimary",
+    "outlinedSecondary",
+    "rounded",
+    "ellipsis",
+    "firstLast",
+    "previousNext",
+    "focusVisible",
+    "disabled",
+    "selected",
+    "icon"
+]);
+var $909b485b23c50ec9$export$2e2bcd8739ae039 = $909b485b23c50ec9$var$paginationItemClasses;
+
+
+
+
+
+parcelRequire("d4J5n");
+
+
+var $4ee1fe59865a7f4f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M18.41 16.59L13.82 12l4.59-4.59L17 6l-6 6 6 6zM6 6h2v12H6z"
+}), "FirstPage");
+
+
+parcelRequire("d4J5n");
+
+
+var $3e7ff328433bef28$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"
+}), "LastPage");
+
+
+parcelRequire("d4J5n");
+
+
+var $87e8e529a6998852$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+}), "NavigateBefore");
+
+
+parcelRequire("d4J5n");
+
+
+var $2528f4abfd36e8f7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
+}), "NavigateNext");
+
+
+
+
+
+const $dbb90dc8fe42c698$var$_excluded = [
+    "className",
+    "color",
+    "component",
+    "components",
+    "disabled",
+    "page",
+    "selected",
+    "shape",
+    "size",
+    "slots",
+    "type",
+    "variant"
+];
+const $dbb90dc8fe42c698$var$overridesResolver = (props, styles)=>{
+    const { ownerState: ownerState  } = props;
+    return [
+        styles.root,
+        styles[ownerState.variant],
+        styles[`size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.size)}`],
+        ownerState.variant === "text" && styles[`text${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`],
+        ownerState.variant === "outlined" && styles[`outlined${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`],
+        ownerState.shape === "rounded" && styles.rounded,
+        ownerState.type === "page" && styles.page,
+        (ownerState.type === "start-ellipsis" || ownerState.type === "end-ellipsis") && styles.ellipsis,
+        (ownerState.type === "previous" || ownerState.type === "next") && styles.previousNext,
+        (ownerState.type === "first" || ownerState.type === "last") && styles.firstLast
+    ];
+};
+const $dbb90dc8fe42c698$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , color: color , disabled: disabled , selected: selected , size: size , shape: shape , type: type , variant: variant  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            `size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            variant,
+            shape,
+            color !== "standard" && `${variant}${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            disabled && "disabled",
+            selected && "selected",
+            {
+                page: "page",
+                first: "firstLast",
+                last: "firstLast",
+                "start-ellipsis": "ellipsis",
+                "end-ellipsis": "ellipsis",
+                previous: "previousNext",
+                next: "previousNext"
+            }[type]
+        ],
+        icon: [
+            "icon"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $909b485b23c50ec9$export$e4ce0a775adf2f74), classes);
+};
+const $dbb90dc8fe42c698$var$PaginationItemEllipsis = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiPaginationItem",
+    slot: "Root",
+    overridesResolver: $dbb90dc8fe42c698$var$overridesResolver
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, theme.typography.body2, {
+        borderRadius: 16,
+        textAlign: "center",
+        boxSizing: "border-box",
+        minWidth: 32,
+        padding: "0 6px",
+        margin: "0 3px",
+        color: (theme.vars || theme).palette.text.primary,
+        height: "auto",
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).disabled}`]: {
+            opacity: (theme.vars || theme).palette.action.disabledOpacity
+        }
+    }, ownerState.size === "small" && {
+        minWidth: 26,
+        borderRadius: 13,
+        margin: "0 1px",
+        padding: "0 4px"
+    }, ownerState.size === "large" && {
+        minWidth: 40,
+        borderRadius: 20,
+        padding: "0 10px",
+        fontSize: theme.typography.pxToRem(15)
+    }));
+const $dbb90dc8fe42c698$var$PaginationItemPage = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $87f61933867dae5e$export$2e2bcd8739ae039), {
+    name: "MuiPaginationItem",
+    slot: "Root",
+    overridesResolver: $dbb90dc8fe42c698$var$overridesResolver
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, theme.typography.body2, {
+        borderRadius: 16,
+        textAlign: "center",
+        boxSizing: "border-box",
+        minWidth: 32,
+        height: 32,
+        padding: "0 6px",
+        margin: "0 3px",
+        color: (theme.vars || theme).palette.text.primary,
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: (theme.vars || theme).palette.action.focus
+        },
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).disabled}`]: {
+            opacity: (theme.vars || theme).palette.action.disabledOpacity
+        },
+        transition: theme.transitions.create([
+            "color",
+            "background-color"
+        ], {
+            duration: theme.transitions.duration.short
+        }),
+        "&:hover": {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+            // Reset on touch devices, it doesn't add specificity
+            "@media (hover: none)": {
+                backgroundColor: "transparent"
+            }
+        },
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).selected}`]: {
+            backgroundColor: (theme.vars || theme).palette.action.selected,
+            "&:hover": {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                "@media (hover: none)": {
+                    backgroundColor: (theme.vars || theme).palette.action.selected
+                }
+            },
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).focusVisible}`]: {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selected} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+            },
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).disabled}`]: {
+                opacity: 1,
+                color: (theme.vars || theme).palette.action.disabled,
+                backgroundColor: (theme.vars || theme).palette.action.selected
+            }
+        }
+    }, ownerState.size === "small" && {
+        minWidth: 26,
+        height: 26,
+        borderRadius: 13,
+        margin: "0 1px",
+        padding: "0 4px"
+    }, ownerState.size === "large" && {
+        minWidth: 40,
+        height: 40,
+        borderRadius: 20,
+        padding: "0 10px",
+        fontSize: theme.typography.pxToRem(15)
+    }, ownerState.shape === "rounded" && {
+        borderRadius: (theme.vars || theme).shape.borderRadius
+    }), ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.variant === "text" && {
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).selected}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.color !== "standard" && {
+            color: (theme.vars || theme).palette[ownerState.color].contrastText,
+            backgroundColor: (theme.vars || theme).palette[ownerState.color].main,
+            "&:hover": {
+                backgroundColor: (theme.vars || theme).palette[ownerState.color].dark,
+                // Reset on touch devices, it doesn't add specificity
+                "@media (hover: none)": {
+                    backgroundColor: (theme.vars || theme).palette[ownerState.color].main
+                }
+            },
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).focusVisible}`]: {
+                backgroundColor: (theme.vars || theme).palette[ownerState.color].dark
+            }
+        }, {
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).disabled}`]: {
+                color: (theme.vars || theme).palette.action.disabled
+            }
+        })
+    }, ownerState.variant === "outlined" && {
+        border: theme.vars ? `1px solid rgba(${theme.vars.palette.common.onBackgroundChannel} / 0.23)` : `1px solid ${theme.palette.mode === "light" ? "rgba(0, 0, 0, 0.23)" : "rgba(255, 255, 255, 0.23)"}`,
+        [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).selected}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.color !== "standard" && {
+            color: (theme.vars || theme).palette[ownerState.color].main,
+            border: `1px solid ${theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.5)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, 0.5)}`,
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.activatedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.activatedOpacity),
+            "&:hover": {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / calc(${theme.vars.palette.action.activatedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.activatedOpacity + theme.palette.action.focusOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                "@media (hover: none)": {
+                    backgroundColor: "transparent"
+                }
+            },
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).focusVisible}`]: {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / calc(${theme.vars.palette.action.activatedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.activatedOpacity + theme.palette.action.focusOpacity)
+            }
+        }, {
+            [`&.${(0, $909b485b23c50ec9$export$2e2bcd8739ae039).disabled}`]: {
+                borderColor: (theme.vars || theme).palette.action.disabledBackground,
+                color: (theme.vars || theme).palette.action.disabled
+            }
+        })
+    }));
+const $dbb90dc8fe42c698$var$PaginationItemPageIcon = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiPaginationItem",
+    slot: "Icon",
+    overridesResolver: (props, styles)=>styles.icon
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        fontSize: theme.typography.pxToRem(20),
+        margin: "0 -8px"
+    }, ownerState.size === "small" && {
+        fontSize: theme.typography.pxToRem(18)
+    }, ownerState.size === "large" && {
+        fontSize: theme.typography.pxToRem(22)
+    }));
+const $dbb90dc8fe42c698$var$PaginationItem = /*#__PURE__*/ $d4J5n.forwardRef(function PaginationItem(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiPaginationItem"
+    });
+    const { className: className , color: color = "standard" , component: component , components: components = {} , disabled: disabled = false , page: page , selected: selected = false , shape: shape = "circular" , size: size = "medium" , slots: slots = {} , type: type = "page" , variant: variant = "text"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $dbb90dc8fe42c698$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        color: color,
+        disabled: disabled,
+        selected: selected,
+        shape: shape,
+        size: size,
+        type: type,
+        variant: variant
+    });
+    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
+    const classes = $dbb90dc8fe42c698$var$useUtilityClasses(ownerState);
+    const normalizedIcons = theme.direction === "rtl" ? {
+        previous: slots.next || components.next || (0, $2528f4abfd36e8f7$export$2e2bcd8739ae039),
+        next: slots.previous || components.previous || (0, $87e8e529a6998852$export$2e2bcd8739ae039),
+        last: slots.first || components.first || (0, $4ee1fe59865a7f4f$export$2e2bcd8739ae039),
+        first: slots.last || components.last || (0, $3e7ff328433bef28$export$2e2bcd8739ae039)
+    } : {
+        previous: slots.previous || components.previous || (0, $87e8e529a6998852$export$2e2bcd8739ae039),
+        next: slots.next || components.next || (0, $2528f4abfd36e8f7$export$2e2bcd8739ae039),
+        first: slots.first || components.first || (0, $4ee1fe59865a7f4f$export$2e2bcd8739ae039),
+        last: slots.last || components.last || (0, $3e7ff328433bef28$export$2e2bcd8739ae039)
+    };
+    const Icon = normalizedIcons[type];
+    return type === "start-ellipsis" || type === "end-ellipsis" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($dbb90dc8fe42c698$var$PaginationItemEllipsis, {
+        ref: ref,
+        ownerState: ownerState,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        children: "\u2026"
+    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($dbb90dc8fe42c698$var$PaginationItemPage, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        ref: ref,
+        ownerState: ownerState,
+        component: component,
+        disabled: disabled,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className)
+    }, other, {
+        children: [
+            type === "page" && page,
+            Icon ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($dbb90dc8fe42c698$var$PaginationItemPageIcon, {
+                as: Icon,
+                ownerState: ownerState,
+                className: classes.icon
+            }) : null
+        ]
+    }));
+});
+var $dbb90dc8fe42c698$export$2e2bcd8739ae039 = $dbb90dc8fe42c698$var$PaginationItem;
+
+
+
+
+
+const $45f76937994d9bdb$var$_excluded = [
+    "boundaryCount",
+    "className",
+    "color",
+    "count",
+    "defaultPage",
+    "disabled",
+    "getItemAriaLabel",
+    "hideNextButton",
+    "hidePrevButton",
+    "onChange",
+    "page",
+    "renderItem",
+    "shape",
+    "showFirstButton",
+    "showLastButton",
+    "siblingCount",
+    "size",
+    "variant"
+];
+const $45f76937994d9bdb$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , variant: variant  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant
+        ],
+        ul: [
+            "ul"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $4a0eefb84a14cb3f$export$427f1c1e2e839f85), classes);
+};
+const $45f76937994d9bdb$var$PaginationRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("nav", {
+    name: "MuiPagination",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            styles[ownerState.variant]
+        ];
+    }
+})({});
+const $45f76937994d9bdb$var$PaginationUl = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("ul", {
+    name: "MuiPagination",
+    slot: "Ul",
+    overridesResolver: (props, styles)=>styles.ul
+})({
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    padding: 0,
+    margin: 0,
+    listStyle: "none"
+});
+function $45f76937994d9bdb$var$defaultGetAriaLabel(type, page, selected) {
+    if (type === "page") return `${selected ? "" : "Go to "}page ${page}`;
+    return `Go to ${type} page`;
+}
+const $45f76937994d9bdb$var$Pagination = /*#__PURE__*/ $d4J5n.forwardRef(function Pagination(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiPagination"
+    });
+    const { boundaryCount: boundaryCount = 1 , className: className , color: color = "standard" , count: count = 1 , defaultPage: defaultPage = 1 , disabled: disabled = false , getItemAriaLabel: getItemAriaLabel = $45f76937994d9bdb$var$defaultGetAriaLabel , hideNextButton: hideNextButton = false , hidePrevButton: hidePrevButton = false , renderItem: renderItem = (item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dbb90dc8fe42c698$export$2e2bcd8739ae039), (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, item)) , shape: shape = "circular" , showFirstButton: showFirstButton = false , showLastButton: showLastButton = false , siblingCount: siblingCount = 1 , size: size = "medium" , variant: variant = "text"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $45f76937994d9bdb$var$_excluded);
+    const { items: items  } = (0, $39b111758c8bd3e5$export$2e2bcd8739ae039)((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        componentName: "Pagination"
+    }));
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        boundaryCount: boundaryCount,
+        color: color,
+        count: count,
+        defaultPage: defaultPage,
+        disabled: disabled,
+        getItemAriaLabel: getItemAriaLabel,
+        hideNextButton: hideNextButton,
+        hidePrevButton: hidePrevButton,
+        renderItem: renderItem,
+        shape: shape,
+        showFirstButton: showFirstButton,
+        showLastButton: showLastButton,
+        siblingCount: siblingCount,
+        size: size,
+        variant: variant
+    });
+    const classes = $45f76937994d9bdb$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($45f76937994d9bdb$var$PaginationRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        "aria-label": "pagination navigation",
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ownerState: ownerState,
+        ref: ref
+    }, other, {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($45f76937994d9bdb$var$PaginationUl, {
+            className: classes.ul,
+            ownerState: ownerState,
+            children: items.map((item, index)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("li", {
+                    children: renderItem((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, item, {
+                        color: color,
+                        "aria-label": getItemAriaLabel(item.type, item.page, item.selected),
+                        shape: shape,
+                        size: size,
+                        variant: variant
+                    }))
+                }, index))
+        })
+    }));
+});
+var $45f76937994d9bdb$export$2e2bcd8739ae039 = $45f76937994d9bdb$var$Pagination;
+
+
+
+
+
 
 
 
@@ -31381,6 +31973,18 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 var $d4J5n = parcelRequire("d4J5n");
+var $5002f5814ed49d1e$exports = {};
+
+$parcel$export($5002f5814ed49d1e$exports, "path", () => $89382e3cfd90d03a$exports);
+$parcel$export($5002f5814ed49d1e$exports, "Template", () => $1b88f382576c34f2$export$14416b8d99d47caa);
+$parcel$export($5002f5814ed49d1e$exports, "cloudFetchTemplateDirectory", () => $20d1a517b8ce84e3$export$30d4711d6f8d17eb);
+$parcel$export($5002f5814ed49d1e$exports, "cloudReadTemplateFile", () => $20d1a517b8ce84e3$export$de1a4df3278e5008);
+$parcel$export($5002f5814ed49d1e$exports, "cloudCreateTemplateFile", () => $20d1a517b8ce84e3$export$25c05c84991e5fdf);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
+$parcel$export($5002f5814ed49d1e$exports, "isObject", () => $aacd3173f0a35cbd$export$a6cdc56e425d0d0a);
+$parcel$export($5002f5814ed49d1e$exports, "removeDOMRefs", () => $d2489396c3ef9092$export$de139376c1f60602);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $711b72822a456466$export$9cd59f9826255e47);
 var $89382e3cfd90d03a$exports = {};
 var $596d45310e010dc1$exports = {};
 
@@ -37902,6 +38506,11 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
 
 
 
+function $711b72822a456466$export$9cd59f9826255e47(value) {
+    return JSON.parse(JSON.stringify(value));
+}
+
+
 function $aacd3173f0a35cbd$export$a6cdc56e425d0d0a(obj) {
     return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
 }
@@ -38071,6 +38680,12 @@ var $830dc22ac55da04f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $841217854c3384ae$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), "Delete");
+
+
+
 var $09e60e810ff3d65b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
 }), "DeleteOutlined");
@@ -38164,6 +38779,18 @@ var $cdeb595f73f319bc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $64d96a0bf049eab8$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.3 3-3.4 3-5.7 0-3.9-3.1-7-7-7z"
+}), "Lightbulb");
+
+
+
+var $9ce284b7467ad2b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"
+}), "LightbulbOutlined");
+
+
+
 var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
 }), "Menu");
@@ -38173,12 +38800,6 @@ var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $0acddbfca73eedfc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
 }), "MoreHoriz");
-
-
-
-var $5605ddca215b33e0$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
-}), "MyLocation");
 
 
 
@@ -38281,6 +38902,7 @@ var $40841473af599963$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ 
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
 
 
 
@@ -38780,12 +39402,70 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+parcelRequire("d4J5n");
+
+var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
+    if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
+        ...props
+    });
+    if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e35cf2d20f939f4$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "item") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "number") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b1faf5f98bbb111e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $012087529d88be7e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1d4519e24428e5fd$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "string") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $793603d0f5153a7e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cd5829ac10d83747$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4f3e459b9996d8e0$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8bd75d7133cf3395$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $10cdc2163f15d747$export$2e2bcd8739ae039), {
+        ...props
+    });
+};
+
+
+
 
 var $d4J5n = parcelRequire("d4J5n");
 
 
 var $9a0805b0db9bb6db$exports = {};
-$9a0805b0db9bb6db$exports = JSON.parse('[{"key":"add","advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content."},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements."},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","advanced":false,"help":"Reduce the set of matched elements to those that match the selector or pass the function\u2019s test."},{"key":"find","advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+$9a0805b0db9bb6db$exports = JSON.parse('[{"key":"add","advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content."},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements."},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
 
 
 var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
@@ -38804,8 +39484,10 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
                         variant: "outlined",
                         size: "small",
                         value: value,
+                        onChange: (event)=>setValue(event.target.value),
                         sx: {
-                            width: 200
+                            width: 200,
+                            maxHeight: 500
                         },
                         MenuProps: {
                             style: {
@@ -38817,16 +39499,27 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
                                     title: help,
                                     arrow: true,
                                     placement: "right",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                         value: key,
-                                        onClick: ()=>setValue(key),
-                                        children: key
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                                                fontSize: "small"
+                                            }),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                                sx: {
+                                                    ml: 1
+                                                },
+                                                children: key
+                                            })
+                                        ]
                                     })
                                 })),
                             expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                 onClick: ()=>setExpanded(false),
                                 children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {}),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                         sx: {
                                             ml: 1
@@ -38837,7 +39530,9 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
                             }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                 onClick: ()=>setExpanded(true),
                                 children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {}),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                         sx: {
                                             ml: 1
@@ -38856,12 +39551,23 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
                         },
                         fullWidth: true
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        onClick: ()=>setShowOutput(!showOutput),
-                        children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                            fontSize: "small"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Delete this stage",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: showOutput ? "Hide stage output" : "Show stage output",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: ()=>setShowOutput(!showOutput),
+                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     })
                 ]
@@ -38889,9 +39595,66 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
+var $0b61921fb120a84a$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
+    const [value1, setValue] = (0, $d4J5n.useState)("");
+    const [error, setError] = (0, $d4J5n.useState)(false);
+    (0, $d4J5n.useEffect)(()=>{
+        const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query1);
+        setValue(value || "");
+        setError(false);
+    }, [
+        query1
+    ]);
+    function handleChange(event) {
+        setValue(event.target.value);
+        try {
+            $75371f08c5d7238f$export$dd48e276a5eff34c(event.target.value);
+            setError(false);
+        } catch (err) {
+            setError(true);
+        }
+    }
+    function handleCommit(event) {
+        if (value1) {
+            let query;
+            try {
+                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value1);
+            } catch (err) {
+                setError(true);
+                return;
+            }
+            if (query) onChange(event, query);
+        }
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        variant: "standard",
+        size: "small",
+        fullWidth: true,
+        value: value1,
+        error: error,
+        onChange: handleChange,
+        InputProps: {
+            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                size: "small",
+                disabled: error,
+                onClick: handleCommit,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0bf399ec89823653$export$2e2bcd8739ae039), {
+                    fontSize: "small"
+                })
+            })
+        }
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
     const [tracking, setTracking] = (0, $d4J5n.useState)(false);
-    const [selector, setSelector] = (0, $d4J5n.useState)("");
     const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
     const [counter, setCounter] = (0, $d4J5n.useState)(0);
     const [output, setOutput] = (0, $d4J5n.useState)("");
@@ -38899,7 +39662,7 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             const data = await $6767c619f5de943e$export$f2909722c7f0f932([
-                selector
+                value
             ]);
             setOutput(data.map((line)=>line || "").join("\n"));
         })();
@@ -38907,7 +39670,7 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
             $6767c619f5de943e$export$f2909722c7f0f932([]);
         };
     }, [
-        selector
+        value
     ]);
     (0, $d4J5n.useEffect)(()=>{
         setCounter(0);
@@ -38917,9 +39680,9 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
             if (tracking) {
                 const selectors = await $6767c619f5de943e$export$225ea495d1fa0d5();
                 if (selectors.length > 0) {
-                    setSelector(selectors[0]);
                     setSelectors(selectors);
                     setCounter(0); // reset interval counter
+                    onChange(new Event("change"), selectors[0]);
                 } else if (counter >= 60) setTracking(false); // disable tracking after 60 seconds
                 else setCounter(counter + 1);
             }
@@ -38938,20 +39701,25 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
                 direction: "row",
                 spacing: 0,
                 children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                        variant: tracking ? "contained" : "outlined",
-                        size: "small",
-                        onClick: ()=>setTracking(!tracking),
-                        sx: {
-                            minWidth: 48
-                        },
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5605ddca215b33e0$export$2e2bcd8739ae039), {
-                            fontSize: "small"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: tracking ? "Start tracking page clicks for CSS suggestions" : "Stop tracking page clicks for CSS suggestions",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                            variant: tracking ? "contained" : "outlined",
+                            size: "small",
+                            onClick: ()=>setTracking(!tracking),
+                            sx: {
+                                minWidth: 48
+                            },
+                            children: tracking ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $64d96a0bf049eab8$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ce284b7467ad2b6$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8461efb96d774bba$export$2e2bcd8739ae039), {
                         size: "small",
-                        value: selector,
+                        value: value,
                         options: selectors1,
                         freeSolo: true,
                         fullWidth: true,
@@ -38962,15 +39730,18 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
                                 ...params,
                                 placeholder: "CSS Selector",
                                 label: "CSS Selector",
-                                onChange: (event)=>setSelector(event.target.value)
+                                onChange: (event)=>onChange(event, event.target.value)
                             })
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        onClick: ()=>setShowOutput(!showOutput),
-                        children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                            fontSize: "small"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: showOutput ? "Hide stage output" : "Show stage output",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: ()=>setShowOutput(!showOutput),
+                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     })
                 ]
@@ -38979,12 +39750,18 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
                 variant: "outlined",
                 multiline: true,
                 rows: 3,
-                defaultValue: output,
+                value: output,
                 sx: {
                     mt: 1,
                     width: "100%",
                     backgroundColor: "LightGray",
-                    fontSize: "small"
+                    ".MuiInputBase-root": {
+                        p: 0
+                    },
+                    ".MuiInputBase-input": {
+                        p: "4px",
+                        fontSize: "smaller"
+                    }
                 }
             }) : null
         ]
@@ -38992,45 +39769,48 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ ...props })=>{
 };
 
 
-var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ query: query , open: open , onClose: onClose , onChange: onChange  })=>{
-    const [advanced, setAdvanced] = (0, $d4J5n.useState)(false);
-    const formattedQuery = query ? $8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) : "";
-    /*
-    function handleClose(event: React.SyntheticEvent) {
-        //setTracking(false);
+var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , onClose: onClose , onChange: onChange  })=>{
+    const [queries, setQueries] = (0, $d4J5n.useState)(select.query || [
+        [
+            ""
+        ]
+    ]);
+    const [index, setIndex] = (0, $d4J5n.useState)(0);
+    function onAddQuery() {
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
+        newValue.push([
+            ""
+        ]);
+        setQueries(newValue);
+        setIndex(newValue.length - 1);
+    }
+    function onDeleteQuery() {
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
+        newValue.splice(index, 1);
+        setQueries(newValue);
+        setIndex(index - 1);
+    }
+    function onRawQueryChanged(event, query) {
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
+        newValue[index] = query;
+        setQueries(newValue);
+    }
+    function onSelectorChanged(event, value) {
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
+        newValue[index][0] = value;
+        setQueries(newValue);
+    }
+    function onCommit(event) {
+        onChange(event, queries);
         onClose(event);
     }
-
-    function handleChange(event: React.SyntheticEvent, value: string) {
-        if (value) {
-            const query = syphonx.parseJQueryExpression(value);
-            if (query) {
-                onChange(event, [query]);
-            }
-        }
-        else {
-            onChange(event, undefined);
-        }
-    }
-    
-    function validateSelectQuery(value: string): boolean {
-        if (value) {
-            let valid = false;
-            try {
-                valid = syphonx.parseJQueryExpression(value) !== undefined;
-            }
-            catch(err) {
-            }
-            return valid;
-        }
-        else {
-            return true;
-        }
-    }
-*/ return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
         onClose: onClose,
+        sx: {
+            minWidth: 600
+        },
         TransitionComponent: (0, $5339359c895a55f0$export$d5e0bbf39d25920b),
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0d0d12e54088d016$export$2e2bcd8739ae039), {
@@ -39047,24 +39827,100 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ query: query , open: open , on
                     mt: 2
                 },
                 children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        spacing: 0,
-                        justifyContent: "end",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
-                                control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                    checked: advanced,
-                                    onChange: (event)=>setAdvanced(event.target.checked)
-                                }),
-                                label: "Advanced"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        style: {
+                            width: "100%"
+                        },
+                        sx: {
+                            display: "flex",
+                            justifyContent: "space-between",
+                            bgcolor: "background.paper",
+                            borderRadius: 1,
+                            p: 1,
+                            m: 1
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                direction: "row",
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                        name: select.type || "string",
+                                        sx: {
+                                            color: "primary.light",
+                                            position: "relative",
+                                            top: "4px"
+                                        }
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        variant: "caption",
+                                        fontSize: "large",
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: select.name || "(array)"
+                                    }),
+                                    select.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                        name: "repeated",
+                                        sx: {
+                                            color: "primary.light",
+                                            ml: 1,
+                                            position: "relative",
+                                            top: "4px"
+                                        }
+                                    }) : null
+                                ]
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                direction: "row",
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                        title: "Switches between query alternates",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $45f76937994d9bdb$export$2e2bcd8739ae039), {
+                                            size: "small",
+                                            color: "primary",
+                                            count: queries.length,
+                                            page: index + 1,
+                                            onChange: (_, page)=>setIndex(page - 1),
+                                            sx: {
+                                                position: "relative",
+                                                top: "2px"
+                                            }
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                        title: "Add an alternate query",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                            size: "small",
+                                            onClick: onAddQuery,
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                                                fontSize: "small"
+                                            })
+                                        })
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                        title: "Delete this alternate query",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                            size: "small",
+                                            disabled: queries.length <= 1,
+                                            onClick: onDeleteQuery,
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                                fontSize: "small"
+                                            })
+                                        })
+                                    })
+                                ]
                             })
-                        })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
+                        sx: {
+                            mt: 1,
+                            mb: 2
+                        }
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0465f9a09db963cd$export$2e2bcd8739ae039), {
-                        sx: {
-                            mt: 1
-                        }
+                        value: queries[index][0],
+                        onChange: (event, value)=>onSelectorChanged(event, value)
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
                         sx: {
@@ -39073,24 +39929,36 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ query: query , open: open , on
                     })
                 ]
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                    variant: "outlined",
-                    size: "small",
-                    fullWidth: true,
-                    value: formattedQuery,
-                    //onChange={handleChange}
-                    //onValidate={validateSelectQuery}
-                    InputProps: {
-                        endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            onClick: ()=>{},
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0bf399ec89823653$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0b61921fb120a84a$export$2e2bcd8739ae039), {
+                            query: queries[index],
+                            onChange: onRawQueryChanged
                         })
-                    }
-                })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        spacing: 0,
+                        justifyContent: "end",
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                                variant: "outlined",
+                                onClick: (event)=>onClose(event),
+                                children: "Cancel"
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                                variant: "contained",
+                                sx: {
+                                    ml: 1
+                                },
+                                onClick: onCommit,
+                                children: "OK"
+                            })
+                        ]
+                    })
+                ]
             })
         ]
     });
@@ -39109,6 +39977,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                 variant: "standard",
                 size: "small",
                 value: select.name,
+                fullWidth: true,
                 onChange: (event, value)=>{
                     select.name = value;
                     setTemplate(template.clone());
@@ -39119,29 +39988,45 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b8a7bbcc1232863d$export$2e2bcd8739ae039), {
-                        variant: "standard",
-                        size: "small",
-                        value: select.query ? $8f015fe631ec2dd6$export$633ae63c2897642e(select.query[0]) : "",
-                        onMore: ()=>setQueryEditorOpen(true)
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
-                        query: select.query,
-                        open: queryEditorOpen,
-                        onClose: ()=>setQueryEditorOpen(false),
-                        onChange: (event, value)=>{
-                            select.query = value;
-                            setTemplate(template.clone());
-                        }
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: select.query ? $8f015fe631ec2dd6$export$633ae63c2897642e(select.query[0]) : "",
+                fullWidth: true,
+                InputProps: {
+                    endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                        position: "end",
+                        children: [
+                            select?.query && select.query.length > 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("span", {
+                                    style: {
+                                        whiteSpace: "pre-line"
+                                    },
+                                    children: select.query ? select.query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
+                                }),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                    label: select.query.length,
+                                    variant: "filled",
+                                    color: "default",
+                                    size: "small",
+                                    sx: {
+                                        ml: 1
+                                    }
+                                })
+                            }) : null,
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                size: "small",
+                                onClick: ()=>setQueryEditorOpen(true),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0acddbfca73eedfc$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
+                        ]
                     })
-                ]
+                }
             }),
-            "A CSS selector or jQuery expression that determines what data is selected"
-        ]
-    ];
-    if (advanced) items.push(...[
+            "A CSS selector or jQuery that determines what data is selected"
+        ],
         [
             "type",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7b74574be994b9cd$export$2e2bcd8739ae039), {
@@ -39163,7 +40048,9 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                 }
             }),
             "Indicates whether the data is single-valued or repeated within an array"
-        ],
+        ]
+    ];
+    if (advanced) items.push(...[
         [
             "required",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
@@ -39289,8 +40176,21 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
     function validateNumber(value) {
         return value ? parseInt(value) >= 0 : true;
     }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-        items: items
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                items: items
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
+                select: select,
+                open: queryEditorOpen,
+                onClose: ()=>setQueryEditorOpen(false),
+                onChange: (event, query)=>{
+                    select.query = query;
+                    setTemplate(template.clone());
+                }
+            })
+        ]
     });
 };
 
@@ -40614,63 +41514,6 @@ parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 
-parcelRequire("d4J5n");
-
-var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
-    if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
-        ...props
-    });
-    if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e35cf2d20f939f4$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "item") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "number") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b1faf5f98bbb111e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $012087529d88be7e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1d4519e24428e5fd$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "string") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $793603d0f5153a7e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cd5829ac10d83747$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4f3e459b9996d8e0$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8bd75d7133cf3395$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $10cdc2163f15d747$export$2e2bcd8739ae039), {
-        ...props
-    });
-};
-
-
 
 parcelRequire("d4J5n");
 
@@ -40832,26 +41675,15 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
+var $721d382012b84877$exports = {};
+$721d382012b84877$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
+
+
+var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
     const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const types = expanded ? [
-        "click",
-        "each",
-        "error",
-        "repeat",
-        "select",
-        "snooze",
-        "transform",
-        "waitfor",
-        "yield"
-    ] : [
-        "select",
-        "waitfor",
-        "click"
-    ];
     const item = template.selectedItem();
     const addSubItem = item?.type === "action" && item?.name === "select";
     function handleAddButtonClick(event) {
@@ -40896,26 +41728,32 @@ var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
                     horizontal: "right"
                 },
                 children: [
-                    types.map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                            onClick: ()=>addAction(type),
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
-                                    name: type
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                    sx: {
-                                        ml: 1
-                                    },
-                                    children: type
-                                })
-                            ]
+                    (0, (/*@__PURE__*/$parcel$interopDefault($721d382012b84877$exports))).filter((type)=>expanded || !type.advanced).map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: type.help,
+                            arrow: true,
+                            placement: "right",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                onClick: ()=>addAction(type.name),
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                        name: type.name,
+                                        fontSize: "small"
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: type.name
+                                    })
+                                ]
+                            })
                         })),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
                     addSubItem ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                         onClick: ()=>addSelector(),
                         children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
-                                name: "string"
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                                fontSize: "small"
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 sx: {
@@ -40928,7 +41766,9 @@ var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
                     expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                         onClick: ()=>setExpanded(false),
                         children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {}),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 sx: {
                                     ml: 1
@@ -40939,7 +41779,9 @@ var $4e33c64f8846b04f$export$2e2bcd8739ae039 = (props)=>{
                     }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                         onClick: ()=>setExpanded(true),
                         children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {}),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 sx: {
                                     ml: 1
@@ -41233,7 +42075,10 @@ var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: {
+            minWidth: 500
+        },
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8a81fae7927c22af$export$2e2bcd8739ae039), {
                 open: sidebarOpen,
@@ -41303,7 +42148,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                                         },
                                         children: [
                                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {}),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e33c64f8846b04f$export$2e2bcd8739ae039), {
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3e7ea5ad9638c16a$export$2e2bcd8739ae039), {
                                                 sx: {
                                                     position: "absolute",
                                                     bottom: (theme)=>theme.spacing(2),

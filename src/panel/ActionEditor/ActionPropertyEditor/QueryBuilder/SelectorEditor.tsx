@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Autocomplete, Button, IconButton, Stack, SxProps, TextField, Theme } from "@mui/material";
-import { MyLocation as TrackIcon, Visibility as ShowOutputIcon, VisibilityOff as HideOutputIcon } from "@mui/icons-material";
+import { Autocomplete, Button, IconButton, Stack, SxProps, TextField, Theme, Tooltip } from "@mui/material";
+import { LightbulbOutlined as TrackOffIcon, Lightbulb as TrackOnIcon, Visibility as ShowOutputIcon, VisibilityOff as HideOutputIcon } from "@mui/icons-material";
 import * as background from "../../../../background-proxy";
 
 export interface Props {
+    value: string;
+    onChange: (event: Event | React.SyntheticEvent, value: string) => void;
     sx?: SxProps<Theme>;
 }
 
-export default ({ ...props }: Props) => {
+export default ({ value, onChange, ...props }: Props) => {
     const [tracking, setTracking] = useState(false);
-    const [selector, setSelector] = useState("");
     const [selectors, setSelectors] = useState<string[]>([]);
     const [counter, setCounter] = useState(0);
     const [output, setOutput] = useState("");
@@ -17,13 +18,13 @@ export default ({ ...props }: Props) => {
 
     useEffect(() => {
         (async () => {
-            const data = await background.selectElements([selector]);
+            const data = await background.selectElements([value]);
             setOutput(data.map(line => line || "").join("\n"));
         })();
         return () => {
             background.selectElements([]);
         };
-    }, [selector]);
+    }, [value]);
 
     useEffect(() => {
         setCounter(0);
@@ -36,9 +37,9 @@ export default ({ ...props }: Props) => {
             if (tracking) {
                 const selectors = await background.queryTracking();
                 if (selectors.length > 0) {
-                    setSelector(selectors[0]);
                     setSelectors(selectors);
                     setCounter(0); // reset interval counter
+                    onChange(new Event("change"), selectors[0]);
                 }
                 else if (counter >= 60) {
                     setTracking(false); // disable tracking after 60 seconds
@@ -57,17 +58,19 @@ export default ({ ...props }: Props) => {
    
     return (<>
         <Stack {...props} direction="row" spacing={0}>
-            <Button
-                variant={ tracking ? "contained" : "outlined" }
-                size="small"
-                onClick={() => setTracking(!tracking)}
-                sx={{ minWidth: 48 }}
-            >
-                <TrackIcon fontSize="small" />
-            </Button>
+            <Tooltip title={tracking ? "Start tracking page clicks for CSS suggestions" : "Stop tracking page clicks for CSS suggestions"}>
+                <Button
+                    variant={tracking ? "contained" : "outlined"}
+                    size="small"
+                    onClick={() => setTracking(!tracking)}
+                    sx={{ minWidth: 48 }}
+                >
+                    {tracking ? <TrackOnIcon fontSize="small" /> : <TrackOffIcon fontSize="small" />}
+                </Button>
+            </Tooltip>
             <Autocomplete
                 size="small"
-                value={selector}
+                value={value}
                 options={selectors}
                 freeSolo
                 fullWidth
@@ -77,21 +80,34 @@ export default ({ ...props }: Props) => {
                         {...params}
                         placeholder="CSS Selector"
                         label="CSS Selector"
-                        onChange={event => setSelector(event.target.value)}
+                        onChange={event => onChange(event, event.target.value)}
                     />
                 }
             />
-            <IconButton onClick={() => setShowOutput(!showOutput) }>
-                {showOutput ? <ShowOutputIcon fontSize="small" /> : <HideOutputIcon fontSize="small" />}
-            </IconButton>
+            <Tooltip title={showOutput ? "Hide stage output" : "Show stage output"}>
+                <IconButton onClick={() => setShowOutput(!showOutput) }>
+                    {showOutput ? <ShowOutputIcon fontSize="small" /> : <HideOutputIcon fontSize="small" />}
+                </IconButton>
+            </Tooltip>
         </Stack>
         {showOutput ? (
             <TextField
                 variant="outlined"
                 multiline
                 rows={3}
-                defaultValue={output}
-                sx={{ mt: 1, width: "100%", backgroundColor: "LightGray", fontSize: "small" }}
+                value={output}
+                sx={{
+                    mt: 1,
+                    width: "100%",
+                    backgroundColor: "LightGray",
+                    ".MuiInputBase-root": {
+                        p: 0
+                    },
+                    ".MuiInputBase-input": {
+                        p: "4px",
+                        fontSize: "smaller"
+                    }
+                }}
             />
         ) : null}
     </>);

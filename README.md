@@ -29,9 +29,9 @@ yarn install
 
 ## Install Chrome Extension
 1. Open Chrome and navigate to **chrome://extensions**
-2. Click **Load unpacked**, navigate to the build folder within this project and click **Select Folder**
+2. Click **Load unpacked**, navigate to the `dist` folder within this project and click **Select Folder**
 3. Navigate to any website and open developer tools or hit F12
-4. Select the SyphonX tab within the developer tools panel.
+4. Select the **SyphonX** tab within the developer tools panel.
 
 
 ## Links

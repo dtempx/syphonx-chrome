@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Divider, Fab, Menu, MenuItem, SxProps, Theme, Typography } from "@mui/material";
+import { Divider, Fab, Menu, MenuItem, SxProps, Theme, Tooltip, Typography } from "@mui/material";
 import { Add as AddIcon, KeyboardDoubleArrowRight as ExpandIcon, KeyboardDoubleArrowLeft as CollapseIcon } from "@mui/icons-material";
-import { useTemplate } from '../context';
-import { TemplateAddItemType } from "../../lib";
-import ActionIcon from "./ActionIcon";
+import { useTemplate } from "../../context";
+import { TemplateAddItemType } from "../../../lib";
+import ActionIcon from "../ActionIcon";
+import types from "./types.json";
 
 export interface Props {
     sx?: SxProps<Theme>;
@@ -15,7 +16,6 @@ export default (props?: Props) => {
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
 
-    const types: TemplateAddItemType[] = expanded ? ["click", "each", "error", "repeat", "select", "snooze", "transform", "waitfor", "yield"] : ["select", "waitfor", "click"];
     const item = template.selectedItem();
     const addSubItem = item?.type === "action" && item?.name === "select";
 
@@ -64,17 +64,21 @@ export default (props?: Props) => {
                 horizontal: "right",
             }}
         >
-            {types.map(type => (
-                <MenuItem onClick={() => addAction(type)}><ActionIcon name={type} /><Typography sx={{ ml: 1 }}>{type}</Typography></MenuItem>
+            {types
+                .filter(type => expanded || !type.advanced)
+                .map(type => (
+                    <Tooltip title={type.help} arrow placement="right">
+                        <MenuItem onClick={() => addAction(type.name as TemplateAddItemType)}><ActionIcon name={type.name} fontSize="small" /><Typography sx={{ ml: 1 }}>{type.name}</Typography></MenuItem>
+                    </Tooltip>
             ))}
             <Divider />
             {addSubItem ? (
-                <MenuItem onClick={() => addSelector()}><ActionIcon name="string" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
+                <MenuItem onClick={() => addSelector()}><AddIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
             ) : null}
             {expanded ? (
-                <MenuItem onClick={() => setExpanded(false)}><CollapseIcon /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>
+                <MenuItem onClick={() => setExpanded(false)}><CollapseIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>
             ) : (
-                <MenuItem onClick={() => setExpanded(true)}><ExpandIcon /><Typography sx={{ ml: 1 }}>More</Typography></MenuItem>
+                <MenuItem onClick={() => setExpanded(true)}><ExpandIcon fontSize="small" /><Typography sx={{ ml: 1 }}>More</Typography></MenuItem>
             )}
         </Menu>
     </>);

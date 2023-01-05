@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Switch } from "@mui/material";
+import { Chip, IconButton, InputAdornment, Switch, TextField, Tooltip } from "@mui/material";
+import { MoreHoriz as MoreIcon } from "@mui/icons-material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { TemplateItem } from "../../../lib";
-import { EditField, MoreField, PropertyGrid, PropertyGridItem } from "../../../components/";
+import { EditField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
 import QueryBuilder from "./QueryBuilder/index";
@@ -25,6 +26,7 @@ export default ({ item }: Props) => {
                 variant="standard"
                 size="small"
                 value={select.name}
+                fullWidth
                 onChange={(event, value) => { select.name = value; setTemplate(template.clone()); }}
                 onValidate={validateName}
             />,
@@ -32,41 +34,52 @@ export default ({ item }: Props) => {
         ],
         [
             "query",
-            <>
-                <MoreField
-                    variant="standard"
-                    size="small"
-                    value={select.query ? syphonx.formatJQueryExpression(select.query[0]) : ""}
-                    onMore={() => setQueryEditorOpen(true)}
-                />
-                <QueryBuilder
-                    query={select.query}
-                    open={queryEditorOpen}
-                    onClose={() => setQueryEditorOpen(false)}
-                    onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
-                />
-            </>,
-            "A CSS selector or jQuery expression that determines what data is selected"
+            <TextField
+                variant="standard"
+                size="small"
+                value={select.query ? syphonx.formatJQueryExpression(select.query[0]) : ""}
+                fullWidth
+                InputProps={{
+                    endAdornment:
+                        <InputAdornment position="end">
+                            {select?.query && select.query.length > 1 ? (
+                                <Tooltip title={<span style={{ whiteSpace: "pre-line" }}>{select.query ? select.query.map(q => syphonx.formatJQueryExpression(q)).join("\n") : null}</span>}>
+                                    <Chip
+                                        label={select.query.length}
+                                        variant="filled"
+                                        color="default"
+                                        size="small"
+                                        sx={{ ml: 1 }}
+                                    />
+                                </Tooltip>
+                            ) : null}
+                            <IconButton size="small" onClick={() => setQueryEditorOpen(true)}>
+                                <MoreIcon fontSize="small" />
+                            </IconButton>
+                        </InputAdornment>
+                    }}
+            />,
+            "A CSS selector or jQuery that determines what data is selected"
+        ],
+        [
+            "type",
+            <SelectTypeDropDown
+                value={select.type}
+                onChange={(event, value) => { select.type = value; setTemplate(template.clone()); }}
+            />,
+            "Determines the type of the property value"
+        ],
+        [
+            "repeated",
+            <Switch
+                checked={select.repeated ?? false}
+                onChange={(event, value) => { select.repeated = value; setTemplate(template.clone()); }}
+            />,
+            "Indicates whether the data is single-valued or repeated within an array"
         ]
     ];
     if (advanced)
         items.push(...[
-            [
-                "type",
-                <SelectTypeDropDown
-                    value={select.type}
-                    onChange={(event, value) => { select.type = value; setTemplate(template.clone()); }}
-                />,
-                "Determines the type of the property value"
-            ],
-            [
-                "repeated",
-                <Switch
-                    checked={select.repeated ?? false}
-                    onChange={(event, value) => { select.repeated = value; setTemplate(template.clone()); }}
-                />,
-                "Indicates whether the data is single-valued or repeated within an array"
-            ],
             [
                 "required",
                 <Switch
@@ -167,6 +180,14 @@ export default ({ item }: Props) => {
     }
 
     return (
-        <PropertyGrid items={items} />
+        <>
+            <PropertyGrid items={items} />
+            <QueryBuilder
+                select={select}
+                open={queryEditorOpen}
+                onClose={() => setQueryEditorOpen(false)}
+                onChange={(event, query) => { select.query = query; setTemplate(template.clone()); }}
+            />
+        </>
     );
 };

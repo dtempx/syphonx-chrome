@@ -17,7 +17,7 @@
     { "key": "eq", "advanced": false, "help": "Reduce the set of matched elements to the one at the specified index." },
     { "key": "even", "advanced": true, "help": "Reduce the set of matched elements to the even ones in the set, numbered from zero." },
     { "key": "extract", "advanced": false, "help": "Extract text from the set of matched elements using a regular expression." },
-    { "key": "filter", "advanced": false, "help": "Reduce the set of matched elements to those that match the selector or pass the function’s test." },
+    { "key": "filter", "advanced": false, "help": "Reduce the set of matched elements to those that match a selector or a regular expression." },
     { "key": "find", "advanced": false, "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector." },
     { "key": "first", "advanced": false, "help": "Reduce the set of matched elements to the first in the set." },
     { "key": "has", "advanced": true, "help": "Reduce the set of matched elements to those that have a descendant that matches the specified selector." },

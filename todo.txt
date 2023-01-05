@@ -74,6 +74,10 @@ selector quality feedback (good, fair, poor)
 config page: api-key, email
 venom conversion tool
 
+iframes
+shadow roots with playwright
+gpt3 chatbot
+
 
 
 DONE
