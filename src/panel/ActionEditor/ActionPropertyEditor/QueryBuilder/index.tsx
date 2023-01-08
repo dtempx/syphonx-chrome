@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, IconButton, Pagination, Stack, Tooltip, Typography } from "@mui/material";
 import { Add as AddIcon, Delete as DeleteIcon } from "@mui/icons-material";
@@ -17,8 +17,12 @@ export interface Props {
 }
 
 export default ({ select, open, onClose, onChange }: Props) => {
-    const [queries, setQueries] = useState<syphonx.SelectQuery[]>(select.query || [[""]]);
+    const [queries, setQueries] = useState<syphonx.SelectQuery[]>([[""]]);
     const [index, setIndex] = useState(0);
+
+    useEffect(() =>
+        setQueries(select.query || [[""]]),
+    [select]);
 
     function onAddQuery() {
         const newValue = clone(queries);

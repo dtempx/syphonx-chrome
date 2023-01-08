@@ -78,8 +78,8 @@ export default ({ value, onChange, ...props }: Props) => {
                 renderInput={params =>
                     <TextField
                         {...params}
-                        placeholder="CSS Selector"
-                        label="CSS Selector"
+                        placeholder="Selector"
+                        label="Selector"
                         onChange={event => onChange(event, event.target.value)}
                     />
                 }

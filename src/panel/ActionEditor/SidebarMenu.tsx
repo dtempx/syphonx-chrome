@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Drawer } from "@mui/material";
-import { NoteAdd as FileNewIcon, FileOpen as FileOpenIcon, Save as FileSaveIcon, SaveAs as FileSaveAsIcon  } from "@mui/icons-material";
+import { NoteAdd as FileNewIcon, FileOpen as FileOpenIcon, Save as FileSaveIcon, ManageAccounts as SettingsIcon  } from "@mui/icons-material";
 import OpenFileDialog from "./OpenFileDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import { List } from "../../components";
@@ -36,7 +36,8 @@ export default ({ open, onClose }: Props) => {
                     ["File New", <FileNewIcon />, event => { setTemplate(new Template()); onClose(event); }],
                     ["File Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
                     ["File Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
-                    ["File Save As", <FileSaveAsIcon />, event => { setFileSaveOpen(true); onClose(event); }]
+                    null,
+                    ["User Settings", <SettingsIcon />, event => { setFileSaveOpen(true); onClose(event); }]
                 ]} />
             </Box>
         </Drawer>

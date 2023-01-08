@@ -20,9 +20,6 @@ function $parcel$exportWildcard(dest, source) {
 
   return dest;
 }
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
-}
 var $parcel$global =
 typeof globalThis !== 'undefined'
   ? globalThis
@@ -10646,11 +10643,6 @@ function $bd40ddda315b2d8b$export$2e2bcd8739ae039(slots, getUtilityClass, classe
 }
 
 
-var $526182804eb2806c$exports = {};
-
-$parcel$defineInteropFlag($526182804eb2806c$exports);
-
-$parcel$export($526182804eb2806c$exports, "default", () => $81a4eb5b0cda9a59$export$2e2bcd8739ae039);
 const $1f94a0ead977c126$var$defaultGenerator = (componentName)=>componentName;
 const $1f94a0ead977c126$var$createClassNameGenerator = ()=>{
     let generate = $1f94a0ead977c126$var$defaultGenerator;
@@ -10687,8 +10679,6 @@ function $81a4eb5b0cda9a59$export$2e2bcd8739ae039(componentName, slot, globalSta
     const globalStateClass = $81a4eb5b0cda9a59$var$globalStateClassesMapping[slot];
     return globalStateClass ? `${globalStatePrefix}-${globalStateClass}` : `${(0, $1f94a0ead977c126$export$2e2bcd8739ae039).generate(componentName)}-${slot}`;
 }
-
-
 
 
 
@@ -18354,12 +18344,6 @@ var $5e35e7f068f55b96$export$2e2bcd8739ae039 = $5e35e7f068f55b96$var$Chip;
 
 
 
-var $3aecab0568aeb1c8$exports = {};
-
-$parcel$defineInteropFlag($3aecab0568aeb1c8$exports);
-
-$parcel$export($3aecab0568aeb1c8$exports, "default", () => $67d9684704896024$export$2e2bcd8739ae039);
-$parcel$export($3aecab0568aeb1c8$exports, "inputBaseClasses", () => $e3d87702158544c9$export$2e2bcd8739ae039);
 
 
 
@@ -18904,9 +18888,6 @@ const $67d9684704896024$var$inputGlobalStyles = /*#__PURE__*/ (0, $17b288f07ec57
     });
 });
 var $67d9684704896024$export$2e2bcd8739ae039 = $67d9684704896024$var$InputBase;
-
-
-
 
 
 
@@ -20795,12 +20776,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $3fab0efee1ba3066$exports = {};
-
-$parcel$defineInteropFlag($3fab0efee1ba3066$exports);
-
-$parcel$export($3fab0efee1ba3066$exports, "default", () => $fd29e14a923db841$export$2e2bcd8739ae039);
-
 
 
 
@@ -21804,8 +21779,6 @@ var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
 
 
 
-
-
 function $ca3ee0292200f2a5$export$2177af0aa15c34c2(slot) {
     return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiDialog", slot);
 }
@@ -22314,12 +22287,6 @@ var $0d0d12e54088d016$export$2e2bcd8739ae039 = $0d0d12e54088d016$var$DialogTitle
 
 
 
-var $a58ae39c5161f204$exports = {};
-
-$parcel$defineInteropFlag($a58ae39c5161f204$exports);
-
-$parcel$export($a58ae39c5161f204$exports, "default", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
-$parcel$export($a58ae39c5161f204$exports, "dividerClasses", () => $6fc412c0ce53bfbd$export$2e2bcd8739ae039);
 
 
 
@@ -22525,9 +22492,6 @@ const $7d334022fa9e4e25$var$Divider = /*#__PURE__*/ $d4J5n.forwardRef(function D
     }));
 });
 var $7d334022fa9e4e25$export$2e2bcd8739ae039 = $7d334022fa9e4e25$var$Divider;
-
-
-
 
 
 
@@ -24574,12 +24538,6 @@ const $e1f9aacd35535f0f$var$listItemClasses = (0, $8100014debd01602$export$2e2bc
 var $e1f9aacd35535f0f$export$2e2bcd8739ae039 = $e1f9aacd35535f0f$var$listItemClasses;
 
 
-var $5e3eddf31c86d517$exports = {};
-
-$parcel$defineInteropFlag($5e3eddf31c86d517$exports);
-
-$parcel$export($5e3eddf31c86d517$exports, "default", () => $daacc79c176159c4$export$2e2bcd8739ae039);
-$parcel$export($5e3eddf31c86d517$exports, "listItemButtonClasses", () => $e2dd11622fde5186$export$2e2bcd8739ae039);
 
 
 
@@ -24760,9 +24718,6 @@ const $daacc79c176159c4$var$ListItemButton = /*#__PURE__*/ $d4J5n.forwardRef(fun
     });
 });
 var $daacc79c176159c4$export$2e2bcd8739ae039 = $daacc79c176159c4$var$ListItemButton;
-
-
-
 
 
 
@@ -25096,12 +25051,6 @@ var $299786ec18bb6fc2$export$2e2bcd8739ae039 = $299786ec18bb6fc2$var$ListItem;
 
 
 
-var $c0a08a0f88a65246$exports = {};
-
-$parcel$defineInteropFlag($c0a08a0f88a65246$exports);
-
-$parcel$export($c0a08a0f88a65246$exports, "default", () => $525a0986dfeaa305$export$2e2bcd8739ae039);
-$parcel$export($c0a08a0f88a65246$exports, "listItemIconClasses", () => $4ab234d350ea8bc5$export$2e2bcd8739ae039);
 
 
 
@@ -25182,15 +25131,6 @@ var $525a0986dfeaa305$export$2e2bcd8739ae039 = $525a0986dfeaa305$var$ListItemIco
 
 
 
-
-
-
-var $e822d4aced53a119$exports = {};
-
-$parcel$defineInteropFlag($e822d4aced53a119$exports);
-
-$parcel$export($e822d4aced53a119$exports, "default", () => $e892f9464432086f$export$2e2bcd8739ae039);
-$parcel$export($e822d4aced53a119$exports, "listItemTextClasses", () => $17cdf6c187d9fdfe$export$2e2bcd8739ae039);
 
 
 
@@ -25322,9 +25262,6 @@ const $e892f9464432086f$var$ListItemText = /*#__PURE__*/ $d4J5n.forwardRef(funct
     }));
 });
 var $e892f9464432086f$export$2e2bcd8739ae039 = $e892f9464432086f$var$ListItemText;
-
-
-
 
 
 
@@ -25522,11 +25459,6 @@ var $fb0eb384587a3ae4$export$2e2bcd8739ae039 = $fb0eb384587a3ae4$var$MenuList;
 
 
 
-var $653eb297fb09c134$exports = {};
-
-$parcel$defineInteropFlag($653eb297fb09c134$exports);
-
-$parcel$export($653eb297fb09c134$exports, "default", () => $625b48b719d538f0$export$2e2bcd8739ae039);
 
 
 
@@ -25993,10 +25925,6 @@ const $625b48b719d538f0$var$Popover = /*#__PURE__*/ $d4J5n.forwardRef(function P
     }));
 });
 var $625b48b719d538f0$export$2e2bcd8739ae039 = $625b48b719d538f0$var$Popover;
-
-
-
-
 
 
 
@@ -30620,12 +30548,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $807a1d539ec88b4c$exports = {};
-
-$parcel$defineInteropFlag($807a1d539ec88b4c$exports);
-
-$parcel$export($807a1d539ec88b4c$exports, "default", () => $f8e9b85224d1dbe5$export$2e2bcd8739ae039);
-$parcel$export($807a1d539ec88b4c$exports, "formLabelClasses", () => $02d545d40cf45079$export$2e2bcd8739ae039);
 
 
 
@@ -30768,10 +30690,6 @@ const $f8e9b85224d1dbe5$var$FormLabel = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $f8e9b85224d1dbe5$export$2e2bcd8739ae039 = $f8e9b85224d1dbe5$var$FormLabel;
-
-
-
-
 
 
 
@@ -31945,10 +31863,6 @@ var $16d648c397460623$export$2e2bcd8739ae039 = $16d648c397460623$var$Tooltip;
 
 
 
-$parcel$exportWildcard($86049548edbb86a7$exports, $a58ae39c5161f204$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $5e3eddf31c86d517$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $c0a08a0f88a65246$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 
@@ -31973,18 +31887,6 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 var $d4J5n = parcelRequire("d4J5n");
-var $5002f5814ed49d1e$exports = {};
-
-$parcel$export($5002f5814ed49d1e$exports, "path", () => $89382e3cfd90d03a$exports);
-$parcel$export($5002f5814ed49d1e$exports, "Template", () => $1b88f382576c34f2$export$14416b8d99d47caa);
-$parcel$export($5002f5814ed49d1e$exports, "cloudFetchTemplateDirectory", () => $20d1a517b8ce84e3$export$30d4711d6f8d17eb);
-$parcel$export($5002f5814ed49d1e$exports, "cloudReadTemplateFile", () => $20d1a517b8ce84e3$export$de1a4df3278e5008);
-$parcel$export($5002f5814ed49d1e$exports, "cloudCreateTemplateFile", () => $20d1a517b8ce84e3$export$25c05c84991e5fdf);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
-$parcel$export($5002f5814ed49d1e$exports, "isObject", () => $aacd3173f0a35cbd$export$a6cdc56e425d0d0a);
-$parcel$export($5002f5814ed49d1e$exports, "removeDOMRefs", () => $d2489396c3ef9092$export$de139376c1f60602);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $711b72822a456466$export$9cd59f9826255e47);
 var $89382e3cfd90d03a$exports = {};
 var $596d45310e010dc1$exports = {};
 
@@ -38605,6 +38507,30 @@ function $1aab7a538bf9cc22$export$5c3a5f48c762cb34() {
 
 var $d4J5n = parcelRequire("d4J5n");
 
+parcelRequire("d4J5n");
+
+parcelRequire("d4J5n");
+var $40841473af599963$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
+        style: {
+            fontFamily: "monospace",
+            fontSize: "small",
+            lineHeight: "12px",
+            height: 200,
+            backgroundColor: "#eee",
+            overflow: "scroll"
+        },
+        children: JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
+    });
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+parcelRequire("d4J5n");
+
 
 
 
@@ -38650,9 +38576,35 @@ var $ba263eacaf41f616$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $b44b889c57764e4f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
-}), "Cancel");
+var $2fa39c758beb1829$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+        d: "M7 19c-1.1 0-2 .9-2 2h14c0-1.1-.9-2-2-2h-4v-2h3c1.1 0 2-.9 2-2h-8c-1.66 0-3-1.34-3-3 0-1.09.59-2.04 1.46-2.56C8.17 9.03 8 8.54 8 8c0-.21.04-.42.09-.62C6.28 8.13 5 9.92 5 12c0 2.76 2.24 5 5 5v2H7z"
+    }, "0"),
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+        d: "M10.56 5.51C11.91 5.54 13 6.64 13 8c0 .75-.33 1.41-.85 1.87l.59 1.62.94-.34.34.94 1.88-.68-.34-.94.94-.34-2.74-7.53-.94.34-.34-.94-1.88.68.34.94-.94.35.56 1.54z"
+    }, "1"),
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
+        cx: "10.5",
+        cy: "8",
+        r: "1.5"
+    }, "2")
+], "Biotech");
+
+
+
+var $70f423fa97015aa4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+        d: "m12 2-5.5 9h11z"
+    }, "0"),
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
+        cx: "17.5",
+        cy: "17.5",
+        r: "4.5"
+    }, "1"),
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+        d: "M3 13.5h8v8H3z"
+    }, "2")
+], "Category");
 
 
 
@@ -38668,9 +38620,21 @@ var $d26849bb34d8b0e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $e2e5d022b98a42f0$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), "Clear");
+
+
+
 var $4f33b287f8eb5d7f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
 }), "Close");
+
+
+
+var $6c65cc6bd5ac31b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
+}), "Code");
 
 
 
@@ -38689,6 +38653,12 @@ var $841217854c3384ae$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $09e60e810ff3d65b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"
 }), "DeleteOutlined");
+
+
+
+var $d5665a6538726d48$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+}), "Edit");
 
 
 
@@ -38791,15 +38761,28 @@ var $9ce284b7467ad2b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $d441ee9f6f9a92ef$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
+        cx: "10",
+        cy: "8",
+        r: "4"
+    }, "0"),
+    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+        d: "M10.67 13.02c-.22-.01-.44-.02-.67-.02-2.42 0-4.68.67-6.61 1.82-.88.52-1.39 1.5-1.39 2.53V20h9.26c-.79-1.13-1.26-2.51-1.26-4 0-1.07.25-2.07.67-2.98zM20.75 16c0-.22-.03-.42-.06-.63l1.14-1.01-1-1.73-1.45.49c-.32-.27-.68-.48-1.08-.63L18 11h-2l-.3 1.49c-.4.15-.76.36-1.08.63l-1.45-.49-1 1.73 1.14 1.01c-.03.21-.06.41-.06.63s.03.42.06.63l-1.14 1.01 1 1.73 1.45-.49c.32.27.68.48 1.08.63L16 21h2l.3-1.49c.4-.15.76-.36 1.08-.63l1.45.49 1-1.73-1.14-1.01c.03-.21.06-.41.06-.63zM17 18c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"
+    }, "1")
+], "ManageAccounts");
+
+
+
 var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
 }), "Menu");
 
 
 
-var $0acddbfca73eedfc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-}), "MoreHoriz");
+var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m14.17 13.71 1.4-2.42c.09-.15.05-.34-.08-.45l-1.48-1.16c.03-.22.05-.45.05-.68s-.02-.46-.05-.69l1.48-1.16c.13-.11.17-.3.08-.45l-1.4-2.42c-.09-.15-.27-.21-.43-.15l-1.74.7c-.36-.28-.75-.51-1.18-.69l-.26-1.85c-.03-.16-.18-.29-.35-.29h-2.8c-.17 0-.32.13-.35.3L6.8 4.15c-.42.18-.82.41-1.18.69l-1.74-.7c-.16-.06-.34 0-.43.15l-1.4 2.42c-.09.15-.05.34.08.45l1.48 1.16c-.03.22-.05.45-.05.68s.02.46.05.69l-1.48 1.16c-.13.11-.17.3-.08.45l1.4 2.42c.09.15.27.21.43.15l1.74-.7c.36.28.75.51 1.18.69l.26 1.85c.03.16.18.29.35.29h2.8c.17 0 .32-.13.35-.3l.26-1.85c.42-.18.82-.41 1.18-.69l1.74.7c.16.06.34 0 .43-.15zM8.81 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm13.11 7.67-.96-.74c.02-.14.04-.29.04-.44 0-.15-.01-.3-.04-.44l.95-.74c.08-.07.11-.19.05-.29l-.9-1.55c-.05-.1-.17-.13-.28-.1l-1.11.45c-.23-.18-.48-.33-.76-.44l-.17-1.18c-.01-.12-.11-.2-.21-.2h-1.79c-.11 0-.21.08-.22.19l-.17 1.18c-.27.12-.53.26-.76.44l-1.11-.45c-.1-.04-.22 0-.28.1l-.9 1.55c-.05.1-.04.22.05.29l.95.74c-.02.14-.03.29-.03.44 0 .15.01.3.03.44l-.95.74c-.08.07-.11.19-.05.29l.9 1.55c.05.1.17.13.28.1l1.11-.45c.23.18.48.33.76.44l.17 1.18c.02.11.11.19.22.19h1.79c.11 0 .21-.08.22-.19l.17-1.18c.27-.12.53-.26.75-.44l1.12.45c.1.04.22 0 .28-.1l.9-1.55c.06-.09.03-.21-.05-.28zm-4.29.16c-.74 0-1.35-.6-1.35-1.35s.6-1.35 1.35-1.35 1.35.6 1.35 1.35-.61 1.35-1.35 1.35z"
+}), "MiscellaneousServices");
 
 
 
@@ -38846,12 +38829,6 @@ var $7d915f92af7d69b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $a89a4266ef5a8f10$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M21 12.4V7l-4-4H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h7.4l8.6-8.6zM15 15c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3zM6 6h9v4H6V6zm13.99 10.25 1.77 1.77L16.77 23H15v-1.77l4.99-4.98zm3.26.26-.85.85-1.77-1.77.85-.85c.2-.2.51-.2.71 0l1.06 1.06c.2.2.2.52 0 .71z"
-}), "SaveAs");
-
-
-
 var $1d4519e24428e5fd$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 5h2V3c-1.1 0-2 .9-2 2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zM7 17h10V7H7v10zm2-8h6v6H9V9z"
 }), "SelectAll");
@@ -38882,34 +38859,6 @@ var $47e9a2a37b32c3e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-
-parcelRequire("d4J5n");
-
-parcelRequire("d4J5n");
-var $40841473af599963$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
-        style: {
-            fontFamily: "monospace",
-            fontSize: "small",
-            lineHeight: "12px",
-            height: 200,
-            backgroundColor: "#eee",
-            overflow: "scroll"
-        },
-        children: JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
-    });
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-parcelRequire("d4J5n");
-
-
 var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open = !!message , onClose: onClose , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039), {
         in: open,
         sx: sx,
@@ -38932,68 +38881,25 @@ var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open 
 
 
 
+parcelRequire("d4J5n");
 
-var $d4J5n = parcelRequire("d4J5n");
 
-
-var $69dc9a54a9f1c597$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , onValidate: onValidate , ...props })=>{
-    const [input, setInput] = (0, $d4J5n.useState)();
-    const [valid, setValid] = (0, $d4J5n.useState)(true);
-    function validate(event) {
-        const value = event.target.value;
-        setInput(value);
-        if (onValidate) setValid(onValidate(value));
-    }
-    function commit(event) {
-        if (valid && input !== undefined) {
-            if (onChange) onChange(event, input);
-            setInput(undefined);
-        }
-    }
-    function cancel() {
-        setInput(undefined);
-        setValid(true);
-    }
-    function keydown(event) {
-        if (event.key === "Escape") cancel();
-        if (event.key === "Enter") commit(event);
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+var $69dc9a54a9f1c597$export$2e2bcd8739ae039 = ({ value: value , onMore: onMore , ...props })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         ...props,
-        error: !valid,
-        value: input !== undefined ? input : value1 !== undefined ? String(value1) : "",
-        onChange: validate,
-        onKeyDown: keydown,
-        onBlur: commit,
+        value: value,
         InputProps: {
-            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
                 position: "end",
-                style: {
-                    visibility: input !== undefined ? "visible" : "hidden"
-                },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: commit,
-                        style: {
-                            visibility: input !== undefined && valid ? "visible" : "hidden"
-                        },
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2f0f81fa11552061$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: cancel,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b44b889c57764e4f$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        })
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    onClick: onMore,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
+                        fontSize: "small"
                     })
-                ]
+                })
             })
         }
     });
-};
 
 
 
@@ -39183,7 +39089,8 @@ parcelRequire("d4J5n");
 
 var $8eb055bd0b9dc033$export$2e2bcd8739ae039 = ({ items: items , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ee1e133ccba2d879$export$2e2bcd8739ae039), {
         sx: sx,
-        children: items.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $299786ec18bb6fc2$export$2e2bcd8739ae039), {
+        children: items.map((item)=>{
+            return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $299786ec18bb6fc2$export$2e2bcd8739ae039), {
                 disablePadding: true,
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
                     onClick: (event)=>item[2](event),
@@ -39196,7 +39103,8 @@ var $8eb055bd0b9dc033$export$2e2bcd8739ae039 = ({ items: items , sx: sx  })=>/*#
                         })
                     ]
                 })
-            }, item[0]))
+            }, item[0]) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {});
+        })
     });
 
 
@@ -39216,28 +39124,6 @@ var $842c61f574169e59$export$2e2bcd8739ae039 = ({ items: items , sx: sx  })=>/*#
                     })
                 ]
             }, item[0]))
-    });
-
-
-
-parcelRequire("d4J5n");
-
-
-var $b8a7bbcc1232863d$export$2e2bcd8739ae039 = ({ value: value , onMore: onMore , ...props })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-        ...props,
-        value: value,
-        InputProps: {
-            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
-                position: "end",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                    size: "small",
-                    onClick: onMore,
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0acddbfca73eedfc$export$2e2bcd8739ae039), {
-                        fontSize: "small"
-                    })
-                })
-            })
-        }
     });
 
 
@@ -39307,6 +39193,80 @@ var $1e6698c63139ed83$export$2e2bcd8739ae039 = ({ title: title , onClose: onClos
             ]
         })
     });
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $b977f189b4ae8da0$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , onValidate: onValidate , ...props })=>{
+    const [input, setInput] = (0, $d4J5n.useState)();
+    const [valid1, setValid] = (0, $d4J5n.useState)(true);
+    (0, $d4J5n.useEffect)(()=>{
+        setInput(undefined);
+        setValid(true);
+    }, [
+        value1
+    ]);
+    function validate(event) {
+        const value = event.target.value;
+        setInput(value);
+        if (onValidate) {
+            const valid = onValidate(event, value);
+            setValid(valid);
+        }
+    }
+    function commit(event) {
+        if (valid1 && input !== undefined) {
+            if (onChange) onChange(event, input);
+            setInput(undefined);
+        }
+    }
+    function cancel() {
+        setInput(undefined);
+        setValid(true);
+    }
+    function keydown(event) {
+        if (event.key === "Escape") cancel();
+        if (event.key === "Enter") commit(event);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        ...props,
+        error: !valid1,
+        value: input !== undefined ? input : value1 !== undefined ? String(value1) : "",
+        onChange: validate,
+        onKeyDown: keydown,
+        onBlur: commit,
+        InputProps: {
+            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                position: "end",
+                style: {
+                    visibility: input !== undefined ? "visible" : "hidden"
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: commit,
+                        style: {
+                            visibility: input !== undefined && valid1 ? "visible" : "hidden"
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2f0f81fa11552061$export$2e2bcd8739ae039), {
+                            fontSize: "small"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: cancel,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e2e5d022b98a42f0$export$2e2bcd8739ae039), {
+                            fontSize: "small"
+                        })
+                    })
+                ]
+            })
+        }
+    });
+};
 
 
 
@@ -39392,6 +39352,63 @@ var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
             })
         ]
     });
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
+    const [value, setValue] = (0, $d4J5n.useState)("");
+    (0, $d4J5n.useEffect)(()=>{
+        if (query && query.length > 0) setValue($8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "");
+        else setValue("");
+    }, [
+        query
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        variant: "standard",
+        size: "small",
+        value: value,
+        fullWidth: true,
+        sx: {
+            caretColor: "transparent"
+        },
+        InputProps: {
+            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                position: "end",
+                children: [
+                    query && query.length > 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("span", {
+                            style: {
+                                whiteSpace: "pre-line"
+                            },
+                            children: query ? query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
+                        }),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                            label: query.length,
+                            variant: "filled",
+                            color: "default",
+                            size: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    }) : null,
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: onClick,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
+                            fontSize: "small"
+                        })
+                    })
+                ]
+            })
+        }
+    });
+};
 
 
 
@@ -39594,55 +39611,41 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
-
 var $0b61921fb120a84a$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
     const [value1, setValue] = (0, $d4J5n.useState)("");
-    const [error, setError] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
         const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query1);
         setValue(value || "");
-        setError(false);
     }, [
         query1
     ]);
-    function handleChange(event) {
-        setValue(event.target.value);
+    function validate(event, value) {
         try {
             $75371f08c5d7238f$export$dd48e276a5eff34c(event.target.value);
-            setError(false);
+            return true;
         } catch (err) {
-            setError(true);
+            return false;
         }
     }
-    function handleCommit(event) {
-        if (value1) {
+    function commit(event, value) {
+        if (value) {
             let query;
             try {
-                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value1);
+                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value);
             } catch (err) {
-                setError(true);
+                console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening
                 return;
             }
             if (query) onChange(event, query);
         }
     }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
         variant: "standard",
         size: "small",
         fullWidth: true,
         value: value1,
-        error: error,
-        onChange: handleChange,
-        InputProps: {
-            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                size: "small",
-                disabled: error,
-                onClick: handleCommit,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0bf399ec89823653$export$2e2bcd8739ae039), {
-                    fontSize: "small"
-                })
-            })
-        }
+        onValidate: validate,
+        onChange: commit
     });
 };
 
@@ -39728,8 +39731,8 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                         },
                         renderInput: (params)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                                 ...params,
-                                placeholder: "CSS Selector",
-                                label: "CSS Selector",
+                                placeholder: "Selector",
+                                label: "Selector",
                                 onChange: (event)=>onChange(event, event.target.value)
                             })
                     }),
@@ -39770,12 +39773,19 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , onClose: onClose , onChange: onChange  })=>{
-    const [queries, setQueries] = (0, $d4J5n.useState)(select.query || [
+    const [queries, setQueries] = (0, $d4J5n.useState)([
         [
             ""
         ]
     ]);
     const [index, setIndex] = (0, $d4J5n.useState)(0);
+    (0, $d4J5n.useEffect)(()=>setQueries(select.query || [
+            [
+                ""
+            ]
+        ]), [
+        select
+    ]);
     function onAddQuery() {
         const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
         newValue.push([
@@ -39969,11 +39979,17 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
 var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
+    function validateName(event, value) {
+        return /^[a-z][a-z0-9_]*$/.test(value);
+    }
+    function validateNumber(event, value) {
+        return value ? parseInt(value) >= 0 : true;
+    }
     const select = item.obj;
     const items = [
         [
             "name",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $69dc9a54a9f1c597$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
                 value: select.name,
@@ -39988,44 +40004,11 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.query ? $8f015fe631ec2dd6$export$633ae63c2897642e(select.query[0]) : "",
-                fullWidth: true,
-                InputProps: {
-                    endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
-                        position: "end",
-                        children: [
-                            select?.query && select.query.length > 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("span", {
-                                    style: {
-                                        whiteSpace: "pre-line"
-                                    },
-                                    children: select.query ? select.query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
-                                }),
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                                    label: select.query.length,
-                                    variant: "filled",
-                                    color: "default",
-                                    size: "small",
-                                    sx: {
-                                        ml: 1
-                                    }
-                                })
-                            }) : null,
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                size: "small",
-                                onClick: ()=>setQueryEditorOpen(true),
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0acddbfca73eedfc$export$2e2bcd8739ae039), {
-                                    fontSize: "small"
-                                })
-                            })
-                        ]
-                    })
-                }
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6a804e9e9de76e97$export$2e2bcd8739ae039), {
+                query: select.query,
+                onClick: ()=>setQueryEditorOpen(true)
             }),
-            "A CSS selector or jQuery that determines what data is selected"
+            "A CSS selector or jQuery expression that determines what data is selected on the page"
         ],
         [
             "type",
@@ -40064,7 +40047,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "value",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $69dc9a54a9f1c597$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
                 value: select.value,
@@ -40089,7 +40072,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "limit",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $69dc9a54a9f1c597$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
                 value: select.limit,
@@ -40114,7 +40097,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "pattern",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $69dc9a54a9f1c597$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
                 value: select.pattern,
@@ -40139,7 +40122,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "when",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $69dc9a54a9f1c597$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
                 value: select.when,
@@ -40170,12 +40153,6 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
             "Debug"
         ]
     ]);
-    function validateName(value) {
-        return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-    function validateNumber(value) {
-        return value ? parseInt(value) >= 0 : true;
-    }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
@@ -40211,104 +40188,6 @@ var $9e41d32715df6971$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
-
-var $7b42a1209722603f$exports = {};
-
-$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
-$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -40879,8 +40758,6 @@ const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function 
     }));
 });
 var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
-
-
 
 
 
@@ -41501,13 +41378,6 @@ var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
 
 
 
-
-
-
-
-
-
-
 parcelRequire("d4J5n");
 
 
@@ -42054,9 +41924,10 @@ var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                     onClose(event);
                                 }
                             ],
+                            null,
                             [
-                                "File Save As",
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a89a4266ef5a8f10$export$2e2bcd8739ae039), {}),
+                                "User Settings",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d441ee9f6f9a92ef$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setFileSaveOpen(true);
                                     onClose(event);
@@ -42072,6 +41943,8 @@ var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
+
+
 var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
@@ -42084,18 +41957,86 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                 open: sidebarOpen,
                 onClose: ()=>setSidebarOpen(false)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                direction: "row",
-                spacing: 0,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                    size: "small",
-                    onClick: ()=>setSidebarOpen(true),
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
-                        fontSize: "small"
-                    })
-                })
-            }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    display: "flex",
+                    justifyContent: "space-between"
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                size: "small",
+                                onClick: ()=>setSidebarOpen(true),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            template.file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                label: template.file,
+                                variant: "outlined",
+                                color: "primary",
+                                size: "small",
+                                icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
+                                    sx: {
+                                        ml: 1
+                                    }
+                                }),
+                                sx: {
+                                    m: 1
+                                }
+                            }) : null
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        sx: {
+                            mr: 1
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Visual Editor",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    color: "primary",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Code Editor",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Test Editor",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Template Settings",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 sx: {
                     position: "relative",
                     backgroundColor: "#ebedf0",
@@ -42105,97 +42046,82 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                     overflowX: "scroll",
                     p: 2
                 },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        visibility: template.file ? "visible" : "hidden",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                            label: template.file,
-                            variant: "filled",
-                            color: "default",
-                            size: "small",
-                            icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {}),
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    sx: {
+                        display: "flex",
+                        flexWrap: "wrap",
+                        "& .panel": {
+                            position: "relative",
+                            overflow: "scroll",
+                            m: 1,
+                            p: 1
+                        }
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                            direction: "row",
                             sx: {
-                                ml: 1
-                            }
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        sx: {
-                            display: "flex",
-                            flexWrap: "wrap",
-                            "& .panel": {
-                                position: "relative",
-                                overflow: "scroll",
-                                m: 1,
-                                p: 1
-                            }
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                direction: "row",
-                                sx: {
-                                    width: 1,
-                                    "& > :not(style)": {
-                                        height: 300
-                                    }
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                        elevation: 3,
-                                        className: "panel",
-                                        sx: {
-                                            width: 400
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {}),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3e7ea5ad9638c16a$export$2e2bcd8739ae039), {
-                                                sx: {
-                                                    position: "absolute",
-                                                    bottom: (theme)=>theme.spacing(2),
-                                                    right: (theme)=>theme.spacing(2)
-                                                }
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                        elevation: 3,
-                                        className: "panel",
-                                        sx: {
-                                            width: 1
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                                direction: "row",
-                                                spacing: 0,
-                                                justifyContent: "end",
-                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
-                                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
-                                                        control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                                            checked: advanced,
-                                                            onChange: (event)=>setAdvanced(event.target.checked)
-                                                        }),
-                                                        label: "Advanced"
-                                                    })
+                                width: 1,
+                                "& > :not(style)": {
+                                    height: 300
+                                }
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                    elevation: 3,
+                                    className: "panel",
+                                    sx: {
+                                        width: 400
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {}),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3e7ea5ad9638c16a$export$2e2bcd8739ae039), {
+                                            sx: {
+                                                position: "absolute",
+                                                bottom: (theme)=>theme.spacing(2),
+                                                right: (theme)=>theme.spacing(2)
+                                            }
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                    elevation: 3,
+                                    className: "panel",
+                                    sx: {
+                                        width: 1
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                            direction: "row",
+                                            spacing: 0,
+                                            justifyContent: "end",
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
+                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
+                                                    control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                                        checked: advanced,
+                                                        onChange: (event)=>setAdvanced(event.target.checked)
+                                                    }),
+                                                    label: "Advanced"
                                                 })
-                                            }),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {
-                                                item: template.selectedItem()
                                             })
-                                        ]
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                elevation: 3,
-                                className: "panel",
-                                sx: {
-                                    width: 1
-                                },
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5313c1139f7bda04$export$2e2bcd8739ae039), {})
-                            })
-                        ]
-                    })
-                ]
+                                        }),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {
+                                            item: template.selectedItem()
+                                        })
+                                    ]
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                            elevation: 3,
+                            className: "panel",
+                            sx: {
+                                width: 1
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5313c1139f7bda04$export$2e2bcd8739ae039), {})
+                        })
+                    ]
+                })
             })
         ]
     });

@@ -1,12 +1,31 @@
 import React, { useState } from "react";
-import { Box, Chip, FormControlLabel, FormGroup, IconButton, Paper, Stack, Switch } from "@mui/material";
-import { Menu as MenuIcon, InsertDriveFileOutlined as FileIcon } from "@mui/icons-material";
 import ActionPropertyEditor from "./ActionPropertyEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton/index";
 import DataView from "./DataView";
 import SidebarMenu from "./SidebarMenu"
 import { useTemplate } from '../context';
+
+import {
+    Box,
+    Chip,
+    FormControlLabel,
+    FormGroup,
+    IconButton,
+    Paper,
+    Stack,
+    Switch,
+    Tooltip
+} from "@mui/material";
+
+import {
+    Code as CodeIcon,
+    Category as EditorIcon,
+    InsertDriveFileOutlined as FileIcon,
+    Menu as MenuIcon,
+    MiscellaneousServices as SettingsIcon,
+    Biotech as TestIcon
+} from "@mui/icons-material";
 
 export default () => {
     const { template, advanced, setAdvanced } = useTemplate();
@@ -16,11 +35,39 @@ export default () => {
         <Box sx={{ minWidth: 500 }}>
             <SidebarMenu open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-            <Stack direction="row" spacing={0}>
-                <IconButton size="small" onClick={() => setSidebarOpen(true)}>
-                    <MenuIcon fontSize="small" />
-                </IconButton>
-            </Stack>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Stack direction="row">
+                    <IconButton size="small" onClick={() => setSidebarOpen(true)}>
+                        <MenuIcon fontSize="small" />
+                    </IconButton>
+
+                    {template.file ? (
+                        <Chip
+                            label={template.file}
+                            variant="outlined"
+                            color="primary"
+                            size="small"
+                            icon={<FileIcon sx={{ ml: 1 }} />}
+                            sx={{ m: 1 }}
+                        />
+                    ) : null}
+                </Stack>
+
+                <Stack direction="row" sx={{ mr: 1 }}>
+                    <Tooltip title="Visual Editor">
+                        <IconButton size="small" color="primary"><EditorIcon fontSize="small" /></IconButton>
+                    </Tooltip>
+                    <Tooltip title="Code Editor">
+                        <IconButton size="small"><CodeIcon fontSize="small" /></IconButton>
+                    </Tooltip>
+                    <Tooltip title="Test Editor">
+                        <IconButton size="small"><TestIcon fontSize="small" /></IconButton>
+                    </Tooltip>
+                    <Tooltip title="Template Settings">
+                        <IconButton size="small"><SettingsIcon fontSize="small" /></IconButton>
+                    </Tooltip>
+                </Stack>
+            </Box>
 
             <Box
                 sx={{
@@ -33,17 +80,6 @@ export default () => {
                     p: 2
                 }}
             >
-                <Box visibility={template.file ? "visible" : "hidden"}>
-                    <Chip
-                        label={template.file}
-                        variant="filled"
-                        color="default"
-                        size="small"
-                        icon={<FileIcon />}
-                        sx={{ ml: 1 }}
-                    />
-                </Box>
-
                 <Box sx={{
                     display: "flex",
                     flexWrap: "wrap",

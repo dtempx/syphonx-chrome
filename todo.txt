@@ -60,6 +60,7 @@ trials
 template test cases
 (1d)
 
+folder permissions
 view template change history (who, when, what/diffs)
 rollbacks
 css selector gadget (create selectors by pointing at parts of the page)

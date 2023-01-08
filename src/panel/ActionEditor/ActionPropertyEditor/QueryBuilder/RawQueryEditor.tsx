@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { IconButton, TextField } from "@mui/material";
-import { Input as CommitIcon } from "@mui/icons-material";
+import { ValidateTextField } from "../../../../components";
 
 export interface Props {
     query: syphonx.SelectQuery;
@@ -10,33 +9,30 @@ export interface Props {
 
 export default ({ query, onChange }: Props) => {
     const [value, setValue] = useState("");
-    const [error, setError] = useState(false);
 
     useEffect(() => {
         const value = syphonx.formatJQueryExpression(query);
         setValue(value || "");
-        setError(false);
     }, [query]);
 
-    function handleChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
-        setValue(event.target.value);
+    function validate(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         try {            
             syphonx.parseJQueryExpression(event.target.value);
-            setError(false);
+            return true;
         }
         catch (err) {
-            setError(true);
+            return false;
         }
     }
 
-    function handleCommit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function commit(event: React.SyntheticEvent, value: string) {
         if (value) {
             let query: syphonx.SelectQuery | undefined;
             try {
                 query = syphonx.parseJQueryExpression(value);
             }
             catch (err) {
-                setError(true);
+                console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening
                 return;
             }
             if (query)
@@ -45,23 +41,13 @@ export default ({ query, onChange }: Props) => {
     }
     
     return (
-        <TextField
+        <ValidateTextField
             variant="standard"
             size="small"
             fullWidth
             value={value}
-            error={error}
-            onChange={handleChange}
-            InputProps={{
-                endAdornment:
-                    <IconButton
-                        size="small"
-                        disabled={error}
-                        onClick={handleCommit}
-                    >
-                        <CommitIcon fontSize="small" />
-                    </IconButton>
-            }}
+            onValidate={validate}
+            onChange={commit}
         />
     );
 };

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Chip, IconButton, InputAdornment, Switch, TextField, Tooltip } from "@mui/material";
-import { MoreHoriz as MoreIcon } from "@mui/icons-material";
+import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { TemplateItem } from "../../../lib";
-import { EditField, PropertyGrid, PropertyGridItem } from "../../../components/";
+import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
+import SelectorField from "./SelectorField";
 import QueryBuilder from "./QueryBuilder/index";
 import DebugView from "./DebugView";
 
@@ -18,11 +18,19 @@ export default ({ item }: Props) => {
     const { template, setTemplate, advanced } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
 
+    function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
+        return /^[a-z][a-z0-9_]*$/.test(value);
+    }
+
+    function validateNumber(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
+        return value ? parseInt(value) >= 0 : true;
+    }
+
     const select = item.obj as syphonx.Select;
     const items: PropertyGridItem[] = [
         [
             "name",
-            <EditField
+            <ValidateTextField
                 variant="standard"
                 size="small"
                 value={select.name}
@@ -34,32 +42,11 @@ export default ({ item }: Props) => {
         ],
         [
             "query",
-            <TextField
-                variant="standard"
-                size="small"
-                value={select.query ? syphonx.formatJQueryExpression(select.query[0]) : ""}
-                fullWidth
-                InputProps={{
-                    endAdornment:
-                        <InputAdornment position="end">
-                            {select?.query && select.query.length > 1 ? (
-                                <Tooltip title={<span style={{ whiteSpace: "pre-line" }}>{select.query ? select.query.map(q => syphonx.formatJQueryExpression(q)).join("\n") : null}</span>}>
-                                    <Chip
-                                        label={select.query.length}
-                                        variant="filled"
-                                        color="default"
-                                        size="small"
-                                        sx={{ ml: 1 }}
-                                    />
-                                </Tooltip>
-                            ) : null}
-                            <IconButton size="small" onClick={() => setQueryEditorOpen(true)}>
-                                <MoreIcon fontSize="small" />
-                            </IconButton>
-                        </InputAdornment>
-                    }}
+            <SelectorField
+                query={select.query}
+                onClick={() => setQueryEditorOpen(true)}
             />,
-            "A CSS selector or jQuery that determines what data is selected"
+            "A CSS selector or jQuery expression that determines what data is selected on the page"
         ],
         [
             "type",
@@ -90,7 +77,7 @@ export default ({ item }: Props) => {
             ],
             [
                 "value",
-                <EditField
+                <ValidateTextField
                     variant="standard"
                     size="small"
                     value={select.value}
@@ -109,7 +96,7 @@ export default ({ item }: Props) => {
             ],
             [
                 "limit",
-                <EditField
+                <ValidateTextField
                     variant="standard"
                     size="small"
                     value={select.limit}
@@ -128,7 +115,7 @@ export default ({ item }: Props) => {
             ],
             [
                 "pattern",
-                <EditField
+                <ValidateTextField
                     variant="standard"
                     size="small"
                     value={select.pattern}
@@ -147,7 +134,7 @@ export default ({ item }: Props) => {
             ],
             [
                 "when",
-                <EditField
+                <ValidateTextField
                     variant="standard"
                     size="small"
                     value={select.when}
@@ -170,14 +157,6 @@ export default ({ item }: Props) => {
                 "Debug"
             ]
         ] as PropertyGridItem[]);
-
-    function validateName(value: string): boolean {
-        return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-
-    function validateNumber(value: string): boolean {
-        return value ? parseInt(value) >= 0 : true;
-    }
 
     return (
         <>
