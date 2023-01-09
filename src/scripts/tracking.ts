@@ -7,12 +7,6 @@ export function disableTracking() {
             element.removeAttribute("class");
     });
 
-    document.querySelectorAll(".sx-select").forEach(element => {
-        element.classList.remove("sx-select");
-        if (element.classList.length === 0)
-            element.removeAttribute("class");
-    });
-
     document.querySelectorAll(".sx-click").forEach(element => {
         element.classList.remove("sx-click");
         if (element.classList.length === 0)
@@ -38,19 +32,13 @@ export function enableTracking() {
                 element.removeAttribute("class");
         });
 
-        document.querySelectorAll(".sx-select").forEach(element => {
-            element.classList.remove("sx-select");
-            if (element.classList.length === 0)
-                element.removeAttribute("class");
-        });
-
         if (sx.tracking)
             if (event.target instanceof HTMLElement)
                 event.target.classList.add("sx-hover");
     });
 
     document.addEventListener("click", onClick);
-    //document.querySelectorAll("a").forEach(element => element.addEventListener("click", onClick));
+    document.addEventListener("auxclick", onClick);
 
     function onClick(event: MouseEvent) {
         document.querySelectorAll(".sx-click").forEach(element => {
@@ -61,12 +49,6 @@ export function enableTracking() {
 
         document.querySelectorAll(".sx-hover").forEach(element => {
             element.classList.remove("sx-hover");
-            if (element.classList.length === 0)
-                element.removeAttribute("class");
-        });
-
-        document.querySelectorAll(".sx-select").forEach(element => {
-            element.classList.remove("sx-select");
             if (element.classList.length === 0)
                 element.removeAttribute("class");
         });

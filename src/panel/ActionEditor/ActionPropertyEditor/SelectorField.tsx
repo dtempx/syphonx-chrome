@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Chip, IconButton, InputAdornment, TextField, Tooltip } from "@mui/material";
-import { Edit as EditIcon } from "@mui/icons-material";
 import * as syphonx from "syphonx-lib";
+
+import {
+    Chip,
+    IconButton,
+    InputAdornment,
+    TextField,
+    Tooltip
+} from "@mui/material";
+
+import {
+    Edit as EditIcon
+} from "@mui/icons-material";
 
 export interface Props {
     query: syphonx.SelectQuery[] | undefined;

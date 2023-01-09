@@ -1,6 +1,20 @@
 import React from "react";
-import { Divider, IconButton, MenuItem, Select, SelectChangeEvent, SxProps, Stack, Theme, Typography } from "@mui/material";
-import { Delete as DeleteIcon } from "@mui/icons-material";
+
+import {
+    Divider,
+    IconButton,
+    MenuItem,
+    Select,
+    SelectChangeEvent,
+    SxProps,
+    Stack,
+    Theme,
+    Typography
+} from "@mui/material";
+
+import {
+    Delete as DeleteIcon
+} from "@mui/icons-material";
 
 export interface Props {
     selectedItem: string;

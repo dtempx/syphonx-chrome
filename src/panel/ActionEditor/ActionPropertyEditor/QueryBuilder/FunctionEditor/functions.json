@@ -1,67 +1,327 @@
 [
-    { "key": "add", "advanced": true, "help": "Create a new object with elements added to the set of matched elements." },
-    { "key": "addBack", "advanced": true, "help": "Add the previous set of elements on the stack to the current set, optionally filtered by a selector." },
-    { "key": "addClass", "advanced": true, "help": "Adds the specified class (or classes) to each element in the set of matched elements." },
-    { "key": "after", "advanced": true, "help": "Insert content, specified by the parameter, after each element in the set of matched elements." },
-    { "key": "andSelf", "advanced": true, "help": "Add the previous set of elements on the stack to the current set." },
-    { "key": "append", "advanced": true, "help": "Insert content, specified by the parameter, to the end of each element in the set of matched elements." },
-    { "key": "attr", "advanced": false, "help": "Return the value of a specified attribute in the set of matched elements." },
-    { "key": "before", "advanced": true, "help": "Insert content, specified by the parameter, before each element in the set of matched elements." },
-    { "key": "blank", "advanced": true, "help": "Retain only elements from the set of matched elements that have no content." },
-    { "key": "children", "advanced": true, "help": "Return the children of each element in the set of matched elements, optionally filtered by a selector." },
-    { "key": "closest", "advanced": false, "help": "For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree." },
-    { "key": "contents", "advanced": true, "help": "Return the children of each element in the set of matched elements, including text and comment nodes." },
-    { "key": "css", "advanced": true, "help": "Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element." },
-    { "key": "cut", "advanced": true, "help": "Cut text from the set of matched elements." },
-    { "key": "empty", "advanced": true, "help": "Remove all child nodes of the set of matched elements from the DOM." },
-    { "key": "eq", "advanced": false, "help": "Reduce the set of matched elements to the one at the specified index." },
-    { "key": "even", "advanced": true, "help": "Reduce the set of matched elements to the even ones in the set, numbered from zero." },
-    { "key": "extract", "advanced": false, "help": "Extract text from the set of matched elements using a regular expression." },
-    { "key": "filter", "advanced": false, "help": "Reduce the set of matched elements to those that match a selector or a regular expression." },
-    { "key": "find", "advanced": false, "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector." },
-    { "key": "first", "advanced": false, "help": "Reduce the set of matched elements to the first in the set." },
-    { "key": "has", "advanced": true, "help": "Reduce the set of matched elements to those that have a descendant that matches the specified selector." },
-    { "key": "hasClass", "advanced": true, "help": "Determine whether any of the matched elements are assigned the given class." },
-    { "key": "html", "advanced": false, "help": "Return the HTML contents of the set of matched elements." },
-    { "key": "index", "advanced": true, "help": "Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector." },
-    { "key": "is", "advanced": true, "help": "Determines whether at least one element within the current matched set of elements matches the specified selector." },
-    { "key": "last", "advanced": false, "help": "Reduce the set of matched elements to the final one in the set." },
-    { "key": "length", "advanced": true, "help": "Returns the number of matched elements." },
-    { "key": "map", "advanced": true, "help": "Map the set of matched elements using a specified formula." },
-    { "key": "next", "advanced": true, "help": "Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector." },
-    { "key": "nextAll", "advanced": true, "help": "Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector." },
-    { "key": "nextUntil", "advanced": true, "help": "Return all following siblings of each element up to but not including the element matched by the specified selector." },
-    { "key": "nonblank", "advanced": true, "help": "Remove elements from the set of matched elements that have no content." },
-    { "key": "not", "advanced": true, "help": "Remove elements from the set of matched elements." },
-    { "key": "odd", "advanced": true, "help": "Reduce the set of matched elements to the odd ones in the set, numbered from zero." },
-    { "key": "parent", "advanced": false, "help": "Return the parent of each element in the current set of matched elements, optionally filtered by a selector." },
-    { "key": "parents", "advanced": false, "help": "Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector." },
-    { "key": "parentsUntil", "advanced": true, "help": "Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector." },
-    { "key": "prepend", "advanced": true, "help": "Insert content, specified by the parameter, to the beginning of each element in the set of matched elements." },
-    { "key": "prev", "advanced": true, "help": "Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector." },
-    { "key": "prevAll", "advanced": true, "help": "Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order." },
-    { "key": "prevUntil", "advanced": true, "help": "Return all preceding siblings of each element up to but not including the element matched by the selector." },
-    { "key": "prop", "advanced": true, "help": "Return the value of a property in the set of matched elements." },
-    { "key": "remove", "advanced": true, "help": "Remove the set of matched elements from the DOM." },
-    { "key": "removeAttr", "advanced": true, "help": "Remove an attribute from each element in the set of matched elements." },
-    { "key": "removeClass", "advanced": true, "help": "Remove a single class, multiple classes, or all classes from each element in the set of matched elements." },
-    { "key": "removeData", "advanced": true, "help": "Remove a previously-stored piece of data." },
-    { "key": "removeProp", "advanced": true, "help": "Remove a property for the set of matched elements." },
-    { "key": "replace", "advanced": true, "help": "Replace the set of matched elements." },
-    { "key": "replaceHTML", "advanced": true, "help": "Replaces the HTML within the set of matched elements." },
-    { "key": "replaceTag", "advanced": true, "help": "Replaces the HTML tag with a specified new tag." },
-    { "key": "replaceText", "advanced": true, "help": "Replaces the text with the set of matched elements." },
-    { "key": "replaceWith", "advanced": true, "help": "Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed." },
-    { "key": "reverse", "advanced": true, "help": "Reverses the order of the current set of matched elements." },
-    { "key": "scrollTop", "advanced": true, "help": "Scrolls to the top of the current viewport." },
-    { "key": "scrollBottom", "advanced": true, "help": "Scrolls to the bottom of the current viewport." },
-    { "key": "siblings", "advanced": true, "help": "Return the siblings of each element in the set of matched elements, optionally filtered by a selector." },
-    { "key": "size", "advanced": true, "help": "Returns the number of matched elements." },
-    { "key": "slice", "advanced": true, "help": "Reduce the set of matched elements to a subset specified by a range of indices." },
-    { "key": "split", "advanced": true, "help": "Split the text of the set of matched elements using the specified delimiter." },
-    { "key": "text", "advanced": true, "help": "Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements." },
-    { "key": "unwrap", "advanced": true, "help": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place." },
-    { "key": "wrap", "advanced": true, "help": "Wrap each element in the set of matched elements with the specified HTML." },
-    { "key": "wrapAll", "advanced": true, "help": "Wrap all elements in the set of matched elements with the specified HTML." },
-    { "key": "wrapInner", "advanced": true, "help": "Wrap the content of each element in the set of matched elements with the specified HTML." }
+    {
+        "key": "add",
+        "advanced": true,
+        "help": "Create a new object with elements added to the set of matched elements."
+    },
+    {
+        "key": "addBack",
+        "advanced": true,
+        "help": "Add the previous set of elements on the stack to the current set, optionally filtered by a selector."
+    },
+    {
+        "key": "addClass",
+        "advanced": true,
+        "help": "Adds the specified class (or classes) to each element in the set of matched elements."
+    },
+    {
+        "key": "after",
+        "advanced": true,
+        "help": "Insert content, specified by the parameter, after each element in the set of matched elements."
+    },
+    {
+        "key": "andSelf",
+        "advanced": true,
+        "help": "Add the previous set of elements on the stack to the current set."
+    },
+    {
+        "key": "append",
+        "advanced": true,
+        "help": "Insert content, specified by the parameter, to the end of each element in the set of matched elements."
+    },
+    {
+        "key": "attr",
+        "advanced": false,
+        "help": "Return the value of a specified attribute in the set of matched elements."
+    },
+    {
+        "key": "before",
+        "advanced": true,
+        "help": "Insert content, specified by the parameter, before each element in the set of matched elements."
+    },
+    {
+        "key": "blank",
+        "advanced": true,
+        "help": "Retain only elements from the set of matched elements that have no content."
+    },
+    {
+        "key": "children",
+        "advanced": true,
+        "help": "Return the children of each element in the set of matched elements, optionally filtered by a selector."
+    },
+    {
+        "key": "closest",
+        "advanced": false,
+        "help": "For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."
+    },
+    {
+        "key": "contents",
+        "advanced": true,
+        "help": "Return the children of each element in the set of matched elements, including text and comment nodes."
+    },
+    {
+        "key": "css",
+        "advanced": true,
+        "help": "Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."
+    },
+    {
+        "key": "cut",
+        "advanced": true,
+        "help": "Cut text from the set of matched elements."
+    },
+    {
+        "key": "empty",
+        "advanced": true,
+        "help": "Remove all child nodes of the set of matched elements from the DOM."
+    },
+    {
+        "key": "eq",
+        "advanced": false,
+        "help": "Reduce the set of matched elements to the one at the specified index."
+    },
+    {
+        "key": "even",
+        "advanced": true,
+        "help": "Reduce the set of matched elements to the even ones in the set, numbered from zero."
+    },
+    {
+        "key": "extract",
+        "advanced": false,
+        "help": "Extract text from the set of matched elements using a regular expression."
+    },
+    {
+        "key": "filter",
+        "advanced": false,
+        "help": "Reduce the set of matched elements to those that match a selector or a regular expression."
+    },
+    {
+        "key": "find",
+        "advanced": false,
+        "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector."
+    },
+    {
+        "key": "first",
+        "advanced": false,
+        "help": "Reduce the set of matched elements to the first in the set."
+    },
+    {
+        "key": "has",
+        "advanced": true,
+        "help": "Reduce the set of matched elements to those that have a descendant that matches the specified selector."
+    },
+    {
+        "key": "hasClass",
+        "advanced": true,
+        "help": "Determine whether any of the matched elements are assigned the given class."
+    },
+    {
+        "key": "html",
+        "advanced": false,
+        "help": "Return the HTML contents of the set of matched elements."
+    },
+    {
+        "key": "index",
+        "advanced": true,
+        "help": "Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."
+    },
+    {
+        "key": "is",
+        "advanced": true,
+        "help": "Determines whether at least one element within the current matched set of elements matches the specified selector."
+    },
+    {
+        "key": "last",
+        "advanced": false,
+        "help": "Reduce the set of matched elements to the final one in the set."
+    },
+    {
+        "key": "length",
+        "advanced": true,
+        "help": "Returns the number of matched elements."
+    },
+    {
+        "key": "map",
+        "advanced": true,
+        "help": "Map the set of matched elements using a specified formula."
+    },
+    {
+        "key": "next",
+        "advanced": true,
+        "help": "Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."
+    },
+    {
+        "key": "nextAll",
+        "advanced": true,
+        "help": "Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."
+    },
+    {
+        "key": "nextUntil",
+        "advanced": true,
+        "help": "Return all following siblings of each element up to but not including the element matched by the specified selector."
+    },
+    {
+        "key": "nonblank",
+        "advanced": true,
+        "help": "Remove elements from the set of matched elements that have no content."
+    },
+    {
+        "key": "not",
+        "advanced": true,
+        "help": "Remove elements from the set of matched elements."
+    },
+    {
+        "key": "odd",
+        "advanced": true,
+        "help": "Reduce the set of matched elements to the odd ones in the set, numbered from zero."
+    },
+    {
+        "key": "parent",
+        "advanced": false,
+        "help": "Return the parent of each element in the current set of matched elements, optionally filtered by a selector."
+    },
+    {
+        "key": "parents",
+        "advanced": false,
+        "help": "Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."
+    },
+    {
+        "key": "parentsUntil",
+        "advanced": true,
+        "help": "Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."
+    },
+    {
+        "key": "prepend",
+        "advanced": true,
+        "help": "Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."
+    },
+    {
+        "key": "prev",
+        "advanced": true,
+        "help": "Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."
+    },
+    {
+        "key": "prevAll",
+        "advanced": true,
+        "help": "Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."
+    },
+    {
+        "key": "prevUntil",
+        "advanced": true,
+        "help": "Return all preceding siblings of each element up to but not including the element matched by the selector."
+    },
+    {
+        "key": "prop",
+        "advanced": true,
+        "help": "Return the value of a property in the set of matched elements."
+    },
+    {
+        "key": "remove",
+        "advanced": true,
+        "help": "Remove the set of matched elements from the DOM."
+    },
+    {
+        "key": "removeAttr",
+        "advanced": true,
+        "help": "Remove an attribute from each element in the set of matched elements."
+    },
+    {
+        "key": "removeClass",
+        "advanced": true,
+        "help": "Remove a single class, multiple classes, or all classes from each element in the set of matched elements."
+    },
+    {
+        "key": "removeData",
+        "advanced": true,
+        "help": "Remove a previously-stored piece of data."
+    },
+    {
+        "key": "removeProp",
+        "advanced": true,
+        "help": "Remove a property for the set of matched elements."
+    },
+    {
+        "key": "replace",
+        "advanced": true,
+        "help": "Replace the set of matched elements."
+    },
+    {
+        "key": "replaceHTML",
+        "advanced": true,
+        "help": "Replaces the HTML within the set of matched elements."
+    },
+    {
+        "key": "replaceTag",
+        "advanced": true,
+        "help": "Replaces the HTML tag with a specified new tag."
+    },
+    {
+        "key": "replaceText",
+        "advanced": true,
+        "help": "Replaces the text with the set of matched elements."
+    },
+    {
+        "key": "replaceWith",
+        "advanced": true,
+        "help": "Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."
+    },
+    {
+        "key": "reverse",
+        "advanced": true,
+        "help": "Reverses the order of the current set of matched elements."
+    },
+    {
+        "key": "scrollTop",
+        "advanced": true,
+        "help": "Scrolls to the top of the current viewport."
+    },
+    {
+        "key": "scrollBottom",
+        "advanced": true,
+        "help": "Scrolls to the bottom of the current viewport."
+    },
+    {
+        "key": "siblings",
+        "advanced": true,
+        "help": "Return the siblings of each element in the set of matched elements, optionally filtered by a selector."
+    },
+    {
+        "key": "size",
+        "advanced": true,
+        "help": "Returns the number of matched elements."
+    },
+    {
+        "key": "slice",
+        "advanced": true,
+        "help": "Reduce the set of matched elements to a subset specified by a range of indices."
+    },
+    {
+        "key": "split",
+        "advanced": true,
+        "help": "Split the text of the set of matched elements using the specified delimiter."
+    },
+    {
+        "key": "text",
+        "advanced": true,
+        "help": "Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."
+    },
+    {
+        "key": "unwrap",
+        "advanced": true,
+        "help": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."
+    },
+    {
+        "key": "wrap",
+        "advanced": true,
+        "help": "Wrap each element in the set of matched elements with the specified HTML."
+    },
+    {
+        "key": "wrapAll",
+        "advanced": true,
+        "help": "Wrap all elements in the set of matched elements with the specified HTML."
+    },
+    {
+        "key": "wrapInner",
+        "advanced": true,
+        "help": "Wrap the content of each element in the set of matched elements with the specified HTML."
+    }
 ]

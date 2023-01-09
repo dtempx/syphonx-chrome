@@ -1,7 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Autocomplete, Button, IconButton, Stack, SxProps, TextField, Theme, Tooltip } from "@mui/material";
-import { LightbulbOutlined as TrackOffIcon, Lightbulb as TrackOnIcon, Visibility as ShowOutputIcon, VisibilityOff as HideOutputIcon } from "@mui/icons-material";
 import * as background from "../../../../background-proxy";
+
+import {
+    Autocomplete,
+    Button,
+    Chip,
+    IconButton,
+    Stack,
+    SxProps,
+    TextField,
+    Theme,
+    Tooltip
+} from "@mui/material";
+
+import {
+    LightbulbOutlined as TrackOffIcon,
+    Lightbulb as TrackOnIcon,
+    Visibility as ShowOutputIcon,
+    VisibilityOff as HideOutputIcon
+} from "@mui/icons-material";
 
 export interface Props {
     value: string;
@@ -13,13 +30,13 @@ export default ({ value, onChange, ...props }: Props) => {
     const [tracking, setTracking] = useState(false);
     const [selectors, setSelectors] = useState<string[]>([]);
     const [counter, setCounter] = useState(0);
-    const [output, setOutput] = useState("");
+    const [output, setOutput] = useState<Array<string | null>>([]);
     const [showOutput, setShowOutput] = useState(false);
 
     useEffect(() => {
         (async () => {
-            const data = await background.selectElements([value]);
-            setOutput(data.map(line => line || "").join("\n"));
+            const output = await background.selectElements([value]);
+            setOutput(output);
         })();
         return () => {
             background.selectElements([]);
@@ -72,8 +89,10 @@ export default ({ value, onChange, ...props }: Props) => {
                 size="small"
                 value={value}
                 options={selectors}
-                freeSolo
-                fullWidth
+                fullWidth={true}
+                freeSolo={true}
+                openOnFocus={true}
+                forcePopupIcon={true}
                 sx={{ ml: 1 }}
                 renderInput={params =>
                     <TextField
@@ -84,6 +103,14 @@ export default ({ value, onChange, ...props }: Props) => {
                     />
                 }
             />
+            {output.length > 0 ? (
+                <Chip
+                    color="primary"
+                    label={output.length}
+                    size="small"
+                    sx={{ position: "relative", top: "8px", ml: 1 }}
+                />
+            ) : null}
             <Tooltip title={showOutput ? "Hide stage output" : "Show stage output"}>
                 <IconButton onClick={() => setShowOutput(!showOutput) }>
                     {showOutput ? <ShowOutputIcon fontSize="small" /> : <HideOutputIcon fontSize="small" />}
@@ -95,7 +122,7 @@ export default ({ value, onChange, ...props }: Props) => {
                 variant="outlined"
                 multiline
                 rows={3}
-                value={output}
+                value={output.map(line => line?.trim() || "").join("\n")}
                 sx={{
                     mt: 1,
                     width: "100%",

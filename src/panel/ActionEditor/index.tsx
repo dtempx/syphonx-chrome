@@ -60,7 +60,7 @@ export default () => {
                     <Tooltip title="Code Editor">
                         <IconButton size="small"><CodeIcon fontSize="small" /></IconButton>
                     </Tooltip>
-                    <Tooltip title="Test Editor">
+                    <Tooltip title="Test Runner">
                         <IconButton size="small"><TestIcon fontSize="small" /></IconButton>
                     </Tooltip>
                     <Tooltip title="Template Settings">

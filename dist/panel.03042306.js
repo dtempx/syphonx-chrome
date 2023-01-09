@@ -39417,8 +39417,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
-
 parcelRequire("d4J5n");
 
 var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
@@ -39660,14 +39658,14 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     const [tracking, setTracking] = (0, $d4J5n.useState)(false);
     const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
     const [counter, setCounter] = (0, $d4J5n.useState)(0);
-    const [output, setOutput] = (0, $d4J5n.useState)("");
+    const [output1, setOutput] = (0, $d4J5n.useState)([]);
     const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
-            const data = await $6767c619f5de943e$export$f2909722c7f0f932([
+            const output = await $6767c619f5de943e$export$f2909722c7f0f932([
                 value
             ]);
-            setOutput(data.map((line)=>line || "").join("\n"));
+            setOutput(output);
         })();
         return ()=>{
             $6767c619f5de943e$export$f2909722c7f0f932([]);
@@ -39724,8 +39722,10 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                         size: "small",
                         value: value,
                         options: selectors1,
-                        freeSolo: true,
                         fullWidth: true,
+                        freeSolo: true,
+                        openOnFocus: true,
+                        forcePopupIcon: true,
                         sx: {
                             ml: 1
                         },
@@ -39736,6 +39736,16 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                                 onChange: (event)=>onChange(event, event.target.value)
                             })
                     }),
+                    output1.length > 0 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                        color: "primary",
+                        label: output1.length,
+                        size: "small",
+                        sx: {
+                            position: "relative",
+                            top: "8px",
+                            ml: 1
+                        }
+                    }) : null,
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: showOutput ? "Hide stage output" : "Show stage output",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
@@ -39753,7 +39763,7 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 variant: "outlined",
                 multiline: true,
                 rows: 3,
-                value: output,
+                value: output1.map((line)=>line?.trim() || "").join("\n"),
                 sx: {
                     mt: 1,
                     width: "100%",
@@ -39772,14 +39782,71 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 };
 
 
+
+parcelRequire("d4J5n");
+
+
+var $f8819d52d7ebd564$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
+    return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+        underline: "always",
+        fontSize: "small",
+        sx: {
+            cursor: "pointer"
+        },
+        onClick: onAdd,
+        children: "Add alternate selector"
+    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Switches between query alternates",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $45f76937994d9bdb$export$2e2bcd8739ae039), {
+                    size: "small",
+                    color: "primary",
+                    count: selects.length,
+                    page: index + 1,
+                    onChange: (event, page)=>onChange(event, page - 1),
+                    sx: {
+                        position: "relative",
+                        top: "2px"
+                    }
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Add an alternate query",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    onClick: onAdd,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                        fontSize: "small"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Delete this alternate query",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    disabled: selects.length <= 1,
+                    onClick: onDelete,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                        fontSize: "small"
+                    })
+                })
+            })
+        ]
+    });
+};
+
+
+
 var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , onClose: onClose , onChange: onChange  })=>{
-    const [queries, setQueries] = (0, $d4J5n.useState)([
+    const [selects, setSelects] = (0, $d4J5n.useState)([
         [
             ""
         ]
     ]);
-    const [index, setIndex] = (0, $d4J5n.useState)(0);
-    (0, $d4J5n.useEffect)(()=>setQueries(select.query || [
+    const [index1, setIndex] = (0, $d4J5n.useState)(0);
+    (0, $d4J5n.useEffect)(()=>setSelects(select.query || [
             [
                 ""
             ]
@@ -39787,31 +39854,31 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
         select
     ]);
     function onAddQuery() {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
         newValue.push([
             ""
         ]);
-        setQueries(newValue);
+        setSelects(newValue);
         setIndex(newValue.length - 1);
     }
     function onDeleteQuery() {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
-        newValue.splice(index, 1);
-        setQueries(newValue);
-        setIndex(index - 1);
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
+        newValue.splice(index1, 1);
+        setSelects(newValue);
+        if (index1 > 0) setIndex(index1 - 1);
     }
     function onRawQueryChanged(event, query) {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
-        newValue[index] = query;
-        setQueries(newValue);
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
+        newValue[index1] = query;
+        setSelects(newValue);
     }
     function onSelectorChanged(event, value) {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(queries);
-        newValue[index][0] = value;
-        setQueries(newValue);
+        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
+        newValue[index1][0] = value;
+        setSelects(newValue);
     }
     function onCommit(event) {
-        onChange(event, queries);
+        onChange(event, selects);
         onClose(event);
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
@@ -39880,45 +39947,12 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                                     }) : null
                                 ]
                             }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                direction: "row",
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                        title: "Switches between query alternates",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $45f76937994d9bdb$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            color: "primary",
-                                            count: queries.length,
-                                            page: index + 1,
-                                            onChange: (_, page)=>setIndex(page - 1),
-                                            sx: {
-                                                position: "relative",
-                                                top: "2px"
-                                            }
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                        title: "Add an alternate query",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            onClick: onAddQuery,
-                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
-                                                fontSize: "small"
-                                            })
-                                        })
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                        title: "Delete this alternate query",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                            size: "small",
-                                            disabled: queries.length <= 1,
-                                            onClick: onDeleteQuery,
-                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                                                fontSize: "small"
-                                            })
-                                        })
-                                    })
-                                ]
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f8819d52d7ebd564$export$2e2bcd8739ae039), {
+                                selects: selects,
+                                index: index1,
+                                onChange: (event, index)=>setIndex(index),
+                                onAdd: onAddQuery,
+                                onDelete: onDeleteQuery
                             })
                         ]
                     }),
@@ -39929,7 +39963,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                         }
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0465f9a09db963cd$export$2e2bcd8739ae039), {
-                        value: queries[index][0],
+                        value: selects[index1][0],
                         onChange: (event, value)=>onSelectorChanged(event, value)
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
@@ -39944,7 +39978,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0b61921fb120a84a$export$2e2bcd8739ae039), {
-                            query: queries[index],
+                            query: selects[index1],
                             onChange: onRawQueryChanged
                         })
                     }),
@@ -42015,7 +42049,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                                 })
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Test Editor",
+                                title: "Test Runner",
                                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                                     size: "small",
                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
