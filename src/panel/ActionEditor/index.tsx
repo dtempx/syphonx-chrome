@@ -3,7 +3,7 @@ import ActionPropertyEditor from "./ActionPropertyEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton/index";
 import DataView from "./DataView";
-import SidebarMenu from "./SidebarMenu"
+import SidebarMenu from "./Sidebar/index"
 import { useTemplate } from '../context';
 
 import {

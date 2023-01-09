@@ -1,7 +1,7 @@
 import React from "react";
-import { FileDialog } from "../../components";
-import { cloudReadTemplateFile, Template } from "../../lib";
-import { useStorage, useTemplate } from "../context";
+import { FileDialog } from "../../../components";
+import { cloudReadTemplateFile, Template } from "../../../lib";
+import { useStorage, useTemplate } from "../../context";
 
 export interface Props {
     open: boolean;

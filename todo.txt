@@ -1,7 +1,14 @@
 BUGS
 CSS Selector not highlighting in DOM on change
 output is only updating the first time
+wait to dismiss file dialog until after file operation is complete, on error set ribbon and don't close the dialog
+file save doesn't work
+prompt for unsaved changes
+selector highlighting doesn't work on property page
 
+
+TIPS
+Use the middle mouse button to 
 
 CURRENT: QUERY BUILDER
 regex editor

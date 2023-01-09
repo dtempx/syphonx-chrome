@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from "@mui/material";
-import { Input as CommitIcon } from "@mui/icons-material";
 import { AlertBar, FileList, FilePathBreadcrumbs, TitleBar, TransitionUp } from ".";
+
+import {
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    TextField
+} from "@mui/material";
+
+import {
+    Input as CommitIcon
+} from "@mui/icons-material";
 
 export interface Props {
     files: string[];

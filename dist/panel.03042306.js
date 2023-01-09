@@ -4,6 +4,9 @@ function $parcel$export(e, n, v, s) {
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
+}
 function $parcel$exportWildcard(dest, source) {
   Object.keys(source).forEach(function(key) {
     if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) {
@@ -20776,6 +20779,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $3fab0efee1ba3066$exports = {};
+
+$parcel$defineInteropFlag($3fab0efee1ba3066$exports);
+
+$parcel$export($3fab0efee1ba3066$exports, "default", () => $fd29e14a923db841$export$2e2bcd8739ae039);
+
 
 
 
@@ -21770,6 +21779,8 @@ const $fd29e14a923db841$var$ModalBackdrop = (0, $28cddbc9c45fcc54$export$2e2bcd8
     }));
 });
 var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
+
+
 
 
 
@@ -31887,6 +31898,18 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 var $d4J5n = parcelRequire("d4J5n");
+var $5002f5814ed49d1e$exports = {};
+
+$parcel$export($5002f5814ed49d1e$exports, "path", () => $89382e3cfd90d03a$exports);
+$parcel$export($5002f5814ed49d1e$exports, "Template", () => $1b88f382576c34f2$export$14416b8d99d47caa);
+$parcel$export($5002f5814ed49d1e$exports, "cloudFetchTemplateDirectory", () => $20d1a517b8ce84e3$export$30d4711d6f8d17eb);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
+$parcel$export($5002f5814ed49d1e$exports, "cloudReadTemplateFile", () => $20d1a517b8ce84e3$export$de1a4df3278e5008);
+$parcel$export($5002f5814ed49d1e$exports, "cloudCreateTemplateFile", () => $20d1a517b8ce84e3$export$25c05c84991e5fdf);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
+$parcel$export($5002f5814ed49d1e$exports, "isObject", () => $aacd3173f0a35cbd$export$a6cdc56e425d0d0a);
+$parcel$export($5002f5814ed49d1e$exports, "removeDOMRefs", () => $d2489396c3ef9092$export$de139376c1f60602);
+$parcel$export($5002f5814ed49d1e$exports, "clone", () => $711b72822a456466$export$9cd59f9826255e47);
 var $89382e3cfd90d03a$exports = {};
 var $596d45310e010dc1$exports = {};
 
@@ -39703,7 +39726,7 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 spacing: 0,
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: tracking ? "Start tracking page clicks for CSS suggestions" : "Stop tracking page clicks for CSS suggestions",
+                        title: tracking ? "Stop tracking page clicks for CSS suggestions" : "Start tracking page clicks for CSS suggestions",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
                             variant: tracking ? "contained" : "outlined",
                             size: "small",
@@ -41841,11 +41864,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
 parcelRequire("d4J5n");
 
 
 
-var $3c40423601a78f55$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $5c306f9cb910b8cc$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     async function onSelectFile(event, file) {
@@ -41877,7 +41901,7 @@ parcelRequire("d4J5n");
 
 
 
-var $49aafe2ff72a5a74$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $a25bfd1370319433$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
     const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     async function handleSelectFile(event, file) {
@@ -41905,21 +41929,56 @@ var $49aafe2ff72a5a74$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
+parcelRequire("d4J5n");
 
 
-var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $dbe7b66a72dc2a47$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
+        fullScreen: true,
+        open: open,
+        onClose: onClose,
+        TransitionComponent: (0, $5339359c895a55f0$export$d5e0bbf39d25920b),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0d0d12e54088d016$export$2e2bcd8739ae039), {
+                sx: {
+                    p: 0
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1e6698c63139ed83$export$2e2bcd8739ae039), {
+                    title: "User Settings",
+                    onClose: onClose
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
+                sx: {
+                    p: 0
+                }
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {})
+        ]
+    });
+};
+
+
+
+
+var $e4769a85bdb2a785$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
+    const [userSettingsOpen, setUserSettingsOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3c40423601a78f55$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5c306f9cb910b8cc$export$2e2bcd8739ae039), {
                 open: fileOpenOpen,
                 onClose: ()=>setFileOpenOpen(false)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $49aafe2ff72a5a74$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a25bfd1370319433$export$2e2bcd8739ae039), {
                 open: fileSaveOpen,
                 onClose: ()=>setFileSaveOpen(false)
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dbe7b66a72dc2a47$export$2e2bcd8739ae039), {
+                open: userSettingsOpen,
+                onClose: ()=>setUserSettingsOpen(false)
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $89021ce2ce45d642$export$2e2bcd8739ae039), {
                 anchor: "left",
@@ -41963,7 +42022,7 @@ var $8a81fae7927c22af$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 "User Settings",
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d441ee9f6f9a92ef$export$2e2bcd8739ae039), {}),
                                 (event)=>{
-                                    setFileSaveOpen(true);
+                                    setUserSettingsOpen(true);
                                     onClose(event);
                                 }
                             ]
@@ -41987,7 +42046,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
             minWidth: 500
         },
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8a81fae7927c22af$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4769a85bdb2a785$export$2e2bcd8739ae039), {
                 open: sidebarOpen,
                 onClose: ()=>setSidebarOpen(false)
             }),

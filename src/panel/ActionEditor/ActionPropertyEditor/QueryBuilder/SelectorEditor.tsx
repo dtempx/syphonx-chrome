@@ -75,7 +75,7 @@ export default ({ value, onChange, ...props }: Props) => {
    
     return (<>
         <Stack {...props} direction="row" spacing={0}>
-            <Tooltip title={tracking ? "Start tracking page clicks for CSS suggestions" : "Stop tracking page clicks for CSS suggestions"}>
+            <Tooltip title={tracking ? "Stop tracking page clicks for CSS suggestions" : "Start tracking page clicks for CSS suggestions"}>
                 <Button
                     variant={tracking ? "contained" : "outlined"}
                     size="small"
