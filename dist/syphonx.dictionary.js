@@ -1,6 +1,6 @@
 (function () {
-    window.sx = {
-        dictionary: new Set(
+
+const dictionary = new Set(
 `a
 aa
 aaa
@@ -9896,6 +9896,8 @@ zope
 zshops
 zu
 zum
-zus`.split("\n"))
-    };
+zus`.split("\n"));
+
+window.syphonx = { ...window.syphonx, dictionary };
+
 })();

@@ -1,5 +1,5 @@
 export function disableTracking() {
-    sx.tracking = false;
+    syphonx.tracking = false;
 
     document.querySelectorAll(".sx-hover").forEach(element => {
         element.classList.remove("sx-hover");
@@ -15,10 +15,10 @@ export function disableTracking() {
 }
 
 export function enableTracking() {
-    sx.tracking = true;
+    syphonx.tracking = true;
 
     window.addEventListener("beforeunload", event => {
-        if (sx.tracking) {
+        if (syphonx.tracking) {
             event.preventDefault();
             event.stopPropagation();
             return "";
@@ -32,7 +32,7 @@ export function enableTracking() {
                 element.removeAttribute("class");
         });
 
-        if (sx.tracking)
+        if (syphonx.tracking)
             if (event.target instanceof HTMLElement)
                 event.target.classList.add("sx-hover");
     });
@@ -53,7 +53,7 @@ export function enableTracking() {
                 element.removeAttribute("class");
         });
 
-        if (sx.tracking) {
+        if (syphonx.tracking) {
             if (event.target instanceof HTMLElement)
                 event.target.classList.add("sx-click");
             event.preventDefault();
@@ -94,7 +94,7 @@ export function queryTracking(): string[] {
         // split words by "-" including only word lengths greater than 3 
         const words = name.split("-").filter(word => word.length > 3);
         // reject if any word of length greater than 3 is not in the English dictionary
-        return words.length > 0 && words.every(word => sx.dictionary.has(word));
+        return words.length > 0 && words.every(word => syphonx.dictionary.has(word));
     }
 
     function singleSelector(element: Element | null): string[] {

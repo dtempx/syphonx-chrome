@@ -1,14 +1,22 @@
-import * as syphonx from "syphonx-lib";
 import * as scripts from "./scripts";
 
 const scriptMap: Record<string, Function> = {
-    "applyTemplate": syphonx.extract,
+    "applyTemplate": scripts.applyTemplate,
     "disableTracking": scripts.disableTracking,
     "enableTracking": scripts.enableTracking,
     "queryTracking": scripts.queryTracking,
     "selectElements": scripts.selectElements,
 };
 
+/**
+ * Executes a function in the context of the page corresponding to a tabId.
+ * 
+ * @param tabId Specifies the tab in which to execute the function.
+ * @param func A reference to a function to execute in the context of the page.
+ * @param args Optional arguments to pass to the function.
+ * @returns The result returned by the function. If the resulting value of the function execution is a promise, Chrome will wait for the promise to settle and return the resulting value. {@link https://developer.chrome.com/docs/extensions/reference/scripting/#promises}
+ * @see {@link https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions}
+ */
 function executeScript<T = unknown>(tabId: number, func: () => void, ...args: any): Promise<T> {
     return new Promise((resolve, reject) =>
         chrome.scripting.executeScript(
@@ -19,6 +27,15 @@ function executeScript<T = unknown>(tabId: number, func: () => void, ...args: an
     );
 }
 
+/**
+ * Executes a script in the context of the page corresponding to a tabId.
+ * Also used to inject a library such as jQuery so it can be called subsequently.
+ * 
+ * @param tabId Specifies the tab in which to execute the script.
+ * @param file A file containing the script to execute in the context of the page.
+ * @returns The result returned by executing the script.
+ * @see {@link https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions}
+ */
 function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T> {
     return new Promise((resolve, reject) =>
         chrome.scripting.executeScript(
@@ -30,10 +47,11 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
 }
 
 async function injectAll(tabId: number): Promise<void> {
-    const injected = await executeScript<boolean>(tabId, () => typeof window.sx === "object");
+    const injected = await executeScript<boolean>(tabId, () => typeof window.syphonx === "object");
     if (!injected) {
         await executeScriptFile(tabId, "jquery.slim.js");
-        await executeScriptFile(tabId, "sx.js");
+        await executeScriptFile(tabId, "syphonx.js");
+        await executeScriptFile(tabId, "syphonx.dictionary.js");
         await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
         console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
