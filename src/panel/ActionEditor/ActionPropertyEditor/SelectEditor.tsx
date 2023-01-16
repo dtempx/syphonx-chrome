@@ -162,10 +162,10 @@ export default ({ item }: Props) => {
         <>
             <PropertyGrid items={items} />
             <QueryBuilder
-                select={select}
+                value={select}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, query) => { select.query = query; setTemplate(template.clone()); }}
+                onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
             />
         </>
     );

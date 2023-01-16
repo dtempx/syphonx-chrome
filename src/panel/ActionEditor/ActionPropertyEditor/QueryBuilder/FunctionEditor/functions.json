@@ -1,11 +1,13 @@
 [
     {
         "key": "add",
+        "args": [],
         "advanced": true,
         "help": "Create a new object with elements added to the set of matched elements."
     },
     {
         "key": "addBack",
+        "args": ["-selector"],
         "advanced": true,
         "help": "Add the previous set of elements on the stack to the current set, optionally filtered by a selector."
     },
@@ -42,7 +44,8 @@
     {
         "key": "blank",
         "advanced": true,
-        "help": "Retain only elements from the set of matched elements that have no content."
+        "help": "Retain only elements from the set of matched elements that have no content.",
+        "args": []
     },
     {
         "key": "children",
@@ -67,7 +70,22 @@
     {
         "key": "cut",
         "advanced": true,
-        "help": "Cut text from the set of matched elements."
+        "help": "Cut text from the set of matched elements.",
+        "args": [
+            {
+                "name": "Splitter",
+                "type": "string",
+                "required": true
+            },
+            {
+                "name": "Position",
+                "type": "number"
+            },
+            {
+                "name": "Limit",
+                "type": "number"
+            }
+        ]
     },
     {
         "key": "empty",
@@ -86,16 +104,19 @@
     },
     {
         "key": "extract",
+        "args": ["selector|regexp", "-keep-unmatched-items", "-trim-whitespace"],
         "advanced": false,
         "help": "Extract text from the set of matched elements using a regular expression."
     },
     {
         "key": "filter",
+        "args": ["selector|regexp"],
         "advanced": false,
         "help": "Reduce the set of matched elements to those that match a selector or a regular expression."
     },
     {
         "key": "find",
+        "args": ["selector"],
         "advanced": false,
         "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector."
     },
@@ -241,41 +262,49 @@
     },
     {
         "key": "replace",
+        "args": ["regexp", "-replace-text"],
         "advanced": true,
         "help": "Replace the set of matched elements."
     },
     {
         "key": "replaceHTML",
+        "args": ["replace-html"],
         "advanced": true,
         "help": "Replaces the HTML within the set of matched elements."
     },
     {
         "key": "replaceTag",
+        "args": ["replace-tag", "-keep-props"],
         "advanced": true,
         "help": "Replaces the HTML tag with a specified new tag."
     },
     {
         "key": "replaceText",
+        "args": ["replace-text"],
         "advanced": true,
         "help": "Replaces the text with the set of matched elements."
     },
     {
         "key": "replaceWith",
+        "args": ["replace-html"],
         "advanced": true,
         "help": "Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."
     },
     {
         "key": "reverse",
+        "args": [],
         "advanced": true,
         "help": "Reverses the order of the current set of matched elements."
     },
     {
         "key": "scrollTop",
+        "args": [],
         "advanced": true,
         "help": "Scrolls to the top of the current viewport."
     },
     {
         "key": "scrollBottom",
+        "args": [],
         "advanced": true,
         "help": "Scrolls to the bottom of the current viewport."
     },
@@ -296,11 +325,13 @@
     },
     {
         "key": "split",
+        "args": ["separator", "-limit", "-trim"],
         "advanced": true,
         "help": "Split the text of the set of matched elements using the specified delimiter."
     },
     {
         "key": "text",
+        "args": ["-inline"],
         "advanced": true,
         "help": "Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."
     },

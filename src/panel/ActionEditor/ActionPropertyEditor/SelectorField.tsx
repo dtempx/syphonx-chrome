@@ -20,19 +20,30 @@ export interface Props {
 
 export default ({ query, onClick }: Props) => {
     const [value, setValue] = useState("");
+    const [showTooltip, setShowTooltip] = useState(false);
+
+    function handleClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        onClick(event);
+        setShowTooltip(false);
+    }
 
     useEffect(() => {
-        if (query && query.length > 0)
+        if (query && query.length > 0 && query[0]) {
             setValue(syphonx.formatJQueryExpression(query[0]) || "");
-        else
+            setShowTooltip(false);
+        }
+        else {
             setValue("");
+            setShowTooltip(true);
+        }
+            
     }, [query]);
 
     return (
         <TextField
             variant="standard"
             size="small"
-            value={value}
+            value={value || "(none)"}
             fullWidth
             sx={{ caretColor: "transparent" }}
             InputProps={{
@@ -49,8 +60,10 @@ export default ({ query, onClick }: Props) => {
                                 />
                             </Tooltip>
                         ) : null}
-                        <IconButton size="small" onClick={onClick}>
-                            <EditIcon fontSize="small" />
+                        <IconButton size="small" onClick={handleClick}>
+                            <Tooltip arrow placement="left" title="Click here to setup a selector" open={showTooltip}>
+                                <EditIcon fontSize="small" />    
+                            </Tooltip>
                         </IconButton>
                     </InputAdornment>
                 }}

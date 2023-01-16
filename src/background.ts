@@ -29,13 +29,6 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
     );
 }
 
-async function getTabUrl(tabId: number): Promise<string | undefined> {
-    if (tabId) {
-        const tab = await chrome.tabs.get(tabId);
-        return tab?.url;
-    }
-}
-
 async function injectAll(tabId: number): Promise<void> {
     const injected = await executeScript<boolean>(tabId, () => typeof window.sx === "object");
     if (!injected) {
@@ -66,12 +59,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         try {
             await injectAll(message.tabId);
             const result = await executeScript(message.tabId, scriptMap[message.key] as () => void, ...message.params);
+            console.log("MESSAGE", message.key, { message, sender, result });
             sendResponse({ result });
         }
         catch (error) {
             console.error("MESSAGE", message.key, { message, sender, error });
             sendResponse({ error });
         }
+        
     })();
     return true; // response will be sent asynchronously
 });

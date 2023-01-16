@@ -1,3 +1,64 @@
+V1
+
+Query Builder
+
+Action Views
+    action view: click
+    action view: each
+    action view: error
+    action view: repeat
+    action view: snooze
+    action view: transform
+    action view: waitfor
+    action view: yield
+
+Add sub-items
+    add sub-items to repeat
+    add sub-items to each
+    add sub-items to transform
+    add sub-items to waitfor
+
+Data View
+    data view: single object view
+    data view: table view
+    data view: json view
+    data view: error view
+    data view: log view
+    data view: data contract view
+    DOM highlighting
+
+Data contracts
+Template test case runner
+Template settings: url, key
+
+User settings: api-key, email
+Cloud template storage access control
+View template change history (who, when, what/diffs)
+Rollbacks
+
+Trials
+
+
+V1.1
+Selector quality feedback (good, fair, poor)
+Comments
+Persist templates locally in chrome.storage
+Breakpoints
+Editor copy/paste
+Switch between autorun and manual
+Paste HTML Sandbox
+
+Edit template as code (yaml)
+Recorder
+
+Venom conversion tool
+IFRAME drilling
+Support shadow roots with Playwright
+GPT3 chatbot integration
+
+
+
+
 BUGS
 CSS Selector not highlighting in DOM on change
 output is only updating the first time
@@ -5,10 +66,9 @@ wait to dismiss file dialog until after file operation is complete, on error set
 file save doesn't work
 prompt for unsaved changes
 selector highlighting doesn't work on property page
+Disable autorun for non-select-only templates
 
 
-TIPS
-Use the middle mouse button to 
 
 CURRENT: QUERY BUILDER
 regex editor
@@ -24,67 +84,6 @@ support finding :contains style selectors (depends on syphonx)
 support repeated selections
 manually set outer context
 
-
-P1
-advanced selector/jquery editor (dropdowns, dom highlighting, regexp editor, selector list management)
-dom highliting for action editor
-(+2d)
-
-fix contextual/selection bugs
-(1d)
-
-action view: click
-action view: each
-action view: error
-action view: repeat
-action view: snooze
-action view: transform
-action view: waitfor
-action view: yield
-(1d)
-
-add sub-items to repeat
-add sub-items to each
-add sub-items to transform
-add sub-items to waitfor
-(1d)
-
-data view: single object view
-data view: table view
-data view: json view
-data view: error view
-data view: log view
-(2d)
-
-data contract validation
-data view: data contract view
-dom highlighting for data views
-(1d)
-
-trials
-(1d)
-
-template test cases
-(1d)
-
-folder permissions
-view template change history (who, when, what/diffs)
-rollbacks
-css selector gadget (create selectors by pointing at parts of the page)
-
-P2
-edit template as code (yaml)
-editor copy/paste
-disable autorun for non-select-only templates
-switch between autorun and manual
-selector quality feedback (good, fair, poor)
-
-config page: api-key, email
-venom conversion tool
-
-iframes
-shadow roots with playwright
-gpt3 chatbot
 
 
 

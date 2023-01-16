@@ -38348,6 +38348,9 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
     clone() {
         return new $1b88f382576c34f2$export$14416b8d99d47caa((0, $6f0852509a7f7477$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
     }
+    empty() {
+        return this.children.length === 0;
+    }
     findItem(key) {
         return (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, key);
     }
@@ -39385,16 +39388,26 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
     const [value, setValue] = (0, $d4J5n.useState)("");
+    const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
+    function handleClick(event) {
+        onClick(event);
+        setShowTooltip(false);
+    }
     (0, $d4J5n.useEffect)(()=>{
-        if (query && query.length > 0) setValue($8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "");
-        else setValue("");
+        if (query && query.length > 0 && query[0]) {
+            setValue($8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "");
+            setShowTooltip(false);
+        } else {
+            setValue("");
+            setShowTooltip(true);
+        }
     }, [
         query
     ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         variant: "standard",
         size: "small",
-        value: value,
+        value: value || "(none)",
         fullWidth: true,
         sx: {
             caretColor: "transparent"
@@ -39422,9 +39435,15 @@ var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClic
                     }) : null,
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                         size: "small",
-                        onClick: onClick,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
-                            fontSize: "small"
+                        onClick: handleClick,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            arrow: true,
+                            placement: "left",
+                            title: "Click here to setup a selector",
+                            open: showTooltip,
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     })
                 ]
@@ -39502,136 +39521,6 @@ var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
-var $9a0805b0db9bb6db$exports = {};
-$9a0805b0db9bb6db$exports = JSON.parse('[{"key":"add","advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content."},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements."},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
-
-
-var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ ...props })=>{
-    const [value, setValue] = (0, $d4J5n.useState)("");
-    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
-    const [output, setOutput] = (0, $d4J5n.useState)("");
-    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                ...props,
-                direction: "row",
-                spacing: 0,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        value: value,
-                        onChange: (event)=>setValue(event.target.value),
-                        sx: {
-                            width: 200,
-                            maxHeight: 500
-                        },
-                        MenuProps: {
-                            style: {
-                                maxHeight: 400
-                            }
-                        },
-                        children: [
-                            (0, (/*@__PURE__*/$parcel$interopDefault($9a0805b0db9bb6db$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: help,
-                                    arrow: true,
-                                    placement: "right",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                        value: key,
-                                        children: [
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
-                                                fontSize: "small"
-                                            }),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                                sx: {
-                                                    ml: 1
-                                                },
-                                                children: key
-                                            })
-                                        ]
-                                    })
-                                })),
-                            expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(false),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: "Less"
-                                    })
-                                ]
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(true),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: "More"
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        sx: {
-                            ml: 1
-                        },
-                        fullWidth: true
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "Delete this stage",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: showOutput ? "Hide stage output" : "Show stage output",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: ()=>setShowOutput(!showOutput),
-                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    })
-                ]
-            }),
-            showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                variant: "outlined",
-                multiline: true,
-                rows: 3,
-                defaultValue: output,
-                sx: {
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "LightGray",
-                    fontSize: "small"
-                }
-            }) : null
-        ]
-    });
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
 var $0b61921fb120a84a$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
     const [value1, setValue] = (0, $d4J5n.useState)("");
     (0, $d4J5n.useEffect)(()=>{
@@ -39677,14 +39566,165 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
+var $d4J5n = parcelRequire("d4J5n");
+var $9a0805b0db9bb6db$exports = {};
+$9a0805b0db9bb6db$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+
+
+
+
+var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ value: value1 = [
+    ""
+] , onChange: onChange , onDelete: onDelete , sx: sx  })=>{
+    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
+    const [output, setOutput] = (0, $d4J5n.useState)("");
+    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    function assignValue(newValue, i) {
+        const obj = value1.slice(0);
+        obj[i] = newValue;
+        return obj;
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                spacing: 0,
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+                        variant: "outlined",
+                        size: "small",
+                        value: value1[0],
+                        displayEmpty: true,
+                        renderValue: (value)=>value || /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                variant: "subtitle1",
+                                sx: {
+                                    opacity: 0.5
+                                },
+                                children: "(Add a stage)"
+                            }),
+                        onChange: (event)=>onChange(event, [
+                                event.target.value,
+                                ...value1.slice(1)
+                            ]),
+                        sx: {
+                            width: 300
+                        },
+                        children: [
+                            (0, (/*@__PURE__*/$parcel$interopDefault($9a0805b0db9bb6db$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                    value: key,
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                        title: help,
+                                        arrow: true,
+                                        placement: "right",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                            sx: {
+                                                width: "100%"
+                                            },
+                                            children: key
+                                        })
+                                    })
+                                })),
+                            expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                onClick: ()=>setExpanded(false),
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: "Less"
+                                    })
+                                ]
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                onClick: ()=>setExpanded(true),
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: "More"
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                        variant: "outlined",
+                        size: "small",
+                        fullWidth: true,
+                        value: value1[1],
+                        onChange: (event)=>onChange(event, assignValue(event.target.value, 1)),
+                        sx: {
+                            ml: 1,
+                            visibility: value1[0] ? "visible" : "hidden"
+                        }
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Delete this stage",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: onDelete,
+                            sx: {
+                                visibility: value1[0] ? "visible" : "hidden"
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: showOutput ? "Hide stage output" : "Show stage output",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: ()=>setShowOutput(!showOutput),
+                            sx: {
+                                visibility: value1[0] ? "visible" : "hidden"
+                            },
+                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            showOutput && value1[0] ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "outlined",
+                multiline: true,
+                rows: 3,
+                defaultValue: output,
+                sx: {
+                    mt: 1,
+                    width: "100%",
+                    backgroundColor: "LightGray",
+                    fontSize: "small"
+                }
+            }) : null
+        ]
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $43cf96b19ff1ec26$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
     const [tracking, setTracking] = (0, $d4J5n.useState)(false);
     const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
     const [counter, setCounter] = (0, $d4J5n.useState)(0);
     const [output1, setOutput] = (0, $d4J5n.useState)([]);
     const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
-        (async ()=>{
+        if (value) (async ()=>{
             const output = await $6767c619f5de943e$export$f2909722c7f0f932([
                 value
             ]);
@@ -39692,6 +39732,16 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
         })();
         return ()=>{
             $6767c619f5de943e$export$f2909722c7f0f932([]);
+        };
+    }, [
+        value
+    ]);
+    (0, $d4J5n.useEffect)(()=>{
+        const timer = setTimeout(()=>{
+            setShowTooltip(!value);
+        }, 250);
+        return ()=>{
+            clearTimeout(timer);
         };
     }, [
         value
@@ -39726,7 +39776,15 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 spacing: 0,
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: tracking ? "Stop tracking page clicks for CSS suggestions" : "Start tracking page clicks for CSS suggestions",
+                        arrow: true,
+                        placement: "bottom",
+                        open: showTooltip,
+                        title: !tracking ? "Click here to automatically generate a CSS selector by clicking on the page." : "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page.",
+                        PopperProps: {
+                            style: {
+                                pointerEvents: "none"
+                            }
+                        },
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
                             variant: tracking ? "contained" : "outlined",
                             size: "small",
@@ -39806,6 +39864,58 @@ var $0465f9a09db963cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
+var $4c28f63364664600$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
+    const select = (0, $d4J5n.useMemo)(()=>value1 || [
+            ""
+        ], [
+        value1
+    ]);
+    function onChangeSelector(event, value) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[0] = value;
+        onChange(event, obj);
+    }
+    function onChangeQueryOp(event, value, i) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[i] = value;
+        onChange(event, obj);
+    }
+    function onDeleteQueryOp(event, i) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.splice(i, 1);
+        onChange(event, obj);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $43cf96b19ff1ec26$export$2e2bcd8739ae039), {
+                value: select[0],
+                onChange: (event, value)=>onChangeSelector(event, value)
+            }),
+            select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                children: [
+                    select.slice(1).map((obj1, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
+                            value: obj1,
+                            onChange: (event, obj)=>onChangeQueryOp(event, obj, i + 1),
+                            onDelete: (event)=>onDeleteQueryOp(event, i + 1),
+                            sx: {
+                                mt: 1
+                            }
+                        })),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
+                        onChange: (event, obj)=>onChangeQueryOp(event, obj, select.length),
+                        sx: {
+                            mt: 1
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
 parcelRequire("d4J5n");
 
 
@@ -39862,46 +39972,41 @@ var $f8819d52d7ebd564$export$2e2bcd8739ae039 = ({ selects: selects , index: inde
 
 
 
-var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , onClose: onClose , onChange: onChange  })=>{
-    const [selects, setSelects] = (0, $d4J5n.useState)([
+var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , onClose: onClose , onChange: onChange  })=>{
+    const [select, setSelect] = (0, $d4J5n.useState)([
         [
             ""
         ]
     ]);
     const [index1, setIndex] = (0, $d4J5n.useState)(0);
-    (0, $d4J5n.useEffect)(()=>setSelects(select.query || [
+    (0, $d4J5n.useEffect)(()=>setSelect(value.query || [
             [
                 ""
             ]
         ]), [
-        select
+        value
     ]);
     function onAddQuery() {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
-        newValue.push([
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.push([
             ""
         ]);
-        setSelects(newValue);
-        setIndex(newValue.length - 1);
+        setSelect(obj);
+        setIndex(obj.length - 1);
     }
     function onDeleteQuery() {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
-        newValue.splice(index1, 1);
-        setSelects(newValue);
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.splice(index1, 1);
+        setSelect(obj);
         if (index1 > 0) setIndex(index1 - 1);
     }
-    function onRawQueryChanged(event, query) {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
-        newValue[index1] = query;
-        setSelects(newValue);
+    function onChangeQuery(event, query) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[index1] = query;
+        setSelect(obj);
     }
-    function onSelectorChanged(event, value) {
-        const newValue = (0, $711b72822a456466$export$9cd59f9826255e47)(selects);
-        newValue[index1][0] = value;
-        setSelects(newValue);
-    }
-    function onCommit(event) {
-        onChange(event, selects);
+    function onSave(event) {
+        onChange(event, select);
         onClose(event);
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
@@ -39944,7 +40049,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                                 direction: "row",
                                 children: [
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
-                                        name: select.type || "string",
+                                        name: value.type || "string",
                                         sx: {
                                             color: "primary.light",
                                             position: "relative",
@@ -39957,9 +40062,9 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                                         sx: {
                                             ml: 1
                                         },
-                                        children: select.name || "(array)"
+                                        children: value.name || "(array)"
                                     }),
-                                    select.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                    value.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
                                         name: "repeated",
                                         sx: {
                                             color: "primary.light",
@@ -39971,7 +40076,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                                 ]
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f8819d52d7ebd564$export$2e2bcd8739ae039), {
-                                selects: selects,
+                                selects: select,
                                 index: index1,
                                 onChange: (event, index)=>setIndex(index),
                                 onAdd: onAddQuery,
@@ -39985,14 +40090,9 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                             mb: 2
                         }
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0465f9a09db963cd$export$2e2bcd8739ae039), {
-                        value: selects[index1][0],
-                        onChange: (event, value)=>onSelectorChanged(event, value)
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
-                        sx: {
-                            mt: 1
-                        }
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4c28f63364664600$export$2e2bcd8739ae039), {
+                        value: select[index1],
+                        onChange: onChangeQuery
                     })
                 ]
             }),
@@ -40001,29 +40101,17 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ select: select , open: open , 
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0b61921fb120a84a$export$2e2bcd8739ae039), {
-                            query: selects[index1],
-                            onChange: onRawQueryChanged
+                            query: select[index1],
+                            onChange: onChangeQuery
                         })
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        spacing: 0,
-                        justifyContent: "end",
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                                variant: "outlined",
-                                onClick: (event)=>onClose(event),
-                                children: "Cancel"
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                                variant: "contained",
-                                sx: {
-                                    ml: 1
-                                },
-                                onClick: onCommit,
-                                children: "OK"
-                            })
-                        ]
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                        variant: "contained",
+                        sx: {
+                            ml: 1
+                        },
+                        onClick: onSave,
+                        children: "Save"
                     })
                 ]
             })
@@ -40216,11 +40304,11 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
                 items: items
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
-                select: select,
+                value: select,
                 open: queryEditorOpen,
                 onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, query)=>{
-                    select.query = query;
+                onChange: (event, value)=>{
+                    select.query = value;
                     setTemplate(template.clone());
                 }
             })
@@ -41600,10 +41688,10 @@ var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ()=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
-
-
 var $721d382012b84877$exports = {};
 $721d382012b84877$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
+
+
 
 
 var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
@@ -41635,12 +41723,18 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f09768665decc43c$export$2e2bcd8739ae039), {
-                ...props,
-                size: "small",
-                color: "secondary",
-                onClick: handleAddButtonClick,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {})
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                arrow: true,
+                placement: "left",
+                open: template.empty(),
+                title: "Click here to add the first action",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f09768665decc43c$export$2e2bcd8739ae039), {
+                    ...props,
+                    size: "small",
+                    color: "secondary",
+                    onClick: handleAddButtonClick,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {})
+                })
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $245fd332f2f721c7$export$2e2bcd8739ae039), {
                 anchorEl: anchor,

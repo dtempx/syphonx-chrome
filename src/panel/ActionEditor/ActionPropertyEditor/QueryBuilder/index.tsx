@@ -3,9 +3,8 @@ import * as syphonx from "syphonx-lib";
 import { TitleBar, TransitionUp } from "../../../../components";
 import { clone } from "../../../../lib";
 import ActionIcon from "../../ActionIcon";
-import FunctionEditor from "./FunctionEditor/index";
 import RawQueryEditor from "./RawQueryEditor";
-import SelectorEditor from "./SelectorEditor";
+import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";
 
 import {
@@ -22,49 +21,43 @@ import {
 } from "@mui/material";
 
 export interface Props {
-    select: syphonx.Select;
+    value: syphonx.Select;
     open: boolean;
+    onChange: (event: React.SyntheticEvent, value: syphonx.SelectQuery[] | undefined) => void;
     onClose: (event: React.SyntheticEvent) => void;
-    onChange: (event: React.SyntheticEvent, query: syphonx.SelectQuery[] | undefined) => void;
 }
 
-export default ({ select, open, onClose, onChange }: Props) => {
-    const [selects, setSelects] = useState<syphonx.SelectQuery[]>([[""]]);
+export default ({ value, open, onClose, onChange }: Props) => {
+    const [select, setSelect] = useState<syphonx.SelectQuery[]>([[""]]);
     const [index, setIndex] = useState(0);
 
     useEffect(() =>
-        setSelects(select.query || [[""]]),
-    [select]);
+        setSelect(value.query || [[""]]),
+    [value]);
 
     function onAddQuery() {
-        const newValue = clone(selects);
-        newValue.push([""]);
-        setSelects(newValue);
-        setIndex(newValue.length - 1);
+        const obj = clone(select);
+        obj.push([""]);
+        setSelect(obj);
+        setIndex(obj.length - 1);
     }
 
     function onDeleteQuery() {
-        const newValue = clone(selects);
-        newValue.splice(index, 1);
-        setSelects(newValue);
+        const obj = clone(select);
+        obj.splice(index, 1);
+        setSelect(obj);
         if (index > 0)
             setIndex(index - 1);
     }
 
-    function onRawQueryChanged(event: React.SyntheticEvent, query: syphonx.SelectQuery) {
-        const newValue = clone(selects);
-        newValue[index] = query;
-        setSelects(newValue);
+    function onChangeQuery(event: React.SyntheticEvent, query: syphonx.SelectQuery) {
+        const obj = clone(select);
+        obj[index] = query;
+        setSelect(obj);
     }
 
-    function onSelectorChanged(event: Event | React.SyntheticEvent, value: string) {
-        const newValue = clone(selects);
-        newValue[index][0] = value;
-        setSelects(newValue);
-    }
-
-    function onCommit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        onChange(event, selects);
+    function onSave(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        onChange(event, select);
         onClose(event);
     }
 
@@ -93,12 +86,12 @@ export default ({ select, open, onClose, onChange }: Props) => {
                     }}
                 >
                     <Stack direction="row">
-                        <ActionIcon name={select.type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />
-                        <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{select.name || "(array)"}</Typography>
-                        {select.repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
+                        <ActionIcon name={value.type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />
+                        <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{value.name || "(array)"}</Typography>
+                        {value.repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
                     </Stack>
                     <QueryPager
-                        selects={selects}
+                        selects={select}
                         index={index}
                         onChange={(event, index) => setIndex(index)}
                         onAdd={onAddQuery}
@@ -107,18 +100,14 @@ export default ({ select, open, onClose, onChange }: Props) => {
                 </Box>
 
                 <Divider sx={{ mt: 1, mb: 2 }} />
-                <SelectorEditor value={selects[index][0]} onChange={(event, value) => onSelectorChanged(event, value)} />
-                <FunctionEditor sx={{ mt: 1 }} />
+                <SelectorEditor value={select[index]} onChange={onChangeQuery} />
             </DialogContent>
 
             <DialogActions>
                 <Tooltip title="Edit the raw jQuery code, or copy/paste a jQuery expression here">
-                    <RawQueryEditor query={selects[index]} onChange={onRawQueryChanged} />
+                    <RawQueryEditor query={select[index]} onChange={onChangeQuery} />
                 </Tooltip>
-                <Stack direction="row" spacing={0} justifyContent="end">
-                    <Button variant="outlined" onClick={event => onClose(event)}>Cancel</Button>
-                    <Button variant="contained" sx={{ ml: 1 }} onClick={onCommit}>OK</Button>
-                </Stack>
+                <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>Save</Button>
             </DialogActions>
         </Dialog>
     );

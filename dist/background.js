@@ -6366,12 +6366,6 @@ function $07c03eb40a016611$var$executeScriptFile(tabId, file) {
                 message: `Failed to execute script file ${file}`
             })));
 }
-async function $07c03eb40a016611$var$getTabUrl(tabId) {
-    if (tabId) {
-        const tab = await chrome.tabs.get(tabId);
-        return tab?.url;
-    }
-}
 async function $07c03eb40a016611$var$injectAll(tabId) {
     const injected = await $07c03eb40a016611$var$executeScript(tabId, ()=>typeof window.sx === "object");
     if (!injected) {
@@ -6413,6 +6407,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         try {
             await $07c03eb40a016611$var$injectAll(message.tabId);
             const result = await $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scriptMap[message.key], ...message.params);
+            console.log("MESSAGE", message.key, {
+                message: message,
+                sender: sender,
+                result: result
+            });
             sendResponse({
                 result: result
             });

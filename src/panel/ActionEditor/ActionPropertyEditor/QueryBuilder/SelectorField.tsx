@@ -32,14 +32,26 @@ export default ({ value, onChange, ...props }: Props) => {
     const [counter, setCounter] = useState(0);
     const [output, setOutput] = useState<Array<string | null>>([]);
     const [showOutput, setShowOutput] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
 
     useEffect(() => {
-        (async () => {
-            const output = await background.selectElements([value]);
-            setOutput(output);
-        })();
+        if (value) {
+            (async () => {
+                const output = await background.selectElements([value]);
+                setOutput(output);
+            })();
+        }
         return () => {
             background.selectElements([]);
+        };
+    }, [value]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowTooltip(!value);
+        }, 250);
+        return () => {
+            clearTimeout(timer);
         };
     }, [value]);
 
@@ -72,10 +84,20 @@ export default ({ value, onChange, ...props }: Props) => {
             background.disableTracking();
         }
     }, [tracking]);
-   
+
     return (<>
         <Stack {...props} direction="row" spacing={0}>
-            <Tooltip title={tracking ? "Stop tracking page clicks for CSS suggestions" : "Start tracking page clicks for CSS suggestions"}>
+            <Tooltip
+                arrow
+                placement="bottom"
+                open={showTooltip}
+                title={!tracking ? (
+                    "Click here to automatically generate a CSS selector by clicking on the page."
+                ) : (
+                    "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page."
+                )}
+                PopperProps={{ style: { pointerEvents: "none" } }}
+            >
                 <Button
                     variant={tracking ? "contained" : "outlined"}
                     size="small"

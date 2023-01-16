@@ -66,8 +66,12 @@ export class Template {
         }
     }
 
-    clone() {
+    clone(): Template {
         return new Template(clone(this.obj), this.selected, this.file);
+    }
+
+    empty(): boolean {
+        return this.children.length === 0;
     }
 
     findItem(key: string): TemplateItem | undefined {
