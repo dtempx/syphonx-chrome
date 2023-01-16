@@ -81,3 +81,12 @@ export function matchBrace(text: string, i: number, token: string): number {
     }
     return -1;
 }
+
+export function newName(list: Array<{ name?: string }>, basename = "new") {
+    for (let n = 1; n <= 100; ++n) {
+        const name = `${basename}${n}`;
+        if (!list.some(obj => obj.name === name))
+            return name;
+    }
+    return "";
+}

@@ -32,7 +32,6 @@ export default (props?: Props) => {
     const [anchor, setAnchor] = useState<Element | undefined>();
 
     const item = template.selectedItem();
-    const addSubItem = item?.type === "action" && item?.name === "select";
 
     function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         setAnchor(event.currentTarget);
@@ -48,10 +47,10 @@ export default (props?: Props) => {
         }
     }
 
-    function addSelector() {
+    function addSubItem() {
         if (template) {
             debugger;
-            template.addSelector();
+            template.addSubItem();
             setTemplate(template.clone());
             setOpen(false);
         }
@@ -90,8 +89,8 @@ export default (props?: Props) => {
                         </Tooltip>
                 ))}
                 <Divider />
-                {addSubItem ? (
-                    <MenuItem onClick={() => addSelector()}><AddIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
+                {template.canAddSubItem() ? (
+                    <MenuItem onClick={() => addSubItem()}><AddIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
                 ) : null}
                 {expanded ? (
                     <MenuItem onClick={() => setExpanded(false)}><CollapseIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>

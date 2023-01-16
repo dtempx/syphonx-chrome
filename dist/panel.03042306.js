@@ -38247,6 +38247,13 @@ function $6f0852509a7f7477$export$ad9052cdca847332(text, i, token) {
     }
     return -1;
 }
+function $6f0852509a7f7477$export$60f47f67e5d44f99(list, basename = "new") {
+    for(let n = 1; n <= 100; ++n){
+        const name = `${basename}${n}`;
+        if (!list.some((obj)=>obj.name === name)) return name;
+    }
+    return "";
+}
 
 
 const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
@@ -38322,7 +38329,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
             click: obj
         });
         else if (type === "select") {
-            obj.name = "noname";
+            obj.name = "title";
             actions.push({
                 select: [
                     obj
@@ -38336,14 +38343,31 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         });
         this.selected = this.findObj(obj) || "";
     }
-    addSelector() {
+    addSubItem() {
         const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
-        if (item?.type === "action" && item?.name === "select") {
-            const selectors = item.obj;
-            selectors.push({
-                name: "noname"
-            });
+        if (item) {
+            if (item.type === "action" && item.name === "select") {
+                const selectors = item.obj;
+                const name = (0, $6f0852509a7f7477$export$60f47f67e5d44f99)(selectors);
+                selectors.push({
+                    name: name
+                });
+            } else if (item.type === "select" && item.parent) {
+                const selectors = item.parent.obj;
+                const name = (0, $6f0852509a7f7477$export$60f47f67e5d44f99)(selectors);
+                selectors.push({
+                    name: name
+                });
+            }
         }
+    }
+    canAddSubItem() {
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
+        if (item) {
+            if (item.type === "action" && item.name === "select") return true;
+            else if (item.type === "select" && item.parent) return true;
+        }
+        return false;
     }
     clone() {
         return new $1b88f382576c34f2$export$14416b8d99d47caa((0, $6f0852509a7f7477$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
@@ -41700,7 +41724,6 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
     const item = template.selectedItem();
-    const addSubItem = item?.type === "action" && item?.name === "select";
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
         setOpen(true);
@@ -41713,10 +41736,10 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
             setOpen(false);
         }
     }
-    function addSelector() {
+    function addSubItem() {
         if (template) {
             debugger;
-            template.addSelector();
+            template.addSubItem();
             setTemplate(template.clone());
             setOpen(false);
         }
@@ -41770,8 +41793,8 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
                             })
                         })),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
-                    addSubItem ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                        onClick: ()=>addSelector(),
+                    template.canAddSubItem() ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: ()=>addSubItem(),
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
                                 fontSize: "small"

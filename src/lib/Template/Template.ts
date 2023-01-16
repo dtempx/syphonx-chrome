@@ -1,6 +1,6 @@
 import * as syphonx from "syphonx-lib";
 import { TemplateItem } from "./TemplateItem";
-import { clone, createActionItems, findItem, firstObj, matchBrace } from "./utilities";
+import { clone, createActionItems, findItem, firstObj, matchBrace, newName } from "./utilities";
 import * as background from "../../background-proxy";
 
 export class Template {
@@ -45,7 +45,7 @@ export class Template {
             actions.push({ click: obj as syphonx.Click });
         }
         else if (type === "select") {
-            obj.name = "noname";
+            obj.name = "title";
             actions.push({ select: [obj] });
         }
         else if (type === "item" && item?.type === "action" && item?.name === "select") {
@@ -58,12 +58,31 @@ export class Template {
         this.selected = this.findObj(obj) || "";
     }
 
-    addSelector(): void {
+    addSubItem(): void {
         const item = findItem(this.children, this.selected);
-        if (item?.type === "action" && item?.name === "select") {
-            const selectors = item.obj as syphonx.Select[];
-            selectors.push({ name: "noname" });
+        if (item) {
+            if (item.type === "action" && item.name === "select") {
+                const selectors = item.obj as syphonx.Select[];
+                const name = newName(selectors);
+                selectors.push({ name });
+            }
+            else if (item.type === "select" && item.parent) {
+                const selectors = item.parent.obj as syphonx.Select[];
+                const name = newName(selectors);
+                selectors.push({ name });
+            }
         }
+    }
+
+    canAddSubItem(): boolean {
+        const item = findItem(this.children, this.selected);
+        if (item) {
+            if (item.type === "action" && item.name === "select")
+                return true;
+            else if (item.type === "select" && item.parent)
+                return true;
+        }
+        return false;
     }
 
     clone(): Template {
