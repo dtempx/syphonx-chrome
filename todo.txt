@@ -1,15 +1,18 @@
 V1
 
 Query Builder
+    context sensitive function parameters
+    selectMultiple
+    formula editor for when
 
 Action Views
+    action view: waitfor
     action view: click
     action view: each
     action view: error
     action view: repeat
     action view: snooze
     action view: transform
-    action view: waitfor
     action view: yield
 
 Add sub-items

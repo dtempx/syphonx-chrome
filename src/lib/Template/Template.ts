@@ -40,25 +40,45 @@ export class Template {
     addAction(type: TemplateAddItemType): void {
         const item = findItem(this.children, this.selected);
         const actions = this.findItemActions(item);
-        const obj: any = {};
         if (type === "click") {
-            actions.push({ click: obj as syphonx.Click });
+            const click = {} as syphonx.Click;
+            actions.push({ click });
+        }
+        else if (type === "each") {
+            const each = {} as syphonx.Each;
+            each.actions = [];
+            actions.push({ each });
+        }
+        else if (type === "error") {
+            const error = {} as syphonx.Error;
+            actions.push({ error });
+        }
+        else if (type === "repeat") {
+            const repeat = { actions: [] } as syphonx.Repeat;
+            actions.push({ repeat });
         }
         else if (type === "select") {
-            obj.name = "title";
-            actions.push({ select: [obj] });
+            const select = [{}] as syphonx.Select[];
+            actions.push({ select });
         }
-        else if (type === "item" && item?.type === "action" && item?.name === "select") {
-            const items = item.obj as syphonx.Select[];
-            items.push(obj);
+        else if (type === "snooze") {
+            const snooze = [1, 2] as syphonx.Snooze;
+            actions.push({ snooze });
+        }
+        else if (type === "transform") {
+            const transform = [{}] as syphonx.Transform[];
+            actions.push({ transform });
+        }
+        else if (type === "yield") {
+            actions.push({ yield: {} });
         }
         else if (type === "waitfor") {
-            actions.push({ waitfor: obj });
+            actions.push({ waitfor: {} });
         }
-        this.selected = this.findObj(obj) || "";
+        //this.selected = this.findObj(obj) || "";
     }
 
-    addSubItem(): void {
+    addSubAction(): void {
         const item = findItem(this.children, this.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") {
@@ -74,7 +94,7 @@ export class Template {
         }
     }
 
-    canAddSubItem(): boolean {
+    canAddSubAction(): boolean {
         const item = findItem(this.children, this.selected);
         if (item) {
             if (item.type === "action" && item.name === "select")

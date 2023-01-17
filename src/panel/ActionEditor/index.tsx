@@ -118,7 +118,7 @@ export default () => {
                                     />
                                 </FormGroup>                        
                             </Stack>
-                            <ActionPropertyEditor item={template.selectedItem()} />
+                            <ActionPropertyEditor />
                         </Paper>
                     </Stack>
                     <Paper elevation={3} className="panel" sx={{ width: 1 }}>

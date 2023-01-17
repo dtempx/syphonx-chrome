@@ -1,20 +1,20 @@
 import React from "react";
 import DebugView from "./DebugView";
+import ClickEditor from "./ClickEditor";
 import SelectEditor from "./SelectEditor";
 import { useTemplate } from '../../context';
-import { TemplateItem } from "../../../lib";
 
-export interface Props {
-    item?: TemplateItem;
-}
+export default () => {
+    const { template, advanced } = useTemplate();
+    const item = template.selectedItem();
+    const action = item?.type === "action" ? item.name : undefined;
 
-export default ({ item }: Props) => {
-    const { advanced } = useTemplate();
-
-    if (item?.type === "select")
-        return <SelectEditor item={item} />;
+    if (action === "select")
+        return <SelectEditor />;
+    else if (action === "click")
+        return <ClickEditor />;
     else if (advanced)
-        return <DebugView item={item} />;
+        return <DebugView />;
     else
         return null;
 };

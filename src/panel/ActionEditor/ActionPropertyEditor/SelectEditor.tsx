@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
-import { TemplateItem } from "../../../lib";
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
@@ -10,13 +9,12 @@ import SelectorField from "./SelectorField";
 import QueryBuilder from "./QueryBuilder/index";
 import DebugView from "./DebugView";
 
-export interface Props {
-    item: TemplateItem;
-}
-
-export default ({ item }: Props) => {
+export default () => {
     const { template, setTemplate, advanced } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
+    const item = template.selectedItem();
+    if (!item)
+        return null;
 
     function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         return /^[a-z][a-z0-9_]*$/.test(value);
@@ -153,7 +151,7 @@ export default ({ item }: Props) => {
             ],
             [
                 "debug",
-                <DebugView item={item} />,
+                <DebugView />,
                 "Debug"
             ]
         ] as PropertyGridItem[]);

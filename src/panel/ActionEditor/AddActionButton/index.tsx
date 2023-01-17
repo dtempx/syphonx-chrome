@@ -47,10 +47,10 @@ export default (props?: Props) => {
         }
     }
 
-    function addSubItem() {
+    function addSubAction() {
         if (template) {
             debugger;
-            template.addSubItem();
+            template.addSubAction();
             setTemplate(template.clone());
             setOpen(false);
         }
@@ -89,8 +89,8 @@ export default (props?: Props) => {
                         </Tooltip>
                 ))}
                 <Divider />
-                {template.canAddSubItem() ? (
-                    <MenuItem onClick={() => addSubItem()}><AddIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
+                {template.canAddSubAction() ? (
+                    <MenuItem onClick={() => addSubAction()}><AddIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Add Selector</Typography></MenuItem>
                 ) : null}
                 {expanded ? (
                     <MenuItem onClick={() => setExpanded(false)}><CollapseIcon fontSize="small" /><Typography sx={{ ml: 1 }}>Less</Typography></MenuItem>

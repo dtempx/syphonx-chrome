@@ -38324,26 +38324,60 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
     addAction(type) {
         const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
         const actions = this.findItemActions(item);
-        const obj = {};
-        if (type === "click") actions.push({
-            click: obj
-        });
-        else if (type === "select") {
-            obj.name = "title";
+        if (type === "click") {
+            const click = {};
             actions.push({
-                select: [
-                    obj
-                ]
+                click: click
             });
-        } else if (type === "item" && item?.type === "action" && item?.name === "select") {
-            const items = item.obj;
-            items.push(obj);
-        } else if (type === "waitfor") actions.push({
-            waitfor: obj
+        } else if (type === "each") {
+            const each = {};
+            each.actions = [];
+            actions.push({
+                each: each
+            });
+        } else if (type === "error") {
+            const error = {};
+            actions.push({
+                error: error
+            });
+        } else if (type === "repeat") {
+            const repeat = {
+                actions: []
+            };
+            actions.push({
+                repeat: repeat
+            });
+        } else if (type === "select") {
+            const select = [
+                {}
+            ];
+            actions.push({
+                select: select
+            });
+        } else if (type === "snooze") {
+            const snooze = [
+                1,
+                2
+            ];
+            actions.push({
+                snooze: snooze
+            });
+        } else if (type === "transform") {
+            const transform = [
+                {}
+            ];
+            actions.push({
+                transform: transform
+            });
+        } else if (type === "yield") actions.push({
+            yield: {}
         });
-        this.selected = this.findObj(obj) || "";
+        else if (type === "waitfor") actions.push({
+            waitfor: {}
+        });
+    //this.selected = this.findObj(obj) || "";
     }
-    addSubItem() {
+    addSubAction() {
         const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") {
@@ -38361,7 +38395,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
             }
         }
     }
-    canAddSubItem() {
+    canAddSubAction() {
         const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") return true;
@@ -38560,7 +38594,11 @@ var $d4J5n = parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
-var $40841473af599963$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
+
+var $40841473af599963$export$2e2bcd8739ae039 = ()=>{
+    const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const item = template.selectedItem();
+    return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
         style: {
             fontFamily: "monospace",
             fontSize: "small",
@@ -38570,7 +38608,8 @@ var $40841473af599963$export$2e2bcd8739ae039 = ({ item: item  })=>/*#__PURE__*/ 
             overflow: "scroll"
         },
         children: JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
-    });
+    }) : null;
+};
 
 
 
@@ -39333,78 +39372,6 @@ const $5339359c895a55f0$export$d5e0bbf39d25920b = /*#__PURE__*/ (0, (/*@__PURE__
 
 
 
-parcelRequire("d4J5n");
-
-var $73e753ca2c47eb90$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-        size: "small",
-        value: value || "default",
-        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "default",
-                children: "(default)"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "none",
-                children: "none"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "href",
-                children: "href"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "multiline",
-                children: "multiline"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "singleline",
-                children: "singleline"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "innertext",
-                children: "innertext"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "textcontent",
-                children: "textcontent"
-            })
-        ]
-    });
-
-
-
-parcelRequire("d4J5n");
-
-var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-        size: "small",
-        value: value || "default",
-        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "default",
-                children: "(default)"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "string",
-                children: "string"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "number",
-                children: "number"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "boolean",
-                children: "boolean"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "object",
-                children: "object"
-            })
-        ]
-    });
-
-
-
 
 var $d4J5n = parcelRequire("d4J5n");
 
@@ -40145,9 +40112,201 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
 
 
 
-var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
+var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
     const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
+    const item = template.selectedItem();
+    if (!item) return null;
+    function validateName(event, value) {
+        return /^[a-z][a-z0-9_]*$/.test(value);
+    }
+    function validateNumber(event, value) {
+        return value ? parseInt(value) >= 0 : true;
+    }
+    const select = item.obj;
+    const items = [
+        [
+            "query",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6a804e9e9de76e97$export$2e2bcd8739ae039), {
+                query: select.query,
+                onClick: ()=>setQueryEditorOpen(true)
+            }),
+            "A CSS selector or jQuery expression that determines what data is selected on the page"
+        ]
+    ];
+    if (advanced) items.push(...[
+        [
+            "required",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: select.required ?? false,
+                onChange: (event, value)=>{
+                    select.required = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether the click is required or optional, an error is produced if conditions on the page do not exists for the click to occur"
+        ],
+        [
+            "retry",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: select.required ?? false,
+                onChange: (event, value)=>{
+                    select.required = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines the number of times to retry clicking and testing for the expected result"
+        ],
+        [
+            "snooze",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                size: "small"
+            }),
+            "An amount of time to snooze before or after clicking"
+        ],
+        [
+            "waitfor",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                size: "small"
+            }),
+            "Wait for a condition to appear on the page before clicking"
+        ],
+        [
+            "when",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: select.when,
+                onChange: (event, value)=>{
+                    select.when = value || undefined;
+                    setTemplate(template.clone());
+                },
+                onValidate: validateName
+            }),
+            "Makes value selection conditional based whether the evaluation produces a true result"
+        ],
+        [
+            "active",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: select.active ?? true,
+                onChange: (event, value)=>{
+                    select.active = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether the property is active or ignored"
+        ],
+        [
+            "debug",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {}),
+            "Debug"
+        ]
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                items: items
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
+                value: select,
+                open: queryEditorOpen,
+                onClose: ()=>setQueryEditorOpen(false),
+                onChange: (event, value)=>{
+                    select.query = value;
+                    setTemplate(template.clone());
+                }
+            })
+        ]
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+parcelRequire("d4J5n");
+
+var $73e753ca2c47eb90$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: "(default)"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "none",
+                children: "none"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "href",
+                children: "href"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "multiline",
+                children: "multiline"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "singleline",
+                children: "singleline"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "innertext",
+                children: "innertext"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "textcontent",
+                children: "textcontent"
+            })
+        ]
+    });
+
+
+
+parcelRequire("d4J5n");
+
+var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: "(default)"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "string",
+                children: "string"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "number",
+                children: "number"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "boolean",
+                children: "boolean"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "object",
+                children: "object"
+            })
+        ]
+    });
+
+
+
+
+
+var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
+    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
+    const item = template.selectedItem();
+    if (!item) return null;
     function validateName(event, value) {
         return /^[a-z][a-z0-9_]*$/.test(value);
     }
@@ -40316,9 +40475,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
         ],
         [
             "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {
-                item: item
-            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {}),
             "Debug"
         ]
     ]);
@@ -40342,14 +40499,13 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
-var $9e41d32715df6971$export$2e2bcd8739ae039 = ({ item: item  })=>{
-    const { advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    if (item?.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cac393273b7aba25$export$2e2bcd8739ae039), {
-        item: item
-    });
-    else if (advanced) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {
-        item: item
-    });
+var $9e41d32715df6971$export$2e2bcd8739ae039 = ()=>{
+    const { template: template , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const item = template.selectedItem();
+    const action = item?.type === "action" ? item.name : undefined;
+    if (action === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cac393273b7aba25$export$2e2bcd8739ae039), {});
+    else if (action === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $31df28b087985813$export$2e2bcd8739ae039), {});
+    else if (advanced) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {});
     else return null;
 };
 
@@ -41736,10 +41892,10 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
             setOpen(false);
         }
     }
-    function addSubItem() {
+    function addSubAction() {
         if (template) {
             debugger;
-            template.addSubItem();
+            template.addSubAction();
             setTemplate(template.clone());
             setOpen(false);
         }
@@ -41793,8 +41949,8 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
                             })
                         })),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
-                    template.canAddSubItem() ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                        onClick: ()=>addSubItem(),
+                    template.canAddSubAction() ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: ()=>addSubAction(),
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
                                 fontSize: "small"
@@ -42315,9 +42471,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                                                 })
                                             })
                                         }),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {
-                                            item: template.selectedItem()
-                                        })
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {})
                                     ]
                                 })
                             ]
