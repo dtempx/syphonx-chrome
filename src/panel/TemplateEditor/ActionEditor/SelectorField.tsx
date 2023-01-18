@@ -43,14 +43,17 @@ export default ({ query, onClick }: Props) => {
         <TextField
             variant="standard"
             size="small"
-            value={value || "(none)"}
+            value={value}
+            placeholder="(none)"
             fullWidth
             sx={{ caretColor: "transparent" }}
             InputProps={{
                 endAdornment:
                     <InputAdornment position="end">
                         {query && query.length > 1 ? (
-                            <Tooltip title={<span style={{ whiteSpace: "pre-line" }}>{query ? query.map(q => syphonx.formatJQueryExpression(q)).join("\n") : null}</span>}>
+                            <Tooltip
+                                title={<span style={{ whiteSpace: "pre-line" }}>{query ? query.map(q => syphonx.formatJQueryExpression(q)).join("\n") : null}</span>}
+                            >
                                 <Chip
                                     label={query.length}
                                     variant="filled"
@@ -61,7 +64,12 @@ export default ({ query, onClick }: Props) => {
                             </Tooltip>
                         ) : null}
                         <IconButton size="small" onClick={handleClick}>
-                            <Tooltip arrow placement="left" title="Click here to setup a selector" open={showTooltip}>
+                            <Tooltip
+                                arrow
+                                placement="left"
+                                title="Click here to setup a selector"
+                                //open={showTooltip}
+                            >
                                 <EditIcon fontSize="small" />    
                             </Tooltip>
                         </IconButton>

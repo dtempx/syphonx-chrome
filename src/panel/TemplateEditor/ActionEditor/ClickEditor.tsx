@@ -4,7 +4,7 @@ import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectorField from "./SelectorField";
-import QueryBuilder from "./QueryBuilder/index";
+import QueryBuilder from "../QueryBuilder/index";
 import DebugView from "./DebugView";
 
 export default () => {
@@ -30,7 +30,7 @@ export default () => {
                 query={select.query}
                 onClick={() => setQueryEditorOpen(true)}
             />,
-            "A CSS selector or jQuery expression that determines what data is selected on the page"
+            "A CSS selector or jQuery expression that determines the click target"
         ]
     ];
 
@@ -42,7 +42,7 @@ export default () => {
                     checked={select.required ?? false}
                     onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
                 />,
-                "Determines whether the click is required or optional, an error is produced if conditions on the page do not exists for the click to occur"
+                "Determines whether the click is optional or required, producing if no click target is found on the page"
             ],
             [
                 "retry",
@@ -50,7 +50,7 @@ export default () => {
                     checked={select.required ?? false}
                     onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
                 />,
-                "Determines the number of times to retry clicking and testing for the expected result"
+                "Determines the number of attempts to retry clicking and testing for the expected result"
             ],
             [
                 "snooze",
@@ -71,7 +71,7 @@ export default () => {
                     onChange={(event, value) => { select.when = value || undefined; setTemplate(template.clone()); }}
                     onValidate={validateName}
                 />,
-                "Makes value selection conditional based whether the evaluation produces a true result"
+                "A formula that determines whether the click is evaluated or bypassed"
             ],
             [
                 "active",
@@ -79,7 +79,7 @@ export default () => {
                     checked={select.active ?? true}
                     onChange={(event, value) => { select.active = value; setTemplate(template.clone()); }}
                 />,
-                "Determines whether the property is active or ignored"
+                "Determines whether the property is active or bypassed"
             ],
             [
                 "debug",

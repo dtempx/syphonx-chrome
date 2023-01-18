@@ -2,7 +2,7 @@ import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AppProvider } from "./context";
 import { TemplateProvider } from "./context";
-import ActionEditor from "./ActionEditor";
+import TemplateEditor from "./TemplateEditor";
 import theme from "./theme";
 
 export default () => (
@@ -10,7 +10,7 @@ export default () => (
         <CssBaseline />
         <AppProvider>
             <TemplateProvider>
-                <ActionEditor />
+                <TemplateEditor />
             </TemplateProvider>
         </AppProvider>
     </ThemeProvider>

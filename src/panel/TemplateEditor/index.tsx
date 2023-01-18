@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ActionPropertyEditor from "./ActionPropertyEditor";
+import ActionEditor from "./ActionEditor";
 import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton/index";
 import DataView from "./DataView";
@@ -118,7 +118,7 @@ export default () => {
                                     />
                                 </FormGroup>                        
                             </Stack>
-                            <ActionPropertyEditor />
+                            <ActionEditor />
                         </Paper>
                     </Stack>
                     <Paper elevation={3} className="panel" sx={{ width: 1 }}>

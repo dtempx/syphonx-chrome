@@ -6,6 +6,7 @@ import {
     AutoAwesomeMotion as EachIcon,
     AutoAwesomeMotionOutlined as RepeatedIcon,
     Autorenew as RepeatIcon,
+    ForkLeft as BreakIcon,
     DataObject as ObjectTypeIcon,
     ExitToApp as YieldIcon,
     FlipCameraAndroid as TransformIcon,
@@ -27,7 +28,9 @@ export interface Props extends SvgIconProps {
 export default ({ name, ...props }: Props) => {
     if (name === "boolean")
         return <BooleanTypeIcon {...props} />;
-    if (name === "click")
+    else if (name === "break")
+        return <BreakIcon {...props} sx={{ ...props.sx, transform: "rotate(180deg)" }} />;
+    else if (name === "click")
         return <ClickIcon {...props} />;
     else if (name === "each")
         return <EachIcon {...props} />;

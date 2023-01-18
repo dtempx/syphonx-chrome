@@ -1,13 +1,9 @@
 import * as syphonx from "syphonx-lib";
 import { TemplateItem } from "./TemplateItem";
 
-export function clone<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj));
-}
-
 export function createActionItems(actions: syphonx.Action[], parent?: TemplateItem): TemplateItem[] {
     const n: Record<string, number> = {};
-    return actions.map(action => {
+    return actions.map((action, index) => {
         const [name] = Object.keys(action);
         n[name] = n[name] ? n[name] + 1 : 1;
         const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
@@ -17,6 +13,7 @@ export function createActionItems(actions: syphonx.Action[], parent?: TemplateIt
             name,
             type: "action",
             icon: name,
+            index,
             obj,
             parent,
             collection: actions
@@ -28,7 +25,7 @@ export function createActionItems(actions: syphonx.Action[], parent?: TemplateIt
 }
 
 function createSelectItems(obj: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
-    return obj.map(select => {
+    return obj.map((select, index) => {
         const key = `${parent.key}.${select.name}`;
         return {
             key,
@@ -37,6 +34,7 @@ function createSelectItems(obj: syphonx.Select[], parent: TemplateItem): Templat
             icon: select.type || "string",
             required: select.required,
             repeated: select.repeated,
+            index,
             obj: select,
             parent,
             collection: obj

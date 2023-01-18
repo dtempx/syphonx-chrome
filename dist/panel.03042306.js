@@ -4,9 +4,6 @@ function $parcel$export(e, n, v, s) {
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
 }
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
-}
 function $parcel$exportWildcard(dest, source) {
   Object.keys(source).forEach(function(key) {
     if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) {
@@ -22,6 +19,9 @@ function $parcel$exportWildcard(dest, source) {
   });
 
   return dest;
+}
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
 }
 var $parcel$global =
 typeof globalThis !== 'undefined'
@@ -22298,6 +22298,12 @@ var $0d0d12e54088d016$export$2e2bcd8739ae039 = $0d0d12e54088d016$var$DialogTitle
 
 
 
+var $a58ae39c5161f204$exports = {};
+
+$parcel$defineInteropFlag($a58ae39c5161f204$exports);
+
+$parcel$export($a58ae39c5161f204$exports, "default", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
+$parcel$export($a58ae39c5161f204$exports, "dividerClasses", () => $6fc412c0ce53bfbd$export$2e2bcd8739ae039);
 
 
 
@@ -22503,6 +22509,9 @@ const $7d334022fa9e4e25$var$Divider = /*#__PURE__*/ $d4J5n.forwardRef(function D
     }));
 });
 var $7d334022fa9e4e25$export$2e2bcd8739ae039 = $7d334022fa9e4e25$var$Divider;
+
+
+
 
 
 
@@ -24549,6 +24558,12 @@ const $e1f9aacd35535f0f$var$listItemClasses = (0, $8100014debd01602$export$2e2bc
 var $e1f9aacd35535f0f$export$2e2bcd8739ae039 = $e1f9aacd35535f0f$var$listItemClasses;
 
 
+var $5e3eddf31c86d517$exports = {};
+
+$parcel$defineInteropFlag($5e3eddf31c86d517$exports);
+
+$parcel$export($5e3eddf31c86d517$exports, "default", () => $daacc79c176159c4$export$2e2bcd8739ae039);
+$parcel$export($5e3eddf31c86d517$exports, "listItemButtonClasses", () => $e2dd11622fde5186$export$2e2bcd8739ae039);
 
 
 
@@ -24729,6 +24744,9 @@ const $daacc79c176159c4$var$ListItemButton = /*#__PURE__*/ $d4J5n.forwardRef(fun
     });
 });
 var $daacc79c176159c4$export$2e2bcd8739ae039 = $daacc79c176159c4$var$ListItemButton;
+
+
+
 
 
 
@@ -25062,6 +25080,12 @@ var $299786ec18bb6fc2$export$2e2bcd8739ae039 = $299786ec18bb6fc2$var$ListItem;
 
 
 
+var $c0a08a0f88a65246$exports = {};
+
+$parcel$defineInteropFlag($c0a08a0f88a65246$exports);
+
+$parcel$export($c0a08a0f88a65246$exports, "default", () => $525a0986dfeaa305$export$2e2bcd8739ae039);
+$parcel$export($c0a08a0f88a65246$exports, "listItemIconClasses", () => $4ab234d350ea8bc5$export$2e2bcd8739ae039);
 
 
 
@@ -25142,6 +25166,15 @@ var $525a0986dfeaa305$export$2e2bcd8739ae039 = $525a0986dfeaa305$var$ListItemIco
 
 
 
+
+
+
+var $e822d4aced53a119$exports = {};
+
+$parcel$defineInteropFlag($e822d4aced53a119$exports);
+
+$parcel$export($e822d4aced53a119$exports, "default", () => $e892f9464432086f$export$2e2bcd8739ae039);
+$parcel$export($e822d4aced53a119$exports, "listItemTextClasses", () => $17cdf6c187d9fdfe$export$2e2bcd8739ae039);
 
 
 
@@ -25273,6 +25306,9 @@ const $e892f9464432086f$var$ListItemText = /*#__PURE__*/ $d4J5n.forwardRef(funct
     }));
 });
 var $e892f9464432086f$export$2e2bcd8739ae039 = $e892f9464432086f$var$ListItemText;
+
+
+
 
 
 
@@ -30559,6 +30595,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $807a1d539ec88b4c$exports = {};
+
+$parcel$defineInteropFlag($807a1d539ec88b4c$exports);
+
+$parcel$export($807a1d539ec88b4c$exports, "default", () => $f8e9b85224d1dbe5$export$2e2bcd8739ae039);
+$parcel$export($807a1d539ec88b4c$exports, "formLabelClasses", () => $02d545d40cf45079$export$2e2bcd8739ae039);
 
 
 
@@ -30701,6 +30743,10 @@ const $f8e9b85224d1dbe5$var$FormLabel = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $f8e9b85224d1dbe5$export$2e2bcd8739ae039 = $f8e9b85224d1dbe5$var$FormLabel;
+
+
+
+
 
 
 
@@ -31874,6 +31920,10 @@ var $16d648c397460623$export$2e2bcd8739ae039 = $16d648c397460623$var$Tooltip;
 
 
 
+$parcel$exportWildcard($86049548edbb86a7$exports, $a58ae39c5161f204$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $5e3eddf31c86d517$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $c0a08a0f88a65246$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 
@@ -31898,18 +31948,6 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 var $d4J5n = parcelRequire("d4J5n");
-var $5002f5814ed49d1e$exports = {};
-
-$parcel$export($5002f5814ed49d1e$exports, "path", () => $89382e3cfd90d03a$exports);
-$parcel$export($5002f5814ed49d1e$exports, "Template", () => $1b88f382576c34f2$export$14416b8d99d47caa);
-$parcel$export($5002f5814ed49d1e$exports, "cloudFetchTemplateDirectory", () => $20d1a517b8ce84e3$export$30d4711d6f8d17eb);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
-$parcel$export($5002f5814ed49d1e$exports, "cloudReadTemplateFile", () => $20d1a517b8ce84e3$export$de1a4df3278e5008);
-$parcel$export($5002f5814ed49d1e$exports, "cloudCreateTemplateFile", () => $20d1a517b8ce84e3$export$25c05c84991e5fdf);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $6f0852509a7f7477$export$9cd59f9826255e47);
-$parcel$export($5002f5814ed49d1e$exports, "isObject", () => $aacd3173f0a35cbd$export$a6cdc56e425d0d0a);
-$parcel$export($5002f5814ed49d1e$exports, "removeDOMRefs", () => $d2489396c3ef9092$export$de139376c1f60602);
-$parcel$export($5002f5814ed49d1e$exports, "clone", () => $711b72822a456466$export$9cd59f9826255e47);
 var $89382e3cfd90d03a$exports = {};
 var $596d45310e010dc1$exports = {};
 
@@ -38180,12 +38218,35 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
-function $6f0852509a7f7477$export$9cd59f9826255e47(obj) {
-    return JSON.parse(JSON.stringify(obj));
+function $711b72822a456466$export$9cd59f9826255e47(value) {
+    return JSON.parse(JSON.stringify(value));
 }
+
+
+function $aacd3173f0a35cbd$export$a6cdc56e425d0d0a(obj) {
+    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+
+
+
+function $d2489396c3ef9092$export$de139376c1f60602(obj) {
+    if (obj instanceof Array) return obj.map((item)=>$d2489396c3ef9092$export$de139376c1f60602(item));
+    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $d2489396c3ef9092$export$de139376c1f60602(obj.value);
+    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj)) {
+        const source = obj;
+        const target = {};
+        for (const key of Object.keys(obj))if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key].value); // unwrap value
+        else target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key]);
+        return target;
+    } else return obj;
+}
+
+
+
+
 function $6f0852509a7f7477$export$a3d9882fc9361f2d(actions, parent) {
     const n = {};
-    return actions.map((action)=>{
+    return actions.map((action, index)=>{
         const [name] = Object.keys(action);
         n[name] = n[name] ? n[name] + 1 : 1;
         const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
@@ -38195,6 +38256,7 @@ function $6f0852509a7f7477$export$a3d9882fc9361f2d(actions, parent) {
             name: name,
             type: "action",
             icon: name,
+            index: index,
             obj: obj,
             parent: parent,
             collection: actions
@@ -38204,7 +38266,7 @@ function $6f0852509a7f7477$export$a3d9882fc9361f2d(actions, parent) {
     });
 }
 function $6f0852509a7f7477$var$createSelectItems(obj, parent) {
-    return obj.map((select)=>{
+    return obj.map((select, index)=>{
         const key = `${parent.key}.${select.name}`;
         return {
             key: key,
@@ -38213,6 +38275,7 @@ function $6f0852509a7f7477$var$createSelectItems(obj, parent) {
             icon: select.type || "string",
             required: select.required,
             repeated: select.repeated,
+            index: index,
             obj: select,
             parent: parent,
             collection: obj
@@ -38324,7 +38387,10 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
     addAction(type) {
         const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
         const actions = this.findItemActions(item);
-        if (type === "click") {
+        if (type === "break") actions.push({
+            break: {}
+        });
+        else if (type === "click") {
             const click = {};
             actions.push({
                 click: click
@@ -38404,7 +38470,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         return false;
     }
     clone() {
-        return new $1b88f382576c34f2$export$14416b8d99d47caa((0, $6f0852509a7f7477$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
+        return new $1b88f382576c34f2$export$14416b8d99d47caa((0, $711b72822a456466$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
     }
     empty() {
         return this.children.length === 0;
@@ -38492,31 +38558,6 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
 
 
 
-function $711b72822a456466$export$9cd59f9826255e47(value) {
-    return JSON.parse(JSON.stringify(value));
-}
-
-
-function $aacd3173f0a35cbd$export$a6cdc56e425d0d0a(obj) {
-    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
-}
-
-
-
-function $d2489396c3ef9092$export$de139376c1f60602(obj) {
-    if (obj instanceof Array) return obj.map((item)=>$d2489396c3ef9092$export$de139376c1f60602(item));
-    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $d2489396c3ef9092$export$de139376c1f60602(obj.value);
-    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj)) {
-        const source = obj;
-        const target = {};
-        for (const key of Object.keys(obj))if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key].value); // unwrap value
-        else target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key]);
-        return target;
-    } else return obj;
-}
-
-
-
 
 
 
@@ -38595,7 +38636,7 @@ parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
-var $40841473af599963$export$2e2bcd8739ae039 = ()=>{
+var $d9e393267c3799f1$export$2e2bcd8739ae039 = ()=>{
     const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const item = template.selectedItem();
     return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
@@ -38609,6 +38650,11 @@ var $40841473af599963$export$2e2bcd8739ae039 = ()=>{
         },
         children: JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
     }) : null;
+};
+
+
+var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
+    return null;
 };
 
 
@@ -38783,6 +38829,12 @@ var $cd5829ac10d83747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $c3cc7c0fbba55fa6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"
 }), "Folder");
+
+
+
+var $820f84c1d7261d6d$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9.41 15.59 8 17l-4-4 4-4 1.41 1.41L7.83 12c1.51-.33 3.73.08 5.17 1.36V6.83l-1.59 1.59L10 7l4-4 4 4-1.41 1.41L15 6.83V21h-2v-4c-.73-2.58-3.07-3.47-5.17-3l1.58 1.59z"
+}), "ForkLeft");
 
 
 
@@ -39377,7 +39429,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
+var $d0f20a63f903f83f$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
     const [value, setValue] = (0, $d4J5n.useState)("");
     const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
     function handleClick(event) {
@@ -39398,7 +39450,8 @@ var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClic
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         variant: "standard",
         size: "small",
-        value: value || "(none)",
+        value: value,
+        placeholder: "(none)",
         fullWidth: true,
         sx: {
             caretColor: "transparent"
@@ -39431,7 +39484,6 @@ var $6a804e9e9de76e97$export$2e2bcd8739ae039 = ({ query: query , onClick: onClic
                             arrow: true,
                             placement: "left",
                             title: "Click here to setup a selector",
-                            open: showTooltip,
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
                                 fontSize: "small"
                             })
@@ -39452,11 +39504,18 @@ var $d4J5n = parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
-var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
+var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
         ...props
     });
-    if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
+    else if (name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $820f84c1d7261d6d$export$2e2bcd8739ae039), {
+        ...props,
+        sx: {
+            ...props.sx,
+            transform: "rotate(180deg)"
+        }
+    });
+    else if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
@@ -39512,7 +39571,7 @@ var $9a6e28ce4ef94519$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
-var $0b61921fb120a84a$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
+var $6abef6d5d24d13ce$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
     const [value1, setValue] = (0, $d4J5n.useState)("");
     (0, $d4J5n.useEffect)(()=>{
         const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query1);
@@ -39558,13 +39617,13 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $d4J5n = parcelRequire("d4J5n");
-var $9a0805b0db9bb6db$exports = {};
-$9a0805b0db9bb6db$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+var $8a570d493fafcca0$exports = {};
+$8a570d493fafcca0$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
 
 
 
 
-var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ value: value1 = [
+var $6417a5352f465ba9$export$2e2bcd8739ae039 = ({ value: value1 = [
     ""
 ] , onChange: onChange , onDelete: onDelete , sx: sx  })=>{
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
@@ -39602,7 +39661,7 @@ var $d0de514dc477abde$export$2e2bcd8739ae039 = ({ value: value1 = [
                             width: 300
                         },
                         children: [
-                            (0, (/*@__PURE__*/$parcel$interopDefault($9a0805b0db9bb6db$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            (0, (/*@__PURE__*/$parcel$interopDefault($8a570d493fafcca0$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                     value: key,
                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                                         title: help,
@@ -39707,7 +39766,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $43cf96b19ff1ec26$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
+var $101d62ce18dea1b1$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
     const [tracking, setTracking] = (0, $d4J5n.useState)(false);
     const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
     const [counter, setCounter] = (0, $d4J5n.useState)(0);
@@ -39855,7 +39914,7 @@ var $43cf96b19ff1ec26$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
-var $4c28f63364664600$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
+var $0875a46d41a08fd1$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
     const select = (0, $d4J5n.useMemo)(()=>value1 || [
             ""
         ], [
@@ -39879,13 +39938,13 @@ var $4c28f63364664600$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onCh
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: sx,
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $43cf96b19ff1ec26$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $101d62ce18dea1b1$export$2e2bcd8739ae039), {
                 value: select[0],
                 onChange: (event, value)=>onChangeSelector(event, value)
             }),
             select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
                 children: [
-                    select.slice(1).map((obj1, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
+                    select.slice(1).map((obj1, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6417a5352f465ba9$export$2e2bcd8739ae039), {
                             value: obj1,
                             onChange: (event, obj)=>onChangeQueryOp(event, obj, i + 1),
                             onDelete: (event)=>onDeleteQueryOp(event, i + 1),
@@ -39893,7 +39952,7 @@ var $4c28f63364664600$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onCh
                                 mt: 1
                             }
                         })),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0de514dc477abde$export$2e2bcd8739ae039), {
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6417a5352f465ba9$export$2e2bcd8739ae039), {
                         onChange: (event, obj)=>onChangeQueryOp(event, obj, select.length),
                         sx: {
                             mt: 1
@@ -39910,7 +39969,7 @@ var $4c28f63364664600$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onCh
 parcelRequire("d4J5n");
 
 
-var $f8819d52d7ebd564$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
+var $bfc02ee7e55afdfc$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
     return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
         underline: "always",
         fontSize: "small",
@@ -39963,7 +40022,7 @@ var $f8819d52d7ebd564$export$2e2bcd8739ae039 = ({ selects: selects , index: inde
 
 
 
-var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , onClose: onClose , onChange: onChange  })=>{
+var $2379682caf290208$export$2e2bcd8739ae039 = ({ value: value , open: open , onClose: onClose , onChange: onChange  })=>{
     const [select, setSelect] = (0, $d4J5n.useState)([
         [
             ""
@@ -40039,7 +40098,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                                 direction: "row",
                                 children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
                                         name: value.type || "string",
                                         sx: {
                                             color: "primary.light",
@@ -40055,7 +40114,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
                                         },
                                         children: value.name || "(array)"
                                     }),
-                                    value.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                    value.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
                                         name: "repeated",
                                         sx: {
                                             color: "primary.light",
@@ -40066,7 +40125,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
                                     }) : null
                                 ]
                             }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f8819d52d7ebd564$export$2e2bcd8739ae039), {
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfc02ee7e55afdfc$export$2e2bcd8739ae039), {
                                 selects: select,
                                 index: index1,
                                 onChange: (event, index)=>setIndex(index),
@@ -40081,7 +40140,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
                             mb: 2
                         }
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4c28f63364664600$export$2e2bcd8739ae039), {
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0875a46d41a08fd1$export$2e2bcd8739ae039), {
                         value: select[index1],
                         onChange: onChangeQuery
                     })
@@ -40091,7 +40150,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0b61921fb120a84a$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6abef6d5d24d13ce$export$2e2bcd8739ae039), {
                             query: select[index1],
                             onChange: onChangeQuery
                         })
@@ -40112,7 +40171,7 @@ var $46569f2fb4ae6a4c$export$2e2bcd8739ae039 = ({ value: value , open: open , on
 
 
 
-var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
+var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
     const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const item = template.selectedItem();
@@ -40127,11 +40186,11 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
     const items = [
         [
             "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6a804e9e9de76e97$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
                 query: select.query,
                 onClick: ()=>setQueryEditorOpen(true)
             }),
-            "A CSS selector or jQuery expression that determines what data is selected on the page"
+            "A CSS selector or jQuery expression that determines the click target"
         ]
     ];
     if (advanced) items.push(...[
@@ -40144,7 +40203,7 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
                     setTemplate(template.clone());
                 }
             }),
-            "Determines whether the click is required or optional, an error is produced if conditions on the page do not exists for the click to occur"
+            "Determines whether the click is optional or required, producing if no click target is found on the page"
         ],
         [
             "retry",
@@ -40155,7 +40214,7 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
                     setTemplate(template.clone());
                 }
             }),
-            "Determines the number of times to retry clicking and testing for the expected result"
+            "Determines the number of attempts to retry clicking and testing for the expected result"
         ],
         [
             "snooze",
@@ -40183,7 +40242,7 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
                 },
                 onValidate: validateName
             }),
-            "Makes value selection conditional based whether the evaluation produces a true result"
+            "A formula that determines whether the click is evaluated or bypassed"
         ],
         [
             "active",
@@ -40194,11 +40253,11 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
                     setTemplate(template.clone());
                 }
             }),
-            "Determines whether the property is active or ignored"
+            "Determines whether the property is active or bypassed"
         ],
         [
             "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {}),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
             "Debug"
         ]
     ]);
@@ -40207,7 +40266,7 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
                 items: items
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: select,
                 open: queryEditorOpen,
                 onClose: ()=>setQueryEditorOpen(false),
@@ -40221,6 +40280,21 @@ var $31df28b087985813$export$2e2bcd8739ae039 = ()=>{
 };
 
 
+var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
+var $b516851a7c38229b$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
+var $9415fe1f85866126$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -40230,7 +40304,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
-var $73e753ca2c47eb90$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+var $f07520fb1bed2c0f$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
         size: "small",
         value: value || "default",
         onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
@@ -40270,7 +40344,7 @@ var $73e753ca2c47eb90$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 parcelRequire("d4J5n");
 
-var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+var $925397cb6c29072f$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
         size: "small",
         value: value || "default",
         onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
@@ -40302,13 +40376,13 @@ var $7b74574be994b9cd$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
-var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
+var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
     const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const item = template.selectedItem();
     if (!item) return null;
     function validateName(event, value) {
-        return /^[a-z][a-z0-9_]*$/.test(value);
+        return value ? /^[a-z][a-z0-9_]*$/.test(value) : true;
     }
     function validateNumber(event, value) {
         return value ? parseInt(value) >= 0 : true;
@@ -40321,6 +40395,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
                 variant: "standard",
                 size: "small",
                 value: select.name,
+                placeholder: "(none)",
                 fullWidth: true,
                 onChange: (event, value)=>{
                     select.name = value;
@@ -40328,11 +40403,11 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
                 },
                 onValidate: validateName
             }),
-            "Determines the name of the selected value"
+            "Determines the name of the selected value, or blank representing a single unnamed value"
         ],
         [
             "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6a804e9e9de76e97$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
                 query: select.query,
                 onClick: ()=>setQueryEditorOpen(true)
             }),
@@ -40340,7 +40415,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
         ],
         [
             "type",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7b74574be994b9cd$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $925397cb6c29072f$export$2e2bcd8739ae039), {
                 value: select.type,
                 onChange: (event, value)=>{
                     select.type = value;
@@ -40414,7 +40489,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
         ],
         [
             "format",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73e753ca2c47eb90$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f07520fb1bed2c0f$export$2e2bcd8739ae039), {
                 value: select.format,
                 onChange: (event, value)=>{
                     select.format = value;
@@ -40460,7 +40535,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
                 },
                 onValidate: validateName
             }),
-            "Makes value selection conditional based whether the evaluation produces a true result"
+            "A formula that determines whether the select is evaluated or bypassed"
         ],
         [
             "active",
@@ -40471,11 +40546,11 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
                     setTemplate(template.clone());
                 }
             }),
-            "Determines whether the property is active or ignored"
+            "Determines whether the property is active or bypassed"
         ],
         [
             "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {}),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
             "Debug"
         ]
     ]);
@@ -40484,7 +40559,7 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
                 items: items
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $46569f2fb4ae6a4c$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: select,
                 open: queryEditorOpen,
                 onClose: ()=>setQueryEditorOpen(false),
@@ -40498,14 +40573,42 @@ var $cac393273b7aba25$export$2e2bcd8739ae039 = ()=>{
 };
 
 
+var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
 
-var $9e41d32715df6971$export$2e2bcd8739ae039 = ()=>{
+
+var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
+var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
+var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
+
+
+
+var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const item = template.selectedItem();
-    const action = item?.type === "action" ? item.name : undefined;
-    if (action === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cac393273b7aba25$export$2e2bcd8739ae039), {});
-    else if (action === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $31df28b087985813$export$2e2bcd8739ae039), {});
-    else if (advanced) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $40841473af599963$export$2e2bcd8739ae039), {});
+    if (!item) return null;
+    else if (item.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b516851a7c38229b$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9415fe1f85866126$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {});
+    else if (item.type === "action" && item.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {});
+    else if (advanced) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {});
     else return null;
 };
 
@@ -40513,6 +40616,104 @@ var $9e41d32715df6971$export$2e2bcd8739ae039 = ()=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
+var $7b42a1209722603f$exports = {};
+
+$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -41083,6 +41284,8 @@ const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function 
     }));
 });
 var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
+
+
 
 
 
@@ -41703,18 +41906,24 @@ var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
 
 
 
+
+
+
+
+
+
+
 parcelRequire("d4J5n");
 
 
 parcelRequire("d4J5n");
 
 
-
 parcelRequire("d4J5n");
 
 
 
-var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>{
+var $fe0739c0143e6f33$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
@@ -41763,8 +41972,15 @@ var $9098bacb6c71e32c$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
-var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
+
+var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
     const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    function name(item) {
+        if (item.name) return item.name;
+        else if (item.repeated) return "(array)";
+        else if (item.type === "select" && item.obj?.type === "object") return "(object)";
+        else return "(value)";
+    }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         justifyContent: "space-between",
@@ -41775,8 +41991,19 @@ var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     mt: 1
                 },
                 children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
-                        name: item.icon,
+                    item1.type === "action" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        variant: "caption",
+                        color: "primary.light",
+                        sx: {
+                            position: "relative",
+                            top: -6,
+                            width: 24,
+                            mr: 1
+                        },
+                        children: item1.index + 1
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                        name: item1.icon,
                         fontSize: "small",
                         sx: {
                             color: "primary.light"
@@ -41787,11 +42014,12 @@ var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
                         sx: {
                             position: "relative",
                             top: -6,
-                            left: 2
+                            left: 2,
+                            height: 12
                         },
-                        children: item.name
+                        children: name(item1)
                     }),
-                    item.required ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                    item1.required ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                         variant: "caption",
                         sx: {
                             position: "relative",
@@ -41802,7 +42030,7 @@ var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
                         },
                         children: "!"
                     }) : null,
-                    item.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                    item1.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
                         name: "repeated",
                         fontSize: "small",
                         sx: {
@@ -41812,28 +42040,28 @@ var $e3e329719c580c99$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     }) : null
                 ]
             }),
-            template.selected === item.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9098bacb6c71e32c$export$2e2bcd8739ae039), {
-                item: item
+            template.selected === item1.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fe0739c0143e6f33$export$2e2bcd8739ae039), {
+                item: item1
             }) : undefined
         ]
     });
 };
 
 
-function $0fa951d9b2d6a3b3$export$2e2bcd8739ae039({ item: item  }) {
+function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e62f391705b5047$export$2e2bcd8739ae039), {
         nodeId: item.key,
-        label: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e3e329719c580c99$export$2e2bcd8739ae039), {
+        label: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5ec2061eb08335c8$export$2e2bcd8739ae039), {
             item: item
         }),
-        children: item.children?.map((subitem)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0fa951d9b2d6a3b3$export$2e2bcd8739ae039, {
+        children: item.children?.map((subitem)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($ec7899798df4c4f5$export$2e2bcd8739ae039, {
                 item: subitem
             }))
     });
 }
 
 
-var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ()=>{
+var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
     const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
@@ -41855,7 +42083,7 @@ var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ()=>{
                 template.selected = nodeIds;
                 setTemplate(template.clone());
             },
-            children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0fa951d9b2d6a3b3$export$2e2bcd8739ae039), {
+            children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ec7899798df4c4f5$export$2e2bcd8739ae039), {
                     item: item
                 }))
         })
@@ -41868,18 +42096,17 @@ var $1a993c7acd9a82e7$export$2e2bcd8739ae039 = ()=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
-var $721d382012b84877$exports = {};
-$721d382012b84877$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
+var $86983b27c45f5667$exports = {};
+$86983b27c45f5667$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"break","advanced":true,"help":"Break out of the current each or repeat loop."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
 
 
 
 
-var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
+var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
     const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const item = template.selectedItem();
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
         setOpen(true);
@@ -41905,8 +42132,19 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                 arrow: true,
                 placement: "left",
-                open: template.empty(),
                 title: "Click here to add the first action",
+                //open={template.empty()}
+                sx: {
+                    animation: "pulse 1s infinite ease-in-out",
+                    "@keyframes pulse": {
+                        "0%": {
+                            opacity: 0.5
+                        },
+                        "100%": {
+                            opacity: 1.0
+                        }
+                    }
+                },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f09768665decc43c$export$2e2bcd8739ae039), {
                     ...props,
                     size: "small",
@@ -41928,14 +42166,14 @@ var $3e7ea5ad9638c16a$export$2e2bcd8739ae039 = (props)=>{
                     horizontal: "right"
                 },
                 children: [
-                    (0, (/*@__PURE__*/$parcel$interopDefault($721d382012b84877$exports))).filter((type)=>expanded || !type.advanced).map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    (0, (/*@__PURE__*/$parcel$interopDefault($86983b27c45f5667$exports))).filter((type)=>expanded || !type.advanced).map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                             title: type.help,
                             arrow: true,
                             placement: "right",
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                 onClick: ()=>addAction(type.name),
                                 children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9a6e28ce4ef94519$export$2e2bcd8739ae039), {
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
                                         name: type.name,
                                         fontSize: "small"
                                     }),
@@ -42006,7 +42244,7 @@ parcelRequire("d4J5n");
 
 
 
-var $a78184c3e57f06f8$export$2e2bcd8739ae039 = ()=>{
+var $b452db4f8da5fc67$export$2e2bcd8739ae039 = ()=>{
     const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
@@ -42021,7 +42259,7 @@ var $a78184c3e57f06f8$export$2e2bcd8739ae039 = ()=>{
 parcelRequire("d4J5n");
 
 
-var $7135a358156e127c$export$2e2bcd8739ae039 = ()=>{
+var $fd9e77c6eb352991$export$2e2bcd8739ae039 = ()=>{
     const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { actions: actions , ...response } = result || {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
@@ -42038,7 +42276,7 @@ parcelRequire("d4J5n");
 
 
 
-var $573feb068ae5f932$export$2e2bcd8739ae039 = ()=>{
+var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
     const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const keys = result && (0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
     const obj = result && (0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(result.data) ? (0, $d2489396c3ef9092$export$de139376c1f60602)(result.data) : {};
@@ -42080,7 +42318,7 @@ var $573feb068ae5f932$export$2e2bcd8739ae039 = ()=>{
 };
 
 
-var $5313c1139f7bda04$export$2e2bcd8739ae039 = ()=>{
+var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
     const [tab, setTab] = (0, $d4J5n.useState)(0);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
         container: true,
@@ -42113,17 +42351,17 @@ var $5313c1139f7bda04$export$2e2bcd8739ae039 = ()=>{
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                     component: "div",
                     display: tab === 0 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $573feb068ae5f932$export$2e2bcd8739ae039), {})
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
                 }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                     component: "div",
                     display: tab === 1 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a78184c3e57f06f8$export$2e2bcd8739ae039), {})
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
                 }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                     component: "div",
                     display: tab === 2 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7135a358156e127c$export$2e2bcd8739ae039), {})
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
                 })
             ]
         })
@@ -42142,7 +42380,7 @@ parcelRequire("d4J5n");
 
 
 
-var $5c306f9cb910b8cc$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     async function onSelectFile(event, file) {
@@ -42174,7 +42412,7 @@ parcelRequire("d4J5n");
 
 
 
-var $a25bfd1370319433$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
     const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     async function handleSelectFile(event, file) {
@@ -42205,7 +42443,7 @@ var $a25bfd1370319433$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 parcelRequire("d4J5n");
 
 
-var $dbe7b66a72dc2a47$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -42234,22 +42472,22 @@ var $dbe7b66a72dc2a47$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
-var $e4769a85bdb2a785$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
     const [userSettingsOpen, setUserSettingsOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5c306f9cb910b8cc$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1f8d5321e219cf73$export$2e2bcd8739ae039), {
                 open: fileOpenOpen,
                 onClose: ()=>setFileOpenOpen(false)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a25bfd1370319433$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9c7488a3ccb37ae1$export$2e2bcd8739ae039), {
                 open: fileSaveOpen,
                 onClose: ()=>setFileSaveOpen(false)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dbe7b66a72dc2a47$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a984d03c08866a0$export$2e2bcd8739ae039), {
                 open: userSettingsOpen,
                 onClose: ()=>setUserSettingsOpen(false)
             }),
@@ -42311,7 +42549,7 @@ var $e4769a85bdb2a785$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
-var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
+var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
@@ -42319,7 +42557,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
             minWidth: 500
         },
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4769a85bdb2a785$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
                 open: sidebarOpen,
                 onClose: ()=>setSidebarOpen(false)
             }),
@@ -42440,8 +42678,8 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                                         width: 400
                                     },
                                     children: [
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1a993c7acd9a82e7$export$2e2bcd8739ae039), {}),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3e7ea5ad9638c16a$export$2e2bcd8739ae039), {
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
                                             sx: {
                                                 position: "absolute",
                                                 bottom: (theme)=>theme.spacing(2),
@@ -42471,7 +42709,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                                                 })
                                             })
                                         }),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e41d32715df6971$export$2e2bcd8739ae039), {})
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
                                     ]
                                 })
                             ]
@@ -42482,7 +42720,7 @@ var $14535b517ab613e7$export$2e2bcd8739ae039 = ()=>{
                             sx: {
                                 width: 1
                             },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5313c1139f7bda04$export$2e2bcd8739ae039), {})
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
                         })
                     ]
                 })
@@ -42507,7 +42745,7 @@ var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5d05c50dc13d9129$export$2e2bcd8739ae039), {}),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e7d45acde193ea2$export$c7dacf3845253dcf), {
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $14535b517ab613e7$export$2e2bcd8739ae039), {})
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
                 })
             })
         ]

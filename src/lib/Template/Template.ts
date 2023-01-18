@@ -1,6 +1,7 @@
 import * as syphonx from "syphonx-lib";
 import { TemplateItem } from "./TemplateItem";
-import { clone, createActionItems, findItem, firstObj, matchBrace, newName } from "./utilities";
+import { clone } from "../utilities";
+import { createActionItems, findItem, firstObj, matchBrace, newName } from "./utilities";
 import * as background from "../../background-proxy";
 
 export class Template {
@@ -40,7 +41,10 @@ export class Template {
     addAction(type: TemplateAddItemType): void {
         const item = findItem(this.children, this.selected);
         const actions = this.findItemActions(item);
-        if (type === "click") {
+        if (type === "break") {
+            actions.push({ break: {} });
+        }
+        else if (type === "click") {
             const click = {} as syphonx.Click;
             actions.push({ click });
         }
@@ -207,5 +211,5 @@ export class Template {
     }
 }
 
-export type TemplateAddItemType = "click" | "each" | "error" | "item" | "repeat" | "select" | "snooze" | "transform" | "waitfor" | "yield";
+export type TemplateAddItemType = "break" | "click" | "each" | "error" | "item" | "repeat" | "select" | "snooze" | "transform" | "waitfor" | "yield";
 export * from "./TemplateItem";

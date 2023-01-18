@@ -43,21 +43,21 @@ await window.syphonx.extract({actions:[{select:[{name:"title",query:[["h1"]]}]}]
 1. Hit F12 from the active tab to open devtools and goto Sources
 2. Change the Sources window context from `Page` to `Content scripts`
 3. Expand the `SyphonX` node and select `syphonx.js`
-4. Set a breakpoint anywhere in the code
+4. Set a breakpoint in the code editor
 
 ## Debug background
 1. Goto chrome://extensions
 2. Click the `service worker` to open devtools window
-3. Select the `Sources` window
-4. Set a breakpoint anywhere in the code
+3. Select **Sources** view
+4. Set a breakpoint in the code editor
 
 ## Debug panel
-TODO
-
+1. Right click on any element in the panel and select **inspect** to open the devtools window for the panel
+2. Select **Sources** view
+3. Drill down to **top > panel.html > {id} > src > panel > index.tsx** (or other desired source location)
+4. Set a breakpoint in the code editor
 
 ## Misc
-
-
 How to get the Selected elements in Chrome Panel? [Chrome Extension Development] [XPath Selenium]
 https://www.youtube.com/watch?v=tFpU95kMJ7U&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOpcR5&index=10
 

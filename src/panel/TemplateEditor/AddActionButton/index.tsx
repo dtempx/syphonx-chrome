@@ -31,8 +31,6 @@ export default (props?: Props) => {
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
 
-    const item = template.selectedItem();
-
     function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         setAnchor(event.currentTarget);
         setOpen(true);
@@ -58,7 +56,23 @@ export default (props?: Props) => {
 
     return (
         <>
-            <Tooltip arrow placement="left" open={template.empty()} title="Click here to add the first action">
+            <Tooltip
+                arrow
+                placement="left"
+                title="Click here to add the first action"
+                //open={template.empty()}
+                sx={{
+                    animation: "pulse 1s infinite ease-in-out",
+                    "@keyframes pulse": {
+                        "0%": {
+                            opacity: 0.5
+                        },
+                        "100%": {
+                            opacity: 1.0
+                        }
+                    }
+                }}
+            >
                 <Fab
                     {...props}
                     size="small"

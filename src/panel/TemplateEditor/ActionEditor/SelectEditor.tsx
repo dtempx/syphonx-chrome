@@ -6,7 +6,7 @@ import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../comp
 import SelectFormatDropDown from "./SelectFormatDropDown";
 import SelectTypeDropDown from "./SelectTypeDropDown";
 import SelectorField from "./SelectorField";
-import QueryBuilder from "./QueryBuilder/index";
+import QueryBuilder from "../QueryBuilder/index";
 import DebugView from "./DebugView";
 
 export default () => {
@@ -17,7 +17,7 @@ export default () => {
         return null;
 
     function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
-        return /^[a-z][a-z0-9_]*$/.test(value);
+        return value ? /^[a-z][a-z0-9_]*$/.test(value) : true;
     }
 
     function validateNumber(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
@@ -32,11 +32,12 @@ export default () => {
                 variant="standard"
                 size="small"
                 value={select.name}
+                placeholder="(none)"
                 fullWidth
                 onChange={(event, value) => { select.name = value; setTemplate(template.clone()); }}
                 onValidate={validateName}
             />,
-            "Determines the name of the selected value"
+            "Determines the name of the selected value, or blank representing a single unnamed value"
         ],
         [
             "query",
@@ -139,7 +140,7 @@ export default () => {
                     onChange={(event, value) => { select.when = value || undefined; setTemplate(template.clone()); }}
                     onValidate={validateName}
                 />,
-                "Makes value selection conditional based whether the evaluation produces a true result"
+                "A formula that determines whether the select is evaluated or bypassed"
             ],
             [
                 "active",
@@ -147,7 +148,7 @@ export default () => {
                     checked={select.active ?? true}
                     onChange={(event, value) => { select.active = value; setTemplate(template.clone()); }}
                 />,
-                "Determines whether the property is active or ignored"
+                "Determines whether the property is active or bypassed"
             ],
             [
                 "debug",
