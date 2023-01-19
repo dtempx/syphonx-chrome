@@ -3,10 +3,9 @@ import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
-import SelectFormatDropDown from "./SelectFormatDropDown";
-import SelectTypeDropDown from "./SelectTypeDropDown";
+import { SelectFormatDropdown, SelectTypeDropdown } from "./components";
 import SelectorField from "./SelectorField";
-import QueryBuilder from "../QueryBuilder/index";
+import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
@@ -49,7 +48,7 @@ export default () => {
         ],
         [
             "type",
-            <SelectTypeDropDown
+            <SelectTypeDropdown
                 value={select.type}
                 onChange={(event, value) => { select.type = value; setTemplate(template.clone()); }}
             />,
@@ -106,7 +105,7 @@ export default () => {
             ],
             [
                 "format",
-                <SelectFormatDropDown
+                <SelectFormatDropdown
                     value={select.format}
                     onChange={(event, value) => { select.format = value; setTemplate(template.clone());  }}
                 />,

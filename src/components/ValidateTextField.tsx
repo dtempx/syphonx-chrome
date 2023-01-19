@@ -4,11 +4,13 @@ import { Check as CommitIcon, Clear as CancelIcon } from "@mui/icons-material";
 
 export interface Props extends BaseTextFieldProps {
     value?: unknown;
+    showCommitButton?: boolean;
+    showCancelButton?: boolean;
     onChange?: (event: React.SyntheticEvent, value: string) => void
     onValidate?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => boolean
 }
 
-export default ({ value, onChange, onValidate, ...props }: Props) => {
+export default ({ value, onChange, onValidate, showCommitButton, showCancelButton, ...props }: Props) => {
     const [ input, setInput ] = useState<string | undefined>();
     const [ valid, setValid ] = useState(true);
 
@@ -54,27 +56,31 @@ export default ({ value, onChange, onValidate, ...props }: Props) => {
             onChange={validate}
             onKeyDown={keydown}
             onBlur={commit}
-            InputProps={{
+            InputProps={showCommitButton || showCancelButton ? {
                 endAdornment:
                     <InputAdornment
                         position="end"
                         style={{ visibility: input !== undefined ? "visible" : "hidden" }}
                     >
-                        <IconButton
-                            size="small"
-                            onClick={commit}
-                            style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
-                        >
-                            <CommitIcon fontSize="small" />
-                        </IconButton>
-                        <IconButton
-                            size="small"
-                            onClick={cancel}
-                        >
-                            <CancelIcon fontSize="small" />
-                        </IconButton>
+                        {showCommitButton &&
+                            <IconButton
+                                size="small"
+                                onClick={commit}
+                                style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
+                            >
+                                <CommitIcon fontSize="small" />
+                            </IconButton>
+                        }
+                        {showCancelButton &&
+                            <IconButton
+                                size="small"
+                                onClick={cancel}
+                            >
+                                <CancelIcon fontSize="small" />
+                            </IconButton>
+                        }
                     </InputAdornment>
-            }}
+            } : undefined}
         />
     );
 }

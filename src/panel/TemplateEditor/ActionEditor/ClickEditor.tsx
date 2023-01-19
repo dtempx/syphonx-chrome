@@ -4,7 +4,7 @@ import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import SelectorField from "./SelectorField";
-import QueryBuilder from "../QueryBuilder/index";
+import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
@@ -22,12 +22,12 @@ export default () => {
         return value ? parseInt(value) >= 0 : true;
     }
 
-    const select = item.obj as syphonx.Select;
+    const click = item.obj as syphonx.Select;
     const items: PropertyGridItem[] = [
         [
             "query",
             <SelectorField
-                query={select.query}
+                query={click.query}
                 onClick={() => setQueryEditorOpen(true)}
             />,
             "A CSS selector or jQuery expression that determines the click target"
@@ -39,23 +39,23 @@ export default () => {
             [
                 "required",
                 <Switch
-                    checked={select.required ?? false}
-                    onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
+                    checked={click.required ?? false}
+                    onChange={(event, value) => { click.required = value; setTemplate(template.clone()); }}
                 />,
                 "Determines whether the click is optional or required, producing if no click target is found on the page"
             ],
             [
                 "retry",
                 <Switch
-                    checked={select.required ?? false}
-                    onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
+                    checked={click.required ?? false}
+                    onChange={(event, value) => { click.required = value; setTemplate(template.clone()); }}
                 />,
                 "Determines the number of attempts to retry clicking and testing for the expected result"
             ],
             [
                 "snooze",
                 <TextField size="small" />,
-                "An amount of time to snooze before or after clicking"
+                "Number of seconds to snooze before or after clicking"
             ],
             [
                 "waitfor",
@@ -67,8 +67,8 @@ export default () => {
                 <ValidateTextField
                     variant="standard"
                     size="small"
-                    value={select.when}
-                    onChange={(event, value) => { select.when = value || undefined; setTemplate(template.clone()); }}
+                    value={click.when}
+                    onChange={(event, value) => { click.when = value || undefined; setTemplate(template.clone()); }}
                     onValidate={validateName}
                 />,
                 "A formula that determines whether the click is evaluated or bypassed"
@@ -76,8 +76,8 @@ export default () => {
             [
                 "active",
                 <Switch
-                    checked={select.active ?? true}
-                    onChange={(event, value) => { select.active = value; setTemplate(template.clone()); }}
+                    checked={click.active ?? true}
+                    onChange={(event, value) => { click.active = value; setTemplate(template.clone()); }}
                 />,
                 "Determines whether the property is active or bypassed"
             ],
@@ -92,10 +92,10 @@ export default () => {
         <>
             <PropertyGrid items={items} />
             <QueryBuilder
-                value={select}
+                value={click}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
+                onChange={(event, value) => { click.query = value; setTemplate(template.clone()); }}
             />
         </>
     );

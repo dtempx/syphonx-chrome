@@ -38629,7 +38629,6 @@ function $1aab7a538bf9cc22$export$5c3a5f48c762cb34() {
 
 
 
-
 var $d4J5n = parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
@@ -39025,7 +39024,7 @@ var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open 
 parcelRequire("d4J5n");
 
 
-var $69dc9a54a9f1c597$export$2e2bcd8739ae039 = ({ value: value , onMore: onMore , ...props })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+var $69dc9a54a9f1c597$export$2e2bcd8739ae039 = ({ value: value , onEdit: onEdit , ...props })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         ...props,
         value: value,
         InputProps: {
@@ -39033,7 +39032,7 @@ var $69dc9a54a9f1c597$export$2e2bcd8739ae039 = ({ value: value , onMore: onMore 
                 position: "end",
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                     size: "small",
-                    onClick: onMore,
+                    onClick: onEdit,
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
                         fontSize: "small"
                     })
@@ -39271,6 +39270,106 @@ var $842c61f574169e59$export$2e2bcd8739ae039 = ({ items: items , sx: sx  })=>/*#
 
 parcelRequire("d4J5n");
 
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $b977f189b4ae8da0$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , onValidate: onValidate , showCommitButton: showCommitButton , showCancelButton: showCancelButton , ...props })=>{
+    const [input, setInput] = (0, $d4J5n.useState)();
+    const [valid1, setValid] = (0, $d4J5n.useState)(true);
+    (0, $d4J5n.useEffect)(()=>{
+        setInput(undefined);
+        setValid(true);
+    }, [
+        value1
+    ]);
+    function validate(event) {
+        const value = event.target.value;
+        setInput(value);
+        if (onValidate) {
+            const valid = onValidate(event, value);
+            setValid(valid);
+        }
+    }
+    function commit(event) {
+        if (valid1 && input !== undefined) {
+            if (onChange) onChange(event, input);
+            setInput(undefined);
+        }
+    }
+    function cancel() {
+        setInput(undefined);
+        setValid(true);
+    }
+    function keydown(event) {
+        if (event.key === "Escape") cancel();
+        if (event.key === "Enter") commit(event);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        ...props,
+        error: !valid1,
+        value: input !== undefined ? input : value1 !== undefined ? String(value1) : "",
+        onChange: validate,
+        onKeyDown: keydown,
+        onBlur: commit,
+        InputProps: showCommitButton || showCancelButton ? {
+            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                position: "end",
+                style: {
+                    visibility: input !== undefined ? "visible" : "hidden"
+                },
+                children: [
+                    showCommitButton && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: commit,
+                        style: {
+                            visibility: input !== undefined && valid1 ? "visible" : "hidden"
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2f0f81fa11552061$export$2e2bcd8739ae039), {
+                            fontSize: "small"
+                        })
+                    }),
+                    showCancelButton && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: cancel,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e2e5d022b98a42f0$export$2e2bcd8739ae039), {
+                            fontSize: "small"
+                        })
+                    })
+                ]
+            })
+        } : undefined
+    });
+};
+
+
+var $8f724433223acec1$export$2e2bcd8739ae039 = ({ value: value1 , min: min , max: max , type: type = "float" , onChange: onChange , ...props })=>{
+    function handleChange(event, value) {
+        if (onChange) {
+            const num = type === "float" ? parseFloat(value) : parseInt(value);
+            onChange(event, !isNaN(num) ? num : undefined);
+        }
+    }
+    function handleValidate(event, value) {
+        if (!value) return true;
+        const num = parseFloat(value);
+        if (isNaN(num)) return false;
+        if (min !== undefined && num < min) return false;
+        if (max !== undefined && num > max) return false;
+        return true;
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+        ...props,
+        value: value1,
+        onChange: handleChange,
+        onValidate: handleValidate
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
 var $71b55ed5fcc7e1a3$export$2e2bcd8739ae039 = ({ items: items , columns: columns = [
     {
         width: 100
@@ -39335,79 +39434,6 @@ var $1e6698c63139ed83$export$2e2bcd8739ae039 = ({ title: title , onClose: onClos
         })
     });
 
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-var $b977f189b4ae8da0$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , onValidate: onValidate , ...props })=>{
-    const [input, setInput] = (0, $d4J5n.useState)();
-    const [valid1, setValid] = (0, $d4J5n.useState)(true);
-    (0, $d4J5n.useEffect)(()=>{
-        setInput(undefined);
-        setValid(true);
-    }, [
-        value1
-    ]);
-    function validate(event) {
-        const value = event.target.value;
-        setInput(value);
-        if (onValidate) {
-            const valid = onValidate(event, value);
-            setValid(valid);
-        }
-    }
-    function commit(event) {
-        if (valid1 && input !== undefined) {
-            if (onChange) onChange(event, input);
-            setInput(undefined);
-        }
-    }
-    function cancel() {
-        setInput(undefined);
-        setValid(true);
-    }
-    function keydown(event) {
-        if (event.key === "Escape") cancel();
-        if (event.key === "Enter") commit(event);
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-        ...props,
-        error: !valid1,
-        value: input !== undefined ? input : value1 !== undefined ? String(value1) : "",
-        onChange: validate,
-        onKeyDown: keydown,
-        onBlur: commit,
-        InputProps: {
-            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
-                position: "end",
-                style: {
-                    visibility: input !== undefined ? "visible" : "hidden"
-                },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: commit,
-                        style: {
-                            visibility: input !== undefined && valid1 ? "visible" : "hidden"
-                        },
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2f0f81fa11552061$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: cancel,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e2e5d022b98a42f0$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        })
-                    })
-                ]
-            })
-        }
-    });
-};
 
 
 
@@ -40182,12 +40208,12 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
     function validateNumber(event, value) {
         return value ? parseInt(value) >= 0 : true;
     }
-    const select = item.obj;
+    const click = item.obj;
     const items = [
         [
             "query",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
-                query: select.query,
+                query: click.query,
                 onClick: ()=>setQueryEditorOpen(true)
             }),
             "A CSS selector or jQuery expression that determines the click target"
@@ -40197,9 +40223,9 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
         [
             "required",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.required ?? false,
+                checked: click.required ?? false,
                 onChange: (event, value)=>{
-                    select.required = value;
+                    click.required = value;
                     setTemplate(template.clone());
                 }
             }),
@@ -40208,9 +40234,9 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
         [
             "retry",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.required ?? false,
+                checked: click.required ?? false,
                 onChange: (event, value)=>{
-                    select.required = value;
+                    click.required = value;
                     setTemplate(template.clone());
                 }
             }),
@@ -40221,7 +40247,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                 size: "small"
             }),
-            "An amount of time to snooze before or after clicking"
+            "Number of seconds to snooze before or after clicking"
         ],
         [
             "waitfor",
@@ -40235,9 +40261,9 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
                 variant: "standard",
                 size: "small",
-                value: select.when,
+                value: click.when,
                 onChange: (event, value)=>{
-                    select.when = value || undefined;
+                    click.when = value || undefined;
                     setTemplate(template.clone());
                 },
                 onValidate: validateName
@@ -40247,9 +40273,9 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
         [
             "active",
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.active ?? true,
+                checked: click.active ?? true,
                 onChange: (event, value)=>{
-                    select.active = value;
+                    click.active = value;
                     setTemplate(template.clone());
                 }
             }),
@@ -40267,11 +40293,11 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 items: items
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: select,
+                value: click,
                 open: queryEditorOpen,
                 onClose: ()=>setQueryEditorOpen(false),
                 onChange: (event, value)=>{
-                    select.query = value;
+                    click.query = value;
                     setTemplate(template.clone());
                 }
             })
@@ -40304,7 +40330,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
-var $f07520fb1bed2c0f$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+var $d9f7df1b27b8772d$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
         size: "small",
         value: value || "default",
         onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
@@ -40344,7 +40370,55 @@ var $f07520fb1bed2c0f$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 parcelRequire("d4J5n");
 
-var $925397cb6c29072f$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+var $741e31916b8e1873$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for any selector to appear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "(default)"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "any",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for any selector to appaer",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "any"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "all",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for all selectors to appear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "all"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for all selectors to disappear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "none"
+                    })
+                })
+            })
+        ]
+    });
+
+
+
+parcelRequire("d4J5n");
+
+var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
         size: "small",
         value: value || "default",
         onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
@@ -40371,6 +40445,8 @@ var $925397cb6c29072f$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
             })
         ]
     });
+
+
 
 
 
@@ -40415,7 +40491,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
         ],
         [
             "type",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $925397cb6c29072f$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
                 value: select.type,
                 onChange: (event, value)=>{
                     select.type = value;
@@ -40489,7 +40565,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
         ],
         [
             "format",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f07520fb1bed2c0f$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
                 value: select.format,
                 onChange: (event, value)=>{
                     select.format = value;
@@ -40573,18 +40649,303 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
 };
 
 
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
 var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
-    return null;
+    const [value1, setValue1] = (0, $d4J5n.useState)();
+    const [value2, setValue2] = (0, $d4J5n.useState)();
+    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    (0, $d4J5n.useEffect)(()=>{
+        const item = template.selectedItem();
+        const snooze = item ? item.obj : [];
+        setValue1(snooze[0]);
+        setValue2(snooze[1]);
+    }, [
+        template
+    ]);
+    function onValue1Changed(event, value) {
+        setValue1(value || undefined);
+        const clone = template.clone();
+        const item = clone.selectedItem();
+        if (item) {
+            item.obj = value2 ? [
+                value,
+                value2
+            ] : [
+                value
+            ];
+            setTemplate(clone);
+        }
+    }
+    function onValue2Changed(event, value) {
+        setValue2(value || undefined);
+        if (value1 === undefined) setValue1(0);
+        const clone = template.clone();
+        const item = clone.selectedItem();
+        if (item) {
+            item.obj = [
+                value1,
+                value
+            ];
+            setTemplate(clone);
+        }
+    }
+    const items = [
+        [
+            "timeframe",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
+                        size: "small",
+                        value: value1,
+                        onChange: onValue1Changed,
+                        min: 0,
+                        max: value2,
+                        sx: {
+                            width: 100
+                        }
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
+                        size: "small",
+                        value: value2,
+                        onChange: onValue2Changed,
+                        min: value1 || 0,
+                        sx: {
+                            width: 100,
+                            ml: 1
+                        }
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        fontSize: "small",
+                        sx: {
+                            position: "relative",
+                            top: 8,
+                            ml: 1
+                        },
+                        children: "seconds"
+                    })
+                ]
+            }),
+            "Defines timeframe to snooze in seconds, specify a single number or a range to define a random interval"
+        ]
+    ];
+    if (advanced) items.push(...[
+        [
+            "debug",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
+            "Debug"
+        ]
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+        items: items
+    });
 };
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
 
 
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
-    return null;
+    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
+    const item = template.selectedItem();
+    if (!item) return null;
+    function validateName(event, value) {
+        return /^[a-z][a-z0-9_]*$/.test(value);
+    }
+    function validateNumber(event, value) {
+        return value ? parseInt(value) >= 0 : true;
+    }
+    const click = item.obj;
+    const items = [
+        [
+            "query",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
+                query: click.query,
+                onClick: ()=>setQueryEditorOpen(true)
+            }),
+            "A CSS selector or jQuery expression that determines the click target"
+        ]
+    ];
+    if (advanced) items.push(...[
+        [
+            "when",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: click.when,
+                onChange: (event, value)=>{
+                    click.when = value || undefined;
+                    setTemplate(template.clone());
+                },
+                onValidate: validateName
+            }),
+            "A formula that determines whether the click is evaluated or bypassed"
+        ],
+        [
+            "active",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: click.active ?? true,
+                onChange: (event, value)=>{
+                    click.active = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether the property is active or bypassed"
+        ],
+        [
+            "debug",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
+            "Debug"
+        ]
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                items: items
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
+                value: click,
+                open: queryEditorOpen,
+                onClose: ()=>setQueryEditorOpen(false),
+                onChange: (event, value)=>{
+                    click.query = value;
+                    setTemplate(template.clone());
+                }
+            })
+        ]
+    });
 };
 
 
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
-    return null;
+    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
+    const item = template.selectedItem();
+    if (!item) return null;
+    function validateName(event, value) {
+        return /^[a-z][a-z0-9_]*$/.test(value);
+    }
+    function validateNumber(event, value) {
+        return value ? parseInt(value) >= 0 : true;
+    }
+    const waitfor = item.obj;
+    const items = [
+        [
+            "query",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
+                query: waitfor.query,
+                onClick: ()=>setQueryEditorOpen(true)
+            }),
+            "A CSS selector or jQuery expression that determines the content to wait for on the page"
+        ]
+    ];
+    if (advanced) items.push(...[
+        [
+            "required",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: waitfor.required ?? false,
+                onChange: (event, value)=>{
+                    waitfor.required = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether the click is optional or required, producing if no click target is found on the page"
+        ],
+        [
+            "on",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
+                value: waitfor.on,
+                onChange: (event, value)=>{
+                    waitfor.on = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether to wait for any, all, or none of the selectors"
+        ],
+        [
+            "pattern",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                size: "small"
+            }),
+            "Waits for a specific text pattern if specified"
+        ],
+        [
+            "timeout",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                size: "small"
+            }),
+            "Number of seconds to wait before timing out"
+        ],
+        [
+            "when",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: waitfor.when,
+                onChange: (event, value)=>{
+                    waitfor.when = value || undefined;
+                    setTemplate(template.clone());
+                },
+                onValidate: validateName
+            }),
+            "A formula that determines whether the click is evaluated or bypassed"
+        ],
+        [
+            "active",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                checked: waitfor.active ?? true,
+                onChange: (event, value)=>{
+                    waitfor.active = value;
+                    setTemplate(template.clone());
+                }
+            }),
+            "Determines whether the property is active or bypassed"
+        ],
+        [
+            "debug",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
+            "Debug"
+        ]
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                items: items
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
+                value: waitfor,
+                open: queryEditorOpen,
+                onClose: ()=>setQueryEditorOpen(false),
+                onChange: (event, value)=>{
+                    waitfor.query = value;
+                    setTemplate(template.clone());
+                }
+            })
+        ]
+    });
 };
 
 
@@ -42552,180 +42913,182 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-        sx: {
-            minWidth: 500
-        },
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
-                open: sidebarOpen,
-                onClose: ()=>setSidebarOpen(false)
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                sx: {
-                    display: "flex",
-                    justifyContent: "space-between"
-                },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                size: "small",
-                                onClick: ()=>setSidebarOpen(true),
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
-                                    fontSize: "small"
-                                })
-                            }),
-                            template.file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                                label: template.file,
-                                variant: "outlined",
-                                color: "primary",
-                                size: "small",
-                                icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
-                                    sx: {
-                                        ml: 1
-                                    }
-                                }),
-                                sx: {
-                                    m: 1
-                                }
-                            }) : null
-                        ]
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        sx: {
-                            mr: 1
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Visual Editor",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                    size: "small",
-                                    color: "primary",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                })
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Code Editor",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                    size: "small",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                })
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Test Runner",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                    size: "small",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                })
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Template Settings",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                    size: "small",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                })
-                            })
-                        ]
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                sx: {
-                    position: "relative",
-                    backgroundColor: "#ebedf0",
-                    width: 1,
-                    height: 1,
-                    minWidth: 500,
-                    overflowX: "scroll",
-                    p: 2
-                },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+            sx: {
+                minWidth: 500
+            },
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
+                    open: sidebarOpen,
+                    onClose: ()=>setSidebarOpen(false)
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                     sx: {
                         display: "flex",
-                        flexWrap: "wrap",
-                        "& .panel": {
-                            position: "relative",
-                            overflow: "scroll",
-                            m: 1,
-                            p: 1
-                        }
+                        justifyContent: "space-between"
                     },
                     children: [
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                             direction: "row",
-                            sx: {
-                                width: 1,
-                                "& > :not(style)": {
-                                    height: 300
-                                }
-                            },
                             children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                    elevation: 3,
-                                    className: "panel",
-                                    sx: {
-                                        width: 400
-                                    },
-                                    children: [
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
-                                            sx: {
-                                                position: "absolute",
-                                                bottom: (theme)=>theme.spacing(2),
-                                                right: (theme)=>theme.spacing(2)
-                                            }
-                                        })
-                                    ]
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    onClick: ()=>setSidebarOpen(true),
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
                                 }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                    elevation: 3,
-                                    className: "panel",
+                                template.file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                    label: template.file,
+                                    variant: "outlined",
+                                    color: "primary",
+                                    size: "small",
+                                    icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        }
+                                    }),
                                     sx: {
-                                        width: 1
-                                    },
-                                    children: [
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                            direction: "row",
-                                            spacing: 0,
-                                            justifyContent: "end",
-                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
-                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
-                                                    control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                                        checked: advanced,
-                                                        onChange: (event)=>setAdvanced(event.target.checked)
-                                                    }),
-                                                    label: "Advanced"
-                                                })
-                                            })
-                                        }),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
-                                    ]
-                                })
+                                        m: 1
+                                    }
+                                }) : null
                             ]
                         }),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                            elevation: 3,
-                            className: "panel",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                            direction: "row",
                             sx: {
-                                width: 1
+                                mr: 1
                             },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    title: "Visual Editor",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                        size: "small",
+                                        color: "primary",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
+                                            fontSize: "small"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    title: "Code Editor",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                        size: "small",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
+                                            fontSize: "small"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    title: "Test Runner",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                        size: "small",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
+                                            fontSize: "small"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    title: "Template Settings",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                        size: "small",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
+                                            fontSize: "small"
+                                        })
+                                    })
+                                })
+                            ]
                         })
                     ]
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    sx: {
+                        position: "relative",
+                        backgroundColor: "#ebedf0",
+                        width: 1,
+                        height: 1,
+                        minWidth: 500,
+                        overflowX: "scroll",
+                        p: 2
+                    },
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        sx: {
+                            display: "flex",
+                            flexWrap: "wrap",
+                            "& .panel": {
+                                position: "relative",
+                                overflow: "scroll",
+                                m: 1,
+                                p: 1
+                            }
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                direction: "row",
+                                sx: {
+                                    width: 1,
+                                    "& > :not(style)": {
+                                        height: 300
+                                    }
+                                },
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                        elevation: 3,
+                                        className: "panel",
+                                        sx: {
+                                            width: 400
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
+                                                sx: {
+                                                    position: "absolute",
+                                                    bottom: (theme)=>theme.spacing(2),
+                                                    right: (theme)=>theme.spacing(2)
+                                                }
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                        elevation: 3,
+                                        className: "panel",
+                                        sx: {
+                                            width: 1
+                                        },
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                                direction: "row",
+                                                spacing: 0,
+                                                justifyContent: "end",
+                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
+                                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
+                                                        control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                                            checked: advanced,
+                                                            onChange: (event)=>setAdvanced(event.target.checked)
+                                                        }),
+                                                        label: "Advanced"
+                                                    })
+                                                })
+                                            }),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                elevation: 3,
+                                className: "panel",
+                                sx: {
+                                    width: 1
+                                },
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
+                            })
+                        ]
+                    })
                 })
-            })
-        ]
+            ]
+        })
     });
 };
 
@@ -42744,9 +43107,7 @@ var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5d05c50dc13d9129$export$2e2bcd8739ae039), {}),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e7d45acde193ea2$export$c7dacf3845253dcf), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
-                })
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
             })
         ]
     });

@@ -1,7 +1,7 @@
 V1
 
 Query Builder
-    context sensitive function parameters
+    context sensitive function parameters for replace, etc.
     selectMultiple
     formula editor for when
 
@@ -17,10 +17,12 @@ Action Views
     action view: yield
 
 Add sub-items
-    add sub-items to repeat
-    add sub-items to each
-    add sub-items to transform
-    add sub-items to waitfor
+    add sub-actions to repeat
+    add sub-actions to each
+    add sub-select to transform
+    add sub-select to waitfor
+    add sub-select for object
+    add waitfor to click
 
 Data View
     data view: single object view
