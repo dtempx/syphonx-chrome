@@ -43014,182 +43014,180 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
     const file = template.file();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-            sx: {
-                minWidth: 500
-            },
-            children: [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
-                    open: sidebarOpen,
-                    onClose: ()=>setSidebarOpen(false)
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: {
+            minWidth: 500
+        },
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
+                open: sidebarOpen,
+                onClose: ()=>setSidebarOpen(false)
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    display: "flex",
+                    justifyContent: "space-between"
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                size: "small",
+                                onClick: ()=>setSidebarOpen(true),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                label: file,
+                                variant: "outlined",
+                                color: "primary",
+                                size: "small",
+                                icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
+                                    sx: {
+                                        ml: 1
+                                    }
+                                }),
+                                sx: {
+                                    m: 1
+                                }
+                            }) : null
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        sx: {
+                            mr: 1
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Visual Editor",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    color: "primary",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Code Editor",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Test Runner",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Template Settings",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    size: "small",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            })
+                        ]
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    position: "relative",
+                    backgroundColor: "#ebedf0",
+                    width: 1,
+                    height: 1,
+                    minWidth: 500,
+                    overflowX: "scroll",
+                    p: 2
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                     sx: {
                         display: "flex",
-                        justifyContent: "space-between"
+                        flexWrap: "wrap",
+                        "& .panel": {
+                            position: "relative",
+                            overflow: "scroll",
+                            m: 1,
+                            p: 1
+                        }
                     },
                     children: [
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                             direction: "row",
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                    size: "small",
-                                    onClick: ()=>setSidebarOpen(true),
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                }),
-                                file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                                    label: file,
-                                    variant: "outlined",
-                                    color: "primary",
-                                    size: "small",
-                                    icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
-                                        sx: {
-                                            ml: 1
-                                        }
-                                    }),
-                                    sx: {
-                                        m: 1
-                                    }
-                                }) : null
-                            ]
-                        }),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                            direction: "row",
                             sx: {
-                                mr: 1
+                                width: 1,
+                                "& > :not(style)": {
+                                    height: 300
+                                }
                             },
                             children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: "Visual Editor",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                        size: "small",
-                                        color: "primary",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
-                                            fontSize: "small"
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                    elevation: 3,
+                                    className: "panel",
+                                    sx: {
+                                        width: 400
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
+                                            sx: {
+                                                position: "absolute",
+                                                bottom: (theme)=>theme.spacing(2),
+                                                right: (theme)=>theme.spacing(2)
+                                            }
                                         })
-                                    })
+                                    ]
                                 }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: "Code Editor",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                        size: "small",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
-                                            fontSize: "small"
-                                        })
-                                    })
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: "Test Runner",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                        size: "small",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
-                                            fontSize: "small"
-                                        })
-                                    })
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: "Template Settings",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                        size: "small",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
-                                            fontSize: "small"
-                                        })
-                                    })
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                    elevation: 3,
+                                    className: "panel",
+                                    sx: {
+                                        width: 1
+                                    },
+                                    children: [
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                            direction: "row",
+                                            spacing: 0,
+                                            justifyContent: "end",
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
+                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
+                                                    control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                                        checked: advanced,
+                                                        onChange: (event)=>setAdvanced(event.target.checked)
+                                                    }),
+                                                    label: "Advanced"
+                                                })
+                                            })
+                                        }),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
+                                    ]
                                 })
                             ]
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                            elevation: 3,
+                            className: "panel",
+                            sx: {
+                                width: 1
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
                         })
                     ]
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    sx: {
-                        position: "relative",
-                        backgroundColor: "#ebedf0",
-                        width: 1,
-                        height: 1,
-                        minWidth: 500,
-                        overflowX: "scroll",
-                        p: 2
-                    },
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        sx: {
-                            display: "flex",
-                            flexWrap: "wrap",
-                            "& .panel": {
-                                position: "relative",
-                                overflow: "scroll",
-                                m: 1,
-                                p: 1
-                            }
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                direction: "row",
-                                sx: {
-                                    width: 1,
-                                    "& > :not(style)": {
-                                        height: 300
-                                    }
-                                },
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                        elevation: 3,
-                                        className: "panel",
-                                        sx: {
-                                            width: 400
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
-                                                sx: {
-                                                    position: "absolute",
-                                                    bottom: (theme)=>theme.spacing(2),
-                                                    right: (theme)=>theme.spacing(2)
-                                                }
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                        elevation: 3,
-                                        className: "panel",
-                                        sx: {
-                                            width: 1
-                                        },
-                                        children: [
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                                direction: "row",
-                                                spacing: 0,
-                                                justifyContent: "end",
-                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
-                                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
-                                                        control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                                            checked: advanced,
-                                                            onChange: (event)=>setAdvanced(event.target.checked)
-                                                        }),
-                                                        label: "Advanced"
-                                                    })
-                                                })
-                                            }),
-                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
-                                        ]
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                elevation: 3,
-                                className: "panel",
-                                sx: {
-                                    width: 1
-                                },
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
-                            })
-                        ]
-                    })
                 })
-            ]
-        })
+            })
+        ]
     });
 };
 
@@ -43208,7 +43206,9 @@ var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5d05c50dc13d9129$export$2e2bcd8739ae039), {}),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e7d45acde193ea2$export$c7dacf3845253dcf), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
+                })
             })
         ]
     });

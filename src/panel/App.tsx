@@ -1,6 +1,6 @@
 import React from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { AppProvider } from "./context";
+import { AppProvider, TemplateProvider } from "./context";
 import TemplateEditor from "./TemplateEditor";
 import theme from "./theme";
 
@@ -8,7 +8,9 @@ export default () => (
     <ThemeProvider theme={theme}>
         <CssBaseline />
         <AppProvider>
-            <TemplateEditor />
+            <TemplateProvider>
+                <TemplateEditor />
+            </TemplateProvider>
         </AppProvider>
     </ThemeProvider>
 );
