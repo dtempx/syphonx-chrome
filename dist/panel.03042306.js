@@ -38218,6 +38218,24 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
+class $5f4e931e94425ce6$export$67c95d00e574f6b6 {
+    constructor(obj){
+        this.key = obj.key;
+        this.type = obj.type;
+        this.name = obj.name;
+        this.icon = obj.icon;
+        this.required = obj.required;
+        this.repeated = obj.repeated;
+        this.parent = obj.parent;
+        this.children = obj.children;
+        this.collection = obj.collection;
+        this.unit = obj.unit;
+        this.obj = obj.obj;
+        this.index = obj.index;
+    }
+}
+
+
 function $711b72822a456466$export$9cd59f9826255e47(value) {
     return JSON.parse(JSON.stringify(value));
 }
@@ -38225,6 +38243,13 @@ function $711b72822a456466$export$9cd59f9826255e47(value) {
 
 function $aacd3173f0a35cbd$export$a6cdc56e425d0d0a(obj) {
     return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+
+
+function $01caa20c9e164fb5$export$30a06c8d3562193f(obj, ...keys) {
+    const output = {};
+    for (const key1 of Object.keys(obj).filter((key)=>!keys.includes(key)))output[key1] = obj[key1];
+    return output;
 }
 
 
@@ -38244,63 +38269,63 @@ function $d2489396c3ef9092$export$de139376c1f60602(obj) {
 
 
 
+
 function $6f0852509a7f7477$export$a3d9882fc9361f2d(actions, parent) {
-    const n = {};
-    return actions.map((action, index)=>{
-        const [name] = Object.keys(action);
-        n[name] = n[name] ? n[name] + 1 : 1;
-        const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
-        const { [name]: obj  } = action;
-        const item = {
-            key: key,
-            name: name,
-            type: "action",
-            icon: name,
-            index: index,
-            obj: obj,
-            parent: parent,
-            collection: actions
-        };
-        if (name === "select" && obj instanceof Array) item.children = $6f0852509a7f7477$var$createSelectItems(obj, item);
-        return item;
-    });
+    if (actions) {
+        const ordinals = {};
+        return actions.map((action, index)=>{
+            const [name] = Object.keys(action);
+            ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
+            const ordinal = ordinals[name];
+            const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
+            const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
+            const item = new (0, $5f4e931e94425ce6$export$67c95d00e574f6b6)({
+                key: key,
+                name: name,
+                type: "action",
+                icon: name,
+                parent: parent,
+                collection: actions,
+                unit: action,
+                obj: obj,
+                index: index
+            });
+            if (name === "select" && obj instanceof Array) item.children = $6f0852509a7f7477$var$createSelectItems(obj, item);
+            return item;
+        });
+    } else return [];
 }
 function $6f0852509a7f7477$var$createSelectItems(obj, parent) {
     return obj.map((select, index)=>{
         const key = `${parent.key}.${select.name}`;
-        return {
+        return new (0, $5f4e931e94425ce6$export$67c95d00e574f6b6)({
             key: key,
             name: select.name || "",
             type: "select",
             icon: select.type || "string",
             required: select.required,
             repeated: select.repeated,
-            index: index,
-            obj: select,
             parent: parent,
-            collection: obj
-        };
+            collection: obj,
+            unit: select,
+            obj: select,
+            index: index
+        });
     });
 }
 function $6f0852509a7f7477$export$a2dea178c28a0308(items, key) {
     for (const item of items){
-        if (item.key === key || item.obj === key) return item;
+        if (item === key || item.key === key || item.unit === key || item.obj === key) return item;
         if (item.children) {
             const subitem = $6f0852509a7f7477$export$a2dea178c28a0308(item.children, key);
             if (subitem) return subitem;
         }
     }
 }
-function $6f0852509a7f7477$export$1befd5ecde967db5(key) {
-    const i = key.lastIndexOf(".");
-    const n = parseInt(key.slice(i + 1));
-    return `${key.slice(0, i)}${n}`;
-}
-function $6f0852509a7f7477$export$272b18412c726147(obj) {
-    if (typeof obj === "object" && obj !== null) {
-        const [key] = Object.keys(obj);
-        return obj[key];
-    }
+function $6f0852509a7f7477$export$a1556c689e18ef72(item) {
+    if (item?.type === "action") return item.collection;
+    else if (item?.parent) return $6f0852509a7f7477$export$a1556c689e18ef72(item.parent);
+    else return undefined;
 }
 function $6f0852509a7f7477$export$ad9052cdca847332(text, i, token) {
     let n = 0;
@@ -38310,7 +38335,7 @@ function $6f0852509a7f7477$export$ad9052cdca847332(text, i, token) {
     }
     return -1;
 }
-function $6f0852509a7f7477$export$60f47f67e5d44f99(list, basename = "new") {
+function $6f0852509a7f7477$export$490ebbf7c6884638(list, basename = "new") {
     for(let n = 1; n <= 100; ++n){
         const name = `${basename}${n}`;
         if (!list.some((obj)=>obj.name === name)) return name;
@@ -38365,96 +38390,83 @@ function $6767c619f5de943e$var$sendMessage(key, ...params) {
 
 
 
-
 class $1b88f382576c34f2$export$14416b8d99d47caa {
-    constructor(obj, selected, file){
-        if (typeof obj === "string") try {
-            this.obj = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(obj);
-        } catch (err) {
-            this.error = err instanceof Error ? err.message : JSON.stringify(err);
-            this.obj = {};
-        }
-        else if (typeof obj === "object") this.obj = obj;
+    constructor(obj, file){
+        if (typeof obj === "string") {
+            if (obj === "") this.obj = {};
+            else try {
+                this.obj = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(obj);
+            } catch (err) {
+                this.error = err instanceof Error ? err.message : JSON.stringify(err);
+                this.obj = {};
+            }
+        } else if (typeof obj === "object") this.obj = (0, $711b72822a456466$export$9cd59f9826255e47)(obj);
         else this.obj = {};
-        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
-        this.selected = selected || "";
-        this.file = file;
-        this.children = this.actions();
-    }
-    actions() {
-        return this.obj.actions instanceof Array ? (0, $6f0852509a7f7477$export$a3d9882fc9361f2d)(this.obj.actions) : [];
+        this.children = (0, $6f0852509a7f7477$export$a3d9882fc9361f2d)(this.obj.actions);
+        if (file) this.obj.file = file;
     }
     addAction(type) {
-        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
-        const actions = this.findItemActions(item);
-        if (type === "break") actions.push({
+        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
+        const item = this.selected();
+        const actions = (0, $6f0852509a7f7477$export$a1556c689e18ef72)(item) || this.obj.actions;
+        let action;
+        if (type === "break") action = {
             break: {}
-        });
-        else if (type === "click") {
-            const click = {};
-            actions.push({
-                click: click
-            });
-        } else if (type === "each") {
-            const each = {};
-            each.actions = [];
-            actions.push({
-                each: each
-            });
-        } else if (type === "error") {
-            const error = {};
-            actions.push({
-                error: error
-            });
-        } else if (type === "repeat") {
-            const repeat = {
+        };
+        else if (type === "click") action = {
+            click: {}
+        };
+        else if (type === "each") action = {
+            each: {
                 actions: []
-            };
-            actions.push({
-                repeat: repeat
-            });
-        } else if (type === "select") {
-            const select = [
+            }
+        };
+        else if (type === "error") action = {
+            error: {}
+        };
+        else if (type === "repeat") action = {
+            repeat: {
+                actions: []
+            }
+        };
+        else if (type === "select") action = {
+            select: [
                 {}
-            ];
-            actions.push({
-                select: select
-            });
-        } else if (type === "snooze") {
-            const snooze = [
+            ]
+        };
+        else if (type === "snooze") action = {
+            snooze: [
                 1,
                 2
-            ];
-            actions.push({
-                snooze: snooze
-            });
-        } else if (type === "transform") {
-            const transform = [
+            ]
+        };
+        else if (type === "transform") action = {
+            transform: [
                 {}
-            ];
-            actions.push({
-                transform: transform
-            });
-        } else if (type === "yield") actions.push({
+            ]
+        };
+        else if (type === "yield") action = {
             yield: {}
-        });
-        else if (type === "waitfor") actions.push({
+        };
+        else if (type === "waitfor") action = {
             waitfor: {}
-        });
-    //this.selected = this.findObj(obj) || "";
+        };
+        else return;
+        actions.push(action);
+        this.setSelected(action);
     }
     addSubAction() {
-        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") {
                 const selectors = item.obj;
-                const name = (0, $6f0852509a7f7477$export$60f47f67e5d44f99)(selectors);
+                const name = (0, $6f0852509a7f7477$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
             } else if (item.type === "select" && item.parent) {
                 const selectors = item.parent.obj;
-                const name = (0, $6f0852509a7f7477$export$60f47f67e5d44f99)(selectors);
+                const name = (0, $6f0852509a7f7477$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
@@ -38462,79 +38474,49 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     canAddSubAction() {
-        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") return true;
             else if (item.type === "select" && item.parent) return true;
         }
         return false;
     }
-    clone() {
-        return new $1b88f382576c34f2$export$14416b8d99d47caa((0, $711b72822a456466$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
+    duplicateItem(item) {
+        debugger;
+        const unit = (0, $711b72822a456466$export$9cd59f9826255e47)(item.unit);
+        item.collection.splice(item.index + 1, 0, unit);
+        this.setSelected(unit);
     }
     empty() {
         return this.children.length === 0;
     }
+    file() {
+        return this.obj.file;
+    }
     findItem(key) {
         return (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, key);
     }
-    findItemActions(item) {
-        if (!item) return this.obj.actions;
-        else if (item.type === "action" && item.name === "repeat") {
-            const repeat = item.obj;
-            if (!(repeat.actions instanceof Array)) repeat.actions = [];
-            return repeat.actions;
-        } else if (item.type === "action" && item.name === "each") {
-            const each = item.obj;
-            if (!(each.actions instanceof Array)) each.actions = [];
-            return each.actions;
-        } else return this.obj.actions;
-    }
-    findObj(obj) {
-        const actions = this.actions();
-        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(actions, obj);
-        return item?.key;
-    }
-    json() {
-        let text = JSON.stringify(this.obj, null, 2) || "";
-        let i = text.indexOf(`"$": [\n`);
-        while(i >= 0){
-            i = text.indexOf("[", i);
-            const j = (0, $6f0852509a7f7477$export$ad9052cdca847332)(text, i, "[]");
-            if (j > i) {
-                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
-                i = text.indexOf(`"$": [\n`);
-            } else break;
-        }
-        return text;
-    }
     moveItemDown(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i < item.collection.length - 1) {
-            item.collection.splice(i, 1);
-            item.collection.splice(i + 1, 0, item);
+        if (item.index < item.collection.length - 1) {
+            item.collection.splice(item.index, 1);
+            item.collection.splice(item.index + 1, 0, item.unit);
+            this.setSelected(item.unit);
         }
-        return this;
     }
     moveItemUp(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i > 0) {
-            item.collection.splice(i, 1);
-            item.collection.splice(i - 1, 0, item);
+        if (item.index > 0) {
+            item.collection.splice(item.index, 1);
+            item.collection.splice(item.index - 1, 0, item.unit);
+            this.setSelected(item.unit);
         }
-        return this;
     }
     removeItem(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $6f0852509a7f7477$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i >= 0) {
-            item.collection.splice(i, 1);
-            const obj = (0, $6f0852509a7f7477$export$272b18412c726147)(item.collection[i] || item.collection[0]);
-            this.selected = this.findObj(obj) || "";
+        if (item.index >= 0) {
+            item.collection.splice(item.index, 1);
+            if (item.collection.length > 1) this.setSelected(item.collection[item.index]);
+            else if (item.collection.length === 1) this.setSelected(item.collection[0]);
+            else this.setSelected(undefined);
         }
-        return this;
     }
     async run() {
         if ($6767c619f5de943e$export$89da14300d534261) {
@@ -38547,8 +38529,34 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
             }
         };
     }
-    selectedItem() {
-        return (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.selected);
+    selected() {
+        const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        return item;
+    }
+    setSelected(key) {
+        if (key) {
+            if (!(key instanceof (0, $5f4e931e94425ce6$export$67c95d00e574f6b6))) this.children = (0, $6f0852509a7f7477$export$a3d9882fc9361f2d)(this.obj.actions);
+            const item = (0, $6f0852509a7f7477$export$a2dea178c28a0308)(this.children, key);
+            if (item) this.obj.selected = item.key;
+            return item;
+        } else {
+            this.obj.selected = undefined;
+            return undefined;
+        }
+    }
+    toString(format) {
+        const obj = format === "file" ? (0, $01caa20c9e164fb5$export$30a06c8d3562193f)(this.obj, "selected", "file") : this.obj;
+        let text = JSON.stringify(obj, null, 2) || "";
+        let i = text.indexOf(`"$": [\n`);
+        while(i >= 0){
+            i = text.indexOf("[", i);
+            const j = (0, $6f0852509a7f7477$export$ad9052cdca847332)(text, i, "[]");
+            if (j > i) {
+                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
+                i = text.indexOf(`"$": [\n`);
+            } else break;
+        }
+        return text;
     }
 }
 
@@ -38592,19 +38600,20 @@ var $d4J5n = parcelRequire("d4J5n");
 var $d4J5n = parcelRequire("d4J5n");
 
 const $1aab7a538bf9cc22$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    template: new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(),
+    template: "",
     setTemplate: ()=>{},
     result: undefined,
     advanced: false,
     setAdvanced: ()=>{}
 });
 function $1aab7a538bf9cc22$export$5abfb1150fa6da6a({ children: children  }) {
-    const [template, setTemplate] = (0, $d4J5n.useState)(new (0, $1b88f382576c34f2$export$14416b8d99d47caa)());
+    const [template, setTemplate] = (0, $d4J5n.useState)("");
     const [result1, setResult] = (0, $d4J5n.useState)();
     const [advanced, setAdvanced] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
         //debugger;
-        template.run().then((result)=>setResult(result));
+        const obj = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(template);
+        obj.run().then((result)=>setResult(result));
     }, [
         template
     ]);
@@ -38635,9 +38644,11 @@ parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
+
 var $d9e393267c3799f1$export$2e2bcd8739ae039 = ()=>{
-    const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const item = template.selectedItem();
+    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
         style: {
             fontFamily: "monospace",
@@ -38769,6 +38780,12 @@ var $4f33b287f8eb5d7f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $6c65cc6bd5ac31b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
 }), "Code");
+
+
+
+var $fc30e1d95bb92ad4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+}), "ContentCopy");
 
 
 
@@ -39445,6 +39462,7 @@ const $5339359c895a55f0$export$d5e0bbf39d25920b = /*#__PURE__*/ (0, (/*@__PURE__
         ref: ref,
         ...props
     }));
+
 
 
 
@@ -40198,9 +40216,10 @@ var $2379682caf290208$export$2e2bcd8739ae039 = ({ value: value , open: open , on
 
 
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const item = template.selectedItem();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
         return /^[a-z][a-z0-9_]*$/.test(value);
@@ -40226,7 +40245,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 checked: click.required ?? false,
                 onChange: (event, value)=>{
                     click.required = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the click is optional or required, producing if no click target is found on the page"
@@ -40237,7 +40256,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 checked: click.required ?? false,
                 onChange: (event, value)=>{
                     click.required = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines the number of attempts to retry clicking and testing for the expected result"
@@ -40264,7 +40283,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 value: click.when,
                 onChange: (event, value)=>{
                     click.when = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40276,7 +40295,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 checked: click.active ?? true,
                 onChange: (event, value)=>{
                     click.active = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the property is active or bypassed"
@@ -40298,7 +40317,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
                 onClose: ()=>setQueryEditorOpen(false),
                 onChange: (event, value)=>{
                     click.query = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             })
         ]
@@ -40452,18 +40471,25 @@ var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
+
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const item = template.selectedItem();
-    if (!item) return null;
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
+    const select = item?.obj;
+    if (!select) return null;
     function validateName(event, value) {
         return value ? /^[a-z][a-z0-9_]*$/.test(value) : true;
     }
     function validateNumber(event, value) {
         return value ? parseInt(value) >= 0 : true;
     }
-    const select = item.obj;
+    function handleRename(event, value) {
+        select.name = value || undefined;
+        template.setSelected(select);
+        setTemplate(template.toString());
+    }
     const items = [
         [
             "name",
@@ -40473,10 +40499,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.name,
                 placeholder: "(none)",
                 fullWidth: true,
-                onChange: (event, value)=>{
-                    select.name = value;
-                    setTemplate(template.clone());
-                },
+                onChange: handleRename,
                 onValidate: validateName
             }),
             "Determines the name of the selected value, or blank representing a single unnamed value"
@@ -40495,7 +40518,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.type,
                 onChange: (event, value)=>{
                     select.type = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines the type of the property value"
@@ -40506,7 +40529,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 checked: select.repeated ?? false,
                 onChange: (event, value)=>{
                     select.repeated = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Indicates whether the data is single-valued or repeated within an array"
@@ -40519,7 +40542,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 checked: select.required ?? false,
                 onChange: (event, value)=>{
                     select.required = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the property is required which produces an error if a value is not obtained"
@@ -40532,7 +40555,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.value,
                 onChange: (event, value)=>{
                     select.value = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40544,7 +40567,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 checked: select.all ?? false,
                 onChange: (event, value)=>{
                     select.all = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether to evaluate all query stages, or stop at the first stage that produces a value"
@@ -40557,7 +40580,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.limit,
                 onChange: (event, value)=>{
                     select.limit = value ? parseInt(value) : undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateNumber
             }),
@@ -40569,7 +40592,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.format,
                 onChange: (event, value)=>{
                     select.format = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines how the selected value is formatted"
@@ -40582,7 +40605,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.pattern,
                 onChange: (event, value)=>{
                     select.pattern = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40594,7 +40617,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 checked: select.collate ?? false,
                 onChange: (event, value)=>{
                     select.collate = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Combines all selected nodes into a single value"
@@ -40607,7 +40630,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 value: select.when,
                 onChange: (event, value)=>{
                     select.when = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40619,7 +40642,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 checked: select.active ?? true,
                 onChange: (event, value)=>{
                     select.active = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the property is active or bypassed"
@@ -40641,7 +40664,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
                 onClose: ()=>setQueryEditorOpen(false),
                 onChange: (event, value)=>{
                     select.query = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             })
         ]
@@ -40656,12 +40679,14 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
 var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
     const [value1, setValue1] = (0, $d4J5n.useState)();
     const [value2, setValue2] = (0, $d4J5n.useState)();
-    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     (0, $d4J5n.useEffect)(()=>{
-        const item = template.selectedItem();
         const snooze = item ? item.obj : [];
         setValue1(snooze[0]);
         setValue2(snooze[1]);
@@ -40670,8 +40695,6 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
     ]);
     function onValue1Changed(event, value) {
         setValue1(value || undefined);
-        const clone = template.clone();
-        const item = clone.selectedItem();
         if (item) {
             item.obj = value2 ? [
                 value,
@@ -40679,20 +40702,18 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
             ] : [
                 value
             ];
-            setTemplate(clone);
+            setTemplate(template.toString());
         }
     }
     function onValue2Changed(event, value) {
         setValue2(value || undefined);
         if (value1 === undefined) setValue1(0);
-        const clone = template.clone();
-        const item = clone.selectedItem();
         if (item) {
             item.obj = [
                 value1,
                 value
             ];
-            setTemplate(clone);
+            setTemplate(template.toString());
         }
     }
     const items = [
@@ -40757,16 +40778,15 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const item = template.selectedItem();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
         return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-    function validateNumber(event, value) {
-        return value ? parseInt(value) >= 0 : true;
     }
     const click = item.obj;
     const items = [
@@ -40788,7 +40808,7 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
                 value: click.when,
                 onChange: (event, value)=>{
                     click.when = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40800,7 +40820,7 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
                 checked: click.active ?? true,
                 onChange: (event, value)=>{
                     click.active = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the property is active or bypassed"
@@ -40822,7 +40842,7 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
                 onClose: ()=>setQueryEditorOpen(false),
                 onChange: (event, value)=>{
                     click.query = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             })
         ]
@@ -40840,16 +40860,15 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const item = template.selectedItem();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
         return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-    function validateNumber(event, value) {
-        return value ? parseInt(value) >= 0 : true;
     }
     const waitfor = item.obj;
     const items = [
@@ -40869,7 +40888,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
                 checked: waitfor.required ?? false,
                 onChange: (event, value)=>{
                     waitfor.required = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the click is optional or required, producing if no click target is found on the page"
@@ -40880,7 +40899,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
                 value: waitfor.on,
                 onChange: (event, value)=>{
                     waitfor.on = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether to wait for any, all, or none of the selectors"
@@ -40907,7 +40926,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
                 value: waitfor.when,
                 onChange: (event, value)=>{
                     waitfor.when = value || undefined;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 },
                 onValidate: validateName
             }),
@@ -40919,7 +40938,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
                 checked: waitfor.active ?? true,
                 onChange: (event, value)=>{
                     waitfor.active = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             }),
             "Determines whether the property is active or bypassed"
@@ -40941,7 +40960,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
                 onClose: ()=>setQueryEditorOpen(false),
                 onChange: (event, value)=>{
                     waitfor.query = value;
-                    setTemplate(template.clone());
+                    setTemplate(template.toString());
                 }
             })
         ]
@@ -40955,9 +40974,11 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
 
 
 
+
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const item = template.selectedItem();
+    const { template: obj , advanced: advanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const item = template.selected();
     if (!item) return null;
     else if (item.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
     else if (item.type === "action" && item.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
@@ -42280,52 +42301,113 @@ parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $fe0739c0143e6f33$export$2e2bcd8739ae039 = ({ item: item  })=>{
-    const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-        direction: "row",
-        spacing: 0,
-        justifyContent: "end",
+
+var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
+    const [anchor, setAnchor] = (0, $d4J5n.useState)();
+    const open = !!anchor;
+    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    function handleMoveUp() {
+        template.moveItemUp(item);
+        setTemplate(template.toString());
+        setAnchor(undefined);
+    }
+    function handleMoveDown() {
+        template.moveItemDown(item);
+        setTemplate(template.toString());
+        setAnchor(undefined);
+    }
+    function handleDuplicate() {
+        template.duplicateItem(item);
+        setTemplate(template.toString());
+        setAnchor(undefined);
+    }
+    function handleDelete() {
+        template.removeItem(item);
+        setTemplate(template.toString());
+        setAnchor(undefined);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                 size: "small",
-                onClick: ()=>{
-                    setTemplate(template.clone().moveItemUp(item));
-                },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9e34cee13fe7931$export$2e2bcd8739ae039), {
+                onClick: (event)=>setAnchor(event.currentTarget),
+                "aria-controls": open ? "basic-menu" : undefined,
+                "aria-haspopup": "true",
+                "aria-expanded": open ? "true" : undefined,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
                     fontSize: "small",
                     sx: {
                         color: "primary.light"
                     }
                 })
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                size: "small",
-                onClick: ()=>{
-                    setTemplate(template.clone().moveItemDown(item));
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $245fd332f2f721c7$export$2e2bcd8739ae039), {
+                anchorEl: anchor,
+                open: open,
+                onClose: ()=>setAnchor(undefined),
+                MenuListProps: {
+                    "aria-labelledby": "basic-button"
                 },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9c740d0fb0ef5c42$export$2e2bcd8739ae039), {
-                    fontSize: "small",
-                    sx: {
-                        color: "primary.light"
-                    }
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                size: "small",
-                onClick: ()=>{
-                    setTemplate(template.clone().removeItem(item));
-                },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $09e60e810ff3d65b$export$2e2bcd8739ae039), {
-                    fontSize: "small",
-                    sx: {
-                        color: "primary.light"
-                    }
-                })
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: handleMoveUp,
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $525a0986dfeaa305$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9e34cee13fe7931$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                                children: "Move Up"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: handleMoveDown,
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $525a0986dfeaa305$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9c740d0fb0ef5c42$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                                children: "Move Down"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: handleDuplicate,
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $525a0986dfeaa305$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc30e1d95bb92ad4$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                                children: "Duplicate"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                        onClick: handleDelete,
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $525a0986dfeaa305$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $09e60e810ff3d65b$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                                children: "Delete"
+                            })
+                        ]
+                    })
+                ]
             })
         ]
     });
@@ -42334,8 +42416,11 @@ var $fe0739c0143e6f33$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
+
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
-    const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const selected = template.selected();
     function name(item) {
         if (item.name) return item.name;
         else if (item.repeated) return "(array)";
@@ -42401,7 +42486,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                     }) : null
                 ]
             }),
-            template.selected === item1.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fe0739c0143e6f33$export$2e2bcd8739ae039), {
+            selected?.key === item1.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dabc6387771e563e$export$2e2bcd8739ae039), {
                 item: item1
             }) : undefined
         ]
@@ -42422,9 +42507,22 @@ function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
 }
 
 
+
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
+    const [selected, setSelected] = (0, $d4J5n.useState)();
+    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    (0, $d4J5n.useEffect)(()=>{
+        setSelected(template.selected()?.key);
+    }, [
+        template
+    ]);
+    function onSelect(event, nodeIds) {
+        debugger;
+        template.setSelected(nodeIds);
+        setTemplate(template.toString());
+    }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ed19a9323b6d50c$export$2e2bcd8739ae039), {
             defaultCollapseIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3152ee484e1d7499$export$2e2bcd8739ae039), {
@@ -42438,12 +42536,9 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
                 }
             }),
             expanded: expanded,
-            selected: template.selected,
+            selected: selected,
             onNodeToggle: (event, nodeIds)=>setExpanded(nodeIds),
-            onNodeSelect: (event, nodeIds)=>{
-                template.selected = nodeIds;
-                setTemplate(template.clone());
-            },
+            onNodeSelect: onSelect,
             children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ec7899798df4c4f5$export$2e2bcd8739ae039), {
                     item: item
                 }))
@@ -42457,6 +42552,7 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 
+
 var $86983b27c45f5667$exports = {};
 $86983b27c45f5667$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"break","advanced":true,"help":"Break out of the current each or repeat loop."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
 
@@ -42464,10 +42560,11 @@ $86983b27c45f5667$exports = JSON.parse('[{"name":"select","advanced":false,"help
 
 
 var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
-    const { template: template , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
         setOpen(true);
@@ -42476,7 +42573,7 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
         if (template) {
             debugger;
             template.addAction(type);
-            setTemplate(template.clone());
+            setTemplate(template.toString());
             setOpen(false);
         }
     }
@@ -42484,7 +42581,7 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
         if (template) {
             debugger;
             template.addSubAction();
-            setTemplate(template.clone());
+            setTemplate(template.toString());
             setOpen(false);
         }
     }
@@ -42736,7 +42833,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 parcelRequire("d4J5n");
 
 
@@ -42746,9 +42842,9 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     async function onSelectFile(event, file) {
         try {
-            const content = await (0, $20d1a517b8ce84e3$export$de1a4df3278e5008)(file);
-            const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(content, "", file);
-            setTemplate(template);
+            const obj = await (0, $20d1a517b8ce84e3$export$de1a4df3278e5008)(file);
+            const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj, file);
+            setTemplate(template.toString());
             onClose(event);
         } catch (err) {
             debugger;
@@ -42773,11 +42869,13 @@ parcelRequire("d4J5n");
 
 
 
+
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
-    const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
     async function handleSelectFile(event, file) {
-        const content = template.json();
+        const content = template.toString("file");
         try {
             await (0, $20d1a517b8ce84e3$export$25c05c84991e5fdf)(file, content);
             onClose(event);
@@ -42792,7 +42890,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         mode: "save",
         error: error,
         open: open,
-        selectedFile: template.file,
+        selectedFile: template.file(),
         onSelectFile: handleSelectFile,
         onClearError: ()=>setError(""),
         onClose: onClose
@@ -42869,7 +42967,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 "File New",
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aff1417d5558df81$export$2e2bcd8739ae039), {}),
                                 (event)=>{
-                                    setTemplate(new (0, $1b88f382576c34f2$export$14416b8d99d47caa)());
+                                    setTemplate("");
                                     onClose(event);
                                 }
                             ],
@@ -42910,9 +43008,12 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
+
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
-    const { template: template , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: obj , advanced: advanced , setAdvanced: setAdvanced  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const file = template.file();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
             sx: {
@@ -42939,8 +43040,8 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
                                         fontSize: "small"
                                     })
                                 }),
-                                template.file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                                    label: template.file,
+                                file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                    label: file,
                                     variant: "outlined",
                                     color: "primary",
                                     size: "small",

@@ -4,15 +4,15 @@ import * as syphonx from "syphonx-lib";
 import { Template } from "../../lib";
 
 export interface TemplateState {
-    template: Template;
-    setTemplate: React.Dispatch<React.SetStateAction<Template>>;
+    template: string;
+    setTemplate: React.Dispatch<React.SetStateAction<string>>;
     result: syphonx.ExtractResult | undefined;
     advanced: boolean;
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TemplateContext = React.createContext<TemplateState>({
-    template: new Template(),
+    template: "",
     setTemplate: () => {},
     result: undefined,
     advanced: false,
@@ -20,13 +20,14 @@ const TemplateContext = React.createContext<TemplateState>({
 });
 
 export function TemplateProvider({ children }: { children: JSX.Element }) {
-    const [template, setTemplate] = useState<Template>(new Template());
+    const [template, setTemplate] = useState("");
     const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
     const [advanced, setAdvanced] = useState(false);
 
     useEffect(() => {
         //debugger;
-        template.run()
+        const obj = new Template(template);
+        obj.run()
             .then(result => setResult(result));
     }, [template]);
 

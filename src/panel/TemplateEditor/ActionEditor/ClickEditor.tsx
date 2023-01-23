@@ -3,14 +3,17 @@ import { Switch, TextField } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
+import { Template } from "../../../lib";
 import SelectorField from "./SelectorField";
 import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
-    const { template, setTemplate, advanced } = useTemplate();
+    const { template: obj, setTemplate, advanced } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
-    const item = template.selectedItem();
+
+    const template = new Template(obj);
+    const item = template.selected();
     if (!item)
         return null;
 
@@ -40,7 +43,7 @@ export default () => {
                 "required",
                 <Switch
                     checked={click.required ?? false}
-                    onChange={(event, value) => { click.required = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { click.required = value; setTemplate(template.toString()); }}
                 />,
                 "Determines whether the click is optional or required, producing if no click target is found on the page"
             ],
@@ -48,7 +51,7 @@ export default () => {
                 "retry",
                 <Switch
                     checked={click.required ?? false}
-                    onChange={(event, value) => { click.required = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { click.required = value; setTemplate(template.toString()); }}
                 />,
                 "Determines the number of attempts to retry clicking and testing for the expected result"
             ],
@@ -68,7 +71,7 @@ export default () => {
                     variant="standard"
                     size="small"
                     value={click.when}
-                    onChange={(event, value) => { click.when = value || undefined; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { click.when = value || undefined; setTemplate(template.toString()); }}
                     onValidate={validateName}
                 />,
                 "A formula that determines whether the click is evaluated or bypassed"
@@ -77,7 +80,7 @@ export default () => {
                 "active",
                 <Switch
                     checked={click.active ?? true}
-                    onChange={(event, value) => { click.active = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { click.active = value; setTemplate(template.toString()); }}
                 />,
                 "Determines whether the property is active or bypassed"
             ],
@@ -95,7 +98,7 @@ export default () => {
                 value={click}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { click.query = value; setTemplate(template.clone()); }}
+                onChange={(event, value) => { click.query = value; setTemplate(template.toString()); }}
             />
         </>
     );

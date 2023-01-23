@@ -4,15 +4,19 @@ import * as syphonx from "syphonx-lib";
 import { useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import { SelectFormatDropdown, SelectTypeDropdown } from "./components";
+import { Template } from "../../../lib";
 import SelectorField from "./SelectorField";
 import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
-    const { template, setTemplate, advanced } = useTemplate();
+    const { template: obj, setTemplate, advanced } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
-    const item = template.selectedItem();
-    if (!item)
+    
+    const template = new Template(obj);
+    const item = template.selected();
+    const select = item?.obj as syphonx.Select;
+    if (!select)
         return null;
 
     function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
@@ -23,7 +27,12 @@ export default () => {
         return value ? parseInt(value) >= 0 : true;
     }
 
-    const select = item.obj as syphonx.Select;
+    function handleRename(event: React.SyntheticEvent<Element, Event>, value: string) {
+        select.name = value || undefined;
+        template.setSelected(select);
+        setTemplate(template.toString());
+    }
+
     const items: PropertyGridItem[] = [
         [
             "name",
@@ -33,7 +42,7 @@ export default () => {
                 value={select.name}
                 placeholder="(none)"
                 fullWidth
-                onChange={(event, value) => { select.name = value; setTemplate(template.clone()); }}
+                onChange={handleRename}
                 onValidate={validateName}
             />,
             "Determines the name of the selected value, or blank representing a single unnamed value"
@@ -50,7 +59,7 @@ export default () => {
             "type",
             <SelectTypeDropdown
                 value={select.type}
-                onChange={(event, value) => { select.type = value; setTemplate(template.clone()); }}
+                onChange={(event, value) => { select.type = value; setTemplate(template.toString()); }}
             />,
             "Determines the type of the property value"
         ],
@@ -58,7 +67,7 @@ export default () => {
             "repeated",
             <Switch
                 checked={select.repeated ?? false}
-                onChange={(event, value) => { select.repeated = value; setTemplate(template.clone()); }}
+                onChange={(event, value) => { select.repeated = value; setTemplate(template.toString()); }}
             />,
             "Indicates whether the data is single-valued or repeated within an array"
         ]
@@ -69,7 +78,7 @@ export default () => {
                 "required",
                 <Switch
                     checked={select.required ?? false}
-                    onChange={(event, value) => { select.required = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.required = value; setTemplate(template.toString()); }}
                 />,
                 "Determines whether the property is required which produces an error if a value is not obtained"
             ],
@@ -79,7 +88,7 @@ export default () => {
                     variant="standard"
                     size="small"
                     value={select.value}
-                    onChange={(event, value) => { select.value = value || undefined; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.value = value || undefined; setTemplate(template.toString()); }}
                     onValidate={validateName}
                 />,
                 "A predetermined or computed value, used if a DOM query is not specified"
@@ -88,7 +97,7 @@ export default () => {
                 "all",
                 <Switch
                     checked={select.all ?? false}
-                    onChange={(event, value) => { select.all = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.all = value; setTemplate(template.toString()); }}
                 />,
                 "Determines whether to evaluate all query stages, or stop at the first stage that produces a value"
             ],
@@ -98,7 +107,7 @@ export default () => {
                     variant="standard"
                     size="small"
                     value={select.limit}
-                    onChange={(event, value) => { select.limit = value ? parseInt(value) : undefined; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.limit = value ? parseInt(value) : undefined; setTemplate(template.toString()); }}
                     onValidate={validateNumber}
                 />,
                 "Limits the number of nodes to be selected, unlimited if not specified"
@@ -107,7 +116,7 @@ export default () => {
                 "format",
                 <SelectFormatDropdown
                     value={select.format}
-                    onChange={(event, value) => { select.format = value; setTemplate(template.clone());  }}
+                    onChange={(event, value) => { select.format = value; setTemplate(template.toString());  }}
                 />,
                 "Determines how the selected value is formatted"
             ],
@@ -117,7 +126,7 @@ export default () => {
                     variant="standard"
                     size="small"
                     value={select.pattern}
-                    onChange={(event, value) => { select.pattern = value || undefined; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.pattern = value || undefined; setTemplate(template.toString()); }}
                     onValidate={validateName}
                 />,
                 "A regex pattern for validation, an error will be produced if the value does not match the pattern"
@@ -126,7 +135,7 @@ export default () => {
                 "collate",
                 <Switch
                     checked={select.collate ?? false}
-                    onChange={(event, value) => { select.collate = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.collate = value; setTemplate(template.toString()); }}
                 />,
                 "Combines all selected nodes into a single value"
             ],
@@ -136,7 +145,7 @@ export default () => {
                     variant="standard"
                     size="small"
                     value={select.when}
-                    onChange={(event, value) => { select.when = value || undefined; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.when = value || undefined; setTemplate(template.toString()); }}
                     onValidate={validateName}
                 />,
                 "A formula that determines whether the select is evaluated or bypassed"
@@ -145,7 +154,7 @@ export default () => {
                 "active",
                 <Switch
                     checked={select.active ?? true}
-                    onChange={(event, value) => { select.active = value; setTemplate(template.clone()); }}
+                    onChange={(event, value) => { select.active = value; setTemplate(template.toString()); }}
                 />,
                 "Determines whether the property is active or bypassed"
             ],
@@ -163,7 +172,7 @@ export default () => {
                 value={select}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { select.query = value; setTemplate(template.clone()); }}
+                onChange={(event, value) => { select.query = value; setTemplate(template.toString()); }}
             />
         </>
     );

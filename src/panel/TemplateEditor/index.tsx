@@ -4,7 +4,8 @@ import ActionTreeView from "./ActionTreeView";
 import AddActionButton from "./AddActionButton/index";
 import DataView from "./DataView";
 import SidebarMenu from "./Sidebar/index"
-import { useTemplate, TemplateProvider } from '../context';
+import { useTemplate, TemplateProvider } from "../context";
+import { Template } from "../../lib";
 
 import {
     Box,
@@ -28,8 +29,10 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
-    const { template, advanced, setAdvanced } = useTemplate();
+    const { template: obj, advanced, setAdvanced } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const template = new Template(obj);
+    const file = template.file();
 
     return (
         <TemplateProvider>
@@ -42,9 +45,9 @@ export default () => {
                             <MenuIcon fontSize="small" />
                         </IconButton>
 
-                        {template.file ? (
+                        {file ? (
                             <Chip
-                                label={template.file}
+                                label={file}
                                 variant="outlined"
                                 color="primary"
                                 size="small"

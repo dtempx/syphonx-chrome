@@ -1,9 +1,9 @@
 import React from "react";
 import * as syphonx from "syphonx-lib";
 import ActionIcon from "../ActionIcon";
-import ActionTreeItemButtons from "./ActionTreeItemButtons";
+import ActionTreeItemMenu from "./ActionTreeItemMenu";
 import { useTemplate } from "../../context";
-import { TemplateItem } from "../../../lib";
+import { Template, TemplateItem } from "../../../lib";
 
 import {
     Stack,
@@ -15,7 +15,9 @@ export interface Props {
 }
 
 export default ({ item }: Props) => {
-    const { template } = useTemplate();
+    const { template: obj } = useTemplate();
+    const template = new Template(obj);
+    const selected = template.selected();
 
     function name(item: TemplateItem) {
         if (item.name)
@@ -44,7 +46,7 @@ export default ({ item }: Props) => {
                 {item.required ? <Typography variant="caption" sx={{ position: "relative", top: -6, left: 4, color: "primary.light", fontWeight: "bold" }}>!</Typography> : null}
                 {item.repeated ? <ActionIcon name="repeated" fontSize="small" sx={{ color: "primary.light", ml: 1 }} /> : null}
             </Typography>
-            {template.selected === item.key ? <ActionTreeItemButtons item={item} /> : undefined}
+            {selected?.key === item.key ? <ActionTreeItemMenu item={item} /> : undefined}
         </Stack>
     );
 };

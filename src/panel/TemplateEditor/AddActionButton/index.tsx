@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTemplate } from "../../context";
-import { TemplateAddItemType } from "../../../lib";
+import { Template, TemplateAddItemType } from "../../../lib";
 import ActionIcon from "../ActionIcon";
 import types from "./types.json";
 
@@ -26,10 +26,11 @@ export interface Props {
 }
 
 export default (props?: Props) => {
-    const { template, setTemplate } = useTemplate();
+    const { template: obj, setTemplate } = useTemplate();
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
+    const template = new Template(obj);
 
     function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         setAnchor(event.currentTarget);
@@ -40,7 +41,7 @@ export default (props?: Props) => {
         if (template) {
             debugger;
             template.addAction(type);
-            setTemplate(template.clone());
+            setTemplate(template.toString());
             setOpen(false);
         }
     }
@@ -49,7 +50,7 @@ export default (props?: Props) => {
         if (template) {
             debugger;
             template.addSubAction();
-            setTemplate(template.clone());
+            setTemplate(template.toString());
             setOpen(false);
         }
     }

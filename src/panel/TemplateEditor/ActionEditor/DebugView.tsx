@@ -1,9 +1,12 @@
 import React from "react";
-import { useTemplate } from '../../context';
+import { useTemplate } from "../../context";
+import { Template } from "../../../lib";
 
 export default () => {
-    const { template } = useTemplate();
-    const item = template.selectedItem();
+    const { template: obj } = useTemplate();
+    const template = new Template(obj);
+    const item = template.selected();
+
     return item ? (
         <pre style={{
             fontFamily: "monospace",

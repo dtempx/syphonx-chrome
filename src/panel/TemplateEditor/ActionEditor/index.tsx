@@ -11,10 +11,12 @@ import TransformEditor from "./TransformEditor";
 import WaitforEditor from "./WaitforEditor";
 import YieldEditor from "./YieldEditor";
 import { useTemplate } from "../../context";
+import { Template } from "../../../lib";
 
 export default () => {
-    const { template, advanced } = useTemplate();
-    const item = template.selectedItem();
+    const { template: obj, advanced } = useTemplate();
+    const template = new Template(obj);
+    const item = template.selected();
 
     if (!item)
         return null;

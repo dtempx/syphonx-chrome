@@ -46,7 +46,7 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={[
-                    ["File New", <FileNewIcon />, event => { setTemplate(new Template()); onClose(event); }],
+                    ["File New", <FileNewIcon />, event => { setTemplate(""); onClose(event); }],
                     ["File Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
                     ["File Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
                     null,

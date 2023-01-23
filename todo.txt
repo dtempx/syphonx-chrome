@@ -3,7 +3,9 @@ V1
 Query Builder
     context sensitive function parameters for replace, etc.
     selectMultiple
+    type editor for entering a string or number for a value
     formula editor for when
+
 
 Action Views
     action view: waitfor
@@ -76,6 +78,8 @@ file save doesn't work
 prompt for unsaved changes
 selector highlighting doesn't work on property page
 Disable autorun for non-select-only templates
+Fix position of add button so it doesn't scroll within the tree
+Add button blocks menu on selected item
 
 
 

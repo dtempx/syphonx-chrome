@@ -14,9 +14,9 @@ export default ({ open, onClose }: Props) => {
 
     async function onSelectFile(event: React.SyntheticEvent, file: string) {
         try {
-            const content = await cloudReadTemplateFile(file);
-            const template = new Template(content, "", file);
-            setTemplate(template);
+            const obj = await cloudReadTemplateFile(file);
+            const template = new Template(obj, file);
+            setTemplate(template.toString());
             onClose(event);
         }
         catch (err) {
