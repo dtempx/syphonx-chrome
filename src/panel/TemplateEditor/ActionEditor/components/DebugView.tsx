@@ -1,6 +1,6 @@
 import React from "react";
-import { useTemplate } from "../../context";
-import { Template } from "../../../lib";
+import { useTemplate } from "../../../context";
+import { Template } from "../../../../lib";
 
 export default () => {
     const { template: json } = useTemplate();

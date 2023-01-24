@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { List } from "../../../components";
+import { List } from "../components";
 import { useTemplate } from "../../context";
 import OpenFileDialog from "./OpenFileDialog";
 import SaveFileDialog from "./SaveFileDialog";

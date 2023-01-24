@@ -1,6 +1,6 @@
 import React from "react";
-import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
+import Slide from "@mui/material/Slide";
+import { TransitionProps } from "@mui/material/transitions";
 
 type R = React.Ref<unknown>;
 type P = TransitionProps & { children: React.ReactElement; };

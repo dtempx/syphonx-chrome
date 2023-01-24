@@ -1,5 +1,5 @@
 import React from "react";
-import { TitleBar, TransitionUp } from "../../../components";
+import { TitleBar, TransitionUp } from "../components";
 
 import {
     Dialog,

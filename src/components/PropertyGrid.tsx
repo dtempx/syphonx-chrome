@@ -1,7 +1,22 @@
 import React from "react";
-import { Box, Table, TableContainer, TableBody, TableCell, TableRow, Tooltip, SxProps, Theme } from "@mui/material";
 
-export type PropertyGridItem = [JSX.Element | string, JSX.Element | string | number | boolean, string];
+import {
+    Box,
+    Table,
+    TableContainer,
+    TableBody,
+    TableCell,
+    TableRow,
+    Tooltip,
+    SxProps,
+    Theme
+} from "@mui/material";
+
+export type PropertyGridItem = [
+    JSX.Element | string, // name
+    JSX.Element | string | number | boolean, // editor
+    string // help
+];
 
 export interface Props {
     columns?: Array<{ width: number | string }>,

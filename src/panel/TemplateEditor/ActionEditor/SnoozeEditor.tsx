@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { Stack, Typography } from "@mui/material";
-import { useApp, useTemplate } from '../../context';
+import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
-import { NumberField, PropertyGrid, PropertyGridItem } from "../../../components/";
-import DebugView from "./DebugView";
+import { ComplexPropertyGrid, NumberField } from "./components/";
 
 export default () => {
     const [value1, setValue1] = useState<number | undefined>();
     const [value2, setValue2] = useState<number | undefined>();
-    const { advanced } = useApp();
 
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
@@ -39,39 +37,33 @@ export default () => {
         }
     }
 
-    const items: PropertyGridItem[] = [
-        [
-            "timeframe",
-            <Stack direction="row">
-                <NumberField
-                    size="small"
-                    value={value1}
-                    onChange={onValue1Changed}
-                    min={0}
-                    max={value2}
-                    sx={{ width: 100 }}
-                />
-                <NumberField
-                    size="small"
-                    value={value2}
-                    onChange={onValue2Changed}
-                    min={value1 || 0}
-                    sx={{ width: 100, ml: 1 }}
-                />
-                <Typography fontSize="small" sx={{ position: "relative", top: 8, ml: 1 }}>seconds</Typography>
-            </Stack>,
-            "Defines timeframe to snooze in seconds, specify a single number or a range to define a random interval"
-        ]
-    ];
-
-    if (advanced)
-        items.push(...[
-            [
-                "debug",
-                <DebugView />,
-                "Debug"
-            ]
-        ] as PropertyGridItem[]);
-
-    return (<PropertyGrid items={items} />);
+    return (
+        <ComplexPropertyGrid
+            items={[
+                [
+                    "timeframe",
+                    <Stack direction="row">
+                        <NumberField
+                            size="small"
+                            value={value1}
+                            onChange={onValue1Changed}
+                            min={0}
+                            max={value2}
+                            sx={{ width: 100 }}
+                        />
+                        <NumberField
+                            size="small"
+                            value={value2}
+                            onChange={onValue2Changed}
+                            min={value1 || 0}
+                            sx={{ width: 100, ml: 1 }}
+                        />
+                        <Typography fontSize="small" sx={{ position: "relative", top: 8, ml: 1 }}>seconds</Typography>
+                    </Stack>,
+                    "Defines timeframe to snooze in seconds, specify a single number or a range to define a random interval",
+                    true
+                ]
+            ]}
+        />
+    );
 };

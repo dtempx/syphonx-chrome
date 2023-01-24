@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { Switch, TextField } from "@mui/material";
 import * as syphonx from "syphonx-lib";
-import { useApp, useTemplate } from '../../context';
-import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
+import { useTemplate } from "../../context";
+import { ComplexPropertyGrid, ValidateTextField } from "./components/";
 import { SelectOnDropdown } from "./components";
 import { Template } from "../../../lib";
-import SelectorField from "./SelectorField";
+import SelectorField from "./components/SelectorField";
 import QueryBuilder from "../QueryBuilder";
-import DebugView from "./DebugView";
 
 export default () => {
-    const { advanced } = useApp();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
 
     const { template: json, setTemplate } = useTemplate();
@@ -24,74 +22,72 @@ export default () => {
     }
 
     const waitfor = item.obj as syphonx.WaitFor;
-    const items: PropertyGridItem[] = [
-        [
-            "query",
-            <SelectorField
-                query={waitfor.query}
-                onClick={() => setQueryEditorOpen(true)}
-            />,
-            "A CSS selector or jQuery expression that determines the content to wait for on the page"
-        ]
-    ];
-
-    if (advanced)
-        items.push(...[
-            [
-                "required",
-                <Switch
-                    checked={waitfor.required ?? false}
-                    onChange={(event, value) => { waitfor.required = value; setTemplate(template.toString()); }}
-                />,
-                "Determines whether the click is optional or required, producing if no click target is found on the page"
-            ],
-            [
-                "on",
-                <SelectOnDropdown
-                    value={waitfor.on}
-                    onChange={(event, value) => { waitfor.on = value; setTemplate(template.toString());  }}
-                />,
-                "Determines whether to wait for any, all, or none of the selectors"
-            ],
-            [
-                "pattern",
-                <TextField size="small" />,
-                "Waits for a specific text pattern if specified"
-            ],
-            [
-                "timeout",
-                <TextField size="small" />,
-                "Number of seconds to wait before timing out"
-            ],
-            [
-                "when",
-                <ValidateTextField
-                    variant="standard"
-                    size="small"
-                    value={waitfor.when}
-                    onChange={(event, value) => { waitfor.when = value || undefined; setTemplate(template.toString()); }}
-                    onValidate={validateName}
-                />,
-                "A formula that determines whether the click is evaluated or bypassed"
-            ],
-            [
-                "active",
-                <Switch
-                    checked={waitfor.active ?? true}
-                    onChange={(event, value) => { waitfor.active = value; setTemplate(template.toString()); }}
-                />,
-                "Determines whether the property is active or bypassed"
-            ],
-            [
-                "debug",
-                <DebugView />,
-                "Debug"
-            ]
-        ] as PropertyGridItem[]);
-
     return (
         <>
-            <PropertyGrid items={items} />
+            <ComplexPropertyGrid
+                items={[
+                    [
+                        "query",
+                        <SelectorField
+                            query={waitfor.query}
+                            onClick={() => setQueryEditorOpen(true)}
+                        />,
+                        "A CSS selector or jQuery expression that determines the content to wait for on the page",
+                        true
+                    ],
+                    [
+                        "required",
+                        <Switch
+                            checked={waitfor.required ?? false}
+                            onChange={(event, value) => { waitfor.required = value; setTemplate(template.toString()); }}
+                        />,
+                        "Determines whether the click is optional or required, producing if no click target is found on the page",
+                        waitfor.required !== undefined
+                    ],
+                    [
+                        "on",
+                        <SelectOnDropdown
+                            value={waitfor.on}
+                            onChange={(event, value) => { waitfor.on = value; setTemplate(template.toString());  }}
+                        />,
+                        "Determines whether to wait for any, all, or none of the selectors",
+                        waitfor.on !== undefined
+                    ],
+                    [
+                        "pattern",
+                        <TextField size="small" />,
+                        "Waits for a specific text pattern if specified",
+                        false
+                    ],
+                    [
+                        "timeout",
+                        <TextField size="small" />,
+                        "Number of seconds to wait before timing out",
+                        false
+                    ],
+                    [
+                        "when",
+                        <ValidateTextField
+                            variant="standard"
+                            size="small"
+                            value={waitfor.when}
+                            onChange={(event, value) => { waitfor.when = value || undefined; setTemplate(template.toString()); }}
+                            onValidate={validateName}
+                        />,
+                        "A formula that determines whether the click is evaluated or bypassed",
+                        waitfor.when !== undefined
+                    ],
+                    [
+                        "active",
+                        <Switch
+                            checked={waitfor.active ?? true}
+                            onChange={(event, value) => { waitfor.active = value; setTemplate(template.toString()); }}
+                        />,
+                        "Determines whether the property is active or bypassed",
+                        waitfor.active !== undefined
+                    ]
+                ]}
+            />
             <QueryBuilder
                 value={waitfor}
                 open={queryEditorOpen}

@@ -7595,8 +7595,6 @@ $parcel$export($86049548edbb86a7$exports, "DialogTitle", () => $0d0d12e54088d016
 $parcel$export($86049548edbb86a7$exports, "Divider", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Drawer", () => $89021ce2ce45d642$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Fab", () => $f09768665decc43c$export$2e2bcd8739ae039);
-$parcel$export($86049548edbb86a7$exports, "FormControlLabel", () => $23a46d6993216966$export$2e2bcd8739ae039);
-$parcel$export($86049548edbb86a7$exports, "FormGroup", () => $d7126578d7ff4afb$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Grid", () => $a8c96cc3b002d944$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "IconButton", () => $fa1dfc78f8375ab9$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "InputAdornment", () => $224cf55292bca498$export$2e2bcd8739ae039);
@@ -23164,480 +23162,6 @@ var $f09768665decc43c$export$2e2bcd8739ae039 = $f09768665decc43c$var$Fab;
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-var $e710b8d29d44410b$export$2e2bcd8739ae039 = (0, $4b5eb78a7b8ee9d8$export$2e2bcd8739ae039);
-
-
-
-
-
-function $145b48f7b357f894$export$149c8b8bab2289d1(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormControl", slot);
-}
-const $145b48f7b357f894$var$formControlClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormControl", [
-    "root",
-    "marginNone",
-    "marginNormal",
-    "marginDense",
-    "fullWidth",
-    "disabled"
-]);
-var $145b48f7b357f894$export$2e2bcd8739ae039 = $145b48f7b357f894$var$formControlClasses;
-
-
-
-const $59b0ea21cba02d3f$var$_excluded = [
-    "children",
-    "className",
-    "color",
-    "component",
-    "disabled",
-    "error",
-    "focused",
-    "fullWidth",
-    "hiddenLabel",
-    "margin",
-    "required",
-    "size",
-    "variant"
-];
-const $59b0ea21cba02d3f$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , margin: margin , fullWidth: fullWidth  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            margin !== "none" && `margin${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(margin)}`,
-            fullWidth && "fullWidth"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $145b48f7b357f894$export$149c8b8bab2289d1), classes);
-};
-const $59b0ea21cba02d3f$var$FormControlRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiFormControl",
-    slot: "Root",
-    overridesResolver: ({ ownerState: ownerState  }, styles)=>{
-        return (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, styles.root, styles[`margin${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.margin)}`], ownerState.fullWidth && styles.fullWidth);
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        display: "inline-flex",
-        flexDirection: "column",
-        position: "relative",
-        // Reset fieldset default style.
-        minWidth: 0,
-        padding: 0,
-        margin: 0,
-        border: 0,
-        verticalAlign: "top"
-    }, ownerState.margin === "normal" && {
-        marginTop: 16,
-        marginBottom: 8
-    }, ownerState.margin === "dense" && {
-        marginTop: 8,
-        marginBottom: 4
-    }, ownerState.fullWidth && {
-        width: "100%"
-    }));
-/**
- * Provides context such as filled/focused/error/required for form inputs.
- * Relying on the context provides high flexibility and ensures that the state always stays
- * consistent across the children of the `FormControl`.
- * This context is used by the following components:
- *
- *  - FormLabel
- *  - FormHelperText
- *  - Input
- *  - InputLabel
- *
- * You can find one composition example below and more going to [the demos](/material-ui/react-text-field/#components).
- *
- * ```jsx
- * <FormControl>
- *   <InputLabel htmlFor="my-input">Email address</InputLabel>
- *   <Input id="my-input" aria-describedby="my-helper-text" />
- *   <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
- * </FormControl>
- * ```
- *
- * ⚠️ Only one `InputBase` can be used within a FormControl because it create visual inconsistencies.
- * For instance, only one input can be focused at the same time, the state shouldn't be shared.
- */ const $59b0ea21cba02d3f$var$FormControl = /*#__PURE__*/ $d4J5n.forwardRef(function FormControl(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiFormControl"
-    });
-    const { children: children , className: className , color: color = "primary" , component: component = "div" , disabled: disabled = false , error: error = false , focused: visuallyFocused , fullWidth: fullWidth = false , hiddenLabel: hiddenLabel = false , margin: margin = "none" , required: required = false , size: size = "medium" , variant: variant = "outlined"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $59b0ea21cba02d3f$var$_excluded);
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        color: color,
-        component: component,
-        disabled: disabled,
-        error: error,
-        fullWidth: fullWidth,
-        hiddenLabel: hiddenLabel,
-        margin: margin,
-        required: required,
-        size: size,
-        variant: variant
-    });
-    const classes = $59b0ea21cba02d3f$var$useUtilityClasses(ownerState);
-    const [adornedStart, setAdornedStart] = $d4J5n.useState(()=>{
-        // We need to iterate through the children and find the Input in order
-        // to fully support server-side rendering.
-        let initialAdornedStart = false;
-        if (children) $d4J5n.Children.forEach(children, (child)=>{
-            if (!(0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
-                "Input",
-                "Select"
-            ])) return;
-            const input = (0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
-                "Select"
-            ]) ? child.props.input : child;
-            if (input && (0, $0712d65e49197f8f$export$1b68bdfa56faeb5d)(input.props)) initialAdornedStart = true;
-        });
-        return initialAdornedStart;
-    });
-    const [filled, setFilled] = $d4J5n.useState(()=>{
-        // We need to iterate through the children and find the Input in order
-        // to fully support server-side rendering.
-        let initialFilled = false;
-        if (children) $d4J5n.Children.forEach(children, (child)=>{
-            if (!(0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
-                "Input",
-                "Select"
-            ])) return;
-            if ((0, $0712d65e49197f8f$export$d652b828d7fdeff8)(child.props, true)) initialFilled = true;
-        });
-        return initialFilled;
-    });
-    const [focusedState, setFocused] = $d4J5n.useState(false);
-    if (disabled && focusedState) setFocused(false);
-    const focused = visuallyFocused !== undefined && !disabled ? visuallyFocused : focusedState;
-    let registerEffect;
-    const childContext = $d4J5n.useMemo(()=>{
-        return {
-            adornedStart: adornedStart,
-            setAdornedStart: setAdornedStart,
-            color: color,
-            disabled: disabled,
-            error: error,
-            filled: filled,
-            focused: focused,
-            fullWidth: fullWidth,
-            hiddenLabel: hiddenLabel,
-            size: size,
-            onBlur: ()=>{
-                setFocused(false);
-            },
-            onEmpty: ()=>{
-                setFilled(false);
-            },
-            onFilled: ()=>{
-                setFilled(true);
-            },
-            onFocus: ()=>{
-                setFocused(true);
-            },
-            registerEffect: registerEffect,
-            required: required,
-            variant: variant
-        };
-    }, [
-        adornedStart,
-        color,
-        disabled,
-        error,
-        filled,
-        focused,
-        fullWidth,
-        hiddenLabel,
-        registerEffect,
-        required,
-        size,
-        variant
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c048f2e0d4d11a3c$export$2e2bcd8739ae039).Provider, {
-        value: childContext,
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($59b0ea21cba02d3f$var$FormControlRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            as: component,
-            ownerState: ownerState,
-            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-            ref: ref
-        }, other, {
-            children: children
-        }))
-    });
-});
-var $59b0ea21cba02d3f$export$2e2bcd8739ae039 = $59b0ea21cba02d3f$var$FormControl;
-
-
-
-
-
-
-
-
-
-function $2cecb61feebd3e30$export$717666c39ec07e12(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormControlLabel", slot);
-}
-const $2cecb61feebd3e30$var$formControlLabelClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormControlLabel", [
-    "root",
-    "labelPlacementStart",
-    "labelPlacementTop",
-    "labelPlacementBottom",
-    "disabled",
-    "label",
-    "error"
-]);
-var $2cecb61feebd3e30$export$2e2bcd8739ae039 = $2cecb61feebd3e30$var$formControlLabelClasses;
-
-
-
-
-
-const $23a46d6993216966$var$_excluded = [
-    "checked",
-    "className",
-    "componentsProps",
-    "control",
-    "disabled",
-    "disableTypography",
-    "inputRef",
-    "label",
-    "labelPlacement",
-    "name",
-    "onChange",
-    "slotProps",
-    "value"
-];
-const $23a46d6993216966$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , disabled: disabled , labelPlacement: labelPlacement , error: error  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            disabled && "disabled",
-            `labelPlacement${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(labelPlacement)}`,
-            error && "error"
-        ],
-        label: [
-            "label",
-            disabled && "disabled"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $2cecb61feebd3e30$export$717666c39ec07e12), classes);
-};
-const $23a46d6993216966$export$1b479270917a5676 = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("label", {
-    name: "MuiFormControlLabel",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            {
-                [`& .${(0, $2cecb61feebd3e30$export$2e2bcd8739ae039).label}`]: styles.label
-            },
-            styles.root,
-            styles[`labelPlacement${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.labelPlacement)}`]
-        ];
-    }
-})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        display: "inline-flex",
-        alignItems: "center",
-        cursor: "pointer",
-        // For correct alignment with the text.
-        verticalAlign: "middle",
-        WebkitTapHighlightColor: "transparent",
-        marginLeft: -11,
-        marginRight: 16,
-        // used for row presentation of radio/checkbox
-        [`&.${(0, $2cecb61feebd3e30$export$2e2bcd8739ae039).disabled}`]: {
-            cursor: "default"
-        }
-    }, ownerState.labelPlacement === "start" && {
-        flexDirection: "row-reverse",
-        marginLeft: 16,
-        // used for row presentation of radio/checkbox
-        marginRight: -11
-    }, ownerState.labelPlacement === "top" && {
-        flexDirection: "column-reverse",
-        marginLeft: 16
-    }, ownerState.labelPlacement === "bottom" && {
-        flexDirection: "column",
-        marginLeft: 16
-    }, {
-        [`& .${(0, $2cecb61feebd3e30$export$2e2bcd8739ae039).label}`]: {
-            [`&.${(0, $2cecb61feebd3e30$export$2e2bcd8739ae039).disabled}`]: {
-                color: (theme.vars || theme).palette.text.disabled
-            }
-        }
-    }));
-/**
- * Drop-in replacement of the `Radio`, `Switch` and `Checkbox` component.
- * Use this component if you want to display an extra label.
- */ const $23a46d6993216966$var$FormControlLabel = /*#__PURE__*/ $d4J5n.forwardRef(function FormControlLabel(inProps, ref) {
-    var _slotProps$typography;
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiFormControlLabel"
-    });
-    const { className: className , componentsProps: componentsProps = {} , control: control , disabled: disabledProp , disableTypography: disableTypography , label: labelProp , labelPlacement: labelPlacement = "end" , slotProps: slotProps = {}  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $23a46d6993216966$var$_excluded);
-    const muiFormControl = (0, $54fed768a65d42d6$export$2e2bcd8739ae039)();
-    let disabled = disabledProp;
-    if (typeof disabled === "undefined" && typeof control.props.disabled !== "undefined") disabled = control.props.disabled;
-    if (typeof disabled === "undefined" && muiFormControl) disabled = muiFormControl.disabled;
-    const controlProps = {
-        disabled: disabled
-    };
-    [
-        "checked",
-        "name",
-        "onChange",
-        "value",
-        "inputRef"
-    ].forEach((key)=>{
-        if (typeof control.props[key] === "undefined" && typeof props[key] !== "undefined") controlProps[key] = props[key];
-    });
-    const fcs = (0, $789e4d36d491b8e0$export$2e2bcd8739ae039)({
-        props: props,
-        muiFormControl: muiFormControl,
-        states: [
-            "error"
-        ]
-    });
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        disabled: disabled,
-        labelPlacement: labelPlacement,
-        error: fcs.error
-    });
-    const classes = $23a46d6993216966$var$useUtilityClasses(ownerState);
-    const typographySlotProps = (_slotProps$typography = slotProps.typography) != null ? _slotProps$typography : componentsProps.typography;
-    let label = labelProp;
-    if (label != null && label.type !== (0, $8588119983b778db$export$2e2bcd8739ae039) && !disableTypography) label = /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        component: "span"
-    }, typographySlotProps, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.label, typographySlotProps == null ? void 0 : typographySlotProps.className),
-        children: label
-    }));
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($23a46d6993216966$export$1b479270917a5676, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ownerState: ownerState,
-        ref: ref
-    }, other, {
-        children: [
-            /*#__PURE__*/ $d4J5n.cloneElement(control, controlProps),
-            label
-        ]
-    }));
-});
-var $23a46d6993216966$export$2e2bcd8739ae039 = $23a46d6993216966$var$FormControlLabel;
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-function $c328579d08306784$export$d72d4cbdc30b331f(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormGroup", slot);
-}
-const $c328579d08306784$var$formGroupClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormGroup", [
-    "root",
-    "row",
-    "error"
-]);
-var $c328579d08306784$export$2e2bcd8739ae039 = $c328579d08306784$var$formGroupClasses;
-
-
-
-
-
-const $d7126578d7ff4afb$var$_excluded = [
-    "className",
-    "row"
-];
-const $d7126578d7ff4afb$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , row: row , error: error  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            row && "row",
-            error && "error"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $c328579d08306784$export$d72d4cbdc30b331f), classes);
-};
-const $d7126578d7ff4afb$var$FormGroupRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiFormGroup",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.root,
-            ownerState.row && styles.row
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "wrap"
-    }, ownerState.row && {
-        flexDirection: "row"
-    }));
-/**
- * `FormGroup` wraps controls such as `Checkbox` and `Switch`.
- * It provides compact row layout.
- * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
- */ const $d7126578d7ff4afb$var$FormGroup = /*#__PURE__*/ $d4J5n.forwardRef(function FormGroup(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiFormGroup"
-    });
-    const { className: className , row: row = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $d7126578d7ff4afb$var$_excluded);
-    const muiFormControl = (0, $54fed768a65d42d6$export$2e2bcd8739ae039)();
-    const fcs = (0, $789e4d36d491b8e0$export$2e2bcd8739ae039)({
-        props: props,
-        muiFormControl: muiFormControl,
-        states: [
-            "error"
-        ]
-    });
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        row: row,
-        error: fcs.error
-    });
-    const classes = $d7126578d7ff4afb$var$useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d7126578d7ff4afb$var$FormGroupRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ownerState: ownerState,
-        ref: ref
-    }, other));
-});
-var $d7126578d7ff4afb$export$2e2bcd8739ae039 = $d7126578d7ff4afb$var$FormGroup;
-
-
-
 
 
 
@@ -24531,6 +24055,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
+
+var $e710b8d29d44410b$export$2e2bcd8739ae039 = (0, $4b5eb78a7b8ee9d8$export$2e2bcd8739ae039);
 
 
 
@@ -30918,6 +30445,219 @@ const $f7e2393a23bb623d$var$InputLabel = /*#__PURE__*/ $d4J5n.forwardRef(functio
 });
 var $f7e2393a23bb623d$export$2e2bcd8739ae039 = $f7e2393a23bb623d$var$InputLabel;
 
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+
+
+function $145b48f7b357f894$export$149c8b8bab2289d1(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormControl", slot);
+}
+const $145b48f7b357f894$var$formControlClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormControl", [
+    "root",
+    "marginNone",
+    "marginNormal",
+    "marginDense",
+    "fullWidth",
+    "disabled"
+]);
+var $145b48f7b357f894$export$2e2bcd8739ae039 = $145b48f7b357f894$var$formControlClasses;
+
+
+
+const $59b0ea21cba02d3f$var$_excluded = [
+    "children",
+    "className",
+    "color",
+    "component",
+    "disabled",
+    "error",
+    "focused",
+    "fullWidth",
+    "hiddenLabel",
+    "margin",
+    "required",
+    "size",
+    "variant"
+];
+const $59b0ea21cba02d3f$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , margin: margin , fullWidth: fullWidth  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            margin !== "none" && `margin${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(margin)}`,
+            fullWidth && "fullWidth"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $145b48f7b357f894$export$149c8b8bab2289d1), classes);
+};
+const $59b0ea21cba02d3f$var$FormControlRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiFormControl",
+    slot: "Root",
+    overridesResolver: ({ ownerState: ownerState  }, styles)=>{
+        return (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, styles.root, styles[`margin${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.margin)}`], ownerState.fullWidth && styles.fullWidth);
+    }
+})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        display: "inline-flex",
+        flexDirection: "column",
+        position: "relative",
+        // Reset fieldset default style.
+        minWidth: 0,
+        padding: 0,
+        margin: 0,
+        border: 0,
+        verticalAlign: "top"
+    }, ownerState.margin === "normal" && {
+        marginTop: 16,
+        marginBottom: 8
+    }, ownerState.margin === "dense" && {
+        marginTop: 8,
+        marginBottom: 4
+    }, ownerState.fullWidth && {
+        width: "100%"
+    }));
+/**
+ * Provides context such as filled/focused/error/required for form inputs.
+ * Relying on the context provides high flexibility and ensures that the state always stays
+ * consistent across the children of the `FormControl`.
+ * This context is used by the following components:
+ *
+ *  - FormLabel
+ *  - FormHelperText
+ *  - Input
+ *  - InputLabel
+ *
+ * You can find one composition example below and more going to [the demos](/material-ui/react-text-field/#components).
+ *
+ * ```jsx
+ * <FormControl>
+ *   <InputLabel htmlFor="my-input">Email address</InputLabel>
+ *   <Input id="my-input" aria-describedby="my-helper-text" />
+ *   <FormHelperText id="my-helper-text">We'll never share your email.</FormHelperText>
+ * </FormControl>
+ * ```
+ *
+ * ⚠️ Only one `InputBase` can be used within a FormControl because it create visual inconsistencies.
+ * For instance, only one input can be focused at the same time, the state shouldn't be shared.
+ */ const $59b0ea21cba02d3f$var$FormControl = /*#__PURE__*/ $d4J5n.forwardRef(function FormControl(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiFormControl"
+    });
+    const { children: children , className: className , color: color = "primary" , component: component = "div" , disabled: disabled = false , error: error = false , focused: visuallyFocused , fullWidth: fullWidth = false , hiddenLabel: hiddenLabel = false , margin: margin = "none" , required: required = false , size: size = "medium" , variant: variant = "outlined"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $59b0ea21cba02d3f$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        color: color,
+        component: component,
+        disabled: disabled,
+        error: error,
+        fullWidth: fullWidth,
+        hiddenLabel: hiddenLabel,
+        margin: margin,
+        required: required,
+        size: size,
+        variant: variant
+    });
+    const classes = $59b0ea21cba02d3f$var$useUtilityClasses(ownerState);
+    const [adornedStart, setAdornedStart] = $d4J5n.useState(()=>{
+        // We need to iterate through the children and find the Input in order
+        // to fully support server-side rendering.
+        let initialAdornedStart = false;
+        if (children) $d4J5n.Children.forEach(children, (child)=>{
+            if (!(0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
+                "Input",
+                "Select"
+            ])) return;
+            const input = (0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
+                "Select"
+            ]) ? child.props.input : child;
+            if (input && (0, $0712d65e49197f8f$export$1b68bdfa56faeb5d)(input.props)) initialAdornedStart = true;
+        });
+        return initialAdornedStart;
+    });
+    const [filled, setFilled] = $d4J5n.useState(()=>{
+        // We need to iterate through the children and find the Input in order
+        // to fully support server-side rendering.
+        let initialFilled = false;
+        if (children) $d4J5n.Children.forEach(children, (child)=>{
+            if (!(0, $e710b8d29d44410b$export$2e2bcd8739ae039)(child, [
+                "Input",
+                "Select"
+            ])) return;
+            if ((0, $0712d65e49197f8f$export$d652b828d7fdeff8)(child.props, true)) initialFilled = true;
+        });
+        return initialFilled;
+    });
+    const [focusedState, setFocused] = $d4J5n.useState(false);
+    if (disabled && focusedState) setFocused(false);
+    const focused = visuallyFocused !== undefined && !disabled ? visuallyFocused : focusedState;
+    let registerEffect;
+    const childContext = $d4J5n.useMemo(()=>{
+        return {
+            adornedStart: adornedStart,
+            setAdornedStart: setAdornedStart,
+            color: color,
+            disabled: disabled,
+            error: error,
+            filled: filled,
+            focused: focused,
+            fullWidth: fullWidth,
+            hiddenLabel: hiddenLabel,
+            size: size,
+            onBlur: ()=>{
+                setFocused(false);
+            },
+            onEmpty: ()=>{
+                setFilled(false);
+            },
+            onFilled: ()=>{
+                setFilled(true);
+            },
+            onFocus: ()=>{
+                setFocused(true);
+            },
+            registerEffect: registerEffect,
+            required: required,
+            variant: variant
+        };
+    }, [
+        adornedStart,
+        color,
+        disabled,
+        error,
+        filled,
+        focused,
+        fullWidth,
+        hiddenLabel,
+        registerEffect,
+        required,
+        size,
+        variant
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c048f2e0d4d11a3c$export$2e2bcd8739ae039).Provider, {
+        value: childContext,
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($59b0ea21cba02d3f$var$FormControlRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            as: component,
+            ownerState: ownerState,
+            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+            ref: ref
+        }, other, {
+            children: children
+        }))
+    });
+});
+var $59b0ea21cba02d3f$export$2e2bcd8739ae039 = $59b0ea21cba02d3f$var$FormControl;
 
 
 
@@ -39595,6 +39335,72 @@ const $5339359c895a55f0$export$d5e0bbf39d25920b = /*#__PURE__*/ (0, (/*@__PURE__
 
 
 
+parcelRequire("d4J5n");
+
+
+
+
+var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
+    const { advanced: advanced , setAdvanced: setAdvanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const items2 = items.filter((item)=>item[3] || advanced).map((item)=>[
+            item[0],
+            item[1],
+            item[2]
+        ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "column",
+        alignItems: "flex-start",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                items: items2,
+                ...props
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: !advanced ? "Show advanced settings" : "Hide advanced settings that are not used",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+                    component: "button",
+                    variant: "body2",
+                    onClick: ()=>setAdvanced(!advanced),
+                    children: [
+                        !advanced && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: [
+                                "More ",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    sx: {
+                                        position: "relative",
+                                        top: 6
+                                    }
+                                })
+                            ]
+                        }),
+                        advanced && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: [
+                                "Less ",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    sx: {
+                                        position: "relative",
+                                        top: 6
+                                    }
+                                })
+                            ]
+                        })
+                    ]
+                })
+            })
+        ]
+    });
+};
+
+
+
+
+
+
+
 
 parcelRequire("d4J5n");
 
@@ -39911,12 +39717,24 @@ var $4e6279b9ecb1b8f5$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 parcelRequire("d4J5n");
 
-parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
+var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
+    return null;
+};
 
 
-var $d9e393267c3799f1$export$2e2bcd8739ae039 = ()=>{
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+parcelRequire("d4J5n");
+
+
+var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
@@ -39934,9 +39752,127 @@ var $d9e393267c3799f1$export$2e2bcd8739ae039 = ()=>{
 };
 
 
-var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
-    return null;
-};
+
+parcelRequire("d4J5n");
+
+var $d9f7df1b27b8772d$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: "(default)"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "none",
+                children: "none"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "href",
+                children: "href"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "multiline",
+                children: "multiline"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "singleline",
+                children: "singleline"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "innertext",
+                children: "innertext"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "textcontent",
+                children: "textcontent"
+            })
+        ]
+    });
+
+
+
+parcelRequire("d4J5n");
+
+var $741e31916b8e1873$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for any selector to appear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "(default)"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "any",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for any selector to appaer",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "any"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "all",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for all selectors to appear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "all"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    title: "Wait for all selectors to disappear",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        children: "none"
+                    })
+                })
+            })
+        ]
+    });
+
+
+
+parcelRequire("d4J5n");
+
+var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        size: "small",
+        value: value || "default",
+        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "default",
+                children: "(default)"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "string",
+                children: "string"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "number",
+                children: "number"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "boolean",
+                children: "boolean"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "object",
+                children: "object"
+            })
+        ]
+    });
+
+
+
 
 
 
@@ -39945,14 +39881,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $d0f20a63f903f83f$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
+var $8eee5212c0bdd5a8$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
     const [value, setValue] = (0, $d4J5n.useState)("");
     const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
     function handleClick(event) {
@@ -40693,9 +40622,7 @@ var $2379682caf290208$export$2e2bcd8739ae039 = ({ value: value , open: open , on
 };
 
 
-
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
@@ -40705,88 +40632,87 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
         return /^[a-z][a-z0-9_]*$/.test(value);
     }
     const click = item.obj;
-    const items = [
-        [
-            "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
-                query: click.query,
-                onClick: ()=>setQueryEditorOpen(true)
-            }),
-            "A CSS selector or jQuery expression that determines the click target"
-        ]
-    ];
-    if (advanced) items.push(...[
-        [
-            "required",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: click.required ?? false,
-                onChange: (event, value)=>{
-                    click.required = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the click is optional or required, producing if no click target is found on the page"
-        ],
-        [
-            "retry",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: click.required ?? false,
-                onChange: (event, value)=>{
-                    click.required = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines the number of attempts to retry clicking and testing for the expected result"
-        ],
-        [
-            "snooze",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                size: "small"
-            }),
-            "Number of seconds to snooze before or after clicking"
-        ],
-        [
-            "waitfor",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                size: "small"
-            }),
-            "Wait for a condition to appear on the page before clicking"
-        ],
-        [
-            "when",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: click.when,
-                onChange: (event, value)=>{
-                    click.when = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A formula that determines whether the click is evaluated or bypassed"
-        ],
-        [
-            "active",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: click.active ?? true,
-                onChange: (event, value)=>{
-                    click.active = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the property is active or bypassed"
-        ],
-        [
-            "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
-            "Debug"
-        ]
-    ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-                items: items
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+                items: [
+                    [
+                        "query",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
+                            query: click.query,
+                            onClick: ()=>setQueryEditorOpen(true)
+                        }),
+                        "A CSS selector or jQuery expression that determines the click target",
+                        true
+                    ],
+                    [
+                        "required",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: click.required ?? false,
+                            onChange: (event, value)=>{
+                                click.required = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the click is optional or required, producing if no click target is found on the page",
+                        true
+                    ],
+                    [
+                        "retry",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: click.required ?? false,
+                            onChange: (event, value)=>{
+                                click.required = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines the number of attempts to retry clicking and testing for the expected result",
+                        click.required !== undefined
+                    ],
+                    [
+                        "snooze",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                            size: "small"
+                        }),
+                        "Number of seconds to snooze before or after clicking",
+                        false
+                    ],
+                    [
+                        "waitfor",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                            size: "small"
+                        }),
+                        "Wait for a condition to appear on the page before clicking",
+                        false
+                    ],
+                    [
+                        "when",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: click.when,
+                            onChange: (event, value)=>{
+                                click.when = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A formula that determines whether the click is evaluated or bypassed",
+                        click.when !== undefined
+                    ],
+                    [
+                        "active",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: click.active ?? true,
+                            onChange: (event, value)=>{
+                                click.active = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the property is active or bypassed",
+                        click.active !== undefined
+                    ]
+                ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: click,
@@ -40824,133 +40750,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-parcelRequire("d4J5n");
-
-var $d9f7df1b27b8772d$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-        size: "small",
-        value: value || "default",
-        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "default",
-                children: "(default)"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "none",
-                children: "none"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "href",
-                children: "href"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "multiline",
-                children: "multiline"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "singleline",
-                children: "singleline"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "innertext",
-                children: "innertext"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "textcontent",
-                children: "textcontent"
-            })
-        ]
-    });
-
-
-
-parcelRequire("d4J5n");
-
-var $741e31916b8e1873$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-        size: "small",
-        value: value || "default",
-        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "default",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                    title: "Wait for any selector to appear",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        children: "(default)"
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "any",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                    title: "Wait for any selector to appaer",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        children: "any"
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "all",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                    title: "Wait for all selectors to appear",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        children: "all"
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                    title: "Wait for all selectors to disappear",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        children: "none"
-                    })
-                })
-            })
-        ]
-    });
-
-
-
-parcelRequire("d4J5n");
-
-var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-        size: "small",
-        value: value || "default",
-        onChange: (event)=>onChange(event, event.target.value !== "default" ? event.target.value : undefined),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "default",
-                children: "(default)"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "string",
-                children: "string"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "number",
-                children: "number"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "boolean",
-                children: "boolean"
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                value: "object",
-                children: "object"
-            })
-        ]
-    });
-
-
-
-
-
-
 
 
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
@@ -40968,173 +40770,178 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
         template.setSelected(select);
         setTemplate(template.toString());
     }
-    const items = [
-        [
-            "name",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.name,
-                placeholder: "(none)",
-                fullWidth: true,
-                onChange: handleRename,
-                onValidate: validateName
-            }),
-            "Determines the name of the selected value, or blank representing a single unnamed value"
-        ],
-        [
-            "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
-                query: select.query,
-                onClick: ()=>setQueryEditorOpen(true)
-            }),
-            "A CSS selector or jQuery expression that determines what data is selected on the page"
-        ],
-        [
-            "type",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
-                value: select.type,
-                onChange: (event, value)=>{
-                    select.type = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines the type of the property value"
-        ],
-        [
-            "repeated",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.repeated ?? false,
-                onChange: (event, value)=>{
-                    select.repeated = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Indicates whether the data is single-valued or repeated within an array"
-        ]
-    ];
-    if (advanced) items.push(...[
-        [
-            "required",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.required ?? false,
-                onChange: (event, value)=>{
-                    select.required = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the property is required which produces an error if a value is not obtained"
-        ],
-        [
-            "value",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.value,
-                onChange: (event, value)=>{
-                    select.value = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A predetermined or computed value, used if a DOM query is not specified"
-        ],
-        [
-            "all",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.all ?? false,
-                onChange: (event, value)=>{
-                    select.all = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether to evaluate all query stages, or stop at the first stage that produces a value"
-        ],
-        [
-            "limit",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.limit,
-                onChange: (event, value)=>{
-                    select.limit = value ? parseInt(value) : undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateNumber
-            }),
-            "Limits the number of nodes to be selected, unlimited if not specified"
-        ],
-        [
-            "format",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
-                value: select.format,
-                onChange: (event, value)=>{
-                    select.format = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines how the selected value is formatted"
-        ],
-        [
-            "pattern",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.pattern,
-                onChange: (event, value)=>{
-                    select.pattern = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A regex pattern for validation, an error will be produced if the value does not match the pattern"
-        ],
-        [
-            "collate",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.collate ?? false,
-                onChange: (event, value)=>{
-                    select.collate = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Combines all selected nodes into a single value"
-        ],
-        [
-            "when",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: select.when,
-                onChange: (event, value)=>{
-                    select.when = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A formula that determines whether the select is evaluated or bypassed"
-        ],
-        [
-            "active",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: select.active ?? true,
-                onChange: (event, value)=>{
-                    select.active = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the property is active or bypassed"
-        ],
-        [
-            "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
-            "Debug"
-        ]
-    ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-                items: items
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+                items: [
+                    [
+                        "name",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: select.name,
+                            placeholder: "(none)",
+                            fullWidth: true,
+                            onChange: handleRename,
+                            onValidate: validateName
+                        }),
+                        "Determines the name of the selected value, or blank representing a single unnamed value",
+                        true
+                    ],
+                    [
+                        "query",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
+                            query: select.query,
+                            onClick: ()=>setQueryEditorOpen(true)
+                        }),
+                        "A CSS selector or jQuery expression that determines what data is selected on the page",
+                        true
+                    ],
+                    [
+                        "type",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
+                            value: select.type,
+                            onChange: (event, value)=>{
+                                select.type = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines the type of the property value",
+                        true
+                    ],
+                    [
+                        "repeated",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: select.repeated ?? false,
+                            onChange: (event, value)=>{
+                                select.repeated = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Indicates whether the data is single-valued or repeated within an array",
+                        true
+                    ],
+                    [
+                        "required",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: select.required ?? false,
+                            onChange: (event, value)=>{
+                                select.required = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the property is required which produces an error if a value is not obtained",
+                        select.required !== undefined
+                    ],
+                    [
+                        "value",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: select.value,
+                            onChange: (event, value)=>{
+                                select.value = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A predetermined or computed value, used if a DOM query is not specified",
+                        select.value !== undefined
+                    ],
+                    [
+                        "all",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: select.all ?? false,
+                            onChange: (event, value)=>{
+                                select.all = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether to evaluate all query stages, or stop at the first stage that produces a value",
+                        select.all !== undefined
+                    ],
+                    [
+                        "limit",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: select.limit,
+                            onChange: (event, value)=>{
+                                select.limit = value ? parseInt(value) : undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateNumber
+                        }),
+                        "Limits the number of nodes to be selected, unlimited if not specified",
+                        select.limit !== undefined
+                    ],
+                    [
+                        "format",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
+                            value: select.format,
+                            onChange: (event, value)=>{
+                                select.format = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines how the selected value is formatted",
+                        select.format !== undefined
+                    ],
+                    [
+                        "pattern",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: select.pattern,
+                            onChange: (event, value)=>{
+                                select.pattern = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A regex pattern for validation, an error will be produced if the value does not match the pattern",
+                        select.pattern !== undefined
+                    ],
+                    [
+                        "collate",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: select.collate ?? false,
+                            onChange: (event, value)=>{
+                                select.collate = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Combines all selected nodes into a single value",
+                        select.collate !== undefined
+                    ],
+                    [
+                        "when",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: select.when,
+                            onChange: (event, value)=>{
+                                select.when = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A formula that determines whether the select is evaluated or bypassed",
+                        select.when !== undefined
+                    ],
+                    [
+                        "active",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: select.active ?? true,
+                            onChange: (event, value)=>{
+                                select.active = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the property is active or bypassed",
+                        select.active !== undefined
+                    ]
+                ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: select,
@@ -41157,11 +40964,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
     const [value1, setValue1] = (0, $d4J5n.useState)();
     const [value2, setValue2] = (0, $d4J5n.useState)();
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
@@ -41195,55 +41000,48 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
             setTemplate(template.toString());
         }
     }
-    const items = [
-        [
-            "timeframe",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                direction: "row",
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
-                        size: "small",
-                        value: value1,
-                        onChange: onValue1Changed,
-                        min: 0,
-                        max: value2,
-                        sx: {
-                            width: 100
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
-                        size: "small",
-                        value: value2,
-                        onChange: onValue2Changed,
-                        min: value1 || 0,
-                        sx: {
-                            width: 100,
-                            ml: 1
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        fontSize: "small",
-                        sx: {
-                            position: "relative",
-                            top: 8,
-                            ml: 1
-                        },
-                        children: "seconds"
-                    })
-                ]
-            }),
-            "Defines timeframe to snooze in seconds, specify a single number or a range to define a random interval"
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "timeframe",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
+                            size: "small",
+                            value: value1,
+                            onChange: onValue1Changed,
+                            min: 0,
+                            max: value2,
+                            sx: {
+                                width: 100
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8f724433223acec1$export$2e2bcd8739ae039), {
+                            size: "small",
+                            value: value2,
+                            onChange: onValue2Changed,
+                            min: value1 || 0,
+                            sx: {
+                                width: 100,
+                                ml: 1
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            sx: {
+                                position: "relative",
+                                top: 8,
+                                ml: 1
+                            },
+                            children: "seconds"
+                        })
+                    ]
+                }),
+                "Defines timeframe to snooze in seconds, specify a single number or a range to define a random interval",
+                true
+            ]
         ]
-    ];
-    if (advanced) items.push(...[
-        [
-            "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
-            "Debug"
-        ]
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-        items: items
     });
 };
 
@@ -41257,9 +41055,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
@@ -41269,52 +41065,47 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
         return /^[a-z][a-z0-9_]*$/.test(value);
     }
     const click = item.obj;
-    const items = [
-        [
-            "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
-                query: click.query,
-                onClick: ()=>setQueryEditorOpen(true)
-            }),
-            "A CSS selector or jQuery expression that determines the click target"
-        ]
-    ];
-    if (advanced) items.push(...[
-        [
-            "when",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: click.when,
-                onChange: (event, value)=>{
-                    click.when = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A formula that determines whether the click is evaluated or bypassed"
-        ],
-        [
-            "active",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: click.active ?? true,
-                onChange: (event, value)=>{
-                    click.active = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the property is active or bypassed"
-        ],
-        [
-            "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
-            "Debug"
-        ]
-    ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-                items: items
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+                items: [
+                    [
+                        "query",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
+                            query: click.query,
+                            onClick: ()=>setQueryEditorOpen(true)
+                        }),
+                        "A CSS selector or jQuery expression that determines the click target",
+                        true
+                    ],
+                    [
+                        "when",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: click.when,
+                            onChange: (event, value)=>{
+                                click.when = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A formula that determines whether the click is evaluated or bypassed",
+                        click.when !== undefined
+                    ],
+                    [
+                        "active",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: click.active ?? true,
+                            onChange: (event, value)=>{
+                                click.active = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the property is active or bypassed",
+                        click.active !== undefined
+                    ]
+                ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: click,
@@ -41340,9 +41131,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
@@ -41352,88 +41141,87 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
         return /^[a-z][a-z0-9_]*$/.test(value);
     }
     const waitfor = item.obj;
-    const items = [
-        [
-            "query",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d0f20a63f903f83f$export$2e2bcd8739ae039), {
-                query: waitfor.query,
-                onClick: ()=>setQueryEditorOpen(true)
-            }),
-            "A CSS selector or jQuery expression that determines the content to wait for on the page"
-        ]
-    ];
-    if (advanced) items.push(...[
-        [
-            "required",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: waitfor.required ?? false,
-                onChange: (event, value)=>{
-                    waitfor.required = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the click is optional or required, producing if no click target is found on the page"
-        ],
-        [
-            "on",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                value: waitfor.on,
-                onChange: (event, value)=>{
-                    waitfor.on = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether to wait for any, all, or none of the selectors"
-        ],
-        [
-            "pattern",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                size: "small"
-            }),
-            "Waits for a specific text pattern if specified"
-        ],
-        [
-            "timeout",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                size: "small"
-            }),
-            "Number of seconds to wait before timing out"
-        ],
-        [
-            "when",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
-                variant: "standard",
-                size: "small",
-                value: waitfor.when,
-                onChange: (event, value)=>{
-                    waitfor.when = value || undefined;
-                    setTemplate(template.toString());
-                },
-                onValidate: validateName
-            }),
-            "A formula that determines whether the click is evaluated or bypassed"
-        ],
-        [
-            "active",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                checked: waitfor.active ?? true,
-                onChange: (event, value)=>{
-                    waitfor.active = value;
-                    setTemplate(template.toString());
-                }
-            }),
-            "Determines whether the property is active or bypassed"
-        ],
-        [
-            "debug",
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {}),
-            "Debug"
-        ]
-    ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-                items: items
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+                items: [
+                    [
+                        "query",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
+                            query: waitfor.query,
+                            onClick: ()=>setQueryEditorOpen(true)
+                        }),
+                        "A CSS selector or jQuery expression that determines the content to wait for on the page",
+                        true
+                    ],
+                    [
+                        "required",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: waitfor.required ?? false,
+                            onChange: (event, value)=>{
+                                waitfor.required = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the click is optional or required, producing if no click target is found on the page",
+                        waitfor.required !== undefined
+                    ],
+                    [
+                        "on",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
+                            value: waitfor.on,
+                            onChange: (event, value)=>{
+                                waitfor.on = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether to wait for any, all, or none of the selectors",
+                        waitfor.on !== undefined
+                    ],
+                    [
+                        "pattern",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                            size: "small"
+                        }),
+                        "Waits for a specific text pattern if specified",
+                        false
+                    ],
+                    [
+                        "timeout",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                            size: "small"
+                        }),
+                        "Number of seconds to wait before timing out",
+                        false
+                    ],
+                    [
+                        "when",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                            variant: "standard",
+                            size: "small",
+                            value: waitfor.when,
+                            onChange: (event, value)=>{
+                                waitfor.when = value || undefined;
+                                setTemplate(template.toString());
+                            },
+                            onValidate: validateName
+                        }),
+                        "A formula that determines whether the click is evaluated or bypassed",
+                        waitfor.when !== undefined
+                    ],
+                    [
+                        "active",
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            checked: waitfor.active ?? true,
+                            onChange: (event, value)=>{
+                                waitfor.active = value;
+                                setTemplate(template.toString());
+                            }
+                        }),
+                        "Determines whether the property is active or bypassed",
+                        waitfor.active !== undefined
+                    ]
+                ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
                 value: waitfor,
@@ -41456,8 +41244,8 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
 
 
 
+
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
@@ -41472,8 +41260,7 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
     else if (item.type === "action" && item.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {});
     else if (item.type === "action" && item.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {});
     else if (item.type === "action" && item.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {});
-    else if (advanced) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9e393267c3799f1$export$2e2bcd8739ae039), {});
-    else return null;
+    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e37e1e37cd5d52f$export$2e2bcd8739ae039), {});
 };
 
 
@@ -43176,11 +42963,7 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
 };
 
 
-
-
-var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>{
-    const { advanced: advanced , setAdvanced: setAdvanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         sx: {
             width: 1,
@@ -43206,33 +42989,16 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>{
                     })
                 ]
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
                 elevation: 3,
                 className: "panel",
                 sx: {
                     width: 1
                 },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        spacing: 0,
-                        justifyContent: "end",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7126578d7ff4afb$export$2e2bcd8739ae039), {
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23a46d6993216966$export$2e2bcd8739ae039), {
-                                control: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                    checked: advanced,
-                                    onChange: (event)=>setAdvanced(event.target.checked)
-                                }),
-                                label: "Advanced"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
-                ]
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
             })
         ]
     });
-};
 
 
 

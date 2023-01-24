@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton, Paper, Stack, Tooltip } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
-import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../components/";
+import { ValidateTextField, PropertyGrid, PropertyGridItem } from "./components/";
 import { useTemplate } from "../context";
 import { Template } from "../../lib";
 import * as background from "../../background-proxy";

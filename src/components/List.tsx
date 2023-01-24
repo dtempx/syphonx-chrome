@@ -1,5 +1,15 @@
-import * as React from 'react';
-import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SxProps, Theme } from "@mui/material";
+import * as React from "react";
+
+import {
+    Divider,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    SxProps,
+    Theme
+} from "@mui/material";
 
 export interface Props {
     items: Array<[string, JSX.Element, (event: React.MouseEvent) => void] | null>;

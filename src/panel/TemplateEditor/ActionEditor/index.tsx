@@ -1,5 +1,4 @@
 import React from "react";
-import DebugView from "./DebugView";
 import BreakEditor from "./BreakEditor";
 import ClickEditor from "./ClickEditor";
 import EachEditor from "./EachEditor";
@@ -10,12 +9,11 @@ import SnoozeEditor from "./SnoozeEditor";
 import TransformEditor from "./TransformEditor";
 import WaitforEditor from "./WaitforEditor";
 import YieldEditor from "./YieldEditor";
-import { useApp, useTemplate } from "../../context";
+import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
+import { DebugView } from "./components";
 
 export default () => {
-    const { advanced } = useApp();
-
     const { template: json } = useTemplate();
     const template = new Template(json);
     const item = template.selected();
@@ -42,8 +40,6 @@ export default () => {
         return <WaitforEditor />;
     else if (item.type === "action" && item.name === "yield")
         return <YieldEditor />;
-    else if (advanced)
-        return <DebugView />;
     else
-        return null;
+        return <DebugView />;
 };
