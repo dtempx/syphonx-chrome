@@ -7,22 +7,17 @@ export interface TemplateState {
     template: string;
     setTemplate: React.Dispatch<React.SetStateAction<string>>;
     result: syphonx.ExtractResult | undefined;
-    advanced: boolean;
-    setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const TemplateContext = React.createContext<TemplateState>({
     template: "",
     setTemplate: () => {},
-    result: undefined,
-    advanced: false,
-    setAdvanced: () => {}
+    result: undefined
 });
 
 export function TemplateProvider({ children }: { children: JSX.Element }) {
     const [template, setTemplate] = useState("");
     const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
-    const [advanced, setAdvanced] = useState(false);
 
     useEffect(() => {
         //debugger;
@@ -34,9 +29,7 @@ export function TemplateProvider({ children }: { children: JSX.Element }) {
     const value = {
         template,
         setTemplate,
-        result,
-        advanced,
-        setAdvanced
+        result
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, TextField } from "@mui/material";
 import * as syphonx from "syphonx-lib";
-import { useTemplate } from '../../context';
+import { useApp, useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import { Template } from "../../../lib";
 import SelectorField from "./SelectorField";
@@ -9,7 +9,8 @@ import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
-    const { template: obj, setTemplate, advanced } = useTemplate();
+    const { advanced } = useApp();
+    const { template: obj, setTemplate } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
 
     const template = new Template(obj);
@@ -19,10 +20,6 @@ export default () => {
 
     function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-
-    function validateNumber(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
-        return value ? parseInt(value) >= 0 : true;
     }
 
     const click = item.obj as syphonx.Select;

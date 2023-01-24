@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { Stack, Typography } from "@mui/material";
-import { useTemplate } from '../../context';
+import { useApp, useTemplate } from '../../context';
 import { Template } from "../../../lib";
 import { NumberField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import DebugView from "./DebugView";
@@ -9,7 +9,8 @@ import DebugView from "./DebugView";
 export default () => {
     const [value1, setValue1] = useState<number | undefined>();
     const [value2, setValue2] = useState<number | undefined>();
-    const { template: obj, setTemplate, advanced } = useTemplate();
+    const { advanced } = useApp();
+    const { template: obj, setTemplate } = useTemplate();
     const template = new Template(obj);
     const item = template.selected();
     

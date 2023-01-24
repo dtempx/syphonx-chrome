@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
-import { useTemplate } from '../../context';
+import { useApp, useTemplate } from '../../context';
 import { ValidateTextField, PropertyGrid, PropertyGridItem } from "../../../components/";
 import { SelectFormatDropdown, SelectTypeDropdown } from "./components";
 import { Template } from "../../../lib";
@@ -10,7 +10,8 @@ import QueryBuilder from "../QueryBuilder";
 import DebugView from "./DebugView";
 
 export default () => {
-    const { template: obj, setTemplate, advanced } = useTemplate();
+    const { advanced } = useApp();    
+    const { template: obj, setTemplate } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
     
     const template = new Template(obj);

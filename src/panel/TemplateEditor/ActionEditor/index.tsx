@@ -10,11 +10,12 @@ import SnoozeEditor from "./SnoozeEditor";
 import TransformEditor from "./TransformEditor";
 import WaitforEditor from "./WaitforEditor";
 import YieldEditor from "./YieldEditor";
-import { useTemplate } from "../../context";
+import { useApp, useTemplate } from "../../context";
 import { Template } from "../../../lib";
 
 export default () => {
-    const { template: obj, advanced } = useTemplate();
+    const { advanced } = useApp();
+    const { template: obj } = useTemplate();
     const template = new Template(obj);
     const item = template.selected();
 

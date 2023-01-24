@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
+export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
+
 export interface AppState {
-    mode: string;
+    mode: AppMode;
+    setMode: React.Dispatch<React.SetStateAction<AppMode>>;
+    advanced: boolean;
+    setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AppContext = React.createContext<AppState>({} as AppState);
@@ -11,11 +16,14 @@ export function useApp() {
 }
 
 export function AppProvider({ children }: { children: JSX.Element }) {
-    const [mode, setMode] = useState("");
+    const [mode, setMode] = useState<AppMode>("visual-editor");
+    const [advanced, setAdvanced] = useState(false);
 
     const value = {
         mode,
-        setMode
+        setMode,
+        advanced,
+        setAdvanced
     };
 
     return (
