@@ -63,13 +63,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return false;
     }
 
-    if (!Object.keys(scriptMap).includes(message.key)) {
-        console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });
+    if (typeof message.tabId !== "number") {
+        console.warn("MESSAGE", message.key, { message, sender, error: `Property "tabId" is invalid: "${message.tabId}"` });
         return false;
     }
 
-    if (typeof message.tabId !== "number") {
-        console.warn("MESSAGE", message.key, { message, sender, error: `Property "tabId" is invalid: "${message.tabId}"` });
+    if (message.key === "navigate") {
+        console.log("MESSAGE", message.key, { message, sender });
+        chrome.tabs.update({ url: message.params[0] });
+    }
+    else if (!Object.keys(scriptMap).includes(message.key)) {
+        console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });
         return false;
     }
 

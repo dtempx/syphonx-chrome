@@ -38358,6 +38358,16 @@ async function $6767c619f5de943e$export$e684be5f4b22cc14() {
 async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
     await $6767c619f5de943e$var$sendMessage("enableTracking");
 }
+function $6767c619f5de943e$export$ff7962acd6052c28(url) {
+    const tabId = chrome.devtools.inspectedWindow.tabId;
+    chrome.runtime.sendMessage({
+        key: "navigate",
+        params: [
+            url
+        ],
+        tabId: tabId
+    });
+}
 function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
     if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
         log: message
@@ -38966,6 +38976,12 @@ var $0e35cf2d20f939f4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $b411a941064d5cd2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14.59 8 12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+}), "HighlightOff");
+
+
+
 var $a591c0d726a7bda6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
 }), "Home");
@@ -39009,6 +39025,12 @@ var $cdeb595f73f319bc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
         d: "m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"
     }, "1")
 ], "KeyboardDoubleArrowRight");
+
+
+
+var $0045e6ed43c27179$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"
+}), "Launch");
 
 
 
@@ -39725,6 +39747,14 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d915f92af7d69b5$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setFileSaveOpen(true);
+                                    onClose(event);
+                                }
+                            ],
+                            [
+                                "File Close",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b411a941064d5cd2$export$2e2bcd8739ae039), {}),
+                                (event)=>{
+                                    setTemplate("");
                                     onClose(event);
                                 }
                             ],
@@ -43254,7 +43284,71 @@ var $53af5c4d3cc3573a$export$2e2bcd8739ae039 = ()=>{
 
 parcelRequire("d4J5n");
 
+
+
+
+
+
 var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    function onChangeUrl(event, value) {
+        template.obj.url = value || undefined;
+        setTemplate(template.toString());
+    }
+    function onValidateUrl(event, value) {
+        return value ? /^https?:\/\/[^\/]/.test(value) : true;
+    }
+    function onChangeKey(event, value) {
+        template.obj.key = value || undefined;
+        setTemplate(template.toString());
+    }
+    function onValidateKey(event, value) {
+        return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
+    }
+    const items = [
+        [
+            "url",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                        variant: "standard",
+                        size: "small",
+                        fullWidth: true,
+                        value: template.obj.url,
+                        onChange: onChangeUrl,
+                        onValidate: onValidateUrl
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        onClick: ()=>$6767c619f5de943e$export$ff7962acd6052c28(template.obj.url),
+                        sx: {
+                            visibility: template.obj.url ? "visible" : "hidden"
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: "Navigate to the url",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0045e6ed43c27179$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            "A default URL for the template"
+        ],
+        [
+            "key",
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b977f189b4ae8da0$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                fullWidth: true,
+                value: template.obj.key,
+                onChange: onChangeKey,
+                onValidate: onValidateKey
+            }),
+            "A key that uniquely identifies this template"
+        ]
+    ];
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
         className: "panel",
@@ -43262,7 +43356,9 @@ var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
             width: 1,
             height: 300
         },
-        children: "TEMPLATE SETTINGS"
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+            items: items
+        })
     });
 };
 

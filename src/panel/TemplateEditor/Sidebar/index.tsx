@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { List } from "../../../components";
-import { Template } from "../../../lib";
 import { useTemplate } from "../../context";
 import OpenFileDialog from "./OpenFileDialog";
 import SaveFileDialog from "./SaveFileDialog";
@@ -15,6 +14,7 @@ import {
     NoteAdd as FileNewIcon,
     FileOpen as FileOpenIcon,
     Save as FileSaveIcon,
+    HighlightOff as FileCloseIcon,
     ManageAccounts as SettingsIcon 
 } from "@mui/icons-material";
 
@@ -49,6 +49,7 @@ export default ({ open, onClose }: Props) => {
                     ["File New", <FileNewIcon />, event => { setTemplate(""); onClose(event); }],
                     ["File Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
                     ["File Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
+                    ["File Close", <FileCloseIcon />, event => { setTemplate(""); onClose(event); }],
                     null,
                     ["User Settings", <SettingsIcon />, event => { setUserSettingsOpen(true); onClose(event); }]
                 ]} />

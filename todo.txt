@@ -68,9 +68,12 @@ GPT3 chatbot integration
 
 POLISH
 file open progress animation on file open/save dialogs
+file close prompt for unsaved changes
 
 
 BUGS
+Crash opening schwabe/person.json, error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
+
 CSS Selector not highlighting in DOM on change
 output is only updating the first time
 wait to dismiss file dialog until after file operation is complete, on error set ribbon and don't close the dialog
@@ -81,7 +84,8 @@ Disable autorun for non-select-only templates
 Fix position of add button so it doesn't scroll within the tree
 Add button blocks menu on selected item
 
-
+FEATURES
+comments
 
 CURRENT: QUERY BUILDER
 regex editor

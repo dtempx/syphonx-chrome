@@ -15,7 +15,12 @@ export async function enableTracking(): Promise<void> {
     await sendMessage("enableTracking");
 }
 
-export function log(message: string) {
+export function navigate(url: string): void {
+    const tabId = chrome.devtools.inspectedWindow.tabId;
+    chrome.runtime.sendMessage({ key: "navigate", params: [url], tabId });
+}
+
+export function log(message: string): void {
     if (active)
         chrome.runtime.sendMessage({ log: message });
     else
