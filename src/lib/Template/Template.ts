@@ -75,7 +75,10 @@ export class Template {
         else
             return;
 
-        actions.push(action);
+        if (item)
+            actions.splice(item.index + 1, 0, action);
+        else
+            actions.push(action);
         this.setSelected(action);
     }
 

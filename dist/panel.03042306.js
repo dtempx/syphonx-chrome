@@ -38452,7 +38452,8 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
             waitfor: {}
         };
         else return;
-        actions.push(action);
+        if (item) actions.splice(item.index + 1, 0, action);
+        else actions.push(action);
         this.setSelected(action);
     }
     addSubAction() {
@@ -42575,7 +42576,6 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
     }
     function addAction(type) {
         if (template) {
-            debugger;
             template.addAction(type);
             setTemplate(template.toString());
             setOpen(false);
