@@ -22,9 +22,9 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { template: obj } = useTemplate();
+    const { template: json } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const template = new Template(obj);
+    const template = new Template(json);
     const file = template.file();
 
     return (

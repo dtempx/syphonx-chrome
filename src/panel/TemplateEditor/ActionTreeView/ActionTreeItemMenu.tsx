@@ -26,8 +26,9 @@ export interface Props {
 export default ({ item }: Props) => {
     const [anchor, setAnchor] = useState<HTMLElement | undefined>();
     const open = !!anchor;
-    const { template: obj, setTemplate } = useTemplate();
-    const template = new Template(obj);
+
+    const { template: json, setTemplate } = useTemplate();
+    const template = new Template(json);
 
     function handleMoveUp() {
         template.moveItemUp(item);

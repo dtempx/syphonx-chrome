@@ -15,8 +15,8 @@ export interface Props {
 }
 
 export default ({ item }: Props) => {
-    const { template: obj } = useTemplate();
-    const template = new Template(obj);
+    const { template: json } = useTemplate();
+    const template = new Template(json);
     const selected = template.selected();
 
     function name(item: TemplateItem) {

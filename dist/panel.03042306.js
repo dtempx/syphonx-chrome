@@ -39613,8 +39613,8 @@ parcelRequire("d4J5n");
 
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
-    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     async function handleSelectFile(event, file) {
         const content = template.toString("file");
         try {
@@ -39752,9 +39752,9 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const file = template.file();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
@@ -39887,8 +39887,8 @@ parcelRequire("d4J5n");
 
 
 var $d9e393267c3799f1$export$2e2bcd8739ae039 = ()=>{
-    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
         style: {
@@ -40666,9 +40666,9 @@ var $2379682caf290208$export$2e2bcd8739ae039 = ({ value: value , open: open , on
 
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
@@ -40921,9 +40921,9 @@ var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     const select = item?.obj;
     if (!select) return null;
@@ -41132,8 +41132,8 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
     const [value1, setValue1] = (0, $d4J5n.useState)();
     const [value2, setValue2] = (0, $d4J5n.useState)();
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     (0, $d4J5n.useEffect)(()=>{
         const snooze = item ? item.obj : [];
@@ -41230,9 +41230,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
@@ -41313,9 +41313,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     if (!item) return null;
     function validateName(event, value) {
@@ -41428,8 +41428,8 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
 
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
     const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const item = template.selected();
     if (!item) return null;
     else if (item.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
@@ -42762,8 +42762,8 @@ var $d4J5n = parcelRequire("d4J5n");
 var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
     const open = !!anchor;
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     function handleMoveUp() {
         template.moveItemUp(item);
         setTemplate(template.toString());
@@ -42870,8 +42870,8 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
-    const { template: obj  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     const selected = template.selected();
     function name(item) {
         if (item.name) return item.name;
@@ -42961,17 +42961,17 @@ function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
 
 
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     const [selected, setSelected] = (0, $d4J5n.useState)([]);
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     (0, $d4J5n.useEffect)(()=>{
         const key = template.selected()?.key;
         setSelected(key ? [
             key
         ] : []);
     }, [
-        obj
+        json
     ]);
     function handleSelect(event, nodeIds) {
         template.setSelected(nodeIds);
@@ -43014,11 +43014,11 @@ $86983b27c45f5667$exports = JSON.parse('[{"name":"select","advanced":false,"help
 
 
 var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
-    const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
         setOpen(true);
@@ -43209,8 +43209,10 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>{
 parcelRequire("d4J5n");
 
 
+
 var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
-    const { template: template  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
         className: "panel",
@@ -43223,9 +43225,10 @@ var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
             size: "small",
             multiline: true,
             fullWidth: true,
-            value: template,
+            value: template.toString("file"),
             sx: {
-                height: "100%"
+                height: "100%",
+                overflow: "scroll"
             }
         })
     });

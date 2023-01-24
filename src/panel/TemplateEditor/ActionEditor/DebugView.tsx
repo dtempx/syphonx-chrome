@@ -3,8 +3,8 @@ import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
 
 export default () => {
-    const { template: obj } = useTemplate();
-    const template = new Template(obj);
+    const { template: json } = useTemplate();
+    const template = new Template(json);
     const item = template.selected();
 
     return item ? (

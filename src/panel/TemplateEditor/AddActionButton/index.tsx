@@ -26,11 +26,11 @@ export interface Props {
 }
 
 export default (props?: Props) => {
-    const { template: obj, setTemplate } = useTemplate();
+    const { template: json, setTemplate } = useTemplate();
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
-    const template = new Template(obj);
+    const template = new Template(json);
 
     function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         setAnchor(event.currentTarget);

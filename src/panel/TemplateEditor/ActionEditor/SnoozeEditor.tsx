@@ -10,8 +10,9 @@ export default () => {
     const [value1, setValue1] = useState<number | undefined>();
     const [value2, setValue2] = useState<number | undefined>();
     const { advanced } = useApp();
-    const { template: obj, setTemplate } = useTemplate();
-    const template = new Template(obj);
+
+    const { template: json, setTemplate } = useTemplate();
+    const template = new Template(json);
     const item = template.selected();
     
     useEffect(() => {

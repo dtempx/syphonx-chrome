@@ -10,10 +10,10 @@ import DebugView from "./DebugView";
 
 export default () => {
     const { advanced } = useApp();
-    const { template: obj, setTemplate } = useTemplate();
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
 
-    const template = new Template(obj);
+    const { template: json, setTemplate } = useTemplate();
+    const template = new Template(json);
     const item = template.selected();
     if (!item)
         return null;

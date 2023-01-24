@@ -11,8 +11,8 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { files, error, setError } = useStorage();
-    const { template: obj } = useTemplate();
-    const template = new Template(obj);
+    const { template: json } = useTemplate();
+    const template = new Template(json);
 
     async function handleSelectFile(event: React.SyntheticEvent, file: string) {
         const content = template.toString("file");

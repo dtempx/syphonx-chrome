@@ -11,16 +11,16 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
-    const { template: obj, setTemplate } = useTemplate();
-    const template = new Template(obj);
-
     const [expanded, setExpanded] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
+
+    const { template: json, setTemplate } = useTemplate();
+    const template = new Template(json);
 
     useEffect(() => {
         const key = template.selected()?.key;
         setSelected(key ? [key] : []);
-    }, [obj]);
+    }, [json]);
 
     function handleSelect(event: any, nodeIds: any) {
         template.setSelected(nodeIds);
