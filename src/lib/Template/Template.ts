@@ -107,7 +107,6 @@ export class Template {
     }
 
     duplicateItem(item: TemplateItem): void {
-        debugger;
         const unit = clone(item.unit);
         item.collection.splice(item.index + 1, 0, unit);
         this.setSelected(unit);
@@ -142,10 +141,12 @@ export class Template {
     }
 
     removeItem(item: TemplateItem): void {
+        debugger;
         if (item.index >= 0) {
             item.collection.splice(item.index, 1);
             if (item.collection.length > 1) {
-                this.setSelected(item.collection[item.index]);
+                const index = item.index >= item.collection.length ? item.index - 1 : item.index;
+                this.setSelected(item.collection[index]);
             }
             else if (item.collection.length === 1) {
                 this.setSelected(item.collection[0]);

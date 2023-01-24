@@ -11,17 +11,18 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
-    const [expanded, setExpanded] = useState<string[]>([]);
-    const [selected, setSelected] = useState<string | undefined>();
     const { template: obj, setTemplate } = useTemplate();
     const template = new Template(obj);
 
-    useEffect(() => {
-        setSelected(template.selected()?.key);
-    }, [template]);
+    const [expanded, setExpanded] = useState<string[]>([]);
+    const [selected, setSelected] = useState<string[]>([]);
 
-    function onSelect(event: any, nodeIds: any) {
-        debugger;
+    useEffect(() => {
+        const key = template.selected()?.key;
+        setSelected(key ? [key] : []);
+    }, [obj]);
+
+    function handleSelect(event: any, nodeIds: any) {
         template.setSelected(nodeIds);
         setTemplate(template.toString());
     }
@@ -34,7 +35,7 @@ export default () => {
                 expanded={expanded}
                 selected={selected}
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
-                onNodeSelect={onSelect}
+                onNodeSelect={handleSelect}
             >
                 {template?.children?.map(item => <ActionTreeItem item={item} />)}
             </TreeView>

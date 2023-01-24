@@ -38482,7 +38482,6 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         return false;
     }
     duplicateItem(item) {
-        debugger;
         const unit = (0, $711b72822a456466$export$9cd59f9826255e47)(item.unit);
         item.collection.splice(item.index + 1, 0, unit);
         this.setSelected(unit);
@@ -38511,10 +38510,13 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     removeItem(item) {
+        debugger;
         if (item.index >= 0) {
             item.collection.splice(item.index, 1);
-            if (item.collection.length > 1) this.setSelected(item.collection[item.index]);
-            else if (item.collection.length === 1) this.setSelected(item.collection[0]);
+            if (item.collection.length > 1) {
+                const index = item.index >= item.collection.length ? item.index - 1 : item.index;
+                this.setSelected(item.collection[index]);
+            } else if (item.collection.length === 1) this.setSelected(item.collection[0]);
             else this.setSelected(undefined);
         }
     }
@@ -42509,17 +42511,19 @@ function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
 
 
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
-    const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
-    const [selected, setSelected] = (0, $d4J5n.useState)();
     const { template: obj , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj);
+    const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
+    const [selected, setSelected] = (0, $d4J5n.useState)([]);
     (0, $d4J5n.useEffect)(()=>{
-        setSelected(template.selected()?.key);
+        const key = template.selected()?.key;
+        setSelected(key ? [
+            key
+        ] : []);
     }, [
-        template
+        obj
     ]);
-    function onSelect(event, nodeIds) {
-        debugger;
+    function handleSelect(event, nodeIds) {
         template.setSelected(nodeIds);
         setTemplate(template.toString());
     }
@@ -42538,7 +42542,7 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
             expanded: expanded,
             selected: selected,
             onNodeToggle: (event, nodeIds)=>setExpanded(nodeIds),
-            onNodeSelect: onSelect,
+            onNodeSelect: handleSelect,
             children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ec7899798df4c4f5$export$2e2bcd8739ae039), {
                     item: item
                 }))

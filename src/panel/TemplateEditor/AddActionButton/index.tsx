@@ -39,7 +39,6 @@ export default (props?: Props) => {
 
     function addAction(type: TemplateAddItemType) {
         if (template) {
-            debugger;
             template.addAction(type);
             setTemplate(template.toString());
             setOpen(false);
