@@ -1,6 +1,39 @@
 
+## Dev Setup
+```
+git clone https://github.com/dtempx/syphonx-chrome.git
+cd syphonx-chrome
+yarn install
+```
 
-# Links
+
+## Build/Test
+* `npx tsc` to build source
+* `yarn test` to run unit tests
+
+
+## Build/Package
+* `yarn build` to build Chrome Extension package
+* `yarn start` to test UI outside of Chrome
+
+
+## Test Chrome Extension
+1. Open Chrome web-browser
+2. Goto `chrome://extensions` to open the **Extensions** page
+3. Click `Load unpacked` and navigate to `dist` folder to load Chrome Extension
+
+
+## Install Chrome Extension
+1. Open Chrome and navigate to **chrome://extensions**
+2. Click **Load unpacked**, navigate to the `dist` folder within this project and click **Select Folder**
+3. Navigate to any website and open developer tools or hit F12
+4. Select the **SyphonX** tab within the developer tools panel.
+
+
+## Links
+* [Roadmap](documentation/roadmap.md)
+
+## References
 * [Material UI Documentation](https://v4.mui.com/)
 * [Chrome Extending DevTools](https://developer.chrome.com/docs/extensions/mv3/devtools/)
 * [Building a Chrome Extension with TypeScript (starter overview)](https://www.youtube.com/watch?v=01vp9cYbQus)

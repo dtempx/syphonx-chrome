@@ -99,6 +99,11 @@ persist user settings
 persist open templates
 ability to switch between multiple open templates
 template params
+save data to Google sheets
+scheduled runs locally
+scheduled runs from cloud
+
+
 
 CURRENT: QUERY BUILDER
 regex editor
