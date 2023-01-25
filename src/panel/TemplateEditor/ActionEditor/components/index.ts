@@ -1,5 +1,13 @@
 export * from "../../components";
 export { default as DebugView } from "./DebugView";
+export { default as FormulaField } from "./FormulaField";
+export { default as NumberField } from "./NumberField";
+export { default as NumberRangeField } from "./NumberRangeField";
+export { default as PlainTextField } from "./PlainTextField";
+export { default as RegexpField } from "./RegexpField";
 export { default as SelectFormatDropdown } from "./SelectFormatDropdown";
+export { default as SelectorField } from "./SelectorField";
 export { default as SelectOnDropdown } from "./SelectOnDropdown";
 export { default as SelectTypeDropdown } from "./SelectTypeDropdown";
+export { default as SymbolicNameField } from "./SymbolicNameField";
+export { default as VariantField } from "./VariantField";

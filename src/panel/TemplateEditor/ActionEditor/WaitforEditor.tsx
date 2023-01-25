@@ -1,12 +1,19 @@
 import React, { useState } from "react";
-import { Switch, TextField } from "@mui/material";
+import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from "../../context";
-import { ComplexPropertyGrid, ValidateTextField } from "./components/";
-import { SelectOnDropdown } from "./components";
+import {  } from "./components";
 import { Template } from "../../../lib";
-import SelectorField from "./components/SelectorField";
 import QueryBuilder from "../QueryBuilder";
+
+import {
+    ComplexPropertyGrid,
+    FormulaField,
+    NumberField,
+    RegexpField,
+    SelectorField,
+    SelectOnDropdown
+} from "./components";
 
 export default () => {
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
@@ -14,86 +21,87 @@ export default () => {
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
     const item = template.selected();
-    if (!item)
-        return null;
+    const obj = item?.obj as syphonx.WaitFor;
 
     function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         return /^[a-z][a-z0-9_]*$/.test(value);
     }
 
-    const waitfor = item.obj as syphonx.WaitFor;
-    return (
+    return obj ? (
         <>
             <ComplexPropertyGrid
                 items={[
                     [
                         "query",
                         <SelectorField
-                            query={waitfor.query}
+                            query={obj.query}
                             onClick={() => setQueryEditorOpen(true)}
                         />,
-                        "A CSS selector or jQuery expression that determines the content to wait for on the page",
+                        "A CSS selector or jQuery expression that determines the content to wait for on the page.",
                         true
                     ],
                     [
                         "required",
                         <Switch
-                            checked={waitfor.required ?? false}
-                            onChange={(event, value) => { waitfor.required = value; setTemplate(template.toString()); }}
+                            checked={obj.required ?? false}
+                            onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
                         />,
-                        "Determines whether the click is optional or required, producing if no click target is found on the page",
-                        waitfor.required !== undefined
+                        "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                        obj.required !== undefined
                     ],
                     [
                         "on",
                         <SelectOnDropdown
-                            value={waitfor.on}
-                            onChange={(event, value) => { waitfor.on = value; setTemplate(template.toString());  }}
+                            value={obj.on}
+                            onChange={(event, value) => { obj.on = value; setTemplate(template.toString());  }}
                         />,
-                        "Determines whether to wait for any, all, or none of the selectors",
-                        waitfor.on !== undefined
+                        "Determines whether to wait for any, all, or none of the selectors.",
+                        obj.on !== undefined
                     ],
                     [
                         "pattern",
-                        <TextField size="small" />,
-                        "Waits for a specific text pattern if specified",
-                        false
+                        <RegexpField
+                            value={obj.pattern}
+                            onChange={(event, value) => { obj.pattern = value; setTemplate(template.toString());  }}
+                        />,
+                        "Waits for a specific text pattern if specified.",
+                        obj.pattern !== undefined
                     ],
                     [
                         "timeout",
-                        <TextField size="small" />,
-                        "Number of seconds to wait before timing out",
-                        false
+                        <NumberField
+                            value={obj.timeout}
+                            onChange={(event, value) => { obj.timeout = value; setTemplate(template.toString());  }}
+                        />,
+                        "Number of seconds to wait before timing out.",
+                        obj.timeout !== undefined
                     ],
                     [
                         "when",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={waitfor.when}
-                            onChange={(event, value) => { waitfor.when = value || undefined; setTemplate(template.toString()); }}
-                            onValidate={validateName}
+                        <FormulaField
+                            value={obj.when}
+                            onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
                         />,
-                        "A formula that determines whether the click is evaluated or bypassed",
-                        waitfor.when !== undefined
+                        "A formula that determines whether the click is evaluated or bypassed.",
+                        obj.when !== undefined
                     ],
                     [
                         "active",
                         <Switch
-                            checked={waitfor.active ?? true}
-                            onChange={(event, value) => { waitfor.active = value; setTemplate(template.toString()); }}
+                            checked={obj.active ?? true}
+                            onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
                         />,
-                        "Determines whether the property is active or bypassed",
-                        waitfor.active !== undefined
+                        "Determines whether the property is active or bypassed.",
+                        obj.active !== undefined
                     ]
                 ]}
             />
             <QueryBuilder
-                value={waitfor}
+                value={obj}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { waitfor.query = value; setTemplate(template.toString()); }}
+                onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
             />
         </>
-    );
+    ) : null;
 };

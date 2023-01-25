@@ -23,8 +23,8 @@ Add sub-items
     add sub-actions to each
     add sub-select to transform
     add sub-select to waitfor
-    add sub-select for object
-    add waitfor to click
+    add sub-select to select with type=object
+    add sub-waitfor to click
 
 Data View
     data view: single object view
@@ -69,11 +69,12 @@ GPT3 chatbot integration
 POLISH
 file open progress animation on file open/save dialogs
 file close prompt for unsaved changes
-
+auto open default url on template open (with user setting)
+add info icon to RegExpField explaining start/end with /, flags, capturing group, etc.
+add info icon to FormulaField explaining start/end with {}, dynamic strings {``}, known variables (data, etc.), any valid javascript expression
 
 BUGS
 Crash opening schwabe/person.json, error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
-
 CSS Selector not highlighting in DOM on change
 output is only updating the first time
 wait to dismiss file dialog until after file operation is complete, on error set ribbon and don't close the dialog
@@ -84,8 +85,20 @@ Disable autorun for non-select-only templates
 Fix position of add button so it doesn't scroll within the tree
 Add button blocks menu on selected item
 
+CONSIDER
+Consider renaming SelectorField to QueryField, and how to pass other properites to it
+Consider refactoring to useQueryBuilder pattern
+Consider moving SnoozeMode out of SnoozeInterval in core
+Consider adding a context field to Yield in core
+
+
 FEATURES
 comments
+about box with version
+persist user settings
+persist open templates
+ability to switch between multiple open templates
+template params
 
 CURRENT: QUERY BUILDER
 regex editor

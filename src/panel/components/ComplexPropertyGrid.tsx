@@ -42,16 +42,36 @@ export default ({ items, ...props }: Props) => {
                 items={items2}
                 {...props}
             />
-            <Tooltip title={!advanced ? "Show advanced settings" : "Hide advanced settings that are not used"}>
+            {!advanced &&
                 <Link
                     component="button"
                     variant="body2"
-                    onClick={() => setAdvanced(!advanced)}
+                    onClick={() => setAdvanced(true)}
+                    sx={{ margin: 1 }}
                 >
-                    {!advanced && <Typography fontSize="small">More <MoreIcon fontSize="small" sx={{ position: "relative", top: 6 }} /></Typography>}
-                    {advanced && <Typography fontSize="small">Less <LessIcon fontSize="small" sx={{ position: "relative", top: 6 }} /></Typography>}
+                    <Tooltip title="Show advanced settings">
+                        <Typography>
+                            More
+                            <MoreIcon fontSize="small" sx={{ position: "relative", top: 6 }} />
+                        </Typography>
+                    </Tooltip>
                 </Link>
-            </Tooltip>
+            }
+            {advanced &&
+                <Link
+                    component="button"
+                    variant="body2"
+                    onClick={() => setAdvanced(false)}
+                    sx={{ margin: 1 }}
+                >
+                    <Tooltip title="Hide unused advanced settings">
+                        <Typography>
+                            Less
+                            <LessIcon fontSize="small" sx={{ position: "relative", top: 6 }} />
+                        </Typography>
+                    </Tooltip>
+                </Link>
+            }
         </Stack>
     );
 }

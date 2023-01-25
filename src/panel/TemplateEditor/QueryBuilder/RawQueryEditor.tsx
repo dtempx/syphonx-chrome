@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { ValidateTextField } from "../components";
+import { ValidateField } from "../components";
 
 export interface Props {
     query: syphonx.SelectQuery;
@@ -41,7 +41,7 @@ export default ({ query, onChange }: Props) => {
     }
     
     return (
-        <ValidateTextField
+        <ValidateField
             variant="standard"
             size="small"
             fullWidth

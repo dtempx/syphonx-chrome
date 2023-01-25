@@ -3,54 +3,43 @@ import { Switch } from "@mui/material";
 import * as syphonx from "syphonx-lib";
 import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
-import SelectorField from "./components/SelectorField";
 import QueryBuilder from "../QueryBuilder";
 
 import {
     ComplexPropertyGrid,
+    FormulaField,
+    NumberField,
+    RegexpField,
+    SelectorField,
     SelectFormatDropdown,
     SelectTypeDropdown,
-    ValidateTextField
+    SymbolicNameField,
+    VariantField
 } from "./components";
 
 export default () => {
     const [queryEditorOpen, setQueryEditorOpen] = useState(false);
-    
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
     const item = template.selected();
-    const select = item?.obj as syphonx.Select;
-    if (!select)
-        return null;
+    const obj = item?.obj as syphonx.Select;
 
-    function validateName(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
-        return value ? /^[a-z][a-z0-9_]*$/.test(value) : true;
-    }
-
-    function validateNumber(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
-        return value ? parseInt(value) >= 0 : true;
-    }
-
-    function handleRename(event: React.SyntheticEvent<Element, Event>, value: string) {
-        select.name = value || undefined;
-        template.setSelected(select);
+    function handleRename(event: React.SyntheticEvent<Element, Event>, value: string | undefined) {
+        obj.name = value;
+        template.setSelected(obj);
         setTemplate(template.toString());
     }
 
-    return (
+    return obj ? (
         <>
             <ComplexPropertyGrid
                 items={[
                     [
                         "name",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={select.name}
-                            placeholder="(none)"
-                            fullWidth
+                        <SymbolicNameField
+                            variant="snake-case"
+                            value={obj.name}
                             onChange={handleRename}
-                            onValidate={validateName}
                         />,
                         "Determines the name of the selected value, or blank representing a single unnamed value",
                         true
@@ -58,7 +47,7 @@ export default () => {
                     [
                         "query",
                         <SelectorField
-                            query={select.query}
+                            query={obj.query}
                             onClick={() => setQueryEditorOpen(true)}
                         />,
                         "A CSS selector or jQuery expression that determines what data is selected on the page",
@@ -67,8 +56,8 @@ export default () => {
                     [
                         "type",
                         <SelectTypeDropdown
-                            value={select.type}
-                            onChange={(event, value) => { select.type = value; setTemplate(template.toString()); }}
+                            value={obj.type}
+                            onChange={(event, value) => { obj.type = value; setTemplate(template.toString()); }}
                         />,
                         "Determines the type of the property value",
                         true
@@ -76,8 +65,8 @@ export default () => {
                     [
                         "repeated",
                         <Switch
-                            checked={select.repeated ?? false}
-                            onChange={(event, value) => { select.repeated = value; setTemplate(template.toString()); }}
+                            checked={obj.repeated ?? false}
+                            onChange={(event, value) => { obj.repeated = value; setTemplate(template.toString()); }}
                         />,
                         "Indicates whether the data is single-valued or repeated within an array",
                         true
@@ -85,104 +74,93 @@ export default () => {
                     [
                         "required",
                         <Switch
-                            checked={select.required ?? false}
-                            onChange={(event, value) => { select.required = value; setTemplate(template.toString()); }}
+                            checked={obj.required ?? false}
+                            onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
                         />,
                         "Determines whether the property is required which produces an error if a value is not obtained",
-                        select.required !== undefined
+                        obj.required !== undefined
                     ],
                     [
                         "value",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={select.value}
-                            onChange={(event, value) => { select.value = value || undefined; setTemplate(template.toString()); }}
-                            onValidate={validateName}
+                        <VariantField
+                            variants={["string", "number", "boolean", "formula", "json"]}
+                            value={obj.value}
+                            onChange={(event, value) => { obj.value = value || undefined; setTemplate(template.toString()); }}
                         />,
                         "A predetermined or computed value, used if a DOM query is not specified",
-                        select.value !== undefined
+                        obj.value !== undefined
                     ],
                     [
                         "all",
                         <Switch
-                            checked={select.all ?? false}
-                            onChange={(event, value) => { select.all = value; setTemplate(template.toString()); }}
+                            checked={obj.all ?? false}
+                            onChange={(event, value) => { obj.all = value; setTemplate(template.toString()); }}
                         />,
                         "Determines whether to evaluate all query stages, or stop at the first stage that produces a value",
-                        select.all !== undefined
+                        obj.all !== undefined
                     ],
                     [
                         "limit",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={select.limit}
-                            onChange={(event, value) => { select.limit = value ? parseInt(value) : undefined; setTemplate(template.toString()); }}
-                            onValidate={validateNumber}
+                        <NumberField
+                            value={obj.limit}
+                            onChange={(event, value) => { obj.limit = value; setTemplate(template.toString()); }}
                         />,
                         "Limits the number of nodes to be selected, unlimited if not specified",
-                        select.limit !== undefined
+                        obj.limit !== undefined
                     ],
                     [
                         "format",
                         <SelectFormatDropdown
-                            value={select.format}
-                            onChange={(event, value) => { select.format = value; setTemplate(template.toString());  }}
+                            value={obj.format}
+                            onChange={(event, value) => { obj.format = value; setTemplate(template.toString());  }}
                         />,
                         "Determines how the selected value is formatted",
-                        select.format !== undefined
+                        obj.format !== undefined
                     ],
                     [
                         "pattern",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={select.pattern}
-                            onChange={(event, value) => { select.pattern = value || undefined; setTemplate(template.toString()); }}
-                            onValidate={validateName}
+                        <RegexpField
+                            value={obj.pattern}
+                            onChange={(event, value) => { obj.pattern = value || undefined; setTemplate(template.toString()); }}
                         />,
                         "A regex pattern for validation, an error will be produced if the value does not match the pattern",
-                        select.pattern !== undefined
+                        obj.pattern !== undefined
                     ],
                     [
                         "collate",
                         <Switch
-                            checked={select.collate ?? false}
-                            onChange={(event, value) => { select.collate = value; setTemplate(template.toString()); }}
+                            checked={obj.collate ?? false}
+                            onChange={(event, value) => { obj.collate = value; setTemplate(template.toString()); }}
                         />,
                         "Combines all selected nodes into a single value",
-                        select.collate !== undefined
+                        obj.collate !== undefined
                     ],
                     [
                         "when",
-                        <ValidateTextField
-                            variant="standard"
-                            size="small"
-                            value={select.when}
-                            onChange={(event, value) => { select.when = value || undefined; setTemplate(template.toString()); }}
-                            onValidate={validateName}
+                        <FormulaField
+                            value={obj.when}
+                            onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
                         />,
                         "A formula that determines whether the select is evaluated or bypassed",
-                        select.when !== undefined
+                        obj.when !== undefined
                     ],
                     [
                         "active",
                         <Switch
-                            checked={select.active ?? true}
-                            onChange={(event, value) => { select.active = value; setTemplate(template.toString()); }}
+                            checked={obj.active ?? true}
+                            onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
                         />,
                         "Determines whether the property is active or bypassed",
-                        select.active !== undefined
+                        obj.active !== undefined
                     ]
                 ]}
             />
             <QueryBuilder
-                value={select}
+                value={obj}
                 open={queryEditorOpen}
                 onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { select.query = value; setTemplate(template.toString()); }}
+                onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
             />
         </>
-    );
+    ) : null;
 };

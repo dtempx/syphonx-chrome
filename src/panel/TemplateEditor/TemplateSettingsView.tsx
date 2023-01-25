@@ -1,10 +1,15 @@
 import React from "react";
 import { IconButton, Paper, Stack, Tooltip } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
-import { ValidateTextField, PropertyGrid, PropertyGridItem } from "./components/";
 import { useTemplate } from "../context";
 import { Template } from "../../lib";
 import * as background from "../../background-proxy";
+
+import {
+    PropertyGrid,
+    PropertyGridItem,
+    ValidateField
+} from "./components";
 
 export default () => {
     const { template: json, setTemplate } = useTemplate();
@@ -32,7 +37,7 @@ export default () => {
         [
             "url",
             <Stack direction="row">
-                <ValidateTextField
+                <ValidateField
                     variant="standard"
                     size="small"
                     fullWidth
@@ -49,11 +54,11 @@ export default () => {
                     </Tooltip>
                 </IconButton>
             </Stack>,
-            "A default URL for the template"
+            "A default URL for the template."
         ],
         [
             "key",
-            <ValidateTextField
+            <ValidateField
                 variant="standard"
                 size="small"
                 fullWidth
@@ -61,7 +66,7 @@ export default () => {
                 onChange={onChangeKey}
                 onValidate={onValidateKey}
             />,
-            "A key that uniquely identifies this template"
+            "A key that uniquely identifies this template."
         ]
     ];
 

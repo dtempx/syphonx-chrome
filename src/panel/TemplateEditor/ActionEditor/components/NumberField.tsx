@@ -1,16 +1,17 @@
 import React from "react";
-import { BaseTextFieldProps } from "@mui/material";
-import ValidateTextField from "./ValidateTextField";
+import { SxProps, Theme } from "@mui/material";
+import { ValidateField } from ".";
 
-export interface Props extends BaseTextFieldProps {
-    value?: number | undefined;
+export interface Props {
+    value: number | undefined | null;
+    onChange: (event: React.SyntheticEvent, value: number | undefined) => void
     min?: number;
     max?: number;
     type? : "integer" | "float";
-    onChange?: (event: React.SyntheticEvent, value: number | undefined) => void
+    sx?: SxProps<Theme>;
 }
 
-export default ({ value, min, max, type = "float", onChange, ...props }: Props) => {
+export default ({ value, min, max, type = "float", onChange, sx }: Props) => {
     function handleChange(event: React.SyntheticEvent, value: string): void {
         if (onChange) {
             const num = type === "float" ? parseFloat(value) : parseInt(value);
@@ -32,11 +33,13 @@ export default ({ value, min, max, type = "float", onChange, ...props }: Props) 
     }
 
     return (
-        <ValidateTextField
-            {...props}
+        <ValidateField
+            variant="standard"
+            size="small"
             value={value}
             onChange={handleChange}
             onValidate={handleValidate}
+            sx={sx}
         />
     );
 }
