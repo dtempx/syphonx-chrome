@@ -1,32 +1,47 @@
 import React, { useState, useEffect } from "react";
-import { AlertBar, FileList, FilePathBreadcrumbs, TitleBar, TransitionUp } from ".";
+
+import {
+    AlertBar,
+    FileList,
+    FilePathBreadcrumbs,
+    TitleBar,
+    TransitionUp
+} from ".";
 
 import {
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
-    IconButton,
-    TextField
+    LinearProgress,
+    TextField,
+    Typography
 } from "@mui/material";
 
 import {
-    Input as CommitIcon
+    LoadingButton
+} from "@mui/lab"
+
+import {
+    CloudUpload as SaveIcon
 } from "@mui/icons-material";
 
 export interface Props {
     files: string[];
-    title: string;
-    error: string;
+    title: string | JSX.Element;
+    error: string | JSX.Element;
     mode: "open" | "save";
     open: boolean;
+    loading?: boolean;
+    opening?: boolean;
+    saving?: boolean;
     selectedFile?: string;
     onSelectFile: (event: React.SyntheticEvent, file: string) => void;
     onClearError: (event: React.SyntheticEvent) => void;
     onClose: (event: React.SyntheticEvent) => void;
 }
 
-export default ({ files, title, mode, open, error, selectedFile, onSelectFile, onClearError, onClose }: Props) => {
+export default ({ files, title, mode, open, loading, opening, saving, error, selectedFile, onSelectFile, onClearError, onClose }: Props) => {
     const [currentDirectory, setCurrentDirectory] = useState("");
     const [text, setText] = useState("");
     const [valid, setValid] = useState(true);
@@ -36,11 +51,9 @@ export default ({ files, title, mode, open, error, selectedFile, onSelectFile, o
         setCurrentDirectory(selectedFile && validateFilename(selectedFile) && selectedFile.lastIndexOf("/") > 0 ? selectedFile?.slice(0, selectedFile?.lastIndexOf("/") + 1) : "/");
     }, [selectedFile]);
 
-    function handleCommit(event: React.SyntheticEvent) {
-        if (valid) {
+    function handleSave(event: React.SyntheticEvent) {
+        if (valid)
             onSelectFile(event, text);
-            onClose(event);
-        }
     }
 
     function handleSelectFile(event: React.SyntheticEvent, file: string) {
@@ -85,17 +98,29 @@ export default ({ files, title, mode, open, error, selectedFile, onSelectFile, o
             <DialogTitle sx={{ p: 0 }}>
                 <TitleBar title={title} onClose={onClose} />
                 <AlertBar message={error} open={!!error} onClose={onClearError} />
-                <FilePathBreadcrumbs file={currentDirectory} onClick={(event, key) => setCurrentDirectory(key)} sx={{ m: 2 }} />
+                <LinearProgress
+                    sx={{
+                        width: "100%",
+                        visibility: loading || opening || saving ? "visible" : "hidden"
+                    }}
+                />
+                {files.length === 0 && <Typography sx={{ m: 2 }}>One moment please…</Typography>}
+                {files.length > 0 && <FilePathBreadcrumbs file={currentDirectory} onClick={(event, key) => setCurrentDirectory(key)} sx={{ m: 2 }} />}
             </DialogTitle>
 
             <DialogContent sx={{ p: 0 }}>
-                <FileList files={currentFiles} onSelectFile={handleSelectFile} onSelectFolder={(event, key) => setCurrentDirectory(key)} />
+                <FileList
+                    files={currentFiles}
+                    onSelectFile={handleSelectFile}
+                    onSelectFolder={(event, key) => setCurrentDirectory(key)}
+                />
             </DialogContent>
             
             {mode === "save" ? (
                 <DialogActions>
                     <TextField
                         variant="outlined"
+                        size="small"
                         type="text"
                         label=""
                         margin="dense"
@@ -104,12 +129,18 @@ export default ({ files, title, mode, open, error, selectedFile, onSelectFile, o
                         value={text}
                         error={!valid}
                         onChange={handleTextChange}
-                        InputProps={{endAdornment:
-                            <IconButton onClick={handleCommit}>
-                                <CommitIcon />
-                            </IconButton>
-                        }}
                     />
+                    <LoadingButton
+                        variant="contained"
+                        disabled={!valid}
+                        loading={saving}
+                        endIcon={<SaveIcon />}
+                        loadingPosition="end"
+                        onClick={handleSave}
+                        sx={{ ml: 1 }}
+                    >
+                        <Typography>Save</Typography>
+                    </LoadingButton>
                 </DialogActions>
             ) : undefined}
         </Dialog>

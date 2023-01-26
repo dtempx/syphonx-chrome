@@ -7,7 +7,6 @@ export default () => {
     const { template: json } = useTemplate();
 
     const { code } = useMemo(() => {
-        debugger;
         const template = new Template(json);
         const code = template.toString("file");
         return { template, code };

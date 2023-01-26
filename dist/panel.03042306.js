@@ -7598,6 +7598,7 @@ $parcel$export($86049548edbb86a7$exports, "Fab", () => $f09768665decc43c$export$
 $parcel$export($86049548edbb86a7$exports, "Grid", () => $a8c96cc3b002d944$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "IconButton", () => $fa1dfc78f8375ab9$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "InputAdornment", () => $224cf55292bca498$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "LinearProgress", () => $2f97f7a2aae17371$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Link", () => $e4e6b7d90906fd0f$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "List", () => $ee1e133ccba2d879$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "ListItem", () => $299786ec18bb6fc2$export$2e2bcd8739ae039);
@@ -23761,6 +23762,335 @@ var $224cf55292bca498$export$2e2bcd8739ae039 = $224cf55292bca498$var$InputAdornm
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+
+function $a2efe32bbe232f29$export$bc8a6ea1eb17d7c6(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiLinearProgress", slot);
+}
+const $a2efe32bbe232f29$var$linearProgressClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiLinearProgress", [
+    "root",
+    "colorPrimary",
+    "colorSecondary",
+    "determinate",
+    "indeterminate",
+    "buffer",
+    "query",
+    "dashed",
+    "dashedColorPrimary",
+    "dashedColorSecondary",
+    "bar",
+    "barColorPrimary",
+    "barColorSecondary",
+    "bar1Indeterminate",
+    "bar1Determinate",
+    "bar1Buffer",
+    "bar2Indeterminate",
+    "bar2Buffer"
+]);
+var $a2efe32bbe232f29$export$2e2bcd8739ae039 = $a2efe32bbe232f29$var$linearProgressClasses;
+
+
+
+
+const $2f97f7a2aae17371$var$_excluded = [
+    "className",
+    "color",
+    "value",
+    "valueBuffer",
+    "variant"
+];
+let $2f97f7a2aae17371$var$_ = (t)=>t, $2f97f7a2aae17371$var$_t, $2f97f7a2aae17371$var$_t2, $2f97f7a2aae17371$var$_t3, $2f97f7a2aae17371$var$_t4, $2f97f7a2aae17371$var$_t5, $2f97f7a2aae17371$var$_t6;
+const $2f97f7a2aae17371$var$TRANSITION_DURATION = 4; // seconds
+const $2f97f7a2aae17371$var$indeterminate1Keyframe = (0, $7503c67a459f016b$export$d25ddfdf17c3ad3e)($2f97f7a2aae17371$var$_t || ($2f97f7a2aae17371$var$_t = $2f97f7a2aae17371$var$_`
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+`));
+const $2f97f7a2aae17371$var$indeterminate2Keyframe = (0, $7503c67a459f016b$export$d25ddfdf17c3ad3e)($2f97f7a2aae17371$var$_t2 || ($2f97f7a2aae17371$var$_t2 = $2f97f7a2aae17371$var$_`
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+`));
+const $2f97f7a2aae17371$var$bufferKeyframe = (0, $7503c67a459f016b$export$d25ddfdf17c3ad3e)($2f97f7a2aae17371$var$_t3 || ($2f97f7a2aae17371$var$_t3 = $2f97f7a2aae17371$var$_`
+  0% {
+    opacity: 1;
+    background-position: 0 -23px;
+  }
+
+  60% {
+    opacity: 0;
+    background-position: 0 -23px;
+  }
+
+  100% {
+    opacity: 1;
+    background-position: -200px -23px;
+  }
+`));
+const $2f97f7a2aae17371$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , variant: variant , color: color  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            `color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            variant
+        ],
+        dashed: [
+            "dashed",
+            `dashedColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
+        ],
+        bar1: [
+            "bar",
+            `barColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            (variant === "indeterminate" || variant === "query") && "bar1Indeterminate",
+            variant === "determinate" && "bar1Determinate",
+            variant === "buffer" && "bar1Buffer"
+        ],
+        bar2: [
+            "bar",
+            variant !== "buffer" && `barColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            variant === "buffer" && `color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            (variant === "indeterminate" || variant === "query") && "bar2Indeterminate",
+            variant === "buffer" && "bar2Buffer"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $a2efe32bbe232f29$export$bc8a6ea1eb17d7c6), classes);
+};
+const $2f97f7a2aae17371$var$getColorShade = (theme, color)=>{
+    if (color === "inherit") return "currentColor";
+    if (theme.vars) return theme.vars.palette.LinearProgress[`${color}Bg`];
+    return theme.palette.mode === "light" ? (0, $5473337acbe386fa$export$c0816ed86df316af)(theme.palette[color].main, 0.62) : (0, $5473337acbe386fa$export$4b073707ff63303)(theme.palette[color].main, 0.5);
+};
+const $2f97f7a2aae17371$var$LinearProgressRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiLinearProgress",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            styles[`color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`],
+            styles[ownerState.variant]
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        position: "relative",
+        overflow: "hidden",
+        display: "block",
+        height: 4,
+        zIndex: 0,
+        // Fix Safari's bug during composition of different paint.
+        "@media print": {
+            colorAdjust: "exact"
+        },
+        backgroundColor: $2f97f7a2aae17371$var$getColorShade(theme, ownerState.color)
+    }, ownerState.color === "inherit" && ownerState.variant !== "buffer" && {
+        backgroundColor: "none",
+        "&::before": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "currentColor",
+            opacity: 0.3
+        }
+    }, ownerState.variant === "buffer" && {
+        backgroundColor: "transparent"
+    }, ownerState.variant === "query" && {
+        transform: "rotate(180deg)"
+    }));
+const $2f97f7a2aae17371$var$LinearProgressDashed = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiLinearProgress",
+    slot: "Dashed",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.dashed,
+            styles[`dashedColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`]
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>{
+    const backgroundColor = $2f97f7a2aae17371$var$getColorShade(theme, ownerState.color);
+    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        position: "absolute",
+        marginTop: 0,
+        height: "100%",
+        width: "100%"
+    }, ownerState.color === "inherit" && {
+        opacity: 0.3
+    }, {
+        backgroundImage: `radial-gradient(${backgroundColor} 0%, ${backgroundColor} 16%, transparent 42%)`,
+        backgroundSize: "10px 10px",
+        backgroundPosition: "0 -23px"
+    });
+}, (0, $7503c67a459f016b$export$dbf350e5966cf602)($2f97f7a2aae17371$var$_t4 || ($2f97f7a2aae17371$var$_t4 = $2f97f7a2aae17371$var$_`
+    animation: ${0} 3s infinite linear;
+  `), $2f97f7a2aae17371$var$bufferKeyframe));
+const $2f97f7a2aae17371$var$LinearProgressBar1 = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiLinearProgress",
+    slot: "Bar1",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.bar,
+            styles[`barColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`],
+            (ownerState.variant === "indeterminate" || ownerState.variant === "query") && styles.bar1Indeterminate,
+            ownerState.variant === "determinate" && styles.bar1Determinate,
+            ownerState.variant === "buffer" && styles.bar1Buffer
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        width: "100%",
+        position: "absolute",
+        left: 0,
+        bottom: 0,
+        top: 0,
+        transition: "transform 0.2s linear",
+        transformOrigin: "left",
+        backgroundColor: ownerState.color === "inherit" ? "currentColor" : (theme.vars || theme).palette[ownerState.color].main
+    }, ownerState.variant === "determinate" && {
+        transition: `transform .${$2f97f7a2aae17371$var$TRANSITION_DURATION}s linear`
+    }, ownerState.variant === "buffer" && {
+        zIndex: 1,
+        transition: `transform .${$2f97f7a2aae17371$var$TRANSITION_DURATION}s linear`
+    }), ({ ownerState: ownerState  })=>(ownerState.variant === "indeterminate" || ownerState.variant === "query") && (0, $7503c67a459f016b$export$dbf350e5966cf602)($2f97f7a2aae17371$var$_t5 || ($2f97f7a2aae17371$var$_t5 = $2f97f7a2aae17371$var$_`
+      width: auto;
+      animation: ${0} 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    `), $2f97f7a2aae17371$var$indeterminate1Keyframe));
+const $2f97f7a2aae17371$var$LinearProgressBar2 = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiLinearProgress",
+    slot: "Bar2",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.bar,
+            styles[`barColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`],
+            (ownerState.variant === "indeterminate" || ownerState.variant === "query") && styles.bar2Indeterminate,
+            ownerState.variant === "buffer" && styles.bar2Buffer
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        width: "100%",
+        position: "absolute",
+        left: 0,
+        bottom: 0,
+        top: 0,
+        transition: "transform 0.2s linear",
+        transformOrigin: "left"
+    }, ownerState.variant !== "buffer" && {
+        backgroundColor: ownerState.color === "inherit" ? "currentColor" : (theme.vars || theme).palette[ownerState.color].main
+    }, ownerState.color === "inherit" && {
+        opacity: 0.3
+    }, ownerState.variant === "buffer" && {
+        backgroundColor: $2f97f7a2aae17371$var$getColorShade(theme, ownerState.color),
+        transition: `transform .${$2f97f7a2aae17371$var$TRANSITION_DURATION}s linear`
+    }), ({ ownerState: ownerState  })=>(ownerState.variant === "indeterminate" || ownerState.variant === "query") && (0, $7503c67a459f016b$export$dbf350e5966cf602)($2f97f7a2aae17371$var$_t6 || ($2f97f7a2aae17371$var$_t6 = $2f97f7a2aae17371$var$_`
+      width: auto;
+      animation: ${0} 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) 1.15s infinite;
+    `), $2f97f7a2aae17371$var$indeterminate2Keyframe));
+/**
+ * ## ARIA
+ *
+ * If the progress bar is describing the loading progress of a particular region of a page,
+ * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
+ * attribute to `true` on that region until it has finished loading.
+ */ const $2f97f7a2aae17371$var$LinearProgress = /*#__PURE__*/ $d4J5n.forwardRef(function LinearProgress(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiLinearProgress"
+    });
+    const { className: className , color: color = "primary" , value: value , valueBuffer: valueBuffer , variant: variant = "indeterminate"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $2f97f7a2aae17371$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        color: color,
+        variant: variant
+    });
+    const classes = $2f97f7a2aae17371$var$useUtilityClasses(ownerState);
+    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
+    const rootProps = {};
+    const inlineStyles = {
+        bar1: {},
+        bar2: {}
+    };
+    if (variant === "determinate" || variant === "buffer") {
+        if (value !== undefined) {
+            rootProps["aria-valuenow"] = Math.round(value);
+            rootProps["aria-valuemin"] = 0;
+            rootProps["aria-valuemax"] = 100;
+            let transform = value - 100;
+            if (theme.direction === "rtl") transform = -transform;
+            inlineStyles.bar1.transform = `translateX(${transform}%)`;
+        }
+    }
+    if (variant === "buffer") {
+        if (valueBuffer !== undefined) {
+            let transform = (valueBuffer || 0) - 100;
+            if (theme.direction === "rtl") transform = -transform;
+            inlineStyles.bar2.transform = `translateX(${transform}%)`;
+        }
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($2f97f7a2aae17371$var$LinearProgressRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ownerState: ownerState,
+        role: "progressbar"
+    }, rootProps, {
+        ref: ref
+    }, other, {
+        children: [
+            variant === "buffer" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($2f97f7a2aae17371$var$LinearProgressDashed, {
+                className: classes.dashed,
+                ownerState: ownerState
+            }) : null,
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($2f97f7a2aae17371$var$LinearProgressBar1, {
+                className: classes.bar1,
+                ownerState: ownerState,
+                style: inlineStyles.bar1
+            }),
+            variant === "determinate" ? null : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($2f97f7a2aae17371$var$LinearProgressBar2, {
+                className: classes.bar2,
+                ownerState: ownerState,
+                style: inlineStyles.bar2
+            })
+        ]
+    }));
+});
+var $2f97f7a2aae17371$export$2e2bcd8739ae039 = $2f97f7a2aae17371$var$LinearProgress;
+
+
+
+
+
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -31716,11 +32046,7 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 var $d4J5n = parcelRequire("d4J5n");
-var $89382e3cfd90d03a$exports = {};
-var $596d45310e010dc1$exports = {};
-
-$parcel$export($596d45310e010dc1$exports, "filename", () => $596d45310e010dc1$export$f9107b66120eb036);
-function $596d45310e010dc1$export$f9107b66120eb036(path) {
+function $1c75672faa6e156a$export$f9107b66120eb036(path) {
     if (path.endsWith("/")) return path.slice(path.slice(0, -1).lastIndexOf("/") + 1, -1);
     else {
         const i = path.lastIndexOf("/");
@@ -31729,10 +32055,7 @@ function $596d45310e010dc1$export$f9107b66120eb036(path) {
 }
 
 
-var $93aa002deec8ce00$exports = {};
-
-$parcel$export($93aa002deec8ce00$exports, "slice", () => $93aa002deec8ce00$export$58adb3bec8346d0f);
-function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
+function $27ccd235d145f52e$export$58adb3bec8346d0f(path) {
     const result = [];
     let i = 0;
     while(i >= 0){
@@ -31744,47 +32067,45 @@ function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
 }
 
 
-$parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
-$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
 
 
-const $20d1a517b8ce84e3$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-const $20d1a517b8ce84e3$var$headers = {
+const $5b6ad683ea322ebf$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+const $5b6ad683ea322ebf$var$headers = {
     "Content-Type": "application/octet-stream"
 };
-async function $20d1a517b8ce84e3$export$30d4711d6f8d17eb() {
-    const response = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/templates/`);
+async function $5b6ad683ea322ebf$export$30d4711d6f8d17eb() {
+    const response = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/templates/`);
     const files = await response.json();
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
 }
-async function $20d1a517b8ce84e3$export$de1a4df3278e5008(file) {
+async function $5b6ad683ea322ebf$export$de1a4df3278e5008(file) {
     if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=read`);
+    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=read`);
     const { url: url  } = await response1.json();
     const response2 = await fetch(url);
     const content = await response2.text();
     return content;
 }
-async function $20d1a517b8ce84e3$export$25c05c84991e5fdf(file, content) {
+async function $5b6ad683ea322ebf$export$25c05c84991e5fdf(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=create`);
+    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=create`);
     const { url: url  } = await response1.json();
     const response2 = await fetch(url, {
         method: "PUT",
-        headers: $20d1a517b8ce84e3$var$headers,
+        headers: $5b6ad683ea322ebf$var$headers,
         body: content
     });
     const result = await response2.text();
     console.log(result);
 }
-async function $20d1a517b8ce84e3$export$885cb9c57e0a1f52(file, content) {
+async function $5b6ad683ea322ebf$export$885cb9c57e0a1f52(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=update`);
+    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=update`);
     const { url: url  } = await response1.json();
     const response2 = await fetch(url, {
         method: "PUT",
-        headers: $20d1a517b8ce84e3$var$headers,
+        headers: $5b6ad683ea322ebf$var$headers,
         body: content
     });
     const result = await response2.text();
@@ -37986,6 +38307,453 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
+function $2746f7c5d1a5aab9$export$9cd59f9826255e47(value) {
+    return JSON.parse(JSON.stringify(value));
+}
+
+
+function $4fec25c38d90d926$export$a6cdc56e425d0d0a(obj) {
+    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+
+
+
+function $bf976c93e1ba0dc9$export$de139376c1f60602(obj) {
+    if (obj instanceof Array) return obj.map((item)=>$bf976c93e1ba0dc9$export$de139376c1f60602(item));
+    else if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $bf976c93e1ba0dc9$export$de139376c1f60602(obj.value);
+    else if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(obj)) {
+        const source = obj;
+        const target = {};
+        for (const key of Object.keys(obj))if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $bf976c93e1ba0dc9$export$de139376c1f60602(source[key].value); // unwrap value
+        else target[key] = $bf976c93e1ba0dc9$export$de139376c1f60602(source[key]);
+        return target;
+    } else return obj;
+}
+
+
+
+
+function $c9010fc8649de231$export$a3d9882fc9361f2d(actions, parent) {
+    const n = {};
+    return actions.map((action, index)=>{
+        const [name] = Object.keys(action);
+        n[name] = n[name] ? n[name] + 1 : 1;
+        const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
+        const { [name]: obj  } = action;
+        const item = {
+            key: key,
+            name: name,
+            type: "action",
+            icon: name,
+            index: index,
+            obj: obj,
+            parent: parent,
+            collection: actions
+        };
+        if (name === "select" && obj instanceof Array) item.children = $c9010fc8649de231$var$createSelectItems(obj, item);
+        return item;
+    });
+}
+function $c9010fc8649de231$var$createSelectItems(obj, parent) {
+    return obj.map((select, index)=>{
+        const key = `${parent.key}.${select.name}`;
+        return {
+            key: key,
+            name: select.name || "",
+            type: "select",
+            icon: select.type || "string",
+            required: select.required,
+            repeated: select.repeated,
+            index: index,
+            obj: select,
+            parent: parent,
+            collection: obj
+        };
+    });
+}
+function $c9010fc8649de231$export$a2dea178c28a0308(items, key) {
+    for (const item of items){
+        if (item.key === key || item.obj === key) return item;
+        if (item.children) {
+            const subitem = $c9010fc8649de231$export$a2dea178c28a0308(item.children, key);
+            if (subitem) return subitem;
+        }
+    }
+}
+function $c9010fc8649de231$export$1befd5ecde967db5(key) {
+    const i = key.lastIndexOf(".");
+    const n = parseInt(key.slice(i + 1));
+    return `${key.slice(0, i)}${n}`;
+}
+function $c9010fc8649de231$export$272b18412c726147(obj) {
+    if (typeof obj === "object" && obj !== null) {
+        const [key] = Object.keys(obj);
+        return obj[key];
+    }
+}
+function $c9010fc8649de231$export$ad9052cdca847332(text, i, token) {
+    let n = 0;
+    while((i++) < text.length){
+        if (text[i] === token[1] && --n < 0) return i + 1;
+        else if (text[i] === token[0]) n += 1;
+    }
+    return -1;
+}
+function $c9010fc8649de231$export$60f47f67e5d44f99(list, basename = "new") {
+    for(let n = 1; n <= 100; ++n){
+        const name = `${basename}${n}`;
+        if (!list.some((obj)=>obj.name === name)) return name;
+    }
+    return "";
+}
+
+
+const $01cf6973c37f9531$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
+async function $01cf6973c37f9531$export$f78a296632f66e69(template) {
+    const result = await $01cf6973c37f9531$var$sendMessage("applyTemplate", template);
+    return result;
+}
+async function $01cf6973c37f9531$export$e684be5f4b22cc14() {
+    await $01cf6973c37f9531$var$sendMessage("disableTracking");
+}
+async function $01cf6973c37f9531$export$1f8ffc6fd33b1d16() {
+    await $01cf6973c37f9531$var$sendMessage("enableTracking");
+}
+function $01cf6973c37f9531$export$bef1f36f5486a6a3(message) {
+    if ($01cf6973c37f9531$export$89da14300d534261) chrome.runtime.sendMessage({
+        log: message
+    });
+    else console.log("BACKGROUND", message);
+}
+async function $01cf6973c37f9531$export$225ea495d1fa0d5() {
+    const result = await $01cf6973c37f9531$var$sendMessage("queryTracking");
+    return result || [];
+}
+async function $01cf6973c37f9531$export$f2909722c7f0f932(selectors) {
+    const result = await $01cf6973c37f9531$var$sendMessage("selectElements", selectors);
+    return result || [];
+}
+function $01cf6973c37f9531$var$sendMessage(key, ...params) {
+    return new Promise((resolve, reject)=>{
+        if ($01cf6973c37f9531$export$89da14300d534261) {
+            const tabId = chrome.devtools.inspectedWindow.tabId;
+            chrome.runtime.sendMessage({
+                key: key,
+                params: params,
+                tabId: tabId
+            }, (response)=>{
+                if (response?.error) reject(response.error);
+                else resolve(response?.result);
+            });
+        } else {
+            console.log("BACKGROUND", key, ...params);
+            resolve(undefined);
+        }
+    });
+}
+
+
+
+
+class $b2dd15a2460cc3dd$export$14416b8d99d47caa {
+    obj;
+    error;
+    children;
+    selected;
+    file;
+    constructor(obj, selected, file){
+        if (typeof obj === "string") try {
+            this.obj = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(obj);
+        } catch (err) {
+            this.error = err instanceof Error ? err.message : JSON.stringify(err);
+            this.obj = {};
+        }
+        else if (typeof obj === "object") this.obj = obj;
+        else this.obj = {};
+        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
+        this.selected = selected || "";
+        this.file = file;
+        this.children = this.actions();
+    }
+    actions() {
+        return this.obj.actions instanceof Array ? (0, $c9010fc8649de231$export$a3d9882fc9361f2d)(this.obj.actions) : [];
+    }
+    addAction(type) {
+        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
+        const actions = this.findItemActions(item);
+        if (type === "break") actions.push({
+            break: {}
+        });
+        else if (type === "click") {
+            const click = {};
+            actions.push({
+                click: click
+            });
+        } else if (type === "each") {
+            const each = {};
+            each.actions = [];
+            actions.push({
+                each: each
+            });
+        } else if (type === "error") {
+            const error = {};
+            actions.push({
+                error: error
+            });
+        } else if (type === "repeat") {
+            const repeat = {
+                actions: []
+            };
+            actions.push({
+                repeat: repeat
+            });
+        } else if (type === "select") {
+            const select = [
+                {}
+            ];
+            actions.push({
+                select: select
+            });
+        } else if (type === "snooze") {
+            const snooze = [
+                1,
+                2
+            ];
+            actions.push({
+                snooze: snooze
+            });
+        } else if (type === "transform") {
+            const transform = [
+                {}
+            ];
+            actions.push({
+                transform: transform
+            });
+        } else if (type === "yield") actions.push({
+            yield: {}
+        });
+        else if (type === "waitfor") actions.push({
+            waitfor: {}
+        });
+    //this.selected = this.findObj(obj) || "";
+    }
+    addSubAction() {
+        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
+        if (item) {
+            if (item.type === "action" && item.name === "select") {
+                const selectors = item.obj;
+                const name = (0, $c9010fc8649de231$export$60f47f67e5d44f99)(selectors);
+                selectors.push({
+                    name: name
+                });
+            } else if (item.type === "select" && item.parent) {
+                const selectors = item.parent.obj;
+                const name = (0, $c9010fc8649de231$export$60f47f67e5d44f99)(selectors);
+                selectors.push({
+                    name: name
+                });
+            }
+        }
+    }
+    canAddSubAction() {
+        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
+        if (item) {
+            if (item.type === "action" && item.name === "select") return true;
+            else if (item.type === "select" && item.parent) return true;
+        }
+        return false;
+    }
+    clone() {
+        return new $b2dd15a2460cc3dd$export$14416b8d99d47caa((0, $2746f7c5d1a5aab9$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
+    }
+    empty() {
+        return this.children.length === 0;
+    }
+    findItem(key) {
+        return (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, key);
+    }
+    findItemActions(item) {
+        if (!item) return this.obj.actions;
+        else if (item.type === "action" && item.name === "repeat") {
+            const repeat = item.obj;
+            if (!(repeat.actions instanceof Array)) repeat.actions = [];
+            return repeat.actions;
+        } else if (item.type === "action" && item.name === "each") {
+            const each = item.obj;
+            if (!(each.actions instanceof Array)) each.actions = [];
+            return each.actions;
+        } else return this.obj.actions;
+    }
+    findObj(obj) {
+        const actions = this.actions();
+        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(actions, obj);
+        return item?.key;
+    }
+    json() {
+        let text = JSON.stringify(this.obj, null, 2) || "";
+        let i = text.indexOf(`"$": [\n`);
+        while(i >= 0){
+            i = text.indexOf("[", i);
+            const j = (0, $c9010fc8649de231$export$ad9052cdca847332)(text, i, "[]");
+            if (j > i) {
+                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
+                i = text.indexOf(`"$": [\n`);
+            } else break;
+        }
+        return text;
+    }
+    moveItemDown(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i < item.collection.length - 1) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i + 1, 0, item);
+        }
+        return this;
+    }
+    moveItemUp(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i > 0) {
+            item.collection.splice(i, 1);
+            item.collection.splice(i - 1, 0, item);
+        }
+        return this;
+    }
+    removeItem(item) {
+        debugger;
+        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
+        if (i >= 0) {
+            item.collection.splice(i, 1);
+            const obj = (0, $c9010fc8649de231$export$272b18412c726147)(item.collection[i] || item.collection[0]);
+            this.selected = this.findObj(obj) || "";
+        }
+        return this;
+    }
+    async run() {
+        if ($01cf6973c37f9531$export$89da14300d534261) {
+            const result = await $01cf6973c37f9531$export$f78a296632f66e69(this.obj);
+            return result;
+        } else return {
+            data: {
+                title: "Example Domain",
+                href: "https://www.example.com/"
+            }
+        };
+    }
+    selectedItem() {
+        return (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+function $fa3e1c5ef019989b$export$95809329f49ea9f9() {
+    const [files1, setFiles] = (0, $d4J5n.useState)([]);
+    const [error, setError] = (0, $d4J5n.useState)("");
+    (0, $d4J5n.useEffect)(()=>{
+        (async ()=>{
+            try {
+                const files = await (0, $5b6ad683ea322ebf$export$30d4711d6f8d17eb)();
+                setFiles(files.map((file)=>file.name));
+                setError("");
+            } catch (err) {
+                debugger;
+                setError(err instanceof Error ? err.message : JSON.stringify(err));
+            }
+        })();
+    }, []);
+    return {
+        files: files1,
+        setFiles: setFiles,
+        error: error,
+        setError: setError
+    };
+}
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
+var $89382e3cfd90d03a$exports = {};
+var $596d45310e010dc1$exports = {};
+
+$parcel$export($596d45310e010dc1$exports, "filename", () => $596d45310e010dc1$export$f9107b66120eb036);
+function $596d45310e010dc1$export$f9107b66120eb036(path) {
+    if (path.endsWith("/")) return path.slice(path.slice(0, -1).lastIndexOf("/") + 1, -1);
+    else {
+        const i = path.lastIndexOf("/");
+        return i >= 0 ? path.slice(i + 1) : path;
+    }
+}
+
+
+var $93aa002deec8ce00$exports = {};
+
+$parcel$export($93aa002deec8ce00$exports, "slice", () => $93aa002deec8ce00$export$58adb3bec8346d0f);
+function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
+    const result = [];
+    let i = 0;
+    while(i >= 0){
+        const text = path.slice(0, i + 1);
+        result.push(text);
+        i = path.indexOf("/", i + 1);
+    }
+    return result;
+}
+
+
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
+
+
+const $20d1a517b8ce84e3$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+async function $20d1a517b8ce84e3$export$30d4711d6f8d17eb() {
+    const response = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/templates/`);
+    const files = await response.json();
+    files.forEach((file)=>file.timestamp = new Date(file.timestamp));
+    return files;
+}
+async function $20d1a517b8ce84e3$export$de1a4df3278e5008(file) {
+    if (file.startsWith("/")) file = file.slice(1);
+    const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=read`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok) throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
+    const { url: url  } = await response1.json();
+    const response2 = await fetch(url);
+    if (!response2.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
+    const content = await response2.text();
+    return content;
+}
+async function $20d1a517b8ce84e3$export$885cb9c57e0a1f52(file, content) {
+    if (file.startsWith("/")) file = file.slice(1);
+    const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?write`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok) throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
+    const { url: url  } = await response1.json();
+    const response2 = await fetch(url, {
+        method: "PUT",
+        body: content,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (!response2.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
+    const result = await response2.text();
+    console.log(result);
+}
+
+
+
 class $5f4e931e94425ce6$export$67c95d00e574f6b6 {
     constructor(obj){
         this.key = obj.key;
@@ -38181,7 +38949,6 @@ function $4c273560d650e2e0$export$1a6ccd4206d621b5(text, key) {
 
 
 function $fc02d71641653776$export$5adbceee7f7ddc90(text) {
-    debugger;
     text = (0, $4c273560d650e2e0$export$1a6ccd4206d621b5)(text, "query");
     text = (0, $4c273560d650e2e0$export$1a6ccd4206d621b5)(text, "snooze");
     return text;
@@ -38317,7 +39084,6 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     removeItem(item) {
-        debugger;
         if (item.index >= 0) {
             item.collection.splice(item.index, 1);
             if (item.collection.length > 1) {
@@ -38363,116 +39129,12 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
 
 
 
-function $c9010fc8649de231$export$a3d9882fc9361f2d(actions, parent) {
-    const n = {};
-    return actions.map((action, index)=>{
-        const [name] = Object.keys(action);
-        n[name] = n[name] ? n[name] + 1 : 1;
-        const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
-        const { [name]: obj  } = action;
-        const item = {
-            key: key,
-            name: name,
-            type: "action",
-            icon: name,
-            index: index,
-            obj: obj,
-            parent: parent,
-            collection: actions
-        };
-        if (name === "select" && obj instanceof Array) item.children = $c9010fc8649de231$var$createSelectItems(obj, item);
-        return item;
-    });
-}
-function $c9010fc8649de231$var$createSelectItems(obj, parent) {
-    return obj.map((select, index)=>{
-        const key = `${parent.key}.${select.name}`;
-        return {
-            key: key,
-            name: select.name || "",
-            type: "select",
-            icon: select.type || "string",
-            required: select.required,
-            repeated: select.repeated,
-            index: index,
-            obj: select,
-            parent: parent,
-            collection: obj
-        };
-    });
-}
-function $c9010fc8649de231$export$a2dea178c28a0308(items, key) {
-    for (const item of items){
-        if (item.key === key || item.obj === key) return item;
-        if (item.children) {
-            const subitem = $c9010fc8649de231$export$a2dea178c28a0308(item.children, key);
-            if (subitem) return subitem;
-        }
-    }
-}
-function $c9010fc8649de231$export$1befd5ecde967db5(key) {
-    const i = key.lastIndexOf(".");
-    const n = parseInt(key.slice(i + 1));
-    return `${key.slice(0, i)}${n}`;
-}
-function $c9010fc8649de231$export$272b18412c726147(obj) {
-    if (typeof obj === "object" && obj !== null) {
-        const [key] = Object.keys(obj);
-        return obj[key];
-    }
-}
-function $c9010fc8649de231$export$ad9052cdca847332(text, i, token) {
-    let n = 0;
-    while((i++) < text.length){
-        if (text[i] === token[1] && --n < 0) return i + 1;
-        else if (text[i] === token[0]) n += 1;
-    }
-    return -1;
-}
-function $c9010fc8649de231$export$60f47f67e5d44f99(list, basename = "new") {
-    for(let n = 1; n <= 100; ++n){
-        const name = `${basename}${n}`;
-        if (!list.some((obj)=>obj.name === name)) return name;
-    }
-    return "";
-}
 
 
 
 
 
 
-
-
-function $3c9c00786942e370$export$95809329f49ea9f9() {
-    const [files1, setFiles] = (0, $d4J5n.useState)([]);
-    const [error, setError] = (0, $d4J5n.useState)("");
-    (0, $d4J5n.useEffect)(()=>{
-        (async ()=>{
-            try {
-                const files = await (0, $20d1a517b8ce84e3$export$30d4711d6f8d17eb)();
-                setFiles(files.map((file)=>file.name));
-                setError("");
-            } catch (err) {
-                debugger;
-                setError(err instanceof Error ? err.message : JSON.stringify(err));
-            }
-        })();
-    }, []);
-    return {
-        files: files1,
-        setFiles: setFiles,
-        error: error,
-        setError: setError
-    };
-}
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-var $d4J5n = parcelRequire("d4J5n");
 
 const $1aab7a538bf9cc22$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     template: "",
@@ -38752,6 +39414,30 @@ var $4f33b287f8eb5d7f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $0a5793ca590f491f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"
+}), "Cloud");
+
+
+
+var $b727c7ac90130205$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"
+}), "CloudDownload");
+
+
+
+var $fb87d55b2c409428$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46C10.21 6.23 11.08 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3 0 1.13-.64 2.11-1.56 2.62l1.45 1.45C23.16 18.16 24 16.68 24 15c0-2.64-2.05-4.78-4.65-4.96zM3 5.27l2.75 2.74C2.56 8.15 0 10.77 0 14c0 3.31 2.69 6 6 6h11.73l2 2L21 20.73 4.27 4 3 5.27zM7.73 10l8 8H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h1.73z"
+}), "CloudOff");
+
+
+
+var $00393b3fb564f209$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
+}), "CloudUpload");
+
+
+
 var $6c65cc6bd5ac31b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M9.4 16.6 4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0 4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
 }), "Code");
@@ -38800,12 +39486,6 @@ var $3152ee484e1d7499$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $fd19480cde974b2f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.89 2 1.99 2H15v-8h5V8l-6-6zm-1 7V3.5L18.5 9H13zm4 12.66V16h5.66v2h-2.24l2.95 2.95-1.41 1.41L19 19.41v2.24h-2z"
-}), "FileOpen");
-
-
-
 var $cd5829ac10d83747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
         d: "M9 12c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z"
@@ -38840,27 +39520,9 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $b411a941064d5cd2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14.59 8 12 10.59 9.41 8 8 9.41 10.59 12 8 14.59 9.41 16 12 13.41 14.59 16 16 14.59 13.41 12 16 9.41 14.59 8zM12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-}), "HighlightOff");
-
-
-
-var $a591c0d726a7bda6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"
-}), "Home");
-
-
-
 var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
 }), "HourglassEmpty");
-
-
-
-var $0bf399ec89823653$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M21 3.01H3c-1.1 0-2 .9-2 2V9h2V4.99h18v14.03H3V15H1v4.01c0 1.1.9 1.98 2 1.98h18c1.1 0 2-.88 2-1.98v-14c0-1.11-.9-2-2-2zM11 16l4-4-4-4v3H1v2h10v3z"
-}), "Input");
 
 
 
@@ -38972,12 +39634,6 @@ var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $7d915f92af7d69b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
-}), "Save");
-
-
-
 var $1d4519e24428e5fd$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 5h2V3c-1.1 0-2 .9-2 2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zM7 17h10V7H7v10zm2-8h6v6H9V9z"
 }), "SelectAll");
@@ -39056,8 +39712,1695 @@ var $26f0b3b6f2bba30f$export$2e2bcd8739ae039 = ({ value: value , onEdit: onEdit 
 var $d4J5n = parcelRequire("d4J5n");
 
 
+var $7b42a1209722603f$exports = {};
 
-var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , mode: mode , open: open , error: error , selectedFile: selectedFile , onSelectFile: onSelectFile , onClearError: onClearError , onClose: onClose  })=>{
+$parcel$export($7b42a1209722603f$exports, "LoadingButton", () => $be534f7264953969$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+
+function $b962739c445a4d55$export$29cad1383b3f235d(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiCircularProgress", slot);
+}
+const $b962739c445a4d55$var$circularProgressClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiCircularProgress", [
+    "root",
+    "determinate",
+    "indeterminate",
+    "colorPrimary",
+    "colorSecondary",
+    "svg",
+    "circle",
+    "circleDeterminate",
+    "circleIndeterminate",
+    "circleDisableShrink"
+]);
+var $b962739c445a4d55$export$2e2bcd8739ae039 = $b962739c445a4d55$var$circularProgressClasses;
+
+
+
+const $03d60e97dca119aa$var$_excluded = [
+    "className",
+    "color",
+    "disableShrink",
+    "size",
+    "style",
+    "thickness",
+    "value",
+    "variant"
+];
+let $03d60e97dca119aa$var$_ = (t)=>t, $03d60e97dca119aa$var$_t, $03d60e97dca119aa$var$_t2, $03d60e97dca119aa$var$_t3, $03d60e97dca119aa$var$_t4;
+const $03d60e97dca119aa$var$SIZE = 44;
+const $03d60e97dca119aa$var$circularRotateKeyframe = (0, $7503c67a459f016b$export$d25ddfdf17c3ad3e)($03d60e97dca119aa$var$_t || ($03d60e97dca119aa$var$_t = $03d60e97dca119aa$var$_`
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+`));
+const $03d60e97dca119aa$var$circularDashKeyframe = (0, $7503c67a459f016b$export$d25ddfdf17c3ad3e)($03d60e97dca119aa$var$_t2 || ($03d60e97dca119aa$var$_t2 = $03d60e97dca119aa$var$_`
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -125px;
+  }
+`));
+const $03d60e97dca119aa$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , variant: variant , color: color , disableShrink: disableShrink  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant,
+            `color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
+        ],
+        svg: [
+            "svg"
+        ],
+        circle: [
+            "circle",
+            `circle${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(variant)}`,
+            disableShrink && "circleDisableShrink"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $b962739c445a4d55$export$29cad1383b3f235d), classes);
+};
+const $03d60e97dca119aa$var$CircularProgressRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiCircularProgress",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            styles[ownerState.variant],
+            styles[`color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.color)}`]
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        display: "inline-block"
+    }, ownerState.variant === "determinate" && {
+        transition: theme.transitions.create("transform")
+    }, ownerState.color !== "inherit" && {
+        color: (theme.vars || theme).palette[ownerState.color].main
+    }), ({ ownerState: ownerState  })=>ownerState.variant === "indeterminate" && (0, $7503c67a459f016b$export$dbf350e5966cf602)($03d60e97dca119aa$var$_t3 || ($03d60e97dca119aa$var$_t3 = $03d60e97dca119aa$var$_`
+      animation: ${0} 1.4s linear infinite;
+    `), $03d60e97dca119aa$var$circularRotateKeyframe));
+const $03d60e97dca119aa$var$CircularProgressSVG = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("svg", {
+    name: "MuiCircularProgress",
+    slot: "Svg",
+    overridesResolver: (props, styles)=>styles.svg
+})({
+    display: "block" // Keeps the progress centered
+});
+const $03d60e97dca119aa$var$CircularProgressCircle = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("circle", {
+    name: "MuiCircularProgress",
+    slot: "Circle",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.circle,
+            styles[`circle${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.variant)}`],
+            ownerState.disableShrink && styles.circleDisableShrink
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        stroke: "currentColor"
+    }, ownerState.variant === "determinate" && {
+        transition: theme.transitions.create("stroke-dashoffset")
+    }, ownerState.variant === "indeterminate" && {
+        // Some default value that looks fine waiting for the animation to kicks in.
+        strokeDasharray: "80px, 200px",
+        strokeDashoffset: 0 // Add the unit to fix a Edge 16 and below bug.
+    }), ({ ownerState: ownerState  })=>ownerState.variant === "indeterminate" && !ownerState.disableShrink && (0, $7503c67a459f016b$export$dbf350e5966cf602)($03d60e97dca119aa$var$_t4 || ($03d60e97dca119aa$var$_t4 = $03d60e97dca119aa$var$_`
+      animation: ${0} 1.4s ease-in-out infinite;
+    `), $03d60e97dca119aa$var$circularDashKeyframe));
+/**
+ * ## ARIA
+ *
+ * If the progress bar is describing the loading progress of a particular region of a page,
+ * you should use `aria-describedby` to point to the progress bar, and set the `aria-busy`
+ * attribute to `true` on that region until it has finished loading.
+ */ const $03d60e97dca119aa$var$CircularProgress = /*#__PURE__*/ $d4J5n.forwardRef(function CircularProgress(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiCircularProgress"
+    });
+    const { className: className , color: color = "primary" , disableShrink: disableShrink = false , size: size = 40 , style: style , thickness: thickness = 3.6 , value: value = 0 , variant: variant = "indeterminate"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $03d60e97dca119aa$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        color: color,
+        disableShrink: disableShrink,
+        size: size,
+        thickness: thickness,
+        value: value,
+        variant: variant
+    });
+    const classes = $03d60e97dca119aa$var$useUtilityClasses(ownerState);
+    const circleStyle = {};
+    const rootStyle = {};
+    const rootProps = {};
+    if (variant === "determinate") {
+        const circumference = 2 * Math.PI * (($03d60e97dca119aa$var$SIZE - thickness) / 2);
+        circleStyle.strokeDasharray = circumference.toFixed(3);
+        rootProps["aria-valuenow"] = Math.round(value);
+        circleStyle.strokeDashoffset = `${((100 - value) / 100 * circumference).toFixed(3)}px`;
+        rootStyle.transform = "rotate(-90deg)";
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($03d60e97dca119aa$var$CircularProgressRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        style: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            width: size,
+            height: size
+        }, rootStyle, style),
+        ownerState: ownerState,
+        ref: ref,
+        role: "progressbar"
+    }, rootProps, other, {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($03d60e97dca119aa$var$CircularProgressSVG, {
+            className: classes.svg,
+            ownerState: ownerState,
+            viewBox: `${$03d60e97dca119aa$var$SIZE / 2} ${$03d60e97dca119aa$var$SIZE / 2} ${$03d60e97dca119aa$var$SIZE} ${$03d60e97dca119aa$var$SIZE}`,
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($03d60e97dca119aa$var$CircularProgressCircle, {
+                className: classes.circle,
+                style: circleStyle,
+                ownerState: ownerState,
+                cx: $03d60e97dca119aa$var$SIZE,
+                cy: $03d60e97dca119aa$var$SIZE,
+                r: ($03d60e97dca119aa$var$SIZE - thickness) / 2,
+                fill: "none",
+                strokeWidth: thickness
+            })
+        })
+    }));
+});
+var $03d60e97dca119aa$export$2e2bcd8739ae039 = $03d60e97dca119aa$var$CircularProgress;
+
+
+
+
+
+
+function $88eea508b25f44c4$export$24fdd7c0683a4fed(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiLoadingButton", slot);
+}
+const $88eea508b25f44c4$var$loadingButtonClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiLoadingButton", [
+    "root",
+    "loading",
+    "loadingIndicator",
+    "loadingIndicatorCenter",
+    "loadingIndicatorStart",
+    "loadingIndicatorEnd",
+    "endIconLoadingEnd",
+    "startIconLoadingStart"
+]);
+var $88eea508b25f44c4$export$2e2bcd8739ae039 = $88eea508b25f44c4$var$loadingButtonClasses;
+
+
+
+
+const $be534f7264953969$var$_excluded = [
+    "children",
+    "disabled",
+    "id",
+    "loading",
+    "loadingIndicator",
+    "loadingPosition",
+    "variant"
+];
+const $be534f7264953969$var$useUtilityClasses = (ownerState)=>{
+    const { loading: loading , loadingPosition: loadingPosition , classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            loading && "loading"
+        ],
+        startIcon: [
+            loading && `startIconLoading${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(loadingPosition)}`
+        ],
+        endIcon: [
+            loading && `endIconLoading${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(loadingPosition)}`
+        ],
+        loadingIndicator: [
+            "loadingIndicator",
+            loading && `loadingIndicator${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(loadingPosition)}`
+        ]
+    };
+    const composedClasses = (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $88eea508b25f44c4$export$24fdd7c0683a4fed), classes);
+    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, classes, composedClasses);
+};
+// TODO use `import { rootShouldForwardProp } from '../styles/styled';` once move to core
+const $be534f7264953969$var$rootShouldForwardProp = (prop)=>prop !== "ownerState" && prop !== "theme" && prop !== "sx" && prop !== "as" && prop !== "classes";
+const $be534f7264953969$var$LoadingButtonRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+    shouldForwardProp: (prop)=>$be534f7264953969$var$rootShouldForwardProp(prop) || prop === "classes",
+    name: "MuiLoadingButton",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        return [
+            styles.root,
+            styles.startIconLoadingStart && {
+                [`& .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).startIconLoadingStart}`]: styles.startIconLoadingStart
+            },
+            styles.endIconLoadingEnd && {
+                [`& .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).endIconLoadingEnd}`]: styles.endIconLoadingEnd
+            }
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        [`& .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).startIconLoadingStart}, & .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).endIconLoadingEnd}`]: {
+            transition: theme.transitions.create([
+                "opacity"
+            ], {
+                duration: theme.transitions.duration.short
+            }),
+            opacity: 0
+        }
+    }, ownerState.loadingPosition === "center" && {
+        transition: theme.transitions.create([
+            "background-color",
+            "box-shadow",
+            "border-color"
+        ], {
+            duration: theme.transitions.duration.short
+        }),
+        [`&.${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).loading}`]: {
+            color: "transparent"
+        }
+    }, ownerState.loadingPosition === "start" && ownerState.fullWidth && {
+        [`& .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).startIconLoadingStart}, & .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).endIconLoadingEnd}`]: {
+            transition: theme.transitions.create([
+                "opacity"
+            ], {
+                duration: theme.transitions.duration.short
+            }),
+            opacity: 0,
+            marginRight: -8
+        }
+    }, ownerState.loadingPosition === "end" && ownerState.fullWidth && {
+        [`& .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).startIconLoadingStart}, & .${(0, $88eea508b25f44c4$export$2e2bcd8739ae039).endIconLoadingEnd}`]: {
+            transition: theme.transitions.create([
+                "opacity"
+            ], {
+                duration: theme.transitions.duration.short
+            }),
+            opacity: 0,
+            marginLeft: -8
+        }
+    }));
+const $be534f7264953969$var$LoadingButtonLoadingIndicator = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiLoadingButton",
+    slot: "LoadingIndicator",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.loadingIndicator,
+            styles[`loadingIndicator${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.loadingPosition)}`]
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        position: "absolute",
+        visibility: "visible",
+        display: "flex"
+    }, ownerState.loadingPosition === "start" && (ownerState.variant === "outlined" || ownerState.variant === "contained") && {
+        left: ownerState.size === "small" ? 10 : 14
+    }, ownerState.loadingPosition === "start" && ownerState.variant === "text" && {
+        left: 6
+    }, ownerState.loadingPosition === "center" && {
+        left: "50%",
+        transform: "translate(-50%)",
+        color: (theme.vars || theme).palette.action.disabled
+    }, ownerState.loadingPosition === "end" && (ownerState.variant === "outlined" || ownerState.variant === "contained") && {
+        right: ownerState.size === "small" ? 10 : 14
+    }, ownerState.loadingPosition === "end" && ownerState.variant === "text" && {
+        right: 6
+    }, ownerState.loadingPosition === "start" && ownerState.fullWidth && {
+        position: "relative",
+        left: -10
+    }, ownerState.loadingPosition === "end" && ownerState.fullWidth && {
+        position: "relative",
+        right: -10
+    }));
+const $be534f7264953969$var$LoadingButton = /*#__PURE__*/ $d4J5n.forwardRef(function LoadingButton(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiLoadingButton"
+    });
+    const { children: children , disabled: disabled = false , id: idProp , loading: loading = false , loadingIndicator: loadingIndicatorProp , loadingPosition: loadingPosition = "center" , variant: variant = "text"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $be534f7264953969$var$_excluded);
+    const id = (0, $092c32856ba8a566$export$2e2bcd8739ae039)(idProp);
+    const loadingIndicator = loadingIndicatorProp != null ? loadingIndicatorProp : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $03d60e97dca119aa$export$2e2bcd8739ae039), {
+        "aria-labelledby": id,
+        color: "inherit",
+        size: 16
+    });
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        disabled: disabled,
+        loading: loading,
+        loadingIndicator: loadingIndicator,
+        loadingPosition: loadingPosition,
+        variant: variant
+    });
+    const classes = $be534f7264953969$var$useUtilityClasses(ownerState);
+    const loadingButtonLoadingIndicator = loading ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($be534f7264953969$var$LoadingButtonLoadingIndicator, {
+        className: classes.loadingIndicator,
+        ownerState: ownerState,
+        children: loadingIndicator
+    }) : null;
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($be534f7264953969$var$LoadingButtonRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        disabled: disabled || loading,
+        id: id,
+        ref: ref
+    }, other, {
+        variant: variant,
+        classes: classes,
+        ownerState: ownerState,
+        children: [
+            ownerState.loadingPosition === "end" ? children : loadingButtonLoadingIndicator,
+            ownerState.loadingPosition === "end" ? loadingButtonLoadingIndicator : children
+        ]
+    }));
+});
+var $be534f7264953969$export$2e2bcd8739ae039 = $be534f7264953969$var$LoadingButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+/**
+ * @ignore - internal component.
+ */ const $adab832cd8417549$var$TreeViewContext = /*#__PURE__*/ $d4J5n.createContext({});
+var $adab832cd8417549$export$2e2bcd8739ae039 = $adab832cd8417549$var$TreeViewContext;
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+const $07b1bb83e7fd932a$var$_excluded = [
+    "element"
+];
+function $07b1bb83e7fd932a$var$findIndex(array, comp) {
+    for(let i = 0; i < array.length; i += 1){
+        if (comp(array[i])) return i;
+    }
+    return -1;
+}
+function $07b1bb83e7fd932a$var$binaryFindElement(array, element) {
+    let start = 0;
+    let end = array.length - 1;
+    while(start <= end){
+        const middle = Math.floor((start + end) / 2);
+        if (array[middle].element === element) return middle;
+        // eslint-disable-next-line no-bitwise
+        if (array[middle].element.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_PRECEDING) end = middle - 1;
+        else start = middle + 1;
+    }
+    return start;
+}
+const $07b1bb83e7fd932a$var$DescendantContext = /*#__PURE__*/ $d4J5n.createContext({});
+function $07b1bb83e7fd932a$var$usePrevious(value) {
+    const ref = $d4J5n.useRef(null);
+    $d4J5n.useEffect(()=>{
+        ref.current = value;
+    }, [
+        value
+    ]);
+    return ref.current;
+}
+const $07b1bb83e7fd932a$var$noop = ()=>{};
+function $07b1bb83e7fd932a$export$b7626b291207e517(descendant) {
+    const [, forceUpdate] = $d4J5n.useState();
+    const { registerDescendant: registerDescendant = $07b1bb83e7fd932a$var$noop , unregisterDescendant: unregisterDescendant = $07b1bb83e7fd932a$var$noop , descendants: descendants = [] , parentId: parentId = null  } = $d4J5n.useContext($07b1bb83e7fd932a$var$DescendantContext);
+    // This will initially return -1 because we haven't registered the descendant
+    // on the first render. After we register, this will then return the correct
+    // index on the following render and we will re-register descendants
+    // so that everything is up-to-date before the user interacts with a
+    // collection.
+    const index = $07b1bb83e7fd932a$var$findIndex(descendants, (item)=>item.element === descendant.element);
+    const previousDescendants = $07b1bb83e7fd932a$var$usePrevious(descendants);
+    // We also need to re-register descendants any time ANY of the other
+    // descendants have changed. My brain was melting when I wrote this and it
+    // feels a little off, but checking in render and using the result in the
+    // effect's dependency array works well enough.
+    const someDescendantsHaveChanged = descendants.some((newDescendant, position)=>{
+        return previousDescendants && previousDescendants[position] && previousDescendants[position].element !== newDescendant.element;
+    });
+    // Prevent any flashing
+    (0, $c751cf77765f6632$export$2e2bcd8739ae039)(()=>{
+        if (descendant.element) {
+            registerDescendant((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, descendant, {
+                index: index
+            }));
+            return ()=>{
+                unregisterDescendant(descendant.element);
+            };
+        }
+        forceUpdate({});
+        return undefined;
+    }, [
+        registerDescendant,
+        unregisterDescendant,
+        index,
+        someDescendantsHaveChanged,
+        descendant
+    ]);
+    return {
+        parentId: parentId,
+        index: index
+    };
+}
+function $07b1bb83e7fd932a$export$c46937d8801f1c9c(props) {
+    const { children: children , id: id  } = props;
+    const [items, set] = $d4J5n.useState([]);
+    const registerDescendant = $d4J5n.useCallback((_ref)=>{
+        let { element: element  } = _ref, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(_ref, $07b1bb83e7fd932a$var$_excluded);
+        set((oldItems)=>{
+            let newItems;
+            if (oldItems.length === 0) // If there are no items, register at index 0 and bail.
+            return [
+                (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, other, {
+                    element: element,
+                    index: 0
+                })
+            ];
+            const index = $07b1bb83e7fd932a$var$binaryFindElement(oldItems, element);
+            if (oldItems[index] && oldItems[index].element === element) // If the element is already registered, just use the same array
+            newItems = oldItems;
+            else {
+                // When registering a descendant, we need to make sure we insert in
+                // into the array in the same order that it appears in the DOM. So as
+                // new descendants are added or maybe some are removed, we always know
+                // that the array is up-to-date and correct.
+                //
+                // So here we look at our registered descendants and see if the new
+                // element we are adding appears earlier than an existing descendant's
+                // DOM node via `node.compareDocumentPosition`. If it does, we insert
+                // the new element at this index. Because `registerDescendant` will be
+                // called in an effect every time the descendants state value changes,
+                // we should be sure that this index is accurate when descendent
+                // elements come or go from our component.
+                const newItem = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, other, {
+                    element: element,
+                    index: index
+                });
+                // If an index is not found we will push the element to the end.
+                newItems = oldItems.slice();
+                newItems.splice(index, 0, newItem);
+            }
+            newItems.forEach((item, position)=>{
+                item.index = position;
+            });
+            return newItems;
+        });
+    }, []);
+    const unregisterDescendant = $d4J5n.useCallback((element)=>{
+        set((oldItems)=>oldItems.filter((item)=>element !== item.element));
+    }, []);
+    const value = $d4J5n.useMemo(()=>({
+            descendants: items,
+            registerDescendant: registerDescendant,
+            unregisterDescendant: unregisterDescendant,
+            parentId: id
+        }), [
+        items,
+        registerDescendant,
+        unregisterDescendant,
+        id
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($07b1bb83e7fd932a$var$DescendantContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+function $4086c93a862e872e$export$2e2bcd8739ae039(nodeId) {
+    const { focus: focus , isExpanded: isExpanded , isExpandable: isExpandable , isFocused: isFocused , isDisabled: isDisabled , isSelected: isSelected , multiSelect: multiSelect , selectNode: selectNode , selectRange: selectRange , toggleExpansion: toggleExpansion  } = $d4J5n.useContext((0, $adab832cd8417549$export$2e2bcd8739ae039));
+    const expandable = isExpandable ? isExpandable(nodeId) : false;
+    const expanded = isExpanded ? isExpanded(nodeId) : false;
+    const focused = isFocused ? isFocused(nodeId) : false;
+    const disabled = isDisabled ? isDisabled(nodeId) : false;
+    const selected = isSelected ? isSelected(nodeId) : false;
+    const handleExpansion = (event)=>{
+        if (!disabled) {
+            if (!focused) focus(event, nodeId);
+            const multiple = multiSelect && (event.shiftKey || event.ctrlKey || event.metaKey);
+            // If already expanded and trying to toggle selection don't close
+            if (expandable && !(multiple && isExpanded(nodeId))) toggleExpansion(event, nodeId);
+        }
+    };
+    const handleSelection = (event)=>{
+        if (!disabled) {
+            if (!focused) focus(event, nodeId);
+            const multiple = multiSelect && (event.shiftKey || event.ctrlKey || event.metaKey);
+            if (multiple) {
+                if (event.shiftKey) selectRange(event, {
+                    end: nodeId
+                });
+                else selectNode(event, nodeId, true);
+            } else selectNode(event, nodeId);
+        }
+    };
+    const preventSelection = (event)=>{
+        if (event.shiftKey || event.ctrlKey || event.metaKey || disabled) // Prevent text selection
+        event.preventDefault();
+    };
+    return {
+        disabled: disabled,
+        expanded: expanded,
+        selected: selected,
+        focused: focused,
+        handleExpansion: handleExpansion,
+        handleSelection: handleSelection,
+        preventSelection: preventSelection
+    };
+}
+
+
+
+
+const $fa4619f3692d9569$var$_excluded = [
+    "classes",
+    "className",
+    "displayIcon",
+    "expansionIcon",
+    "icon",
+    "label",
+    "nodeId",
+    "onClick",
+    "onMouseDown"
+];
+const $fa4619f3692d9569$var$TreeItemContent = /*#__PURE__*/ $d4J5n.forwardRef(function TreeItemContent(props, ref) {
+    const { classes: classes , className: className , displayIcon: displayIcon , expansionIcon: expansionIcon , icon: iconProp , label: label , nodeId: nodeId , onClick: onClick , onMouseDown: onMouseDown  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $fa4619f3692d9569$var$_excluded);
+    const { disabled: disabled , expanded: expanded , selected: selected , focused: focused , handleExpansion: handleExpansion , handleSelection: handleSelection , preventSelection: preventSelection  } = (0, $4086c93a862e872e$export$2e2bcd8739ae039)(nodeId);
+    const icon = iconProp || expansionIcon || displayIcon;
+    const handleMouseDown = (event)=>{
+        preventSelection(event);
+        if (onMouseDown) onMouseDown(event);
+    };
+    const handleClick = (event)=>{
+        handleExpansion(event);
+        handleSelection(event);
+        if (onClick) onClick(event);
+    };
+    return /*#__PURE__*/ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions -- Key event is handled by the TreeView */ (0, $17b288f07ec57b56$exports.jsxs)("div", (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(className, classes.root, expanded && classes.expanded, selected && classes.selected, focused && classes.focused, disabled && classes.disabled),
+        onClick: handleClick,
+        onMouseDown: handleMouseDown,
+        ref: ref
+    }, other, {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", {
+                className: classes.iconContainer,
+                children: icon
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", {
+                className: classes.label,
+                children: label
+            })
+        ]
+    }));
+});
+var $fa4619f3692d9569$export$2e2bcd8739ae039 = $fa4619f3692d9569$var$TreeItemContent;
+
+
+
+
+function $d03466de31d8ee62$export$e06936b9af6d8f5b(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTreeItem", slot);
+}
+const $d03466de31d8ee62$var$treeItemClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTreeItem", [
+    "root",
+    "group",
+    "content",
+    "expanded",
+    "selected",
+    "focused",
+    "disabled",
+    "iconContainer",
+    "label"
+]);
+var $d03466de31d8ee62$export$2e2bcd8739ae039 = $d03466de31d8ee62$var$treeItemClasses;
+
+
+
+
+const $4e62f391705b5047$var$_excluded = [
+    "children",
+    "className",
+    "collapseIcon",
+    "ContentComponent",
+    "ContentProps",
+    "endIcon",
+    "expandIcon",
+    "disabled",
+    "icon",
+    "id",
+    "label",
+    "nodeId",
+    "onClick",
+    "onMouseDown",
+    "TransitionComponent",
+    "TransitionProps"
+];
+const $4e62f391705b5047$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ],
+        content: [
+            "content"
+        ],
+        expanded: [
+            "expanded"
+        ],
+        selected: [
+            "selected"
+        ],
+        focused: [
+            "focused"
+        ],
+        disabled: [
+            "disabled"
+        ],
+        iconContainer: [
+            "iconContainer"
+        ],
+        label: [
+            "label"
+        ],
+        group: [
+            "group"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $d03466de31d8ee62$export$e06936b9af6d8f5b), classes);
+};
+const $4e62f391705b5047$var$TreeItemRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("li", {
+    name: "MuiTreeItem",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})({
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    outline: 0
+});
+const $4e62f391705b5047$var$StyledTreeItemContent = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $fa4619f3692d9569$export$2e2bcd8739ae039), {
+    name: "MuiTreeItem",
+    slot: "Content",
+    overridesResolver: (props, styles)=>{
+        return [
+            styles.content,
+            styles.iconContainer && {
+                [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).iconContainer}`]: styles.iconContainer
+            },
+            styles.label && {
+                [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).label}`]: styles.label
+            }
+        ];
+    }
+})(({ theme: theme  })=>({
+        padding: "0 8px",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        cursor: "pointer",
+        WebkitTapHighlightColor: "transparent",
+        "&:hover": {
+            backgroundColor: (theme.vars || theme).palette.action.hover,
+            // Reset on touch devices, it doesn't add specificity
+            "@media (hover: none)": {
+                backgroundColor: "transparent"
+            }
+        },
+        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).disabled}`]: {
+            opacity: (theme.vars || theme).palette.action.disabledOpacity,
+            backgroundColor: "transparent"
+        },
+        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).focused}`]: {
+            backgroundColor: (theme.vars || theme).palette.action.focus
+        },
+        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).selected}`]: {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity),
+            "&:hover": {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                "@media (hover: none)": {
+                    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity)
+                }
+            },
+            [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).focused}`]: {
+                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+            }
+        },
+        [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).iconContainer}`]: {
+            marginRight: 4,
+            width: 15,
+            display: "flex",
+            flexShrink: 0,
+            justifyContent: "center",
+            "& svg": {
+                fontSize: 18
+            }
+        },
+        [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).label}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            width: "100%",
+            // fixes overflow - see https://github.com/mui/material-ui/issues/27372
+            minWidth: 0,
+            paddingLeft: 4,
+            position: "relative"
+        }, theme.typography.body1)
+    }));
+const $4e62f391705b5047$var$TreeItemGroup = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039), {
+    name: "MuiTreeItem",
+    slot: "Group",
+    overridesResolver: (props, styles)=>styles.group
+})({
+    margin: 0,
+    padding: 0,
+    marginLeft: 17
+});
+const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function TreeItem(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiTreeItem"
+    });
+    const { children: children , className: className , collapseIcon: collapseIcon , ContentComponent: ContentComponent = (0, $fa4619f3692d9569$export$2e2bcd8739ae039) , ContentProps: ContentProps , endIcon: endIcon , expandIcon: expandIcon , disabled: disabledProp , icon: icon , id: idProp , label: label , nodeId: nodeId , onClick: onClick , onMouseDown: onMouseDown , TransitionComponent: TransitionComponent = (0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039) , TransitionProps: TransitionProps  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $4e62f391705b5047$var$_excluded);
+    const { icons: contextIcons = {} , focus: focus , isExpanded: isExpanded , isFocused: isFocused , isSelected: isSelected , isDisabled: isDisabled , multiSelect: multiSelect , disabledItemsFocusable: disabledItemsFocusable , mapFirstChar: mapFirstChar , unMapFirstChar: unMapFirstChar , registerNode: registerNode , unregisterNode: unregisterNode , treeId: treeId  } = $d4J5n.useContext((0, $adab832cd8417549$export$2e2bcd8739ae039));
+    let id = null;
+    if (idProp != null) id = idProp;
+    else if (treeId && nodeId) id = `${treeId}-${nodeId}`;
+    const [treeitemElement, setTreeitemElement] = $d4J5n.useState(null);
+    const contentRef = $d4J5n.useRef(null);
+    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(setTreeitemElement, ref);
+    const descendant = $d4J5n.useMemo(()=>({
+            element: treeitemElement,
+            id: nodeId
+        }), [
+        nodeId,
+        treeitemElement
+    ]);
+    const { index: index , parentId: parentId  } = (0, $07b1bb83e7fd932a$export$b7626b291207e517)(descendant);
+    const expandable = Boolean(Array.isArray(children) ? children.length : children);
+    const expanded = isExpanded ? isExpanded(nodeId) : false;
+    const focused = isFocused ? isFocused(nodeId) : false;
+    const selected = isSelected ? isSelected(nodeId) : false;
+    const disabled = isDisabled ? isDisabled(nodeId) : false;
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        expanded: expanded,
+        focused: focused,
+        selected: selected,
+        disabled: disabled
+    });
+    const classes = $4e62f391705b5047$var$useUtilityClasses(ownerState);
+    let displayIcon;
+    let expansionIcon;
+    if (expandable) {
+        if (!expanded) expansionIcon = expandIcon || contextIcons.defaultExpandIcon;
+        else expansionIcon = collapseIcon || contextIcons.defaultCollapseIcon;
+    }
+    if (expandable) displayIcon = contextIcons.defaultParentIcon;
+    else displayIcon = endIcon || contextIcons.defaultEndIcon;
+    $d4J5n.useEffect(()=>{
+        // On the first render a node's index will be -1. We want to wait for the real index.
+        if (registerNode && unregisterNode && index !== -1) {
+            registerNode({
+                id: nodeId,
+                idAttribute: id,
+                index: index,
+                parentId: parentId,
+                expandable: expandable,
+                disabled: disabledProp
+            });
+            return ()=>{
+                unregisterNode(nodeId);
+            };
+        }
+        return undefined;
+    }, [
+        registerNode,
+        unregisterNode,
+        parentId,
+        index,
+        nodeId,
+        expandable,
+        disabledProp,
+        id
+    ]);
+    $d4J5n.useEffect(()=>{
+        if (mapFirstChar && unMapFirstChar && label) {
+            mapFirstChar(nodeId, contentRef.current.textContent.substring(0, 1).toLowerCase());
+            return ()=>{
+                unMapFirstChar(nodeId);
+            };
+        }
+        return undefined;
+    }, [
+        mapFirstChar,
+        unMapFirstChar,
+        nodeId,
+        label
+    ]);
+    let ariaSelected;
+    if (multiSelect) ariaSelected = selected;
+    else if (selected) /* single-selection trees unset aria-selected on un-selected items.
+     *
+     * If the tree does not support multiple selection, aria-selected
+     * is set to true for the selected node and it is not present on any other node in the tree.
+     * Source: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
+     */ ariaSelected = true;
+    function handleFocus(event) {
+        // DOM focus stays on the tree which manages focus with aria-activedescendant
+        if (event.target === event.currentTarget) (0, $ada992583889f30c$export$2e2bcd8739ae039)(event.target).getElementById(treeId).focus({
+            preventScroll: true
+        });
+        const unfocusable = !disabledItemsFocusable && disabled;
+        if (!focused && event.currentTarget === event.target && !unfocusable) focus(event, nodeId);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($4e62f391705b5047$var$TreeItemRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        role: "treeitem",
+        "aria-expanded": expandable ? expanded : null,
+        "aria-selected": ariaSelected,
+        "aria-disabled": disabled || null,
+        ref: handleRef,
+        id: id,
+        tabIndex: -1
+    }, other, {
+        ownerState: ownerState,
+        onFocus: handleFocus,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4e62f391705b5047$var$StyledTreeItemContent, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+                as: ContentComponent,
+                ref: contentRef,
+                classes: {
+                    root: classes.content,
+                    expanded: classes.expanded,
+                    selected: classes.selected,
+                    focused: classes.focused,
+                    disabled: classes.disabled,
+                    iconContainer: classes.iconContainer,
+                    label: classes.label
+                },
+                label: label,
+                nodeId: nodeId,
+                onClick: onClick,
+                onMouseDown: onMouseDown,
+                icon: icon,
+                expansionIcon: expansionIcon,
+                displayIcon: displayIcon,
+                ownerState: ownerState
+            }, ContentProps)),
+            children && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $07b1bb83e7fd932a$export$c46937d8801f1c9c), {
+                id: nodeId,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4e62f391705b5047$var$TreeItemGroup, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+                    as: TransitionComponent,
+                    unmountOnExit: true,
+                    className: classes.group,
+                    in: expanded,
+                    component: "ul",
+                    role: "group"
+                }, TransitionProps, {
+                    children: children
+                }))
+            })
+        ]
+    }));
+});
+var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+function $72431ccbc2c1ba13$export$a9a855983a3a6110(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTreeView", slot);
+}
+const $72431ccbc2c1ba13$var$treeViewClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTreeView", [
+    "root"
+]);
+var $72431ccbc2c1ba13$export$2e2bcd8739ae039 = $72431ccbc2c1ba13$var$treeViewClasses;
+
+
+
+const $4ed19a9323b6d50c$var$_excluded = [
+    "children",
+    "className",
+    "defaultCollapseIcon",
+    "defaultEndIcon",
+    "defaultExpanded",
+    "defaultExpandIcon",
+    "defaultParentIcon",
+    "defaultSelected",
+    "disabledItemsFocusable",
+    "disableSelection",
+    "expanded",
+    "id",
+    "multiSelect",
+    "onBlur",
+    "onFocus",
+    "onKeyDown",
+    "onNodeFocus",
+    "onNodeSelect",
+    "onNodeToggle",
+    "selected"
+];
+const $4ed19a9323b6d50c$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $72431ccbc2c1ba13$export$a9a855983a3a6110), classes);
+};
+const $4ed19a9323b6d50c$var$TreeViewRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("ul", {
+    name: "MuiTreeView",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})({
+    padding: 0,
+    margin: 0,
+    listStyle: "none",
+    outline: 0
+});
+function $4ed19a9323b6d50c$var$isPrintableCharacter(string) {
+    return string && string.length === 1 && string.match(/\S/);
+}
+function $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, startIndex, char) {
+    for(let i = startIndex; i < firstChars.length; i += 1){
+        if (char === firstChars[i]) return i;
+    }
+    return -1;
+}
+function $4ed19a9323b6d50c$var$noopSelection() {
+    return false;
+}
+const $4ed19a9323b6d50c$var$defaultDefaultExpanded = [];
+const $4ed19a9323b6d50c$var$defaultDefaultSelected = [];
+const $4ed19a9323b6d50c$var$TreeView = /*#__PURE__*/ $d4J5n.forwardRef(function TreeView(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiTreeView"
+    });
+    const { children: children , className: className , defaultCollapseIcon: defaultCollapseIcon , defaultEndIcon: defaultEndIcon , defaultExpanded: defaultExpanded = $4ed19a9323b6d50c$var$defaultDefaultExpanded , defaultExpandIcon: defaultExpandIcon , defaultParentIcon: defaultParentIcon , defaultSelected: defaultSelected = $4ed19a9323b6d50c$var$defaultDefaultSelected , disabledItemsFocusable: disabledItemsFocusable = false , disableSelection: disableSelection = false , expanded: expandedProp , id: idProp , multiSelect: multiSelect = false , onBlur: onBlur , onFocus: onFocus , onKeyDown: onKeyDown , onNodeFocus: onNodeFocus , onNodeSelect: onNodeSelect , onNodeToggle: onNodeToggle , selected: selectedProp  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $4ed19a9323b6d50c$var$_excluded);
+    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
+    const isRtl = theme.direction === "rtl";
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        defaultExpanded: defaultExpanded,
+        defaultSelected: defaultSelected,
+        disabledItemsFocusable: disabledItemsFocusable,
+        disableSelection: disableSelection,
+        multiSelect: multiSelect
+    });
+    const classes = $4ed19a9323b6d50c$var$useUtilityClasses(ownerState);
+    const treeId = (0, $092c32856ba8a566$export$2e2bcd8739ae039)(idProp);
+    const treeRef = $d4J5n.useRef(null);
+    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(treeRef, ref);
+    const [focusedNodeId, setFocusedNodeId] = $d4J5n.useState(null);
+    const nodeMap = $d4J5n.useRef({});
+    const firstCharMap = $d4J5n.useRef({});
+    const [expanded, setExpandedState] = (0, $d290fd83b7d7104d$export$2e2bcd8739ae039)({
+        controlled: expandedProp,
+        default: defaultExpanded,
+        name: "TreeView",
+        state: "expanded"
+    });
+    const [selected, setSelectedState] = (0, $d290fd83b7d7104d$export$2e2bcd8739ae039)({
+        controlled: selectedProp,
+        default: defaultSelected,
+        name: "TreeView",
+        state: "selected"
+    });
+    /*
+   * Status Helpers
+   */ const isExpanded = $d4J5n.useCallback((id)=>Array.isArray(expanded) ? expanded.indexOf(id) !== -1 : false, [
+        expanded
+    ]);
+    const isExpandable = $d4J5n.useCallback((id)=>nodeMap.current[id] && nodeMap.current[id].expandable, []);
+    const isSelected = $d4J5n.useCallback((id)=>Array.isArray(selected) ? selected.indexOf(id) !== -1 : selected === id, [
+        selected
+    ]);
+    const isDisabled = $d4J5n.useCallback((id)=>{
+        let node = nodeMap.current[id];
+        // This can be called before the node has been added to the node map.
+        if (!node) return false;
+        if (node.disabled) return true;
+        while(node.parentId != null){
+            node = nodeMap.current[node.parentId];
+            if (node.disabled) return true;
+        }
+        return false;
+    }, []);
+    const isFocused = (id)=>focusedNodeId === id;
+    /*
+   * Child Helpers
+   */ // Using Object.keys -> .map to mimic Object.values we should replace with Object.values() once we stop IE11 support.
+    const getChildrenIds = (id)=>Object.keys(nodeMap.current).map((key)=>{
+            return nodeMap.current[key];
+        }).filter((node)=>node.parentId === id).sort((a, b)=>a.index - b.index).map((child)=>child.id);
+    const getNavigableChildrenIds = (id)=>{
+        let childrenIds = getChildrenIds(id);
+        if (!disabledItemsFocusable) childrenIds = childrenIds.filter((node)=>!isDisabled(node));
+        return childrenIds;
+    };
+    /*
+   * Node Helpers
+   */ const getNextNode = (id)=>{
+        // If expanded get first child
+        if (isExpanded(id) && getNavigableChildrenIds(id).length > 0) return getNavigableChildrenIds(id)[0];
+        let node = nodeMap.current[id];
+        while(node != null){
+            // Try to get next sibling
+            const siblings = getNavigableChildrenIds(node.parentId);
+            const nextSibling = siblings[siblings.indexOf(node.id) + 1];
+            if (nextSibling) return nextSibling;
+            // If the sibling does not exist, go up a level to the parent and try again.
+            node = nodeMap.current[node.parentId];
+        }
+        return null;
+    };
+    const getPreviousNode = (id)=>{
+        const node = nodeMap.current[id];
+        const siblings = getNavigableChildrenIds(node.parentId);
+        const nodeIndex = siblings.indexOf(id);
+        if (nodeIndex === 0) return node.parentId;
+        let currentNode = siblings[nodeIndex - 1];
+        while(isExpanded(currentNode) && getNavigableChildrenIds(currentNode).length > 0)currentNode = getNavigableChildrenIds(currentNode).pop();
+        return currentNode;
+    };
+    const getLastNode = ()=>{
+        let lastNode = getNavigableChildrenIds(null).pop();
+        while(isExpanded(lastNode))lastNode = getNavigableChildrenIds(lastNode).pop();
+        return lastNode;
+    };
+    const getFirstNode = ()=>getNavigableChildrenIds(null)[0];
+    const getParent = (id)=>nodeMap.current[id].parentId;
+    /**
+   * This is used to determine the start and end of a selection range so
+   * we can get the nodes between the two border nodes.
+   *
+   * It finds the nodes' common ancestor using
+   * a naive implementation of a lowest common ancestor algorithm
+   * (https://en.wikipedia.org/wiki/Lowest_common_ancestor).
+   * Then compares the ancestor's 2 children that are ancestors of nodeA and NodeB
+   * so we can compare their indexes to work out which node comes first in a depth first search.
+   * (https://en.wikipedia.org/wiki/Depth-first_search)
+   *
+   * Another way to put it is which node is shallower in a trémaux tree
+   * https://en.wikipedia.org/wiki/Tr%C3%A9maux_tree
+   */ const findOrderInTremauxTree = (nodeAId, nodeBId)=>{
+        if (nodeAId === nodeBId) return [
+            nodeAId,
+            nodeBId
+        ];
+        const nodeA = nodeMap.current[nodeAId];
+        const nodeB = nodeMap.current[nodeBId];
+        if (nodeA.parentId === nodeB.id || nodeB.parentId === nodeA.id) return nodeB.parentId === nodeA.id ? [
+            nodeA.id,
+            nodeB.id
+        ] : [
+            nodeB.id,
+            nodeA.id
+        ];
+        const aFamily = [
+            nodeA.id
+        ];
+        const bFamily = [
+            nodeB.id
+        ];
+        let aAncestor = nodeA.parentId;
+        let bAncestor = nodeB.parentId;
+        let aAncestorIsCommon = bFamily.indexOf(aAncestor) !== -1;
+        let bAncestorIsCommon = aFamily.indexOf(bAncestor) !== -1;
+        let continueA = true;
+        let continueB = true;
+        while(!bAncestorIsCommon && !aAncestorIsCommon){
+            if (continueA) {
+                aFamily.push(aAncestor);
+                aAncestorIsCommon = bFamily.indexOf(aAncestor) !== -1;
+                continueA = aAncestor !== null;
+                if (!aAncestorIsCommon && continueA) aAncestor = nodeMap.current[aAncestor].parentId;
+            }
+            if (continueB && !aAncestorIsCommon) {
+                bFamily.push(bAncestor);
+                bAncestorIsCommon = aFamily.indexOf(bAncestor) !== -1;
+                continueB = bAncestor !== null;
+                if (!bAncestorIsCommon && continueB) bAncestor = nodeMap.current[bAncestor].parentId;
+            }
+        }
+        const commonAncestor = aAncestorIsCommon ? aAncestor : bAncestor;
+        const ancestorFamily = getChildrenIds(commonAncestor);
+        const aSide = aFamily[aFamily.indexOf(commonAncestor) - 1];
+        const bSide = bFamily[bFamily.indexOf(commonAncestor) - 1];
+        return ancestorFamily.indexOf(aSide) < ancestorFamily.indexOf(bSide) ? [
+            nodeAId,
+            nodeBId
+        ] : [
+            nodeBId,
+            nodeAId
+        ];
+    };
+    const getNodesInRange = (nodeA, nodeB)=>{
+        const [first, last] = findOrderInTremauxTree(nodeA, nodeB);
+        const nodes = [
+            first
+        ];
+        let current = first;
+        while(current !== last){
+            current = getNextNode(current);
+            nodes.push(current);
+        }
+        return nodes;
+    };
+    /*
+   * Focus Helpers
+   */ const focus = (event, id)=>{
+        if (id) {
+            setFocusedNodeId(id);
+            if (onNodeFocus) onNodeFocus(event, id);
+        }
+    };
+    const focusNextNode = (event, id)=>focus(event, getNextNode(id));
+    const focusPreviousNode = (event, id)=>focus(event, getPreviousNode(id));
+    const focusFirstNode = (event)=>focus(event, getFirstNode());
+    const focusLastNode = (event)=>focus(event, getLastNode());
+    const focusByFirstCharacter = (event, id, char)=>{
+        let start;
+        let index;
+        const lowercaseChar = char.toLowerCase();
+        const firstCharIds = [];
+        const firstChars = [];
+        // This really only works since the ids are strings
+        Object.keys(firstCharMap.current).forEach((nodeId)=>{
+            const firstChar = firstCharMap.current[nodeId];
+            const map = nodeMap.current[nodeId];
+            const visible = map.parentId ? isExpanded(map.parentId) : true;
+            const shouldBeSkipped = disabledItemsFocusable ? false : isDisabled(nodeId);
+            if (visible && !shouldBeSkipped) {
+                firstCharIds.push(nodeId);
+                firstChars.push(firstChar);
+            }
+        });
+        // Get start index for search based on position of currentItem
+        start = firstCharIds.indexOf(id) + 1;
+        if (start >= firstCharIds.length) start = 0;
+        // Check remaining slots in the menu
+        index = $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, start, lowercaseChar);
+        // If not found in remaining slots, check from beginning
+        if (index === -1) index = $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, 0, lowercaseChar);
+        // If match was found...
+        if (index > -1) focus(event, firstCharIds[index]);
+    };
+    /*
+   * Expansion Helpers
+   */ const toggleExpansion = (event, value = focusedNodeId)=>{
+        let newExpanded;
+        if (expanded.indexOf(value) !== -1) newExpanded = expanded.filter((id)=>id !== value);
+        else newExpanded = [
+            value
+        ].concat(expanded);
+        if (onNodeToggle) onNodeToggle(event, newExpanded);
+        setExpandedState(newExpanded);
+    };
+    const expandAllSiblings = (event, id)=>{
+        const map = nodeMap.current[id];
+        const siblings = getChildrenIds(map.parentId);
+        const diff = siblings.filter((child)=>isExpandable(child) && !isExpanded(child));
+        const newExpanded = expanded.concat(diff);
+        if (diff.length > 0) {
+            setExpandedState(newExpanded);
+            if (onNodeToggle) onNodeToggle(event, newExpanded);
+        }
+    };
+    /*
+   * Selection Helpers
+   */ const lastSelectedNode = $d4J5n.useRef(null);
+    const lastSelectionWasRange = $d4J5n.useRef(false);
+    const currentRangeSelection = $d4J5n.useRef([]);
+    const handleRangeArrowSelect = (event, nodes)=>{
+        let base = selected.slice();
+        const { start: start , next: next , current: current  } = nodes;
+        if (!next || !current) return;
+        if (currentRangeSelection.current.indexOf(current) === -1) currentRangeSelection.current = [];
+        if (lastSelectionWasRange.current) {
+            if (currentRangeSelection.current.indexOf(next) !== -1) {
+                base = base.filter((id)=>id === start || id !== current);
+                currentRangeSelection.current = currentRangeSelection.current.filter((id)=>id === start || id !== current);
+            } else {
+                base.push(next);
+                currentRangeSelection.current.push(next);
+            }
+        } else {
+            base.push(next);
+            currentRangeSelection.current.push(current, next);
+        }
+        if (onNodeSelect) onNodeSelect(event, base);
+        setSelectedState(base);
+    };
+    const handleRangeSelect = (event, nodes)=>{
+        let base = selected.slice();
+        const { start: start , end: end  } = nodes;
+        // If last selection was a range selection ignore nodes that were selected.
+        if (lastSelectionWasRange.current) base = base.filter((id)=>currentRangeSelection.current.indexOf(id) === -1);
+        let range = getNodesInRange(start, end);
+        range = range.filter((node)=>!isDisabled(node));
+        currentRangeSelection.current = range;
+        let newSelected = base.concat(range);
+        newSelected = newSelected.filter((id, i)=>newSelected.indexOf(id) === i);
+        if (onNodeSelect) onNodeSelect(event, newSelected);
+        setSelectedState(newSelected);
+    };
+    const handleMultipleSelect = (event, value)=>{
+        let newSelected;
+        if (selected.indexOf(value) !== -1) newSelected = selected.filter((id)=>id !== value);
+        else newSelected = [
+            value
+        ].concat(selected);
+        if (onNodeSelect) onNodeSelect(event, newSelected);
+        setSelectedState(newSelected);
+    };
+    const handleSingleSelect = (event, value)=>{
+        const newSelected = multiSelect ? [
+            value
+        ] : value;
+        if (onNodeSelect) onNodeSelect(event, newSelected);
+        setSelectedState(newSelected);
+    };
+    const selectNode = (event, id, multiple = false)=>{
+        if (id) {
+            if (multiple) handleMultipleSelect(event, id);
+            else handleSingleSelect(event, id);
+            lastSelectedNode.current = id;
+            lastSelectionWasRange.current = false;
+            currentRangeSelection.current = [];
+            return true;
+        }
+        return false;
+    };
+    const selectRange = (event, nodes, stacked = false)=>{
+        const { start: start = lastSelectedNode.current , end: end , current: current  } = nodes;
+        if (stacked) handleRangeArrowSelect(event, {
+            start: start,
+            next: end,
+            current: current
+        });
+        else if (start != null && end != null) handleRangeSelect(event, {
+            start: start,
+            end: end
+        });
+        lastSelectionWasRange.current = true;
+    };
+    const rangeSelectToFirst = (event, id)=>{
+        if (!lastSelectedNode.current) lastSelectedNode.current = id;
+        const start = lastSelectionWasRange.current ? lastSelectedNode.current : id;
+        selectRange(event, {
+            start: start,
+            end: getFirstNode()
+        });
+    };
+    const rangeSelectToLast = (event, id)=>{
+        if (!lastSelectedNode.current) lastSelectedNode.current = id;
+        const start = lastSelectionWasRange.current ? lastSelectedNode.current : id;
+        selectRange(event, {
+            start: start,
+            end: getLastNode()
+        });
+    };
+    const selectNextNode = (event, id)=>{
+        if (!isDisabled(getNextNode(id))) selectRange(event, {
+            end: getNextNode(id),
+            current: id
+        }, true);
+    };
+    const selectPreviousNode = (event, id)=>{
+        if (!isDisabled(getPreviousNode(id))) selectRange(event, {
+            end: getPreviousNode(id),
+            current: id
+        }, true);
+    };
+    const selectAllNodes = (event)=>{
+        selectRange(event, {
+            start: getFirstNode(),
+            end: getLastNode()
+        });
+    };
+    /*
+   * Mapping Helpers
+   */ const registerNode = $d4J5n.useCallback((node)=>{
+        const { id: id , index: index , parentId: parentId , expandable: expandable , idAttribute: idAttribute , disabled: disabled  } = node;
+        nodeMap.current[id] = {
+            id: id,
+            index: index,
+            parentId: parentId,
+            expandable: expandable,
+            idAttribute: idAttribute,
+            disabled: disabled
+        };
+    }, []);
+    const unregisterNode = $d4J5n.useCallback((id)=>{
+        const newMap = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, nodeMap.current);
+        delete newMap[id];
+        nodeMap.current = newMap;
+        setFocusedNodeId((oldFocusedNodeId)=>{
+            if (oldFocusedNodeId === id && treeRef.current === (0, $ada992583889f30c$export$2e2bcd8739ae039)(treeRef.current).activeElement) return getChildrenIds(null)[0];
+            return oldFocusedNodeId;
+        });
+    }, []);
+    const mapFirstChar = $d4J5n.useCallback((id, firstChar)=>{
+        firstCharMap.current[id] = firstChar;
+    }, []);
+    const unMapFirstChar = $d4J5n.useCallback((id)=>{
+        const newMap = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, firstCharMap.current);
+        delete newMap[id];
+        firstCharMap.current = newMap;
+    }, []);
+    /**
+   * Event handlers and Navigation
+   */ const handleNextArrow = (event)=>{
+        if (isExpandable(focusedNodeId)) {
+            if (isExpanded(focusedNodeId)) focusNextNode(event, focusedNodeId);
+            else if (!isDisabled(focusedNodeId)) toggleExpansion(event);
+        }
+        return true;
+    };
+    const handlePreviousArrow = (event)=>{
+        if (isExpanded(focusedNodeId) && !isDisabled(focusedNodeId)) {
+            toggleExpansion(event, focusedNodeId);
+            return true;
+        }
+        const parent = getParent(focusedNodeId);
+        if (parent) {
+            focus(event, parent);
+            return true;
+        }
+        return false;
+    };
+    const handleKeyDown = (event)=>{
+        let flag = false;
+        const key = event.key;
+        // If the tree is empty there will be no focused node
+        if (event.altKey || event.currentTarget !== event.target || !focusedNodeId) return;
+        const ctrlPressed = event.ctrlKey || event.metaKey;
+        switch(key){
+            case " ":
+                if (!disableSelection && !isDisabled(focusedNodeId)) {
+                    if (multiSelect && event.shiftKey) {
+                        selectRange(event, {
+                            end: focusedNodeId
+                        });
+                        flag = true;
+                    } else if (multiSelect) flag = selectNode(event, focusedNodeId, true);
+                    else flag = selectNode(event, focusedNodeId);
+                }
+                event.stopPropagation();
+                break;
+            case "Enter":
+                if (!isDisabled(focusedNodeId)) {
+                    if (isExpandable(focusedNodeId)) {
+                        toggleExpansion(event);
+                        flag = true;
+                    } else if (multiSelect) flag = selectNode(event, focusedNodeId, true);
+                    else flag = selectNode(event, focusedNodeId);
+                }
+                event.stopPropagation();
+                break;
+            case "ArrowDown":
+                if (multiSelect && event.shiftKey && !disableSelection) selectNextNode(event, focusedNodeId);
+                focusNextNode(event, focusedNodeId);
+                flag = true;
+                break;
+            case "ArrowUp":
+                if (multiSelect && event.shiftKey && !disableSelection) selectPreviousNode(event, focusedNodeId);
+                focusPreviousNode(event, focusedNodeId);
+                flag = true;
+                break;
+            case "ArrowRight":
+                if (isRtl) flag = handlePreviousArrow(event);
+                else flag = handleNextArrow(event);
+                break;
+            case "ArrowLeft":
+                if (isRtl) flag = handleNextArrow(event);
+                else flag = handlePreviousArrow(event);
+                break;
+            case "Home":
+                if (multiSelect && ctrlPressed && event.shiftKey && !disableSelection && !isDisabled(focusedNodeId)) rangeSelectToFirst(event, focusedNodeId);
+                focusFirstNode(event);
+                flag = true;
+                break;
+            case "End":
+                if (multiSelect && ctrlPressed && event.shiftKey && !disableSelection && !isDisabled(focusedNodeId)) rangeSelectToLast(event, focusedNodeId);
+                focusLastNode(event);
+                flag = true;
+                break;
+            default:
+                if (key === "*") {
+                    expandAllSiblings(event, focusedNodeId);
+                    flag = true;
+                } else if (multiSelect && ctrlPressed && key.toLowerCase() === "a" && !disableSelection) {
+                    selectAllNodes(event);
+                    flag = true;
+                } else if (!ctrlPressed && !event.shiftKey && $4ed19a9323b6d50c$var$isPrintableCharacter(key)) {
+                    focusByFirstCharacter(event, focusedNodeId, key);
+                    flag = true;
+                }
+        }
+        if (flag) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        if (onKeyDown) onKeyDown(event);
+    };
+    const handleFocus = (event)=>{
+        // if the event bubbled (which is React specific) we don't want to steal focus
+        if (event.target === event.currentTarget) {
+            const firstSelected = Array.isArray(selected) ? selected[0] : selected;
+            focus(event, firstSelected || getNavigableChildrenIds(null)[0]);
+        }
+        if (onFocus) onFocus(event);
+    };
+    const handleBlur = (event)=>{
+        setFocusedNodeId(null);
+        if (onBlur) onBlur(event);
+    };
+    const activeDescendant = nodeMap.current[focusedNodeId] ? nodeMap.current[focusedNodeId].idAttribute : null;
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $adab832cd8417549$export$2e2bcd8739ae039).Provider, {
+        // TODO: fix this lint error
+        // eslint-disable-next-line react/jsx-no-constructed-context-values
+        value: {
+            icons: {
+                defaultCollapseIcon: defaultCollapseIcon,
+                defaultExpandIcon: defaultExpandIcon,
+                defaultParentIcon: defaultParentIcon,
+                defaultEndIcon: defaultEndIcon
+            },
+            focus: focus,
+            toggleExpansion: toggleExpansion,
+            isExpanded: isExpanded,
+            isExpandable: isExpandable,
+            isFocused: isFocused,
+            isSelected: isSelected,
+            isDisabled: isDisabled,
+            selectNode: disableSelection ? $4ed19a9323b6d50c$var$noopSelection : selectNode,
+            selectRange: disableSelection ? $4ed19a9323b6d50c$var$noopSelection : selectRange,
+            multiSelect: multiSelect,
+            disabledItemsFocusable: disabledItemsFocusable,
+            mapFirstChar: mapFirstChar,
+            unMapFirstChar: unMapFirstChar,
+            registerNode: registerNode,
+            unregisterNode: unregisterNode,
+            treeId: treeId
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $07b1bb83e7fd932a$export$c46937d8801f1c9c), {
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4ed19a9323b6d50c$var$TreeViewRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+                role: "tree",
+                id: treeId,
+                "aria-activedescendant": activeDescendant,
+                "aria-multiselectable": multiSelect,
+                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+                ref: handleRef,
+                tabIndex: 0,
+                onKeyDown: handleKeyDown,
+                onFocus: handleFocus,
+                onBlur: handleBlur,
+                ownerState: ownerState
+            }, other, {
+                children: children
+            }))
+        })
+    });
+});
+var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
+
+
+
+
+
+
+
+
+
+
+
+
+var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , mode: mode , open: open , loading: loading , opening: opening , saving: saving , error: error , selectedFile: selectedFile , onSelectFile: onSelectFile , onClearError: onClearError , onClose: onClose  })=>{
     const [currentDirectory, setCurrentDirectory] = (0, $d4J5n.useState)("");
     const [text1, setText] = (0, $d4J5n.useState)("");
     const [valid1, setValid] = (0, $d4J5n.useState)(true);
@@ -39067,11 +41410,8 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
     }, [
         selectedFile
     ]);
-    function handleCommit(event) {
-        if (valid1) {
-            onSelectFile(event, text1);
-            onClose(event);
-        }
+    function handleSave(event) {
+        if (valid1) onSelectFile(event, text1);
     }
     function handleSelectFile(event, file) {
         if (mode === "open") {
@@ -39116,7 +41456,19 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
                         open: !!error,
                         onClose: onClearError
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdf9880214f9840f$export$2e2bcd8739ae039), {
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2f97f7a2aae17371$export$2e2bcd8739ae039), {
+                        sx: {
+                            width: "100%",
+                            visibility: loading || opening || saving ? "visible" : "hidden"
+                        }
+                    }),
+                    files.length === 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        sx: {
+                            m: 2
+                        },
+                        children: "One moment please\u2026"
+                    }),
+                    files.length > 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdf9880214f9840f$export$2e2bcd8739ae039), {
                         file: currentDirectory,
                         onClick: (event, key)=>setCurrentDirectory(key),
                         sx: {
@@ -39135,24 +41487,35 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
                     onSelectFolder: (event, key)=>setCurrentDirectory(key)
                 })
             }),
-            mode === "save" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                    variant: "outlined",
-                    type: "text",
-                    label: "",
-                    margin: "dense",
-                    autoFocus: true,
-                    fullWidth: true,
-                    value: text1,
-                    error: !valid1,
-                    onChange: handleTextChange,
-                    InputProps: {
-                        endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: handleCommit,
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0bf399ec89823653$export$2e2bcd8739ae039), {})
+            mode === "save" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                        variant: "outlined",
+                        size: "small",
+                        type: "text",
+                        label: "",
+                        margin: "dense",
+                        autoFocus: true,
+                        fullWidth: true,
+                        value: text1,
+                        error: !valid1,
+                        onChange: handleTextChange
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be534f7264953969$export$2e2bcd8739ae039), {
+                        variant: "contained",
+                        disabled: !valid1,
+                        loading: saving,
+                        endIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00393b3fb564f209$export$2e2bcd8739ae039), {}),
+                        loadingPosition: "end",
+                        onClick: handleSave,
+                        sx: {
+                            ml: 1
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            children: "Save"
                         })
-                    }
-                })
+                    })
+                ]
             }) : undefined
         ]
     });
@@ -39223,10 +41586,10 @@ var $cdf9880214f9840f$export$2e2bcd8739ae039 = ({ file: file , onClick: onClick 
                             cursor: "pointer"
                         }
                     },
-                    children: key !== "/" ? $596d45310e010dc1$export$f9107b66120eb036(key) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a591c0d726a7bda6$export$2e2bcd8739ae039), {})
+                    children: key !== "/" ? $596d45310e010dc1$export$f9107b66120eb036(key) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0a5793ca590f491f$export$2e2bcd8739ae039), {})
                 })),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                children: slices.length > 1 ? $596d45310e010dc1$export$f9107b66120eb036(slices.at(-1)) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a591c0d726a7bda6$export$2e2bcd8739ae039), {})
+                children: slices.length > 1 ? $596d45310e010dc1$export$f9107b66120eb036(slices.at(-1)) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0a5793ca590f491f$export$2e2bcd8739ae039), {})
             })
         ]
     });
@@ -39509,30 +41872,61 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
+
 
 
 
 var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
+    const [files1, setFiles] = (0, $d4J5n.useState)([]);
+    const [error, setError] = (0, $d4J5n.useState)("");
+    const [loading, setLoading] = (0, $d4J5n.useState)(false);
+    const [opening, setOpening] = (0, $d4J5n.useState)(false);
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    (0, $d4J5n.useEffect)(()=>{
+        if (open) (async ()=>{
+            try {
+                setLoading(true);
+                const directory = await (0, $20d1a517b8ce84e3$export$30d4711d6f8d17eb)();
+                const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
+                .map((file)=>file.name);
+                setFiles(files);
+                setError("");
+                setLoading(false);
+            } catch (err) {
+                debugger;
+                setError(err instanceof Error ? err.message : JSON.stringify(err));
+                setLoading(false);
+            }
+        })();
+    }, [
+        open
+    ]);
     async function onSelectFile(event, file) {
         try {
-            const obj = await (0, $20d1a517b8ce84e3$export$de1a4df3278e5008)(file);
-            const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(obj, file);
+            setOpening(true);
+            const json = await (0, $20d1a517b8ce84e3$export$de1a4df3278e5008)(file);
+            const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json, file);
             setTemplate(template.toString());
             onClose(event);
+            setOpening(false);
+            setError("");
+            if (template.obj.url) $6767c619f5de943e$export$ff7962acd6052c28(template.obj.url);
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
+            setOpening(false);
         }
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $932acd7bba086cc0$export$2e2bcd8739ae039), {
-        files: files,
-        title: "Open File",
+        files: files1,
+        title: "Open Template",
         mode: "open",
         error: error,
         open: open,
+        loading: loading,
+        opening: opening,
         onSelectFile: onSelectFile,
         onClearError: ()=>setError(""),
         onClose: onClose
@@ -39541,31 +41935,64 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
 
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { files: files , error: error , setError: setError  } = (0, $3c9c00786942e370$export$95809329f49ea9f9)();
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const [files1, setFiles] = (0, $d4J5n.useState)([]);
+    const [error, setError] = (0, $d4J5n.useState)("");
+    const [loading, setLoading] = (0, $d4J5n.useState)(false);
+    const [saving, setSaving] = (0, $d4J5n.useState)(false);
+    const { template: json1  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const template = (0, $d4J5n.useMemo)(()=>{
+        return new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json1);
+    }, [
+        json1
+    ]);
+    (0, $d4J5n.useEffect)(()=>{
+        if (open) (async ()=>{
+            try {
+                setLoading(true);
+                const directory = await (0, $20d1a517b8ce84e3$export$30d4711d6f8d17eb)();
+                const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
+                .map((file)=>file.name);
+                setFiles(files);
+                setError("");
+                setLoading(false);
+            } catch (err) {
+                debugger;
+                setError(err instanceof Error ? err.message : JSON.stringify(err));
+                setLoading(false);
+            }
+        })();
+    }, [
+        open
+    ]);
     async function handleSelectFile(event, file) {
-        const content = template.toString("file");
         try {
-            await (0, $20d1a517b8ce84e3$export$25c05c84991e5fdf)(file, content);
+            setSaving(true);
+            const json = template.toString("file");
+            await (0, $20d1a517b8ce84e3$export$885cb9c57e0a1f52)(file, json);
             onClose(event);
+            setSaving(false);
+            setError("");
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
+            setSaving(false);
         }
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $932acd7bba086cc0$export$2e2bcd8739ae039), {
-        files: files,
-        title: "Save File",
+        files: files1,
+        title: "Save Template",
         mode: "save",
         error: error,
         open: open,
+        loading: loading,
+        saving: saving,
         selectedFile: template.file(),
         onSelectFile: handleSelectFile,
         onClearError: ()=>setError(""),
@@ -39640,7 +42067,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eb055bd0b9dc033$export$2e2bcd8739ae039), {
                         items: [
                             [
-                                "File New",
+                                "New Template",
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aff1417d5558df81$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
@@ -39648,24 +42075,24 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 }
                             ],
                             [
-                                "File Open",
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd19480cde974b2f$export$2e2bcd8739ae039), {}),
+                                "Open Template",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b727c7ac90130205$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setFileOpenOpen(true);
                                     onClose(event);
                                 }
                             ],
                             [
-                                "File Save",
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d915f92af7d69b5$export$2e2bcd8739ae039), {}),
+                                "Save Template",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00393b3fb564f209$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setFileSaveOpen(true);
                                     onClose(event);
                                 }
                             ],
                             [
-                                "File Close",
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b411a941064d5cd2$export$2e2bcd8739ae039), {}),
+                                "Close Template",
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb87d55b2c409428$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
                                     onClose(event);
@@ -41504,7 +43931,6 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
         setTemplate(template1.toString());
     }
     function onChangeQuery(event, query) {
-        debugger;
         obj1.query = query;
         setTemplate(template1.toString());
     }
@@ -42003,1298 +44429,6 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
 
 var $d4J5n = parcelRequire("d4J5n");
 
-var $7b42a1209722603f$exports = {};
-
-$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
-$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-/**
- * @ignore - internal component.
- */ const $adab832cd8417549$var$TreeViewContext = /*#__PURE__*/ $d4J5n.createContext({});
-var $adab832cd8417549$export$2e2bcd8739ae039 = $adab832cd8417549$var$TreeViewContext;
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-const $07b1bb83e7fd932a$var$_excluded = [
-    "element"
-];
-function $07b1bb83e7fd932a$var$findIndex(array, comp) {
-    for(let i = 0; i < array.length; i += 1){
-        if (comp(array[i])) return i;
-    }
-    return -1;
-}
-function $07b1bb83e7fd932a$var$binaryFindElement(array, element) {
-    let start = 0;
-    let end = array.length - 1;
-    while(start <= end){
-        const middle = Math.floor((start + end) / 2);
-        if (array[middle].element === element) return middle;
-        // eslint-disable-next-line no-bitwise
-        if (array[middle].element.compareDocumentPosition(element) & Node.DOCUMENT_POSITION_PRECEDING) end = middle - 1;
-        else start = middle + 1;
-    }
-    return start;
-}
-const $07b1bb83e7fd932a$var$DescendantContext = /*#__PURE__*/ $d4J5n.createContext({});
-function $07b1bb83e7fd932a$var$usePrevious(value) {
-    const ref = $d4J5n.useRef(null);
-    $d4J5n.useEffect(()=>{
-        ref.current = value;
-    }, [
-        value
-    ]);
-    return ref.current;
-}
-const $07b1bb83e7fd932a$var$noop = ()=>{};
-function $07b1bb83e7fd932a$export$b7626b291207e517(descendant) {
-    const [, forceUpdate] = $d4J5n.useState();
-    const { registerDescendant: registerDescendant = $07b1bb83e7fd932a$var$noop , unregisterDescendant: unregisterDescendant = $07b1bb83e7fd932a$var$noop , descendants: descendants = [] , parentId: parentId = null  } = $d4J5n.useContext($07b1bb83e7fd932a$var$DescendantContext);
-    // This will initially return -1 because we haven't registered the descendant
-    // on the first render. After we register, this will then return the correct
-    // index on the following render and we will re-register descendants
-    // so that everything is up-to-date before the user interacts with a
-    // collection.
-    const index = $07b1bb83e7fd932a$var$findIndex(descendants, (item)=>item.element === descendant.element);
-    const previousDescendants = $07b1bb83e7fd932a$var$usePrevious(descendants);
-    // We also need to re-register descendants any time ANY of the other
-    // descendants have changed. My brain was melting when I wrote this and it
-    // feels a little off, but checking in render and using the result in the
-    // effect's dependency array works well enough.
-    const someDescendantsHaveChanged = descendants.some((newDescendant, position)=>{
-        return previousDescendants && previousDescendants[position] && previousDescendants[position].element !== newDescendant.element;
-    });
-    // Prevent any flashing
-    (0, $c751cf77765f6632$export$2e2bcd8739ae039)(()=>{
-        if (descendant.element) {
-            registerDescendant((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, descendant, {
-                index: index
-            }));
-            return ()=>{
-                unregisterDescendant(descendant.element);
-            };
-        }
-        forceUpdate({});
-        return undefined;
-    }, [
-        registerDescendant,
-        unregisterDescendant,
-        index,
-        someDescendantsHaveChanged,
-        descendant
-    ]);
-    return {
-        parentId: parentId,
-        index: index
-    };
-}
-function $07b1bb83e7fd932a$export$c46937d8801f1c9c(props) {
-    const { children: children , id: id  } = props;
-    const [items, set] = $d4J5n.useState([]);
-    const registerDescendant = $d4J5n.useCallback((_ref)=>{
-        let { element: element  } = _ref, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(_ref, $07b1bb83e7fd932a$var$_excluded);
-        set((oldItems)=>{
-            let newItems;
-            if (oldItems.length === 0) // If there are no items, register at index 0 and bail.
-            return [
-                (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, other, {
-                    element: element,
-                    index: 0
-                })
-            ];
-            const index = $07b1bb83e7fd932a$var$binaryFindElement(oldItems, element);
-            if (oldItems[index] && oldItems[index].element === element) // If the element is already registered, just use the same array
-            newItems = oldItems;
-            else {
-                // When registering a descendant, we need to make sure we insert in
-                // into the array in the same order that it appears in the DOM. So as
-                // new descendants are added or maybe some are removed, we always know
-                // that the array is up-to-date and correct.
-                //
-                // So here we look at our registered descendants and see if the new
-                // element we are adding appears earlier than an existing descendant's
-                // DOM node via `node.compareDocumentPosition`. If it does, we insert
-                // the new element at this index. Because `registerDescendant` will be
-                // called in an effect every time the descendants state value changes,
-                // we should be sure that this index is accurate when descendent
-                // elements come or go from our component.
-                const newItem = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, other, {
-                    element: element,
-                    index: index
-                });
-                // If an index is not found we will push the element to the end.
-                newItems = oldItems.slice();
-                newItems.splice(index, 0, newItem);
-            }
-            newItems.forEach((item, position)=>{
-                item.index = position;
-            });
-            return newItems;
-        });
-    }, []);
-    const unregisterDescendant = $d4J5n.useCallback((element)=>{
-        set((oldItems)=>oldItems.filter((item)=>element !== item.element));
-    }, []);
-    const value = $d4J5n.useMemo(()=>({
-            descendants: items,
-            registerDescendant: registerDescendant,
-            unregisterDescendant: unregisterDescendant,
-            parentId: id
-        }), [
-        items,
-        registerDescendant,
-        unregisterDescendant,
-        id
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($07b1bb83e7fd932a$var$DescendantContext.Provider, {
-        value: value,
-        children: children
-    });
-}
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-function $4086c93a862e872e$export$2e2bcd8739ae039(nodeId) {
-    const { focus: focus , isExpanded: isExpanded , isExpandable: isExpandable , isFocused: isFocused , isDisabled: isDisabled , isSelected: isSelected , multiSelect: multiSelect , selectNode: selectNode , selectRange: selectRange , toggleExpansion: toggleExpansion  } = $d4J5n.useContext((0, $adab832cd8417549$export$2e2bcd8739ae039));
-    const expandable = isExpandable ? isExpandable(nodeId) : false;
-    const expanded = isExpanded ? isExpanded(nodeId) : false;
-    const focused = isFocused ? isFocused(nodeId) : false;
-    const disabled = isDisabled ? isDisabled(nodeId) : false;
-    const selected = isSelected ? isSelected(nodeId) : false;
-    const handleExpansion = (event)=>{
-        if (!disabled) {
-            if (!focused) focus(event, nodeId);
-            const multiple = multiSelect && (event.shiftKey || event.ctrlKey || event.metaKey);
-            // If already expanded and trying to toggle selection don't close
-            if (expandable && !(multiple && isExpanded(nodeId))) toggleExpansion(event, nodeId);
-        }
-    };
-    const handleSelection = (event)=>{
-        if (!disabled) {
-            if (!focused) focus(event, nodeId);
-            const multiple = multiSelect && (event.shiftKey || event.ctrlKey || event.metaKey);
-            if (multiple) {
-                if (event.shiftKey) selectRange(event, {
-                    end: nodeId
-                });
-                else selectNode(event, nodeId, true);
-            } else selectNode(event, nodeId);
-        }
-    };
-    const preventSelection = (event)=>{
-        if (event.shiftKey || event.ctrlKey || event.metaKey || disabled) // Prevent text selection
-        event.preventDefault();
-    };
-    return {
-        disabled: disabled,
-        expanded: expanded,
-        selected: selected,
-        focused: focused,
-        handleExpansion: handleExpansion,
-        handleSelection: handleSelection,
-        preventSelection: preventSelection
-    };
-}
-
-
-
-
-const $fa4619f3692d9569$var$_excluded = [
-    "classes",
-    "className",
-    "displayIcon",
-    "expansionIcon",
-    "icon",
-    "label",
-    "nodeId",
-    "onClick",
-    "onMouseDown"
-];
-const $fa4619f3692d9569$var$TreeItemContent = /*#__PURE__*/ $d4J5n.forwardRef(function TreeItemContent(props, ref) {
-    const { classes: classes , className: className , displayIcon: displayIcon , expansionIcon: expansionIcon , icon: iconProp , label: label , nodeId: nodeId , onClick: onClick , onMouseDown: onMouseDown  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $fa4619f3692d9569$var$_excluded);
-    const { disabled: disabled , expanded: expanded , selected: selected , focused: focused , handleExpansion: handleExpansion , handleSelection: handleSelection , preventSelection: preventSelection  } = (0, $4086c93a862e872e$export$2e2bcd8739ae039)(nodeId);
-    const icon = iconProp || expansionIcon || displayIcon;
-    const handleMouseDown = (event)=>{
-        preventSelection(event);
-        if (onMouseDown) onMouseDown(event);
-    };
-    const handleClick = (event)=>{
-        handleExpansion(event);
-        handleSelection(event);
-        if (onClick) onClick(event);
-    };
-    return /*#__PURE__*/ /* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions -- Key event is handled by the TreeView */ (0, $17b288f07ec57b56$exports.jsxs)("div", (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(className, classes.root, expanded && classes.expanded, selected && classes.selected, focused && classes.focused, disabled && classes.disabled),
-        onClick: handleClick,
-        onMouseDown: handleMouseDown,
-        ref: ref
-    }, other, {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", {
-                className: classes.iconContainer,
-                children: icon
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", {
-                className: classes.label,
-                children: label
-            })
-        ]
-    }));
-});
-var $fa4619f3692d9569$export$2e2bcd8739ae039 = $fa4619f3692d9569$var$TreeItemContent;
-
-
-
-
-
-function $d03466de31d8ee62$export$e06936b9af6d8f5b(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTreeItem", slot);
-}
-const $d03466de31d8ee62$var$treeItemClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTreeItem", [
-    "root",
-    "group",
-    "content",
-    "expanded",
-    "selected",
-    "focused",
-    "disabled",
-    "iconContainer",
-    "label"
-]);
-var $d03466de31d8ee62$export$2e2bcd8739ae039 = $d03466de31d8ee62$var$treeItemClasses;
-
-
-
-
-const $4e62f391705b5047$var$_excluded = [
-    "children",
-    "className",
-    "collapseIcon",
-    "ContentComponent",
-    "ContentProps",
-    "endIcon",
-    "expandIcon",
-    "disabled",
-    "icon",
-    "id",
-    "label",
-    "nodeId",
-    "onClick",
-    "onMouseDown",
-    "TransitionComponent",
-    "TransitionProps"
-];
-const $4e62f391705b5047$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes  } = ownerState;
-    const slots = {
-        root: [
-            "root"
-        ],
-        content: [
-            "content"
-        ],
-        expanded: [
-            "expanded"
-        ],
-        selected: [
-            "selected"
-        ],
-        focused: [
-            "focused"
-        ],
-        disabled: [
-            "disabled"
-        ],
-        iconContainer: [
-            "iconContainer"
-        ],
-        label: [
-            "label"
-        ],
-        group: [
-            "group"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $d03466de31d8ee62$export$e06936b9af6d8f5b), classes);
-};
-const $4e62f391705b5047$var$TreeItemRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("li", {
-    name: "MuiTreeItem",
-    slot: "Root",
-    overridesResolver: (props, styles)=>styles.root
-})({
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-    outline: 0
-});
-const $4e62f391705b5047$var$StyledTreeItemContent = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $fa4619f3692d9569$export$2e2bcd8739ae039), {
-    name: "MuiTreeItem",
-    slot: "Content",
-    overridesResolver: (props, styles)=>{
-        return [
-            styles.content,
-            styles.iconContainer && {
-                [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).iconContainer}`]: styles.iconContainer
-            },
-            styles.label && {
-                [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).label}`]: styles.label
-            }
-        ];
-    }
-})(({ theme: theme  })=>({
-        padding: "0 8px",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer",
-        WebkitTapHighlightColor: "transparent",
-        "&:hover": {
-            backgroundColor: (theme.vars || theme).palette.action.hover,
-            // Reset on touch devices, it doesn't add specificity
-            "@media (hover: none)": {
-                backgroundColor: "transparent"
-            }
-        },
-        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).disabled}`]: {
-            opacity: (theme.vars || theme).palette.action.disabledOpacity,
-            backgroundColor: "transparent"
-        },
-        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).focused}`]: {
-            backgroundColor: (theme.vars || theme).palette.action.focus
-        },
-        [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).selected}`]: {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity),
-            "&:hover": {
-                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
-                // Reset on touch devices, it doesn't add specificity
-                "@media (hover: none)": {
-                    backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity)
-                }
-            },
-            [`&.${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).focused}`]: {
-                backgroundColor: theme.vars ? `rgba(${theme.vars.palette.primary.mainChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.primary.main, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
-            }
-        },
-        [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).iconContainer}`]: {
-            marginRight: 4,
-            width: 15,
-            display: "flex",
-            flexShrink: 0,
-            justifyContent: "center",
-            "& svg": {
-                fontSize: 18
-            }
-        },
-        [`& .${(0, $d03466de31d8ee62$export$2e2bcd8739ae039).label}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            width: "100%",
-            // fixes overflow - see https://github.com/mui/material-ui/issues/27372
-            minWidth: 0,
-            paddingLeft: 4,
-            position: "relative"
-        }, theme.typography.body1)
-    }));
-const $4e62f391705b5047$var$TreeItemGroup = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039), {
-    name: "MuiTreeItem",
-    slot: "Group",
-    overridesResolver: (props, styles)=>styles.group
-})({
-    margin: 0,
-    padding: 0,
-    marginLeft: 17
-});
-const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function TreeItem(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTreeItem"
-    });
-    const { children: children , className: className , collapseIcon: collapseIcon , ContentComponent: ContentComponent = (0, $fa4619f3692d9569$export$2e2bcd8739ae039) , ContentProps: ContentProps , endIcon: endIcon , expandIcon: expandIcon , disabled: disabledProp , icon: icon , id: idProp , label: label , nodeId: nodeId , onClick: onClick , onMouseDown: onMouseDown , TransitionComponent: TransitionComponent = (0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039) , TransitionProps: TransitionProps  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $4e62f391705b5047$var$_excluded);
-    const { icons: contextIcons = {} , focus: focus , isExpanded: isExpanded , isFocused: isFocused , isSelected: isSelected , isDisabled: isDisabled , multiSelect: multiSelect , disabledItemsFocusable: disabledItemsFocusable , mapFirstChar: mapFirstChar , unMapFirstChar: unMapFirstChar , registerNode: registerNode , unregisterNode: unregisterNode , treeId: treeId  } = $d4J5n.useContext((0, $adab832cd8417549$export$2e2bcd8739ae039));
-    let id = null;
-    if (idProp != null) id = idProp;
-    else if (treeId && nodeId) id = `${treeId}-${nodeId}`;
-    const [treeitemElement, setTreeitemElement] = $d4J5n.useState(null);
-    const contentRef = $d4J5n.useRef(null);
-    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(setTreeitemElement, ref);
-    const descendant = $d4J5n.useMemo(()=>({
-            element: treeitemElement,
-            id: nodeId
-        }), [
-        nodeId,
-        treeitemElement
-    ]);
-    const { index: index , parentId: parentId  } = (0, $07b1bb83e7fd932a$export$b7626b291207e517)(descendant);
-    const expandable = Boolean(Array.isArray(children) ? children.length : children);
-    const expanded = isExpanded ? isExpanded(nodeId) : false;
-    const focused = isFocused ? isFocused(nodeId) : false;
-    const selected = isSelected ? isSelected(nodeId) : false;
-    const disabled = isDisabled ? isDisabled(nodeId) : false;
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        expanded: expanded,
-        focused: focused,
-        selected: selected,
-        disabled: disabled
-    });
-    const classes = $4e62f391705b5047$var$useUtilityClasses(ownerState);
-    let displayIcon;
-    let expansionIcon;
-    if (expandable) {
-        if (!expanded) expansionIcon = expandIcon || contextIcons.defaultExpandIcon;
-        else expansionIcon = collapseIcon || contextIcons.defaultCollapseIcon;
-    }
-    if (expandable) displayIcon = contextIcons.defaultParentIcon;
-    else displayIcon = endIcon || contextIcons.defaultEndIcon;
-    $d4J5n.useEffect(()=>{
-        // On the first render a node's index will be -1. We want to wait for the real index.
-        if (registerNode && unregisterNode && index !== -1) {
-            registerNode({
-                id: nodeId,
-                idAttribute: id,
-                index: index,
-                parentId: parentId,
-                expandable: expandable,
-                disabled: disabledProp
-            });
-            return ()=>{
-                unregisterNode(nodeId);
-            };
-        }
-        return undefined;
-    }, [
-        registerNode,
-        unregisterNode,
-        parentId,
-        index,
-        nodeId,
-        expandable,
-        disabledProp,
-        id
-    ]);
-    $d4J5n.useEffect(()=>{
-        if (mapFirstChar && unMapFirstChar && label) {
-            mapFirstChar(nodeId, contentRef.current.textContent.substring(0, 1).toLowerCase());
-            return ()=>{
-                unMapFirstChar(nodeId);
-            };
-        }
-        return undefined;
-    }, [
-        mapFirstChar,
-        unMapFirstChar,
-        nodeId,
-        label
-    ]);
-    let ariaSelected;
-    if (multiSelect) ariaSelected = selected;
-    else if (selected) /* single-selection trees unset aria-selected on un-selected items.
-     *
-     * If the tree does not support multiple selection, aria-selected
-     * is set to true for the selected node and it is not present on any other node in the tree.
-     * Source: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
-     */ ariaSelected = true;
-    function handleFocus(event) {
-        // DOM focus stays on the tree which manages focus with aria-activedescendant
-        if (event.target === event.currentTarget) (0, $ada992583889f30c$export$2e2bcd8739ae039)(event.target).getElementById(treeId).focus({
-            preventScroll: true
-        });
-        const unfocusable = !disabledItemsFocusable && disabled;
-        if (!focused && event.currentTarget === event.target && !unfocusable) focus(event, nodeId);
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($4e62f391705b5047$var$TreeItemRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        role: "treeitem",
-        "aria-expanded": expandable ? expanded : null,
-        "aria-selected": ariaSelected,
-        "aria-disabled": disabled || null,
-        ref: handleRef,
-        id: id,
-        tabIndex: -1
-    }, other, {
-        ownerState: ownerState,
-        onFocus: handleFocus,
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4e62f391705b5047$var$StyledTreeItemContent, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-                as: ContentComponent,
-                ref: contentRef,
-                classes: {
-                    root: classes.content,
-                    expanded: classes.expanded,
-                    selected: classes.selected,
-                    focused: classes.focused,
-                    disabled: classes.disabled,
-                    iconContainer: classes.iconContainer,
-                    label: classes.label
-                },
-                label: label,
-                nodeId: nodeId,
-                onClick: onClick,
-                onMouseDown: onMouseDown,
-                icon: icon,
-                expansionIcon: expansionIcon,
-                displayIcon: displayIcon,
-                ownerState: ownerState
-            }, ContentProps)),
-            children && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $07b1bb83e7fd932a$export$c46937d8801f1c9c), {
-                id: nodeId,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4e62f391705b5047$var$TreeItemGroup, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-                    as: TransitionComponent,
-                    unmountOnExit: true,
-                    className: classes.group,
-                    in: expanded,
-                    component: "ul",
-                    role: "group"
-                }, TransitionProps, {
-                    children: children
-                }))
-            })
-        ]
-    }));
-});
-var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-
-function $72431ccbc2c1ba13$export$a9a855983a3a6110(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTreeView", slot);
-}
-const $72431ccbc2c1ba13$var$treeViewClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTreeView", [
-    "root"
-]);
-var $72431ccbc2c1ba13$export$2e2bcd8739ae039 = $72431ccbc2c1ba13$var$treeViewClasses;
-
-
-
-const $4ed19a9323b6d50c$var$_excluded = [
-    "children",
-    "className",
-    "defaultCollapseIcon",
-    "defaultEndIcon",
-    "defaultExpanded",
-    "defaultExpandIcon",
-    "defaultParentIcon",
-    "defaultSelected",
-    "disabledItemsFocusable",
-    "disableSelection",
-    "expanded",
-    "id",
-    "multiSelect",
-    "onBlur",
-    "onFocus",
-    "onKeyDown",
-    "onNodeFocus",
-    "onNodeSelect",
-    "onNodeToggle",
-    "selected"
-];
-const $4ed19a9323b6d50c$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes  } = ownerState;
-    const slots = {
-        root: [
-            "root"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $72431ccbc2c1ba13$export$a9a855983a3a6110), classes);
-};
-const $4ed19a9323b6d50c$var$TreeViewRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("ul", {
-    name: "MuiTreeView",
-    slot: "Root",
-    overridesResolver: (props, styles)=>styles.root
-})({
-    padding: 0,
-    margin: 0,
-    listStyle: "none",
-    outline: 0
-});
-function $4ed19a9323b6d50c$var$isPrintableCharacter(string) {
-    return string && string.length === 1 && string.match(/\S/);
-}
-function $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, startIndex, char) {
-    for(let i = startIndex; i < firstChars.length; i += 1){
-        if (char === firstChars[i]) return i;
-    }
-    return -1;
-}
-function $4ed19a9323b6d50c$var$noopSelection() {
-    return false;
-}
-const $4ed19a9323b6d50c$var$defaultDefaultExpanded = [];
-const $4ed19a9323b6d50c$var$defaultDefaultSelected = [];
-const $4ed19a9323b6d50c$var$TreeView = /*#__PURE__*/ $d4J5n.forwardRef(function TreeView(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTreeView"
-    });
-    const { children: children , className: className , defaultCollapseIcon: defaultCollapseIcon , defaultEndIcon: defaultEndIcon , defaultExpanded: defaultExpanded = $4ed19a9323b6d50c$var$defaultDefaultExpanded , defaultExpandIcon: defaultExpandIcon , defaultParentIcon: defaultParentIcon , defaultSelected: defaultSelected = $4ed19a9323b6d50c$var$defaultDefaultSelected , disabledItemsFocusable: disabledItemsFocusable = false , disableSelection: disableSelection = false , expanded: expandedProp , id: idProp , multiSelect: multiSelect = false , onBlur: onBlur , onFocus: onFocus , onKeyDown: onKeyDown , onNodeFocus: onNodeFocus , onNodeSelect: onNodeSelect , onNodeToggle: onNodeToggle , selected: selectedProp  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $4ed19a9323b6d50c$var$_excluded);
-    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
-    const isRtl = theme.direction === "rtl";
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        defaultExpanded: defaultExpanded,
-        defaultSelected: defaultSelected,
-        disabledItemsFocusable: disabledItemsFocusable,
-        disableSelection: disableSelection,
-        multiSelect: multiSelect
-    });
-    const classes = $4ed19a9323b6d50c$var$useUtilityClasses(ownerState);
-    const treeId = (0, $092c32856ba8a566$export$2e2bcd8739ae039)(idProp);
-    const treeRef = $d4J5n.useRef(null);
-    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(treeRef, ref);
-    const [focusedNodeId, setFocusedNodeId] = $d4J5n.useState(null);
-    const nodeMap = $d4J5n.useRef({});
-    const firstCharMap = $d4J5n.useRef({});
-    const [expanded, setExpandedState] = (0, $d290fd83b7d7104d$export$2e2bcd8739ae039)({
-        controlled: expandedProp,
-        default: defaultExpanded,
-        name: "TreeView",
-        state: "expanded"
-    });
-    const [selected, setSelectedState] = (0, $d290fd83b7d7104d$export$2e2bcd8739ae039)({
-        controlled: selectedProp,
-        default: defaultSelected,
-        name: "TreeView",
-        state: "selected"
-    });
-    /*
-   * Status Helpers
-   */ const isExpanded = $d4J5n.useCallback((id)=>Array.isArray(expanded) ? expanded.indexOf(id) !== -1 : false, [
-        expanded
-    ]);
-    const isExpandable = $d4J5n.useCallback((id)=>nodeMap.current[id] && nodeMap.current[id].expandable, []);
-    const isSelected = $d4J5n.useCallback((id)=>Array.isArray(selected) ? selected.indexOf(id) !== -1 : selected === id, [
-        selected
-    ]);
-    const isDisabled = $d4J5n.useCallback((id)=>{
-        let node = nodeMap.current[id];
-        // This can be called before the node has been added to the node map.
-        if (!node) return false;
-        if (node.disabled) return true;
-        while(node.parentId != null){
-            node = nodeMap.current[node.parentId];
-            if (node.disabled) return true;
-        }
-        return false;
-    }, []);
-    const isFocused = (id)=>focusedNodeId === id;
-    /*
-   * Child Helpers
-   */ // Using Object.keys -> .map to mimic Object.values we should replace with Object.values() once we stop IE11 support.
-    const getChildrenIds = (id)=>Object.keys(nodeMap.current).map((key)=>{
-            return nodeMap.current[key];
-        }).filter((node)=>node.parentId === id).sort((a, b)=>a.index - b.index).map((child)=>child.id);
-    const getNavigableChildrenIds = (id)=>{
-        let childrenIds = getChildrenIds(id);
-        if (!disabledItemsFocusable) childrenIds = childrenIds.filter((node)=>!isDisabled(node));
-        return childrenIds;
-    };
-    /*
-   * Node Helpers
-   */ const getNextNode = (id)=>{
-        // If expanded get first child
-        if (isExpanded(id) && getNavigableChildrenIds(id).length > 0) return getNavigableChildrenIds(id)[0];
-        let node = nodeMap.current[id];
-        while(node != null){
-            // Try to get next sibling
-            const siblings = getNavigableChildrenIds(node.parentId);
-            const nextSibling = siblings[siblings.indexOf(node.id) + 1];
-            if (nextSibling) return nextSibling;
-            // If the sibling does not exist, go up a level to the parent and try again.
-            node = nodeMap.current[node.parentId];
-        }
-        return null;
-    };
-    const getPreviousNode = (id)=>{
-        const node = nodeMap.current[id];
-        const siblings = getNavigableChildrenIds(node.parentId);
-        const nodeIndex = siblings.indexOf(id);
-        if (nodeIndex === 0) return node.parentId;
-        let currentNode = siblings[nodeIndex - 1];
-        while(isExpanded(currentNode) && getNavigableChildrenIds(currentNode).length > 0)currentNode = getNavigableChildrenIds(currentNode).pop();
-        return currentNode;
-    };
-    const getLastNode = ()=>{
-        let lastNode = getNavigableChildrenIds(null).pop();
-        while(isExpanded(lastNode))lastNode = getNavigableChildrenIds(lastNode).pop();
-        return lastNode;
-    };
-    const getFirstNode = ()=>getNavigableChildrenIds(null)[0];
-    const getParent = (id)=>nodeMap.current[id].parentId;
-    /**
-   * This is used to determine the start and end of a selection range so
-   * we can get the nodes between the two border nodes.
-   *
-   * It finds the nodes' common ancestor using
-   * a naive implementation of a lowest common ancestor algorithm
-   * (https://en.wikipedia.org/wiki/Lowest_common_ancestor).
-   * Then compares the ancestor's 2 children that are ancestors of nodeA and NodeB
-   * so we can compare their indexes to work out which node comes first in a depth first search.
-   * (https://en.wikipedia.org/wiki/Depth-first_search)
-   *
-   * Another way to put it is which node is shallower in a trémaux tree
-   * https://en.wikipedia.org/wiki/Tr%C3%A9maux_tree
-   */ const findOrderInTremauxTree = (nodeAId, nodeBId)=>{
-        if (nodeAId === nodeBId) return [
-            nodeAId,
-            nodeBId
-        ];
-        const nodeA = nodeMap.current[nodeAId];
-        const nodeB = nodeMap.current[nodeBId];
-        if (nodeA.parentId === nodeB.id || nodeB.parentId === nodeA.id) return nodeB.parentId === nodeA.id ? [
-            nodeA.id,
-            nodeB.id
-        ] : [
-            nodeB.id,
-            nodeA.id
-        ];
-        const aFamily = [
-            nodeA.id
-        ];
-        const bFamily = [
-            nodeB.id
-        ];
-        let aAncestor = nodeA.parentId;
-        let bAncestor = nodeB.parentId;
-        let aAncestorIsCommon = bFamily.indexOf(aAncestor) !== -1;
-        let bAncestorIsCommon = aFamily.indexOf(bAncestor) !== -1;
-        let continueA = true;
-        let continueB = true;
-        while(!bAncestorIsCommon && !aAncestorIsCommon){
-            if (continueA) {
-                aFamily.push(aAncestor);
-                aAncestorIsCommon = bFamily.indexOf(aAncestor) !== -1;
-                continueA = aAncestor !== null;
-                if (!aAncestorIsCommon && continueA) aAncestor = nodeMap.current[aAncestor].parentId;
-            }
-            if (continueB && !aAncestorIsCommon) {
-                bFamily.push(bAncestor);
-                bAncestorIsCommon = aFamily.indexOf(bAncestor) !== -1;
-                continueB = bAncestor !== null;
-                if (!bAncestorIsCommon && continueB) bAncestor = nodeMap.current[bAncestor].parentId;
-            }
-        }
-        const commonAncestor = aAncestorIsCommon ? aAncestor : bAncestor;
-        const ancestorFamily = getChildrenIds(commonAncestor);
-        const aSide = aFamily[aFamily.indexOf(commonAncestor) - 1];
-        const bSide = bFamily[bFamily.indexOf(commonAncestor) - 1];
-        return ancestorFamily.indexOf(aSide) < ancestorFamily.indexOf(bSide) ? [
-            nodeAId,
-            nodeBId
-        ] : [
-            nodeBId,
-            nodeAId
-        ];
-    };
-    const getNodesInRange = (nodeA, nodeB)=>{
-        const [first, last] = findOrderInTremauxTree(nodeA, nodeB);
-        const nodes = [
-            first
-        ];
-        let current = first;
-        while(current !== last){
-            current = getNextNode(current);
-            nodes.push(current);
-        }
-        return nodes;
-    };
-    /*
-   * Focus Helpers
-   */ const focus = (event, id)=>{
-        if (id) {
-            setFocusedNodeId(id);
-            if (onNodeFocus) onNodeFocus(event, id);
-        }
-    };
-    const focusNextNode = (event, id)=>focus(event, getNextNode(id));
-    const focusPreviousNode = (event, id)=>focus(event, getPreviousNode(id));
-    const focusFirstNode = (event)=>focus(event, getFirstNode());
-    const focusLastNode = (event)=>focus(event, getLastNode());
-    const focusByFirstCharacter = (event, id, char)=>{
-        let start;
-        let index;
-        const lowercaseChar = char.toLowerCase();
-        const firstCharIds = [];
-        const firstChars = [];
-        // This really only works since the ids are strings
-        Object.keys(firstCharMap.current).forEach((nodeId)=>{
-            const firstChar = firstCharMap.current[nodeId];
-            const map = nodeMap.current[nodeId];
-            const visible = map.parentId ? isExpanded(map.parentId) : true;
-            const shouldBeSkipped = disabledItemsFocusable ? false : isDisabled(nodeId);
-            if (visible && !shouldBeSkipped) {
-                firstCharIds.push(nodeId);
-                firstChars.push(firstChar);
-            }
-        });
-        // Get start index for search based on position of currentItem
-        start = firstCharIds.indexOf(id) + 1;
-        if (start >= firstCharIds.length) start = 0;
-        // Check remaining slots in the menu
-        index = $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, start, lowercaseChar);
-        // If not found in remaining slots, check from beginning
-        if (index === -1) index = $4ed19a9323b6d50c$var$findNextFirstChar(firstChars, 0, lowercaseChar);
-        // If match was found...
-        if (index > -1) focus(event, firstCharIds[index]);
-    };
-    /*
-   * Expansion Helpers
-   */ const toggleExpansion = (event, value = focusedNodeId)=>{
-        let newExpanded;
-        if (expanded.indexOf(value) !== -1) newExpanded = expanded.filter((id)=>id !== value);
-        else newExpanded = [
-            value
-        ].concat(expanded);
-        if (onNodeToggle) onNodeToggle(event, newExpanded);
-        setExpandedState(newExpanded);
-    };
-    const expandAllSiblings = (event, id)=>{
-        const map = nodeMap.current[id];
-        const siblings = getChildrenIds(map.parentId);
-        const diff = siblings.filter((child)=>isExpandable(child) && !isExpanded(child));
-        const newExpanded = expanded.concat(diff);
-        if (diff.length > 0) {
-            setExpandedState(newExpanded);
-            if (onNodeToggle) onNodeToggle(event, newExpanded);
-        }
-    };
-    /*
-   * Selection Helpers
-   */ const lastSelectedNode = $d4J5n.useRef(null);
-    const lastSelectionWasRange = $d4J5n.useRef(false);
-    const currentRangeSelection = $d4J5n.useRef([]);
-    const handleRangeArrowSelect = (event, nodes)=>{
-        let base = selected.slice();
-        const { start: start , next: next , current: current  } = nodes;
-        if (!next || !current) return;
-        if (currentRangeSelection.current.indexOf(current) === -1) currentRangeSelection.current = [];
-        if (lastSelectionWasRange.current) {
-            if (currentRangeSelection.current.indexOf(next) !== -1) {
-                base = base.filter((id)=>id === start || id !== current);
-                currentRangeSelection.current = currentRangeSelection.current.filter((id)=>id === start || id !== current);
-            } else {
-                base.push(next);
-                currentRangeSelection.current.push(next);
-            }
-        } else {
-            base.push(next);
-            currentRangeSelection.current.push(current, next);
-        }
-        if (onNodeSelect) onNodeSelect(event, base);
-        setSelectedState(base);
-    };
-    const handleRangeSelect = (event, nodes)=>{
-        let base = selected.slice();
-        const { start: start , end: end  } = nodes;
-        // If last selection was a range selection ignore nodes that were selected.
-        if (lastSelectionWasRange.current) base = base.filter((id)=>currentRangeSelection.current.indexOf(id) === -1);
-        let range = getNodesInRange(start, end);
-        range = range.filter((node)=>!isDisabled(node));
-        currentRangeSelection.current = range;
-        let newSelected = base.concat(range);
-        newSelected = newSelected.filter((id, i)=>newSelected.indexOf(id) === i);
-        if (onNodeSelect) onNodeSelect(event, newSelected);
-        setSelectedState(newSelected);
-    };
-    const handleMultipleSelect = (event, value)=>{
-        let newSelected;
-        if (selected.indexOf(value) !== -1) newSelected = selected.filter((id)=>id !== value);
-        else newSelected = [
-            value
-        ].concat(selected);
-        if (onNodeSelect) onNodeSelect(event, newSelected);
-        setSelectedState(newSelected);
-    };
-    const handleSingleSelect = (event, value)=>{
-        const newSelected = multiSelect ? [
-            value
-        ] : value;
-        if (onNodeSelect) onNodeSelect(event, newSelected);
-        setSelectedState(newSelected);
-    };
-    const selectNode = (event, id, multiple = false)=>{
-        if (id) {
-            if (multiple) handleMultipleSelect(event, id);
-            else handleSingleSelect(event, id);
-            lastSelectedNode.current = id;
-            lastSelectionWasRange.current = false;
-            currentRangeSelection.current = [];
-            return true;
-        }
-        return false;
-    };
-    const selectRange = (event, nodes, stacked = false)=>{
-        const { start: start = lastSelectedNode.current , end: end , current: current  } = nodes;
-        if (stacked) handleRangeArrowSelect(event, {
-            start: start,
-            next: end,
-            current: current
-        });
-        else if (start != null && end != null) handleRangeSelect(event, {
-            start: start,
-            end: end
-        });
-        lastSelectionWasRange.current = true;
-    };
-    const rangeSelectToFirst = (event, id)=>{
-        if (!lastSelectedNode.current) lastSelectedNode.current = id;
-        const start = lastSelectionWasRange.current ? lastSelectedNode.current : id;
-        selectRange(event, {
-            start: start,
-            end: getFirstNode()
-        });
-    };
-    const rangeSelectToLast = (event, id)=>{
-        if (!lastSelectedNode.current) lastSelectedNode.current = id;
-        const start = lastSelectionWasRange.current ? lastSelectedNode.current : id;
-        selectRange(event, {
-            start: start,
-            end: getLastNode()
-        });
-    };
-    const selectNextNode = (event, id)=>{
-        if (!isDisabled(getNextNode(id))) selectRange(event, {
-            end: getNextNode(id),
-            current: id
-        }, true);
-    };
-    const selectPreviousNode = (event, id)=>{
-        if (!isDisabled(getPreviousNode(id))) selectRange(event, {
-            end: getPreviousNode(id),
-            current: id
-        }, true);
-    };
-    const selectAllNodes = (event)=>{
-        selectRange(event, {
-            start: getFirstNode(),
-            end: getLastNode()
-        });
-    };
-    /*
-   * Mapping Helpers
-   */ const registerNode = $d4J5n.useCallback((node)=>{
-        const { id: id , index: index , parentId: parentId , expandable: expandable , idAttribute: idAttribute , disabled: disabled  } = node;
-        nodeMap.current[id] = {
-            id: id,
-            index: index,
-            parentId: parentId,
-            expandable: expandable,
-            idAttribute: idAttribute,
-            disabled: disabled
-        };
-    }, []);
-    const unregisterNode = $d4J5n.useCallback((id)=>{
-        const newMap = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, nodeMap.current);
-        delete newMap[id];
-        nodeMap.current = newMap;
-        setFocusedNodeId((oldFocusedNodeId)=>{
-            if (oldFocusedNodeId === id && treeRef.current === (0, $ada992583889f30c$export$2e2bcd8739ae039)(treeRef.current).activeElement) return getChildrenIds(null)[0];
-            return oldFocusedNodeId;
-        });
-    }, []);
-    const mapFirstChar = $d4J5n.useCallback((id, firstChar)=>{
-        firstCharMap.current[id] = firstChar;
-    }, []);
-    const unMapFirstChar = $d4J5n.useCallback((id)=>{
-        const newMap = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, firstCharMap.current);
-        delete newMap[id];
-        firstCharMap.current = newMap;
-    }, []);
-    /**
-   * Event handlers and Navigation
-   */ const handleNextArrow = (event)=>{
-        if (isExpandable(focusedNodeId)) {
-            if (isExpanded(focusedNodeId)) focusNextNode(event, focusedNodeId);
-            else if (!isDisabled(focusedNodeId)) toggleExpansion(event);
-        }
-        return true;
-    };
-    const handlePreviousArrow = (event)=>{
-        if (isExpanded(focusedNodeId) && !isDisabled(focusedNodeId)) {
-            toggleExpansion(event, focusedNodeId);
-            return true;
-        }
-        const parent = getParent(focusedNodeId);
-        if (parent) {
-            focus(event, parent);
-            return true;
-        }
-        return false;
-    };
-    const handleKeyDown = (event)=>{
-        let flag = false;
-        const key = event.key;
-        // If the tree is empty there will be no focused node
-        if (event.altKey || event.currentTarget !== event.target || !focusedNodeId) return;
-        const ctrlPressed = event.ctrlKey || event.metaKey;
-        switch(key){
-            case " ":
-                if (!disableSelection && !isDisabled(focusedNodeId)) {
-                    if (multiSelect && event.shiftKey) {
-                        selectRange(event, {
-                            end: focusedNodeId
-                        });
-                        flag = true;
-                    } else if (multiSelect) flag = selectNode(event, focusedNodeId, true);
-                    else flag = selectNode(event, focusedNodeId);
-                }
-                event.stopPropagation();
-                break;
-            case "Enter":
-                if (!isDisabled(focusedNodeId)) {
-                    if (isExpandable(focusedNodeId)) {
-                        toggleExpansion(event);
-                        flag = true;
-                    } else if (multiSelect) flag = selectNode(event, focusedNodeId, true);
-                    else flag = selectNode(event, focusedNodeId);
-                }
-                event.stopPropagation();
-                break;
-            case "ArrowDown":
-                if (multiSelect && event.shiftKey && !disableSelection) selectNextNode(event, focusedNodeId);
-                focusNextNode(event, focusedNodeId);
-                flag = true;
-                break;
-            case "ArrowUp":
-                if (multiSelect && event.shiftKey && !disableSelection) selectPreviousNode(event, focusedNodeId);
-                focusPreviousNode(event, focusedNodeId);
-                flag = true;
-                break;
-            case "ArrowRight":
-                if (isRtl) flag = handlePreviousArrow(event);
-                else flag = handleNextArrow(event);
-                break;
-            case "ArrowLeft":
-                if (isRtl) flag = handleNextArrow(event);
-                else flag = handlePreviousArrow(event);
-                break;
-            case "Home":
-                if (multiSelect && ctrlPressed && event.shiftKey && !disableSelection && !isDisabled(focusedNodeId)) rangeSelectToFirst(event, focusedNodeId);
-                focusFirstNode(event);
-                flag = true;
-                break;
-            case "End":
-                if (multiSelect && ctrlPressed && event.shiftKey && !disableSelection && !isDisabled(focusedNodeId)) rangeSelectToLast(event, focusedNodeId);
-                focusLastNode(event);
-                flag = true;
-                break;
-            default:
-                if (key === "*") {
-                    expandAllSiblings(event, focusedNodeId);
-                    flag = true;
-                } else if (multiSelect && ctrlPressed && key.toLowerCase() === "a" && !disableSelection) {
-                    selectAllNodes(event);
-                    flag = true;
-                } else if (!ctrlPressed && !event.shiftKey && $4ed19a9323b6d50c$var$isPrintableCharacter(key)) {
-                    focusByFirstCharacter(event, focusedNodeId, key);
-                    flag = true;
-                }
-        }
-        if (flag) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        if (onKeyDown) onKeyDown(event);
-    };
-    const handleFocus = (event)=>{
-        // if the event bubbled (which is React specific) we don't want to steal focus
-        if (event.target === event.currentTarget) {
-            const firstSelected = Array.isArray(selected) ? selected[0] : selected;
-            focus(event, firstSelected || getNavigableChildrenIds(null)[0]);
-        }
-        if (onFocus) onFocus(event);
-    };
-    const handleBlur = (event)=>{
-        setFocusedNodeId(null);
-        if (onBlur) onBlur(event);
-    };
-    const activeDescendant = nodeMap.current[focusedNodeId] ? nodeMap.current[focusedNodeId].idAttribute : null;
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $adab832cd8417549$export$2e2bcd8739ae039).Provider, {
-        // TODO: fix this lint error
-        // eslint-disable-next-line react/jsx-no-constructed-context-values
-        value: {
-            icons: {
-                defaultCollapseIcon: defaultCollapseIcon,
-                defaultExpandIcon: defaultExpandIcon,
-                defaultParentIcon: defaultParentIcon,
-                defaultEndIcon: defaultEndIcon
-            },
-            focus: focus,
-            toggleExpansion: toggleExpansion,
-            isExpanded: isExpanded,
-            isExpandable: isExpandable,
-            isFocused: isFocused,
-            isSelected: isSelected,
-            isDisabled: isDisabled,
-            selectNode: disableSelection ? $4ed19a9323b6d50c$var$noopSelection : selectNode,
-            selectRange: disableSelection ? $4ed19a9323b6d50c$var$noopSelection : selectRange,
-            multiSelect: multiSelect,
-            disabledItemsFocusable: disabledItemsFocusable,
-            mapFirstChar: mapFirstChar,
-            unMapFirstChar: unMapFirstChar,
-            registerNode: registerNode,
-            unregisterNode: unregisterNode,
-            treeId: treeId
-        },
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $07b1bb83e7fd932a$export$c46937d8801f1c9c), {
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($4ed19a9323b6d50c$var$TreeViewRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-                role: "tree",
-                id: treeId,
-                "aria-activedescendant": activeDescendant,
-                "aria-multiselectable": multiSelect,
-                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-                ref: handleRef,
-                tabIndex: 0,
-                onKeyDown: handleKeyDown,
-                onFocus: handleFocus,
-                onBlur: handleBlur,
-                ownerState: ownerState
-            }, other, {
-                children: children
-            }))
-        })
-    });
-});
-var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -43585,7 +44719,6 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
     }
     function addSubAction() {
         if (template) {
-            debugger;
             template.addSubAction();
             setTemplate(template.toString());
             setOpen(false);
@@ -43761,7 +44894,6 @@ var $d4J5n = parcelRequire("d4J5n");
 var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
-        debugger;
         const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
         const code = template.toString("file");
         return {

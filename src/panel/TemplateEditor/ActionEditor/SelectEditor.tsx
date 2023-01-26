@@ -33,7 +33,6 @@ export default () => {
     }
 
     function onChangeQuery(event: React.SyntheticEvent<Element, Event>, query: syphonx.SelectQuery[]): void {
-        debugger;
         obj.query = query;
         setTemplate(template.toString());
     }

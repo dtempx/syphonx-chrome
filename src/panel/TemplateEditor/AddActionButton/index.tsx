@@ -49,7 +49,6 @@ export default (props?: Props) => {
 
     function addSubAction() {
         if (template) {
-            debugger;
             template.addSubAction();
             setTemplate(template.toString());
             setOpen(false);

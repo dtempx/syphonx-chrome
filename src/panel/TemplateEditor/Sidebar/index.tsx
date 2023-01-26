@@ -12,9 +12,9 @@ import {
 
 import {
     NoteAdd as FileNewIcon,
-    FileOpen as FileOpenIcon,
-    Save as FileSaveIcon,
-    HighlightOff as FileCloseIcon,
+    CloudDownload as FileOpenIcon,
+    CloudUpload as FileSaveIcon,
+    CloudOff as FileCloseIcon,
     ManageAccounts as SettingsIcon 
 } from "@mui/icons-material";
 
@@ -46,10 +46,10 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={[
-                    ["File New", <FileNewIcon />, event => { setTemplate(""); onClose(event); }],
-                    ["File Open", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
-                    ["File Save", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
-                    ["File Close", <FileCloseIcon />, event => { setTemplate(""); onClose(event); }],
+                    ["New Template", <FileNewIcon />, event => { setTemplate(""); onClose(event); }],
+                    ["Open Template", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
+                    ["Save Template", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
+                    ["Close Template", <FileCloseIcon />, event => { setTemplate(""); onClose(event); }],
                     null,
                     ["User Settings", <SettingsIcon />, event => { setUserSettingsOpen(true); onClose(event); }]
                 ]} />

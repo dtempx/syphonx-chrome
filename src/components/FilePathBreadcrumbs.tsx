@@ -1,6 +1,6 @@
 import React from "react";
 import { Breadcrumbs, Link, SxProps, Theme, Typography } from "@mui/material";
-import { Home as HomeIcon } from "@mui/icons-material";
+import { Cloud as RootIcon } from "@mui/icons-material";
 import * as path from "../lib/path";
 
 export interface Props {
@@ -20,11 +20,11 @@ export default ({ file, onClick, sx }: Props) => {
                     onClick={event => onClick(event, key)}
                     sx={{ "&:hover": { cursor: "pointer" } }}
                 >
-                    {key !== "/" ? path.filename(key) : <HomeIcon />}
+                    {key !== "/" ? path.filename(key) : <RootIcon />}
                 </Link>
             )}
             <Typography>
-                {slices.length > 1 ? path.filename(slices.at(-1)!) : <HomeIcon />}
+                {slices.length > 1 ? path.filename(slices.at(-1)!) : <RootIcon />}
             </Typography>
         </Breadcrumbs>
     );

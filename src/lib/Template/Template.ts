@@ -151,7 +151,6 @@ export class Template {
     }
 
     removeItem(item: TemplateItem): void {
-        debugger;
         if (item.index >= 0) {
             item.collection.splice(item.index, 1);
             if (item.collection.length > 1) {

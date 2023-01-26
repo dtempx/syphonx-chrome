@@ -1,9 +1,5 @@
 const serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
 
-const headers = {
-    "Content-Type": "application/octet-stream"
-};
-
 export interface File {
     name: string;
     timestamp: Date;
@@ -22,37 +18,33 @@ export async function cloudFetchTemplateDirectory(): Promise<File[]> {
 export async function cloudReadTemplateFile(file: string): Promise<string> {
     if (file.startsWith("/"))
         file = file.slice(1);
-    const response1 = await fetch(`${serviceUrl}/template/${file}?mode=read`);
+    const apiUrl = `${serviceUrl}/template/${file}?mode=read`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok)
+        throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
+
     const { url } = await response1.json() as { url: string };
     const response2 = await fetch(url);
+    if (!response2.ok)
+        throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
     const content = await response2.text();
     return content;
-}
-
-export async function cloudCreateTemplateFile(file: string, content: string): Promise<void> {
-    if (file.startsWith("/"))
-        file = file.slice(1);
-    const response1 = await fetch(`${serviceUrl}/template/${file}?mode=create`);
-    const { url } = await response1.json() as { url: string };
-    const response2 = await fetch(url, {
-        method: "PUT",
-        headers,
-        body: content
-    });
-    const result = await response2.text();
-    console.log(result);
 }
 
 export async function cloudUpdateTemplateFile(file: string, content: string): Promise<void> {
     if (file.startsWith("/"))
         file = file.slice(1);
-    const response1 = await fetch(`${serviceUrl}/template/${file}?mode=update`);
+
+    const apiUrl = `${serviceUrl}/template/${file}?write`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok)
+        throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
+
     const { url } = await response1.json() as { url: string };
-    const response2 = await fetch(url, {
-        method: "PUT",
-        headers,
-        body: content
-    });
+    const response2 = await fetch(url, { method: "PUT", body: content, headers: { "Content-Type": "application/json" } });
+    if (!response2.ok)
+        throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
+
     const result = await response2.text();
     console.log(result);
 }
