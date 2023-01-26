@@ -47,13 +47,13 @@ export default ({ value, onChange }: Props) => {
                 onChange={onValue1Changed}
                 min={0}
                 max={value2}
-                sx={{ width: 100 }}
+                sx={{ width: 50 }}
             />
             <NumberField
                 value={value2}
                 onChange={onValue2Changed}
                 min={value1 || 0}
-                sx={{ width: 100, ml: 1 }}
+                sx={{ width: 50, ml: 1 }}
             />
         </Stack>
     );

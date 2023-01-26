@@ -1,18 +1,25 @@
-V1
+Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
 
-variant field editor
 
-Query Builder
-    context sensitive function parameters for replace, etc.
-    selectMultiple
-
-Add sub-items
+sub-items
     repeat -> sub-actions
     each -> sub-actions
     select[type=object] -> sub-selects
     click -> waitfor (subselect)
     pivot
     union
+    subitem numbering
+    fab selection context
+
+highlight dom on hover over tree or query
+open page on template
+file save debug
+
+VariantField
+file open progress animation on file open/save dialogs
+select cover page
+
+
 
 Data View
     data view: single object view
@@ -22,36 +29,22 @@ Data View
     data view: log view
     data view: data contract view
     DOM highlighting
-    Runnable data view for complex templates
-
+    autorun/manual-mode
+    tree picker
+    breakpoints
+    
 Data contracts
 Template test case runner
-Template settings: url, key
+
+Query Builder
+    context sensitive function parameters for replace, etc.
+    selectMultiple
+
 
 User settings: api-key, email
 Cloud template storage access control
 View template change history (who, when, what/diffs)
 Rollbacks
-
-Trials
-
-
-V1.1
-Selector quality feedback (good, fair, poor)
-Comments
-Persist templates locally in chrome.storage
-Breakpoints
-Editor copy/paste
-Switch between autorun and manual
-Paste HTML Sandbox
-
-Edit template as code (yaml)
-Recorder
-
-Venom conversion tool
-IFRAME drilling
-Support shadow roots with Playwright
-GPT3 chatbot integration
 
 
 
@@ -62,6 +55,7 @@ auto open default url on template open (with user setting)
 add info icon to RegExpField explaining start/end with /, flags, capturing group, etc.
 add info icon to FormulaField explaining start/end with {}, dynamic strings {``}, known variables (data, etc.), any valid javascript expression
 ghosted state in tree for disabled actions or subitems
+selector help & tasks
 
 
 BUGS
@@ -95,6 +89,16 @@ save data to Google sheets
 scheduled runs locally
 scheduled runs from cloud
 multi-transform
+Selector quality feedback (good, fair, poor)
+persist templates locally in chrome.storage
+paste HTML sandbox
+Edit template as code (yaml)
+Recorder
+Venom conversion tool
+IFRAME drilling
+Support shadow roots with Playwright
+GPT3 chatbot integration
+
 
 
 CURRENT: QUERY BUILDER
@@ -141,3 +145,4 @@ Action Views
 
 field editors: formula, regexp, symbolic name
 
+Template settings: url, key

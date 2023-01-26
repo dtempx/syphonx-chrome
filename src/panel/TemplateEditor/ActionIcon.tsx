@@ -1,24 +1,24 @@
 import React from "react";
 import { SvgIconProps } from "@mui/material";
 import {
-    Abc as ItemIcon,
-    Abc as StringTypeIcon,
+    Rule as BooleanTypeIcon,
+    ForkLeft as BreakIcon,
+    TouchApp as ClickIcon,
     AutoAwesomeMotion as EachIcon,
+    GppMaybeOutlined as ErrorIcon,
+    Abc as ItemIcon,
+    Numbers as NumberTypeIcon,
+    DataObject as ObjectTypeIcon,
     AutoAwesomeMotionOutlined as RepeatedIcon,
     Autorenew as RepeatIcon,
-    ForkLeft as BreakIcon,
-    DataObject as ObjectTypeIcon,
-    ExitToApp as YieldIcon,
-    FlipCameraAndroid as TransformIcon,
-    GppMaybe as ErrorIcon,
-    HourglassTop as WaitforIcon,
-    Numbers as NumberTypeIcon,
     PriorityHighOutlined as RequiredIcon,
-    QuestionMark as UnknownIcon,
-    Rule as BooleanTypeIcon,
-    TouchApp as ClickIcon,
     SelectAll as SelectIcon,
-    Timer as SnoozeIcon
+    Snooze as SnoozeIcon,
+    Abc as StringTypeIcon,
+    FlipCameraAndroid as TransformIcon,
+    QuestionMark as UnknownIcon,
+    HourglassEmpty as WaitforIcon,
+    ExitToApp as YieldIcon
 } from "@mui/icons-material";
 
 export interface Props extends SvgIconProps {

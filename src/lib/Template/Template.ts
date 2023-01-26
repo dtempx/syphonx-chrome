@@ -1,8 +1,15 @@
 import * as syphonx from "syphonx-lib";
 import { TemplateItem } from "./TemplateItem";
 import { clone, omit } from "../utilities";
-import { createActionItems, findItem, findParentActionCollection, matchBrace, ordinalName } from "./utilities";
 import * as background from "../../background-proxy";
+
+import {
+    createActionItems,
+    findItem,
+    findParentActionCollection,
+    formatTemplateJson,
+    ordinalName
+} from "./utilities/index";
 
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
@@ -192,20 +199,9 @@ export class Template {
 
     toString(format?: "file"): string {
         const obj = format === "file" ? omit(this.obj, "selected", "file") : this.obj;
-        let text = JSON.stringify(obj, null, 2) || "";
-        let i = text.indexOf(`"query": [\n`);
-        while (i >= 0) {
-            i = text.indexOf("[", i);
-            const j = matchBrace(text, i, "[]");
-            if (j > i) {
-                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
-                i = text.indexOf(`"query": [\n`);
-            }
-            else {
-                break;
-            }
-        }
-        return text;    
+        let json = JSON.stringify(obj, null, 2) || "";
+        json = formatTemplateJson(json);
+        return json;
     }
 }
 

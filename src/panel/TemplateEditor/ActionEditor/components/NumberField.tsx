@@ -39,7 +39,7 @@ export default ({ value, min, max, type = "float", onChange, sx }: Props) => {
             value={value}
             onChange={handleChange}
             onValidate={handleValidate}
-            sx={sx}
+            sx={{ width: 50, ...sx }}
         />
     );
 }
