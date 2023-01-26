@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Switch } from "@mui/material";
-import * as syphonx from "syphonx-lib";
 import { useTemplate } from "../../context";
 import { NumberField } from "./components";
 import { Template } from "../../../lib";
+import * as syphonx from "syphonx-lib";
 
 import {
     ComplexPropertyGrid,
     FormulaField,
-    ValidateField
+    PlainTextField
 } from "./components";
 
 export default () => {
     const { template: json, setTemplate } = useTemplate();
-    const template = new Template(json);
-    const item = template.selected();
-    const obj = item?.obj as syphonx.Yield & { context: string };
+
+    const { template, obj } = useMemo(() => {
+        const template = new Template(json);
+        const item = template.selected();
+        //todo: remove shim when syphonx-core updated
+        const obj = item?.obj as syphonx.Yield & { context?: string };
+        return { template, obj };
+    }, [json]);
+
     return obj ? (
         <>
             <ComplexPropertyGrid
@@ -26,16 +32,16 @@ export default () => {
                             value={obj.when}
                             onChange={(event, value) => { obj.when = value; setTemplate(template.toString()); }}
                         />,
-                        "A formula that determines whether to break out of the current loop, or breaks unconditionally if not specified.",
+                        "A formula that determines whether to yield, or yields unconditionally if unspecified.",
                         true
                     ],
                     [
                         "context",
-                        <ValidateField
+                        <PlainTextField
                             value={obj.context}
                             onChange={(event, value) => { obj.context = value; setTemplate(template.toString()); }}
                         />,
-                        "Specifies additional context for host, such as to take a screenshot.",
+                        "Specifies host context. Used to trigger screenshots and other host responsibilities.",
                         obj.context !== undefined
                     ],
                     [

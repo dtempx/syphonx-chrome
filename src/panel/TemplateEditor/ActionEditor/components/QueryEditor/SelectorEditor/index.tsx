@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import * as syphonx from "syphonx-lib";
-import { clone } from "../../../../lib";
+import { clone } from "../../../../../../lib";
 import FunctionEditor from "../FunctionEditor/index";
 import SelectorField from "../SelectorField";
 

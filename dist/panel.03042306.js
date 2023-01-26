@@ -38195,17 +38195,13 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
             click: {}
         };
         else if (type === "each") action = {
-            each: {
-                actions: []
-            }
+            each: {}
         };
         else if (type === "error") action = {
             error: {}
         };
         else if (type === "repeat") action = {
-            repeat: {
-                actions: []
-            }
+            repeat: {}
         };
         else if (type === "select") action = {
             select: [
@@ -38328,13 +38324,13 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
     toString(format) {
         const obj = format === "file" ? (0, $01caa20c9e164fb5$export$30a06c8d3562193f)(this.obj, "selected", "file") : this.obj;
         let text = JSON.stringify(obj, null, 2) || "";
-        let i = text.indexOf(`"$": [\n`);
+        let i = text.indexOf(`"query": [\n`);
         while(i >= 0){
             i = text.indexOf("[", i);
             const j = (0, $6f0852509a7f7477$export$ad9052cdca847332)(text, i, "[]");
             if (j > i) {
                 text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
-                i = text.indexOf(`"$": [\n`);
+                i = text.indexOf(`"query": [\n`);
             } else break;
         }
         return text;
@@ -39735,680 +39731,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-parcelRequire("d4J5n");
-
-var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
-    if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $820f84c1d7261d6d$export$2e2bcd8739ae039), {
-        ...props,
-        sx: {
-            ...props.sx,
-            transform: "rotate(180deg)"
-        }
-    });
-    else if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e35cf2d20f939f4$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "item") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "number") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b1faf5f98bbb111e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $012087529d88be7e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1d4519e24428e5fd$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "string") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $793603d0f5153a7e$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cd5829ac10d83747$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4f3e459b9996d8e0$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8bd75d7133cf3395$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $10cdc2163f15d747$export$2e2bcd8739ae039), {
-        ...props
-    });
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-var $6abef6d5d24d13ce$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
-    const [value1, setValue] = (0, $d4J5n.useState)("");
-    (0, $d4J5n.useEffect)(()=>{
-        const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query1);
-        setValue(value || "");
-    }, [
-        query1
-    ]);
-    function validate(event, value) {
-        try {
-            $75371f08c5d7238f$export$dd48e276a5eff34c(event.target.value);
-            return true;
-        } catch (err) {
-            return false;
-        }
-    }
-    function commit(event, value) {
-        if (value) {
-            let query;
-            try {
-                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value);
-            } catch (err) {
-                console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening
-                return;
-            }
-            if (query) onChange(event, query);
-        }
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
-        variant: "standard",
-        size: "small",
-        fullWidth: true,
-        value: value1,
-        onValidate: validate,
-        onChange: commit
-    });
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-var $8a570d493fafcca0$exports = {};
-$8a570d493fafcca0$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
-
-
-
-
-var $6417a5352f465ba9$export$2e2bcd8739ae039 = ({ value: value1 = [
-    ""
-] , onChange: onChange , onDelete: onDelete , sx: sx  })=>{
-    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
-    const [output, setOutput] = (0, $d4J5n.useState)("");
-    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
-    function assignValue(newValue, i) {
-        const obj = value1.slice(0);
-        obj[i] = newValue;
-        return obj;
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-        sx: sx,
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                direction: "row",
-                spacing: 0,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        value: value1[0],
-                        displayEmpty: true,
-                        renderValue: (value)=>value || /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                variant: "subtitle1",
-                                sx: {
-                                    opacity: 0.5
-                                },
-                                children: "(Add a stage)"
-                            }),
-                        onChange: (event)=>onChange(event, [
-                                event.target.value,
-                                ...value1.slice(1)
-                            ]),
-                        sx: {
-                            width: 300
-                        },
-                        children: [
-                            (0, (/*@__PURE__*/$parcel$interopDefault($8a570d493fafcca0$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                    value: key,
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                        title: help,
-                                        arrow: true,
-                                        placement: "right",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                            sx: {
-                                                width: "100%"
-                                            },
-                                            children: key
-                                        })
-                                    })
-                                })),
-                            expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(false),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: "Less"
-                                    })
-                                ]
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(true),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: "More"
-                                    })
-                                ]
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        fullWidth: true,
-                        value: value1[1],
-                        onChange: (event)=>onChange(event, assignValue(event.target.value, 1)),
-                        sx: {
-                            ml: 1,
-                            visibility: value1[0] ? "visible" : "hidden"
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "Delete this stage",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: onDelete,
-                            sx: {
-                                visibility: value1[0] ? "visible" : "hidden"
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: showOutput ? "Hide stage output" : "Show stage output",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: ()=>setShowOutput(!showOutput),
-                            sx: {
-                                visibility: value1[0] ? "visible" : "hidden"
-                            },
-                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    })
-                ]
-            }),
-            showOutput && value1[0] ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                variant: "outlined",
-                multiline: true,
-                rows: 3,
-                defaultValue: output,
-                sx: {
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "LightGray",
-                    fontSize: "small"
-                }
-            }) : null
-        ]
-    });
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $101d62ce18dea1b1$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
-    const [tracking, setTracking] = (0, $d4J5n.useState)(false);
-    const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
-    const [counter, setCounter] = (0, $d4J5n.useState)(0);
-    const [output1, setOutput] = (0, $d4J5n.useState)([]);
-    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
-    const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
-    (0, $d4J5n.useEffect)(()=>{
-        if (value) (async ()=>{
-            const output = await $6767c619f5de943e$export$f2909722c7f0f932([
-                value
-            ]);
-            setOutput(output);
-        })();
-        return ()=>{
-            $6767c619f5de943e$export$f2909722c7f0f932([]);
-        };
-    }, [
-        value
-    ]);
-    (0, $d4J5n.useEffect)(()=>{
-        const timer = setTimeout(()=>{
-            setShowTooltip(!value);
-        }, 250);
-        return ()=>{
-            clearTimeout(timer);
-        };
-    }, [
-        value
-    ]);
-    (0, $d4J5n.useEffect)(()=>{
-        setCounter(0);
-        if (tracking) $6767c619f5de943e$export$1f8ffc6fd33b1d16();
-        else $6767c619f5de943e$export$e684be5f4b22cc14();
-        const timer = setInterval(async ()=>{
-            if (tracking) {
-                const selectors = await $6767c619f5de943e$export$225ea495d1fa0d5();
-                if (selectors.length > 0) {
-                    setSelectors(selectors);
-                    setCounter(0); // reset interval counter
-                    onChange(new Event("change"), selectors[0]);
-                } else if (counter >= 60) setTracking(false); // disable tracking after 60 seconds
-                else setCounter(counter + 1);
-            }
-        }, 1000);
-        return ()=>{
-            clearInterval(timer);
-            $6767c619f5de943e$export$e684be5f4b22cc14();
-        };
-    }, [
-        tracking
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                ...props,
-                direction: "row",
-                spacing: 0,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        arrow: true,
-                        placement: "bottom",
-                        open: showTooltip,
-                        title: !tracking ? "Click here to automatically generate a CSS selector by clicking on the page." : "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page.",
-                        PopperProps: {
-                            style: {
-                                pointerEvents: "none"
-                            }
-                        },
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                            variant: tracking ? "contained" : "outlined",
-                            size: "small",
-                            onClick: ()=>setTracking(!tracking),
-                            sx: {
-                                minWidth: 48
-                            },
-                            children: tracking ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $64d96a0bf049eab8$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ce284b7467ad2b6$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8461efb96d774bba$export$2e2bcd8739ae039), {
-                        size: "small",
-                        value: value,
-                        options: selectors1,
-                        fullWidth: true,
-                        freeSolo: true,
-                        openOnFocus: true,
-                        forcePopupIcon: true,
-                        sx: {
-                            ml: 1
-                        },
-                        renderInput: (params)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                                ...params,
-                                placeholder: "Selector",
-                                label: "Selector",
-                                onChange: (event)=>onChange(event, event.target.value)
-                            })
-                    }),
-                    output1.length > 0 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                        color: "primary",
-                        label: output1.length,
-                        size: "small",
-                        sx: {
-                            position: "relative",
-                            top: "8px",
-                            ml: 1
-                        }
-                    }) : null,
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: showOutput ? "Hide stage output" : "Show stage output",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: ()=>setShowOutput(!showOutput),
-                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    })
-                ]
-            }),
-            showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                variant: "outlined",
-                multiline: true,
-                rows: 3,
-                value: output1.map((line)=>line?.trim() || "").join("\n"),
-                sx: {
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "LightGray",
-                    ".MuiInputBase-root": {
-                        p: 0
-                    },
-                    ".MuiInputBase-input": {
-                        p: "4px",
-                        fontSize: "smaller"
-                    }
-                }
-            }) : null
-        ]
-    });
-};
-
-
-
-var $0875a46d41a08fd1$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
-    const select = (0, $d4J5n.useMemo)(()=>value1 || [
-            ""
-        ], [
-        value1
-    ]);
-    function onChangeSelector(event, value) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj[0] = value;
-        onChange(event, obj);
-    }
-    function onChangeQueryOp(event, value, i) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj[i] = value;
-        onChange(event, obj);
-    }
-    function onDeleteQueryOp(event, i) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj.splice(i, 1);
-        onChange(event, obj);
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-        sx: sx,
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $101d62ce18dea1b1$export$2e2bcd8739ae039), {
-                value: select[0],
-                onChange: (event, value)=>onChangeSelector(event, value)
-            }),
-            select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                children: [
-                    select.slice(1).map((obj1, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6417a5352f465ba9$export$2e2bcd8739ae039), {
-                            value: obj1,
-                            onChange: (event, obj)=>onChangeQueryOp(event, obj, i + 1),
-                            onDelete: (event)=>onDeleteQueryOp(event, i + 1),
-                            sx: {
-                                mt: 1
-                            }
-                        })),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6417a5352f465ba9$export$2e2bcd8739ae039), {
-                        onChange: (event, obj)=>onChangeQueryOp(event, obj, select.length),
-                        sx: {
-                            mt: 1
-                        }
-                    })
-                ]
-            })
-        ]
-    });
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-var $bfc02ee7e55afdfc$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
-    return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
-        underline: "always",
-        fontSize: "small",
-        sx: {
-            cursor: "pointer"
-        },
-        onClick: onAdd,
-        children: "Add alternate selector"
-    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-        direction: "row",
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                title: "Switches between query alternates",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $45f76937994d9bdb$export$2e2bcd8739ae039), {
-                    size: "small",
-                    color: "primary",
-                    count: selects.length,
-                    page: index + 1,
-                    onChange: (event, page)=>onChange(event, page - 1),
-                    sx: {
-                        position: "relative",
-                        top: "2px"
-                    }
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                title: "Add an alternate query",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                    size: "small",
-                    onClick: onAdd,
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
-                        fontSize: "small"
-                    })
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                title: "Delete this alternate query",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                    size: "small",
-                    disabled: selects.length <= 1,
-                    onClick: onDelete,
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                        fontSize: "small"
-                    })
-                })
-            })
-        ]
-    });
-};
-
-
-
-var $2379682caf290208$export$2e2bcd8739ae039 = ({ value: value , open: open , onClose: onClose , onChange: onChange  })=>{
-    const [select, setSelect] = (0, $d4J5n.useState)([
-        [
-            ""
-        ]
-    ]);
-    const [index1, setIndex] = (0, $d4J5n.useState)(0);
-    (0, $d4J5n.useEffect)(()=>setSelect(value.query || [
-            [
-                ""
-            ]
-        ]), [
-        value
-    ]);
-    function onAddQuery() {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj.push([
-            ""
-        ]);
-        setSelect(obj);
-        setIndex(obj.length - 1);
-    }
-    function onDeleteQuery() {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj.splice(index1, 1);
-        setSelect(obj);
-        if (index1 > 0) setIndex(index1 - 1);
-    }
-    function onChangeQuery(event, query) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
-        obj[index1] = query;
-        setSelect(obj);
-    }
-    function onSave(event) {
-        onChange(event, select);
-        onClose(event);
-    }
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
-        fullScreen: true,
-        open: open,
-        onClose: onClose,
-        sx: {
-            minWidth: 600
-        },
-        TransitionComponent: (0, $5339359c895a55f0$export$d5e0bbf39d25920b),
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0d0d12e54088d016$export$2e2bcd8739ae039), {
-                sx: {
-                    p: 0
-                },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1e6698c63139ed83$export$2e2bcd8739ae039), {
-                    title: "Query Builder",
-                    onClose: onClose
-                })
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
-                sx: {
-                    mt: 2
-                },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        style: {
-                            width: "100%"
-                        },
-                        sx: {
-                            display: "flex",
-                            justifyContent: "space-between",
-                            bgcolor: "background.paper",
-                            borderRadius: 1,
-                            p: 1,
-                            m: 1
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                                direction: "row",
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                                        name: value.type || "string",
-                                        sx: {
-                                            color: "primary.light",
-                                            position: "relative",
-                                            top: "4px"
-                                        }
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        variant: "caption",
-                                        fontSize: "large",
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: value.name || "(array)"
-                                    }),
-                                    value.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                                        name: "repeated",
-                                        sx: {
-                                            color: "primary.light",
-                                            ml: 1,
-                                            position: "relative",
-                                            top: "4px"
-                                        }
-                                    }) : null
-                                ]
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfc02ee7e55afdfc$export$2e2bcd8739ae039), {
-                                selects: select,
-                                index: index1,
-                                onChange: (event, index)=>setIndex(index),
-                                onAdd: onAddQuery,
-                                onDelete: onDeleteQuery
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
-                        sx: {
-                            mt: 1,
-                            mb: 2
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0875a46d41a08fd1$export$2e2bcd8739ae039), {
-                        value: select[index1],
-                        onChange: onChangeQuery
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6abef6d5d24d13ce$export$2e2bcd8739ae039), {
-                            query: select[index1],
-                            onChange: onChangeQuery
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                        variant: "contained",
-                        sx: {
-                            ml: 1
-                        },
-                        onClick: onSave,
-                        children: "Save"
-                    })
-                ]
-            })
-        ]
-    });
-};
-
-
-
-
 parcelRequire("d4J5n");
 
 
@@ -40582,6 +39904,756 @@ var $a51aaad515892d7c$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 var $d4J5n = parcelRequire("d4J5n");
 
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+parcelRequire("d4J5n");
+
+var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
+    if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $820f84c1d7261d6d$export$2e2bcd8739ae039), {
+        ...props,
+        sx: {
+            ...props.sx,
+            transform: "rotate(180deg)"
+        }
+    });
+    else if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e35cf2d20f939f4$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "item") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "number") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b1faf5f98bbb111e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $012087529d88be7e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1d4519e24428e5fd$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "string") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $793603d0f5153a7e$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cd5829ac10d83747$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4f3e459b9996d8e0$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8bd75d7133cf3395$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $10cdc2163f15d747$export$2e2bcd8739ae039), {
+        ...props
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $5dd869992b20fc34$export$2e2bcd8739ae039 = ({ query: query1 , onChange: onChange  })=>{
+    const [value1, setValue] = (0, $d4J5n.useState)("");
+    (0, $d4J5n.useEffect)(()=>{
+        const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query1);
+        setValue(value || "");
+    }, [
+        query1
+    ]);
+    function validate(event, value) {
+        try {
+            $75371f08c5d7238f$export$dd48e276a5eff34c(event.target.value);
+            return true;
+        } catch (err) {
+            return false;
+        }
+    }
+    function commit(event, value) {
+        if (value) {
+            let query;
+            try {
+                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value);
+            } catch (err) {
+                console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening
+                return;
+            }
+            if (query) onChange(event, query);
+        }
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
+        variant: "standard",
+        size: "small",
+        fullWidth: true,
+        value: value1,
+        onValidate: validate,
+        onChange: commit
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+var $a96c103c091a20a8$exports = {};
+$a96c103c091a20a8$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":false,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":false,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":false,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":true,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+
+
+
+
+var $d9035591e653d6fe$export$2e2bcd8739ae039 = ({ value: value1 = [
+    ""
+] , onChange: onChange , onDelete: onDelete , sx: sx  })=>{
+    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
+    const [output, setOutput] = (0, $d4J5n.useState)("");
+    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    function assignValue(newValue, i) {
+        const obj = value1.slice(0);
+        obj[i] = newValue;
+        return obj;
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                spacing: 0,
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+                        variant: "outlined",
+                        size: "small",
+                        value: value1[0],
+                        displayEmpty: true,
+                        renderValue: (value)=>value || /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                variant: "subtitle1",
+                                sx: {
+                                    opacity: 0.5
+                                },
+                                children: "(Add a stage)"
+                            }),
+                        onChange: (event)=>onChange(event, [
+                                event.target.value,
+                                ...value1.slice(1)
+                            ]),
+                        sx: {
+                            width: 300
+                        },
+                        children: [
+                            (0, (/*@__PURE__*/$parcel$interopDefault($a96c103c091a20a8$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                    value: key,
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                        title: help,
+                                        arrow: true,
+                                        placement: "right",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                            sx: {
+                                                width: "100%"
+                                            },
+                                            children: key
+                                        })
+                                    })
+                                })),
+                            expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                onClick: ()=>setExpanded(false),
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: "Less"
+                                    })
+                                ]
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                onClick: ()=>setExpanded(true),
+                                children: [
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: "More"
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                        variant: "outlined",
+                        size: "small",
+                        fullWidth: true,
+                        value: value1[1],
+                        onChange: (event)=>onChange(event, assignValue(event.target.value, 1)),
+                        sx: {
+                            ml: 1,
+                            visibility: value1[0] ? "visible" : "hidden"
+                        }
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Delete this stage",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: onDelete,
+                            sx: {
+                                visibility: value1[0] ? "visible" : "hidden"
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: showOutput ? "Hide stage output" : "Show stage output",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: ()=>setShowOutput(!showOutput),
+                            sx: {
+                                visibility: value1[0] ? "visible" : "hidden"
+                            },
+                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            showOutput && value1[0] ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "outlined",
+                multiline: true,
+                rows: 3,
+                defaultValue: output,
+                sx: {
+                    mt: 1,
+                    width: "100%",
+                    backgroundColor: "LightGray",
+                    fontSize: "small"
+                }
+            }) : null
+        ]
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
+    const [tracking, setTracking] = (0, $d4J5n.useState)(false);
+    const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
+    const [counter, setCounter] = (0, $d4J5n.useState)(0);
+    const [output1, setOutput] = (0, $d4J5n.useState)([]);
+    const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
+    (0, $d4J5n.useEffect)(()=>{
+        if (value) (async ()=>{
+            const output = await $6767c619f5de943e$export$f2909722c7f0f932([
+                value
+            ]);
+            setOutput(output);
+        })();
+        return ()=>{
+            $6767c619f5de943e$export$f2909722c7f0f932([]);
+        };
+    }, [
+        value
+    ]);
+    (0, $d4J5n.useEffect)(()=>{
+        const timer = setTimeout(()=>{
+            setShowTooltip(!value);
+        }, 250);
+        return ()=>{
+            clearTimeout(timer);
+        };
+    }, [
+        value
+    ]);
+    (0, $d4J5n.useEffect)(()=>{
+        setCounter(0);
+        if (tracking) $6767c619f5de943e$export$1f8ffc6fd33b1d16();
+        else $6767c619f5de943e$export$e684be5f4b22cc14();
+        const timer = setInterval(async ()=>{
+            if (tracking) {
+                const selectors = await $6767c619f5de943e$export$225ea495d1fa0d5();
+                if (selectors.length > 0) {
+                    setSelectors(selectors);
+                    setCounter(0); // reset interval counter
+                    onChange(new Event("change"), selectors[0]);
+                } else if (counter >= 60) setTracking(false); // disable tracking after 60 seconds
+                else setCounter(counter + 1);
+            }
+        }, 1000);
+        return ()=>{
+            clearInterval(timer);
+            $6767c619f5de943e$export$e684be5f4b22cc14();
+        };
+    }, [
+        tracking
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                ...props,
+                direction: "row",
+                spacing: 0,
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        arrow: true,
+                        placement: "bottom",
+                        open: showTooltip,
+                        title: !tracking ? "Click here to automatically generate a CSS selector by clicking on the page." : "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page.",
+                        PopperProps: {
+                            style: {
+                                pointerEvents: "none"
+                            }
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                            variant: tracking ? "contained" : "outlined",
+                            size: "small",
+                            onClick: ()=>setTracking(!tracking),
+                            sx: {
+                                minWidth: 48
+                            },
+                            children: tracking ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $64d96a0bf049eab8$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ce284b7467ad2b6$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8461efb96d774bba$export$2e2bcd8739ae039), {
+                        size: "small",
+                        value: value,
+                        options: selectors1,
+                        fullWidth: true,
+                        freeSolo: true,
+                        openOnFocus: true,
+                        forcePopupIcon: true,
+                        sx: {
+                            ml: 1
+                        },
+                        renderInput: (params)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                                ...params,
+                                placeholder: "Selector",
+                                label: "Selector",
+                                onChange: (event)=>onChange(event, event.target.value)
+                            })
+                    }),
+                    output1.length > 0 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                        color: "primary",
+                        label: output1.length,
+                        size: "small",
+                        sx: {
+                            position: "relative",
+                            top: "8px",
+                            ml: 1
+                        }
+                    }) : null,
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: showOutput ? "Hide stage output" : "Show stage output",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            onClick: ()=>setShowOutput(!showOutput),
+                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "outlined",
+                multiline: true,
+                rows: 3,
+                value: output1.map((line)=>line?.trim() || "").join("\n"),
+                sx: {
+                    mt: 1,
+                    width: "100%",
+                    backgroundColor: "LightGray",
+                    ".MuiInputBase-root": {
+                        p: 0
+                    },
+                    ".MuiInputBase-input": {
+                        p: "4px",
+                        fontSize: "smaller"
+                    }
+                }
+            }) : null
+        ]
+    });
+};
+
+
+
+var $cea40509986280c6$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
+    const select = (0, $d4J5n.useMemo)(()=>value1 || [
+            ""
+        ], [
+        value1
+    ]);
+    function onChangeSelector(event, value) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[0] = value;
+        onChange(event, obj);
+    }
+    function onChangeQueryOp(event, value, i) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[i] = value;
+        onChange(event, obj);
+    }
+    function onDeleteQueryOp(event, i) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.splice(i, 1);
+        onChange(event, obj);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70df549096d55328$export$2e2bcd8739ae039), {
+                value: select[0],
+                onChange: (event, value)=>onChangeSelector(event, value)
+            }),
+            select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                children: [
+                    select.slice(1).map((obj1, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9035591e653d6fe$export$2e2bcd8739ae039), {
+                            value: obj1,
+                            onChange: (event, obj)=>onChangeQueryOp(event, obj, i + 1),
+                            onDelete: (event)=>onDeleteQueryOp(event, i + 1),
+                            sx: {
+                                mt: 1
+                            }
+                        })),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9035591e653d6fe$export$2e2bcd8739ae039), {
+                        onChange: (event, obj)=>onChangeQueryOp(event, obj, select.length),
+                        sx: {
+                            mt: 1
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $026ca9644150778a$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
+    return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+        underline: "always",
+        fontSize: "small",
+        sx: {
+            cursor: "pointer"
+        },
+        onClick: onAdd,
+        children: "Add alternate selector"
+    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Switches between query alternates",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $45f76937994d9bdb$export$2e2bcd8739ae039), {
+                    size: "small",
+                    color: "primary",
+                    count: selects.length,
+                    page: index + 1,
+                    onChange: (event, page)=>onChange(event, page - 1),
+                    sx: {
+                        position: "relative",
+                        top: "2px"
+                    }
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Add an alternate query",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    onClick: onAdd,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                        fontSize: "small"
+                    })
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Delete this alternate query",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    disabled: selects.length <= 1,
+                    onClick: onDelete,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                        fontSize: "small"
+                    })
+                })
+            })
+        ]
+    });
+};
+
+
+
+var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , name: name , type: type , repeated: repeated , single: single , onClose: onClose , onChange: onChange  })=>{
+    const [select, setSelect] = (0, $d4J5n.useState)([
+        [
+            ""
+        ]
+    ]);
+    const [index1, setIndex] = (0, $d4J5n.useState)(0);
+    (0, $d4J5n.useEffect)(()=>setSelect(value || [
+            [
+                ""
+            ]
+        ]), [
+        value
+    ]);
+    function onAddQuery() {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.push([
+            ""
+        ]);
+        setSelect(obj);
+        setIndex(obj.length - 1);
+    }
+    function onDeleteQuery() {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj.splice(index1, 1);
+        setSelect(obj);
+        if (index1 > 0) setIndex(index1 - 1);
+    }
+    function onChangeQuery(event, query) {
+        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        obj[index1] = query;
+        setSelect(obj);
+    }
+    function onSave(event) {
+        onChange(event, select);
+        onClose(event);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
+        fullScreen: true,
+        open: open,
+        onClose: onClose,
+        sx: {
+            minWidth: 600
+        },
+        TransitionComponent: (0, $5339359c895a55f0$export$d5e0bbf39d25920b),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0d0d12e54088d016$export$2e2bcd8739ae039), {
+                sx: {
+                    p: 0
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1e6698c63139ed83$export$2e2bcd8739ae039), {
+                    title: "Query Builder",
+                    onClose: onClose
+                })
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
+                sx: {
+                    mt: 2
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        style: {
+                            width: "100%"
+                        },
+                        sx: {
+                            display: "flex",
+                            justifyContent: "space-between",
+                            bgcolor: "background.paper",
+                            borderRadius: 1,
+                            p: 1,
+                            m: 1
+                        },
+                        children: [
+                            !!name && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                                direction: "row",
+                                children: [
+                                    type && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                                        name: type || "string",
+                                        sx: {
+                                            color: "primary.light",
+                                            position: "relative",
+                                            top: "4px"
+                                        }
+                                    }),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        variant: "caption",
+                                        fontSize: "large",
+                                        sx: {
+                                            ml: 1
+                                        },
+                                        children: name || "(array)"
+                                    }),
+                                    repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                                        name: "repeated",
+                                        sx: {
+                                            color: "primary.light",
+                                            ml: 1,
+                                            position: "relative",
+                                            top: "4px"
+                                        }
+                                    }) : null
+                                ]
+                            }),
+                            !single && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $026ca9644150778a$export$2e2bcd8739ae039), {
+                                selects: select,
+                                index: index1,
+                                onChange: (event, index)=>setIndex(index),
+                                onAdd: onAddQuery,
+                                onDelete: onDeleteQuery
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
+                        sx: {
+                            mt: 1,
+                            mb: 2
+                        }
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cea40509986280c6$export$2e2bcd8739ae039), {
+                        value: select[index1],
+                        onChange: onChangeQuery
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Edit the raw jQuery code, or copy/paste a jQuery expression here",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5dd869992b20fc34$export$2e2bcd8739ae039), {
+                            query: select[index1],
+                            onChange: onChangeQuery
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                        variant: "contained",
+                        sx: {
+                            ml: 1
+                        },
+                        onClick: onSave,
+                        children: "Save"
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
+
+
+var $2130d30de6a4afe4$export$2e2bcd8739ae039 = ({ query: query , name: name , type: type , repeated: repeated , onChange: onChange  })=>{
+    const [open, setOpen] = (0, $d4J5n.useState)(false);
+    const value = (0, $d4J5n.useMemo)(()=>{
+        if (query && query.length > 0 && query[0]) return $8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "";
+        else return "";
+    }, [
+        query
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: value,
+                placeholder: "(none)",
+                fullWidth: true,
+                sx: {
+                    caretColor: "transparent"
+                },
+                InputProps: {
+                    endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                        position: "end",
+                        children: [
+                            query && query.length > 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("span", {
+                                    style: {
+                                        whiteSpace: "pre-line"
+                                    },
+                                    children: query ? query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
+                                }),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                    label: query.length,
+                                    variant: "filled",
+                                    color: "default",
+                                    size: "small",
+                                    sx: {
+                                        ml: 1
+                                    }
+                                })
+                            }) : null,
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                size: "small",
+                                onClick: ()=>setOpen(true),
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    arrow: true,
+                                    placement: "left",
+                                    title: "Click here to setup a selector",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            })
+                        ]
+                    })
+                }
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8c0e9d9f446adfc8$export$2e2bcd8739ae039), {
+                value: query,
+                open: open,
+                name: name,
+                type: type,
+                repeated: repeated,
+                onClose: ()=>setOpen(false),
+                onChange: onChange
+            })
+        ]
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
 var $bc149888b566c89c$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , sx: sx  })=>{
     const [input, setInput] = (0, $d4J5n.useState)();
     (0, $d4J5n.useEffect)(()=>{
@@ -40657,79 +40729,6 @@ var $d9f7df1b27b8772d$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
             })
         ]
     });
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $8eee5212c0bdd5a8$export$2e2bcd8739ae039 = ({ query: query , onClick: onClick  })=>{
-    const [value, setValue] = (0, $d4J5n.useState)("");
-    const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
-    function handleClick(event) {
-        onClick(event);
-        setShowTooltip(false);
-    }
-    (0, $d4J5n.useEffect)(()=>{
-        if (query && query.length > 0 && query[0]) {
-            setValue($8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "");
-            setShowTooltip(false);
-        } else {
-            setValue("");
-            setShowTooltip(true);
-        }
-    }, [
-        query
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-        variant: "standard",
-        size: "small",
-        value: value,
-        placeholder: "(none)",
-        fullWidth: true,
-        sx: {
-            caretColor: "transparent"
-        },
-        InputProps: {
-            endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
-                position: "end",
-                children: [
-                    query && query.length > 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("span", {
-                            style: {
-                                whiteSpace: "pre-line"
-                            },
-                            children: query ? query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
-                        }),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                            label: query.length,
-                            variant: "filled",
-                            color: "default",
-                            size: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    }) : null,
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        size: "small",
-                        onClick: handleClick,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                            arrow: true,
-                            placement: "left",
-                            title: "Click here to setup a selector",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    })
-                ]
-            })
-        }
-    });
-};
 
 
 
@@ -40813,6 +40812,65 @@ var $4ded3d70a75b9f5a$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+var $720d345d88dda83e$export$2e2bcd8739ae039 = ({ query: query1 , name: name , onChange: onChange  })=>{
+    const [open, setOpen] = (0, $d4J5n.useState)(false);
+    const value = (0, $d4J5n.useMemo)(()=>{
+        if (query1 && query1.length > 0 && query1[0]) return $8f015fe631ec2dd6$export$633ae63c2897642e(query1) || "";
+        else return "";
+    }, [
+        query1
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                variant: "standard",
+                size: "small",
+                value: value,
+                placeholder: "(none)",
+                fullWidth: true,
+                sx: {
+                    caretColor: "transparent"
+                },
+                InputProps: {
+                    endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                        position: "end",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: ()=>setOpen(true),
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                arrow: true,
+                                placement: "left",
+                                title: "Click here to setup a selector",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5665a6538726d48$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
+                        })
+                    })
+                }
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8c0e9d9f446adfc8$export$2e2bcd8739ae039), {
+                value: query1 ? [
+                    query1
+                ] : [],
+                name: name,
+                open: open,
+                single: true,
+                onClose: ()=>setOpen(false),
+                onChange: (event, query)=>onChange(event, query[0])
+            })
+        ]
+    });
+};
+
+
+
 parcelRequire("d4J5n");
 
 const $cc8726b30629a3e6$var$regexps = {
@@ -40861,83 +40919,81 @@ var $f4cfb68b239954cb$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines whether to break out of the current loop if content is found on the page. Can be further modified using a pattern.",
-                        true
-                    ],
-                    [
-                        "on",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                            value: obj.on,
-                            onChange: (event, value)=>{
-                                obj.on = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether to break out of the current loop if any, all, or none of the selectors from the query are found on the page.",
-                        obj.on !== undefined
-                    ],
-                    [
-                        "pattern",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                            value: obj.pattern,
-                            onChange: (event, value)=>{
-                                obj.pattern = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Breaks out of the current loop if a text pattern matches the output of the specified query.",
-                        obj.pattern !== undefined
-                    ],
-                    [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula that determines whether to break out of the current loop.",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed.",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value;
-                    setTemplate(template.toString());
-                }
-            })
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "break",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines whether to break out of the current loop if content is found on the page. Can be further modified using a pattern.",
+                true
+            ],
+            [
+                "on",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
+                    value: obj1.on,
+                    onChange: (event, value)=>{
+                        obj1.on = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether to break out of the current loop if any, all, or none of the selectors from the query are found on the page.",
+                obj1.on !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj1.pattern,
+                    onChange: (event, value)=>{
+                        obj1.pattern = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Breaks out of the current loop if a text pattern matches the output of the specified query.",
+                obj1.pattern !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether to break out of the current loop.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj1.active !== undefined
+            ]
         ]
     }) : null;
 };
@@ -40946,118 +41002,101 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
-
 
 
 
 
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines the click target.",
-                        true
-                    ],
-                    [
-                        "required",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.required ?? false,
-                            onChange: (event, value)=>{
-                                obj.required = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                        true
-                    ],
-                    [
-                        "retry",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.required ?? false,
-                            onChange: (event, value)=>{
-                                obj.required = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines the number of attempts to retry clicking and testing for the expected result.",
-                        obj.required !== undefined
-                    ],
-                    [
-                        "snooze",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
-                            value: obj.snooze,
-                            onChange: (event, value)=>{
-                                obj.snooze = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Number of seconds to snooze before the click.",
-                        false
-                    ],
-                    /*
-                [
-                    "waitfor",
-                    <FormulaField
-                        value={obj.waitfor}
-                        onClick={}
-                    />,
-                    "Wait for a condition to appear on the page before clicking.",
-                    false
-                ],
-                */ [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula that determines whether the click is evaluated or bypassed.",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed.",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value || [];
-                    setTemplate(template.toString());
-                }
-            })
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "click",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines the click target.",
+                true
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.required ?? false,
+                    onChange: (event, value)=>{
+                        obj1.required = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                true
+            ],
+            [
+                "retry",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.retry,
+                    onChange: (event, value)=>{
+                        obj1.retry = value;
+                        setTemplate(template1.toString());
+                    },
+                    min: 0
+                }),
+                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
+                obj1.retry !== undefined
+            ],
+            [
+                "snooze",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
+                    value: obj1.snooze,
+                    onChange: (event, value)=>{
+                        obj1.snooze = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Number of seconds to snooze before the click.",
+                false
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the click is evaluated or bypassed.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj1.active !== undefined
+            ]
         ]
     }) : null;
-};
-
-
-var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
-    return null;
 };
 
 
@@ -41065,125 +41104,193 @@ var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
 
 var $d4J5n = parcelRequire("d4J5n");
 
+
+
+
+var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "each",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines the set of elements to loop over.",
+                true
+            ],
+            [
+                "global",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.context === null,
+                    onChange: (event, value)=>{
+                        obj1.context = value ? null : undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Performs the query in a global context rather than within the current context.",
+                obj1.context !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the each loop is performed. Each loop is performed unconditionally if not specified.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the each loop is active or bypassed.",
+                obj1.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
 
 var $b516851a7c38229b$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "message",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
-                            variants: [
-                                "string",
-                                "dynamic-string"
-                            ],
-                            value: obj.message,
-                            onChange: (event, value)=>{
-                                obj.message = value || "";
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
-                        true
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "message",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "dynamic-string"
                     ],
-                    [
-                        "code",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
-                            variant: "kebab-case",
-                            value: obj.code,
-                            onChange: (event, value)=>{
-                                obj.code = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Defines an error-code for programatically identifying the error.",
-                        obj.code !== undefined
-                    ],
-                    [
-                        "level",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                            value: obj.level,
-                            onChange: (event, value)=>{
-                                obj.level = value;
-                                setTemplate(template.toString());
-                            },
-                            min: 0
-                        }),
-                        "Defines an error-level number indicating the severity of the error. By convention, a zero indicates an error that will not succeed with a retry. (default=1)",
-                        obj.level !== undefined
-                    ],
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines whether an error is produced.",
-                        true
-                    ],
-                    [
-                        "stop",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.stop ?? false,
-                            onChange: (event, value)=>{
-                                obj.stop = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the error should stop any further processing of the template.",
-                        obj.stop !== undefined
-                    ],
-                    [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula returning a true or false result that determines whether an error is produced.",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed.",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value || [];
-                    setTemplate(template.toString());
-                }
-            })
+                    value: obj1.message,
+                    onChange: (event, value)=>{
+                        obj1.message = value || "";
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
+                true
+            ],
+            [
+                "code",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
+                    variant: "kebab-case",
+                    value: obj1.code,
+                    onChange: (event, value)=>{
+                        obj1.code = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Defines an error-code for programatically identifying the error.",
+                obj1.code !== undefined
+            ],
+            [
+                "level",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.level,
+                    onChange: (event, value)=>{
+                        obj1.level = value;
+                        setTemplate(template1.toString());
+                    },
+                    min: 0
+                }),
+                "Defines an error-level number indicating the severity of the error. By convention, a zero indicates an error that will not succeed with a retry. (default=1)",
+                obj1.level !== undefined
+            ],
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "error",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines whether an error is produced.",
+                true
+            ],
+            [
+                "stop",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.stop ?? false,
+                    onChange: (event, value)=>{
+                        obj1.stop = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the error should stop any further processing of the template.",
+                obj1.stop !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula returning a true or false result that determines whether an error is produced.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj1.active !== undefined
+            ]
         ]
     }) : null;
-};
-
-
-var $9415fe1f85866126$export$2e2bcd8739ae039 = ()=>{
-    return null;
 };
 
 
@@ -41194,191 +41301,270 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $9415fe1f85866126$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        //todo: remove shim when syphonx-core updated
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.limit,
+                    onChange: (event, value)=>{
+                        obj1.limit = value;
+                        setTemplate(template1.toString());
+                    },
+                    min: 0
+                }),
+                "Limits the number of repeat iterations.",
+                true
+            ],
+            [
+                "errors",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.errors,
+                    onChange: (event, value)=>{
+                        obj1.errors = value;
+                        setTemplate(template1.toString());
+                    },
+                    min: 1
+                }),
+                "Maximum number of errors before aborting the repeat loop. (default=1)",
+                obj1.errors !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj1.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
 
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    function handleRename(event, value) {
-        obj.name = value;
-        template.setSelected(obj);
-        setTemplate(template.toString());
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    function onChangeName(event, value) {
+        obj1.name = value;
+        template1.setSelected(obj1);
+        setTemplate(template1.toString());
     }
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "name",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
-                            variant: "snake-case",
-                            value: obj.name,
-                            onChange: handleRename
-                        }),
-                        "Determines the name of the selected value, or blank representing a single unnamed value",
-                        true
+    function onChangeQuery(event, query) {
+        debugger;
+        obj1.query = query;
+        setTemplate(template1.toString());
+    }
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "name",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
+                    variant: "snake-case",
+                    value: obj1.name,
+                    onChange: onChangeName
+                }),
+                "Determines the name of the selected value, or blank representing a single unnamed value.",
+                true
+            ],
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    query: obj1.query,
+                    name: obj1.name,
+                    type: obj1.type,
+                    repeated: obj1.repeated,
+                    onChange: onChangeQuery
+                }),
+                "A CSS selector or jQuery expression that determines what data is selected on the page.",
+                true
+            ],
+            [
+                "type",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
+                    value: obj1.type,
+                    onChange: (event, value)=>{
+                        obj1.type = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines the type of the property value.",
+                true
+            ],
+            [
+                "repeated",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.repeated ?? false,
+                    onChange: (event, value)=>{
+                        obj1.repeated = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Indicates whether the data is single-valued or repeated within an array.",
+                true
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.required ?? false,
+                    onChange: (event, value)=>{
+                        obj1.required = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is required which produces an error if a value is not obtained.",
+                obj1.required !== undefined
+            ],
+            [
+                "value",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "number",
+                        "boolean",
+                        "formula",
+                        "json"
                     ],
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines what data is selected on the page",
-                        true
-                    ],
-                    [
-                        "type",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
-                            value: obj.type,
-                            onChange: (event, value)=>{
-                                obj.type = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines the type of the property value",
-                        true
-                    ],
-                    [
-                        "repeated",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.repeated ?? false,
-                            onChange: (event, value)=>{
-                                obj.repeated = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Indicates whether the data is single-valued or repeated within an array",
-                        true
-                    ],
-                    [
-                        "required",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.required ?? false,
-                            onChange: (event, value)=>{
-                                obj.required = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is required which produces an error if a value is not obtained",
-                        obj.required !== undefined
-                    ],
-                    [
-                        "value",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
-                            variants: [
-                                "string",
-                                "number",
-                                "boolean",
-                                "formula",
-                                "json"
-                            ],
-                            value: obj.value,
-                            onChange: (event, value)=>{
-                                obj.value = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A predetermined or computed value, used if a DOM query is not specified",
-                        obj.value !== undefined
-                    ],
-                    [
-                        "all",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.all ?? false,
-                            onChange: (event, value)=>{
-                                obj.all = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether to evaluate all query stages, or stop at the first stage that produces a value",
-                        obj.all !== undefined
-                    ],
-                    [
-                        "limit",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                            value: obj.limit,
-                            onChange: (event, value)=>{
-                                obj.limit = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Limits the number of nodes to be selected, unlimited if not specified",
-                        obj.limit !== undefined
-                    ],
-                    [
-                        "format",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
-                            value: obj.format,
-                            onChange: (event, value)=>{
-                                obj.format = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines how the selected value is formatted",
-                        obj.format !== undefined
-                    ],
-                    [
-                        "pattern",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                            value: obj.pattern,
-                            onChange: (event, value)=>{
-                                obj.pattern = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A regex pattern for validation, an error will be produced if the value does not match the pattern",
-                        obj.pattern !== undefined
-                    ],
-                    [
-                        "collate",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.collate ?? false,
-                            onChange: (event, value)=>{
-                                obj.collate = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Combines all selected nodes into a single value",
-                        obj.collate !== undefined
-                    ],
-                    [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula that determines whether the select is evaluated or bypassed",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value;
-                    setTemplate(template.toString());
-                }
-            })
+                    value: obj1.value,
+                    onChange: (event, value)=>{
+                        obj1.value = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A predetermined or computed value, only used if a DOM query is unspecified.",
+                obj1.value !== undefined
+            ],
+            [
+                "all",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.all ?? false,
+                    onChange: (event, value)=>{
+                        obj1.all = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
+                obj1.all !== undefined
+            ],
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.limit,
+                    onChange: (event, value)=>{
+                        obj1.limit = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                obj1.limit !== undefined
+            ],
+            [
+                "format",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
+                    value: obj1.format,
+                    onChange: (event, value)=>{
+                        obj1.format = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines how the selected value is formatted.",
+                obj1.format !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj1.pattern,
+                    onChange: (event, value)=>{
+                        obj1.pattern = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
+                obj1.pattern !== undefined
+            ],
+            [
+                "collate",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.collate ?? false,
+                    onChange: (event, value)=>{
+                        obj1.collate = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Combines all selected nodes into a single value.",
+                obj1.collate !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the select is evaluated or bypassed.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed",
+                obj1.active !== undefined
+            ]
         ]
     }) : null;
 };
@@ -41437,61 +41623,170 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines the click target",
-                        true
-                    ],
-                    [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula that determines whether the click is evaluated or bypassed",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value;
-                    setTemplate(template.toString());
-                }
-            })
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $720d345d88dda83e$export$2e2bcd8739ae039), {
+                    name: "transform",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that defines the transform.",
+                true
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the transform is evaluated.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the transform is active or bypassed.",
+                obj1.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "waitfor",
+                    query: obj1.query,
+                    onChange: (event, value)=>{
+                        obj1.query = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines the content to wait for on the page.",
+                true
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.required ?? false,
+                    onChange: (event, value)=>{
+                        obj1.required = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                obj1.required !== undefined
+            ],
+            [
+                "on",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
+                    value: obj1.on,
+                    onChange: (event, value)=>{
+                        obj1.on = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether to wait for any, all, or none of the selectors.",
+                obj1.on !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj1.pattern,
+                    onChange: (event, value)=>{
+                        obj1.pattern = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Waits for a specific text pattern if specified.",
+                obj1.pattern !== undefined
+            ],
+            [
+                "timeout",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.timeout,
+                    onChange: (event, value)=>{
+                        obj1.timeout = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Number of seconds to wait before timing out.",
+                obj1.timeout !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the click is evaluated or bypassed.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj1.active !== undefined
+            ]
         ]
     }) : null;
 };
@@ -41505,179 +41800,70 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
-var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
-    const [queryEditorOpen, setQueryEditorOpen] = (0, $d4J5n.useState)(false);
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    function validateName(event, value) {
-        return /^[a-z][a-z0-9_]*$/.test(value);
-    }
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-                items: [
-                    [
-                        "query",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8eee5212c0bdd5a8$export$2e2bcd8739ae039), {
-                            query: obj.query,
-                            onClick: ()=>setQueryEditorOpen(true)
-                        }),
-                        "A CSS selector or jQuery expression that determines the content to wait for on the page.",
-                        true
-                    ],
-                    [
-                        "required",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.required ?? false,
-                            onChange: (event, value)=>{
-                                obj.required = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                        obj.required !== undefined
-                    ],
-                    [
-                        "on",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                            value: obj.on,
-                            onChange: (event, value)=>{
-                                obj.on = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether to wait for any, all, or none of the selectors.",
-                        obj.on !== undefined
-                    ],
-                    [
-                        "pattern",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                            value: obj.pattern,
-                            onChange: (event, value)=>{
-                                obj.pattern = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Waits for a specific text pattern if specified.",
-                        obj.pattern !== undefined
-                    ],
-                    [
-                        "timeout",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                            value: obj.timeout,
-                            onChange: (event, value)=>{
-                                obj.timeout = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Number of seconds to wait before timing out.",
-                        obj.timeout !== undefined
-                    ],
-                    [
-                        "when",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                            value: obj.when,
-                            onChange: (event, value)=>{
-                                obj.when = value || undefined;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "A formula that determines whether the click is evaluated or bypassed.",
-                        obj.when !== undefined
-                    ],
-                    [
-                        "active",
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            checked: obj.active ?? true,
-                            onChange: (event, value)=>{
-                                obj.active = value;
-                                setTemplate(template.toString());
-                            }
-                        }),
-                        "Determines whether the property is active or bypassed.",
-                        obj.active !== undefined
-                    ]
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2379682caf290208$export$2e2bcd8739ae039), {
-                value: obj,
-                open: queryEditorOpen,
-                onClose: ()=>setQueryEditorOpen(false),
-                onChange: (event, value)=>{
-                    obj.query = value;
-                    setTemplate(template.toString());
-                }
-            })
-        ]
-    }) : null;
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-
-
-
 var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $17b288f07ec57b56$exports.Fragment), {
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        //todo: remove shim when syphonx-core updated
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $17b288f07ec57b56$exports.Fragment), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
             items: [
                 [
                     "when",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                        value: obj.when,
+                        value: obj1.when,
                         onChange: (event, value)=>{
-                            obj.when = value;
-                            setTemplate(template.toString());
+                            obj1.when = value;
+                            setTemplate(template1.toString());
                         }
                     }),
-                    "A formula that determines whether to break out of the current loop, or breaks unconditionally if not specified.",
+                    "A formula that determines whether to yield, or yields unconditionally if unspecified.",
                     true
                 ],
                 [
                     "context",
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
-                        value: obj.context,
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51aaad515892d7c$export$2e2bcd8739ae039), {
+                        value: obj1.context,
                         onChange: (event, value)=>{
-                            obj.context = value;
-                            setTemplate(template.toString());
+                            obj1.context = value;
+                            setTemplate(template1.toString());
                         }
                     }),
-                    "Specifies additional context for host, such as to take a screenshot.",
-                    obj.context !== undefined
+                    "Specifies host context. Used to trigger screenshots and other host responsibilities.",
+                    obj1.context !== undefined
                 ],
                 [
                     "timeout",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                        value: obj.timeout,
+                        value: obj1.timeout,
                         onChange: (event, value)=>{
-                            obj.timeout = value;
-                            setTemplate(template.toString());
+                            obj1.timeout = value;
+                            setTemplate(template1.toString());
                         }
                     }),
                     "Determines the amount of time in seconds to wait for a renavigation before a timeout error occurs.",
-                    obj.timeout !== undefined
+                    obj1.timeout !== undefined
                 ],
                 [
                     "active",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                        checked: obj.active ?? true,
+                        checked: obj1.active ?? true,
                         onChange: (event, value)=>{
-                            obj.active = value;
-                            setTemplate(template.toString());
+                            obj1.active = value;
+                            setTemplate(template1.toString());
                         }
                     }),
                     "Determines whether the property is active or bypassed.",
-                    obj.active !== undefined
+                    obj1.active !== undefined
                 ]
             ]
         })
@@ -43445,13 +43631,24 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
 var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
+        debugger;
+        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const code = template.toString("file");
+        return {
+            template: template,
+            code: code
+        };
+    }, [
+        json
+    ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
         className: "panel",
@@ -43464,7 +43661,7 @@ var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
             size: "small",
             multiline: true,
             fullWidth: true,
-            value: template.toString("file"),
+            value: code1,
             sx: {
                 height: "100%",
                 overflow: "scroll"

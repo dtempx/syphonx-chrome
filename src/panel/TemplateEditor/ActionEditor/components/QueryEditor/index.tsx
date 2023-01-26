@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { TitleBar, TransitionUp } from "../components";
-import { clone } from "../../../lib";
-import ActionIcon from "../ActionIcon";
+import { TitleBar, TransitionUp } from "../../../components";
+import { clone } from "../../../../../lib";
+import ActionIcon from "../../../ActionIcon";
 import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";
@@ -21,18 +21,22 @@ import {
 } from "@mui/material";
 
 export interface Props {
-    value: syphonx.Select;
+    value: syphonx.SelectQuery[] | undefined;
     open: boolean;
-    onChange: (event: React.SyntheticEvent, value: syphonx.SelectQuery[] | undefined) => void;
+    name?: string;
+    type?: syphonx.SelectType;
+    repeated?: boolean;
+    single?: boolean;
+    onChange: (event: React.SyntheticEvent, value: syphonx.SelectQuery[]) => void;
     onClose: (event: React.SyntheticEvent) => void;
 }
 
-export default ({ value, open, onClose, onChange }: Props) => {
+export default ({ value, open, name, type, repeated, single, onClose, onChange }: Props) => {
     const [select, setSelect] = useState<syphonx.SelectQuery[]>([[""]]);
     const [index, setIndex] = useState(0);
 
     useEffect(() =>
-        setSelect(value.query || [[""]]),
+        setSelect(value || [[""]]),
     [value]);
 
     function onAddQuery() {
@@ -85,18 +89,22 @@ export default ({ value, open, onClose, onChange }: Props) => {
                         m: 1
                     }}
                 >
-                    <Stack direction="row">
-                        <ActionIcon name={value.type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />
-                        <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{value.name || "(array)"}</Typography>
-                        {value.repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
-                    </Stack>
-                    <QueryPager
-                        selects={select}
-                        index={index}
-                        onChange={(event, index) => setIndex(index)}
-                        onAdd={onAddQuery}
-                        onDelete={onDeleteQuery}
-                    />
+                    {!!name &&
+                        <Stack direction="row">
+                            {type && <ActionIcon name={type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />}
+                            <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{name || "(array)"}</Typography>
+                            {repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
+                        </Stack>
+                    }
+                    {!single &&
+                        <QueryPager
+                            selects={select}
+                            index={index}
+                            onChange={(event, index) => setIndex(index)}
+                            onAdd={onAddQuery}
+                            onDelete={onDeleteQuery}
+                        />
+                    }
                 </Box>
 
                 <Divider sx={{ mt: 1, mb: 2 }} />

@@ -1,98 +1,85 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { Switch } from "@mui/material";
-import * as syphonx from "syphonx-lib";
 import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
-import QueryBuilder from "../QueryBuilder";
+import * as syphonx from "syphonx-lib";
 
 import {
     ComplexPropertyGrid,
     FormulaField,
-    NumberRangeField,
-    SelectorField
+    QueryEditorField,
+    NumberField,
+    NumberRangeField
 } from "./components";
 
 export default () => {
-    const [queryEditorOpen, setQueryEditorOpen] = useState(false);
     const { template: json, setTemplate } = useTemplate();
-    const template = new Template(json);
-    const item = template.selected();
-    const obj = item?.obj as syphonx.Click;
+
+    const { template, obj } = useMemo(() => {
+        const template = new Template(json);
+        const item = template.selected();
+        const obj = item?.obj as syphonx.Click;
+        return { template, obj };
+    }, [json]);
+
     return obj ? (
-        <>
-            <ComplexPropertyGrid items={[
-                [
-                    "query",
-                    <SelectorField
-                        query={obj.query}
-                        onClick={() => setQueryEditorOpen(true)}
-                    />,
-                    "A CSS selector or jQuery expression that determines the click target.",
-                    true
-                ],
-                [
-                    "required",
-                    <Switch
-                        checked={obj.required ?? false}
-                        onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
-                    />,
-                    "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                    true
-                ],
-                [
-                    "retry",
-                    <Switch
-                        checked={obj.required ?? false}
-                        onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
-                    />,
-                    "Determines the number of attempts to retry clicking and testing for the expected result.",
-                    obj.required !== undefined
-                ],
-                [
-                    "snooze",
-                    <NumberRangeField
-                        value={obj.snooze as [number, number]}
-                        onChange={(event, value) => { obj.snooze = value as syphonx.SnoozeInterval; setTemplate(template.toString()); }}
-                    />,
-                    "Number of seconds to snooze before the click.",
-                    false
-                ],
-                /*
-                [
-                    "waitfor",
-                    <FormulaField
-                        value={obj.waitfor}
-                        onClick={}
-                    />,
-                    "Wait for a condition to appear on the page before clicking.",
-                    false
-                ],
-                */
-                [
-                    "when",
-                    <FormulaField
-                        value={obj.when}
-                        onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
-                    />,
-                    "A formula that determines whether the click is evaluated or bypassed.",
-                    obj.when !== undefined
-                ],
-                [
-                    "active",
-                    <Switch
-                        checked={obj.active ?? true}
-                        onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
-                    />,
-                    "Determines whether the property is active or bypassed.",
-                    obj.active !== undefined
-                ]
-            ]} />
-            <QueryBuilder
-                value={obj}
-                open={queryEditorOpen}
-                onClose={() => setQueryEditorOpen(false)}
-                onChange={(event, value) => { obj.query = value || []; setTemplate(template.toString()); }}
-            />
-        </>
+        <ComplexPropertyGrid items={[
+            [
+                "query",
+                <QueryEditorField
+                    name="click"
+                    query={obj.query}
+                    onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
+                />,
+                "A CSS selector or jQuery expression that determines the click target.",
+                true
+            ],
+            [
+                "required",
+                <Switch
+                    checked={obj.required ?? false}
+                    onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
+                />,
+                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                true
+            ],
+            [
+                "retry",
+                <NumberField
+                    value={obj.retry}
+                    onChange={(event, value) => { obj.retry = value; setTemplate(template.toString()); }}
+                    min={0}
+                />,
+                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
+                obj.retry !== undefined
+            ],
+            [
+                "snooze",
+                <NumberRangeField
+                    value={obj.snooze as [number, number]}
+                    onChange={(event, value) => { obj.snooze = value as syphonx.SnoozeInterval; setTemplate(template.toString()); }}
+                />,
+                "Number of seconds to snooze before the click.",
+                false
+            ],
+            [
+                "when",
+                <FormulaField
+                    value={obj.when}
+                    onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
+                />,
+                "A formula that determines whether the click is evaluated or bypassed.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                <Switch
+                    checked={obj.active ?? true}
+                    onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
+                />,
+                "Determines whether the property is active or bypassed.",
+                obj.active !== undefined
+            ]
+        ]} />
     ) : null;
 };

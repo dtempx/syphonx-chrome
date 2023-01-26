@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { ValidateField } from "../components";
+import { ValidateField } from "../../../components";
 
 export interface Props {
     query: syphonx.SelectQuery;

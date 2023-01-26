@@ -1,30 +1,18 @@
 V1
 
+variant field editor
+
 Query Builder
     context sensitive function parameters for replace, etc.
     selectMultiple
-    type editor for entering a string or number for a value
-    formula editor for when
-
-
-Action Views
-    action view: waitfor
-    action view: break
-    action view: click
-    action view: each
-    action view: error
-    action view: repeat
-    action view: snooze
-    action view: transform
-    action view: yield
 
 Add sub-items
-    add sub-actions to repeat
-    add sub-actions to each
-    add sub-select to transform
-    add sub-select to waitfor
-    add sub-select to select with type=object
-    add sub-waitfor to click
+    repeat -> sub-actions
+    each -> sub-actions
+    select[type=object] -> sub-selects
+    click -> waitfor (subselect)
+    pivot
+    union
 
 Data View
     data view: single object view
@@ -34,6 +22,7 @@ Data View
     data view: log view
     data view: data contract view
     DOM highlighting
+    Runnable data view for complex templates
 
 Data contracts
 Template test case runner
@@ -72,6 +61,8 @@ file close prompt for unsaved changes
 auto open default url on template open (with user setting)
 add info icon to RegExpField explaining start/end with /, flags, capturing group, etc.
 add info icon to FormulaField explaining start/end with {}, dynamic strings {``}, known variables (data, etc.), any valid javascript expression
+ghosted state in tree for disabled actions or subitems
+
 
 BUGS
 Crash opening schwabe/person.json, error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
@@ -84,6 +75,7 @@ selector highlighting doesn't work on property page
 Disable autorun for non-select-only templates
 Fix position of add button so it doesn't scroll within the tree
 Add button blocks menu on selected item
+Change key for undefined name to ? (so it doesn't collide with a name of "undefined")
 
 CONSIDER
 Consider renaming SelectorField to QueryField, and how to pass other properites to it
@@ -102,7 +94,7 @@ template params
 save data to Google sheets
 scheduled runs locally
 scheduled runs from cloud
-
+multi-transform
 
 
 CURRENT: QUERY BUILDER
@@ -135,3 +127,17 @@ basic/advanced filter view
 basic data view
 template cloud server
 integrate template cloud storage (open, save, save as)
+
+Action Views
+    action view: waitfor
+    action view: break
+    action view: click
+    action view: each
+    action view: error
+    action view: repeat
+    action view: snooze
+    action view: transform
+    action view: yield
+
+field editors: formula, regexp, symbolic name
+
