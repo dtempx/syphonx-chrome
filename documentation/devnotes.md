@@ -1,37 +1,20 @@
 # Overview
 
+
+## Dependency Diagram
 ```mermaid
 graph TD
-    A[SyphonX Core]
-    A2[SyphonX Library]
-    B[SyphonX Chrome Extension]
-    C[SyphonX SDK CLI/API]
-    D[Custom Crawler Infrastructure]
-    A2-->A
-    B-->A2
-    C-->A2
-    D-->A2
-    D-->A
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
+    syphonx-core["<b>syphon-core</b><br>Core Data Extraction<br>Component"]
+    syphonx-lib["<b>syphon-lib</b><br>Cloud Template Storage,<br>YAML support"]
+    syphonx-chrome["<b>syphonx-chrome</b><br>Template editor<br>(chrome extension)"]
+    syphonx["<b>syphonx</b><br>Puppeteer,<br>CLI mode, API"]
+    app["Custom Crawler<br>Apps & Infrastructure"]
+    syphonx-lib-->syphonx-core
+    syphonx-chrome-->syphonx-lib
+    syphonx-->syphonx-lib
+    app-->syphonx
+    app-->syphonx-lib
+    app-->syphonx-core
 ```
 
 
@@ -147,3 +130,28 @@ https://www.youtube.com/watch?v=EuGxrTCj5Ac&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOp
 
 * https://developer.chrome.com/docs/extensions/mv3/getstarted/
 * https://developer.chrome.com/docs/extensions/mv3/devtools/
+
+
+# More Diagrams
+
+## Data Flow
+```mermaid
+graph LR
+    template-->syphonx-core
+    html-->syphonx-core
+    syphonx-core-->json
+```
+
+## Hosting
+```mermaid
+graph TD
+    app-->browser
+    browser["browser<br>puppeteer, cheerio"]
+    browser-->jquery
+    browser-->syphonx
+    app-->syphonx
+    syphonx-->jquery
+    syphonx-->json
+    json-->app
+
+```
