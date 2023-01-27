@@ -161,15 +161,17 @@ const $07c03eb40a016611$var$scriptMap = {
  * @returns The result returned by the function. If the resulting value of the function execution is a promise, Chrome will wait for the promise to settle and return the resulting value. {@link https://developer.chrome.com/docs/extensions/reference/scripting/#promises}
  * @see {@link https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions}
  */ function $07c03eb40a016611$var$executeScript(tabId, func, ...args) {
-    return new Promise((resolve, reject)=>chrome.scripting.executeScript({
+    return new Promise((resolve)=>chrome.scripting.executeScript({
             target: {
                 tabId: tabId
             },
             func: func,
             args: args
-        }, (results)=>results.length > 0 ? resolve(results[0].result) : reject({
-                message: `Failed to execute script`
-            })));
+        }, (results)=>{
+            // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
+            if (results instanceof Array && results.length > 0) resolve(results[0].result); // only take the first frame result for now
+            else resolve();
+        }));
 }
 /**
  * Executes a script in the context of the page corresponding to a tabId.
@@ -261,35 +263,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         }
     })();
     return true; // response will be sent asynchronously
-}); /*
-chrome.runtime.onConnect.addListener(port => {
-    port.onMessage.addListener(onDevToolsMessage);
-    port.onDisconnect.addListener(() => port.onMessage.removeListener(onDevToolsMessage));
 });
-
-function onDevToolsMessage(message: any, port: chrome.runtime.Port): boolean {
-    if (message.log) {
-        console.log("DEVTOOLS", message.log);
-        return false;
-    }
-    else if (message.key === "load" && typeof message.tabId === "number") {
-        (async () => {
-            try {
-                const url = await getTabUrl(message.tabId);
-                console.log("DEVTOOLS", { message }, url);
-            }
-            catch (error) {
-                console.error("DEVTOOLS", { message, error });
-            }
-        })();
-        return true; // response will be sent asynchronously
-    }
-    else {
-        console.warn("DEVTOOLS UNKNOWN MESSAGE", { message });
-        return false;
-    }
-}
-*/ 
 
 })();
 //# sourceMappingURL=background.js.map

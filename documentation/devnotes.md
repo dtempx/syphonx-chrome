@@ -1,5 +1,41 @@
+# Overview
 
-## Dev Setup
+```mermaid
+graph TD
+    A[SyphonX Core]
+    A2[SyphonX Library]
+    B[SyphonX Chrome Extension]
+    C[SyphonX SDK CLI/API]
+    D[Custom Crawler Infrastructure]
+    A2-->A
+    B-->A2
+    C-->A2
+    D-->A2
+    D-->A
+```
+
+```mermaid
+mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectiveness<br/>and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid
+```
+
+
+# Dev Setup
 ```
 git clone https://github.com/dtempx/syphonx-chrome.git
 cd syphonx-chrome
@@ -7,44 +43,48 @@ yarn install
 ```
 
 
-## Build/Test
+# Build/Test
 * `npx tsc` to build source
 * `yarn test` to run unit tests
 
 
-## Build/Package
+# Build/Package
 * `yarn build` to build Chrome Extension package
 * `yarn start` to test UI outside of Chrome
 
 
-## Test Chrome Extension
+# Test Chrome Extension
 1. Open Chrome web-browser
 2. Goto `chrome://extensions` to open the **Extensions** page
 3. Click `Load unpacked` and navigate to `dist` folder to load Chrome Extension
 
 
-## Install Chrome Extension
+# Install Chrome Extension
 1. Open Chrome and navigate to **chrome://extensions**
 2. Click **Load unpacked**, navigate to the `dist` folder within this project and click **Select Folder**
 3. Navigate to any website and open developer tools or hit F12
 4. Select the **SyphonX** tab within the developer tools panel.
 
 
-## Links
-* [Roadmap](documentation/roadmap.md)
+# Deploy
+1. Update version number in manifest.json
+2. Zip the dist directory
+3. Goto https://github.com/dtempx/syphonx-chrome/releases/
+4. Click **Draft new release**
+5. Set tag to `beta`
+6. Set name to the version number
+7. Add zip file
+8. Check **Set as a pre-release**
+8. Click **Publish release**
 
-## References
+
+# Links
 * [Material UI Documentation](https://v4.mui.com/)
 * [Chrome Extending DevTools](https://developer.chrome.com/docs/extensions/mv3/devtools/)
 * [Building a Chrome Extension with TypeScript (starter overview)](https://www.youtube.com/watch?v=01vp9cYbQus)
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+
+# Other
 
 ## Add jQuery to any page
 ```js

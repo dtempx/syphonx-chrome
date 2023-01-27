@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FileDialog } from "../components";
-import { cloudFetchTemplateDirectory, cloudUpdateTemplateFile } from "../../../lib";
+import { cloud } from "../../../lib";
 import { useTemplate } from "../../context";
 import { Template } from "../../../lib";
 
@@ -25,7 +25,7 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const directory = await cloudFetchTemplateDirectory();
+                    const directory = await cloud.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                         .map(file => file.name);
@@ -46,7 +46,7 @@ export default ({ open, onClose }: Props) => {
         try {
             setSaving(true);
             const json = template.toString("file");
-            await cloudUpdateTemplateFile(file, json);
+            await cloud.write(file, json);
             onClose(event);
             setSaving(false);
             setError("");

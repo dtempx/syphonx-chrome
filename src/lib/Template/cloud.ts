@@ -8,14 +8,14 @@ export interface File {
     hash: string;
 }
 
-export async function cloudFetchTemplateDirectory(): Promise<File[]> {
+export async function directory(): Promise<File[]> {
     const response = await fetch(`${serviceUrl}/templates/`);
     const files = await response.json() as File[];
     files.forEach(file => file.timestamp = new Date(file.timestamp));
     return files;
 }
 
-export async function cloudReadTemplateFile(file: string): Promise<string> {
+export async function read(file: string): Promise<string> {
     if (file.startsWith("/"))
         file = file.slice(1);
     const apiUrl = `${serviceUrl}/template/${file}?mode=read`;
@@ -31,7 +31,7 @@ export async function cloudReadTemplateFile(file: string): Promise<string> {
     return content;
 }
 
-export async function cloudUpdateTemplateFile(file: string, content: string): Promise<void> {
+export async function write(file: string, content: string): Promise<void> {
     if (file.startsWith("/"))
         file = file.slice(1);
 

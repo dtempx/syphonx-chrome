@@ -168,8 +168,13 @@ export class Template {
 
     async run(): Promise<syphonx.ExtractResult> {
         if (background.active) {
-            const result = await background.applyTemplate(this.obj as syphonx.Template);
-            return result!;
+            try {
+                const result = await background.applyTemplate(this.obj as syphonx.Template);
+                return result!;
+            }
+            catch (err) {
+                return { errors: [{ message: err instanceof Error ? err.message : JSON.stringify(err) }]} as syphonx.ExtractResult;
+            }
         }
         else {
             return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;

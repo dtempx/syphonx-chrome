@@ -38716,14 +38716,19 @@ $parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
 
 
+var $20d1a517b8ce84e3$exports = {};
+
+$parcel$export($20d1a517b8ce84e3$exports, "directory", () => $20d1a517b8ce84e3$export$18e11c4ddd562c9d);
+$parcel$export($20d1a517b8ce84e3$exports, "read", () => $20d1a517b8ce84e3$export$aafa59e2e03f2942);
+$parcel$export($20d1a517b8ce84e3$exports, "write", () => $20d1a517b8ce84e3$export$68d8715fc104d294);
 const $20d1a517b8ce84e3$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-async function $20d1a517b8ce84e3$export$30d4711d6f8d17eb() {
+async function $20d1a517b8ce84e3$export$18e11c4ddd562c9d() {
     const response = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/templates/`);
     const files = await response.json();
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
 }
-async function $20d1a517b8ce84e3$export$de1a4df3278e5008(file) {
+async function $20d1a517b8ce84e3$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
     const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=read`;
     const response1 = await fetch(apiUrl);
@@ -38734,7 +38739,7 @@ async function $20d1a517b8ce84e3$export$de1a4df3278e5008(file) {
     const content = await response2.text();
     return content;
 }
-async function $20d1a517b8ce84e3$export$885cb9c57e0a1f52(file, content) {
+async function $20d1a517b8ce84e3$export$68d8715fc104d294(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
     const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?write`;
     const response1 = await fetch(apiUrl);
@@ -39094,10 +39099,19 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     async run() {
-        if ($6767c619f5de943e$export$89da14300d534261) {
+        if ($6767c619f5de943e$export$89da14300d534261) try {
             const result = await $6767c619f5de943e$export$f78a296632f66e69(this.obj);
             return result;
-        } else return {
+        } catch (err) {
+            return {
+                errors: [
+                    {
+                        message: err instanceof Error ? err.message : JSON.stringify(err)
+                    }
+                ]
+            };
+        }
+        else return {
             data: {
                 title: "Example Domain",
                 href: "https://www.example.com/"
@@ -41888,7 +41902,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $20d1a517b8ce84e3$export$30d4711d6f8d17eb)();
+                const directory = await (0, $20d1a517b8ce84e3$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41906,7 +41920,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     async function onSelectFile(event, file) {
         try {
             setOpening(true);
-            const json = await (0, $20d1a517b8ce84e3$export$de1a4df3278e5008)(file);
+            const json = await (0, $20d1a517b8ce84e3$exports).read(file);
             const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json, file);
             setTemplate(template.toString());
             onClose(event);
@@ -41956,7 +41970,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $20d1a517b8ce84e3$export$30d4711d6f8d17eb)();
+                const directory = await (0, $20d1a517b8ce84e3$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41975,7 +41989,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         try {
             setSaving(true);
             const json = template.toString("file");
-            await (0, $20d1a517b8ce84e3$export$885cb9c57e0a1f52)(file, json);
+            await (0, $20d1a517b8ce84e3$exports).write(file, json);
             onClose(event);
             setSaving(false);
             setError("");
