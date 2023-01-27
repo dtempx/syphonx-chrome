@@ -1,15 +1,15 @@
 # Overview
 
-
-## Dependency Diagram
 ```mermaid
 graph TD
-    syphonx-core["<b>syphon-core</b><br>Core Data Extraction<br>Component"]
-    syphonx-lib["<b>syphon-lib</b><br>Cloud Template Storage,<br>YAML support"]
-    syphonx-chrome["<b>syphonx-chrome</b><br>Template editor<br>(chrome extension)"]
-    syphonx["<b>syphonx</b><br>Puppeteer,<br>CLI mode, API"]
+    syphonx-core["<b>syphon-core</b><br>Core Data Extraction<br>Javascript Function"]
+    syphonx-lib["<b>syphon-lib</b><br>Template Cloud<br>Storage"]
+    syphonx-chrome["<b>syphonx-chrome</b><br>Template Editor<br><small>(chrome extension)</small>"]
+    syphonx-cloud["<b>syphonx-cloud</b><br>Template cloud storage,<br>access control,<br>versioning"]
+    syphonx["<b>syphonx</b><br>Standalone CLI,<br>Node.js API<br><small>Puppeteer, jQuery,<br>Cheerio built-in</small>"]
     app["Custom Crawler<br>Apps & Infrastructure"]
     syphonx-lib-->syphonx-core
+    syphonx-lib-->syphonx-cloud
     syphonx-chrome-->syphonx-lib
     syphonx-->syphonx-lib
     app-->syphonx
