@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useTemplate } from "../../context";
-import { removeDOMRefs } from "../../../lib";
+import { removeDOMRefs } from "../lib";
 
 export default () => {
     const { result } = useTemplate();

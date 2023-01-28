@@ -1,5 +1,5 @@
 export * as path from "./path";
-
-export * from "./Template";
-export * from "./Template/utilities";
-export * from "./utilities";
+export * from "./clone";
+export * from "./isObject";
+export * from "./omit";
+export * from "./removeDOMRefs";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { TreeView } from "@mui/lab";
 import { useTemplate } from "../../context";
-import { Template } from "../../../lib";
+import { Template } from "../lib";
 import ActionTreeItem from "./ActionTreeItem";
 
 import {

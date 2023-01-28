@@ -32031,11 +32031,14 @@ function $0e7d45acde193ea2$export$fca13ab91e1a6240() {
 function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
     const [mode, setMode] = (0, $d4J5n.useState)("visual-editor");
     const [advanced, setAdvanced] = (0, $d4J5n.useState)(false);
+    const [debug, setDebug] = (0, $d4J5n.useState)(false);
     const value = {
         mode: mode,
         setMode: setMode,
         advanced: advanced,
-        setAdvanced: setAdvanced
+        setAdvanced: setAdvanced,
+        debug: debug,
+        setDebug: setDebug
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0e7d45acde193ea2$var$AppContext.Provider, {
         value: value,
@@ -32045,8 +32048,15 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
 
 
 
+
 var $d4J5n = parcelRequire("d4J5n");
-function $1c75672faa6e156a$export$f9107b66120eb036(path) {
+
+var $d4J5n = parcelRequire("d4J5n");
+var $89382e3cfd90d03a$exports = {};
+var $596d45310e010dc1$exports = {};
+
+$parcel$export($596d45310e010dc1$exports, "filename", () => $596d45310e010dc1$export$f9107b66120eb036);
+function $596d45310e010dc1$export$f9107b66120eb036(path) {
     if (path.endsWith("/")) return path.slice(path.slice(0, -1).lastIndexOf("/") + 1, -1);
     else {
         const i = path.lastIndexOf("/");
@@ -32055,7 +32065,10 @@ function $1c75672faa6e156a$export$f9107b66120eb036(path) {
 }
 
 
-function $27ccd235d145f52e$export$58adb3bec8346d0f(path) {
+var $93aa002deec8ce00$exports = {};
+
+$parcel$export($93aa002deec8ce00$exports, "slice", () => $93aa002deec8ce00$export$58adb3bec8346d0f);
+function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
     const result = [];
     let i = 0;
     while(i >= 0){
@@ -32067,47 +32080,80 @@ function $27ccd235d145f52e$export$58adb3bec8346d0f(path) {
 }
 
 
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
 
 
-const $5b6ad683ea322ebf$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-const $5b6ad683ea322ebf$var$headers = {
-    "Content-Type": "application/octet-stream"
-};
-async function $5b6ad683ea322ebf$export$30d4711d6f8d17eb() {
-    const response = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/templates/`);
+function $90fa643a8d44e1af$export$9cd59f9826255e47(value) {
+    return JSON.parse(JSON.stringify(value));
+}
+
+
+function $9cab6e567be87881$export$a6cdc56e425d0d0a(obj) {
+    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+
+
+function $c183e629fad26e04$export$30a06c8d3562193f(obj, ...keys) {
+    const output = {};
+    for (const key1 of Object.keys(obj).filter((key)=>!keys.includes(key)))output[key1] = obj[key1];
+    return output;
+}
+
+
+
+function $fee381e3400c58a7$export$de139376c1f60602(obj) {
+    if (obj instanceof Array) return obj.map((item)=>$fee381e3400c58a7$export$de139376c1f60602(item));
+    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $fee381e3400c58a7$export$de139376c1f60602(obj.value);
+    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj)) {
+        const source = obj;
+        const target = {};
+        for (const key of Object.keys(obj))if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key].value); // unwrap value
+        else target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key]);
+        return target;
+    } else return obj;
+}
+
+
+
+
+var $2203ad40f7cc0e19$exports = {};
+
+$parcel$export($2203ad40f7cc0e19$exports, "directory", () => $2203ad40f7cc0e19$export$18e11c4ddd562c9d);
+$parcel$export($2203ad40f7cc0e19$exports, "read", () => $2203ad40f7cc0e19$export$aafa59e2e03f2942);
+$parcel$export($2203ad40f7cc0e19$exports, "write", () => $2203ad40f7cc0e19$export$68d8715fc104d294);
+const $2203ad40f7cc0e19$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+async function $2203ad40f7cc0e19$export$18e11c4ddd562c9d() {
+    const response = await fetch(`${$2203ad40f7cc0e19$var$serviceUrl}/templates/`);
     const files = await response.json();
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
 }
-async function $5b6ad683ea322ebf$export$de1a4df3278e5008(file) {
+async function $2203ad40f7cc0e19$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=read`);
+    const apiUrl = `${$2203ad40f7cc0e19$var$serviceUrl}/template/${file}?mode=read`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok) throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
     const { url: url  } = await response1.json();
     const response2 = await fetch(url);
+    if (!response2.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
     const content = await response2.text();
     return content;
 }
-async function $5b6ad683ea322ebf$export$25c05c84991e5fdf(file, content) {
+async function $2203ad40f7cc0e19$export$68d8715fc104d294(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=create`);
+    const apiUrl = `${$2203ad40f7cc0e19$var$serviceUrl}/template/${file}?write`;
+    const response1 = await fetch(apiUrl);
+    if (!response1.ok) throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
     const { url: url  } = await response1.json();
     const response2 = await fetch(url, {
         method: "PUT",
-        headers: $5b6ad683ea322ebf$var$headers,
-        body: content
+        body: content,
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
-    const result = await response2.text();
-    console.log(result);
-}
-async function $5b6ad683ea322ebf$export$885cb9c57e0a1f52(file, content) {
-    if (file.startsWith("/")) file = file.slice(1);
-    const response1 = await fetch(`${$5b6ad683ea322ebf$var$serviceUrl}/template/${file}?mode=update`);
-    const { url: url  } = await response1.json();
-    const response2 = await fetch(url, {
-        method: "PUT",
-        headers: $5b6ad683ea322ebf$var$headers,
-        body: content
-    });
+    if (!response2.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
     const result = await response2.text();
     console.log(result);
 }
@@ -38307,459 +38353,7 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
-function $2746f7c5d1a5aab9$export$9cd59f9826255e47(value) {
-    return JSON.parse(JSON.stringify(value));
-}
-
-
-function $4fec25c38d90d926$export$a6cdc56e425d0d0a(obj) {
-    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
-}
-
-
-
-function $bf976c93e1ba0dc9$export$de139376c1f60602(obj) {
-    if (obj instanceof Array) return obj.map((item)=>$bf976c93e1ba0dc9$export$de139376c1f60602(item));
-    else if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $bf976c93e1ba0dc9$export$de139376c1f60602(obj.value);
-    else if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(obj)) {
-        const source = obj;
-        const target = {};
-        for (const key of Object.keys(obj))if ((0, $4fec25c38d90d926$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $bf976c93e1ba0dc9$export$de139376c1f60602(source[key].value); // unwrap value
-        else target[key] = $bf976c93e1ba0dc9$export$de139376c1f60602(source[key]);
-        return target;
-    } else return obj;
-}
-
-
-
-
-function $c9010fc8649de231$export$a3d9882fc9361f2d(actions, parent) {
-    const n = {};
-    return actions.map((action, index)=>{
-        const [name] = Object.keys(action);
-        n[name] = n[name] ? n[name] + 1 : 1;
-        const key = parent ? `${parent.key}.${name}.${n[name]}` : `${name}.${n[name]}`;
-        const { [name]: obj  } = action;
-        const item = {
-            key: key,
-            name: name,
-            type: "action",
-            icon: name,
-            index: index,
-            obj: obj,
-            parent: parent,
-            collection: actions
-        };
-        if (name === "select" && obj instanceof Array) item.children = $c9010fc8649de231$var$createSelectItems(obj, item);
-        return item;
-    });
-}
-function $c9010fc8649de231$var$createSelectItems(obj, parent) {
-    return obj.map((select, index)=>{
-        const key = `${parent.key}.${select.name}`;
-        return {
-            key: key,
-            name: select.name || "",
-            type: "select",
-            icon: select.type || "string",
-            required: select.required,
-            repeated: select.repeated,
-            index: index,
-            obj: select,
-            parent: parent,
-            collection: obj
-        };
-    });
-}
-function $c9010fc8649de231$export$a2dea178c28a0308(items, key) {
-    for (const item of items){
-        if (item.key === key || item.obj === key) return item;
-        if (item.children) {
-            const subitem = $c9010fc8649de231$export$a2dea178c28a0308(item.children, key);
-            if (subitem) return subitem;
-        }
-    }
-}
-function $c9010fc8649de231$export$1befd5ecde967db5(key) {
-    const i = key.lastIndexOf(".");
-    const n = parseInt(key.slice(i + 1));
-    return `${key.slice(0, i)}${n}`;
-}
-function $c9010fc8649de231$export$272b18412c726147(obj) {
-    if (typeof obj === "object" && obj !== null) {
-        const [key] = Object.keys(obj);
-        return obj[key];
-    }
-}
-function $c9010fc8649de231$export$ad9052cdca847332(text, i, token) {
-    let n = 0;
-    while((i++) < text.length){
-        if (text[i] === token[1] && --n < 0) return i + 1;
-        else if (text[i] === token[0]) n += 1;
-    }
-    return -1;
-}
-function $c9010fc8649de231$export$60f47f67e5d44f99(list, basename = "new") {
-    for(let n = 1; n <= 100; ++n){
-        const name = `${basename}${n}`;
-        if (!list.some((obj)=>obj.name === name)) return name;
-    }
-    return "";
-}
-
-
-const $01cf6973c37f9531$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
-async function $01cf6973c37f9531$export$f78a296632f66e69(template) {
-    const result = await $01cf6973c37f9531$var$sendMessage("applyTemplate", template);
-    return result;
-}
-async function $01cf6973c37f9531$export$e684be5f4b22cc14() {
-    await $01cf6973c37f9531$var$sendMessage("disableTracking");
-}
-async function $01cf6973c37f9531$export$1f8ffc6fd33b1d16() {
-    await $01cf6973c37f9531$var$sendMessage("enableTracking");
-}
-function $01cf6973c37f9531$export$bef1f36f5486a6a3(message) {
-    if ($01cf6973c37f9531$export$89da14300d534261) chrome.runtime.sendMessage({
-        log: message
-    });
-    else console.log("BACKGROUND", message);
-}
-async function $01cf6973c37f9531$export$225ea495d1fa0d5() {
-    const result = await $01cf6973c37f9531$var$sendMessage("queryTracking");
-    return result || [];
-}
-async function $01cf6973c37f9531$export$f2909722c7f0f932(selectors) {
-    const result = await $01cf6973c37f9531$var$sendMessage("selectElements", selectors);
-    return result || [];
-}
-function $01cf6973c37f9531$var$sendMessage(key, ...params) {
-    return new Promise((resolve, reject)=>{
-        if ($01cf6973c37f9531$export$89da14300d534261) {
-            const tabId = chrome.devtools.inspectedWindow.tabId;
-            chrome.runtime.sendMessage({
-                key: key,
-                params: params,
-                tabId: tabId
-            }, (response)=>{
-                if (response?.error) reject(response.error);
-                else resolve(response?.result);
-            });
-        } else {
-            console.log("BACKGROUND", key, ...params);
-            resolve(undefined);
-        }
-    });
-}
-
-
-
-
-class $b2dd15a2460cc3dd$export$14416b8d99d47caa {
-    obj;
-    error;
-    children;
-    selected;
-    file;
-    constructor(obj, selected, file){
-        if (typeof obj === "string") try {
-            this.obj = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(obj);
-        } catch (err) {
-            this.error = err instanceof Error ? err.message : JSON.stringify(err);
-            this.obj = {};
-        }
-        else if (typeof obj === "object") this.obj = obj;
-        else this.obj = {};
-        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
-        this.selected = selected || "";
-        this.file = file;
-        this.children = this.actions();
-    }
-    actions() {
-        return this.obj.actions instanceof Array ? (0, $c9010fc8649de231$export$a3d9882fc9361f2d)(this.obj.actions) : [];
-    }
-    addAction(type) {
-        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
-        const actions = this.findItemActions(item);
-        if (type === "break") actions.push({
-            break: {}
-        });
-        else if (type === "click") {
-            const click = {};
-            actions.push({
-                click: click
-            });
-        } else if (type === "each") {
-            const each = {};
-            each.actions = [];
-            actions.push({
-                each: each
-            });
-        } else if (type === "error") {
-            const error = {};
-            actions.push({
-                error: error
-            });
-        } else if (type === "repeat") {
-            const repeat = {
-                actions: []
-            };
-            actions.push({
-                repeat: repeat
-            });
-        } else if (type === "select") {
-            const select = [
-                {}
-            ];
-            actions.push({
-                select: select
-            });
-        } else if (type === "snooze") {
-            const snooze = [
-                1,
-                2
-            ];
-            actions.push({
-                snooze: snooze
-            });
-        } else if (type === "transform") {
-            const transform = [
-                {}
-            ];
-            actions.push({
-                transform: transform
-            });
-        } else if (type === "yield") actions.push({
-            yield: {}
-        });
-        else if (type === "waitfor") actions.push({
-            waitfor: {}
-        });
-    //this.selected = this.findObj(obj) || "";
-    }
-    addSubAction() {
-        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
-        if (item) {
-            if (item.type === "action" && item.name === "select") {
-                const selectors = item.obj;
-                const name = (0, $c9010fc8649de231$export$60f47f67e5d44f99)(selectors);
-                selectors.push({
-                    name: name
-                });
-            } else if (item.type === "select" && item.parent) {
-                const selectors = item.parent.obj;
-                const name = (0, $c9010fc8649de231$export$60f47f67e5d44f99)(selectors);
-                selectors.push({
-                    name: name
-                });
-            }
-        }
-    }
-    canAddSubAction() {
-        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
-        if (item) {
-            if (item.type === "action" && item.name === "select") return true;
-            else if (item.type === "select" && item.parent) return true;
-        }
-        return false;
-    }
-    clone() {
-        return new $b2dd15a2460cc3dd$export$14416b8d99d47caa((0, $2746f7c5d1a5aab9$export$9cd59f9826255e47)(this.obj), this.selected, this.file);
-    }
-    empty() {
-        return this.children.length === 0;
-    }
-    findItem(key) {
-        return (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, key);
-    }
-    findItemActions(item) {
-        if (!item) return this.obj.actions;
-        else if (item.type === "action" && item.name === "repeat") {
-            const repeat = item.obj;
-            if (!(repeat.actions instanceof Array)) repeat.actions = [];
-            return repeat.actions;
-        } else if (item.type === "action" && item.name === "each") {
-            const each = item.obj;
-            if (!(each.actions instanceof Array)) each.actions = [];
-            return each.actions;
-        } else return this.obj.actions;
-    }
-    findObj(obj) {
-        const actions = this.actions();
-        const item = (0, $c9010fc8649de231$export$a2dea178c28a0308)(actions, obj);
-        return item?.key;
-    }
-    json() {
-        let text = JSON.stringify(this.obj, null, 2) || "";
-        let i = text.indexOf(`"$": [\n`);
-        while(i >= 0){
-            i = text.indexOf("[", i);
-            const j = (0, $c9010fc8649de231$export$ad9052cdca847332)(text, i, "[]");
-            if (j > i) {
-                text = `${text.substring(0, i)}${text.substring(i, j).replace(/\s*\[/g, "[").replace(/\s*\]/g, "]").replace(/\[\s*"/g, `["`).replace(/",\s*"/g, `","`)}${text.substring(j)}`;
-                i = text.indexOf(`"$": [\n`);
-            } else break;
-        }
-        return text;
-    }
-    moveItemDown(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i < item.collection.length - 1) {
-            item.collection.splice(i, 1);
-            item.collection.splice(i + 1, 0, item);
-        }
-        return this;
-    }
-    moveItemUp(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i > 0) {
-            item.collection.splice(i, 1);
-            item.collection.splice(i - 1, 0, item);
-        }
-        return this;
-    }
-    removeItem(item) {
-        debugger;
-        const i = item.collection.findIndex((subitem)=>(0, $c9010fc8649de231$export$272b18412c726147)(subitem) === item.obj || subitem.name === item.name); // todo
-        if (i >= 0) {
-            item.collection.splice(i, 1);
-            const obj = (0, $c9010fc8649de231$export$272b18412c726147)(item.collection[i] || item.collection[0]);
-            this.selected = this.findObj(obj) || "";
-        }
-        return this;
-    }
-    async run() {
-        if ($01cf6973c37f9531$export$89da14300d534261) {
-            const result = await $01cf6973c37f9531$export$f78a296632f66e69(this.obj);
-            return result;
-        } else return {
-            data: {
-                title: "Example Domain",
-                href: "https://www.example.com/"
-            }
-        };
-    }
-    selectedItem() {
-        return (0, $c9010fc8649de231$export$a2dea178c28a0308)(this.children, this.selected);
-    }
-}
-
-
-
-
-
-
-
-
-
-
-function $fa3e1c5ef019989b$export$95809329f49ea9f9() {
-    const [files1, setFiles] = (0, $d4J5n.useState)([]);
-    const [error, setError] = (0, $d4J5n.useState)("");
-    (0, $d4J5n.useEffect)(()=>{
-        (async ()=>{
-            try {
-                const files = await (0, $5b6ad683ea322ebf$export$30d4711d6f8d17eb)();
-                setFiles(files.map((file)=>file.name));
-                setError("");
-            } catch (err) {
-                debugger;
-                setError(err instanceof Error ? err.message : JSON.stringify(err));
-            }
-        })();
-    }, []);
-    return {
-        files: files1,
-        setFiles: setFiles,
-        error: error,
-        setError: setError
-    };
-}
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-var $d4J5n = parcelRequire("d4J5n");
-var $89382e3cfd90d03a$exports = {};
-var $596d45310e010dc1$exports = {};
-
-$parcel$export($596d45310e010dc1$exports, "filename", () => $596d45310e010dc1$export$f9107b66120eb036);
-function $596d45310e010dc1$export$f9107b66120eb036(path) {
-    if (path.endsWith("/")) return path.slice(path.slice(0, -1).lastIndexOf("/") + 1, -1);
-    else {
-        const i = path.lastIndexOf("/");
-        return i >= 0 ? path.slice(i + 1) : path;
-    }
-}
-
-
-var $93aa002deec8ce00$exports = {};
-
-$parcel$export($93aa002deec8ce00$exports, "slice", () => $93aa002deec8ce00$export$58adb3bec8346d0f);
-function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
-    const result = [];
-    let i = 0;
-    while(i >= 0){
-        const text = path.slice(0, i + 1);
-        result.push(text);
-        i = path.indexOf("/", i + 1);
-    }
-    return result;
-}
-
-
-$parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
-$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
-
-
-var $20d1a517b8ce84e3$exports = {};
-
-$parcel$export($20d1a517b8ce84e3$exports, "directory", () => $20d1a517b8ce84e3$export$18e11c4ddd562c9d);
-$parcel$export($20d1a517b8ce84e3$exports, "read", () => $20d1a517b8ce84e3$export$aafa59e2e03f2942);
-$parcel$export($20d1a517b8ce84e3$exports, "write", () => $20d1a517b8ce84e3$export$68d8715fc104d294);
-const $20d1a517b8ce84e3$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-async function $20d1a517b8ce84e3$export$18e11c4ddd562c9d() {
-    const response = await fetch(`${$20d1a517b8ce84e3$var$serviceUrl}/templates/`);
-    const files = await response.json();
-    files.forEach((file)=>file.timestamp = new Date(file.timestamp));
-    return files;
-}
-async function $20d1a517b8ce84e3$export$aafa59e2e03f2942(file) {
-    if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?mode=read`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok) throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
-    const { url: url  } = await response1.json();
-    const response2 = await fetch(url);
-    if (!response2.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
-    const content = await response2.text();
-    return content;
-}
-async function $20d1a517b8ce84e3$export$68d8715fc104d294(file, content) {
-    if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$20d1a517b8ce84e3$var$serviceUrl}/template/${file}?write`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok) throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
-    const { url: url  } = await response1.json();
-    const response2 = await fetch(url, {
-        method: "PUT",
-        body: content,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    if (!response2.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
-    const result = await response2.text();
-    console.log(result);
-}
-
-
-
-class $5f4e931e94425ce6$export$67c95d00e574f6b6 {
+class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
     constructor(obj){
         this.key = obj.key;
         this.type = obj.type;
@@ -38775,38 +38369,6 @@ class $5f4e931e94425ce6$export$67c95d00e574f6b6 {
         this.index = obj.index;
     }
 }
-
-
-function $711b72822a456466$export$9cd59f9826255e47(value) {
-    return JSON.parse(JSON.stringify(value));
-}
-
-
-function $aacd3173f0a35cbd$export$a6cdc56e425d0d0a(obj) {
-    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
-}
-
-
-function $01caa20c9e164fb5$export$30a06c8d3562193f(obj, ...keys) {
-    const output = {};
-    for (const key1 of Object.keys(obj).filter((key)=>!keys.includes(key)))output[key1] = obj[key1];
-    return output;
-}
-
-
-
-function $d2489396c3ef9092$export$de139376c1f60602(obj) {
-    if (obj instanceof Array) return obj.map((item)=>$d2489396c3ef9092$export$de139376c1f60602(item));
-    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $d2489396c3ef9092$export$de139376c1f60602(obj.value);
-    else if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(obj)) {
-        const source = obj;
-        const target = {};
-        for (const key of Object.keys(obj))if ((0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key].value); // unwrap value
-        else target[key] = $d2489396c3ef9092$export$de139376c1f60602(source[key]);
-        return target;
-    } else return obj;
-}
-
 
 
 
@@ -38866,7 +38428,7 @@ function $6767c619f5de943e$var$sendMessage(key, ...params) {
 
 
 
-function $d57891eafce663b4$export$a3d9882fc9361f2d(actions, parent) {
+function $512c73527a382006$export$a3d9882fc9361f2d(actions, parent) {
     if (actions) {
         const ordinals = {};
         return actions.map((action, index)=>{
@@ -38875,7 +38437,7 @@ function $d57891eafce663b4$export$a3d9882fc9361f2d(actions, parent) {
             const ordinal = ordinals[name];
             const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
             const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
-            const item = new (0, $5f4e931e94425ce6$export$67c95d00e574f6b6)({
+            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
                 key: key,
                 name: name,
                 type: "action",
@@ -38886,15 +38448,15 @@ function $d57891eafce663b4$export$a3d9882fc9361f2d(actions, parent) {
                 obj: obj,
                 index: index
             });
-            if (name === "select" && obj instanceof Array) item.children = $d57891eafce663b4$var$createSelectItems(obj, item);
+            if (name === "select" && obj instanceof Array) item.children = $512c73527a382006$var$createSelectItems(obj, item);
             return item;
         });
     } else return [];
 }
-function $d57891eafce663b4$var$createSelectItems(obj, parent) {
+function $512c73527a382006$var$createSelectItems(obj, parent) {
     return obj.map((select, index)=>{
         const key = `${parent.key}.${select.name}`;
-        return new (0, $5f4e931e94425ce6$export$67c95d00e574f6b6)({
+        return new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
             key: key,
             name: select.name || "",
             type: "select",
@@ -38911,25 +38473,25 @@ function $d57891eafce663b4$var$createSelectItems(obj, parent) {
 }
 
 
-function $e4372410e549926b$export$a2dea178c28a0308(items, key) {
+function $1ea6494eef95c08b$export$a2dea178c28a0308(items, key) {
     for (const item of items){
         if (item === key || item.key === key || item.unit === key || item.obj === key) return item;
         if (item.children) {
-            const subitem = $e4372410e549926b$export$a2dea178c28a0308(item.children, key);
+            const subitem = $1ea6494eef95c08b$export$a2dea178c28a0308(item.children, key);
             if (subitem) return subitem;
         }
     }
 }
 
 
-function $85cc38566d0e4723$export$a1556c689e18ef72(item) {
+function $7f9f3705461a1368$export$a1556c689e18ef72(item) {
     if (item?.type === "action") return item.collection;
-    else if (item?.parent) return $85cc38566d0e4723$export$a1556c689e18ef72(item.parent);
+    else if (item?.parent) return $7f9f3705461a1368$export$a1556c689e18ef72(item.parent);
     else return undefined;
 }
 
 
-function $000c0aa836e99c82$export$ad9052cdca847332(text, i, token) {
+function $2e741646fc3bad73$export$ad9052cdca847332(text, i, token) {
     let n = 0;
     while((i++) < text.length){
         if (text[i] === token[1] && --n < 0) return i + 1;
@@ -38939,11 +38501,11 @@ function $000c0aa836e99c82$export$ad9052cdca847332(text, i, token) {
 }
 
 
-function $4c273560d650e2e0$export$1a6ccd4206d621b5(text, key) {
+function $a5061090d26ef82e$export$1a6ccd4206d621b5(text, key) {
     let i = text.indexOf(`"${key}": [\n`);
     while(i >= 0){
         i = text.indexOf("[", i);
-        const j = (0, $000c0aa836e99c82$export$ad9052cdca847332)(text, i, "[]");
+        const j = (0, $2e741646fc3bad73$export$ad9052cdca847332)(text, i, "[]");
         if (j > i) {
             text = `${text.substring(0, i)}${JSON.stringify(JSON.parse(text.substring(i, j)))}${text.substring(j)}`;
             i = text.indexOf(`"${key}": [\n`, j);
@@ -38953,14 +38515,14 @@ function $4c273560d650e2e0$export$1a6ccd4206d621b5(text, key) {
 }
 
 
-function $fc02d71641653776$export$5adbceee7f7ddc90(text) {
-    text = (0, $4c273560d650e2e0$export$1a6ccd4206d621b5)(text, "query");
-    text = (0, $4c273560d650e2e0$export$1a6ccd4206d621b5)(text, "snooze");
+function $bcb4aef0f6b91b86$export$5adbceee7f7ddc90(text) {
+    text = (0, $a5061090d26ef82e$export$1a6ccd4206d621b5)(text, "query");
+    text = (0, $a5061090d26ef82e$export$1a6ccd4206d621b5)(text, "snooze");
     return text;
 }
 
 
-function $82fdb553f3e3b789$export$490ebbf7c6884638(list, basename = "new") {
+function $049f6d752ade0147$export$490ebbf7c6884638(list, basename = "new") {
     for(let n = 1; n <= 100; ++n){
         const name = `${basename}${n}`;
         if (!list.some((obj)=>obj.name === name)) return name;
@@ -38972,7 +38534,7 @@ function $82fdb553f3e3b789$export$490ebbf7c6884638(list, basename = "new") {
 
 
 
-class $1b88f382576c34f2$export$14416b8d99d47caa {
+class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
     constructor(obj, file){
         if (typeof obj === "string") {
             if (obj === "") this.obj = {};
@@ -38982,15 +38544,15 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
                 this.error = err instanceof Error ? err.message : JSON.stringify(err);
                 this.obj = {};
             }
-        } else if (typeof obj === "object") this.obj = (0, $711b72822a456466$export$9cd59f9826255e47)(obj);
+        } else if (typeof obj === "object") this.obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(obj);
         else this.obj = {};
-        this.children = (0, $d57891eafce663b4$export$a3d9882fc9361f2d)(this.obj.actions);
+        this.children = (0, $512c73527a382006$export$a3d9882fc9361f2d)(this.obj.actions);
         if (file) this.obj.file = file;
     }
     addAction(type) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
         const item = this.selected();
-        const actions = (0, $85cc38566d0e4723$export$a1556c689e18ef72)(item) || this.obj.actions;
+        const actions = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
         let action;
         if (type === "break") action = {
             break: {}
@@ -39035,17 +38597,17 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         this.setSelected(action);
     }
     addSubAction() {
-        const item = (0, $e4372410e549926b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") {
                 const selectors = item.obj;
-                const name = (0, $82fdb553f3e3b789$export$490ebbf7c6884638)(selectors);
+                const name = (0, $049f6d752ade0147$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
             } else if (item.type === "select" && item.parent) {
                 const selectors = item.parent.obj;
-                const name = (0, $82fdb553f3e3b789$export$490ebbf7c6884638)(selectors);
+                const name = (0, $049f6d752ade0147$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
@@ -39053,7 +38615,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     canAddSubAction() {
-        const item = (0, $e4372410e549926b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") return true;
             else if (item.type === "select" && item.parent) return true;
@@ -39061,7 +38623,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         return false;
     }
     duplicateItem(item) {
-        const unit = (0, $711b72822a456466$export$9cd59f9826255e47)(item.unit);
+        const unit = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(item.unit);
         item.collection.splice(item.index + 1, 0, unit);
         this.setSelected(unit);
     }
@@ -39072,7 +38634,7 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         return this.obj.file;
     }
     findItem(key) {
-        return (0, $e4372410e549926b$export$a2dea178c28a0308)(this.children, key);
+        return (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
     }
     moveItemDown(item) {
         if (item.index < item.collection.length - 1) {
@@ -39119,13 +38681,13 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         };
     }
     selected() {
-        const item = (0, $e4372410e549926b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
         return item;
     }
     setSelected(key) {
         if (key) {
-            if (!(key instanceof (0, $5f4e931e94425ce6$export$67c95d00e574f6b6))) this.children = (0, $d57891eafce663b4$export$a3d9882fc9361f2d)(this.obj.actions);
-            const item = (0, $e4372410e549926b$export$a2dea178c28a0308)(this.children, key);
+            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = (0, $512c73527a382006$export$a3d9882fc9361f2d)(this.obj.actions);
+            const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
             if (item) this.obj.selected = item.key;
             return item;
         } else {
@@ -39134,14 +38696,12 @@ class $1b88f382576c34f2$export$14416b8d99d47caa {
         }
     }
     toString(format) {
-        const obj = format === "file" ? (0, $01caa20c9e164fb5$export$30a06c8d3562193f)(this.obj, "selected", "file") : this.obj;
+        const obj = format === "file" ? (0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected", "file") : this.obj;
         let json = JSON.stringify(obj, null, 2) || "";
-        json = (0, $fc02d71641653776$export$5adbceee7f7ddc90)(json);
+        json = (0, $bcb4aef0f6b91b86$export$5adbceee7f7ddc90)(json);
         return json;
     }
 }
-
-
 
 
 
@@ -39160,7 +38720,7 @@ function $1aab7a538bf9cc22$export$5abfb1150fa6da6a({ children: children  }) {
     const [result1, setResult] = (0, $d4J5n.useState)();
     (0, $d4J5n.useEffect)(()=>{
         //debugger;
-        const obj = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(template);
+        const obj = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(template);
         obj.run().then((result)=>setResult(result));
     }, [
         template
@@ -39193,12 +38753,14 @@ parcelRequire("d4J5n");
 
 
 
+
+
 var $b452db4f8da5fc67$export$2e2bcd8739ae039 = ()=>{
     const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
-        value: result && result.data ? JSON.stringify((0, $d2489396c3ef9092$export$de139376c1f60602)(result.data), null, 2) : "",
+        value: result && result.data ? JSON.stringify((0, $fee381e3400c58a7$export$de139376c1f60602)(result.data), null, 2) : "",
         variant: "outlined"
     });
 };
@@ -39227,8 +38789,8 @@ parcelRequire("d4J5n");
 
 var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
     const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const keys = result && (0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
-    const obj = result && (0, $aacd3173f0a35cbd$export$a6cdc56e425d0d0a)(result.data) ? (0, $d2489396c3ef9092$export$de139376c1f60602)(result.data) : {};
+    const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
+    const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
@@ -39354,12 +38916,6 @@ var $f9e34cee13fe7931$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $0e5549116f55a48e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 2H4c-1.11 0-2 .9-2 2v10h2V4h10V2zm4 4H8c-1.11 0-2 .9-2 2v10h2V8h10V6zm2 4h-8c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2z"
-}), "AutoAwesomeMotion");
-
-
-
 var $012087529d88be7e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M14 2H4c-1.1 0-2 .9-2 2v10h2V4h10V2zm4 4H8c-1.1 0-2 .9-2 2v10h2V8h10V6zm2 4h-8c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm0 10h-8v-8h8v8z"
 }), "AutoAwesomeMotionOutlined");
@@ -39464,6 +39020,12 @@ var $fc30e1d95bb92ad4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $b84bdb52d4a3451a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M15.73 3H8.27L3 8.27v7.46L8.27 21h7.46L21 15.73V8.27L15.73 3zM19 14.9 14.9 19H9.1L5 14.9V9.1L9.1 5h5.8L19 9.1v5.8zm-4.17-7.14L12 10.59 9.17 7.76 7.76 9.17 10.59 12l-2.83 2.83 1.41 1.41L12 13.41l2.83 2.83 1.41-1.41L13.41 12l2.83-2.83-1.41-1.41z"
+}), "DangerousOutlined");
+
+
+
 var $830dc22ac55da04f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M4 7v2c0 .55-.45 1-1 1H2v4h1c.55 0 1 .45 1 1v2c0 1.65 1.35 3 3 3h3v-2H7c-.55 0-1-.45-1-1v-2c0-1.3-.84-2.42-2-2.83v-.34C5.16 11.42 6 10.3 6 9V7c0-.55.45-1 1-1h3V4H7C5.35 4 4 5.35 4 7zm17 3c-.55 0-1-.45-1-1V7c0-1.65-1.35-3-3-3h-3v2h3c.55 0 1 .45 1 1v2c0 1.3.84 2.42 2 2.83v.34c-1.16.41-2 1.52-2 2.83v2c0 .55-.45 1-1 1h-3v2h3c1.65 0 3-1.35 3-3v-2c0-.55.45-1 1-1h1v-4h-1z"
 }), "DataObject");
@@ -39500,26 +39062,15 @@ var $3152ee484e1d7499$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $cd5829ac10d83747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "M9 12c0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3-3 1.34-3 3z"
-    }, "0"),
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "M8 10V8H5.09C6.47 5.61 9.05 4 12 4c3.72 0 6.85 2.56 7.74 6h2.06c-.93-4.56-4.96-8-9.8-8-3.27 0-6.18 1.58-8 4.01V4H2v6h6zm8 4v2h2.91c-1.38 2.39-3.96 4-6.91 4-3.72 0-6.85-2.56-7.74-6H2.2c.93 4.56 4.96 8 9.8 8 3.27 0 6.18-1.58 8-4.01V20h2v-6h-6z"
-    }, "1")
-], "FlipCameraAndroid");
-
-
-
 var $c3cc7c0fbba55fa6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"
 }), "Folder");
 
 
 
-var $820f84c1d7261d6d$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M9.41 15.59 8 17l-4-4 4-4 1.41 1.41L7.83 12c1.51-.33 3.73.08 5.17 1.36V6.83l-1.59 1.59L10 7l4-4 4 4-1.41 1.41L15 6.83V21h-2v-4c-.73-2.58-3.07-3.47-5.17-3l1.58 1.59z"
-}), "ForkLeft");
+var $f6e84161dd14880c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
+}), "FormatListNumbered");
 
 
 
@@ -39531,6 +39082,12 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
         d: "M11 14h2v2h-2zm0-7h2v5h-2z"
     }, "1")
 ], "GppMaybeOutlined");
+
+
+
+var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M17 5h-2V3h2v2zm-2 16h2v-2.59L19.59 21 21 19.59 18.41 17H21v-2h-6v6zm4-12h2V7h-2v2zm0 4h2v-2h-2v2zm-8 8h2v-2h-2v2zM7 5h2V3H7v2zM3 17h2v-2H3v2zm2 4v-2H3c0 1.1.9 2 2 2zM19 3v2h2c0-1.1-.9-2-2-2zm-8 2h2V3h-2v2zM3 9h2V7H3v2zm4 12h2v-2H7v2zm-4-8h2v-2H3v2zm0-8h2V3c-1.1 0-2 .9-2 2z"
+}), "HighlightAlt");
 
 
 
@@ -39648,21 +39205,21 @@ var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $1d4519e24428e5fd$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M3 5h2V3c-1.1 0-2 .9-2 2zm0 8h2v-2H3v2zm4 8h2v-2H7v2zM3 9h2V7H3v2zm10-6h-2v2h2V3zm6 0v2h2c0-1.1-.9-2-2-2zM5 21v-2H3c0 1.1.9 2 2 2zm-2-4h2v-2H3v2zM9 3H7v2h2V3zm2 18h2v-2h-2v2zm8-8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2zm0-12h2V7h-2v2zm0 8h2v-2h-2v2zm-4 4h2v-2h-2v2zm0-16h2V3h-2v2zM7 17h10V7H7v10zm2-8h6v6H9V9z"
-}), "SelectAll");
-
-
-
 var $a1d75b31022e04c3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M7.88 3.39 6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7zm-3-9h3.63L9 15.2V17h6v-2h-3.63L15 10.8V9H9v2z"
 }), "Snooze");
 
 
 
-var $84f9a35fb5b1bd88$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74c-3.6-.76-3.54-.75-3.67-.75-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z"
-}), "TouchApp");
+var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
+}), "TouchAppOutlined");
+
+
+
+var $43454011a3067c9f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z"
+}), "Transform");
 
 
 
@@ -41902,7 +41459,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $20d1a517b8ce84e3$exports).directory();
+                const directory = await (0, $2203ad40f7cc0e19$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41920,8 +41477,8 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     async function onSelectFile(event, file) {
         try {
             setOpening(true);
-            const json = await (0, $20d1a517b8ce84e3$exports).read(file);
-            const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json, file);
+            const json = await (0, $2203ad40f7cc0e19$exports).read(file);
+            const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json, file);
             setTemplate(template.toString());
             onClose(event);
             setOpening(false);
@@ -41954,7 +41511,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const [files1, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
@@ -41962,7 +41518,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const [saving, setSaving] = (0, $d4J5n.useState)(false);
     const { template: json1  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = (0, $d4J5n.useMemo)(()=>{
-        return new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json1);
+        return new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json1);
     }, [
         json1
     ]);
@@ -41970,7 +41526,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $20d1a517b8ce84e3$exports).directory();
+                const directory = await (0, $2203ad40f7cc0e19$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41989,7 +41545,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         try {
             setSaving(true);
             const json = template.toString("file");
-            await (0, $20d1a517b8ce84e3$exports).write(file, json);
+            await (0, $2203ad40f7cc0e19$exports).write(file, json);
             onClose(event);
             setSaving(false);
             setError("");
@@ -42019,7 +41575,9 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 parcelRequire("d4J5n");
 
 
+
 var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+    const { debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -42038,7 +41596,24 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
                 sx: {
                     p: 0
-                }
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+                    columns: [
+                        {
+                            width: 400
+                        }
+                    ],
+                    items: [
+                        [
+                            "Debug mode",
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                checked: debug,
+                                onChange: ()=>setDebug(!debug)
+                            }),
+                            "Shows or hides additional debug info"
+                        ]
+                    ]
+                })
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {})
         ]
@@ -42138,7 +41713,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     const file = template.file();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
@@ -42266,7 +41841,8 @@ var $4e6279b9ecb1b8f5$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 parcelRequire("d4J5n");
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -42275,23 +41851,29 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
+    const { debug: debug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const item1 = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        return item;
+    }, [
+        json
+    ]);
+    return item1 && debug ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
         style: {
             fontFamily: "monospace",
             fontSize: "small",
             lineHeight: "12px",
-            height: 200,
             backgroundColor: "#eee",
             overflow: "scroll"
         },
-        children: JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
+        children: JSON.stringify(item1, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
     }) : null;
 };
 
@@ -42462,17 +42044,13 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     if (name === "boolean") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $290e23fc548da9ea$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $820f84c1d7261d6d$export$2e2bcd8739ae039), {
-        ...props,
-        sx: {
-            ...props.sx,
-            transform: "rotate(180deg)"
-        }
-    });
-    else if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $84f9a35fb5b1bd88$export$2e2bcd8739ae039), {
+    else if (name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b84bdb52d4a3451a$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e5549116f55a48e$export$2e2bcd8739ae039), {
+    else if (name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7cc2bf8a0939df3a$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6e84161dd14880c$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7bb6f719f47e063b$export$2e2bcd8739ae039), {
@@ -42496,7 +42074,7 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1d4519e24428e5fd$export$2e2bcd8739ae039), {
+    else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ffcd2e035197e27e$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "string") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $344080bf51b4e6c7$export$2e2bcd8739ae039), {
@@ -42505,7 +42083,7 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a1d75b31022e04c3$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cd5829ac10d83747$export$2e2bcd8739ae039), {
+    else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $43454011a3067c9f$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a1f3cbed4353f602$export$2e2bcd8739ae039), {
@@ -42875,17 +42453,17 @@ var $cea40509986280c6$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onCh
         value1
     ]);
     function onChangeSelector(event, value) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj[0] = value;
         onChange(event, obj);
     }
     function onChangeQueryOp(event, value, i) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj[i] = value;
         onChange(event, obj);
     }
     function onDeleteQueryOp(event, i) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj.splice(i, 1);
         onChange(event, obj);
     }
@@ -42991,7 +42569,7 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
         value
     ]);
     function onAddQuery() {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj.push([
             ""
         ]);
@@ -42999,13 +42577,13 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
         setIndex(obj.length - 1);
     }
     function onDeleteQuery() {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj.splice(index1, 1);
         setSelect(obj);
         if (index1 > 0) setIndex(index1 - 1);
     }
     function onChangeQuery(event, query) {
-        const obj = (0, $711b72822a456466$export$9cd59f9826255e47)(select);
+        const obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(select);
         obj[index1] = query;
         setSelect(obj);
     }
@@ -43468,7 +43046,7 @@ var $f4cfb68b239954cb$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -43556,7 +43134,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -43657,7 +43235,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -43733,7 +43311,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $b516851a7c38229b$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -43851,7 +43429,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $9415fe1f85866126$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         //todo: remove shim when syphonx-core updated
         const obj = item?.obj;
@@ -43929,7 +43507,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -44124,7 +43702,7 @@ parcelRequire("d4J5n");
 
 var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     const item = template.selected();
     function handleChange(event, value) {
         item.obj = value || [
@@ -44172,7 +43750,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
         return {
@@ -44236,7 +43814,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         const obj = item?.obj;
         return {
@@ -44349,7 +43927,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         //todo: remove shim when syphonx-core updated
         const obj = item?.obj;
@@ -44418,24 +43996,44 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
 
 
 
+parcelRequire("d4J5n");
+
+
+var $7d8e9cab3e33d886$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        children: [
+            children,
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e37e1e37cd5d52f$export$2e2bcd8739ae039), {})
+        ]
+    });
+
+
 
 
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    if (!item) return null;
-    else if (item.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b516851a7c38229b$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9415fe1f85866126$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {});
-    else if (item.type === "action" && item.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {});
-    else return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e37e1e37cd5d52f$export$2e2bcd8739ae039), {});
+    const item1 = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        return item;
+    }, [
+        json
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d8e9cab3e33d886$export$2e2bcd8739ae039), {
+        children: function() {
+            if (!item1) return null;
+            else if (item1.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b516851a7c38229b$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9415fe1f85866126$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {});
+            else if (item1.type === "action" && item1.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {});
+            else return null;
+        }()
+    });
 };
 
 
@@ -44463,7 +44061,7 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
     const open = !!anchor;
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     function handleMoveUp() {
         template.moveItemUp(item);
         setTemplate(template.toString());
@@ -44571,7 +44169,7 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     const selected = template.selected();
     function name(item) {
         if (item.name) return item.name;
@@ -44664,7 +44262,7 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     const [selected, setSelected] = (0, $d4J5n.useState)([]);
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     (0, $d4J5n.useEffect)(()=>{
         const key = template.selected()?.key;
         setSelected(key ? [
@@ -44718,7 +44316,7 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     const types = expanded ? (0, (/*@__PURE__*/$parcel$interopDefault($86983b27c45f5667$exports))).sort((a, b)=>a.name.localeCompare(b.name)) : (0, (/*@__PURE__*/$parcel$interopDefault($86983b27c45f5667$exports))).filter((type)=>expanded || !type.advanced);
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
@@ -44908,7 +44506,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const code = template.toString("file");
         return {
             template: template,
@@ -44965,7 +44563,7 @@ parcelRequire("d4J5n");
 
 var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $1b88f382576c34f2$export$14416b8d99d47caa)(json);
+    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
     function onChangeUrl(event, value) {
         template.obj.url = value || undefined;
         setTemplate(template.toString());

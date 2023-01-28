@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { Template } from "../../lib";
+import { Template } from "../lib";
 
 export interface TemplateState {
     template: string;

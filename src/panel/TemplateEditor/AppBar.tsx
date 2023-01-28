@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
 import { useApp, useTemplate } from "../context";
-import { Template } from "../../lib";
+import { Template } from "../lib";
 
 import {
     Box,

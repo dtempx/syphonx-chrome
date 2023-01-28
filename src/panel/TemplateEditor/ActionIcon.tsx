@@ -2,9 +2,9 @@ import React from "react";
 import { SvgIconProps } from "@mui/material";
 import {
     Rule as BooleanTypeIcon,
-    ForkLeft as BreakIcon,
-    TouchApp as ClickIcon,
-    AutoAwesomeMotion as EachIcon,
+    DangerousOutlined as BreakIcon,
+    TouchAppOutlined as ClickIcon,
+    FormatListNumbered as EachIcon,
     GppMaybeOutlined as ErrorIcon,
     Abc as ItemIcon,
     Numbers as NumberTypeIcon,
@@ -12,10 +12,10 @@ import {
     AutoAwesomeMotionOutlined as RepeatedIcon,
     Autorenew as RepeatIcon,
     PriorityHighOutlined as RequiredIcon,
-    SelectAll as SelectIcon,
+    HighlightAlt as SelectIcon,
     Snooze as SnoozeIcon,
     Abc as StringTypeIcon,
-    FlipCameraAndroid as TransformIcon,
+    Transform as TransformIcon,
     QuestionMark as UnknownIcon,
     HourglassEmpty as WaitforIcon,
     ExitToApp as YieldIcon
@@ -29,7 +29,7 @@ export default ({ name, ...props }: Props) => {
     if (name === "boolean")
         return <BooleanTypeIcon {...props} />;
     else if (name === "break")
-        return <BreakIcon {...props} sx={{ ...props.sx, transform: "rotate(180deg)" }} />;
+        return <BreakIcon {...props} />;
     else if (name === "click")
         return <ClickIcon {...props} />;
     else if (name === "each")

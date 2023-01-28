@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Switch } from "@mui/material";
 import { useTemplate } from "../../context";
-import { Template } from "../../../lib";
+import { Template } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {

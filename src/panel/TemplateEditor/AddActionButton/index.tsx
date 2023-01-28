@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTemplate } from "../../context";
-import { Template, TemplateAddItemType } from "../../../lib";
+import { Template, TemplateAddItemType } from "../lib";
 import ActionIcon from "../ActionIcon";
 import ActionTypes from "./types.json";
 

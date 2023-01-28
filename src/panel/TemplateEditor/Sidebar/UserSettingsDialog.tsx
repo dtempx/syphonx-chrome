@@ -1,11 +1,13 @@
 import React from "react";
-import { TitleBar, TransitionUp } from "../components";
+import { PropertyGrid, TitleBar, TransitionUp } from "../components";
+import { useApp } from "../../context";
 
 import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle
+    DialogTitle,
+    Switch
 } from "@mui/material";
 
 
@@ -15,6 +17,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
+    const { debug, setDebug } = useApp();
     return (
         <Dialog
             fullScreen
@@ -27,6 +30,19 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
 
             <DialogContent sx={{ p: 0 }}>
+                <PropertyGrid
+                    columns={[{ width: 400 }]}
+                    items={[
+                        [
+                            "Debug mode",
+                            <Switch
+                                checked={debug}
+                                onChange={() => setDebug(!debug)}
+                            />,
+                            "Shows or hides additional debug info"
+                        ]
+                    ]}
+                />
             </DialogContent>
 
             <DialogActions>

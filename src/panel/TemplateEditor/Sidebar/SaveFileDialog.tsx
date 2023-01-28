@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FileDialog } from "../components";
-import { cloud } from "../../../lib";
 import { useTemplate } from "../../context";
-import { Template } from "../../../lib";
+import { cloud, Template } from "../lib";
 
 export interface Props {
     open: boolean;

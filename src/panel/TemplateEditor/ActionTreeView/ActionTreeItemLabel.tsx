@@ -3,7 +3,7 @@ import * as syphonx from "syphonx-lib";
 import ActionIcon from "../ActionIcon";
 import ActionTreeItemMenu from "./ActionTreeItemMenu";
 import { useTemplate } from "../../context";
-import { Template, TemplateItem } from "../../../lib";
+import { Template, TemplateItem } from "../lib";
 
 import {
     Stack,

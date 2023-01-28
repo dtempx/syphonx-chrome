@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
 import { useTemplate } from "../../context";
-import { Template } from "../../../lib";
+import { Template } from "../lib";
 
 import {
     ComplexPropertyGrid,

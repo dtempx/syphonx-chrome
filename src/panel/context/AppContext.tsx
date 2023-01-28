@@ -7,6 +7,8 @@ export interface AppState {
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     advanced: boolean;
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
+    debug: boolean;
+    setDebug: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AppContext = React.createContext<AppState>({} as AppState);
@@ -18,12 +20,15 @@ export function useApp() {
 export function AppProvider({ children }: { children: JSX.Element }) {
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [advanced, setAdvanced] = useState(false);
+    const [debug, setDebug] = useState(false);
 
     const value = {
         mode,
         setMode,
         advanced,
-        setAdvanced
+        setAdvanced,
+        debug,
+        setDebug
     };
 
     return (
