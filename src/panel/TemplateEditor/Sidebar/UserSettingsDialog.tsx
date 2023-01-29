@@ -17,7 +17,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { advanced, setAdvanced, debug, setDebug } = useApp();
+    const { advanced, setAdvanced, autoOpen, setAutoOpen, debug, setDebug } = useApp();
     return (
         <Dialog
             fullScreen
@@ -34,12 +34,20 @@ export default ({ open, onClose }: Props) => {
                     columns={[{ width: 400 }]}
                     items={[
                         [
+                            "Auto-open template default URL",
+                            <Switch
+                                checked={autoOpen}
+                                onChange={() => setAutoOpen(!autoOpen)}
+                            />,
+                            "Automatically opens the template default URL if enabled."
+                        ],
+                        [
                             "Advanced mode",
                             <Switch
                                 checked={advanced}
                                 onChange={() => setAdvanced(!advanced)}
                             />,
-                            "Shows or hides advanced settings"
+                            "Shows or hides advanced settings."
                         ],
                         [
                             "Debug mode",
@@ -47,7 +55,7 @@ export default ({ open, onClose }: Props) => {
                                 checked={debug}
                                 onChange={() => setDebug(!debug)}
                             />,
-                            "Shows or hides additional debug info"
+                            "Shows or hides additional debug info."
                         ]
                     ]}
                 />

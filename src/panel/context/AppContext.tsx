@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
 export interface AppState {
-    mode: AppMode;
-    setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     advanced: boolean;
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
+    autoOpen: boolean;
+    setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     debug: boolean;
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
+    mode: AppMode;
+    setMode: React.Dispatch<React.SetStateAction<AppMode>>;
 }
 
 export function useApp() {
@@ -16,31 +18,46 @@ export function useApp() {
 }
 
 export function AppProvider({ children }: { children: JSX.Element }) {
-    const [mode, setMode] = useState<AppMode>("visual-editor");
     const [advanced, setAdvanced] = useState(false);
+    const [autoOpen, setAutoOpen] = useState(true);
     const [debug, setDebug] = useState(false);
+    const [mode, setMode] = useState<AppMode>("visual-editor");
 
     useEffect(() => {
         chrome.storage.local.get(
-            ["advanced", "debug"],
-            ({ advanced, debug }) => {
-                setAdvanced(!!advanced);
-                setDebug(!!debug); 
+            [
+                "advanced",
+                "autoOpen",
+                "debug"
+            ],
+            ({ advanced, autoOpen, debug }) => {
+                if (advanced !== undefined)
+                    setAdvanced(advanced);
+                if (autoOpen !== undefined)
+                    setAutoOpen(autoOpen);
+                if (debug !== undefined)
+                    setDebug(debug);
             }
         );
     }, []);
 
     useEffect(() => {
-        chrome.storage.local.set({ advanced, debug });
+        chrome.storage.local.set({
+            advanced,
+            autoOpen,
+            debug
+        });
     }, [advanced, debug]);
 
     const value = {
-        mode,
-        setMode,
         advanced,
         setAdvanced,
+        autoOpen,
+        setAutoOpen,
         debug,
-        setDebug
+        setDebug,
+        mode,
+        setMode
     };
 
     return (

@@ -31616,21 +31616,25 @@ function $0e7d45acde193ea2$export$fca13ab91e1a6240() {
     return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext($0e7d45acde193ea2$var$AppContext);
 }
 function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
-    const [mode, setMode] = (0, $d4J5n.useState)("visual-editor");
     const [advanced1, setAdvanced] = (0, $d4J5n.useState)(false);
+    const [autoOpen1, setAutoOpen] = (0, $d4J5n.useState)(true);
     const [debug1, setDebug] = (0, $d4J5n.useState)(false);
+    const [mode, setMode] = (0, $d4J5n.useState)("visual-editor");
     (0, $d4J5n.useEffect)(()=>{
         chrome.storage.local.get([
             "advanced",
+            "autoOpen",
             "debug"
-        ], ({ advanced: advanced , debug: debug  })=>{
-            setAdvanced(!!advanced);
-            setDebug(!!debug);
+        ], ({ advanced: advanced , autoOpen: autoOpen , debug: debug  })=>{
+            if (advanced !== undefined) setAdvanced(advanced);
+            if (autoOpen !== undefined) setAutoOpen(autoOpen);
+            if (debug !== undefined) setDebug(debug);
         });
     }, []);
     (0, $d4J5n.useEffect)(()=>{
         chrome.storage.local.set({
             advanced: advanced1,
+            autoOpen: autoOpen1,
             debug: debug1
         });
     }, [
@@ -31638,12 +31642,14 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
         debug1
     ]);
     const value = {
-        mode: mode,
-        setMode: setMode,
         advanced: advanced1,
         setAdvanced: setAdvanced,
+        autoOpen: autoOpen1,
+        setAutoOpen: setAutoOpen,
         debug: debug1,
-        setDebug: setDebug
+        setDebug: setDebug,
+        mode: mode,
+        setMode: setMode
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0e7d45acde193ea2$var$AppContext.Provider, {
         value: value,
@@ -38384,7 +38390,6 @@ function $1aab7a538bf9cc22$export$5abfb1150fa6da6a({ children: children  }) {
     const [template, setTemplate] = (0, $d4J5n.useState)("");
     const [result1, setResult] = (0, $d4J5n.useState)();
     (0, $d4J5n.useEffect)(()=>{
-        //debugger;
         const obj = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(template);
         obj.run().then((result)=>setResult(result));
     }, [
@@ -41012,6 +41017,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
     const [opening, setOpening] = (0, $d4J5n.useState)(false);
+    const { autoOpen: autoOpen  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     (0, $d4J5n.useEffect)(()=>{
         if (open) (async ()=>{
@@ -41041,7 +41047,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             onClose(event);
             setOpening(false);
             setError("");
-            if (template.obj.url) (0, $6767c619f5de943e$exports).navigate(template.obj.url);
+            if (autoOpen && template.obj.url) (0, $6767c619f5de943e$exports).navigate(template.obj.url);
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
@@ -41135,7 +41141,7 @@ parcelRequire("d4J5n");
 
 
 var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { advanced: advanced , setAdvanced: setAdvanced , debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const { advanced: advanced , setAdvanced: setAdvanced , autoOpen: autoOpen , setAutoOpen: setAutoOpen , debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -41163,12 +41169,20 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                     ],
                     items: [
                         [
+                            "Auto-open template default URL",
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                checked: autoOpen,
+                                onChange: ()=>setAutoOpen(!autoOpen)
+                            }),
+                            "Automatically opens the template default URL if enabled."
+                        ],
+                        [
                             "Advanced mode",
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
                                 checked: advanced,
                                 onChange: ()=>setAdvanced(!advanced)
                             }),
-                            "Shows or hides advanced settings"
+                            "Shows or hides advanced settings."
                         ],
                         [
                             "Debug mode",
@@ -41176,7 +41190,7 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 checked: debug,
                                 onChange: ()=>setDebug(!debug)
                             }),
-                            "Shows or hides additional debug info"
+                            "Shows or hides additional debug info."
                         ]
                     ]
                 })

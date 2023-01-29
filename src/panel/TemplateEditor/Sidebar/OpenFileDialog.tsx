@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
 import { background, cloud, Template } from "../lib";
-import { useTemplate } from "../../context";
+import { useApp, useTemplate } from "../../context";
 
 export interface Props {
     open: boolean;
@@ -13,6 +13,7 @@ export default ({ open, onClose }: Props) => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [opening, setOpening] = useState(false);
+    const { autoOpen } = useApp();
     const { setTemplate } = useTemplate();
 
     useEffect(() => {
@@ -46,7 +47,7 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
             setOpening(false);
             setError("");
-            if (template.obj.url)
+            if (autoOpen && template.obj.url)
                 background.navigate(template.obj.url);
         }
         catch (err) {

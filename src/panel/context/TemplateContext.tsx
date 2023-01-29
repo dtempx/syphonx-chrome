@@ -20,7 +20,6 @@ export function TemplateProvider({ children }: { children: JSX.Element }) {
     const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
 
     useEffect(() => {
-        //debugger;
         const obj = new Template(template);
         obj.run()
             .then(result => setResult(result));
