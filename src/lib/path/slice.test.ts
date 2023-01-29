@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { slice } from "./slice.js";
+import { slice } from "./slice";
 
 describe("slice", () => {
     it("/", () => expect(slice("/")).to.eql(["/"]));

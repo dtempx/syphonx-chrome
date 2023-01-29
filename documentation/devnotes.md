@@ -27,8 +27,8 @@ yarn install
 
 
 # Build/Test
-* `npx tsc` to build source
-* `yarn test` to run unit tests
+* `yarn build-test` to build for tests
+* `yarn test` to run tests
 
 
 # Build/Package
@@ -131,6 +131,13 @@ https://www.youtube.com/watch?v=EuGxrTCj5Ac&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOp
 * https://developer.chrome.com/docs/extensions/mv3/getstarted/
 * https://developer.chrome.com/docs/extensions/mv3/devtools/
 
+
+## Workaround for unit tests
+Note the `--experimental-specifier-resolution=node` flag added to the `test` command in `package.json`. Without this flag tests will fail with a `ERR_MODULE_NOT_FOUND` error. This project uses more modern ECMAScript modules (ESM) which are enabled by specifying `"type": "module"` in `package.json`. However, ESM also requires specifying the `.js` extension in all imports throughout the code. Unfortunately, this is incompatible with the parcel packager that builds the bundled chrome extension. Adding this flag causes the Node.js to relax requiring the `.js` file extensions when loading ESM modules, thereby providing a workaround that allows running tests and bundling the chrome extension.
+
+See the following links for more info...
+* https://github.com/TypeStrong/ts-node/discussions/1781
+* https://github.com/nodejs/node/issues/41465
 
 # More Diagrams
 

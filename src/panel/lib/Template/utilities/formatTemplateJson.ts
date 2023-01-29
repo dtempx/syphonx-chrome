@@ -1,7 +1,8 @@
-import { jsonCollapseArray } from "./jsonCollapseArray";
+import { jsonCollapseArrayAll } from "./jsonCollapseArrayAll";
+import { jsonCollapseQueryAll } from "./jsonCollapseQueryAll";
 
 export function formatTemplateJson(text: string): string {
-    text = jsonCollapseArray(text, "query");
-    text = jsonCollapseArray(text, "snooze");
+    text = jsonCollapseQueryAll(text);
+    text = jsonCollapseArrayAll(text, "snooze");
     return text;
 }

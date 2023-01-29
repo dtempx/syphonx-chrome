@@ -1,5 +1,8 @@
 export function filename(path: string): string {
-    if (path.endsWith("/")) {
+    if (!path) {
+        return "";
+    }
+    else if (path.endsWith("/")) {
         return path.slice(path.slice(0, -1).lastIndexOf("/") + 1, -1);
     }
     else {
