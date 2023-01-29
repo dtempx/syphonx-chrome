@@ -5,7 +5,6 @@ import { isObject, removeDOMRefs } from "../lib";
 
 export default () => {
     const { result } = useTemplate();
-
     const keys = result && isObject(result.data) ? Object.keys(result.data) : [];
     const obj = (result && isObject(result.data) ? removeDOMRefs(result.data) : {}) as Record<string, string>;
 
@@ -25,7 +24,7 @@ export default () => {
                         return (
                             <TableRow>
                                 <TableCell>{key}</TableCell>
-                                <TableCell>{obj[key]}</TableCell>
+                                <TableCell>{typeof obj[key] !== "object" ? String(obj[key]) : JSON.stringify(obj[key])}</TableCell>
                             </TableRow>
                         );
                     })}
