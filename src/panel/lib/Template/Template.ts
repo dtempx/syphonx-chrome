@@ -1,7 +1,6 @@
 import * as syphonx from "syphonx-lib";
 import { TemplateItem } from "./TemplateItem";
-import { clone, omit } from "..";
-import * as background from "../../../background-proxy";
+import { background, clone, omit } from "..";
 
 import {
     createActionItems,

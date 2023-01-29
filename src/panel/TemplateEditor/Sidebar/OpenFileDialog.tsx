@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
-import { cloud, Template } from "../lib";
+import { background, cloud, Template } from "../lib";
 import { useTemplate } from "../../context";
-import * as background from "../../../background-proxy";
 
 export interface Props {
     open: boolean;

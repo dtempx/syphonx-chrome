@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as background from "../../../../../background-proxy";
+import { background } from "../../lib";
 
 import {
     Autocomplete,

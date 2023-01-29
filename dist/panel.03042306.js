@@ -32024,20 +32024,37 @@ $parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 var $d4J5n = parcelRequire("d4J5n");
-const $0e7d45acde193ea2$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({});
 function $0e7d45acde193ea2$export$fca13ab91e1a6240() {
     return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext($0e7d45acde193ea2$var$AppContext);
 }
 function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
     const [mode, setMode] = (0, $d4J5n.useState)("visual-editor");
-    const [advanced, setAdvanced] = (0, $d4J5n.useState)(false);
-    const [debug, setDebug] = (0, $d4J5n.useState)(false);
+    const [advanced1, setAdvanced] = (0, $d4J5n.useState)(false);
+    const [debug1, setDebug] = (0, $d4J5n.useState)(false);
+    (0, $d4J5n.useEffect)(()=>{
+        chrome.storage.local.get([
+            "advanced",
+            "debug"
+        ], ({ advanced: advanced , debug: debug  })=>{
+            setAdvanced(!!advanced);
+            setDebug(!!debug);
+        });
+    }, []);
+    (0, $d4J5n.useEffect)(()=>{
+        chrome.storage.local.set({
+            advanced: advanced1,
+            debug: debug1
+        });
+    }, [
+        advanced1,
+        debug1
+    ]);
     const value = {
         mode: mode,
         setMode: setMode,
-        advanced: advanced,
+        advanced: advanced1,
         setAdvanced: setAdvanced,
-        debug: debug,
+        debug: debug1,
         setDebug: setDebug
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0e7d45acde193ea2$var$AppContext.Provider, {
@@ -32045,6 +32062,7 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
         children: children
     });
 }
+const $0e7d45acde193ea2$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({});
 
 
 
@@ -32115,6 +32133,71 @@ function $fee381e3400c58a7$export$de139376c1f60602(obj) {
 }
 
 
+
+
+var $6767c619f5de943e$exports = {};
+
+$parcel$export($6767c619f5de943e$exports, "active", () => $6767c619f5de943e$export$89da14300d534261);
+$parcel$export($6767c619f5de943e$exports, "applyTemplate", () => $6767c619f5de943e$export$f78a296632f66e69);
+$parcel$export($6767c619f5de943e$exports, "disableTracking", () => $6767c619f5de943e$export$e684be5f4b22cc14);
+$parcel$export($6767c619f5de943e$exports, "enableTracking", () => $6767c619f5de943e$export$1f8ffc6fd33b1d16);
+$parcel$export($6767c619f5de943e$exports, "navigate", () => $6767c619f5de943e$export$ff7962acd6052c28);
+$parcel$export($6767c619f5de943e$exports, "log", () => $6767c619f5de943e$export$bef1f36f5486a6a3);
+$parcel$export($6767c619f5de943e$exports, "queryTracking", () => $6767c619f5de943e$export$225ea495d1fa0d5);
+$parcel$export($6767c619f5de943e$exports, "selectElements", () => $6767c619f5de943e$export$f2909722c7f0f932);
+const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
+async function $6767c619f5de943e$export$f78a296632f66e69(template) {
+    const result = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
+    return result;
+}
+async function $6767c619f5de943e$export$e684be5f4b22cc14() {
+    await $6767c619f5de943e$var$sendMessage("disableTracking");
+}
+async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
+    await $6767c619f5de943e$var$sendMessage("enableTracking");
+}
+function $6767c619f5de943e$export$ff7962acd6052c28(url) {
+    const tabId = chrome.devtools.inspectedWindow.tabId;
+    chrome.runtime.sendMessage({
+        key: "navigate",
+        params: [
+            url
+        ],
+        tabId: tabId
+    });
+}
+function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
+    if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
+        log: message
+    });
+    else console.log("BACKGROUND", message);
+}
+async function $6767c619f5de943e$export$225ea495d1fa0d5() {
+    const result = await $6767c619f5de943e$var$sendMessage("queryTracking");
+    return result || [];
+}
+async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
+    const result = await $6767c619f5de943e$var$sendMessage("selectElements", selectors);
+    return result || [];
+}
+function $6767c619f5de943e$var$sendMessage(key, ...params) {
+    return new Promise((resolve, reject)=>{
+        if ($6767c619f5de943e$export$89da14300d534261) {
+            const tabId = chrome.devtools.inspectedWindow.tabId;
+            chrome.runtime.sendMessage({
+                key: key,
+                params: params,
+                tabId: tabId
+            }, (response)=>{
+                if (response?.error) reject(response.error);
+                else resolve(response?.result);
+            });
+        } else {
+            console.log("BACKGROUND", key, ...params);
+            resolve(undefined);
+        }
+    });
+}
 
 
 var $2203ad40f7cc0e19$exports = {};
@@ -38372,61 +38455,6 @@ class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
 
 
 
-const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
-async function $6767c619f5de943e$export$f78a296632f66e69(template) {
-    const result = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
-    return result;
-}
-async function $6767c619f5de943e$export$e684be5f4b22cc14() {
-    await $6767c619f5de943e$var$sendMessage("disableTracking");
-}
-async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
-    await $6767c619f5de943e$var$sendMessage("enableTracking");
-}
-function $6767c619f5de943e$export$ff7962acd6052c28(url) {
-    const tabId = chrome.devtools.inspectedWindow.tabId;
-    chrome.runtime.sendMessage({
-        key: "navigate",
-        params: [
-            url
-        ],
-        tabId: tabId
-    });
-}
-function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
-    if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
-        log: message
-    });
-    else console.log("BACKGROUND", message);
-}
-async function $6767c619f5de943e$export$225ea495d1fa0d5() {
-    const result = await $6767c619f5de943e$var$sendMessage("queryTracking");
-    return result || [];
-}
-async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
-    const result = await $6767c619f5de943e$var$sendMessage("selectElements", selectors);
-    return result || [];
-}
-function $6767c619f5de943e$var$sendMessage(key, ...params) {
-    return new Promise((resolve, reject)=>{
-        if ($6767c619f5de943e$export$89da14300d534261) {
-            const tabId = chrome.devtools.inspectedWindow.tabId;
-            chrome.runtime.sendMessage({
-                key: key,
-                params: params,
-                tabId: tabId
-            }, (response)=>{
-                if (response?.error) reject(response.error);
-                else resolve(response?.result);
-            });
-        } else {
-            console.log("BACKGROUND", key, ...params);
-            resolve(undefined);
-        }
-    });
-}
-
-
 
 function $512c73527a382006$export$a3d9882fc9361f2d(actions, parent) {
     if (actions) {
@@ -38455,7 +38483,7 @@ function $512c73527a382006$export$a3d9882fc9361f2d(actions, parent) {
 }
 function $512c73527a382006$var$createSelectItems(obj, parent) {
     return obj.map((select, index)=>{
-        const key = `${parent.key}.${select.name}`;
+        const key = `${parent.key}.${select.name || "?"}`;
         return new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
             key: key,
             name: select.name || "",
@@ -38661,8 +38689,8 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         }
     }
     async run() {
-        if ($6767c619f5de943e$export$89da14300d534261) try {
-            const result = await $6767c619f5de943e$export$f78a296632f66e69(this.obj);
+        if ((0, $6767c619f5de943e$exports).active) try {
+            const result = await (0, $6767c619f5de943e$exports).applyTemplate(this.obj);
             return result;
         } catch (err) {
             return {
@@ -41366,14 +41394,16 @@ const $5339359c895a55f0$export$d5e0bbf39d25920b = /*#__PURE__*/ (0, (/*@__PURE__
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
 
 var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
     const { advanced: advanced , setAdvanced: setAdvanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const items2 = items.filter((item)=>item[3] || advanced).map((item)=>[
+    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
+    const visibleItems = items.filter((item)=>item[3] || expanded || advanced).map((item)=>[
             item[0],
             item[1],
             item[2]
@@ -41383,13 +41413,13 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
         alignItems: "flex-start",
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-                items: items2,
+                items: visibleItems,
                 ...props
             }),
-            !advanced && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+            !advanced && !expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
                 component: "button",
                 variant: "body2",
-                onClick: ()=>setAdvanced(true),
+                onClick: ()=>setExpanded(true),
                 sx: {
                     margin: 1
                 },
@@ -41409,10 +41439,10 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
                     })
                 })
             }),
-            advanced && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+            !advanced && expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
                 component: "button",
                 variant: "body2",
-                onClick: ()=>setAdvanced(false),
+                onClick: ()=>setExpanded(false),
                 sx: {
                     margin: 1
                 },
@@ -41445,7 +41475,6 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
-
 
 
 
@@ -41483,7 +41512,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             onClose(event);
             setOpening(false);
             setError("");
-            if (template.obj.url) $6767c619f5de943e$export$ff7962acd6052c28(template.obj.url);
+            if (template.obj.url) (0, $6767c619f5de943e$exports).navigate(template.obj.url);
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
@@ -41577,7 +41606,7 @@ parcelRequire("d4J5n");
 
 
 var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const { advanced: advanced , setAdvanced: setAdvanced , debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -41604,6 +41633,14 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                         }
                     ],
                     items: [
+                        [
+                            "Advanced mode",
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                checked: advanced,
+                                onChange: ()=>setAdvanced(!advanced)
+                            }),
+                            "Shows or hides advanced settings"
+                        ],
                         [
                             "Debug mode",
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
@@ -42298,6 +42335,8 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+
+
 var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , ...props })=>{
     const [tracking, setTracking] = (0, $d4J5n.useState)(false);
     const [selectors1, setSelectors] = (0, $d4J5n.useState)([]);
@@ -42307,13 +42346,13 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     const [showTooltip, setShowTooltip] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
         if (value) (async ()=>{
-            const output = await $6767c619f5de943e$export$f2909722c7f0f932([
+            const output = await (0, $6767c619f5de943e$exports).selectElements([
                 value
             ]);
             setOutput(output);
         })();
         return ()=>{
-            $6767c619f5de943e$export$f2909722c7f0f932([]);
+            (0, $6767c619f5de943e$exports).selectElements([]);
         };
     }, [
         value
@@ -42330,11 +42369,11 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     ]);
     (0, $d4J5n.useEffect)(()=>{
         setCounter(0);
-        if (tracking) $6767c619f5de943e$export$1f8ffc6fd33b1d16();
-        else $6767c619f5de943e$export$e684be5f4b22cc14();
+        if (tracking) (0, $6767c619f5de943e$exports).enableTracking();
+        else (0, $6767c619f5de943e$exports).disableTracking();
         const timer = setInterval(async ()=>{
             if (tracking) {
-                const selectors = await $6767c619f5de943e$export$225ea495d1fa0d5();
+                const selectors = await (0, $6767c619f5de943e$exports).queryTracking();
                 if (selectors.length > 0) {
                     setSelectors(selectors);
                     setCounter(0); // reset interval counter
@@ -42345,7 +42384,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
         }, 1000);
         return ()=>{
             clearInterval(timer);
-            $6767c619f5de943e$export$e684be5f4b22cc14();
+            (0, $6767c619f5de943e$exports).disableTracking();
         };
     }, [
         tracking
@@ -44305,34 +44344,98 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $86983b27c45f5667$exports = {};
-$86983b27c45f5667$exports = JSON.parse('[{"name":"select","advanced":false,"help":"Select data on the page."},{"name":"click","advanced":false,"help":"Click on an element on the page."},{"name":"waitfor","advanced":false,"help":"Wait for an element to appear on a page."},{"name":"break","advanced":true,"help":"Break out of the current each or repeat loop."},{"name":"each","advanced":true,"help":"Run a set of actions for each element in the set of matched elements."},{"name":"error","advanced":true,"help":"Raise an error."},{"name":"repeat","advanced":true,"help":"Repeat a set of actions until a condition is met."},{"name":"snooze","advanced":true,"help":"Snooze for a set period of time."},{"name":"transform","advanced":true,"help":"Transform content on the page."},{"name":"yield","advanced":true,"help":"Yield back to the host, for example after a click that renavigates the page."}]');
 
 
-
-
-var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
+const $d92259c5199083bc$var$ActionTypes = [
+    {
+        name: "select",
+        advanced: false,
+        help: "Select data on the page."
+    },
+    {
+        name: "click",
+        advanced: false,
+        help: "Click on an element on the page."
+    },
+    {
+        name: "waitfor",
+        advanced: false,
+        help: "Wait for an element to appear on a page."
+    },
+    {
+        name: "break",
+        advanced: true,
+        help: "Break out of the current each or repeat loop."
+    },
+    {
+        name: "each",
+        advanced: true,
+        help: "Run a set of actions for each element in the set of matched elements."
+    },
+    {
+        name: "error",
+        advanced: true,
+        help: "Raise an error."
+    },
+    {
+        name: "repeat",
+        advanced: true,
+        help: "Repeat a set of actions until a condition is met."
+    },
+    {
+        name: "snooze",
+        advanced: true,
+        help: "Snooze for a set period of time."
+    },
+    {
+        name: "transform",
+        advanced: true,
+        help: "Transform content on the page."
+    },
+    {
+        name: "yield",
+        advanced: true,
+        help: "Yield back to the host, for example after a click that renavigates the page."
+    }
+];
+var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
+    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-    const types = expanded ? (0, (/*@__PURE__*/$parcel$interopDefault($86983b27c45f5667$exports))).sort((a, b)=>a.name.localeCompare(b.name)) : (0, (/*@__PURE__*/$parcel$interopDefault($86983b27c45f5667$exports))).filter((type)=>expanded || !type.advanced);
+    const { template: template1 , canAddSubAction: canAddSubAction1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const canAddSubAction = template.canAddSubAction();
+        return {
+            template: template,
+            canAddSubAction: canAddSubAction
+        };
+    }, [
+        json
+    ]);
+    const types1 = (0, $d4J5n.useMemo)(()=>{
+        const types = advanced || expanded ? $d92259c5199083bc$var$ActionTypes.sort((a, b)=>a.name.localeCompare(b.name)) : $d92259c5199083bc$var$ActionTypes.filter((type)=>expanded || !type.advanced);
+        return types;
+    }, [
+        advanced,
+        expanded
+    ]);
     function handleAddButtonClick(event) {
         setAnchor(event.currentTarget);
         setOpen(true);
     }
     function addAction(type) {
-        if (template) {
-            template.addAction(type);
-            setTemplate(template.toString());
+        if (template1) {
+            template1.addAction(type);
+            setTemplate(template1.toString());
             setOpen(false);
         }
     }
     function addSubAction() {
-        if (template) {
-            template.addSubAction();
-            setTemplate(template.toString());
+        if (template1) {
+            template1.addSubAction();
+            setTemplate(template1.toString());
             setOpen(false);
         }
     }
@@ -44375,7 +44478,7 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
                     horizontal: "right"
                 },
                 children: [
-                    types.map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    types1.map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                             title: type.help,
                             arrow: true,
                             placement: "right",
@@ -44395,8 +44498,8 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
                                 ]
                             })
                         })),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
-                    template.canAddSubAction() ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    (canAddSubAction1 || !advanced) && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
+                    canAddSubAction1 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Add a selector",
                         arrow: true,
                         placement: "right",
@@ -44414,8 +44517,8 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
                                 })
                             ]
                         })
-                    }) : null,
-                    expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    }),
+                    !advanced && expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Hide advanced actions",
                         arrow: true,
                         placement: "right",
@@ -44433,7 +44536,8 @@ var $73dcac9e0bed82c2$export$2e2bcd8739ae039 = (props)=>{
                                 })
                             ]
                         })
-                    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    }),
+                    !advanced && !expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Show advanced actions",
                         arrow: true,
                         placement: "right",
@@ -44476,7 +44580,7 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
                 },
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $73dcac9e0bed82c2$export$2e2bcd8739ae039), {
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d92259c5199083bc$export$2e2bcd8739ae039), {
                         sx: {
                             position: "absolute",
                             bottom: (theme)=>theme.spacing(2),
@@ -44560,7 +44664,6 @@ parcelRequire("d4J5n");
 
 
 
-
 var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
@@ -44593,7 +44696,7 @@ var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
                         onValidate: onValidateUrl
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                        onClick: ()=>$6767c619f5de943e$export$ff7962acd6052c28(template.obj.url),
+                        onClick: ()=>(0, $6767c619f5de943e$exports).navigate(template.obj.url),
                         sx: {
                             visibility: template.obj.url ? "visible" : "hidden"
                         },

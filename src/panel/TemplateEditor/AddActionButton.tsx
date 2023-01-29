@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { useTemplate } from "../../context";
-import { Template, TemplateAddItemType } from "../lib";
-import ActionIcon from "../ActionIcon";
-import ActionTypes from "./types.json";
+import React, { useMemo, useState } from "react";
+import { useApp, useTemplate } from "../context";
+import { Template, TemplateAddItemType } from "./lib";
+import ActionIcon from "./ActionIcon";
 
 import {
     Divider,
@@ -25,14 +24,77 @@ export interface Props {
     sx?: SxProps<Theme>;
 }
 
+const ActionTypes = [
+    {
+        name: "select",
+        advanced: false,
+        help: "Select data on the page."
+    },
+    {
+        name: "click",
+        advanced: false,
+        help: "Click on an element on the page."
+    },
+    {
+        name: "waitfor",
+        advanced: false,
+        help: "Wait for an element to appear on a page."
+    },
+    { 
+        name: "break",
+        advanced: true,
+        help: "Break out of the current each or repeat loop."
+    },
+    {
+        name: "each",
+        advanced: true,
+        help: "Run a set of actions for each element in the set of matched elements."
+    },
+    {
+        name: "error",
+        advanced: true,
+        help: "Raise an error."
+    },
+    {
+        name: "repeat",
+        advanced: true,
+        help: "Repeat a set of actions until a condition is met."
+    },
+    {
+        name: "snooze",
+        advanced: true,
+        help: "Snooze for a set period of time."
+    },
+    {
+        name: "transform",
+        advanced: true,
+        help: "Transform content on the page."
+    },
+    {
+        name: "yield",
+        advanced: true,
+        help: "Yield back to the host, for example after a click that renavigates the page."
+    }
+];
+
 export default (props?: Props) => {
+    const { advanced } = useApp();
     const { template: json, setTemplate } = useTemplate();
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
 
-    const template = new Template(json);
-    const types = expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
+    const { template, canAddSubAction } = useMemo(() => {
+        const template = new Template(json);
+        const canAddSubAction = template.canAddSubAction();
+        return { template, canAddSubAction };
+    }, [json]);
+
+    const types = useMemo(() => {
+        const types = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
+        return types;
+    }, [advanced, expanded]);
+
 
     function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         setAnchor(event.currentTarget);
@@ -104,23 +166,30 @@ export default (props?: Props) => {
                         </MenuItem>
                     </Tooltip>
                 ))}
-                <Divider />
-                {template.canAddSubAction() ? (
+
+                {(canAddSubAction || !advanced) && (
+                    <Divider />
+                )}
+
+                {canAddSubAction && (
                     <Tooltip title="Add a selector" arrow placement="right">
                         <MenuItem onClick={() => addSubAction()}>
                             <AddIcon fontSize="small" />
                             <Typography sx={{ ml: 1 }}>Add Selector</Typography>
                         </MenuItem>
                     </Tooltip>
-                ) : null}
-                {expanded ? (
+                )}
+
+                {!advanced && expanded && (
                     <Tooltip title="Hide advanced actions" arrow placement="right">
                         <MenuItem onClick={() => setExpanded(false)}>
                             <CollapseIcon fontSize="small" />
                             <Typography sx={{ ml: 1 }}>Less</Typography>
                         </MenuItem>
                     </Tooltip>
-                ) : (
+                )}
+
+                {!advanced && !expanded && (
                     <Tooltip title="Show advanced actions" arrow placement="right">
                         <MenuItem onClick={() => setExpanded(true)}>
                             <ExpandIcon fontSize="small" />

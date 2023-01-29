@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { PropertyGrid, PropertyGridItem } from "../../components";
 import { useApp } from "../context";
 
@@ -31,22 +31,23 @@ export interface Props {
 
 export default ({ items, ...props }: Props) => {
     const { advanced, setAdvanced } = useApp();
+    const [expanded, setExpanded] = useState(false);
 
-    const items2 = items
-        .filter(item => item[3] || advanced)
+    const visibleItems = items
+        .filter(item => item[3] || expanded || advanced)
         .map(item => [item[0], item[1], item[2]] as PropertyGridItem);
 
     return (
         <Stack direction="column" alignItems="flex-start">
             <PropertyGrid
-                items={items2}
+                items={visibleItems}
                 {...props}
             />
-            {!advanced &&
+            {!advanced && !expanded &&
                 <Link
                     component="button"
                     variant="body2"
-                    onClick={() => setAdvanced(true)}
+                    onClick={() => setExpanded(true)}
                     sx={{ margin: 1 }}
                 >
                     <Tooltip title="Show advanced settings">
@@ -57,11 +58,11 @@ export default ({ items, ...props }: Props) => {
                     </Tooltip>
                 </Link>
             }
-            {advanced &&
+            {!advanced && expanded &&
                 <Link
                     component="button"
                     variant="body2"
-                    onClick={() => setAdvanced(false)}
+                    onClick={() => setExpanded(false)}
                     sx={{ margin: 1 }}
                 >
                     <Tooltip title="Hide unused advanced settings">

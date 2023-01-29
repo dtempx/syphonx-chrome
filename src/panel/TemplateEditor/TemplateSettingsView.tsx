@@ -2,8 +2,7 @@ import React from "react";
 import { IconButton, Paper, Stack, Tooltip } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "../context";
-import { Template } from "./lib";
-import * as background from "../../background-proxy";
+import { background, Template } from "./lib";
 
 import {
     PropertyGrid,

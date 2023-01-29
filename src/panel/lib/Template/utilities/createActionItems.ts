@@ -33,7 +33,7 @@ export function createActionItems(actions: syphonx.Action[] | undefined, parent?
 
 function createSelectItems(obj: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
     return obj.map((select, index) => {
-        const key = `${parent.key}.${select.name}`;
+        const key = `${parent.key}.${select.name || "?"}`;
         return new TemplateItem({
             key,
             name: select.name || "",

@@ -17,7 +17,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { debug, setDebug } = useApp();
+    const { advanced, setAdvanced, debug, setDebug } = useApp();
     return (
         <Dialog
             fullScreen
@@ -33,6 +33,14 @@ export default ({ open, onClose }: Props) => {
                 <PropertyGrid
                     columns={[{ width: 400 }]}
                     items={[
+                        [
+                            "Advanced mode",
+                            <Switch
+                                checked={advanced}
+                                onChange={() => setAdvanced(!advanced)}
+                            />,
+                            "Shows or hides advanced settings"
+                        ],
                         [
                             "Debug mode",
                             <Switch

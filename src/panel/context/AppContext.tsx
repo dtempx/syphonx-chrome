@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
@@ -11,8 +11,6 @@ export interface AppState {
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AppContext = React.createContext<AppState>({} as AppState);
-
 export function useApp() {
     return React.useContext(AppContext);
 }
@@ -21,6 +19,20 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [advanced, setAdvanced] = useState(false);
     const [debug, setDebug] = useState(false);
+
+    useEffect(() => {
+        chrome.storage.local.get(
+            ["advanced", "debug"],
+            ({ advanced, debug }) => {
+                setAdvanced(!!advanced);
+                setDebug(!!debug); 
+            }
+        );
+    }, []);
+
+    useEffect(() => {
+        chrome.storage.local.set({ advanced, debug });
+    }, [advanced, debug]);
 
     const value = {
         mode,
@@ -37,3 +49,5 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         </AppContext.Provider>
     );
 }
+
+const AppContext = React.createContext<AppState>({} as AppState);

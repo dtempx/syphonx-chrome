@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Stack } from "@mui/material";
 import ActionEditor from "./ActionEditor";
 import ActionTreeView from "./ActionTreeView";
-import AddActionButton from "./AddActionButton/index";
+import AddActionButton from "./AddActionButton";
 
 export default () => (
     <Stack
