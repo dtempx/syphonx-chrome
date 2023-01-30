@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const regexps = {
-    "snake-case": /^[a-z][a-z0-9_]*$/,
+    "snake-case": /^_?[a-z][a-z0-9_]*$/,
     "kebab-case": /^[a-z][a-z0-9-]*$/
 };
 

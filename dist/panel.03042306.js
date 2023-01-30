@@ -43165,7 +43165,7 @@ var $720d345d88dda83e$export$2e2bcd8739ae039 = ({ query: query1 , name: name , o
 parcelRequire("d4J5n");
 
 const $cc8726b30629a3e6$var$regexps = {
-    "snake-case": /^[a-z][a-z0-9_]*$/,
+    "snake-case": /^_?[a-z][a-z0-9_]*$/,
     "kebab-case": /^[a-z][a-z0-9-]*$/
 };
 var $cc8726b30629a3e6$export$2e2bcd8739ae039 = ({ value: value1 , onChange: onChange , variant: variant = "snake-case" , sx: sx  })=>{
