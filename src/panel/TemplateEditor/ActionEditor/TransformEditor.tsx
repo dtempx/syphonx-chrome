@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Switch } from "@mui/material";
-import { useTemplate } from "../../context";
-import { Template } from "../lib";
+import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
@@ -10,16 +9,13 @@ import {
     SingleQueryEditorField
 } from "./components";
 
-export default () => {
-    const { template: json, setTemplate } = useTemplate();
+export interface Props {
+    item: TemplateItem;
+    onChange: (event: React.SyntheticEvent<Element, Event>) => void;
+}
 
-    const { template, obj } = useMemo(() => {
-        const template = new Template(json);
-        const item = template.selected();
-        const obj = item?.obj instanceof Array ? item.obj[0] as syphonx.Transform : undefined;
-        return { template, obj };
-    }, [json]);
-
+export default ({ item, onChange }: Props) => {
+    const obj = item?.obj instanceof Array ? item.obj[0] as syphonx.Transform : undefined;
     return obj ? (
         <ComplexPropertyGrid
             items={[
@@ -28,7 +24,10 @@ export default () => {
                     <SingleQueryEditorField
                         name="transform"
                         query={obj.query}
-                        onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.query = value;
+                            onChange(event);
+                        }}
                     />,
                     "A CSS selector or jQuery expression that defines the transform.",
                     true
@@ -37,7 +36,10 @@ export default () => {
                     "when",
                     <FormulaField
                         value={obj.when}
-                        onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.when = value || undefined;
+                            onChange(event);
+                        }}
                     />,
                     "A formula that determines whether the transform is evaluated.",
                     obj.when !== undefined
@@ -46,7 +48,10 @@ export default () => {
                     "active",
                     <Switch
                         checked={obj.active ?? true}
-                        onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.active = value;
+                            onChange(event);
+                        }}
                     />,
                     "Determines whether the transform is active or bypassed.",
                     obj.active !== undefined

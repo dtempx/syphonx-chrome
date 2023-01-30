@@ -1,9 +1,16 @@
+import { Template } from "./Template";
+
 export type TemplateItemType = "action" | "pivot" | "select" | "union";
 
 /**
  * Adapts an item within a template document, adding state and behavior for manipulation by a UI editor.
  */
 export class TemplateItem {
+    /**
+     * A reference to the template wrapper that contains this template item wrapper.
+     */
+    template: Template;
+  
     /**
      * A unique identifier for a template object within the template document.
      */
@@ -82,6 +89,7 @@ export class TemplateItem {
     index: number;
 
     constructor(obj: TemplateItem) {
+        this.template = obj.template;
         this.key = obj.key;
         this.type = obj.type;
         this.name = obj.name;

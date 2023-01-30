@@ -15,13 +15,17 @@ import { useTemplate } from "../../context";
 import { Template } from "../lib";
 
 export default () => {
-    const { template: json } = useTemplate();
+    const { template: json, setTemplate } = useTemplate();
 
-    const item = useMemo(() => {
+    const { template, item } = useMemo(() => {
         const template = new Template(json);
         const item = template.selected();
-        return item;
+        return { template, item };
     }, [json]);
+
+    function onChange() {
+        setTemplate(template.json());
+    }
 
     return (
         <EditorFrame>
@@ -29,29 +33,31 @@ export default () => {
                 if (!item)
                     return null;
                 else if (item.type === "select")
-                    return <SelectEditor />;
+                    return <SelectEditor item={item} onChange={onChange} />;
                 else if (item.type === "union")
-                    return <SelectTargetEditor />;
+                    return <SelectTargetEditor item={item} onChange={onChange} />;
                 else if (item.type === "pivot")
-                    return <SelectTargetEditor />;
+                    return <SelectTargetEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "click")
-                    return <ClickEditor />;
+                    return <ClickEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "break")
-                    return <BreakEditor />;
+                    return <BreakEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "each")
-                    return <EachEditor />;
+                    return <EachEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "error")
-                    return <ErrorEditor />;
+                    return <ErrorEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "repeat")
-                    return <RepeatEditor />;
+                    return <RepeatEditor item={item} onChange={onChange} />;
+                else if (item.type === "action" && item.name === "select" && item.children && item.children[0])
+                    return <SelectEditor item={item.children[0]} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "snooze")
-                    return <SnoozeEditor />;
+                    return <SnoozeEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "transform")
-                    return <TransformEditor />;
+                    return <TransformEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "waitfor")
-                    return <WaitforEditor />;
+                    return <WaitforEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "yield")
-                    return <YieldEditor />;
+                    return <YieldEditor item={item} onChange={onChange} />;
                 else
                     return null;
             })()}

@@ -38445,6 +38445,7 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
     constructor(obj){
+        this.template = obj.template;
         this.key = obj.key;
         this.type = obj.type;
         this.name = obj.name;
@@ -38460,95 +38461,6 @@ class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
     }
 }
 
-
-
-
-function $e58f8b994fe0cfbf$export$e324594224ef24da(actions1, parent) {
-    if (actions1) {
-        const ordinals = {};
-        return actions1.map((action, index)=>{
-            const [name] = Object.keys(action);
-            ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
-            const ordinal = ordinals[name];
-            const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
-            const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
-            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-                key: key,
-                name: name,
-                type: "action",
-                icon: name,
-                parent: parent,
-                collection: actions1,
-                unit: action,
-                obj: obj,
-                index: index
-            });
-            if (name === "select" && obj instanceof Array) item.children = $e58f8b994fe0cfbf$var$selects(obj, item);
-            return item;
-        });
-    } else return [];
-}
-function $e58f8b994fe0cfbf$var$pivot(obj, parent) {
-    const key = `${parent.key}.pivot`;
-    const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-        key: key,
-        name: "pivot",
-        type: "pivot",
-        icon: "pivot",
-        parent: parent,
-        collection: [],
-        unit: obj,
-        obj: obj,
-        index: 0
-    });
-    item.children = $e58f8b994fe0cfbf$var$subselect(obj, item);
-    return item;
-}
-function $e58f8b994fe0cfbf$var$selects(obj, parent) {
-    return obj.map((select, index)=>{
-        const key = `${parent.key}.${select.name || "?"}`;
-        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-            key: key,
-            name: select.name || "",
-            type: "select",
-            icon: select.type || "string",
-            required: select.required,
-            repeated: select.repeated,
-            parent: parent,
-            collection: obj,
-            unit: select,
-            obj: select,
-            index: index
-        });
-        item.children = $e58f8b994fe0cfbf$var$subselect(select, item);
-        return item;
-    });
-}
-function $e58f8b994fe0cfbf$var$subselect(obj, parent) {
-    if (obj.select) return $e58f8b994fe0cfbf$var$selects(obj.select, parent);
-    else if (obj.union) return $e58f8b994fe0cfbf$var$union(obj.union, parent);
-    else if (obj.pivot) return [
-        $e58f8b994fe0cfbf$var$pivot(obj.pivot, parent)
-    ];
-}
-function $e58f8b994fe0cfbf$var$union(union1, parent) {
-    return union1.map((obj, index)=>{
-        const key = `${parent.key}.union.${index}`;
-        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-            key: key,
-            name: "union",
-            type: "union",
-            icon: "union",
-            parent: parent,
-            collection: union1,
-            unit: obj,
-            obj: obj,
-            index: index
-        });
-        item.children = $e58f8b994fe0cfbf$var$subselect(obj, item);
-        return item;
-    });
-}
 
 
 function $1ea6494eef95c08b$export$a2dea178c28a0308(items, key) {
@@ -38672,13 +38584,105 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
             }
         } else if (typeof obj === "object") this.obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(obj);
         else this.obj = {};
-        this.children = (0, $e58f8b994fe0cfbf$export$e324594224ef24da)(this.obj.actions);
+        this.children = this.actions(this.obj.actions);
         if (file) this.obj.file = file;
+    }
+    actions(collection, parent) {
+        if (collection) {
+            const ordinals = {};
+            return collection.map((action, index)=>{
+                const [name] = Object.keys(action);
+                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
+                const ordinal = ordinals[name];
+                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
+                const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
+                const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+                    template: this,
+                    key: key,
+                    name: name,
+                    type: "action",
+                    icon: name,
+                    parent: parent,
+                    collection: collection,
+                    unit: action,
+                    obj: obj,
+                    index: index
+                });
+                if (name === "select" && obj instanceof Array) item.children = this.selects(obj, item);
+                if (name === "each" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
+                if (name === "repeat" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
+                return item;
+            });
+        } else return [];
+    }
+    pivot(obj, parent) {
+        const key = `${parent.key}.pivot`;
+        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+            template: this,
+            key: key,
+            name: "pivot",
+            type: "pivot",
+            icon: "pivot",
+            parent: parent,
+            collection: [],
+            unit: obj,
+            obj: obj,
+            index: 0
+        });
+        item.children = this.subselect(obj, item);
+        return item;
+    }
+    selects(collection, parent) {
+        return collection.map((select, index)=>{
+            const key = `${parent.key}.${select.name || "?"}`;
+            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+                template: this,
+                key: key,
+                name: select.name || "",
+                type: "select",
+                icon: select.type || "string",
+                required: select.required,
+                repeated: select.repeated,
+                parent: parent,
+                collection: collection,
+                unit: select,
+                obj: select,
+                index: index
+            });
+            item.children = this.subselect(select, item);
+            return item;
+        });
+    }
+    subselect(obj, parent) {
+        if (obj.select) return this.selects(obj.select, parent);
+        else if (obj.union) return this.union(obj.union, parent);
+        else if (obj.pivot) return [
+            this.pivot(obj.pivot, parent)
+        ];
+    }
+    union(collection, parent) {
+        return collection.map((obj, index)=>{
+            const key = `${parent.key}.union.${index}`;
+            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+                template: this,
+                key: key,
+                name: "union",
+                type: "union",
+                icon: "union",
+                parent: parent,
+                collection: collection,
+                unit: obj,
+                obj: obj,
+                index: index
+            });
+            item.children = this.subselect(obj, item);
+            return item;
+        });
     }
     addAction(type) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
         const item = this.selected();
-        const actions1 = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
+        const actions = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
         let action;
         if (type === "break") action = {
             break: {}
@@ -38718,8 +38722,8 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
             waitfor: {}
         };
         else return;
-        if (item) actions1.splice(item.index + 1, 0, action);
-        else actions1.push(action);
+        if (item) actions.splice(item.index + 1, 0, action);
+        else actions.push(action);
         this.setSelected(action);
     }
     addSubAction() {
@@ -38761,6 +38765,9 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
     }
     findItem(key) {
         return (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
+    }
+    json() {
+        return JSON.stringify(this.obj, null, 2) || "";
     }
     moveItemDown(item) {
         if (item.index < item.collection.length - 1) {
@@ -38812,7 +38819,7 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
     }
     setSelected(key) {
         if (key) {
-            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = (0, $e58f8b994fe0cfbf$export$e324594224ef24da)(this.obj.actions);
+            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = this.actions(this.obj.actions);
             const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
             if (item) this.obj.selected = item.key;
             return item;
@@ -41999,10 +42006,7 @@ parcelRequire("d4J5n");
 
 var $d4J5n = parcelRequire("d4J5n");
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
+parcelRequire("d4J5n");
 
 
 
@@ -42017,7 +42021,12 @@ var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
         const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
         if (item) {
-            const code = JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2);
+            const code = JSON.stringify(item, (key, value)=>{
+                if (key === "template") return undefined;
+                else if (key === "parent") return value?.key;
+                else if (key === "children") return value?.length;
+                else return value;
+            }, 2);
             return (0, $bcb4aef0f6b91b86$export$5adbceee7f7ddc90)(code);
         }
     }, [
@@ -43209,29 +43218,18 @@ var $f4cfb68b239954cb$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 
 
 
-var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
                 "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "break",
-                    query: obj1.query,
+                    query: obj.query,
                     onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
+                        obj.query = value;
+                        onChange(event);
                     }
                 }),
                 "A CSS selector or jQuery expression that determines whether to break out of the current loop if content is found on the page. Can be further modified using a pattern.",
@@ -43240,771 +43238,50 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ()=>{
             [
                 "on",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                    value: obj1.on,
+                    value: obj.on,
                     onChange: (event, value)=>{
-                        obj1.on = value;
-                        setTemplate(template1.toString());
+                        obj.on = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether to break out of the current loop if any, all, or none of the selectors from the query are found on the page.",
-                obj1.on !== undefined
+                obj.on !== undefined
             ],
             [
                 "pattern",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                    value: obj1.pattern,
+                    value: obj.pattern,
                     onChange: (event, value)=>{
-                        obj1.pattern = value;
-                        setTemplate(template1.toString());
+                        obj.pattern = value;
+                        onChange(event);
                     }
                 }),
                 "Breaks out of the current loop if a text pattern matches the output of the specified query.",
-                obj1.pattern !== undefined
+                obj.pattern !== undefined
             ],
             [
                 "when",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
+                    value: obj.when,
                     onChange: (event, value)=>{
-                        obj1.when = value;
-                        setTemplate(template1.toString());
+                        obj.when = value;
+                        onChange(event);
                     }
                 }),
                 "A formula that determines whether to break out of the current loop.",
-                obj1.when !== undefined
+                obj.when !== undefined
             ],
             [
                 "active",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
+                    checked: obj.active ?? true,
                     onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
+                        obj.active = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether the property is active or bypassed.",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "query",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
-                    name: "click",
-                    query: obj1.query,
-                    onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A CSS selector or jQuery expression that determines the click target.",
-                true
-            ],
-            [
-                "required",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.required ?? false,
-                    onChange: (event, value)=>{
-                        obj1.required = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                true
-            ],
-            [
-                "retry",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.retry,
-                    onChange: (event, value)=>{
-                        obj1.retry = value;
-                        setTemplate(template1.toString());
-                    },
-                    min: 0
-                }),
-                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
-                obj1.retry !== undefined
-            ],
-            [
-                "snooze",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
-                    value: obj1.snooze,
-                    onChange: (event, value)=>{
-                        obj1.snooze = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Number of seconds to snooze before the click.",
-                false
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula that determines whether the click is evaluated or bypassed.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $ba74450b53ad4694$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "query",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
-                    name: "each",
-                    query: obj1.query,
-                    onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A CSS selector or jQuery expression that determines the set of elements to loop over.",
-                true
-            ],
-            [
-                "global",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.context === null,
-                    onChange: (event, value)=>{
-                        obj1.context = value ? null : undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Performs the query in a global context rather than within the current context.",
-                obj1.context !== undefined
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula that determines whether the each loop is performed. Each loop is performed unconditionally if not specified.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the each loop is active or bypassed.",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $b516851a7c38229b$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "message",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
-                    variants: [
-                        "string",
-                        "dynamic-string"
-                    ],
-                    value: obj1.message,
-                    onChange: (event, value)=>{
-                        obj1.message = value || "";
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
-                true
-            ],
-            [
-                "code",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
-                    variant: "kebab-case",
-                    value: obj1.code,
-                    onChange: (event, value)=>{
-                        obj1.code = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Defines an error-code for programatically identifying the error.",
-                obj1.code !== undefined
-            ],
-            [
-                "level",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.level,
-                    onChange: (event, value)=>{
-                        obj1.level = value;
-                        setTemplate(template1.toString());
-                    },
-                    min: 0
-                }),
-                "Defines an error-level number indicating the severity of the error. By convention, a zero indicates an error that will not succeed with a retry. (default=1)",
-                obj1.level !== undefined
-            ],
-            [
-                "query",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
-                    name: "error",
-                    query: obj1.query,
-                    onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A CSS selector or jQuery expression that determines whether an error is produced.",
-                true
-            ],
-            [
-                "stop",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.stop ?? false,
-                    onChange: (event, value)=>{
-                        obj1.stop = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the error should stop any further processing of the template.",
-                obj1.stop !== undefined
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula returning a true or false result that determines whether an error is produced.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $9415fe1f85866126$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        //todo: remove shim when syphonx-core updated
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "limit",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.limit,
-                    onChange: (event, value)=>{
-                        obj1.limit = value;
-                        setTemplate(template1.toString());
-                    },
-                    min: 0
-                }),
-                "Limits the number of repeat iterations.",
-                true
-            ],
-            [
-                "errors",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.errors,
-                    onChange: (event, value)=>{
-                        obj1.errors = value;
-                        setTemplate(template1.toString());
-                    },
-                    min: 1
-                }),
-                "Maximum number of errors before aborting the repeat loop. (default=1)",
-                obj1.errors !== undefined
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    function onChangeName(event, value) {
-        obj1.name = value;
-        template1.setSelected(obj1);
-        setTemplate(template1.toString());
-    }
-    function onChangeQuery(event, query) {
-        obj1.query = query;
-        setTemplate(template1.toString());
-    }
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "name",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
-                    variant: "snake-case",
-                    value: obj1.name,
-                    onChange: onChangeName
-                }),
-                "Determines the name of the selected value, or blank representing a single unnamed value.",
-                true
-            ],
-            [
-                "query",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
-                    query: obj1.query,
-                    name: obj1.name,
-                    type: obj1.type,
-                    repeated: obj1.repeated,
-                    onChange: onChangeQuery
-                }),
-                "A CSS selector or jQuery expression that determines what data is selected on the page.",
-                true
-            ],
-            [
-                "type",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
-                    value: obj1.type,
-                    onChange: (event, value)=>{
-                        obj1.type = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines the type of the property value.",
-                true
-            ],
-            [
-                "repeated",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.repeated ?? false,
-                    onChange: (event, value)=>{
-                        obj1.repeated = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Indicates whether the data is single-valued or repeated within an array.",
-                true
-            ],
-            [
-                "required",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.required ?? false,
-                    onChange: (event, value)=>{
-                        obj1.required = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is required which produces an error if a value is not obtained.",
-                obj1.required !== undefined
-            ],
-            [
-                "value",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
-                    variants: [
-                        "string",
-                        "number",
-                        "boolean",
-                        "formula",
-                        "json"
-                    ],
-                    value: obj1.value,
-                    onChange: (event, value)=>{
-                        obj1.value = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A predetermined or computed value, only used if a DOM query is unspecified.",
-                obj1.value !== undefined
-            ],
-            [
-                "all",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.all ?? false,
-                    onChange: (event, value)=>{
-                        obj1.all = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
-                obj1.all !== undefined
-            ],
-            [
-                "limit",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.limit,
-                    onChange: (event, value)=>{
-                        obj1.limit = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
-                obj1.limit !== undefined
-            ],
-            [
-                "format",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
-                    value: obj1.format,
-                    onChange: (event, value)=>{
-                        obj1.format = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines how the selected value is formatted.",
-                obj1.format !== undefined
-            ],
-            [
-                "pattern",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                    value: obj1.pattern,
-                    onChange: (event, value)=>{
-                        obj1.pattern = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
-                obj1.pattern !== undefined
-            ],
-            [
-                "collate",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.collate ?? false,
-                    onChange: (event, value)=>{
-                        obj1.collate = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Combines all selected nodes into a single value.",
-                obj1.collate !== undefined
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula that determines whether the select is evaluated or bypassed.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is active or bypassed",
-                obj1.active !== undefined
-            ]
-        ]
-    }) : null;
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    function onChangeName(event, value) {
-        obj1.name = value;
-        template1.setSelected(obj1);
-        setTemplate(template1.toString());
-    }
-    function onChangeQuery(event, query) {
-        obj1.query = query;
-        setTemplate(template1.toString());
-    }
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
-        items: [
-            [
-                "query",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
-                    query: obj1.query,
-                    name: obj1.name,
-                    type: obj1.type,
-                    repeated: obj1.repeated,
-                    onChange: onChangeQuery
-                }),
-                "A CSS selector or jQuery expression that determines what data is selected on the page.",
-                true
-            ],
-            [
-                "value",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
-                    variants: [
-                        "string",
-                        "number",
-                        "boolean",
-                        "formula",
-                        "json"
-                    ],
-                    value: obj1.value,
-                    onChange: (event, value)=>{
-                        obj1.value = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A predetermined or computed value, only used if a DOM query is unspecified.",
-                obj1.value !== undefined
-            ],
-            [
-                "all",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.all ?? false,
-                    onChange: (event, value)=>{
-                        obj1.all = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
-                obj1.all !== undefined
-            ],
-            [
-                "limit",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.limit,
-                    onChange: (event, value)=>{
-                        obj1.limit = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
-                obj1.limit !== undefined
-            ],
-            [
-                "format",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
-                    value: obj1.format,
-                    onChange: (event, value)=>{
-                        obj1.format = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines how the selected value is formatted.",
-                obj1.format !== undefined
-            ],
-            [
-                "pattern",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                    value: obj1.pattern,
-                    onChange: (event, value)=>{
-                        obj1.pattern = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
-                obj1.pattern !== undefined
-            ],
-            [
-                "collate",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.collate ?? false,
-                    onChange: (event, value)=>{
-                        obj1.collate = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Combines all selected nodes into a single value.",
-                obj1.collate !== undefined
-            ],
-            [
-                "when",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
-                    onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "A formula that determines whether the select is evaluated or bypassed.",
-                obj1.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
-                    onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
-                    }
-                }),
-                "Determines whether the property is active or bypassed",
-                obj1.active !== undefined
+                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -44015,18 +43292,635 @@ var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ()=>{
 parcelRequire("d4J5n");
 
 
+var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "click",
+                    query: obj.query,
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines the click target.",
+                true
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.required ?? false,
+                    onChange: (event, value)=>{
+                        obj.required = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                true
+            ],
+            [
+                "retry",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.retry,
+                    onChange: (event, value)=>{
+                        obj.retry = value;
+                        onChange(event);
+                    },
+                    min: 0
+                }),
+                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
+                obj.retry !== undefined
+            ],
+            [
+                "snooze",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
+                    value: obj.snooze,
+                    onChange: (event, value)=>{
+                        obj.snooze = value;
+                        onChange(event);
+                    }
+                }),
+                "Number of seconds to snooze before the click.",
+                false
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether the click is evaluated or bypassed.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
 
 
-var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-    const item = template.selected();
-    function handleChange(event, value) {
-        item.obj = value || [
-            1
-        ];
-        setTemplate(template.toString());
-    }
+
+parcelRequire("d4J5n");
+
+
+var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "each",
+                    query: obj.query,
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines the set of elements to loop over.",
+                true
+            ],
+            [
+                "global",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.context === null,
+                    onChange: (event, value)=>{
+                        obj.context = value ? null : undefined;
+                        onChange(event);
+                    }
+                }),
+                "Performs the query in a global context rather than within the current context.",
+                obj.context !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether the each loop is performed. Each loop is performed unconditionally if not specified.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the each loop is active or bypassed.",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "message",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "dynamic-string"
+                    ],
+                    value: obj.message,
+                    onChange: (event, value)=>{
+                        obj.message = value || "";
+                        onChange(event);
+                    }
+                }),
+                "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
+                true
+            ],
+            [
+                "code",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
+                    variant: "kebab-case",
+                    value: obj.code,
+                    onChange: (event, value)=>{
+                        obj.code = value;
+                        onChange(event);
+                    }
+                }),
+                "Defines an error-code for programatically identifying the error.",
+                obj.code !== undefined
+            ],
+            [
+                "level",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.level,
+                    onChange: (event, value)=>{
+                        obj.level = value;
+                        onChange(event);
+                    },
+                    min: 0
+                }),
+                "Defines an error-level number indicating the severity of the error. By convention, a zero indicates an error that will not succeed with a retry. (default=1)",
+                obj.level !== undefined
+            ],
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    name: "error",
+                    query: obj.query,
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines whether an error is produced.",
+                true
+            ],
+            [
+                "stop",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.stop ?? false,
+                    onChange: (event, value)=>{
+                        obj.stop = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the error should stop any further processing of the template.",
+                obj.stop !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula returning a true or false result that determines whether an error is produced.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj; //todo: remove shim when syphonx-core updated
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.limit,
+                    onChange: (event, value)=>{
+                        obj.limit = value;
+                        onChange(event);
+                    },
+                    min: 0
+                }),
+                "Limits the number of repeat iterations.",
+                true
+            ],
+            [
+                "errors",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.errors,
+                    onChange: (event, value)=>{
+                        obj.errors = value;
+                        onChange(event);
+                    },
+                    min: 1
+                }),
+                "Maximum number of errors before aborting the repeat loop. (default=1)",
+                obj.errors !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is active or bypassed.",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "name",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cc8726b30629a3e6$export$2e2bcd8739ae039), {
+                    variant: "snake-case",
+                    value: obj.name,
+                    onChange: (event, value)=>{
+                        obj.name = value;
+                        item.template.setSelected(obj);
+                        onChange(event);
+                    }
+                }),
+                "Determines the name of the selected value, or blank representing a single unnamed value.",
+                true
+            ],
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    query: obj.query,
+                    name: obj.name,
+                    type: obj.type,
+                    repeated: obj.repeated,
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines what data is selected on the page.",
+                true
+            ],
+            [
+                "type",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
+                    value: obj.type,
+                    onChange: (event, value)=>{
+                        obj.type = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines the type of the property value.",
+                true
+            ],
+            [
+                "repeated",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.repeated ?? false,
+                    onChange: (event, value)=>{
+                        obj.repeated = value;
+                        onChange(event);
+                    }
+                }),
+                "Indicates whether the data is single-valued or repeated within an array.",
+                true
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.required ?? false,
+                    onChange: (event, value)=>{
+                        obj.required = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is required which produces an error if a value is not obtained.",
+                obj.required !== undefined
+            ],
+            [
+                "value",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "number",
+                        "boolean",
+                        "formula",
+                        "json"
+                    ],
+                    value: obj.value,
+                    onChange: (event, value)=>{
+                        obj.value = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A predetermined or computed value, only used if a DOM query is unspecified.",
+                obj.value !== undefined
+            ],
+            [
+                "all",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.all ?? false,
+                    onChange: (event, value)=>{
+                        obj.all = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
+                obj.all !== undefined
+            ],
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.limit,
+                    onChange: (event, value)=>{
+                        obj.limit = value;
+                        onChange(event);
+                    }
+                }),
+                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                obj.limit !== undefined
+            ],
+            [
+                "format",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
+                    value: obj.format,
+                    onChange: (event, value)=>{
+                        obj.format = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines how the selected value is formatted.",
+                obj.format !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj.pattern,
+                    onChange: (event, value)=>{
+                        obj.pattern = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
+                obj.pattern !== undefined
+            ],
+            [
+                "collate",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.collate ?? false,
+                    onChange: (event, value)=>{
+                        obj.collate = value;
+                        onChange(event);
+                    }
+                }),
+                "Combines all selected nodes into a single value.",
+                obj.collate !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether the select is evaluated or bypassed.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is active or bypassed",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    query: obj.query,
+                    name: obj.name,
+                    type: obj.type,
+                    repeated: obj.repeated,
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that determines what data is selected on the page.",
+                true
+            ],
+            [
+                "value",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "number",
+                        "boolean",
+                        "formula",
+                        "json"
+                    ],
+                    value: obj.value,
+                    onChange: (event, value)=>{
+                        obj.value = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A predetermined or computed value, only used if a DOM query is unspecified.",
+                obj.value !== undefined
+            ],
+            [
+                "all",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.all ?? false,
+                    onChange: (event, value)=>{
+                        obj.all = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
+                obj.all !== undefined
+            ],
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj.limit,
+                    onChange: (event, value)=>{
+                        obj.limit = value;
+                        onChange(event);
+                    }
+                }),
+                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                obj.limit !== undefined
+            ],
+            [
+                "format",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
+                    value: obj.format,
+                    onChange: (event, value)=>{
+                        obj.format = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines how the selected value is formatted.",
+                obj.format !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj.pattern,
+                    onChange: (event, value)=>{
+                        obj.pattern = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
+                obj.pattern !== undefined
+            ],
+            [
+                "collate",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.collate ?? false,
+                    onChange: (event, value)=>{
+                        obj.collate = value;
+                        onChange(event);
+                    }
+                }),
+                "Combines all selected nodes into a single value.",
+                obj.collate !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether the select is evaluated or bypassed.",
+                obj.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj.active ?? true,
+                    onChange: (event, value)=>{
+                        obj.active = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the property is active or bypassed",
+                obj.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     return item ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
@@ -44036,7 +43930,12 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
                     children: [
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
                             value: item.obj,
-                            onChange: handleChange
+                            onChange: (event, value)=>{
+                                item.obj = value || [
+                                    1
+                                ];
+                                onChange(event);
+                            }
                         }),
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                             fontSize: "small",
@@ -44058,35 +43957,21 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ()=>{
 
 
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
+parcelRequire("d4J5n");
 
 
-
-var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
                 "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $720d345d88dda83e$export$2e2bcd8739ae039), {
                     name: "transform",
-                    query: obj1.query,
+                    query: obj.query,
                     onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
+                        obj.query = value;
+                        onChange(event);
                     }
                 }),
                 "A CSS selector or jQuery expression that defines the transform.",
@@ -44095,26 +43980,26 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
             [
                 "when",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
+                    value: obj.when,
                     onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
+                        obj.when = value || undefined;
+                        onChange(event);
                     }
                 }),
                 "A formula that determines whether the transform is evaluated.",
-                obj1.when !== undefined
+                obj.when !== undefined
             ],
             [
                 "active",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
+                    checked: obj.active ?? true,
                     onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
+                        obj.active = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether the transform is active or bypassed.",
-                obj1.active !== undefined
+                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -44122,35 +44007,21 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ()=>{
 
 
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
+parcelRequire("d4J5n");
 
 
-
-var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
                 "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "waitfor",
-                    query: obj1.query,
+                    query: obj.query,
                     onChange: (event, value)=>{
-                        obj1.query = value;
-                        setTemplate(template1.toString());
+                        obj.query = value;
+                        onChange(event);
                     }
                 }),
                 "A CSS selector or jQuery expression that determines the content to wait for on the page.",
@@ -44159,74 +44030,74 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
             [
                 "required",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.required ?? false,
+                    checked: obj.required ?? false,
                     onChange: (event, value)=>{
-                        obj1.required = value;
-                        setTemplate(template1.toString());
+                        obj.required = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                obj1.required !== undefined
+                obj.required !== undefined
             ],
             [
                 "on",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                    value: obj1.on,
+                    value: obj.on,
                     onChange: (event, value)=>{
-                        obj1.on = value;
-                        setTemplate(template1.toString());
+                        obj.on = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether to wait for any, all, or none of the selectors.",
-                obj1.on !== undefined
+                obj.on !== undefined
             ],
             [
                 "pattern",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                    value: obj1.pattern,
+                    value: obj.pattern,
                     onChange: (event, value)=>{
-                        obj1.pattern = value;
-                        setTemplate(template1.toString());
+                        obj.pattern = value;
+                        onChange(event);
                     }
                 }),
                 "Waits for a specific text pattern if specified.",
-                obj1.pattern !== undefined
+                obj.pattern !== undefined
             ],
             [
                 "timeout",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.timeout,
+                    value: obj.timeout,
                     onChange: (event, value)=>{
-                        obj1.timeout = value;
-                        setTemplate(template1.toString());
+                        obj.timeout = value;
+                        onChange(event);
                     }
                 }),
                 "Number of seconds to wait before timing out.",
-                obj1.timeout !== undefined
+                obj.timeout !== undefined
             ],
             [
                 "when",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj1.when,
+                    value: obj.when,
                     onChange: (event, value)=>{
-                        obj1.when = value || undefined;
-                        setTemplate(template1.toString());
+                        obj.when = value || undefined;
+                        onChange(event);
                     }
                 }),
                 "A formula that determines whether the click is evaluated or bypassed.",
-                obj1.when !== undefined
+                obj.when !== undefined
             ],
             [
                 "active",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj1.active ?? true,
+                    checked: obj.active ?? true,
                     onChange: (event, value)=>{
-                        obj1.active = value;
-                        setTemplate(template1.toString());
+                        obj.active = value;
+                        onChange(event);
                     }
                 }),
                 "Determines whether the property is active or bypassed.",
-                obj1.active !== undefined
+                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -44234,37 +44105,22 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ()=>{
 
 
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
+parcelRequire("d4J5n");
 
 
 
-
-var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
-        const item = template.selected();
-        //todo: remove shim when syphonx-core updated
-        const obj = item?.obj;
-        return {
-            template: template,
-            obj: obj
-        };
-    }, [
-        json
-    ]);
-    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $17b288f07ec57b56$exports.Fragment), {
+var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj; // todo: remove shim when syphonx-core updated
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $17b288f07ec57b56$exports.Fragment), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
             items: [
                 [
                     "when",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                        value: obj1.when,
+                        value: obj.when,
                         onChange: (event, value)=>{
-                            obj1.when = value;
-                            setTemplate(template1.toString());
+                            obj.when = value;
+                            onChange(event);
                         }
                     }),
                     "A formula that determines whether to yield, or yields unconditionally if unspecified.",
@@ -44273,38 +44129,38 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ()=>{
                 [
                     "context",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51aaad515892d7c$export$2e2bcd8739ae039), {
-                        value: obj1.context,
+                        value: obj.context,
                         onChange: (event, value)=>{
-                            obj1.context = value;
-                            setTemplate(template1.toString());
+                            obj.context = value;
+                            onChange(event);
                         }
                     }),
                     "Specifies host context. Used to trigger screenshots and other host responsibilities.",
-                    obj1.context !== undefined
+                    obj.context !== undefined
                 ],
                 [
                     "timeout",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                        value: obj1.timeout,
+                        value: obj.timeout,
                         onChange: (event, value)=>{
-                            obj1.timeout = value;
-                            setTemplate(template1.toString());
+                            obj.timeout = value;
+                            onChange(event);
                         }
                     }),
                     "Determines the amount of time in seconds to wait for a renavigation before a timeout error occurs.",
-                    obj1.timeout !== undefined
+                    obj.timeout !== undefined
                 ],
                 [
                     "active",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                        checked: obj1.active ?? true,
+                        checked: obj.active ?? true,
                         onChange: (event, value)=>{
-                            obj1.active = value;
-                            setTemplate(template1.toString());
+                            obj.active = value;
+                            onChange(event);
                         }
                     }),
                     "Determines whether the property is active or bypassed.",
-                    obj1.active !== undefined
+                    obj.active !== undefined
                 ]
             ]
         })
@@ -44327,29 +44183,75 @@ var $7d8e9cab3e33d886$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const item1 = (0, $d4J5n.useMemo)(()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: template1 , item: item1  } = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
-        return item;
+        return {
+            template: template,
+            item: item
+        };
     }, [
         json
     ]);
+    function onChange() {
+        setTemplate(template1.json());
+    }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d8e9cab3e33d886$export$2e2bcd8739ae039), {
         children: function() {
             if (!item1) return null;
-            else if (item1.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
-            else if (item1.type === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {});
-            else if (item1.type === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b516851a7c38229b$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9415fe1f85866126$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {});
-            else if (item1.type === "action" && item1.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {});
+            else if (item1.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "error") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b516851a7c38229b$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9415fe1f85866126$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "select" && item1.children && item1.children[0]) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {
+                item: item1.children[0],
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
+            else if (item1.type === "action" && item1.name === "yield") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a9b5db3d2d3d0819$export$2e2bcd8739ae039), {
+                item: item1,
+                onChange: onChange
+            });
             else return null;
         }()
     });

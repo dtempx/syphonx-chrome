@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Switch } from "@mui/material";
-import { useTemplate } from "../../context";
-import { Template } from "../lib";
+import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
@@ -12,16 +11,13 @@ import {
     SelectOnDropdown
 } from "./components";
 
-export default () => {
-    const { template: json, setTemplate } = useTemplate();
+export interface Props {
+    item: TemplateItem;
+    onChange: (event: React.SyntheticEvent<Element, Event>) => void;
+}
 
-    const { template, obj } = useMemo(() => {
-        const template = new Template(json);
-        const item = template.selected();
-        const obj = item?.obj as syphonx.Break;
-        return { template, obj };
-    }, [json]);
-
+export default ({ item, onChange }: Props) => {
+    const obj = item?.obj as syphonx.Break;
     return obj ? (
         <ComplexPropertyGrid
             items={[
@@ -30,7 +26,10 @@ export default () => {
                     <QueryEditorField
                         name="break"
                         query={obj.query}
-                        onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.query = value;
+                            onChange(event);
+                        }}
                     />,
                     "A CSS selector or jQuery expression that determines whether to break out of the current loop if content is found on the page. Can be further modified using a pattern.",
                     true
@@ -39,7 +38,10 @@ export default () => {
                     "on",
                     <SelectOnDropdown
                         value={obj.on}
-                        onChange={(event, value) => { obj.on = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.on = value;
+                            onChange(event);
+                        }}
                     />,
                     "Determines whether to break out of the current loop if any, all, or none of the selectors from the query are found on the page.",
                     obj.on !== undefined
@@ -48,7 +50,10 @@ export default () => {
                     "pattern",
                     <RegexpField
                         value={obj.pattern}
-                        onChange={(event, value) => { obj.pattern = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.pattern = value;
+                            onChange(event);
+                        }}
                     />,
                     "Breaks out of the current loop if a text pattern matches the output of the specified query.",
                     obj.pattern !== undefined
@@ -57,7 +62,10 @@ export default () => {
                     "when",
                     <FormulaField
                         value={obj.when}
-                        onChange={(event, value) => { obj.when = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.when = value;
+                            onChange(event);
+                        }}
                     />,
                     "A formula that determines whether to break out of the current loop.",
                     obj.when !== undefined
@@ -66,7 +74,10 @@ export default () => {
                     "active",
                     <Switch
                         checked={obj.active ?? true}
-                        onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
+                        onChange={(event, value) => {
+                            obj.active = value;
+                            onChange(event);
+                        }}
                     />,
                     "Determines whether the property is active or bypassed.",
                     obj.active !== undefined

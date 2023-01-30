@@ -1,23 +1,18 @@
 import React from "react";
 import { Stack, Typography } from "@mui/material";
-import { useTemplate } from "../../context";
-import { Template } from "../lib";
+import { TemplateItem } from "../lib";
 
 import {
     ComplexPropertyGrid,
     NumberRangeField
 } from "./components";
 
-export default () => {
-    const { template: json, setTemplate } = useTemplate();
-    const template = new Template(json);
-    const item = template.selected();
-    
-    function handleChange(event: React.SyntheticEvent, value: [number] | [number, number] | undefined) {
-        item!.obj = value || [1];
-        setTemplate(template.toString());
-    }
+export interface Props {
+    item: TemplateItem;
+    onChange: (event: React.SyntheticEvent<Element, Event>) => void;
+}
 
+export default ({ item, onChange }: Props) => {
     return item ? (
         <ComplexPropertyGrid
             items={[
@@ -26,7 +21,10 @@ export default () => {
                     <Stack direction="row">
                         <NumberRangeField
                             value={item.obj as [number, number]}
-                            onChange={handleChange}
+                            onChange={(event, value) => {
+                                item!.obj = value || [1];
+                                onChange(event);
+                            }}
                         />
                         <Typography fontSize="small" sx={{ position: "relative", top: 8, ml: 1 }}>seconds</Typography>
                     </Stack>,

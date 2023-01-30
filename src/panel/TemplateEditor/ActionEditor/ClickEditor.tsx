@@ -1,7 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Switch } from "@mui/material";
-import { useTemplate } from "../../context";
-import { Template } from "../lib";
+import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
@@ -12,16 +11,13 @@ import {
     NumberRangeField
 } from "./components";
 
-export default () => {
-    const { template: json, setTemplate } = useTemplate();
+export interface Props {
+    item: TemplateItem;
+    onChange: (event: React.SyntheticEvent<Element, Event>) => void;
+}
 
-    const { template, obj } = useMemo(() => {
-        const template = new Template(json);
-        const item = template.selected();
-        const obj = item?.obj as syphonx.Click;
-        return { template, obj };
-    }, [json]);
-
+export default ({ item, onChange }: Props) => {
+    const obj = item?.obj as syphonx.Click;
     return obj ? (
         <ComplexPropertyGrid items={[
             [
@@ -29,7 +25,10 @@ export default () => {
                 <QueryEditorField
                     name="click"
                     query={obj.query}
-                    onChange={(event, value) => { obj.query = value; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.query = value;
+                        onChange(event);
+                    }}
                 />,
                 "A CSS selector or jQuery expression that determines the click target.",
                 true
@@ -38,7 +37,10 @@ export default () => {
                 "required",
                 <Switch
                     checked={obj.required ?? false}
-                    onChange={(event, value) => { obj.required = value; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.required = value;
+                        onChange(event);
+                    }}
                 />,
                 "Determines whether the click is optional or required, producing if no click target is found on the page.",
                 true
@@ -47,7 +49,10 @@ export default () => {
                 "retry",
                 <NumberField
                     value={obj.retry}
-                    onChange={(event, value) => { obj.retry = value; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.retry = value;
+                        onChange(event);
+                    }}
                     min={0}
                 />,
                 "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
@@ -57,7 +62,10 @@ export default () => {
                 "snooze",
                 <NumberRangeField
                     value={obj.snooze as [number, number]}
-                    onChange={(event, value) => { obj.snooze = value as syphonx.SnoozeInterval; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.snooze = value as syphonx.SnoozeInterval;
+                        onChange(event);
+                    }}
                 />,
                 "Number of seconds to snooze before the click.",
                 false
@@ -66,7 +74,10 @@ export default () => {
                 "when",
                 <FormulaField
                     value={obj.when}
-                    onChange={(event, value) => { obj.when = value || undefined; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }}
                 />,
                 "A formula that determines whether the click is evaluated or bypassed.",
                 obj.when !== undefined
@@ -75,7 +86,10 @@ export default () => {
                 "active",
                 <Switch
                     checked={obj.active ?? true}
-                    onChange={(event, value) => { obj.active = value; setTemplate(template.toString()); }}
+                    onChange={(event, value) => {
+                        obj.active = value;
+                        onChange(event);
+                    }}
                 />,
                 "Determines whether the property is active or bypassed.",
                 obj.active !== undefined

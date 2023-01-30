@@ -1,5 +1,6 @@
 Data contracts
 Template test case runner
+template autorun user setting
 
 Data View
     data view: single object view

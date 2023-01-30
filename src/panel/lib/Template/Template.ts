@@ -3,7 +3,6 @@ import { TemplateItem } from "./TemplateItem";
 import { background, clone, omit } from "..";
 
 import {
-    actions,
     findItem,
     findParentActionCollection,
     formatTemplateJson,
@@ -45,10 +44,120 @@ export class Template {
             this.obj = {};
         }
 
-        this.children = actions(this.obj.actions);
+        this.children = this.actions(this.obj.actions);
         if (file)
             this.obj.file = file;
     }
+
+
+    private actions(collection: syphonx.Action[] | undefined, parent?: TemplateItem): TemplateItem[] {
+        if (collection) {
+            const ordinals: Record<string, number> = {};
+            return collection.map((action, index) => {
+                const [name] = Object.keys(action);
+                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
+                const ordinal = ordinals[name];
+                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
+                const { [name]: obj } = action as Record<string, unknown>; // assign to `obj` the value within `action` with a key of `name`
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name,
+                    type: "action",
+                    icon: name,
+                    parent,
+                    collection,
+                    unit: action,
+                    obj,
+                    index
+                });
+                if (name === "select" && obj instanceof Array)
+                    item.children = this.selects(obj as syphonx.Select[], item);
+                if (name === "each" && (obj as syphonx.Each).actions instanceof Array)
+                    item.children = this.actions((obj as syphonx.Each).actions, item);
+                if (name === "repeat" && (obj as syphonx.Repeat).actions instanceof Array)
+                    item.children = this.actions((obj as syphonx.Repeat).actions, item);
+                return item;
+            });
+        }
+        else {
+            return [];
+        }
+    }
+    
+    private pivot(obj: syphonx.SelectTarget, parent: TemplateItem): TemplateItem {
+        const key = `${parent.key}.pivot`;
+        const item = new TemplateItem({
+            template: this,
+            key,
+            name: "pivot",
+            type: "pivot",
+            icon: "pivot",
+            parent,
+            collection: [],
+            unit: obj,
+            obj,
+            index: 0
+        });
+        item.children = this.subselect(obj, item);
+        return item;
+    }
+    
+    private selects(collection: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
+        return collection.map((select, index) => {
+            const key = `${parent.key}.${select.name || "?"}`;
+            const item = new TemplateItem({
+                template: this,
+                key,
+                name: select.name || "",
+                type: "select",
+                icon: select.type || "string",
+                required: select.required,
+                repeated: select.repeated,
+                parent,
+                collection,
+                unit: select,
+                obj: select,
+                index
+            });
+            item.children = this.subselect(select, item);
+            return item;
+        });
+    }
+    
+    private subselect(obj: syphonx.Select, parent: TemplateItem): TemplateItem[] | undefined {
+        if (obj.select) {
+            return this.selects(obj.select, parent);
+        }
+        else if (obj.union) {
+            return this.union(obj.union, parent);
+        }
+        else if (obj.pivot) {
+            return [this.pivot(obj.pivot, parent)];
+        }
+    }
+    
+    private union(collection: syphonx.SelectTarget[], parent: TemplateItem): TemplateItem[] {
+        return collection.map((obj, index) => {
+            const key = `${parent.key}.union.${index}`;
+            const item = new TemplateItem({
+                template: this,
+                key,
+                name: "union",
+                type: "union",
+                icon: "union",
+                parent,
+                collection,
+                unit: obj,
+                obj,
+                index
+            });
+            item.children = this.subselect(obj, item);
+            return item;
+        });
+    }
+
+
 
     addAction(type: TemplateAddItemType): void {
         if (!(this.obj.actions instanceof Array))
@@ -133,6 +242,10 @@ export class Template {
         return findItem(this.children, key);
     }
 
+    json(): string {
+        return JSON.stringify(this.obj, null, 2) || "";
+    }
+
     moveItemDown(item: TemplateItem): void {
         if (item.index < item.collection.length - 1) {
             item.collection.splice(item.index, 1);
@@ -188,7 +301,7 @@ export class Template {
     setSelected(key?: string | unknown): TemplateItem | undefined {
         if (key) {
             if (!(key instanceof TemplateItem))
-                this.children = actions(this.obj.actions);
+                this.children = this.actions(this.obj.actions);
             const item = findItem(this.children, key);
             if (item)
                 this.obj.selected = item.key;
