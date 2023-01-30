@@ -1,4 +1,4 @@
-export type TemplateItemType = "action" | "select";
+export type TemplateItemType = "action" | "pivot" | "select" | "union";
 
 /**
  * Adapts an item within a template document, adding state and behavior for manipulation by a UI editor.
@@ -10,7 +10,7 @@ export class TemplateItem {
     key: string;
 
     /**
-     * Determines the type of the adapter item as either `action` or `select`.
+     * Determines the type of the adapter item.
      */
     type: TemplateItemType;
 

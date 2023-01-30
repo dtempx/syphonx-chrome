@@ -1,18 +1,21 @@
 import React, { useMemo } from "react";
 import { useApp, useTemplate } from "../../../context";
-import { Template } from "../../lib";
+import { formatTemplateJson, Template } from "../../lib";
 
 export default () => {
     const { template: json } = useTemplate();
     const { debug } = useApp();
 
-    const item = useMemo(() => {
+    const code = useMemo(() => {
         const template = new Template(json);
         const item = template.selected();
-        return item;
+        if (item) {
+            const code = JSON.stringify(item, (key, value) => key === "parent" ? value?.key : key === "children" ? value?.length : value, 2);
+            return formatTemplateJson(code);
+        }
     }, [json]);
 
-    return item && debug ? (
+    return code && debug ? (
         <pre
             style={{
                 fontFamily: "monospace",
@@ -21,8 +24,6 @@ export default () => {
                 backgroundColor: "#eee",
                 overflow: "scroll"
             }}
-        >
-            {JSON.stringify(item, (key, value) => key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)}
-        </pre>
+        >{code}</pre>
     ) : null;
 };

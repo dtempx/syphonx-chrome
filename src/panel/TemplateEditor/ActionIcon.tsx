@@ -9,13 +9,15 @@ import {
     Abc as ItemIcon,
     Numbers as NumberTypeIcon,
     DataObject as ObjectTypeIcon,
-    AutoAwesomeMotionOutlined as RepeatedIcon,
+    PivotTableChart as PivotIcon,
     Autorenew as RepeatIcon,
+    AutoAwesomeMotionOutlined as RepeatedIcon,
     PriorityHighOutlined as RequiredIcon,
     HighlightAlt as SelectIcon,
     Snooze as SnoozeIcon,
     Abc as StringTypeIcon,
     Transform as TransformIcon,
+    Mediation as UnionIcon,
     QuestionMark as UnknownIcon,
     HourglassEmpty as WaitforIcon,
     ExitToApp as YieldIcon
@@ -42,6 +44,8 @@ export default ({ name, ...props }: Props) => {
         return <NumberTypeIcon {...props} />;
     else if (name === "object")
         return <ObjectTypeIcon {...props} />;
+    else if (name === "pivot")
+        return <PivotIcon {...props} />;
     else if (name === "repeat")
         return <RepeatIcon {...props} />;
     else if (name === "repeated")
@@ -56,6 +60,8 @@ export default ({ name, ...props }: Props) => {
         return <SnoozeIcon {...props} />;
     else if (name === "transform")
         return <TransformIcon {...props} />;
+    else if (name === "union")
+        return <UnionIcon {...props} />;
     else if (name === "waitfor")
         return <WaitforIcon {...props} />;
     else if (name === "yield")

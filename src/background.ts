@@ -45,8 +45,13 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
     return new Promise((resolve, reject) =>
         chrome.scripting.executeScript(
             { target: { tabId }, files: [file] },
-            results =>
-                results.length > 0 ? resolve(results[0].result) : reject({ message: `Failed to execute script file ${file}` })
+            results => {
+                // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
+                if (results instanceof Array && results.length > 0)
+                    resolve(results[0].result); // only take the first frame result for now
+                else
+                    reject({ message: `Failed to execute script file ${file}` });
+            }
         )
     );
 }

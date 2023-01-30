@@ -38463,10 +38463,10 @@ class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
 
 
 
-function $512c73527a382006$export$a3d9882fc9361f2d(actions, parent) {
-    if (actions) {
+function $e58f8b994fe0cfbf$export$e324594224ef24da(actions1, parent) {
+    if (actions1) {
         const ordinals = {};
-        return actions.map((action, index)=>{
+        return actions1.map((action, index)=>{
             const [name] = Object.keys(action);
             ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
             const ordinal = ordinals[name];
@@ -38478,20 +38478,36 @@ function $512c73527a382006$export$a3d9882fc9361f2d(actions, parent) {
                 type: "action",
                 icon: name,
                 parent: parent,
-                collection: actions,
+                collection: actions1,
                 unit: action,
                 obj: obj,
                 index: index
             });
-            if (name === "select" && obj instanceof Array) item.children = $512c73527a382006$var$createSelectItems(obj, item);
+            if (name === "select" && obj instanceof Array) item.children = $e58f8b994fe0cfbf$var$selects(obj, item);
             return item;
         });
     } else return [];
 }
-function $512c73527a382006$var$createSelectItems(obj, parent) {
+function $e58f8b994fe0cfbf$var$pivot(obj, parent) {
+    const key = `${parent.key}.pivot`;
+    const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+        key: key,
+        name: "pivot",
+        type: "pivot",
+        icon: "pivot",
+        parent: parent,
+        collection: [],
+        unit: obj,
+        obj: obj,
+        index: 0
+    });
+    item.children = $e58f8b994fe0cfbf$var$subselect(obj, item);
+    return item;
+}
+function $e58f8b994fe0cfbf$var$selects(obj, parent) {
     return obj.map((select, index)=>{
         const key = `${parent.key}.${select.name || "?"}`;
-        return new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
             key: key,
             name: select.name || "",
             type: "select",
@@ -38504,6 +38520,33 @@ function $512c73527a382006$var$createSelectItems(obj, parent) {
             obj: select,
             index: index
         });
+        item.children = $e58f8b994fe0cfbf$var$subselect(select, item);
+        return item;
+    });
+}
+function $e58f8b994fe0cfbf$var$subselect(obj, parent) {
+    if (obj.select) return $e58f8b994fe0cfbf$var$selects(obj.select, parent);
+    else if (obj.union) return $e58f8b994fe0cfbf$var$union(obj.union, parent);
+    else if (obj.pivot) return [
+        $e58f8b994fe0cfbf$var$pivot(obj.pivot, parent)
+    ];
+}
+function $e58f8b994fe0cfbf$var$union(union1, parent) {
+    return union1.map((obj, index)=>{
+        const key = `${parent.key}.union.${index}`;
+        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
+            key: key,
+            name: "union",
+            type: "union",
+            icon: "union",
+            parent: parent,
+            collection: union1,
+            unit: obj,
+            obj: obj,
+            index: index
+        });
+        item.children = $e58f8b994fe0cfbf$var$subselect(obj, item);
+        return item;
     });
 }
 
@@ -38629,13 +38672,13 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
             }
         } else if (typeof obj === "object") this.obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(obj);
         else this.obj = {};
-        this.children = (0, $512c73527a382006$export$a3d9882fc9361f2d)(this.obj.actions);
+        this.children = (0, $e58f8b994fe0cfbf$export$e324594224ef24da)(this.obj.actions);
         if (file) this.obj.file = file;
     }
     addAction(type) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
         const item = this.selected();
-        const actions = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
+        const actions1 = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
         let action;
         if (type === "break") action = {
             break: {}
@@ -38675,8 +38718,8 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
             waitfor: {}
         };
         else return;
-        if (item) actions.splice(item.index + 1, 0, action);
-        else actions.push(action);
+        if (item) actions1.splice(item.index + 1, 0, action);
+        else actions1.push(action);
         this.setSelected(action);
     }
     addSubAction() {
@@ -38769,7 +38812,7 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
     }
     setSelected(key) {
         if (key) {
-            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = (0, $512c73527a382006$export$a3d9882fc9361f2d)(this.obj.actions);
+            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = (0, $e58f8b994fe0cfbf$export$e324594224ef24da)(this.obj.actions);
             const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
             if (item) this.obj.selected = item.key;
             return item;
@@ -39238,6 +39281,12 @@ var $d441ee9f6f9a92ef$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
+}), "Mediation");
+
+
+
 var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
 }), "Menu");
@@ -39259,6 +39308,12 @@ var $aff1417d5558df81$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
 }), "Numbers");
+
+
+
+var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
+}), "PivotTableChart");
 
 
 
@@ -41958,14 +42013,17 @@ var $d4J5n = parcelRequire("d4J5n");
 var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
     const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
     const { debug: debug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const item1 = (0, $d4J5n.useMemo)(()=>{
+    const code1 = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
         const item = template.selected();
-        return item;
+        if (item) {
+            const code = JSON.stringify(item, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2);
+            return (0, $bcb4aef0f6b91b86$export$5adbceee7f7ddc90)(code);
+        }
     }, [
         json
     ]);
-    return item1 && debug ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
+    return code1 && debug ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
         style: {
             fontFamily: "monospace",
             fontSize: "small",
@@ -41973,7 +42031,7 @@ var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
             backgroundColor: "#eee",
             overflow: "scroll"
         },
-        children: JSON.stringify(item1, (key, value)=>key === "parent" ? value?.key : key === "children" ? value?.length : value, 2)
+        children: code1
     }) : null;
 };
 
@@ -42165,6 +42223,9 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
         ...props
     });
+    else if (name === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
+        ...props
+    });
     else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
         ...props
     });
@@ -42184,6 +42245,9 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
         ...props
     });
     else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $43454011a3067c9f$export$2e2bcd8739ae039), {
+        ...props
+    });
+    else if (name === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cf56af1cd2ad706b$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a1f3cbed4353f602$export$2e2bcd8739ae039), {
@@ -43797,6 +43861,157 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ()=>{
 
 
 
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: template1 , obj: obj1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const item = template.selected();
+        const obj = item?.obj;
+        return {
+            template: template,
+            obj: obj
+        };
+    }, [
+        json
+    ]);
+    function onChangeName(event, value) {
+        obj1.name = value;
+        template1.setSelected(obj1);
+        setTemplate(template1.toString());
+    }
+    function onChangeQuery(event, query) {
+        obj1.query = query;
+        setTemplate(template1.toString());
+    }
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    query: obj1.query,
+                    name: obj1.name,
+                    type: obj1.type,
+                    repeated: obj1.repeated,
+                    onChange: onChangeQuery
+                }),
+                "A CSS selector or jQuery expression that determines what data is selected on the page.",
+                true
+            ],
+            [
+                "value",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
+                    variants: [
+                        "string",
+                        "number",
+                        "boolean",
+                        "formula",
+                        "json"
+                    ],
+                    value: obj1.value,
+                    onChange: (event, value)=>{
+                        obj1.value = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A predetermined or computed value, only used if a DOM query is unspecified.",
+                obj1.value !== undefined
+            ],
+            [
+                "all",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.all ?? false,
+                    onChange: (event, value)=>{
+                        obj1.all = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
+                obj1.all !== undefined
+            ],
+            [
+                "limit",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    value: obj1.limit,
+                    onChange: (event, value)=>{
+                        obj1.limit = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                obj1.limit !== undefined
+            ],
+            [
+                "format",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9f7df1b27b8772d$export$2e2bcd8739ae039), {
+                    value: obj1.format,
+                    onChange: (event, value)=>{
+                        obj1.format = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines how the selected value is formatted.",
+                obj1.format !== undefined
+            ],
+            [
+                "pattern",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
+                    value: obj1.pattern,
+                    onChange: (event, value)=>{
+                        obj1.pattern = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
+                obj1.pattern !== undefined
+            ],
+            [
+                "collate",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.collate ?? false,
+                    onChange: (event, value)=>{
+                        obj1.collate = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Combines all selected nodes into a single value.",
+                obj1.collate !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj1.when,
+                    onChange: (event, value)=>{
+                        obj1.when = value || undefined;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "A formula that determines whether the select is evaluated or bypassed.",
+                obj1.when !== undefined
+            ],
+            [
+                "active",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.active ?? true,
+                    onChange: (event, value)=>{
+                        obj1.active = value;
+                        setTemplate(template1.toString());
+                    }
+                }),
+                "Determines whether the property is active or bypassed",
+                obj1.active !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
 parcelRequire("d4J5n");
 
 
@@ -44124,6 +44339,8 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
         children: function() {
             if (!item1) return null;
             else if (item1.type === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {});
+            else if (item1.type === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {});
+            else if (item1.type === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {});
             else if (item1.type === "action" && item1.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {});
             else if (item1.type === "action" && item1.name === "break") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d5bb3179a5128f7c$export$2e2bcd8739ae039), {});
             else if (item1.type === "action" && item1.name === "each") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba74450b53ad4694$export$2e2bcd8739ae039), {});
@@ -44289,23 +44506,29 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                     mt: 1
                 },
                 children: [
-                    item1.type === "action" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        variant: "caption",
-                        color: "primary.light",
-                        sx: {
-                            position: "relative",
-                            top: -6,
-                            width: 24,
-                            mr: 1
-                        },
-                        children: item1.index + 1
+                    item1.type === "action" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "sequence #",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            variant: "caption",
+                            color: "primary.light",
+                            sx: {
+                                position: "relative",
+                                top: -6,
+                                width: 24,
+                                mr: 1
+                            },
+                            children: item1.index + 1
+                        })
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                        name: item1.icon,
-                        fontSize: "small",
-                        sx: {
-                            color: "primary.light"
-                        }
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: item1.icon,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: item1.icon,
+                            fontSize: "small",
+                            sx: {
+                                color: "primary.light"
+                            }
+                        })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                         variant: "caption",
@@ -44317,25 +44540,53 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                         },
                         children: name(item1)
                     }),
-                    item1.required ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                        variant: "caption",
-                        sx: {
-                            position: "relative",
-                            top: -6,
-                            left: 4,
-                            color: "primary.light",
-                            fontWeight: "bold"
-                        },
-                        children: "!"
-                    }) : null,
-                    item1.repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                        name: "repeated",
-                        fontSize: "small",
-                        sx: {
-                            color: "primary.light",
-                            ml: 1
-                        }
-                    }) : null
+                    item1.required && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "required",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            variant: "caption",
+                            sx: {
+                                position: "relative",
+                                top: -6,
+                                left: 4,
+                                color: "primary.light",
+                                fontWeight: "bold"
+                            },
+                            children: "!"
+                        })
+                    }),
+                    item1.repeated && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "repeated",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "repeated",
+                            fontSize: "small",
+                            sx: {
+                                color: "primary.light",
+                                ml: 1
+                            }
+                        })
+                    }),
+                    item1.obj.union && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "union",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "union",
+                            fontSize: "small",
+                            sx: {
+                                color: "primary.light",
+                                ml: 1
+                            }
+                        })
+                    }),
+                    item1.obj.pivot && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "pivot",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "pivot",
+                            fontSize: "small",
+                            sx: {
+                                color: "primary.light",
+                                ml: 1
+                            }
+                        })
+                    })
                 ]
             }),
             selected?.key === item1.key ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dabc6387771e563e$export$2e2bcd8739ae039), {

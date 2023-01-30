@@ -3,7 +3,7 @@ import { TemplateItem } from "./TemplateItem";
 import { background, clone, omit } from "..";
 
 import {
-    createActionItems,
+    actions,
     findItem,
     findParentActionCollection,
     formatTemplateJson,
@@ -45,7 +45,7 @@ export class Template {
             this.obj = {};
         }
 
-        this.children = createActionItems(this.obj.actions);
+        this.children = actions(this.obj.actions);
         if (file)
             this.obj.file = file;
     }
@@ -188,7 +188,7 @@ export class Template {
     setSelected(key?: string | unknown): TemplateItem | undefined {
         if (key) {
             if (!(key instanceof TemplateItem))
-                this.children = createActionItems(this.obj.actions);
+                this.children = actions(this.obj.actions);
             const item = findItem(this.children, key);
             if (item)
                 this.obj.selected = item.key;

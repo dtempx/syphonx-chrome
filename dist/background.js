@@ -189,9 +189,13 @@ const $07c03eb40a016611$var$scriptMap = {
             files: [
                 file
             ]
-        }, (results)=>results.length > 0 ? resolve(results[0].result) : reject({
+        }, (results)=>{
+            // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
+            if (results instanceof Array && results.length > 0) resolve(results[0].result); // only take the first frame result for now
+            else reject({
                 message: `Failed to execute script file ${file}`
-            })));
+            });
+        }));
 }
 async function $07c03eb40a016611$var$injectAll(tabId) {
     const injected = await $07c03eb40a016611$var$executeScript(tabId, ()=>typeof window.syphonx === "object");
