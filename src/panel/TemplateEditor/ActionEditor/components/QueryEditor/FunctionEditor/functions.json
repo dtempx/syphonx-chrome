@@ -54,7 +54,7 @@
     },
     {
         "key": "closest",
-        "advanced": false,
+        "advanced": true,
         "help": "For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."
     },
     {
@@ -197,12 +197,12 @@
     },
     {
         "key": "parent",
-        "advanced": false,
+        "advanced": true,
         "help": "Return the parent of each element in the current set of matched elements, optionally filtered by a selector."
     },
     {
         "key": "parents",
-        "advanced": false,
+        "advanced": true,
         "help": "Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."
     },
     {
@@ -263,7 +263,7 @@
     {
         "key": "replace",
         "args": ["regexp", "-replace-text"],
-        "advanced": true,
+        "advanced": false,
         "help": "Replace the set of matched elements."
     },
     {
@@ -297,16 +297,16 @@
         "help": "Reverses the order of the current set of matched elements."
     },
     {
-        "key": "scrollTop",
-        "args": [],
-        "advanced": true,
-        "help": "Scrolls to the top of the current viewport."
-    },
-    {
         "key": "scrollBottom",
         "args": [],
         "advanced": true,
         "help": "Scrolls to the bottom of the current viewport."
+    },
+    {
+        "key": "scrollTop",
+        "args": [],
+        "advanced": true,
+        "help": "Scrolls to the top of the current viewport."
     },
     {
         "key": "siblings",

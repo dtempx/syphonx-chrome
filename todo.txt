@@ -1,28 +1,5 @@
-Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
-
-
-file save debug
-
-
-sub-items
-    repeat -> sub-actions
-    each -> sub-actions
-    select[type=object] -> sub-selects
-    click -> waitfor (subselect)
-    pivot
-    union
-    subitem numbering
-    fab selection context
-
-
-highlight dom on hover over tree or query
-open page on template
-
-VariantField
-file open progress animation on file open/save dialogs
-select cover page
-
-
+Data contracts
+Template test case runner
 
 Data View
     data view: single object view
@@ -35,20 +12,37 @@ Data View
     autorun/manual-mode
     tree picker
     breakpoints
+
+sub-items
+    repeat -> sub-actions
+    each -> sub-actions (with numbering)
+    select[type=object] -> sub-selects
+    click -> waitfor (subselect)
+    pivot DONE
+    union DONE
+    finalize FAB selection context
+
+
+highlight dom on hover over tree or query
+select steps to run in action tree
+
+VariantField
+file open progress animation on file open/save dialogs
+select cover page
+
     
-Data contracts
-Template test case runner
 
 Query Builder
     context sensitive function parameters for replace, etc.
     selectMultiple
+    arrange order of functions
+    fix function stage view state
 
 
 User settings: api-key, email
 Cloud template storage access control
 View template change history (who, when, what/diffs)
 Rollbacks
-
 
 
 POLISH
@@ -147,5 +141,9 @@ Action Views
     action view: yield
 
 field editors: formula, regexp, symbolic name
-
 Template settings: url, key
+open page on template open
+
+FIXED
+Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
+file save debug
