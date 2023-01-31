@@ -11,7 +11,7 @@ import TransformEditor from "./TransformEditor";
 import WaitforEditor from "./WaitforEditor";
 import YieldEditor from "./YieldEditor";
 import EditorFrame from "./components/EditorFrame";
-import { useTemplate } from "../../context";
+import { useTemplate } from "../context";
 import { Template } from "../lib";
 
 export default () => {

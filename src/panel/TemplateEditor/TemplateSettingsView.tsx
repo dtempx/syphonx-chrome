@@ -1,7 +1,7 @@
 import React from "react";
 import { IconButton, Paper, Stack, Tooltip } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
-import { useTemplate } from "../context";
+import { useTemplate } from "./context";
 import { background, Template } from "./lib";
 
 import {
@@ -65,7 +65,7 @@ export default () => {
                 onChange={onChangeKey}
                 onValidate={onValidateKey}
             />,
-            "A key that uniquely identifies this template."
+            "A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data."
         ]
     ];
 

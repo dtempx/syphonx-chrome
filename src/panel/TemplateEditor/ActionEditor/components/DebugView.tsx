@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { useApp, useTemplate } from "../../../context";
-import { formatTemplateJson, Template } from "../../lib";
+import { useApp, useTemplate } from "../../context";
+import { formatTemplateJson, Template } from "../lib";
 
 export default () => {
     const { template: json } = useTemplate();
@@ -18,6 +18,8 @@ export default () => {
                     else if (key === "parent")
                         return value?.key;
                     else if (key === "children")
+                        return value?.length;
+                    else if (key === "collection")
                         return value?.length;
                     else
                         return value;

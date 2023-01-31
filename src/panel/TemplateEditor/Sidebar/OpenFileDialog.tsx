@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
 import { background, cloud, Template } from "../lib";
-import { useApp, useTemplate } from "../../context";
+import { useApp, useTemplate } from "../context";
 
 export interface Props {
     open: boolean;

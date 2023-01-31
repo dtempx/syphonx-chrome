@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { useTemplate } from "../context";
 import { Paper, TextField } from "@mui/material";
+import { useTemplate } from "./context";
 import { Template } from "./lib";
 
 export default () => {

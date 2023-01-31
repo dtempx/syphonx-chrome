@@ -32024,22 +32024,25 @@ $parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 var $d4J5n = parcelRequire("d4J5n");
-function $0e7d45acde193ea2$export$fca13ab91e1a6240() {
-    return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext($0e7d45acde193ea2$var$AppContext);
+function $bda87eb62dcce197$export$fca13ab91e1a6240() {
+    return (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).useContext($bda87eb62dcce197$var$AppContext);
 }
-function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
+function $bda87eb62dcce197$export$c7dacf3845253dcf({ children: children  }) {
     const [advanced1, setAdvanced] = (0, $d4J5n.useState)(false);
     const [autoOpen1, setAutoOpen] = (0, $d4J5n.useState)(true);
+    const [autoRefresh1, setAutoRefresh] = (0, $d4J5n.useState)(true);
     const [debug1, setDebug] = (0, $d4J5n.useState)(false);
     const [mode, setMode] = (0, $d4J5n.useState)("visual-editor");
     (0, $d4J5n.useEffect)(()=>{
         chrome.storage.local.get([
             "advanced",
             "autoOpen",
+            "autoRefresh",
             "debug"
-        ], ({ advanced: advanced , autoOpen: autoOpen , debug: debug  })=>{
+        ], ({ advanced: advanced , autoOpen: autoOpen , autoRefresh: autoRefresh , debug: debug  })=>{
             if (advanced !== undefined) setAdvanced(advanced);
             if (autoOpen !== undefined) setAutoOpen(autoOpen);
+            if (autoRefresh !== undefined) setAutoRefresh(autoRefresh);
             if (debug !== undefined) setDebug(debug);
         });
     }, []);
@@ -32047,10 +32050,13 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
         chrome.storage.local.set({
             advanced: advanced1,
             autoOpen: autoOpen1,
+            autoRefresh: autoRefresh1,
             debug: debug1
         });
     }, [
         advanced1,
+        autoOpen1,
+        autoRefresh1,
         debug1
     ]);
     const value = {
@@ -32058,24 +32064,63 @@ function $0e7d45acde193ea2$export$c7dacf3845253dcf({ children: children  }) {
         setAdvanced: setAdvanced,
         autoOpen: autoOpen1,
         setAutoOpen: setAutoOpen,
+        autoRefresh: autoRefresh1,
+        setAutoRefresh: setAutoRefresh,
         debug: debug1,
         setDebug: setDebug,
         mode: mode,
         setMode: setMode
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($0e7d45acde193ea2$var$AppContext.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bda87eb62dcce197$var$AppContext.Provider, {
         value: value,
         children: children
     });
 }
-const $0e7d45acde193ea2$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({});
+const $bda87eb62dcce197$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({});
 
+
+
+parcelRequire("d4J5n");
 
 
 
 var $d4J5n = parcelRequire("d4J5n");
 
 var $d4J5n = parcelRequire("d4J5n");
+
+const $cbba94a8ea5d4dbc$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    template: "",
+    setTemplate: ()=>{}
+});
+function $cbba94a8ea5d4dbc$export$5abfb1150fa6da6a({ children: children  }) {
+    const [template, setTemplate] = (0, $d4J5n.useState)("");
+    const value = {
+        template: template,
+        setTemplate: setTemplate
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($cbba94a8ea5d4dbc$var$TemplateContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+function $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34() {
+    return (0, $d4J5n.useContext)($cbba94a8ea5d4dbc$var$TemplateContext);
+}
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+parcelRequire("d4J5n");
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
+
 var $89382e3cfd90d03a$exports = {};
 var $596d45310e010dc1$exports = {};
 
@@ -32107,39 +32152,6 @@ function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
 
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
-
-
-function $90fa643a8d44e1af$export$9cd59f9826255e47(value) {
-    return JSON.parse(JSON.stringify(value));
-}
-
-
-function $9cab6e567be87881$export$a6cdc56e425d0d0a(obj) {
-    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
-}
-
-
-function $c183e629fad26e04$export$30a06c8d3562193f(obj, ...keys) {
-    const output = {};
-    for (const key1 of Object.keys(obj).filter((key)=>!keys.includes(key)))output[key1] = obj[key1];
-    return output;
-}
-
-
-
-function $fee381e3400c58a7$export$de139376c1f60602(obj) {
-    if (obj instanceof Array) return obj.map((item)=>$fee381e3400c58a7$export$de139376c1f60602(item));
-    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $fee381e3400c58a7$export$de139376c1f60602(obj.value);
-    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj)) {
-        const source = obj;
-        const target = {};
-        for (const key of Object.keys(obj))if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key].value); // unwrap value
-        else target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key]);
-        return target;
-    } else return obj;
-}
-
-
 
 
 var $6767c619f5de943e$exports = {};
@@ -32207,21 +32219,56 @@ function $6767c619f5de943e$var$sendMessage(key, ...params) {
 }
 
 
-var $2203ad40f7cc0e19$exports = {};
+function $90fa643a8d44e1af$export$9cd59f9826255e47(value) {
+    return JSON.parse(JSON.stringify(value));
+}
 
-$parcel$export($2203ad40f7cc0e19$exports, "directory", () => $2203ad40f7cc0e19$export$18e11c4ddd562c9d);
-$parcel$export($2203ad40f7cc0e19$exports, "read", () => $2203ad40f7cc0e19$export$aafa59e2e03f2942);
-$parcel$export($2203ad40f7cc0e19$exports, "write", () => $2203ad40f7cc0e19$export$68d8715fc104d294);
-const $2203ad40f7cc0e19$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-async function $2203ad40f7cc0e19$export$18e11c4ddd562c9d() {
-    const response = await fetch(`${$2203ad40f7cc0e19$var$serviceUrl}/templates/`);
+
+function $9cab6e567be87881$export$a6cdc56e425d0d0a(obj) {
+    return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+}
+
+
+function $c183e629fad26e04$export$30a06c8d3562193f(obj, ...keys) {
+    const output = {};
+    for (const key1 of Object.keys(obj).filter((key)=>!keys.includes(key)))output[key1] = obj[key1];
+    return output;
+}
+
+
+
+function $fee381e3400c58a7$export$de139376c1f60602(obj) {
+    if (obj instanceof Array) return obj.map((item)=>$fee381e3400c58a7$export$de139376c1f60602(item));
+    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj) && typeof obj.hasOwnProperty === "function" && obj.hasOwnProperty("value")) return $fee381e3400c58a7$export$de139376c1f60602(obj.value);
+    else if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(obj)) {
+        const source = obj;
+        const target = {};
+        for (const key of Object.keys(obj))if ((0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key].value); // unwrap value
+        else target[key] = $fee381e3400c58a7$export$de139376c1f60602(source[key]);
+        return target;
+    } else return obj;
+}
+
+
+
+
+
+
+var $80e77e55da602fd0$exports = {};
+
+$parcel$export($80e77e55da602fd0$exports, "directory", () => $80e77e55da602fd0$export$18e11c4ddd562c9d);
+$parcel$export($80e77e55da602fd0$exports, "read", () => $80e77e55da602fd0$export$aafa59e2e03f2942);
+$parcel$export($80e77e55da602fd0$exports, "write", () => $80e77e55da602fd0$export$68d8715fc104d294);
+const $80e77e55da602fd0$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+async function $80e77e55da602fd0$export$18e11c4ddd562c9d() {
+    const response = await fetch(`${$80e77e55da602fd0$var$serviceUrl}/templates/`);
     const files = await response.json();
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
 }
-async function $2203ad40f7cc0e19$export$aafa59e2e03f2942(file) {
+async function $80e77e55da602fd0$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$2203ad40f7cc0e19$var$serviceUrl}/template/${file}?mode=read`;
+    const apiUrl = `${$80e77e55da602fd0$var$serviceUrl}/template/${file}?mode=read`;
     const response1 = await fetch(apiUrl);
     if (!response1.ok) throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
     const { url: url  } = await response1.json();
@@ -32230,9 +32277,9 @@ async function $2203ad40f7cc0e19$export$aafa59e2e03f2942(file) {
     const content = await response2.text();
     return content;
 }
-async function $2203ad40f7cc0e19$export$68d8715fc104d294(file, content) {
+async function $80e77e55da602fd0$export$68d8715fc104d294(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$2203ad40f7cc0e19$var$serviceUrl}/template/${file}?write`;
+    const apiUrl = `${$80e77e55da602fd0$var$serviceUrl}/template/${file}?write`;
     const response1 = await fetch(apiUrl);
     if (!response1.ok) throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
     const { url: url  } = await response1.json();
@@ -38443,7 +38490,7 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
-class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
+class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
     constructor(obj){
         this.template = obj.template;
         this.key = obj.key;
@@ -38463,25 +38510,25 @@ class $f3e08b3defbe9c2e$export$67c95d00e574f6b6 {
 
 
 
-function $1ea6494eef95c08b$export$a2dea178c28a0308(items, key) {
+function $72249484b46a0533$export$a2dea178c28a0308(items, key) {
     for (const item of items){
         if (item === key || item.key === key || item.unit === key || item.obj === key) return item;
         if (item.children) {
-            const subitem = $1ea6494eef95c08b$export$a2dea178c28a0308(item.children, key);
+            const subitem = $72249484b46a0533$export$a2dea178c28a0308(item.children, key);
             if (subitem) return subitem;
         }
     }
 }
 
 
-function $7f9f3705461a1368$export$a1556c689e18ef72(item) {
+function $a0bb46a5ccd801f1$export$a1556c689e18ef72(item) {
     if (item?.type === "action") return item.collection;
-    else if (item?.parent) return $7f9f3705461a1368$export$a1556c689e18ef72(item.parent);
+    else if (item?.parent) return $a0bb46a5ccd801f1$export$a1556c689e18ef72(item.parent);
     else return undefined;
 }
 
 
-function $dcce3fd77eeda476$export$70345b78b6a836e5(json, i) {
+function $5b9ddcc4fe863a71$export$70345b78b6a836e5(json, i) {
     if (i >= 0 && i < json.length && json[i] === `"`) while((i++) < json.length){
         if (json[i] === `"`) return i + 1;
         else if (json[i] === "\\") i += 1;
@@ -38490,24 +38537,24 @@ function $dcce3fd77eeda476$export$70345b78b6a836e5(json, i) {
 }
 
 
-function $b6d1a02944bbee36$export$a9ff923210c231c8(json, i, token) {
+function $ffc1945cfaeda047$export$a9ff923210c231c8(json, i, token) {
     if (i >= 0 && i < json.length && json[i] === token[0]) {
         let n = 0;
         while(i >= 0 && (i++) < json.length){
             if (json[i] === token[1] && --n < 0) return i + 1;
             else if (json[i] === token[0]) n += 1;
-            else if (json[i] === `"`) i = (0, $dcce3fd77eeda476$export$70345b78b6a836e5)(json, i);
+            else if (json[i] === `"`) i = (0, $5b9ddcc4fe863a71$export$70345b78b6a836e5)(json, i);
         }
     }
     return -1;
 }
 
 
-function $443d5be123bd3616$export$3b7e1b1645c7d5fc(json, key) {
+function $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc(json, key) {
     let i = json.indexOf(`"${key}": [\n`);
     while(i >= 0){
         i = json.indexOf("[", i);
-        const j = (0, $b6d1a02944bbee36$export$a9ff923210c231c8)(json, i, "[]");
+        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
         if (j > i) {
             json = `${json.substring(0, i)}${JSON.stringify(JSON.parse(json.substring(i, j)))}${json.substring(j)}`;
             i = json.indexOf(`"${key}": [\n`, j);
@@ -38518,7 +38565,7 @@ function $443d5be123bd3616$export$3b7e1b1645c7d5fc(json, key) {
 
 
 
-function $832b058121bec5cc$export$ef7cf49fcd65861d(json, i) {
+function $7f694ef22f2a8c3f$export$ef7cf49fcd65861d(json, i) {
     let m = -1;
     let n = -1;
     while(--i >= 0){
@@ -38532,17 +38579,17 @@ function $832b058121bec5cc$export$ef7cf49fcd65861d(json, i) {
 }
 
 
-function $2864824fa386f176$export$53a08cb12bacbe86(json) {
+function $d8166acd30588c40$export$53a08cb12bacbe86(json) {
     let i = json.indexOf(`"query": [\n`);
     while(i >= 0){
         i = json.indexOf("[", i);
-        const j = (0, $b6d1a02944bbee36$export$a9ff923210c231c8)(json, i, "[]");
+        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
         if (j > i) {
             const array = JSON.parse(json.substring(i, j));
             let replace;
             if (array.length < 2) replace = JSON.stringify(array);
             else {
-                const whitespace = (0, $832b058121bec5cc$export$ef7cf49fcd65861d)(json, i);
+                const whitespace = (0, $7f694ef22f2a8c3f$export$ef7cf49fcd65861d)(json, i);
                 replace = "[\n" + array.map((obj)=>whitespace + "  " + JSON.stringify(obj)).join(",\n") + "\n" + whitespace + "]";
             }
             json = `${json.substring(0, i)}${replace}${json.substring(j)}`;
@@ -38553,14 +38600,14 @@ function $2864824fa386f176$export$53a08cb12bacbe86(json) {
 }
 
 
-function $bcb4aef0f6b91b86$export$5adbceee7f7ddc90(text) {
-    text = (0, $2864824fa386f176$export$53a08cb12bacbe86)(text);
-    text = (0, $443d5be123bd3616$export$3b7e1b1645c7d5fc)(text, "snooze");
+function $932c041178f6dd7a$export$5adbceee7f7ddc90(text) {
+    text = (0, $d8166acd30588c40$export$53a08cb12bacbe86)(text);
+    text = (0, $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc)(text, "snooze");
     return text;
 }
 
 
-function $049f6d752ade0147$export$490ebbf7c6884638(list, basename = "new") {
+function $621975ba229ea888$export$490ebbf7c6884638(list, basename = "new") {
     for(let n = 1; n <= 100; ++n){
         const name = `${basename}${n}`;
         if (!list.some((obj)=>obj.name === name)) return name;
@@ -38572,7 +38619,7 @@ function $049f6d752ade0147$export$490ebbf7c6884638(list, basename = "new") {
 
 
 
-class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
+class $7182cf99d95db7c1$export$14416b8d99d47caa {
     constructor(obj, file){
         if (typeof obj === "string") {
             if (obj === "") this.obj = {};
@@ -38587,102 +38634,10 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         this.children = this.actions(this.obj.actions);
         if (file) this.obj.file = file;
     }
-    actions(collection, parent) {
-        if (collection) {
-            const ordinals = {};
-            return collection.map((action, index)=>{
-                const [name] = Object.keys(action);
-                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
-                const ordinal = ordinals[name];
-                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
-                const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
-                const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-                    template: this,
-                    key: key,
-                    name: name,
-                    type: "action",
-                    icon: name,
-                    parent: parent,
-                    collection: collection,
-                    unit: action,
-                    obj: obj,
-                    index: index
-                });
-                if (name === "select" && obj instanceof Array) item.children = this.selects(obj, item);
-                if (name === "each" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
-                if (name === "repeat" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
-                return item;
-            });
-        } else return [];
-    }
-    pivot(obj, parent) {
-        const key = `${parent.key}.pivot`;
-        const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-            template: this,
-            key: key,
-            name: "pivot",
-            type: "pivot",
-            icon: "pivot",
-            parent: parent,
-            collection: [],
-            unit: obj,
-            obj: obj,
-            index: 0
-        });
-        item.children = this.subselect(obj, item);
-        return item;
-    }
-    selects(collection, parent) {
-        return collection.map((select, index)=>{
-            const key = `${parent.key}.${select.name || "?"}`;
-            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-                template: this,
-                key: key,
-                name: select.name || "",
-                type: "select",
-                icon: select.type || "string",
-                required: select.required,
-                repeated: select.repeated,
-                parent: parent,
-                collection: collection,
-                unit: select,
-                obj: select,
-                index: index
-            });
-            item.children = this.subselect(select, item);
-            return item;
-        });
-    }
-    subselect(obj, parent) {
-        if (obj.select) return this.selects(obj.select, parent);
-        else if (obj.union) return this.union(obj.union, parent);
-        else if (obj.pivot) return [
-            this.pivot(obj.pivot, parent)
-        ];
-    }
-    union(collection, parent) {
-        return collection.map((obj, index)=>{
-            const key = `${parent.key}.union.${index}`;
-            const item = new (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6)({
-                template: this,
-                key: key,
-                name: "union",
-                type: "union",
-                icon: "union",
-                parent: parent,
-                collection: collection,
-                unit: obj,
-                obj: obj,
-                index: index
-            });
-            item.children = this.subselect(obj, item);
-            return item;
-        });
-    }
     addAction(type) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
         const item = this.selected();
-        const actions = (0, $7f9f3705461a1368$export$a1556c689e18ef72)(item) || this.obj.actions;
+        const actions = (0, $a0bb46a5ccd801f1$export$a1556c689e18ef72)(item) || this.obj.actions;
         let action;
         if (type === "break") action = {
             break: {}
@@ -38727,17 +38682,17 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         this.setSelected(action);
     }
     addSubAction() {
-        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") {
                 const selectors = item.obj;
-                const name = (0, $049f6d752ade0147$export$490ebbf7c6884638)(selectors);
+                const name = (0, $621975ba229ea888$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
             } else if (item.type === "select" && item.parent) {
                 const selectors = item.parent.obj;
-                const name = (0, $049f6d752ade0147$export$490ebbf7c6884638)(selectors);
+                const name = (0, $621975ba229ea888$export$490ebbf7c6884638)(selectors);
                 selectors.push({
                     name: name
                 });
@@ -38745,7 +38700,7 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         }
     }
     canAddSubAction() {
-        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
         if (item) {
             if (item.type === "action" && item.name === "select") return true;
             else if (item.type === "select" && item.parent) return true;
@@ -38764,7 +38719,7 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         return this.obj.file;
     }
     findItem(key) {
-        return (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
+        return (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, key);
     }
     json() {
         return JSON.stringify(this.obj, null, 2) || "";
@@ -38814,13 +38769,13 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
         };
     }
     selected() {
-        const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
         return item;
     }
     setSelected(key) {
         if (key) {
-            if (!(key instanceof (0, $f3e08b3defbe9c2e$export$67c95d00e574f6b6))) this.children = this.actions(this.obj.actions);
-            const item = (0, $1ea6494eef95c08b$export$a2dea178c28a0308)(this.children, key);
+            if (!(key instanceof (0, $1238fd0f4bef3443$export$67c95d00e574f6b6))) this.children = this.actions(this.obj.actions);
+            const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, key);
             if (item) this.obj.selected = item.key;
             return item;
         } else {
@@ -38831,8 +38786,100 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
     toString(format) {
         const obj = format === "file" ? (0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected", "file") : this.obj;
         let json = JSON.stringify(obj, null, 2) || "";
-        json = (0, $bcb4aef0f6b91b86$export$5adbceee7f7ddc90)(json);
+        json = (0, $932c041178f6dd7a$export$5adbceee7f7ddc90)(json);
         return json;
+    }
+    actions(collection, parent) {
+        if (collection) {
+            const ordinals = {};
+            return collection.map((action, index)=>{
+                const [name] = Object.keys(action);
+                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
+                const ordinal = ordinals[name];
+                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
+                const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
+                const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+                    template: this,
+                    key: key,
+                    name: name,
+                    type: "action",
+                    icon: name,
+                    parent: parent,
+                    collection: collection,
+                    unit: action,
+                    obj: obj,
+                    index: index
+                });
+                if (name === "select" && obj instanceof Array) item.children = this.selects(obj, item);
+                if (name === "each" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
+                if (name === "repeat" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
+                return item;
+            });
+        } else return [];
+    }
+    pivot(obj, parent) {
+        const key = `${parent.key}.pivot`;
+        const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+            template: this,
+            key: key,
+            name: "pivot",
+            type: "pivot",
+            icon: "pivot",
+            parent: parent,
+            collection: [],
+            unit: obj,
+            obj: obj,
+            index: 0
+        });
+        item.children = this.subselect(obj, item);
+        return item;
+    }
+    selects(collection, parent) {
+        return collection.map((select, index)=>{
+            const key = `${parent.key}.${select.name || "?"}`;
+            const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+                template: this,
+                key: key,
+                name: select.name || "",
+                type: "select",
+                icon: select.type || "string",
+                required: select.required,
+                repeated: select.repeated,
+                parent: parent,
+                collection: collection,
+                unit: select,
+                obj: select,
+                index: index
+            });
+            item.children = this.subselect(select, item);
+            return item;
+        });
+    }
+    subselect(obj, parent) {
+        if (obj.select) return this.selects(obj.select, parent);
+        else if (obj.union) return this.union(obj.union, parent);
+        else if (obj.pivot) return [
+            this.pivot(obj.pivot, parent)
+        ];
+    }
+    union(collection, parent) {
+        return collection.map((obj, index)=>{
+            const key = `${parent.key}.union.${index}`;
+            const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+                template: this,
+                key: key,
+                name: "union",
+                type: "union",
+                icon: "union",
+                parent: parent,
+                collection: collection,
+                unit: obj,
+                obj: obj,
+                index: index
+            });
+            item.children = this.subselect(obj, item);
+            return item;
+        });
     }
 }
 
@@ -38843,52 +38890,42 @@ class $b96b9e85bd6f0ff5$export$14416b8d99d47caa {
 
 
 
-const $1aab7a538bf9cc22$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    template: "",
-    setTemplate: ()=>{},
-    result: undefined
-});
-function $1aab7a538bf9cc22$export$5abfb1150fa6da6a({ children: children  }) {
-    const [template, setTemplate] = (0, $d4J5n.useState)("");
+
+function $d99881d9fee9589c$export$5839ba03810e8481({ children: children  }) {
     const [result1, setResult] = (0, $d4J5n.useState)();
+    const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { template: json  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     (0, $d4J5n.useEffect)(()=>{
-        const obj = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(template);
-        obj.run().then((result)=>setResult(result));
+        debugger;
+        if (autoRefresh) {
+            const obj = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+            obj.run().then((result)=>setResult(result));
+        }
     }, [
-        template
+        json,
+        autoRefresh
     ]);
     const value = {
-        template: template,
-        setTemplate: setTemplate,
-        result: result1
+        result: result1,
+        setResult: setResult
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($1aab7a538bf9cc22$var$TemplateContext.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d99881d9fee9589c$export$3dbf83a64597832d.Provider, {
         value: value,
         children: children
     });
 }
-function $1aab7a538bf9cc22$export$5c3a5f48c762cb34() {
-    return (0, $d4J5n.useContext)($1aab7a538bf9cc22$var$TemplateContext);
+function $d99881d9fee9589c$export$5929441add3e8278() {
+    return (0, $d4J5n.useContext)($d99881d9fee9589c$export$3dbf83a64597832d);
 }
-
-
-
-
-
-parcelRequire("d4J5n");
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-parcelRequire("d4J5n");
-
-
+const $d99881d9fee9589c$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    result: undefined,
+    setResult: ()=>{}
+});
 
 
 
 var $b452db4f8da5fc67$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
@@ -38903,7 +38940,7 @@ parcelRequire("d4J5n");
 
 
 var $fd9e77c6eb352991$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
     const { actions: actions , ...response } = result || {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
@@ -38920,7 +38957,7 @@ parcelRequire("d4J5n");
 
 
 var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
     const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
     const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
@@ -38961,52 +38998,55 @@ var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
 };
 
 
+
 var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
     const [tab, setTab] = (0, $d4J5n.useState)(0);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
-        container: true,
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
-            item: true,
-            xs: 12,
-            children: [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ef80e5cd9ca7bff$export$2e2bcd8739ae039), {
-                    position: "static",
-                    color: "default",
-                    style: {
-                        marginBottom: 12
-                    },
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $de9f03f465a99f00$export$2e2bcd8739ae039), {
-                        value: tab,
-                        onChange: (event, value)=>setTab(value),
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                label: "RESULTS"
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                label: "JSON"
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                label: "RESPONSE"
-                            })
-                        ]
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d99881d9fee9589c$export$5839ba03810e8481), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
+            container: true,
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
+                item: true,
+                xs: 12,
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ef80e5cd9ca7bff$export$2e2bcd8739ae039), {
+                        position: "static",
+                        color: "default",
+                        style: {
+                            marginBottom: 12
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $de9f03f465a99f00$export$2e2bcd8739ae039), {
+                            value: tab,
+                            onChange: (event, value)=>setTab(value),
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
+                                    label: "RESULTS"
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
+                                    label: "JSON"
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
+                                    label: "RESPONSE"
+                                })
+                            ]
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: tab === 0 ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: tab === 1 ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: tab === 2 ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
                     })
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: tab === 0 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: tab === 1 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: tab === 2 ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
-                })
-            ]
+                ]
+            })
         })
     });
 };
@@ -41517,7 +41557,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
-    const { advanced: advanced , setAdvanced: setAdvanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const { advanced: advanced  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const visibleItems = items.filter((item)=>item[3] || expanded || advanced).map((item)=>[
             item[0],
@@ -41599,13 +41639,13 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
     const [opening, setOpening] = (0, $d4J5n.useState)(false);
-    const { autoOpen: autoOpen  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { autoOpen: autoOpen  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     (0, $d4J5n.useEffect)(()=>{
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $2203ad40f7cc0e19$exports).directory();
+                const directory = await (0, $80e77e55da602fd0$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41623,8 +41663,8 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     async function onSelectFile(event, file) {
         try {
             setOpening(true);
-            const json = await (0, $2203ad40f7cc0e19$exports).read(file);
-            const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json, file);
+            const json = await (0, $80e77e55da602fd0$exports).read(file);
+            const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json, file);
             setTemplate(template.toString());
             onClose(event);
             setOpening(false);
@@ -41662,9 +41702,9 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
     const [saving, setSaving] = (0, $d4J5n.useState)(false);
-    const { template: json1  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json1  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const template = (0, $d4J5n.useMemo)(()=>{
-        return new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json1);
+        return new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json1);
     }, [
         json1
     ]);
@@ -41672,7 +41712,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         if (open) (async ()=>{
             try {
                 setLoading(true);
-                const directory = await (0, $2203ad40f7cc0e19$exports).directory();
+                const directory = await (0, $80e77e55da602fd0$exports).directory();
                 const files = directory.filter((file)=>file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                 .map((file)=>file.name);
                 setFiles(files);
@@ -41691,7 +41731,7 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         try {
             setSaving(true);
             const json = template.toString("file");
-            await (0, $2203ad40f7cc0e19$exports).write(file, json);
+            await (0, $80e77e55da602fd0$exports).write(file, json);
             onClose(event);
             setSaving(false);
             setError("");
@@ -41723,7 +41763,7 @@ parcelRequire("d4J5n");
 
 
 var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { advanced: advanced , setAdvanced: setAdvanced , autoOpen: autoOpen , setAutoOpen: setAutoOpen , debug: debug , setDebug: setDebug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const { advanced: advanced , setAdvanced: setAdvanced , autoOpen: autoOpen , setAutoOpen: setAutoOpen , autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh , debug: debug , setDebug: setDebug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -41759,6 +41799,14 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                             "Automatically opens the template default URL if enabled."
                         ],
                         [
+                            "Auto refresh data",
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                                checked: autoRefresh,
+                                onChange: ()=>setAutoRefresh(!autoRefresh)
+                            }),
+                            "Automatically refreshes the data view."
+                        ],
+                        [
                             "Advanced mode",
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
                                 checked: advanced,
@@ -41786,7 +41834,7 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
     const [userSettingsOpen, setUserSettingsOpen] = (0, $d4J5n.useState)(false);
@@ -41872,10 +41920,10 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
-    const { mode: mode , setMode: setMode  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { template: json  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     const file = template.file();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
@@ -42014,20 +42062,23 @@ parcelRequire("d4J5n");
 var $d4J5n = parcelRequire("d4J5n");
 
 
+
+
 var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const { debug: debug  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
+    const { template: json  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
+    const { debug: debug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const code1 = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const item = template.selected();
         if (item) {
             const code = JSON.stringify(item, (key, value)=>{
                 if (key === "template") return undefined;
                 else if (key === "parent") return value?.key;
                 else if (key === "children") return value?.length;
+                else if (key === "collection") return value?.length;
                 else return value;
             }, 2);
-            return (0, $bcb4aef0f6b91b86$export$5adbceee7f7ddc90)(code);
+            return (0, $932c041178f6dd7a$export$5adbceee7f7ddc90)(code);
         }
     }, [
         json
@@ -42468,8 +42519,6 @@ var $d9035591e653d6fe$export$2e2bcd8739ae039 = ({ value: value1 = [
 
 
 var $d4J5n = parcelRequire("d4J5n");
-
-
 
 
 
@@ -44183,9 +44232,9 @@ var $7d8e9cab3e33d886$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const { template: template1 , item: item1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const item = template.selected();
         return {
             template: template,
@@ -44281,8 +44330,8 @@ var $d4J5n = parcelRequire("d4J5n");
 var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
     const open = !!anchor;
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+    const { template: json , setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     function handleMoveUp() {
         template.moveItemUp(item);
         setTemplate(template.toString());
@@ -44389,8 +44438,8 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+    const { template: json  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     const selected = template.selected();
     function name(item) {
         if (item.name) return item.name;
@@ -44516,8 +44565,8 @@ function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     const [selected, setSelected] = (0, $d4J5n.useState)([]);
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+    const { template: json , setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     (0, $d4J5n.useEffect)(()=>{
         const key = template.selected()?.key;
         setSelected(key ? [
@@ -44615,13 +44664,13 @@ const $d92259c5199083bc$var$ActionTypes = [
     }
 ];
 var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
-    const { advanced: advanced  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { advanced: advanced  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { template: json , setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
     const { template: template1 , canAddSubAction: canAddSubAction1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const canAddSubAction = template.canAddSubAction();
         return {
             template: template,
@@ -44792,7 +44841,7 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
                 elevation: 3,
                 className: "panel",
                 sx: {
-                    width: 400
+                    width: 500
                 },
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {}),
@@ -44824,9 +44873,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
     const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const code = template.toString("file");
         return {
             template: template,
@@ -44881,8 +44930,8 @@ parcelRequire("d4J5n");
 
 
 var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $1aab7a538bf9cc22$export$5c3a5f48c762cb34)();
-    const template = new (0, $b96b9e85bd6f0ff5$export$14416b8d99d47caa)(json);
+    const { template: json , setTemplate: setTemplate  } = (0, $cbba94a8ea5d4dbc$export$5c3a5f48c762cb34)();
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     function onChangeUrl(event, value) {
         template.obj.url = value || undefined;
         setTemplate(template.toString());
@@ -44937,7 +44986,7 @@ var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
                 onChange: onChangeKey,
                 onValidate: onValidateKey
             }),
-            "A key that uniquely identifies this template."
+            "A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data."
         ]
     ];
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
@@ -44954,35 +45003,35 @@ var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
 };
 
 
-
-
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
-    const { mode: mode  } = (0, $0e7d45acde193ea2$export$fca13ab91e1a6240)();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-        sx: {
-            minWidth: 500
-        },
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                    children: [
-                        mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $929f6a752088f49b$export$2e2bcd8739ae039), {}),
-                        mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aaa1ac035959e1a9$export$2e2bcd8739ae039), {}),
-                        mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $53af5c4d3cc3573a$export$2e2bcd8739ae039), {}),
-                        mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25ed3c2a8beb606c$export$2e2bcd8739ae039), {}),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                            elevation: 3,
-                            className: "panel",
-                            sx: {
-                                width: 1
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
-                        })
-                    ]
+    const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cbba94a8ea5d4dbc$export$5abfb1150fa6da6a), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+            sx: {
+                minWidth: 500
+            },
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                        children: [
+                            mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $929f6a752088f49b$export$2e2bcd8739ae039), {}),
+                            mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aaa1ac035959e1a9$export$2e2bcd8739ae039), {}),
+                            mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $53af5c4d3cc3573a$export$2e2bcd8739ae039), {}),
+                            mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25ed3c2a8beb606c$export$2e2bcd8739ae039), {}),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                elevation: 3,
+                                className: "panel",
+                                sx: {
+                                    width: 1
+                                },
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
+                            })
+                        ]
+                    })
                 })
-            })
-        ]
+            ]
+        })
     });
 };
 
@@ -45000,10 +45049,8 @@ var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
         theme: (0, $c401fe30c7c41bae$export$2e2bcd8739ae039),
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5d05c50dc13d9129$export$2e2bcd8739ae039), {}),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0e7d45acde193ea2$export$c7dacf3845253dcf), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aab7a538bf9cc22$export$5abfb1150fa6da6a), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
-                })
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bda87eb62dcce197$export$c7dacf3845253dcf), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2064a1938eec2dc2$export$2e2bcd8739ae039), {})
             })
         ]
     });

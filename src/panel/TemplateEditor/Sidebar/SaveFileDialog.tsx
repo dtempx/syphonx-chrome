@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FileDialog } from "../components";
-import { useTemplate } from "../../context";
+import { useTemplate } from "../context";
 import { cloud, Template } from "../lib";
 
 export interface Props {

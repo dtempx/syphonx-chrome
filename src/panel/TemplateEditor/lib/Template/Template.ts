@@ -22,7 +22,7 @@ export class Template {
     children: TemplateItem[];
     error?: string;
 
-    constructor(obj?: string | Partial<syphonx.Template>, file?: string) {
+    constructor(obj?: string | TemplateObj, file?: string) {
         if (typeof obj === "string") {
             if (obj === "") { //todo: remove this check when lib updated
                 this.obj = {};
@@ -48,116 +48,6 @@ export class Template {
         if (file)
             this.obj.file = file;
     }
-
-
-    private actions(collection: syphonx.Action[] | undefined, parent?: TemplateItem): TemplateItem[] {
-        if (collection) {
-            const ordinals: Record<string, number> = {};
-            return collection.map((action, index) => {
-                const [name] = Object.keys(action);
-                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
-                const ordinal = ordinals[name];
-                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
-                const { [name]: obj } = action as Record<string, unknown>; // assign to `obj` the value within `action` with a key of `name`
-                const item = new TemplateItem({
-                    template: this,
-                    key,
-                    name,
-                    type: "action",
-                    icon: name,
-                    parent,
-                    collection,
-                    unit: action,
-                    obj,
-                    index
-                });
-                if (name === "select" && obj instanceof Array)
-                    item.children = this.selects(obj as syphonx.Select[], item);
-                if (name === "each" && (obj as syphonx.Each).actions instanceof Array)
-                    item.children = this.actions((obj as syphonx.Each).actions, item);
-                if (name === "repeat" && (obj as syphonx.Repeat).actions instanceof Array)
-                    item.children = this.actions((obj as syphonx.Repeat).actions, item);
-                return item;
-            });
-        }
-        else {
-            return [];
-        }
-    }
-    
-    private pivot(obj: syphonx.SelectTarget, parent: TemplateItem): TemplateItem {
-        const key = `${parent.key}.pivot`;
-        const item = new TemplateItem({
-            template: this,
-            key,
-            name: "pivot",
-            type: "pivot",
-            icon: "pivot",
-            parent,
-            collection: [],
-            unit: obj,
-            obj,
-            index: 0
-        });
-        item.children = this.subselect(obj, item);
-        return item;
-    }
-    
-    private selects(collection: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
-        return collection.map((select, index) => {
-            const key = `${parent.key}.${select.name || "?"}`;
-            const item = new TemplateItem({
-                template: this,
-                key,
-                name: select.name || "",
-                type: "select",
-                icon: select.type || "string",
-                required: select.required,
-                repeated: select.repeated,
-                parent,
-                collection,
-                unit: select,
-                obj: select,
-                index
-            });
-            item.children = this.subselect(select, item);
-            return item;
-        });
-    }
-    
-    private subselect(obj: syphonx.Select, parent: TemplateItem): TemplateItem[] | undefined {
-        if (obj.select) {
-            return this.selects(obj.select, parent);
-        }
-        else if (obj.union) {
-            return this.union(obj.union, parent);
-        }
-        else if (obj.pivot) {
-            return [this.pivot(obj.pivot, parent)];
-        }
-    }
-    
-    private union(collection: syphonx.SelectTarget[], parent: TemplateItem): TemplateItem[] {
-        return collection.map((obj, index) => {
-            const key = `${parent.key}.union.${index}`;
-            const item = new TemplateItem({
-                template: this,
-                key,
-                name: "union",
-                type: "union",
-                icon: "union",
-                parent,
-                collection,
-                unit: obj,
-                obj,
-                index
-            });
-            item.children = this.subselect(obj, item);
-            return item;
-        });
-    }
-
-
 
     addAction(type: TemplateAddItemType): void {
         if (!(this.obj.actions instanceof Array))
@@ -318,6 +208,113 @@ export class Template {
         let json = JSON.stringify(obj, null, 2) || "";
         json = formatTemplateJson(json);
         return json;
+    }
+
+    private actions(collection: syphonx.Action[] | undefined, parent?: TemplateItem): TemplateItem[] {
+        if (collection) {
+            const ordinals: Record<string, number> = {};
+            return collection.map((action, index) => {
+                const [name] = Object.keys(action);
+                ordinals[name] = ordinals[name] ? ordinals[name] + 1 : 1;
+                const ordinal = ordinals[name];
+                const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
+                const { [name]: obj } = action as Record<string, unknown>; // assign to `obj` the value within `action` with a key of `name`
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name,
+                    type: "action",
+                    icon: name,
+                    parent,
+                    collection,
+                    unit: action,
+                    obj,
+                    index
+                });
+                if (name === "select" && obj instanceof Array)
+                    item.children = this.selects(obj as syphonx.Select[], item);
+                if (name === "each" && (obj as syphonx.Each).actions instanceof Array)
+                    item.children = this.actions((obj as syphonx.Each).actions, item);
+                if (name === "repeat" && (obj as syphonx.Repeat).actions instanceof Array)
+                    item.children = this.actions((obj as syphonx.Repeat).actions, item);
+                return item;
+            });
+        }
+        else {
+            return [];
+        }
+    }
+    
+    private pivot(obj: syphonx.SelectTarget, parent: TemplateItem): TemplateItem {
+        const key = `${parent.key}.pivot`;
+        const item = new TemplateItem({
+            template: this,
+            key,
+            name: "pivot",
+            type: "pivot",
+            icon: "pivot",
+            parent,
+            collection: [],
+            unit: obj,
+            obj,
+            index: 0
+        });
+        item.children = this.subselect(obj, item);
+        return item;
+    }
+    
+    private selects(collection: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
+        return collection.map((select, index) => {
+            const key = `${parent.key}.${select.name || "?"}`;
+            const item = new TemplateItem({
+                template: this,
+                key,
+                name: select.name || "",
+                type: "select",
+                icon: select.type || "string",
+                required: select.required,
+                repeated: select.repeated,
+                parent,
+                collection,
+                unit: select,
+                obj: select,
+                index
+            });
+            item.children = this.subselect(select, item);
+            return item;
+        });
+    }
+    
+    private subselect(obj: syphonx.Select, parent: TemplateItem): TemplateItem[] | undefined {
+        if (obj.select) {
+            return this.selects(obj.select, parent);
+        }
+        else if (obj.union) {
+            return this.union(obj.union, parent);
+        }
+        else if (obj.pivot) {
+            return [this.pivot(obj.pivot, parent)];
+        }
+    }
+    
+    private union(collection: syphonx.SelectTarget[], parent: TemplateItem): TemplateItem[] {
+        return collection.map((obj, index) => {
+            const key = `${parent.key}.union.${index}`;
+            const item = new TemplateItem({
+                template: this,
+                key,
+                name: "union",
+                type: "union",
+                icon: "union",
+                parent,
+                collection,
+                unit: obj,
+                obj,
+                index
+            });
+            item.children = this.subselect(obj, item);
+            return item;
+        });
     }
 }
 

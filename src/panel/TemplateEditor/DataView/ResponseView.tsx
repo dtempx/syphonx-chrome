@@ -1,9 +1,9 @@
 import React from "react";
 import { TextField } from "@mui/material";
-import { useTemplate } from "../../context";
+import { useTemplateData } from "./context";
 
 export default () => {
-    const { result } = useTemplate();
+    const { result } = useTemplateData();
     const { actions, ...response } = result || {};
     return (
         <TextField

@@ -1,6 +1,6 @@
 import React from "react";
 import { PropertyGrid, TitleBar, TransitionUp } from "../components";
-import { useApp } from "../../context";
+import { useApp } from "../context";
 
 import {
     Dialog,
@@ -17,7 +17,16 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { advanced, setAdvanced, autoOpen, setAutoOpen, debug, setDebug } = useApp();
+    const {
+        advanced,
+        setAdvanced,
+        autoOpen,
+        setAutoOpen,
+        autoRefresh,
+        setAutoRefresh,
+        debug,
+        setDebug
+    } = useApp();
     return (
         <Dialog
             fullScreen
@@ -40,6 +49,14 @@ export default ({ open, onClose }: Props) => {
                                 onChange={() => setAutoOpen(!autoOpen)}
                             />,
                             "Automatically opens the template default URL if enabled."
+                        ],
+                        [
+                            "Auto refresh data",
+                            <Switch
+                                checked={autoRefresh}
+                                onChange={() => setAutoRefresh(!autoRefresh)}
+                            />,
+                            "Automatically refreshes the data view."
                         ],
                         [
                             "Advanced mode",

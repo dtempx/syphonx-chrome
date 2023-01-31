@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate } from "./context";
 import { Template, TemplateAddItemType } from "./lib";
 import ActionIcon from "./ActionIcon";
 

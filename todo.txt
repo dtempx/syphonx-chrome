@@ -1,6 +1,7 @@
 Data contracts
 Template test case runner
 template autorun user setting
+test out repeated objects (can't add)
 
 Data View
     data view: single object view
@@ -68,6 +69,7 @@ Disable autorun for non-select-only templates
 Fix position of add button so it doesn't scroll within the tree
 Add button blocks menu on selected item
 Change key for undefined name to ? (so it doesn't collide with a name of "undefined")
+A directory that only contains sub-directories (i.e. no files) is not visible in the file dialog
 
 CONSIDER
 Consider renaming SelectorField to QueryField, and how to pass other properites to it

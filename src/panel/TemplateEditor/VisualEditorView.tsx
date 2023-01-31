@@ -14,7 +14,7 @@ export default () => (
             }    
         }}
     >
-        <Paper elevation={3} className="panel" sx={{ width: 400 }}>
+        <Paper elevation={3} className="panel" sx={{ width: 500 }}>
             <ActionTreeView />
             <AddActionButton
                 sx={{

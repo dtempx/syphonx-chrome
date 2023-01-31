@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PropertyGrid, PropertyGridItem } from "../../components";
+import { PropertyGrid, PropertyGridItem } from ".";
 import { useApp } from "../context";
 
 import {
@@ -30,7 +30,7 @@ export interface Props {
 }
 
 export default ({ items, ...props }: Props) => {
-    const { advanced, setAdvanced } = useApp();
+    const { advanced } = useApp();
     const [expanded, setExpanded] = useState(false);
 
     const visibleItems = items
