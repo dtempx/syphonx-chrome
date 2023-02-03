@@ -8,7 +8,7 @@ export default () => {
 
     const { code } = useMemo(() => {
         const template = new Template(json);
-        const code = template.toString("file");
+        const code = template.file();
         return { template, code };
     }, [json]);
 

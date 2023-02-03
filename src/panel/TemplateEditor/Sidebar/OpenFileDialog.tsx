@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
-import { background, cloud, Template } from "../lib";
-import { useApp, useTemplate } from "../context";
+import { background, cloud, path, Template } from "../lib";
+import { useApp, useContract, useTemplate } from "../context";
 
 export interface Props {
     open: boolean;
@@ -9,12 +9,14 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
+    const { autoOpen } = useApp();
+    const { setFile: setContractFile } = useContract();
+    const { setFile: setTemplateFile, setTemplate } = useTemplate();
+
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [opening, setOpening] = useState(false);
-    const { autoOpen } = useApp();
-    const { setTemplate } = useTemplate();
 
     useEffect(() => {
         if (open) {
@@ -42,8 +44,15 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             const json = await cloud.read(file);
-            const template = new Template(json, file);
-            setTemplate(template.toString());
+            const template = new Template(json);
+            setTemplate(template.json());
+            setTemplateFile(file);
+
+            const dirname = path.dirname(file);
+            const contractFile = path.resolve(dirname, "contract.json");
+            const contractExists = files.some(file => file === contractFile);
+            setContractFile(contractExists ? contractFile : "");
+
             onClose(event);
             setOpening(false);
             setError("");

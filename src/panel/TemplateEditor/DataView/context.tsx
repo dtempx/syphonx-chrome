@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
-import { useState } from "react";
-import { useApp, useTemplate } from "../context";
-import { Template } from "../lib";
+import React, { useContext, useEffect, useState } from "react";
+import { Validator } from "jsonschema";
+import { useApp, useContract, useTemplate } from "../context";
+import { removeDOMRefs, snakeify, Template } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 export interface TemplateDataState {
@@ -10,16 +10,33 @@ export interface TemplateDataState {
 }
 
 export function TemplateDataProvider({ children }: { children: JSX.Element }) {
-    const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
     const { autoRefresh } = useApp();
+    const { contract } = useContract();
     const { template: json } = useTemplate();
+    const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
 
     useEffect(() => {
-        debugger;
         if (autoRefresh) {
-            const obj = new Template(json);
-            obj.run()
-                .then(result => setResult(result));
+            const template = new Template(json);
+            if (template.obj.actions instanceof Array) {
+                template.run()
+                .then(result => {
+                    if (result?.data && contract) {
+                        const validator = new Validator();
+                        const data = removeDOMRefs(result.data);
+                        const { errors } = validator.validate(data, contract);
+                        for (const error of errors) {
+                            const code = `contract-${snakeify(error.name)}` as syphonx.ExtractErrorCode;
+                            const message = error.stack.replace(/^(instance\b)/, "Object");
+                            result.errors.push({ code, message, level: 1 });
+                        }
+                    }
+                    setResult(result);
+                });
+            }
+            else {
+                setResult(undefined);
+            }
         }
     }, [json, autoRefresh]);
  

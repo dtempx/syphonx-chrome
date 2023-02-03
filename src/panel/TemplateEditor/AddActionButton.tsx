@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { useApp, useTemplate } from "./context";
 import { Template, TemplateAddItemType } from "./lib";
 import ActionIcon from "./ActionIcon";
@@ -83,39 +83,9 @@ export default (props?: Props) => {
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
-
-    const { template, canAddSubAction } = useMemo(() => {
-        const template = new Template(json);
-        const canAddSubAction = template.canAddSubAction();
-        return { template, canAddSubAction };
-    }, [json]);
-
-    const types = useMemo(() => {
-        const types = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
-        return types;
-    }, [advanced, expanded]);
-
-
-    function handleAddButtonClick(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        setAnchor(event.currentTarget);
-        setOpen(true);
-    }
-
-    function addAction(type: TemplateAddItemType) {
-        if (template) {
-            template.addAction(type);
-            setTemplate(template.toString());
-            setOpen(false);
-        }
-    }
-
-    function addSubAction() {
-        if (template) {
-            template.addSubAction();
-            setTemplate(template.toString());
-            setOpen(false);
-        }
-    }
+    const types = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
+    const template = new Template(json);
+    const canAddSubAction = template.canAddSubAction();
 
     return (
         <>
@@ -140,7 +110,10 @@ export default (props?: Props) => {
                     {...props}
                     size="small"
                     color="secondary"
-                    onClick={handleAddButtonClick}
+                    onClick={event => {
+                        setAnchor(event.currentTarget);
+                        setOpen(true);                
+                    }}
                 >
                     <AddIcon />
                 </Fab>
@@ -160,7 +133,11 @@ export default (props?: Props) => {
             >
                 {types.map(type => (
                     <Tooltip title={type.help} arrow placement="right">
-                        <MenuItem onClick={() => addAction(type.name as TemplateAddItemType)}>
+                        <MenuItem onClick={() => {
+                            template.addAction(type.name as TemplateAddItemType);
+                            setTemplate(template.json());
+                            setOpen(false);
+                        }}>
                             <ActionIcon name={type.name} fontSize="small" />
                             <Typography sx={{ ml: 1 }}>{type.name}</Typography>
                         </MenuItem>
@@ -173,7 +150,11 @@ export default (props?: Props) => {
 
                 {canAddSubAction && (
                     <Tooltip title="Add a selector" arrow placement="right">
-                        <MenuItem onClick={() => addSubAction()}>
+                        <MenuItem onClick={() => {
+                            template.addSubAction();
+                            setTemplate(template.json());
+                            setOpen(false);
+                        }}>
                             <AddIcon fontSize="small" />
                             <Typography sx={{ ml: 1 }}>Add Selector</Typography>
                         </MenuItem>

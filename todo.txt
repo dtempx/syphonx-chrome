@@ -150,3 +150,6 @@ open page on template open
 FIXED
 Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
 file save debug
+
+
+multi hits with repeated=false should be flagged

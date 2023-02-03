@@ -25,34 +25,9 @@ export interface Props {
 
 export default ({ item }: Props) => {
     const [anchor, setAnchor] = useState<HTMLElement | undefined>();
-    const open = !!anchor;
-
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
-
-    function handleMoveUp() {
-        template.moveItemUp(item);
-        setTemplate(template.toString());
-        setAnchor(undefined);
-    }
-
-    function handleMoveDown() {
-        template.moveItemDown(item);
-        setTemplate(template.toString());
-        setAnchor(undefined);
-    }
-
-    function handleDuplicate() {
-        template.duplicateItem(item);
-        setTemplate(template.toString());
-        setAnchor(undefined);
-    }
-
-    function handleDelete() {
-        template.removeItem(item);
-        setTemplate(template.toString());
-        setAnchor(undefined);
-    }
+    const open = !!anchor;
 
     return (
         <>
@@ -73,22 +48,38 @@ export default ({ item }: Props) => {
                     "aria-labelledby": "basic-button",
                   }}
             >
-                <MenuItem onClick={handleMoveUp}>
+                <MenuItem onClick={() => {
+                    template.moveItemUp(item);
+                    setTemplate(template.json());
+                    setAnchor(undefined);
+                }}>
                     <ListItemIcon><MoveUpIcon fontSize="small" /></ListItemIcon>
                     <ListItemText>Move Up</ListItemText>
                 </MenuItem>
 
-                <MenuItem onClick={handleMoveDown}>
+                <MenuItem onClick={() => {
+                    template.moveItemDown(item);
+                    setTemplate(template.json());
+                    setAnchor(undefined);
+                }}>
                     <ListItemIcon><MoveDownIcon fontSize="small" /></ListItemIcon>
                     <ListItemText>Move Down</ListItemText>
                 </MenuItem>
 
-                <MenuItem onClick={handleDuplicate}>
+                <MenuItem onClick={() => {
+                    template.duplicateItem(item);
+                    setTemplate(template.json());
+                    setAnchor(undefined);
+                }}>
                     <ListItemIcon><DuplicateIcon fontSize="small" /></ListItemIcon>
                     <ListItemText>Duplicate</ListItemText>
                 </MenuItem>
 
-                <MenuItem onClick={handleDelete}>
+                <MenuItem onClick={() => {
+                    template.removeItem(item);
+                    setTemplate(template.json());
+                    setAnchor(undefined);
+                }}>
                     <ListItemIcon><DeleteIcon fontSize="small" /></ListItemIcon>
                     <ListItemText>Delete</ListItemText>
                 </MenuItem>

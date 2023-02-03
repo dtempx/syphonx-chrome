@@ -11,7 +11,6 @@ import {
 
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
-    file?: string;
 }
 
 /**
@@ -22,7 +21,7 @@ export class Template {
     children: TemplateItem[];
     error?: string;
 
-    constructor(obj?: string | TemplateObj, file?: string) {
+    constructor(obj?: string | TemplateObj) {
         if (typeof obj === "string") {
             if (obj === "") { //todo: remove this check when lib updated
                 this.obj = {};
@@ -45,8 +44,6 @@ export class Template {
         }
 
         this.children = this.actions(this.obj.actions);
-        if (file)
-            this.obj.file = file;
     }
 
     addAction(type: TemplateAddItemType): void {
@@ -124,8 +121,11 @@ export class Template {
         return this.children.length === 0;
     }
 
-    file(): string | undefined {
-        return this.obj.file;
+    file(): string {
+        const obj = omit(this.obj, "selected");
+        let json = JSON.stringify(obj, null, 2) || "";
+        json = formatTemplateJson(json);
+        return json;
     }
 
     findItem(key: string): TemplateItem | undefined {
@@ -201,13 +201,6 @@ export class Template {
             this.obj.selected = undefined;
             return undefined;
         }
-    }
-
-    toString(format?: "file"): string {
-        const obj = format === "file" ? omit(this.obj, "selected", "file") : this.obj;
-        let json = JSON.stringify(obj, null, 2) || "";
-        json = formatTemplateJson(json);
-        return json;
     }
 
     private actions(collection: syphonx.Action[] | undefined, parent?: TemplateItem): TemplateItem[] {

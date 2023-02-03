@@ -22,11 +22,6 @@ export default () => {
         setSelected(key ? [key] : []);
     }, [json]);
 
-    function handleSelect(event: any, nodeIds: any) {
-        template.setSelected(nodeIds);
-        setTemplate(template.toString());
-    }
-
     return (
         <Box>
             <TreeView
@@ -35,7 +30,10 @@ export default () => {
                 expanded={expanded}
                 selected={selected}
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
-                onNodeSelect={handleSelect}
+                onNodeSelect={(event: any, value: any) => {
+                    template.setSelected(value);
+                    setTemplate(template.json());            
+                }}
             >
                 {template?.children?.map(item => <ActionTreeItem item={item} />)}
             </TreeView>

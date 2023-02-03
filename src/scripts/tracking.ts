@@ -112,7 +112,7 @@ export function queryTracking(): string[] {
                         closed.push(selector);
                     }
                     else if (element!.parentElement) {
-                        const n = element!.parentElement.querySelectorAll(selector).length;
+                        const n = element!.parentElement.querySelectorAll(tag).length;
                         if (n === 1)
                             next.push(selector);
                     }
@@ -141,9 +141,11 @@ export function queryTracking(): string[] {
                     closed.push(selector);
                 }
                 if (element!.parentElement) {
-                    const n = element!.parentElement.querySelectorAll(selector).length;
+                    const n = element!.parentElement.querySelectorAll(tag).length;
                     if (n > 1) {
-                        const i = Array.from(element.parentElement.children).findIndex(child => child === element);
+                        const i = Array.from(element.parentElement.children)
+                            .filter(child => child.tagName.toLowerCase() === tag)
+                            .findIndex(child => child === element);
                         selector = `${tag}:nth-of-type(${i + 1})${path ? ` > ${path}` : ""}`;
                     }
                     next.push(selector);

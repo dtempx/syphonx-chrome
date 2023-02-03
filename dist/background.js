@@ -100,7 +100,7 @@ function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
                     const selector = path ? `${target} > ${path}` : target;
                     if (document.querySelectorAll(selector).length === 1) closed.push(selector);
                     else if (element.parentElement) {
-                        const n = element.parentElement.querySelectorAll(selector).length;
+                        const n = element.parentElement.querySelectorAll(tag).length;
                         if (n === 1) next.push(selector);
                     }
                 }
@@ -123,9 +123,9 @@ function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
                 let selector = path1 ? `${tag} > ${path1}` : tag;
                 if (document.querySelectorAll(selector).length === 1) closed.push(selector);
                 if (element.parentElement) {
-                    const n = element.parentElement.querySelectorAll(selector).length;
+                    const n = element.parentElement.querySelectorAll(tag).length;
                     if (n > 1) {
-                        const i = Array.from(element.parentElement.children).findIndex((child)=>child === element);
+                        const i = Array.from(element.parentElement.children).filter((child)=>child.tagName.toLowerCase() === tag).findIndex((child)=>child === element);
                         selector = `${tag}:nth-of-type(${i + 1})${path1 ? ` > ${path1}` : ""}`;
                     }
                     next.push(selector);

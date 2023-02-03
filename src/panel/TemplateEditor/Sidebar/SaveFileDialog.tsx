@@ -9,11 +9,12 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
+    const { template: json, file: templateFile } = useTemplate();
+
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [saving, setSaving] = useState(false);
-    const { template: json } = useTemplate();
 
     const template = useMemo(() => {
         return new Template(json);
@@ -44,7 +45,7 @@ export default ({ open, onClose }: Props) => {
     async function handleSelectFile(event: React.SyntheticEvent, file: string) {
         try {
             setSaving(true);
-            const json = template.toString("file");
+            const json = template.file();
             await cloud.write(file, json);
             onClose(event);
             setSaving(false);
@@ -66,7 +67,7 @@ export default ({ open, onClose }: Props) => {
             open={open}
             loading={loading}
             saving={saving}
-            selectedFile={template.file()}
+            selectedFile={templateFile}
             onSelectFile={handleSelectFile}
             onClearError={() => setError("")}
             onClose={onClose}

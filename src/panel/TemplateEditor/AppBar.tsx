@@ -22,10 +22,9 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { template: json } = useTemplate();
+    const { template: json, file } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const template = new Template(json);
-    const file = template.file();
 
     return (
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
