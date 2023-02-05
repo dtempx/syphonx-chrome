@@ -775,13 +775,13 @@ async function extract(state) {
             for (const element of elements) {
                 const $parent = $(element).parent();
                 const tag = element.tagName.toLowerCase();
-                const id = $(element).attr('id');
-                const className = $(element).attr('class')?.split(' ')[0];
+                const id = $(element).attr('id') || "";
+                const className = $(element).attr('class')?.split(' ')[0] || "";
                 const n = $(element).index() + 1;
-                const uniqueId = $(`#${id}`).length === 1;
-                const uniqueClassName = className ? $(`${tag}.${className}`).length === 1 : false;
+                const uniqueId = /^[A-Za-z0-9_-]+$/.test(id) ? $(`#${id}`).length === 1 : false;
+                const uniqueClassName = /^[A-Za-z0-9_-]+$/.test(className) ? $(`${tag}.${className}`).length === 1 : false;
                 const onlyTag = $parent.children(tag).length === 1;
-                const onlyClassName = className ? $parent.children(`${tag}.${className}`).length === 1 : false;
+                const onlyClassName = /^[A-Za-z0-9_-]+$/.test(className) ? $parent.children(`${tag}.${className}`).length === 1 : false;
                 if (uniqueId) {
                     path.push(`#${id}`);
                     break;
