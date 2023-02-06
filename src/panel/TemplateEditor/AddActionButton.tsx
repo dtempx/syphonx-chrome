@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useApp, useTemplate } from "./context";
-import { Template, TemplateAddItemType } from "./lib";
+import { Template, TemplateAction } from "./lib";
 import ActionIcon from "./ActionIcon";
 
 import {
@@ -24,7 +24,7 @@ export interface Props {
     sx?: SxProps<Theme>;
 }
 
-const ActionTypes = [
+const ActionTypes: Array<{ name: TemplateAction, advanced: boolean, help: string }> = [
     {
         name: "select",
         advanced: false,
@@ -83,9 +83,9 @@ export default (props?: Props) => {
     const [open, setOpen] = useState(false);
     const [expanded, setExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
-    const types = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
+
+    const actions = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
     const template = new Template(json);
-    const canAddSubAction = template.canAddSubAction();
 
     return (
         <>
@@ -111,8 +111,14 @@ export default (props?: Props) => {
                     size="small"
                     color="secondary"
                     onClick={event => {
-                        setAnchor(event.currentTarget);
-                        setOpen(true);                
+                        const added = template.addItem();
+                        if (added) {
+                            setTemplate(template.json());
+                        }
+                        else {
+                            setAnchor(event.currentTarget);
+                            setOpen(true);    
+                        }
                     }}
                 >
                     <AddIcon />
@@ -131,34 +137,21 @@ export default (props?: Props) => {
                     horizontal: "right",
                 }}
             >
-                {types.map(type => (
-                    <Tooltip title={type.help} arrow placement="right">
+                {actions.map(action => (
+                    <Tooltip title={action.help} arrow placement="right">
                         <MenuItem onClick={() => {
-                            template.addAction(type.name as TemplateAddItemType);
+                            template.addItem(action.name);
                             setTemplate(template.json());
                             setOpen(false);
                         }}>
-                            <ActionIcon name={type.name} fontSize="small" />
-                            <Typography sx={{ ml: 1 }}>{type.name}</Typography>
+                            <ActionIcon name={action.name} fontSize="small" />
+                            <Typography sx={{ ml: 1 }}>{action.name}</Typography>
                         </MenuItem>
                     </Tooltip>
                 ))}
 
-                {(canAddSubAction || !advanced) && (
+                {!advanced && (
                     <Divider />
-                )}
-
-                {canAddSubAction && (
-                    <Tooltip title="Add a selector" arrow placement="right">
-                        <MenuItem onClick={() => {
-                            template.addSubAction();
-                            setTemplate(template.json());
-                            setOpen(false);
-                        }}>
-                            <AddIcon fontSize="small" />
-                            <Typography sx={{ ml: 1 }}>Add Selector</Typography>
-                        </MenuItem>
-                    </Tooltip>
                 )}
 
                 {!advanced && expanded && (

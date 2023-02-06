@@ -1,7 +1,17 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
+
+
+import {
+    Stack,
+    Switch,
+    Typography
+} from "@mui/material";
+
+import {
+    WarningAmberOutlined as AlertIcon
+} from "@mui/icons-material";
 
 import {
     ComplexPropertyGrid,
@@ -23,7 +33,10 @@ export default ({ item, onChange }: Props) => {
         <ComplexPropertyGrid
             items={[
                 [
-                    "query",
+                    <Stack direction="row">
+                        <Typography fontSize="small">query</Typography>
+                        {!obj.query && !obj.select && <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />}
+                    </Stack>,
                     <QueryEditorField
                         name="waitfor"
                         query={obj.query}

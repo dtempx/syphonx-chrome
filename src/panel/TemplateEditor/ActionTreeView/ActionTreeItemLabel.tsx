@@ -11,6 +11,14 @@ import {
     Typography
 } from "@mui/material";
 
+import {
+    WarningAmberOutlined as AlertIcon,
+    LowPriority as ConditionalIcon,
+    MoreVert as RepeatedIcon,
+    PivotTableChart as PivotIcon,
+    Mediation as UnionIcon
+} from "@mui/icons-material";
+
 export interface Props {
     item: TemplateItem;
 }
@@ -46,11 +54,12 @@ export default ({ item }: Props) => {
                     </Tooltip>
                 )}
                 <Tooltip title={item.icon}><ActionIcon name={item.icon} fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>
-                <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12 }}>{name(item)}</Typography>
-                {item.required && <Tooltip title="required"><Typography variant="caption" sx={{ position: "relative", top: -6, left: 4, color: "primary.light", fontWeight: "bold" }}>!</Typography></Tooltip>}
-                {item.repeated && <Tooltip title="repeated"><ActionIcon name="repeated" fontSize="small" sx={{ color: "primary.light", ml: 1 }} /></Tooltip>}
-                {(item.obj as syphonx.Select).union && <Tooltip title="union"><ActionIcon name="union" fontSize="small" sx={{ color: "primary.light", ml: 1 }} /></Tooltip>}
-                {(item.obj as syphonx.Select).pivot && <Tooltip title="pivot"><ActionIcon name="pivot" fontSize="small" sx={{ color: "primary.light", ml: 1 }} /></Tooltip>}
+                <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>{name(item)}</Typography>
+                {item.conditional && <Tooltip title="conditional"><ConditionalIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
+                {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
+                {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
+                {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
+                {item.alert && <Tooltip title={item.alert}><AlertIcon color="warning" fontSize="small" /></Tooltip>}
             </Typography>
             {selected?.key === item.key ? <ActionTreeItemMenu item={item} /> : undefined}
         </Stack>

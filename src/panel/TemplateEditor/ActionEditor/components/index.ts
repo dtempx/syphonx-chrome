@@ -9,6 +9,7 @@ export { default as RegexpField } from "./RegexpField";
 export { default as SelectFormatDropdown } from "./SelectFormatDropdown";
 export { default as SelectOnDropdown } from "./SelectOnDropdown";
 export { default as SelectTypeDropdown } from "./SelectTypeDropdown";
+export { default as SelectTypeField } from "./SelectTypeField";
 export { default as SingleQueryEditorField } from "./SingleQueryEditorField";
 export { default as SymbolicNameField } from "./SymbolicNameField";
 export { default as VariantField } from "./VariantField";

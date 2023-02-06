@@ -1,6 +1,6 @@
 import { Template } from "./Template";
 
-export type TemplateItemType = "action" | "pivot" | "select" | "union";
+export type TemplateItemType = "action" | "pivot" | "select" | "union" | "placeholder";
 
 /**
  * Adapts an item within a template document, adding state and behavior for manipulation by a UI editor.
@@ -35,6 +35,16 @@ export class TemplateItem {
      * Display icon for this object in the UI editor.
      */
     icon: string;
+
+    /**
+     * Indicates whether item specifies a when condition.
+     */    
+    conditional?: boolean;
+
+    /**
+     * Indicates if item is in an invalid state.
+     */
+    alert?: string;
 
     /**
      * Indicates whether item is required, used only in the case of a `select` type.
@@ -88,19 +98,20 @@ export class TemplateItem {
      */
     index: number;
 
-    constructor(obj: TemplateItem) {
-        this.template = obj.template;
-        this.key = obj.key;
-        this.type = obj.type;
-        this.name = obj.name;
-        this.icon = obj.icon;
-        this.required = obj.required;
-        this.repeated = obj.repeated;
-        this.parent = obj.parent;
-        this.children = obj.children;
-        this.collection = obj.collection;
-        this.unit = obj.unit;
-        this.obj = obj.obj;
-        this.index = obj.index;
+    constructor(item: TemplateItem) {
+        this.template = item.template;
+        this.key = item.key;
+        this.type = item.type;
+        this.name = item.name;
+        this.icon = item.icon;
+        this.alert = item.alert;
+        this.required = item.required;
+        this.repeated = item.repeated;
+        this.parent = item.parent;
+        this.children = item.children;
+        this.collection = item.collection;
+        this.unit = item.unit;
+        this.obj = item.obj;
+        this.index = item.index;
     }
 }

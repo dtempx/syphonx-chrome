@@ -151,5 +151,9 @@ FIXED
 Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
 file save debug
 
+CHORES
+investigate if js files in dist folder can be copied from node_modules (jquery.slim.js, syphonx.js)
 
-multi hits with repeated=false should be flagged
+
+VALIDATION
+multiple DOM hits with repeated=false should be flagged

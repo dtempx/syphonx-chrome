@@ -32,7 +32,7 @@ export default () => {
 
             <Stack direction="row">
                 <IconButton size="small" onClick={() => setSidebarOpen(true)}>
-                    <MenuIcon fontSize="small" />
+                    <MenuIcon />
                 </IconButton>
 
                 {file ? (
@@ -49,16 +49,16 @@ export default () => {
 
             <Stack direction="row" sx={{ mr: 1 }}>
                 <Tooltip title="Visual Editor" onClick={() => setMode("visual-editor")}>
-                    <IconButton size="small" color={mode === "visual-editor" ? "primary" : "default"}><EditorIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" color={mode === "visual-editor" ? "primary" : "default"}><EditorIcon /></IconButton>
                 </Tooltip>
                 <Tooltip title="Code Editor" onClick={() => setMode("code-editor")}>
-                    <IconButton size="small" color={mode === "code-editor" ? "primary" : "default"}><CodeIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" color={mode === "code-editor" ? "primary" : "default"}><CodeIcon /></IconButton>
                 </Tooltip>
                 <Tooltip title="Test Runner" onClick={() => setMode("test-runner")}>
-                    <IconButton size="small" color={mode === "test-runner" ? "primary" : "default"}><TestIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" color={mode === "test-runner" ? "primary" : "default"}><TestIcon /></IconButton>
                 </Tooltip>
                 <Tooltip title="Template Settings" onClick={() => setMode("template-settings")}>
-                    <IconButton size="small" color={mode === "template-settings" ? "primary" : "default"}><SettingsIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" color={mode === "template-settings" ? "primary" : "default"}><SettingsIcon /></IconButton>
                 </Tooltip>
             </Stack>
         </Box>

@@ -1,7 +1,16 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
+
+import {
+    Stack,
+    Switch,
+    Typography
+} from "@mui/material";
+
+import {
+    WarningAmberOutlined as AlertIcon
+} from "@mui/icons-material";
 
 import {
     ComplexPropertyGrid,
@@ -10,7 +19,7 @@ import {
     NumberField,
     RegexpField,
     SelectFormatDropdown,
-    SelectTypeDropdown,
+    SelectTypeField,
     SymbolicNameField,
     VariantField
 } from "./components";
@@ -40,7 +49,10 @@ export default ({ item, onChange }: Props) => {
                     true
                 ],
                 [
-                    "query",
+                    <Stack direction="row">
+                        <Typography fontSize="small">query</Typography>
+                        {!obj.query && !obj.value && <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />}
+                    </Stack>,
                     <QueryEditorField
                         query={obj.query}
                         name={obj.name}
@@ -55,13 +67,15 @@ export default ({ item, onChange }: Props) => {
                     true
                 ],
                 [
-                    "type",
-                    <SelectTypeDropdown
-                        value={obj.type}
-                        onChange={(event, value) => {
-                            obj.type = value;
-                            onChange(event);
-                        }}
+                    <Stack direction="row">
+                        <Typography fontSize="small">type</Typography>
+                        {obj.type === "object" && !obj.select && !obj.pivot && !obj.union && (
+                            <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />
+                        )}
+                    </Stack>,
+                    <SelectTypeField
+                        item={item}
+                        onChange={onChange}
                     />,
                     "Determines the type of the property value.",
                     true

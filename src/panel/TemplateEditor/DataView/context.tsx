@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Validator } from "jsonschema";
 import { useApp, useContract, useTemplate } from "../context";
-import { removeDOMRefs, snakeify, Template } from "../lib";
+import { Template } from "../lib";
+import { applyTemplate } from "./applyTemplate";
 import * as syphonx from "syphonx-lib";
 
 export interface TemplateDataState {
@@ -18,19 +18,9 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
     useEffect(() => {
         if (autoRefresh) {
             const template = new Template(json);
-            if (template.obj.actions instanceof Array) {
-                template.run()
+            if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
+                applyTemplate(template, contract)
                 .then(result => {
-                    if (result?.data && contract) {
-                        const validator = new Validator();
-                        const data = removeDOMRefs(result.data);
-                        const { errors } = validator.validate(data, contract);
-                        for (const error of errors) {
-                            const code = `contract-${snakeify(error.name)}` as syphonx.ExtractErrorCode;
-                            const message = error.stack.replace(/^(instance\b)/, "Object");
-                            result.errors.push({ code, message, level: 1 });
-                        }
-                    }
                     setResult(result);
                 });
             }

@@ -10137,6 +10137,8 @@ $parcel$export($86049548edbb86a7$exports, "TableHead", () => $70776c1ed0e29d8a$e
 $parcel$export($86049548edbb86a7$exports, "TableRow", () => $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Tabs", () => $de9f03f465a99f00$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TextField", () => $e00f995e0f3cc83a$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "ToggleButton", () => $fc79f6ee39fd6680$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "ToggleButtonGroup", () => $267ddc6d673c1b4e$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Toolbar", () => $fb76fa4d2fe2669c$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Tooltip", () => $16d648c397460623$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Typography", () => $8588119983b778db$export$2e2bcd8739ae039);
@@ -33860,6 +33862,332 @@ var $e00f995e0f3cc83a$export$2e2bcd8739ae039 = $e00f995e0f3cc83a$var$TextField;
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+
+function $85ee02a8e916de61$export$21f89b560b65a301(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiToggleButton", slot);
+}
+const $85ee02a8e916de61$var$toggleButtonClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiToggleButton", [
+    "root",
+    "disabled",
+    "selected",
+    "standard",
+    "primary",
+    "secondary",
+    "sizeSmall",
+    "sizeMedium",
+    "sizeLarge"
+]);
+var $85ee02a8e916de61$export$2e2bcd8739ae039 = $85ee02a8e916de61$var$toggleButtonClasses;
+
+
+
+const $fc79f6ee39fd6680$var$_excluded = [
+    "children",
+    "className",
+    "color",
+    "disabled",
+    "disableFocusRipple",
+    "fullWidth",
+    "onChange",
+    "onClick",
+    "selected",
+    "size",
+    "value"
+];
+const $fc79f6ee39fd6680$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , fullWidth: fullWidth , selected: selected , disabled: disabled , size: size , color: color  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            selected && "selected",
+            disabled && "disabled",
+            fullWidth && "fullWidth",
+            `size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            color
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $85ee02a8e916de61$export$21f89b560b65a301), classes);
+};
+const $fc79f6ee39fd6680$var$ToggleButtonRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $87f61933867dae5e$export$2e2bcd8739ae039), {
+    name: "MuiToggleButton",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            styles[`size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.size)}`]
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>{
+    let selectedColor = ownerState.color === "standard" ? theme.palette.text.primary : theme.palette[ownerState.color].main;
+    let selectedColorChannel;
+    if (theme.vars) {
+        selectedColor = ownerState.color === "standard" ? theme.vars.palette.text.primary : theme.vars.palette[ownerState.color].main;
+        selectedColorChannel = ownerState.color === "standard" ? theme.vars.palette.text.primaryChannel : theme.vars.palette[ownerState.color].mainChannel;
+    }
+    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, theme.typography.button, {
+        borderRadius: (theme.vars || theme).shape.borderRadius,
+        padding: 11,
+        border: `1px solid ${(theme.vars || theme).palette.divider}`,
+        color: (theme.vars || theme).palette.action.active
+    }, ownerState.fullWidth && {
+        width: "100%"
+    }, {
+        [`&.${(0, $85ee02a8e916de61$export$2e2bcd8739ae039).disabled}`]: {
+            color: (theme.vars || theme).palette.action.disabled,
+            border: `1px solid ${(theme.vars || theme).palette.action.disabledBackground}`
+        },
+        "&:hover": {
+            textDecoration: "none",
+            // Reset on mouse devices
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / ${theme.vars.palette.action.hoverOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.text.primary, theme.palette.action.hoverOpacity),
+            "@media (hover: none)": {
+                backgroundColor: "transparent"
+            }
+        },
+        [`&.${(0, $85ee02a8e916de61$export$2e2bcd8739ae039).selected}`]: {
+            color: selectedColor,
+            backgroundColor: theme.vars ? `rgba(${selectedColorChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(selectedColor, theme.palette.action.selectedOpacity),
+            "&:hover": {
+                backgroundColor: theme.vars ? `rgba(${selectedColorChannel} / calc(${theme.vars.palette.action.selectedOpacity} + ${theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(selectedColor, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity),
+                // Reset on touch devices, it doesn't add specificity
+                "@media (hover: none)": {
+                    backgroundColor: theme.vars ? `rgba(${selectedColorChannel} / ${theme.vars.palette.action.selectedOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(selectedColor, theme.palette.action.selectedOpacity)
+                }
+            }
+        }
+    }, ownerState.size === "small" && {
+        padding: 7,
+        fontSize: theme.typography.pxToRem(13)
+    }, ownerState.size === "large" && {
+        padding: 15,
+        fontSize: theme.typography.pxToRem(15)
+    });
+});
+const $fc79f6ee39fd6680$var$ToggleButton = /*#__PURE__*/ $d4J5n.forwardRef(function ToggleButton(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiToggleButton"
+    });
+    const { children: children , className: className , color: color = "standard" , disabled: disabled = false , disableFocusRipple: disableFocusRipple = false , fullWidth: fullWidth = false , onChange: onChange , onClick: onClick , selected: selected , size: size = "medium" , value: value  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $fc79f6ee39fd6680$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        color: color,
+        disabled: disabled,
+        disableFocusRipple: disableFocusRipple,
+        fullWidth: fullWidth,
+        size: size
+    });
+    const classes = $fc79f6ee39fd6680$var$useUtilityClasses(ownerState);
+    const handleChange = (event)=>{
+        if (onClick) {
+            onClick(event, value);
+            if (event.defaultPrevented) return;
+        }
+        if (onChange) onChange(event, value);
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($fc79f6ee39fd6680$var$ToggleButtonRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        disabled: disabled,
+        focusRipple: !disableFocusRipple,
+        ref: ref,
+        onClick: handleChange,
+        onChange: onChange,
+        value: value,
+        ownerState: ownerState,
+        "aria-pressed": selected
+    }, other, {
+        children: children
+    }));
+});
+var $fc79f6ee39fd6680$export$2e2bcd8739ae039 = $fc79f6ee39fd6680$var$ToggleButton;
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $f5db4c2b97f211a6$export$2e2bcd8739ae039(value, candidate) {
+    if (candidate === undefined || value === undefined) return false;
+    if (Array.isArray(candidate)) return candidate.indexOf(value) >= 0;
+    return value === candidate;
+}
+
+
+
+
+function $0f6024804fa583f7$export$44aa3ae5b353cef1(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiToggleButtonGroup", slot);
+}
+const $0f6024804fa583f7$var$toggleButtonGroupClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiToggleButtonGroup", [
+    "root",
+    "selected",
+    "vertical",
+    "disabled",
+    "grouped",
+    "groupedHorizontal",
+    "groupedVertical"
+]);
+var $0f6024804fa583f7$export$2e2bcd8739ae039 = $0f6024804fa583f7$var$toggleButtonGroupClasses;
+
+
+
+const $267ddc6d673c1b4e$var$_excluded = [
+    "children",
+    "className",
+    "color",
+    "disabled",
+    "exclusive",
+    "fullWidth",
+    "onChange",
+    "orientation",
+    "size",
+    "value"
+];
+const $267ddc6d673c1b4e$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , orientation: orientation , fullWidth: fullWidth , disabled: disabled  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            orientation === "vertical" && "vertical",
+            fullWidth && "fullWidth"
+        ],
+        grouped: [
+            "grouped",
+            `grouped${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(orientation)}`,
+            disabled && "disabled"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $0f6024804fa583f7$export$44aa3ae5b353cef1), classes);
+};
+const $267ddc6d673c1b4e$var$ToggleButtonGroupRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiToggleButtonGroup",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            {
+                [`& .${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).grouped}`]: styles.grouped
+            },
+            {
+                [`& .${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).grouped}`]: styles[`grouped${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.orientation)}`]
+            },
+            styles.root,
+            ownerState.orientation === "vertical" && styles.vertical,
+            ownerState.fullWidth && styles.fullWidth
+        ];
+    }
+})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        display: "inline-flex",
+        borderRadius: (theme.vars || theme).shape.borderRadius
+    }, ownerState.orientation === "vertical" && {
+        flexDirection: "column"
+    }, ownerState.fullWidth && {
+        width: "100%"
+    }, {
+        [`& .${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).grouped}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.orientation === "horizontal" ? {
+            "&:not(:first-of-type)": {
+                marginLeft: -1,
+                borderLeft: "1px solid transparent",
+                borderTopLeftRadius: 0,
+                borderBottomLeftRadius: 0
+            },
+            "&:not(:last-of-type)": {
+                borderTopRightRadius: 0,
+                borderBottomRightRadius: 0
+            },
+            [`&.${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).selected} + .${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).grouped}.${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).selected}`]: {
+                borderLeft: 0,
+                marginLeft: 0
+            }
+        } : {
+            "&:not(:first-of-type)": {
+                marginTop: -1,
+                borderTop: "1px solid transparent",
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0
+            },
+            "&:not(:last-of-type)": {
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0
+            },
+            [`&.${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).selected} + .${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).grouped}.${(0, $0f6024804fa583f7$export$2e2bcd8739ae039).selected}`]: {
+                borderTop: 0,
+                marginTop: 0
+            }
+        })
+    }));
+const $267ddc6d673c1b4e$var$ToggleButtonGroup = /*#__PURE__*/ $d4J5n.forwardRef(function ToggleButtonGroup(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiToggleButtonGroup"
+    });
+    const { children: children , className: className , color: color = "standard" , disabled: disabled = false , exclusive: exclusive = false , fullWidth: fullWidth = false , onChange: onChange , orientation: orientation = "horizontal" , size: size = "medium" , value: value  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $267ddc6d673c1b4e$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        disabled: disabled,
+        fullWidth: fullWidth,
+        orientation: orientation,
+        size: size
+    });
+    const classes = $267ddc6d673c1b4e$var$useUtilityClasses(ownerState);
+    const handleChange = (event, buttonValue)=>{
+        if (!onChange) return;
+        const index = value && value.indexOf(buttonValue);
+        let newValue;
+        if (value && index >= 0) {
+            newValue = value.slice();
+            newValue.splice(index, 1);
+        } else newValue = value ? value.concat(buttonValue) : [
+            buttonValue
+        ];
+        onChange(event, newValue);
+    };
+    const handleExclusiveChange = (event, buttonValue)=>{
+        if (!onChange) return;
+        onChange(event, value === buttonValue ? null : buttonValue);
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($267ddc6d673c1b4e$var$ToggleButtonGroupRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        role: "group",
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ref: ref,
+        ownerState: ownerState
+    }, other, {
+        children: $d4J5n.Children.map(children, (child)=>{
+            if (!/*#__PURE__*/ $d4J5n.isValidElement(child)) return null;
+            return /*#__PURE__*/ $d4J5n.cloneElement(child, {
+                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.grouped, child.props.className),
+                onChange: exclusive ? handleExclusiveChange : handleChange,
+                selected: child.props.selected === undefined ? (0, $f5db4c2b97f211a6$export$2e2bcd8739ae039)(child.props.value, value) : child.props.selected,
+                size: child.props.size || size,
+                fullWidth: fullWidth,
+                color: child.props.color || color,
+                disabled: child.props.disabled || disabled
+            });
+        })
+    }));
+});
+var $267ddc6d673c1b4e$export$2e2bcd8739ae039 = $267ddc6d673c1b4e$var$ToggleButtonGroup;
+
+
+
 
 
 
@@ -42333,24 +42661,44 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
 
 
 
+
 class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
-    constructor(obj){
-        this.template = obj.template;
-        this.key = obj.key;
-        this.type = obj.type;
-        this.name = obj.name;
-        this.icon = obj.icon;
-        this.required = obj.required;
-        this.repeated = obj.repeated;
-        this.parent = obj.parent;
-        this.children = obj.children;
-        this.collection = obj.collection;
-        this.unit = obj.unit;
-        this.obj = obj.obj;
-        this.index = obj.index;
+    constructor(item){
+        this.template = item.template;
+        this.key = item.key;
+        this.type = item.type;
+        this.name = item.name;
+        this.icon = item.icon;
+        this.alert = item.alert;
+        this.required = item.required;
+        this.repeated = item.repeated;
+        this.parent = item.parent;
+        this.children = item.children;
+        this.collection = item.collection;
+        this.unit = item.unit;
+        this.obj = item.obj;
+        this.index = item.index;
     }
 }
 
+
+
+class $549379eae42a48da$export$84712d0562a614b8 extends (0, $1238fd0f4bef3443$export$67c95d00e574f6b6) {
+    constructor(parent){
+        super({
+            template: parent.template,
+            key: `${parent.key}.?`,
+            name: "(add sub-item)",
+            type: "placeholder",
+            icon: "placeholder",
+            parent: parent,
+            collection: [],
+            unit: undefined,
+            obj: undefined,
+            index: 0
+        });
+    }
+}
 
 
 function $72249484b46a0533$export$a2dea178c28a0308(items, key) {
@@ -42450,7 +42798,7 @@ function $932c041178f6dd7a$export$5adbceee7f7ddc90(text) {
 }
 
 
-function $621975ba229ea888$export$490ebbf7c6884638(list, basename = "new") {
+function $621975ba229ea888$export$490ebbf7c6884638(list, basename) {
     for(let n = 1; n <= 100; ++n){
         const name = `${basename}${n}`;
         if (!list.some((obj)=>obj.name === name)) return name;
@@ -42474,80 +42822,16 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             }
         } else if (typeof obj === "object") this.obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(obj);
         else this.obj = {};
-        this.children = this.actions(this.obj.actions);
+        this.children = this.renderActions(this.obj.actions);
     }
-    addAction(type) {
-        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
-        const item = this.selected();
-        const actions = (0, $a0bb46a5ccd801f1$export$a1556c689e18ef72)(item) || this.obj.actions;
-        let action;
-        if (type === "break") action = {
-            break: {}
-        };
-        else if (type === "click") action = {
-            click: {}
-        };
-        else if (type === "each") action = {
-            each: {}
-        };
-        else if (type === "error") action = {
-            error: {}
-        };
-        else if (type === "repeat") action = {
-            repeat: {}
-        };
-        else if (type === "select") action = {
-            select: [
-                {}
-            ]
-        };
-        else if (type === "snooze") action = {
-            snooze: [
-                1,
-                2
-            ]
-        };
-        else if (type === "transform") action = {
-            transform: [
-                {}
-            ]
-        };
-        else if (type === "yield") action = {
-            yield: {}
-        };
-        else if (type === "waitfor") action = {
-            waitfor: {}
-        };
-        else return;
-        if (item) actions.splice(item.index + 1, 0, action);
-        else actions.push(action);
-        this.setSelected(action);
-    }
-    addSubAction() {
-        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
-        if (item) {
-            if (item.type === "action" && item.name === "select") {
-                const selectors = item.obj;
-                const name = (0, $621975ba229ea888$export$490ebbf7c6884638)(selectors);
-                selectors.push({
-                    name: name
-                });
-            } else if (item.type === "select" && item.parent) {
-                const selectors = item.parent.obj;
-                const name = (0, $621975ba229ea888$export$490ebbf7c6884638)(selectors);
-                selectors.push({
-                    name: name
-                });
-            }
+    addItem(action) {
+        if (action) {
+            this.addAction(action);
+            return true;
+        } else {
+            const added = this.addSelected();
+            return added;
         }
-    }
-    canAddSubAction() {
-        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
-        if (item) {
-            if (item.type === "action" && item.name === "select") return true;
-            else if (item.type === "select" && item.parent) return true;
-        }
-        return false;
     }
     duplicateItem(item) {
         const unit = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(item.unit);
@@ -42593,33 +42877,13 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             else this.setSelected(undefined);
         }
     }
-    async run() {
-        if ((0, $6767c619f5de943e$exports).active) try {
-            const result = await (0, $6767c619f5de943e$exports).applyTemplate(this.obj);
-            return result;
-        } catch (err) {
-            return {
-                errors: [
-                    {
-                        message: err instanceof Error ? err.message : JSON.stringify(err)
-                    }
-                ]
-            };
-        }
-        else return {
-            data: {
-                title: "Example Domain",
-                href: "https://www.example.com/"
-            }
-        };
-    }
     selected() {
         const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
         return item;
     }
     setSelected(key) {
         if (key) {
-            if (!(key instanceof (0, $1238fd0f4bef3443$export$67c95d00e574f6b6))) this.children = this.actions(this.obj.actions);
+            if (!(key instanceof (0, $1238fd0f4bef3443$export$67c95d00e574f6b6))) this.children = this.renderActions(this.obj.actions);
             const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, key);
             if (item) this.obj.selected = item.key;
             return item;
@@ -42628,7 +42892,92 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             return undefined;
         }
     }
-    actions(collection, parent) {
+    addAction(type) {
+        if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
+        const item = this.selected();
+        const actions = (0, $a0bb46a5ccd801f1$export$a1556c689e18ef72)(item) || this.obj.actions;
+        let action;
+        if (type === "break") action = {
+            break: {}
+        };
+        else if (type === "click") action = {
+            click: {}
+        };
+        else if (type === "each") action = {
+            each: {}
+        };
+        else if (type === "error") action = {
+            error: {}
+        };
+        else if (type === "repeat") action = {
+            repeat: {}
+        };
+        else if (type === "select") action = {
+            select: [
+                {
+                    name: "value1",
+                    query: [
+                        [
+                            "h1"
+                        ]
+                    ]
+                }
+            ]
+        };
+        else if (type === "snooze") action = {
+            snooze: [
+                1,
+                2
+            ]
+        };
+        else if (type === "transform") action = {
+            transform: [
+                {}
+            ]
+        };
+        else if (type === "yield") action = {
+            yield: {}
+        };
+        else if (type === "waitfor") action = {
+            waitfor: {}
+        };
+        else return;
+        if (item) actions.splice(item.index + 1, 0, action);
+        else actions.push(action);
+        this.setSelected(action);
+    }
+    addPlaceholder(placeholder) {
+        if (placeholder.parent?.type === "select") {
+            const parentObj = placeholder.parent.obj;
+            const select = {
+                name: "value1"
+            };
+            parentObj.select = [
+                select
+            ];
+            this.setSelected(select);
+            return true;
+        }
+        return false;
+    }
+    addSelected() {
+        const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
+        debugger;
+        if (item) {
+            if (item.type === "placeholder") return this.addPlaceholder(item);
+            else if (item.type === "select" && item.collection) {
+                const name = (0, $621975ba229ea888$export$490ebbf7c6884638)(item.collection, "value");
+                const obj = {
+                    name: name
+                };
+                item.collection.push(obj);
+                this.setSelected(obj);
+                return true;
+            }
+        }
+        return false;
+    }
+    renderActions(collection, parent) {
         if (collection) {
             const ordinals = {};
             return collection.map((action, index)=>{
@@ -42637,26 +42986,74 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 const ordinal = ordinals[name];
                 const key = parent ? `${parent.key}.${name}.${ordinal}` : `${name}.${ordinal}`;
                 const { [name]: obj  } = action; // assign to `obj` the value within `action` with a key of `name`
+                const conditional = typeof obj === "object" && obj !== null ? obj.hasOwnProperty("when") : false;
                 const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
                     template: this,
                     key: key,
                     name: name,
                     type: "action",
                     icon: name,
+                    conditional: conditional,
                     parent: parent,
                     collection: collection,
                     unit: action,
                     obj: obj,
                     index: index
                 });
-                if (name === "select" && obj instanceof Array) item.children = this.selects(obj, item);
-                if (name === "each" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
-                if (name === "repeat" && obj.actions instanceof Array) item.children = this.actions(obj.actions, item);
+                if (name === "break") {
+                    const breakObj = obj;
+                    item.conditional = !!breakObj.when;
+                } else if (name === "click") {
+                    const clickObj = obj;
+                    if (!clickObj.query && !clickObj.waitfor) item.alert = "query or waitfor required";
+                    item.conditional = !!clickObj.when;
+                } else if (name === "each") {
+                    const eachObj = obj;
+                    if (eachObj.actions instanceof Array && eachObj.actions.length > 0) item.children = this.renderActions(eachObj.actions, item);
+                    else {
+                        item.children = [
+                            new (0, $549379eae42a48da$export$84712d0562a614b8)(item)
+                        ];
+                        item.alert = "action required";
+                    }
+                    item.conditional = !!eachObj.when;
+                } else if (name === "error") {
+                    const errorObj = obj;
+                    if (!errorObj.message) item.alert = "uninitialized";
+                    item.conditional = !!errorObj.when;
+                } else if (name === "repeat") {
+                    const repeatObj = obj;
+                    if (repeatObj.actions instanceof Array) item.children = this.renderActions(repeatObj.actions, item);
+                    else {
+                        item.children = [
+                            new (0, $549379eae42a48da$export$84712d0562a614b8)(item)
+                        ];
+                        item.alert = "action required";
+                    }
+                // item.conditional = !!repeatObj.when; // todo
+                } else if (name === "select") {
+                    const selectObj = obj;
+                    if (selectObj instanceof Array && selectObj.length > 0) item.children = this.renderSelect(selectObj, item);
+                    item.conditional = item.children ? item.children.some((child)=>child.conditional) : false;
+                } else if (name === "snooze") ;
+                else if (name === "transform") {
+                    const transformObj = obj;
+                // todo: implement transform adapters
+                //item.conditional = item.children ? item.children.some(child => child.conditional) : false;
+                } else if (name === "waitfor") {
+                    const waitforObj = obj;
+                    if (!waitforObj.query && !waitforObj.select) item.alert = "query or select required";
+                    item.conditional = !!waitforObj.when;
+                } else if (name === "yield") {
+                    const yieldObj = obj;
+                    item.conditional = !!yieldObj.when;
+                }
+                if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
                 return item;
             });
         } else return [];
     }
-    pivot(obj, parent) {
+    renderPivot(obj, parent) {
         const key = `${parent.key}.pivot`;
         const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
             template: this,
@@ -42670,10 +43067,10 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             obj: obj,
             index: 0
         });
-        item.children = this.subselect(obj, item);
+        item.children = this.renderSubselect(obj, item);
         return item;
     }
-    selects(collection, parent) {
+    renderSelect(collection, parent) {
         return collection.map((select, index)=>{
             const key = `${parent.key}.${select.name || "?"}`;
             const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
@@ -42690,18 +43087,21 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 obj: select,
                 index: index
             });
-            item.children = this.subselect(select, item);
+            item.children = this.renderSubselect(select, item);
+            if (!select.query && !select.value && !select.union) item.alert = "query or value required";
+            if (select.type === "object" && !select.select && !select.pivot && !select.union) item.alert = "object type requires additional initialization";
             return item;
         });
     }
-    subselect(obj, parent) {
-        if (obj.select) return this.selects(obj.select, parent);
-        else if (obj.union) return this.union(obj.union, parent);
-        else if (obj.pivot) return [
-            this.pivot(obj.pivot, parent)
+    renderSubselect(obj, parent) {
+        if (obj.pivot) return [
+            this.renderPivot(obj.pivot, parent)
         ];
+        else if (obj.union) return this.renderUnion(obj.union, parent);
+        else if (obj.select) return this.renderSelect(obj.select, parent);
+        else return undefined;
     }
-    union(collection, parent) {
+    renderUnion(collection, parent) {
         return collection.map((obj, index)=>{
             const key = `${parent.key}.union.${index}`;
             const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
@@ -42716,7 +43116,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 obj: obj,
                 index: index
             });
-            item.children = this.subselect(obj, item);
+            item.children = this.renderSubselect(obj, item);
             return item;
         });
     }
@@ -42815,6 +43215,8 @@ parcelRequire("d4J5n");
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
+
 var $b9093140ea6d98ca$export$9eeb22c0bba4ed5e;
 var $b9093140ea6d98ca$export$b0184c04dbb75cbd;
 var $b9093140ea6d98ca$export$93b9911b232b246c;
@@ -42845,6 +43247,41 @@ $b9093140ea6d98ca$export$a22775fa5e2eebd9 = function(instance, schema, options) 
 
 
 
+async function $98393c94ae7378a9$export$f78a296632f66e69(template, schema) {
+    if ((0, $6767c619f5de943e$exports).active) try {
+        const result = await (0, $6767c619f5de943e$exports).applyTemplate(template.obj);
+        if (result?.data && schema) {
+            const validator = new (0, $b9093140ea6d98ca$export$9eeb22c0bba4ed5e)();
+            const data = (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data);
+            const { errors: errors  } = validator.validate(data, schema);
+            for (const error of errors){
+                const code = `contract-${(0, $3ee7bf181cfaaad0$export$1d20a92cf1845969)(error.name)}`;
+                const message = error.stack.replace(/^(instance\b)/, "Object");
+                result.errors.push({
+                    code: code,
+                    message: message,
+                    level: 1
+                });
+            }
+        }
+        return result;
+    } catch (err) {
+        return {
+            errors: [
+                {
+                    message: err instanceof Error ? err.message : JSON.stringify(err)
+                }
+            ]
+        };
+    }
+    else return {
+        data: {
+            title: "Example Domain",
+            href: "https://www.example.com/"
+        }
+    };
+}
+
 
 
 function $d99881d9fee9589c$export$5839ba03810e8481({ children: children  }) {
@@ -42855,21 +43292,7 @@ function $d99881d9fee9589c$export$5839ba03810e8481({ children: children  }) {
     (0, $d4J5n.useEffect)(()=>{
         if (autoRefresh) {
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-            if (template.obj.actions instanceof Array) template.run().then((result)=>{
-                if (result?.data && contract) {
-                    const validator = new (0, $b9093140ea6d98ca$export$9eeb22c0bba4ed5e)();
-                    const data = (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data);
-                    const { errors: errors  } = validator.validate(data, contract);
-                    for (const error of errors){
-                        const code = `contract-${(0, $3ee7bf181cfaaad0$export$1d20a92cf1845969)(error.name)}`;
-                        const message = error.stack.replace(/^(instance\b)/, "Object");
-                        result.errors.push({
-                            code: code,
-                            message: message,
-                            level: 1
-                        });
-                    }
-                }
+            if (template.obj.actions instanceof Array && template.obj.actions.length > 0) (0, $98393c94ae7378a9$export$f78a296632f66e69)(template, contract).then((result)=>{
                 setResult(result);
             });
             else setResult(undefined);
@@ -43116,12 +43539,6 @@ var $f9e34cee13fe7931$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $012087529d88be7e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 2H4c-1.1 0-2 .9-2 2v10h2V4h10V2zm4 4H8c-1.1 0-2 .9-2 2v10h2V8h10V6zm2 4h-8c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8c0-1.1-.9-2-2-2zm0 10h-8v-8h8v8z"
-}), "AutoAwesomeMotionOutlined");
-
-
-
 var $ba263eacaf41f616$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
 }), "Autorenew");
@@ -43343,6 +43760,18 @@ var $9ce284b7467ad2b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $fb466aae3024022c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10h8c1.1 0 2-.9 2-2v-8c0-5.51-4.49-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+}), "Loupe");
+
+
+
+var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
+}), "LowPriority");
+
+
+
 var $d441ee9f6f9a92ef$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
         cx: "10",
@@ -43371,6 +43800,12 @@ var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m14.17 13.71 1.4-2.42c.09-.15.05-.34-.08-.45l-1.48-1.16c.03-.22.05-.45.05-.68s-.02-.46-.05-.69l1.48-1.16c.13-.11.17-.3.08-.45l-1.4-2.42c-.09-.15-.27-.21-.43-.15l-1.74.7c-.36-.28-.75-.51-1.18-.69l-.26-1.85c-.03-.16-.18-.29-.35-.29h-2.8c-.17 0-.32.13-.35.3L6.8 4.15c-.42.18-.82.41-1.18.69l-1.74-.7c-.16-.06-.34 0-.43.15l-1.4 2.42c-.09.15-.05.34.08.45l1.48 1.16c-.03.22-.05.45-.05.68s.02.46.05.69l-1.48 1.16c-.13.11-.17.3-.08.45l1.4 2.42c.09.15.27.21.43.15l1.74-.7c.36.28.75.51 1.18.69l.26 1.85c.03.16.18.29.35.29h2.8c.17 0 .32-.13.35-.3l.26-1.85c.42-.18.82-.41 1.18-.69l1.74.7c.16.06.34 0 .43-.15zM8.81 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm13.11 7.67-.96-.74c.02-.14.04-.29.04-.44 0-.15-.01-.3-.04-.44l.95-.74c.08-.07.11-.19.05-.29l-.9-1.55c-.05-.1-.17-.13-.28-.1l-1.11.45c-.23-.18-.48-.33-.76-.44l-.17-1.18c-.01-.12-.11-.2-.21-.2h-1.79c-.11 0-.21.08-.22.19l-.17 1.18c-.27.12-.53.26-.76.44l-1.11-.45c-.1-.04-.22 0-.28.1l-.9 1.55c-.05.1-.04.22.05.29l.95.74c-.02.14-.03.29-.03.44 0 .15.01.3.03.44l-.95.74c-.08.07-.11.19-.05.29l.9 1.55c.05.1.17.13.28.1l1.11-.45c.23.18.48.33.76.44l.17 1.18c.02.11.11.19.22.19h1.79c.11 0 .21-.08.22-.19l.17-1.18c.27-.12.53-.26.75-.44l1.12.45c.1.04.22 0 .28-.1l.9-1.55c.06-.09.03-.21-.05-.28zm-4.29.16c-.74 0-1.35-.6-1.35-1.35s.6-1.35 1.35-1.35 1.35.6 1.35 1.35-.61 1.35-1.35 1.35z"
 }), "MiscellaneousServices");
+
+
+
+var $77baa0da2e03e76e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+}), "MoreVert");
 
 
 
@@ -43444,6 +43879,12 @@ var $b077eda8e4d472bc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $47e9a2a37b32c3e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78 3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
 }), "VisibilityOff");
+
+
+
+var $b960753d486198ce$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 5.99 19.53 19H4.47L12 5.99M12 2 1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
+}), "WarningAmberOutlined");
 
 
 
@@ -45866,9 +46307,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                         size: "small",
                         onClick: ()=>setSidebarOpen(true),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {
-                            fontSize: "small"
-                        })
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {})
                     }),
                     file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
                         label: file,
@@ -45898,9 +46337,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "visual-editor" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {})
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -45909,9 +46346,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "code-editor" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6c65cc6bd5ac31b5$export$2e2bcd8739ae039), {})
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -45920,9 +46355,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "test-runner" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {})
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -45931,9 +46364,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "template-settings" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $163aeff49cb93c90$export$2e2bcd8739ae039), {})
                         })
                     })
                 ]
@@ -46211,10 +46642,13 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
         ...props
     });
+    else if (name === "placeholder") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb466aae3024022c$export$2e2bcd8739ae039), {
+        ...props
+    });
     else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $012087529d88be7e$export$2e2bcd8739ae039), {
+    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $77baa0da2e03e76e$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
@@ -47091,6 +47525,102 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $ab597aea378e8072$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange , sx: sx  })=>{
+    const { type: type1 , mode: mode1  } = (0, $d4J5n.useMemo)(()=>{
+        const obj = item?.obj;
+        const type = obj.type;
+        let mode;
+        if (obj.select) mode = "select";
+        else if (obj.pivot) mode = "pivot";
+        else if (obj.union) mode = "union";
+        else mode = undefined;
+        return {
+            type: type,
+            mode: mode
+        };
+    }, [
+        item
+    ]);
+    function handleChangeType(event, value) {
+        const obj = item?.obj;
+        obj.type = value;
+        obj.select = undefined;
+        obj.pivot = undefined;
+        obj.union = undefined;
+        onChange(event);
+    }
+    function handleChangeMode(event, value) {
+        const obj = item?.obj;
+        if (value === "select") {
+            obj.select = [
+                {}
+            ];
+            obj.pivot = undefined;
+            obj.union = undefined;
+        } else if (value === "pivot") {
+            obj.select = undefined;
+            obj.pivot = {};
+            obj.union = undefined;
+        } else if (value === "union") {
+            obj.select = undefined;
+            obj.pivot = undefined;
+            obj.union = [
+                {}
+            ];
+        }
+        onChange(event);
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        sx: sx,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
+                value: type1,
+                onChange: handleChangeType
+            }),
+            type1 === "object" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $267ddc6d673c1b4e$export$2e2bcd8739ae039), {
+                value: mode1,
+                size: "small",
+                exclusive: true,
+                onChange: handleChangeMode,
+                sx: {
+                    ml: 1
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
+                        value: "select",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "select",
+                            fontSize: "small"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
+                        value: "pivot",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "pivot",
+                            fontSize: "small"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
+                        value: "union",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
+                            name: "union",
+                            fontSize: "small"
+                        })
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
 
 var $720d345d88dda83e$export$2e2bcd8739ae039 = ({ query: query1 , name: name , onChange: onChange  })=>{
     const [open, setOpen] = (0, $d4J5n.useState)(false);
@@ -47266,12 +47796,28 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
+
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "query"
+                        }),
+                        !obj.query && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "click",
                     query: obj.query,
@@ -47353,12 +47899,28 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
+
 var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "message"
+                        }),
+                        !obj.query && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "each",
                     query: obj.query,
@@ -47415,12 +47977,28 @@ var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
+
 var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                "message",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "message"
+                        }),
+                        !obj.message && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
                     variants: [
                         "string",
@@ -47582,6 +48160,7 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
+
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
@@ -47601,7 +48180,22 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 true
             ],
             [
-                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "query"
+                        }),
+                        !obj.query && !obj.value && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     query: obj.query,
                     name: obj.name,
@@ -47616,13 +48210,25 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 true
             ],
             [
-                "type",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
-                    value: obj.type,
-                    onChange: (event, value)=>{
-                        obj.type = value;
-                        onChange(event);
-                    }
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "type"
+                        }),
+                        obj.type === "object" && !obj.select && !obj.pivot && !obj.union && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ab597aea378e8072$export$2e2bcd8739ae039), {
+                    item: item,
+                    onChange: onChange
                 }),
                 "Determines the type of the property value.",
                 true
@@ -47984,12 +48590,28 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
+
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            children: "query"
+                        }),
+                        !obj.query && !obj.select && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    ]
+                }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "waitfor",
                     query: obj.query,
@@ -48358,6 +48980,7 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
+
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
     const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
@@ -48408,55 +49031,52 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                             position: "relative",
                             top: -6,
                             left: 2,
-                            height: 12
+                            height: 12,
+                            mr: 1
                         },
                         children: name(item1)
                     }),
-                    item1.required && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "required",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            variant: "caption",
+                    item1.conditional && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "conditional",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5317019d8b872cfb$export$2e2bcd8739ae039), {
+                            fontSize: "small",
                             sx: {
-                                position: "relative",
-                                top: -6,
-                                left: 4,
-                                color: "primary.light",
-                                fontWeight: "bold"
-                            },
-                            children: "!"
+                                color: "primary.light"
+                            }
                         })
                     }),
                     item1.repeated && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "repeated",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "repeated",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $77baa0da2e03e76e$export$2e2bcd8739ae039), {
                             fontSize: "small",
                             sx: {
-                                color: "primary.light",
-                                ml: 1
+                                color: "primary.light"
                             }
                         })
                     }),
-                    item1.obj.union && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    item1.obj?.union && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "union",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "union",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cf56af1cd2ad706b$export$2e2bcd8739ae039), {
                             fontSize: "small",
                             sx: {
-                                color: "primary.light",
-                                ml: 1
+                                color: "primary.light"
                             }
                         })
                     }),
-                    item1.obj.pivot && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                    item1.obj?.pivot && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "pivot",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "pivot",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
                             fontSize: "small",
                             sx: {
-                                color: "primary.light",
-                                ml: 1
+                                color: "primary.light"
                             }
+                        })
+                    }),
+                    item1.alert && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: item1.alert,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small"
                         })
                     })
                 ]
@@ -48589,9 +49209,8 @@ var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const types = advanced || expanded ? $d92259c5199083bc$var$ActionTypes.sort((a, b)=>a.name.localeCompare(b.name)) : $d92259c5199083bc$var$ActionTypes.filter((type)=>expanded || !type.advanced);
+    const actions = advanced || expanded ? $d92259c5199083bc$var$ActionTypes.sort((a, b)=>a.name.localeCompare(b.name)) : $d92259c5199083bc$var$ActionTypes.filter((type)=>expanded || !type.advanced);
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-    const canAddSubAction = template.canAddSubAction();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -48615,8 +49234,12 @@ var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
                     size: "small",
                     color: "secondary",
                     onClick: (event)=>{
-                        setAnchor(event.currentTarget);
-                        setOpen(true);
+                        const added = template.addItem();
+                        if (added) setTemplate(template.json());
+                        else {
+                            setAnchor(event.currentTarget);
+                            setOpen(true);
+                        }
                     },
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {})
                 })
@@ -48634,54 +49257,31 @@ var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
                     horizontal: "right"
                 },
                 children: [
-                    types.map((type)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                            title: type.help,
+                    actions.map((action)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: action.help,
                             arrow: true,
                             placement: "right",
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
                                 onClick: ()=>{
-                                    template.addAction(type.name);
+                                    template.addItem(action.name);
                                     setTemplate(template.json());
                                     setOpen(false);
                                 },
                                 children: [
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                                        name: type.name,
+                                        name: action.name,
                                         fontSize: "small"
                                     }),
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                         sx: {
                                             ml: 1
                                         },
-                                        children: type.name
+                                        children: action.name
                                     })
                                 ]
                             })
                         })),
-                    (canAddSubAction || !advanced) && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
-                    canAddSubAction && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "Add a selector",
-                        arrow: true,
-                        placement: "right",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                            onClick: ()=>{
-                                template.addSubAction();
-                                setTemplate(template.json());
-                                setOpen(false);
-                            },
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
-                                    fontSize: "small"
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                    sx: {
-                                        ml: 1
-                                    },
-                                    children: "Add Selector"
-                                })
-                            ]
-                        })
-                    }),
+                    !advanced && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {}),
                     !advanced && expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "Hide advanced actions",
                         arrow: true,
