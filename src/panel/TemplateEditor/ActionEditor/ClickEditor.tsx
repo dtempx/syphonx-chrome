@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from "@mui/material";
+import { Stack, Switch, Typography } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
@@ -61,13 +61,16 @@ export default ({ item, onChange }: Props) => {
             ],
             [
                 "snooze",
-                <NumberRangeField
-                    value={obj.snooze as [number, number]}
-                    onChange={(event, value) => {
-                        obj.snooze = value as syphonx.SnoozeInterval;
-                        onChange(event);
-                    }}
-                />,
+                <Stack direction="row">
+                    <NumberRangeField
+                        value={obj.snooze as [number, number]}
+                        onChange={(event, value) => {
+                            obj.snooze = value as syphonx.SnoozeInterval;
+                            onChange(event);
+                        }}
+                    />
+                    <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
+                </Stack>,
                 "Number of seconds to snooze before the click.",
                 false
             ],

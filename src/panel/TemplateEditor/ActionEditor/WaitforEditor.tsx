@@ -3,10 +3,12 @@ import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
+    Stack,
     Switch,
     ToggleButton,
     ToggleButtonGroup,
-    Tooltip
+    Tooltip,
+    Typography
 } from "@mui/material";
 
 import {
@@ -134,14 +136,17 @@ export default ({ item, onChange }: Props) => {
                 ],
                 [
                     "timeout",
-                    <NumberField
-                        value={obj.timeout}
-                        onChange={(event, value) => {
-                            obj.timeout = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Number of seconds to wait before timing out.",
+                    <Stack direction="row">
+                        <NumberField
+                            value={obj.timeout}
+                            onChange={(event, value) => {
+                                obj.timeout = value;
+                                onChange(event);
+                            }}
+                        />
+                        <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
+                    </Stack>,
+                    "Number of seconds to wait before timing out. (default=30)",
                     obj.timeout !== undefined
                 ],
                 [

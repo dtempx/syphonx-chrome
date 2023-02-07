@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
 import { useApp, useTemplate } from "./context";
-import { Template } from "./lib";
 
 import {
     Box,
@@ -22,9 +21,8 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { template: json, file } = useTemplate();
+    const { file } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const template = new Template(json);
 
     return (
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>

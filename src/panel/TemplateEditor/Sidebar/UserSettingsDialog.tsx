@@ -22,8 +22,6 @@ export default ({ open, onClose }: Props) => {
         setAdvanced,
         autoOpen,
         setAutoOpen,
-        autoRefresh,
-        setAutoRefresh,
         debug,
         setDebug
     } = useApp();
@@ -49,14 +47,6 @@ export default ({ open, onClose }: Props) => {
                                 onChange={() => setAutoOpen(!autoOpen)}
                             />,
                             "Automatically opens the template default URL if enabled."
-                        ],
-                        [
-                            "Auto refresh data",
-                            <Switch
-                                checked={autoRefresh}
-                                onChange={() => setAutoRefresh(!autoRefresh)}
-                            />,
-                            "Automatically refreshes the data view."
                         ],
                         [
                             "Advanced mode",

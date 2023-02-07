@@ -10110,7 +10110,6 @@ $parcel$export($86049548edbb86a7$exports, "DialogTitle", () => $0d0d12e54088d016
 $parcel$export($86049548edbb86a7$exports, "Divider", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Drawer", () => $89021ce2ce45d642$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Fab", () => $f09768665decc43c$export$2e2bcd8739ae039);
-$parcel$export($86049548edbb86a7$exports, "Grid", () => $a8c96cc3b002d944$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "IconButton", () => $fa1dfc78f8375ab9$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "InputAdornment", () => $224cf55292bca498$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "LinearProgress", () => $2f97f7a2aae17371$export$2e2bcd8739ae039);
@@ -10128,14 +10127,12 @@ $parcel$export($86049548edbb86a7$exports, "Paper", () => $e1c08ee9f6edce16$expor
 $parcel$export($86049548edbb86a7$exports, "Select", () => $5cd693904b0d5801$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Stack", () => $ff1b9c20c47218e6$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Switch", () => $d30118e660fee7dd$export$2e2bcd8739ae039);
-$parcel$export($86049548edbb86a7$exports, "Tab", () => $be9f8767ed1da178$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Table", () => $795ce8072056b061$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TableBody", () => $c90d18d433fbb5ef$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TableCell", () => $4288686d451c9d61$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TableContainer", () => $6d21e7ab88a61fec$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TableHead", () => $70776c1ed0e29d8a$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TableRow", () => $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039);
-$parcel$export($86049548edbb86a7$exports, "Tabs", () => $de9f03f465a99f00$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "TextField", () => $e00f995e0f3cc83a$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "ToggleButton", () => $fc79f6ee39fd6680$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "ToggleButtonGroup", () => $267ddc6d673c1b4e$export$2e2bcd8739ae039);
@@ -13094,47 +13091,6 @@ function $5fd2f9659fb8c9c4$export$2e2bcd8739ae039(doc) {
     // https://developer.mozilla.org/en-US/docs/Web/API/Window/innerWidth#usage_notes
     const documentWidth = doc.documentElement.clientWidth;
     return Math.abs(window.innerWidth - documentWidth);
-}
-
-// Source from https://github.com/alitaheri/normalize-scroll-left
-let $2da6400a34bc736c$var$cachedType;
-function $2da6400a34bc736c$export$a10970ffb6510128() {
-    if ($2da6400a34bc736c$var$cachedType) return $2da6400a34bc736c$var$cachedType;
-    const dummy = document.createElement("div");
-    const container = document.createElement("div");
-    container.style.width = "10px";
-    container.style.height = "1px";
-    dummy.appendChild(container);
-    dummy.dir = "rtl";
-    dummy.style.fontSize = "14px";
-    dummy.style.width = "4px";
-    dummy.style.height = "1px";
-    dummy.style.position = "absolute";
-    dummy.style.top = "-1000px";
-    dummy.style.overflow = "scroll";
-    document.body.appendChild(dummy);
-    $2da6400a34bc736c$var$cachedType = "reverse";
-    if (dummy.scrollLeft > 0) $2da6400a34bc736c$var$cachedType = "default";
-    else {
-        dummy.scrollLeft = 1;
-        if (dummy.scrollLeft === 0) $2da6400a34bc736c$var$cachedType = "negative";
-    }
-    document.body.removeChild(dummy);
-    return $2da6400a34bc736c$var$cachedType;
-}
-function $2da6400a34bc736c$export$3c615b88e5d7e4f6(element, direction) {
-    const scrollLeft = element.scrollLeft;
-    // Perform the calculations only when direction is rtl to avoid messing up the ltr behavior
-    if (direction !== "rtl") return scrollLeft;
-    const type = $2da6400a34bc736c$export$a10970ffb6510128();
-    switch(type){
-        case "negative":
-            return element.scrollWidth - element.clientWidth + scrollLeft;
-        case "reverse":
-            return element.scrollWidth - element.clientWidth - scrollLeft;
-        default:
-            return scrollLeft;
-    }
 }
 
 
@@ -25672,417 +25628,6 @@ var $f09768665decc43c$export$2e2bcd8739ae039 = $f09768665decc43c$var$Fab;
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-/**
- * @ignore - internal component.
- */ const $6958402c349f866b$var$GridContext = /*#__PURE__*/ $d4J5n.createContext();
-var $6958402c349f866b$export$2e2bcd8739ae039 = $6958402c349f866b$var$GridContext;
-
-
-
-
-function $54cd19e14d764e0f$export$9973ac5fd0181f33(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiGrid", slot);
-}
-const $54cd19e14d764e0f$var$SPACINGS = [
-    0,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10
-];
-const $54cd19e14d764e0f$var$DIRECTIONS = [
-    "column-reverse",
-    "column",
-    "row-reverse",
-    "row"
-];
-const $54cd19e14d764e0f$var$WRAPS = [
-    "nowrap",
-    "wrap-reverse",
-    "wrap"
-];
-const $54cd19e14d764e0f$var$GRID_SIZES = [
-    "auto",
-    true,
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-    10,
-    11,
-    12
-];
-const $54cd19e14d764e0f$var$gridClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiGrid", [
-    "root",
-    "container",
-    "item",
-    "zeroMinWidth",
-    // spacings
-    ...$54cd19e14d764e0f$var$SPACINGS.map((spacing)=>`spacing-xs-${spacing}`),
-    // direction values
-    ...$54cd19e14d764e0f$var$DIRECTIONS.map((direction)=>`direction-xs-${direction}`),
-    // wrap values
-    ...$54cd19e14d764e0f$var$WRAPS.map((wrap)=>`wrap-xs-${wrap}`),
-    // grid sizes for all breakpoints
-    ...$54cd19e14d764e0f$var$GRID_SIZES.map((size)=>`grid-xs-${size}`),
-    ...$54cd19e14d764e0f$var$GRID_SIZES.map((size)=>`grid-sm-${size}`),
-    ...$54cd19e14d764e0f$var$GRID_SIZES.map((size)=>`grid-md-${size}`),
-    ...$54cd19e14d764e0f$var$GRID_SIZES.map((size)=>`grid-lg-${size}`),
-    ...$54cd19e14d764e0f$var$GRID_SIZES.map((size)=>`grid-xl-${size}`)
-]);
-var $54cd19e14d764e0f$export$2e2bcd8739ae039 = $54cd19e14d764e0f$var$gridClasses;
-
-
-
-const $a8c96cc3b002d944$var$_excluded = [
-    "className",
-    "columns",
-    "columnSpacing",
-    "component",
-    "container",
-    "direction",
-    "item",
-    "rowSpacing",
-    "spacing",
-    "wrap",
-    "zeroMinWidth"
-];
-function $a8c96cc3b002d944$var$getOffset(val) {
-    const parse = parseFloat(val);
-    return `${parse}${String(val).replace(String(parse), "") || "px"}`;
-}
-function $a8c96cc3b002d944$export$ca2a698f6020fda({ theme: theme , ownerState: ownerState  }) {
-    let size;
-    return theme.breakpoints.keys.reduce((globalStyles, breakpoint)=>{
-        // Use side effect over immutability for better performance.
-        let styles = {};
-        if (ownerState[breakpoint]) size = ownerState[breakpoint];
-        if (!size) return globalStyles;
-        if (size === true) // For the auto layouting
-        styles = {
-            flexBasis: 0,
-            flexGrow: 1,
-            maxWidth: "100%"
-        };
-        else if (size === "auto") styles = {
-            flexBasis: "auto",
-            flexGrow: 0,
-            flexShrink: 0,
-            maxWidth: "none",
-            width: "auto"
-        };
-        else {
-            const columnsBreakpointValues = (0, $0f9225f907645704$export$980e6a259d807490)({
-                values: ownerState.columns,
-                breakpoints: theme.breakpoints.values
-            });
-            const columnValue = typeof columnsBreakpointValues === "object" ? columnsBreakpointValues[breakpoint] : columnsBreakpointValues;
-            if (columnValue === undefined || columnValue === null) return globalStyles;
-            // Keep 7 significant numbers.
-            const width = `${Math.round(size / columnValue * 10e7) / 10e5}%`;
-            let more = {};
-            if (ownerState.container && ownerState.item && ownerState.columnSpacing !== 0) {
-                const themeSpacing = theme.spacing(ownerState.columnSpacing);
-                if (themeSpacing !== "0px") {
-                    const fullWidth = `calc(${width} + ${$a8c96cc3b002d944$var$getOffset(themeSpacing)})`;
-                    more = {
-                        flexBasis: fullWidth,
-                        maxWidth: fullWidth
-                    };
-                }
-            }
-            // Close to the bootstrap implementation:
-            // https://github.com/twbs/bootstrap/blob/8fccaa2439e97ec72a4b7dc42ccc1f649790adb0/scss/mixins/_grid.scss#L41
-            styles = (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-                flexBasis: width,
-                flexGrow: 0,
-                maxWidth: width
-            }, more);
-        }
-        // No need for a media query for the first size.
-        if (theme.breakpoints.values[breakpoint] === 0) Object.assign(globalStyles, styles);
-        else globalStyles[theme.breakpoints.up(breakpoint)] = styles;
-        return globalStyles;
-    }, {});
-}
-function $a8c96cc3b002d944$export$71d4225eeb1bc13e({ theme: theme , ownerState: ownerState  }) {
-    const directionValues = (0, $0f9225f907645704$export$980e6a259d807490)({
-        values: ownerState.direction,
-        breakpoints: theme.breakpoints.values
-    });
-    return (0, $0f9225f907645704$export$88347efdb2e19abd)({
-        theme: theme
-    }, directionValues, (propValue)=>{
-        const output = {
-            flexDirection: propValue
-        };
-        if (propValue.indexOf("column") === 0) output[`& > .${(0, $54cd19e14d764e0f$export$2e2bcd8739ae039).item}`] = {
-            maxWidth: "none"
-        };
-        return output;
-    });
-}
-/**
- * Extracts zero value breakpoint keys before a non-zero value breakpoint key.
- * @example { xs: 0, sm: 0, md: 2, lg: 0, xl: 0 } or [0, 0, 2, 0, 0]
- * @returns [xs, sm]
- */ function $a8c96cc3b002d944$var$extractZeroValueBreakpointKeys({ breakpoints: breakpoints , values: values  }) {
-    let nonZeroKey = "";
-    Object.keys(values).forEach((key)=>{
-        if (nonZeroKey !== "") return;
-        if (values[key] !== 0) nonZeroKey = key;
-    });
-    const sortedBreakpointKeysByValue = Object.keys(breakpoints).sort((a, b)=>{
-        return breakpoints[a] - breakpoints[b];
-    });
-    return sortedBreakpointKeysByValue.slice(0, sortedBreakpointKeysByValue.indexOf(nonZeroKey));
-}
-function $a8c96cc3b002d944$export$380604d7c79f9e8f({ theme: theme , ownerState: ownerState  }) {
-    const { container: container , rowSpacing: rowSpacing  } = ownerState;
-    let styles = {};
-    if (container && rowSpacing !== 0) {
-        const rowSpacingValues = (0, $0f9225f907645704$export$980e6a259d807490)({
-            values: rowSpacing,
-            breakpoints: theme.breakpoints.values
-        });
-        let zeroValueBreakpointKeys;
-        if (typeof rowSpacingValues === "object") zeroValueBreakpointKeys = $a8c96cc3b002d944$var$extractZeroValueBreakpointKeys({
-            breakpoints: theme.breakpoints.values,
-            values: rowSpacingValues
-        });
-        styles = (0, $0f9225f907645704$export$88347efdb2e19abd)({
-            theme: theme
-        }, rowSpacingValues, (propValue, breakpoint)=>{
-            var _zeroValueBreakpointK;
-            const themeSpacing = theme.spacing(propValue);
-            if (themeSpacing !== "0px") return {
-                marginTop: `-${$a8c96cc3b002d944$var$getOffset(themeSpacing)}`,
-                [`& > .${(0, $54cd19e14d764e0f$export$2e2bcd8739ae039).item}`]: {
-                    paddingTop: $a8c96cc3b002d944$var$getOffset(themeSpacing)
-                }
-            };
-            if ((_zeroValueBreakpointK = zeroValueBreakpointKeys) != null && _zeroValueBreakpointK.includes(breakpoint)) return {};
-            return {
-                marginTop: 0,
-                [`& > .${(0, $54cd19e14d764e0f$export$2e2bcd8739ae039).item}`]: {
-                    paddingTop: 0
-                }
-            };
-        });
-    }
-    return styles;
-}
-function $a8c96cc3b002d944$export$4315fba5128fb4a1({ theme: theme , ownerState: ownerState  }) {
-    const { container: container , columnSpacing: columnSpacing  } = ownerState;
-    let styles = {};
-    if (container && columnSpacing !== 0) {
-        const columnSpacingValues = (0, $0f9225f907645704$export$980e6a259d807490)({
-            values: columnSpacing,
-            breakpoints: theme.breakpoints.values
-        });
-        let zeroValueBreakpointKeys;
-        if (typeof columnSpacingValues === "object") zeroValueBreakpointKeys = $a8c96cc3b002d944$var$extractZeroValueBreakpointKeys({
-            breakpoints: theme.breakpoints.values,
-            values: columnSpacingValues
-        });
-        styles = (0, $0f9225f907645704$export$88347efdb2e19abd)({
-            theme: theme
-        }, columnSpacingValues, (propValue, breakpoint)=>{
-            var _zeroValueBreakpointK2;
-            const themeSpacing = theme.spacing(propValue);
-            if (themeSpacing !== "0px") return {
-                width: `calc(100% + ${$a8c96cc3b002d944$var$getOffset(themeSpacing)})`,
-                marginLeft: `-${$a8c96cc3b002d944$var$getOffset(themeSpacing)}`,
-                [`& > .${(0, $54cd19e14d764e0f$export$2e2bcd8739ae039).item}`]: {
-                    paddingLeft: $a8c96cc3b002d944$var$getOffset(themeSpacing)
-                }
-            };
-            if ((_zeroValueBreakpointK2 = zeroValueBreakpointKeys) != null && _zeroValueBreakpointK2.includes(breakpoint)) return {};
-            return {
-                width: "100%",
-                marginLeft: 0,
-                [`& > .${(0, $54cd19e14d764e0f$export$2e2bcd8739ae039).item}`]: {
-                    paddingLeft: 0
-                }
-            };
-        });
-    }
-    return styles;
-}
-function $a8c96cc3b002d944$export$4ffcd0b3420424d2(spacing, breakpoints, styles = {}) {
-    // undefined/null or `spacing` <= 0
-    if (!spacing || spacing <= 0) return [];
-    // in case of string/number `spacing`
-    if (typeof spacing === "string" && !Number.isNaN(Number(spacing)) || typeof spacing === "number") return [
-        styles[`spacing-xs-${String(spacing)}`]
-    ];
-    // in case of object `spacing`
-    const spacingStyles = [];
-    breakpoints.forEach((breakpoint)=>{
-        const value = spacing[breakpoint];
-        if (Number(value) > 0) spacingStyles.push(styles[`spacing-${breakpoint}-${String(value)}`]);
-    });
-    return spacingStyles;
-}
-// Default CSS values
-// flex: '0 1 auto',
-// flexDirection: 'row',
-// alignItems: 'flex-start',
-// flexWrap: 'nowrap',
-// justifyContent: 'flex-start',
-const $a8c96cc3b002d944$var$GridRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiGrid",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        const { container: container , direction: direction , item: item , spacing: spacing , wrap: wrap , zeroMinWidth: zeroMinWidth , breakpoints: breakpoints  } = ownerState;
-        let spacingStyles = [];
-        // in case of grid item
-        if (container) spacingStyles = $a8c96cc3b002d944$export$4ffcd0b3420424d2(spacing, breakpoints, styles);
-        const breakpointsStyles = [];
-        breakpoints.forEach((breakpoint)=>{
-            const value = ownerState[breakpoint];
-            if (value) breakpointsStyles.push(styles[`grid-${breakpoint}-${String(value)}`]);
-        });
-        return [
-            styles.root,
-            container && styles.container,
-            item && styles.item,
-            zeroMinWidth && styles.zeroMinWidth,
-            ...spacingStyles,
-            direction !== "row" && styles[`direction-xs-${String(direction)}`],
-            wrap !== "wrap" && styles[`wrap-xs-${String(wrap)}`],
-            ...breakpointsStyles
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        boxSizing: "border-box"
-    }, ownerState.container && {
-        display: "flex",
-        flexWrap: "wrap",
-        width: "100%"
-    }, ownerState.item && {
-        margin: 0 // For instance, it's useful when used with a `figure` element.
-    }, ownerState.zeroMinWidth && {
-        minWidth: 0
-    }, ownerState.wrap !== "wrap" && {
-        flexWrap: ownerState.wrap
-    }), $a8c96cc3b002d944$export$71d4225eeb1bc13e, $a8c96cc3b002d944$export$380604d7c79f9e8f, $a8c96cc3b002d944$export$4315fba5128fb4a1, $a8c96cc3b002d944$export$ca2a698f6020fda);
-function $a8c96cc3b002d944$export$2d1097e8e67cf24b(spacing, breakpoints) {
-    // undefined/null or `spacing` <= 0
-    if (!spacing || spacing <= 0) return [];
-    // in case of string/number `spacing`
-    if (typeof spacing === "string" && !Number.isNaN(Number(spacing)) || typeof spacing === "number") return [
-        `spacing-xs-${String(spacing)}`
-    ];
-    // in case of object `spacing`
-    const classes = [];
-    breakpoints.forEach((breakpoint)=>{
-        const value = spacing[breakpoint];
-        if (Number(value) > 0) {
-            const className = `spacing-${breakpoint}-${String(value)}`;
-            classes.push(className);
-        }
-    });
-    return classes;
-}
-const $a8c96cc3b002d944$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , container: container , direction: direction , item: item , spacing: spacing , wrap: wrap , zeroMinWidth: zeroMinWidth , breakpoints: breakpoints  } = ownerState;
-    let spacingClasses = [];
-    // in case of grid item
-    if (container) spacingClasses = $a8c96cc3b002d944$export$2d1097e8e67cf24b(spacing, breakpoints);
-    const breakpointsClasses = [];
-    breakpoints.forEach((breakpoint)=>{
-        const value = ownerState[breakpoint];
-        if (value) breakpointsClasses.push(`grid-${breakpoint}-${String(value)}`);
-    });
-    const slots = {
-        root: [
-            "root",
-            container && "container",
-            item && "item",
-            zeroMinWidth && "zeroMinWidth",
-            ...spacingClasses,
-            direction !== "row" && `direction-xs-${String(direction)}`,
-            wrap !== "wrap" && `wrap-xs-${String(wrap)}`,
-            ...breakpointsClasses
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $54cd19e14d764e0f$export$9973ac5fd0181f33), classes);
-};
-const $a8c96cc3b002d944$var$Grid = /*#__PURE__*/ $d4J5n.forwardRef(function Grid(inProps, ref) {
-    const themeProps = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiGrid"
-    });
-    const { breakpoints: breakpoints  } = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
-    const props = (0, $7f0d8ce753bc6e5e$export$2e2bcd8739ae039)(themeProps);
-    const { className: className , columns: columnsProp , columnSpacing: columnSpacingProp , component: component = "div" , container: container = false , direction: direction = "row" , item: item = false , rowSpacing: rowSpacingProp , spacing: spacing = 0 , wrap: wrap = "wrap" , zeroMinWidth: zeroMinWidth = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $a8c96cc3b002d944$var$_excluded);
-    const rowSpacing = rowSpacingProp || spacing;
-    const columnSpacing = columnSpacingProp || spacing;
-    const columnsContext = $d4J5n.useContext((0, $6958402c349f866b$export$2e2bcd8739ae039));
-    // columns set with default breakpoint unit of 12
-    const columns = container ? columnsProp || 12 : columnsContext;
-    const breakpointsValues = {};
-    const otherFiltered = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, other);
-    breakpoints.keys.forEach((breakpoint)=>{
-        if (other[breakpoint] != null) {
-            breakpointsValues[breakpoint] = other[breakpoint];
-            delete otherFiltered[breakpoint];
-        }
-    });
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        columns: columns,
-        container: container,
-        direction: direction,
-        item: item,
-        rowSpacing: rowSpacing,
-        columnSpacing: columnSpacing,
-        wrap: wrap,
-        zeroMinWidth: zeroMinWidth,
-        spacing: spacing
-    }, breakpointsValues, {
-        breakpoints: breakpoints.keys
-    });
-    const classes = $a8c96cc3b002d944$var$useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6958402c349f866b$export$2e2bcd8739ae039).Provider, {
-        value: columns,
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a8c96cc3b002d944$var$GridRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            ownerState: ownerState,
-            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-            as: component,
-            ref: ref
-        }, otherFiltered))
-    });
-});
-var $a8c96cc3b002d944$export$2e2bcd8739ae039 = $a8c96cc3b002d944$var$Grid;
-
-
-
-
-
 
 
 
@@ -31327,214 +30872,6 @@ var $d30118e660fee7dd$export$2e2bcd8739ae039 = $d30118e660fee7dd$var$Switch;
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-
-
-function $7e9c681f052f0656$export$72aef224d6115253(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTab", slot);
-}
-const $7e9c681f052f0656$var$tabClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTab", [
-    "root",
-    "labelIcon",
-    "textColorInherit",
-    "textColorPrimary",
-    "textColorSecondary",
-    "selected",
-    "disabled",
-    "fullWidth",
-    "wrapped",
-    "iconWrapper"
-]);
-var $7e9c681f052f0656$export$2e2bcd8739ae039 = $7e9c681f052f0656$var$tabClasses;
-
-
-
-const $be9f8767ed1da178$var$_excluded = [
-    "className",
-    "disabled",
-    "disableFocusRipple",
-    "fullWidth",
-    "icon",
-    "iconPosition",
-    "indicator",
-    "label",
-    "onChange",
-    "onClick",
-    "onFocus",
-    "selected",
-    "selectionFollowsFocus",
-    "textColor",
-    "value",
-    "wrapped"
-];
-const $be9f8767ed1da178$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , textColor: textColor , fullWidth: fullWidth , wrapped: wrapped , icon: icon , label: label , selected: selected , disabled: disabled  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            icon && label && "labelIcon",
-            `textColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(textColor)}`,
-            fullWidth && "fullWidth",
-            wrapped && "wrapped",
-            selected && "selected",
-            disabled && "disabled"
-        ],
-        iconWrapper: [
-            "iconWrapper"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $7e9c681f052f0656$export$72aef224d6115253), classes);
-};
-const $be9f8767ed1da178$var$TabRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $87f61933867dae5e$export$2e2bcd8739ae039), {
-    name: "MuiTab",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.root,
-            ownerState.label && ownerState.icon && styles.labelIcon,
-            styles[`textColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.textColor)}`],
-            ownerState.fullWidth && styles.fullWidth,
-            ownerState.wrapped && styles.wrapped
-        ];
-    }
-})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, theme.typography.button, {
-        maxWidth: 360,
-        minWidth: 90,
-        position: "relative",
-        minHeight: 48,
-        flexShrink: 0,
-        padding: "12px 16px",
-        overflow: "hidden",
-        whiteSpace: "normal",
-        textAlign: "center"
-    }, ownerState.label && {
-        flexDirection: ownerState.iconPosition === "top" || ownerState.iconPosition === "bottom" ? "column" : "row"
-    }, {
-        lineHeight: 1.25
-    }, ownerState.icon && ownerState.label && {
-        minHeight: 72,
-        paddingTop: 9,
-        paddingBottom: 9,
-        [`& > .${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).iconWrapper}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.iconPosition === "top" && {
-            marginBottom: 6
-        }, ownerState.iconPosition === "bottom" && {
-            marginTop: 6
-        }, ownerState.iconPosition === "start" && {
-            marginRight: theme.spacing(1)
-        }, ownerState.iconPosition === "end" && {
-            marginLeft: theme.spacing(1)
-        })
-    }, ownerState.textColor === "inherit" && {
-        color: "inherit",
-        opacity: 0.6,
-        // same opacity as theme.palette.text.secondary
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).selected}`]: {
-            opacity: 1
-        },
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).disabled}`]: {
-            opacity: (theme.vars || theme).palette.action.disabledOpacity
-        }
-    }, ownerState.textColor === "primary" && {
-        color: (theme.vars || theme).palette.text.secondary,
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).selected}`]: {
-            color: (theme.vars || theme).palette.primary.main
-        },
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).disabled}`]: {
-            color: (theme.vars || theme).palette.text.disabled
-        }
-    }, ownerState.textColor === "secondary" && {
-        color: (theme.vars || theme).palette.text.secondary,
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).selected}`]: {
-            color: (theme.vars || theme).palette.secondary.main
-        },
-        [`&.${(0, $7e9c681f052f0656$export$2e2bcd8739ae039).disabled}`]: {
-            color: (theme.vars || theme).palette.text.disabled
-        }
-    }, ownerState.fullWidth && {
-        flexShrink: 1,
-        flexGrow: 1,
-        flexBasis: 0,
-        maxWidth: "none"
-    }, ownerState.wrapped && {
-        fontSize: theme.typography.pxToRem(12)
-    }));
-const $be9f8767ed1da178$var$Tab = /*#__PURE__*/ $d4J5n.forwardRef(function Tab(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTab"
-    });
-    const { className: className , disabled: disabled = false , disableFocusRipple: disableFocusRipple = false , fullWidth: // eslint-disable-next-line react/prop-types
-    fullWidth , icon: iconProp , iconPosition: iconPosition = "top" , indicator: // eslint-disable-next-line react/prop-types
-    indicator , label: label , onChange: onChange , onClick: onClick , onFocus: onFocus , selected: // eslint-disable-next-line react/prop-types
-    selected , selectionFollowsFocus: // eslint-disable-next-line react/prop-types
-    selectionFollowsFocus , textColor: // eslint-disable-next-line react/prop-types
-    textColor = "inherit" , value: value , wrapped: wrapped = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $be9f8767ed1da178$var$_excluded);
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        disabled: disabled,
-        disableFocusRipple: disableFocusRipple,
-        selected: selected,
-        icon: !!iconProp,
-        iconPosition: iconPosition,
-        label: !!label,
-        fullWidth: fullWidth,
-        textColor: textColor,
-        wrapped: wrapped
-    });
-    const classes = $be9f8767ed1da178$var$useUtilityClasses(ownerState);
-    const icon = iconProp && label && /*#__PURE__*/ $d4J5n.isValidElement(iconProp) ? /*#__PURE__*/ $d4J5n.cloneElement(iconProp, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.iconWrapper, iconProp.props.className)
-    }) : iconProp;
-    const handleClick = (event)=>{
-        if (!selected && onChange) onChange(event, value);
-        if (onClick) onClick(event);
-    };
-    const handleFocus = (event)=>{
-        if (selectionFollowsFocus && !selected && onChange) onChange(event, value);
-        if (onFocus) onFocus(event);
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($be9f8767ed1da178$var$TabRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        focusRipple: !disableFocusRipple,
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ref: ref,
-        role: "tab",
-        "aria-selected": selected,
-        disabled: disabled,
-        onClick: handleClick,
-        onFocus: handleFocus,
-        ownerState: ownerState,
-        tabIndex: selected ? 0 : -1
-    }, other, {
-        children: [
-            iconPosition === "top" || iconPosition === "start" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($d4J5n.Fragment, {
-                children: [
-                    icon,
-                    label
-                ]
-            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($d4J5n.Fragment, {
-                children: [
-                    label,
-                    icon
-                ]
-            }),
-            indicator
-        ]
-    }));
-});
-var $be9f8767ed1da178$export$2e2bcd8739ae039 = $be9f8767ed1da178$var$Tab;
-
-
-
-
-
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -32137,837 +31474,6 @@ var $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039 = $ed3a5e9ae5a5bf88$var$TableRow;
 
 
 
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-
-
-
-function $a2314a47f8234457$var$easeInOutSin(time) {
-    return (1 + Math.sin(Math.PI * time - Math.PI / 2)) / 2;
-}
-function $a2314a47f8234457$export$2e2bcd8739ae039(property, element, to, options = {}, cb = ()=>{}) {
-    const { ease: ease = $a2314a47f8234457$var$easeInOutSin , duration: duration = 300 // standard
-      } = options;
-    let start = null;
-    const from = element[property];
-    let cancelled = false;
-    const cancel = ()=>{
-        cancelled = true;
-    };
-    const step = (timestamp)=>{
-        if (cancelled) {
-            cb(new Error("Animation cancelled"));
-            return;
-        }
-        if (start === null) start = timestamp;
-        const time = Math.min(1, (timestamp - start) / duration);
-        element[property] = ease(time) * (to - from) + from;
-        if (time >= 1) {
-            requestAnimationFrame(()=>{
-                cb(null);
-            });
-            return;
-        }
-        requestAnimationFrame(step);
-    };
-    if (from === to) {
-        cb(new Error("Element already at target position"));
-        return cancel;
-    }
-    requestAnimationFrame(step);
-    return cancel;
-}
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-const $79ccd497c4ba3c76$var$_excluded = [
-    "onChange"
-];
-const $79ccd497c4ba3c76$var$styles = {
-    width: 99,
-    height: 99,
-    position: "absolute",
-    top: -9999,
-    overflow: "scroll"
-};
-function $79ccd497c4ba3c76$export$2e2bcd8739ae039(props) {
-    const { onChange: onChange  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $79ccd497c4ba3c76$var$_excluded);
-    const scrollbarHeight = $d4J5n.useRef();
-    const nodeRef = $d4J5n.useRef(null);
-    const setMeasurements = ()=>{
-        scrollbarHeight.current = nodeRef.current.offsetHeight - nodeRef.current.clientHeight;
-    };
-    $d4J5n.useEffect(()=>{
-        const handleResize = (0, $7cba1ad6d7d57dda$export$2e2bcd8739ae039)(()=>{
-            const prevHeight = scrollbarHeight.current;
-            setMeasurements();
-            if (prevHeight !== scrollbarHeight.current) onChange(scrollbarHeight.current);
-        });
-        const containerWindow = (0, $9a3c96500d964713$export$2e2bcd8739ae039)(nodeRef.current);
-        containerWindow.addEventListener("resize", handleResize);
-        return ()=>{
-            handleResize.clear();
-            containerWindow.removeEventListener("resize", handleResize);
-        };
-    }, [
-        onChange
-    ]);
-    $d4J5n.useEffect(()=>{
-        setMeasurements();
-        onChange(scrollbarHeight.current);
-    }, [
-        onChange
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("div", (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        style: $79ccd497c4ba3c76$var$styles,
-        ref: nodeRef
-    }, other));
-}
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-parcelRequire("d4J5n");
-
-
-var $67ed5b134863a1b8$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
-}), "KeyboardArrowLeft");
-
-
-parcelRequire("d4J5n");
-
-
-var $07456f2cbbae82da$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
-}), "KeyboardArrowRight");
-
-
-
-
-
-
-
-
-function $f4bee39227240ddf$export$34861783d3c2eef8(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTabScrollButton", slot);
-}
-const $f4bee39227240ddf$var$tabScrollButtonClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTabScrollButton", [
-    "root",
-    "vertical",
-    "horizontal",
-    "disabled"
-]);
-var $f4bee39227240ddf$export$2e2bcd8739ae039 = $f4bee39227240ddf$var$tabScrollButtonClasses;
-
-
-
-var $2f3a93a56b04fe4c$var$_KeyboardArrowLeft, $2f3a93a56b04fe4c$var$_KeyboardArrowRight;
-const $2f3a93a56b04fe4c$var$_excluded = [
-    "className",
-    "direction",
-    "orientation",
-    "disabled"
-];
-const $2f3a93a56b04fe4c$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , orientation: orientation , disabled: disabled  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            orientation,
-            disabled && "disabled"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $f4bee39227240ddf$export$34861783d3c2eef8), classes);
-};
-const $2f3a93a56b04fe4c$var$TabScrollButtonRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $87f61933867dae5e$export$2e2bcd8739ae039), {
-    name: "MuiTabScrollButton",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.root,
-            ownerState.orientation && styles[ownerState.orientation]
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        width: 40,
-        flexShrink: 0,
-        opacity: 0.8,
-        [`&.${(0, $f4bee39227240ddf$export$2e2bcd8739ae039).disabled}`]: {
-            opacity: 0
-        }
-    }, ownerState.orientation === "vertical" && {
-        width: "100%",
-        height: 40,
-        "& svg": {
-            transform: `rotate(${ownerState.isRtl ? -90 : 90}deg)`
-        }
-    }));
-const $2f3a93a56b04fe4c$var$TabScrollButton = /*#__PURE__*/ $d4J5n.forwardRef(function TabScrollButton(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTabScrollButton"
-    });
-    const { className: className , direction: direction  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $2f3a93a56b04fe4c$var$_excluded);
-    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
-    const isRtl = theme.direction === "rtl";
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        isRtl: isRtl
-    }, props);
-    const classes = $2f3a93a56b04fe4c$var$useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($2f3a93a56b04fe4c$var$TabScrollButtonRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        component: "div",
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ref: ref,
-        role: null,
-        ownerState: ownerState,
-        tabIndex: null
-    }, other, {
-        children: direction === "left" ? $2f3a93a56b04fe4c$var$_KeyboardArrowLeft || ($2f3a93a56b04fe4c$var$_KeyboardArrowLeft = /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $67ed5b134863a1b8$export$2e2bcd8739ae039), {
-            fontSize: "small"
-        })) : $2f3a93a56b04fe4c$var$_KeyboardArrowRight || ($2f3a93a56b04fe4c$var$_KeyboardArrowRight = /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $07456f2cbbae82da$export$2e2bcd8739ae039), {
-            fontSize: "small"
-        }))
-    }));
-});
-var $2f3a93a56b04fe4c$export$2e2bcd8739ae039 = $2f3a93a56b04fe4c$var$TabScrollButton;
-
-
-
-
-
-
-function $ad02f01b8d054344$export$cdd93bd054dec359(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTabs", slot);
-}
-const $ad02f01b8d054344$var$tabsClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTabs", [
-    "root",
-    "vertical",
-    "flexContainer",
-    "flexContainerVertical",
-    "centered",
-    "scroller",
-    "fixed",
-    "scrollableX",
-    "scrollableY",
-    "hideScrollbar",
-    "scrollButtons",
-    "scrollButtonsHideMobile",
-    "indicator"
-]);
-var $ad02f01b8d054344$export$2e2bcd8739ae039 = $ad02f01b8d054344$var$tabsClasses;
-
-
-
-
-
-
-const $de9f03f465a99f00$var$_excluded = [
-    "aria-label",
-    "aria-labelledby",
-    "action",
-    "centered",
-    "children",
-    "className",
-    "component",
-    "allowScrollButtonsMobile",
-    "indicatorColor",
-    "onChange",
-    "orientation",
-    "ScrollButtonComponent",
-    "scrollButtons",
-    "selectionFollowsFocus",
-    "TabIndicatorProps",
-    "TabScrollButtonProps",
-    "textColor",
-    "value",
-    "variant",
-    "visibleScrollbar"
-];
-const $de9f03f465a99f00$var$nextItem = (list, item)=>{
-    if (list === item) return list.firstChild;
-    if (item && item.nextElementSibling) return item.nextElementSibling;
-    return list.firstChild;
-};
-const $de9f03f465a99f00$var$previousItem = (list, item)=>{
-    if (list === item) return list.lastChild;
-    if (item && item.previousElementSibling) return item.previousElementSibling;
-    return list.lastChild;
-};
-const $de9f03f465a99f00$var$moveFocus = (list, currentFocus, traversalFunction)=>{
-    let wrappedOnce = false;
-    let nextFocus = traversalFunction(list, currentFocus);
-    while(nextFocus){
-        // Prevent infinite loop.
-        if (nextFocus === list.firstChild) {
-            if (wrappedOnce) return;
-            wrappedOnce = true;
-        }
-        // Same logic as useAutocomplete.js
-        const nextFocusDisabled = nextFocus.disabled || nextFocus.getAttribute("aria-disabled") === "true";
-        if (!nextFocus.hasAttribute("tabindex") || nextFocusDisabled) // Move to the next element.
-        nextFocus = traversalFunction(list, nextFocus);
-        else {
-            nextFocus.focus();
-            return;
-        }
-    }
-};
-const $de9f03f465a99f00$var$useUtilityClasses = (ownerState)=>{
-    const { vertical: vertical , fixed: fixed , hideScrollbar: hideScrollbar , scrollableX: scrollableX , scrollableY: scrollableY , centered: centered , scrollButtonsHideMobile: scrollButtonsHideMobile , classes: classes  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            vertical && "vertical"
-        ],
-        scroller: [
-            "scroller",
-            fixed && "fixed",
-            hideScrollbar && "hideScrollbar",
-            scrollableX && "scrollableX",
-            scrollableY && "scrollableY"
-        ],
-        flexContainer: [
-            "flexContainer",
-            vertical && "flexContainerVertical",
-            centered && "centered"
-        ],
-        indicator: [
-            "indicator"
-        ],
-        scrollButtons: [
-            "scrollButtons",
-            scrollButtonsHideMobile && "scrollButtonsHideMobile"
-        ],
-        scrollableX: [
-            scrollableX && "scrollableX"
-        ],
-        hideScrollbar: [
-            hideScrollbar && "hideScrollbar"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $ad02f01b8d054344$export$cdd93bd054dec359), classes);
-};
-const $de9f03f465a99f00$var$TabsRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiTabs",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            {
-                [`& .${(0, $ad02f01b8d054344$export$2e2bcd8739ae039).scrollButtons}`]: styles.scrollButtons
-            },
-            {
-                [`& .${(0, $ad02f01b8d054344$export$2e2bcd8739ae039).scrollButtons}`]: ownerState.scrollButtonsHideMobile && styles.scrollButtonsHideMobile
-            },
-            styles.root,
-            ownerState.vertical && styles.vertical
-        ];
-    }
-})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        overflow: "hidden",
-        minHeight: 48,
-        // Add iOS momentum scrolling for iOS < 13.0
-        WebkitOverflowScrolling: "touch",
-        display: "flex"
-    }, ownerState.vertical && {
-        flexDirection: "column"
-    }, ownerState.scrollButtonsHideMobile && {
-        [`& .${(0, $ad02f01b8d054344$export$2e2bcd8739ae039).scrollButtons}`]: {
-            [theme.breakpoints.down("sm")]: {
-                display: "none"
-            }
-        }
-    }));
-const $de9f03f465a99f00$var$TabsScroller = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiTabs",
-    slot: "Scroller",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.scroller,
-            ownerState.fixed && styles.fixed,
-            ownerState.hideScrollbar && styles.hideScrollbar,
-            ownerState.scrollableX && styles.scrollableX,
-            ownerState.scrollableY && styles.scrollableY
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        position: "relative",
-        display: "inline-block",
-        flex: "1 1 auto",
-        whiteSpace: "nowrap"
-    }, ownerState.fixed && {
-        overflowX: "hidden",
-        width: "100%"
-    }, ownerState.hideScrollbar && {
-        // Hide dimensionless scrollbar on macOS
-        scrollbarWidth: "none",
-        // Firefox
-        "&::-webkit-scrollbar": {
-            display: "none" // Safari + Chrome
-        }
-    }, ownerState.scrollableX && {
-        overflowX: "auto",
-        overflowY: "hidden"
-    }, ownerState.scrollableY && {
-        overflowY: "auto",
-        overflowX: "hidden"
-    }));
-const $de9f03f465a99f00$var$FlexContainer = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiTabs",
-    slot: "FlexContainer",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.flexContainer,
-            ownerState.vertical && styles.flexContainerVertical,
-            ownerState.centered && styles.centered
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        display: "flex"
-    }, ownerState.vertical && {
-        flexDirection: "column"
-    }, ownerState.centered && {
-        justifyContent: "center"
-    }));
-const $de9f03f465a99f00$var$TabsIndicator = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
-    name: "MuiTabs",
-    slot: "Indicator",
-    overridesResolver: (props, styles)=>styles.indicator
-})(({ ownerState: ownerState , theme: theme  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        position: "absolute",
-        height: 2,
-        bottom: 0,
-        width: "100%",
-        transition: theme.transitions.create()
-    }, ownerState.indicatorColor === "primary" && {
-        backgroundColor: (theme.vars || theme).palette.primary.main
-    }, ownerState.indicatorColor === "secondary" && {
-        backgroundColor: (theme.vars || theme).palette.secondary.main
-    }, ownerState.vertical && {
-        height: "100%",
-        width: 2,
-        right: 0
-    }));
-const $de9f03f465a99f00$var$TabsScrollbarSize = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $79ccd497c4ba3c76$export$2e2bcd8739ae039), {
-    name: "MuiTabs",
-    slot: "ScrollbarSize"
-})({
-    overflowX: "auto",
-    overflowY: "hidden",
-    // Hide dimensionless scrollbar on macOS
-    scrollbarWidth: "none",
-    // Firefox
-    "&::-webkit-scrollbar": {
-        display: "none" // Safari + Chrome
-    }
-});
-const $de9f03f465a99f00$var$defaultIndicatorStyle = {};
-let $de9f03f465a99f00$var$warnedOnceTabPresent = false;
-const $de9f03f465a99f00$var$Tabs = /*#__PURE__*/ $d4J5n.forwardRef(function Tabs(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTabs"
-    });
-    const theme = (0, $2fb162e75abd8467$export$2e2bcd8739ae039)();
-    const isRtl = theme.direction === "rtl";
-    const { "aria-label": ariaLabel , "aria-labelledby": ariaLabelledBy , action: action , centered: centered = false , children: childrenProp , className: className , component: component = "div" , allowScrollButtonsMobile: allowScrollButtonsMobile = false , indicatorColor: indicatorColor = "primary" , onChange: onChange , orientation: orientation = "horizontal" , ScrollButtonComponent: ScrollButtonComponent = (0, $2f3a93a56b04fe4c$export$2e2bcd8739ae039) , scrollButtons: scrollButtons = "auto" , selectionFollowsFocus: selectionFollowsFocus , TabIndicatorProps: TabIndicatorProps = {} , TabScrollButtonProps: TabScrollButtonProps = {} , textColor: textColor = "primary" , value: value , variant: variant = "standard" , visibleScrollbar: visibleScrollbar = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $de9f03f465a99f00$var$_excluded);
-    const scrollable = variant === "scrollable";
-    const vertical = orientation === "vertical";
-    const scrollStart = vertical ? "scrollTop" : "scrollLeft";
-    const start = vertical ? "top" : "left";
-    const end = vertical ? "bottom" : "right";
-    const clientSize = vertical ? "clientHeight" : "clientWidth";
-    const size = vertical ? "height" : "width";
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        component: component,
-        allowScrollButtonsMobile: allowScrollButtonsMobile,
-        indicatorColor: indicatorColor,
-        orientation: orientation,
-        vertical: vertical,
-        scrollButtons: scrollButtons,
-        textColor: textColor,
-        variant: variant,
-        visibleScrollbar: visibleScrollbar,
-        fixed: !scrollable,
-        hideScrollbar: scrollable && !visibleScrollbar,
-        scrollableX: scrollable && !vertical,
-        scrollableY: scrollable && vertical,
-        centered: centered && !scrollable,
-        scrollButtonsHideMobile: !allowScrollButtonsMobile
-    });
-    const classes = $de9f03f465a99f00$var$useUtilityClasses(ownerState);
-    const [mounted, setMounted] = $d4J5n.useState(false);
-    const [indicatorStyle, setIndicatorStyle] = $d4J5n.useState($de9f03f465a99f00$var$defaultIndicatorStyle);
-    const [displayScroll, setDisplayScroll] = $d4J5n.useState({
-        start: false,
-        end: false
-    });
-    const [scrollerStyle, setScrollerStyle] = $d4J5n.useState({
-        overflow: "hidden",
-        scrollbarWidth: 0
-    });
-    const valueToIndex = new Map();
-    const tabsRef = $d4J5n.useRef(null);
-    const tabListRef = $d4J5n.useRef(null);
-    const getTabsMeta = ()=>{
-        const tabsNode = tabsRef.current;
-        let tabsMeta;
-        if (tabsNode) {
-            const rect = tabsNode.getBoundingClientRect();
-            // create a new object with ClientRect class props + scrollLeft
-            tabsMeta = {
-                clientWidth: tabsNode.clientWidth,
-                scrollLeft: tabsNode.scrollLeft,
-                scrollTop: tabsNode.scrollTop,
-                scrollLeftNormalized: (0, $2da6400a34bc736c$export$3c615b88e5d7e4f6)(tabsNode, theme.direction),
-                scrollWidth: tabsNode.scrollWidth,
-                top: rect.top,
-                bottom: rect.bottom,
-                left: rect.left,
-                right: rect.right
-            };
-        }
-        let tabMeta;
-        if (tabsNode && value !== false) {
-            const children = tabListRef.current.children;
-            if (children.length > 0) {
-                const tab = children[valueToIndex.get(value)];
-                tabMeta = tab ? tab.getBoundingClientRect() : null;
-            }
-        }
-        return {
-            tabsMeta: tabsMeta,
-            tabMeta: tabMeta
-        };
-    };
-    const updateIndicatorState = (0, $40f2e0d02fed9376$export$2e2bcd8739ae039)(()=>{
-        const { tabsMeta: tabsMeta , tabMeta: tabMeta  } = getTabsMeta();
-        let startValue = 0;
-        let startIndicator;
-        if (vertical) {
-            startIndicator = "top";
-            if (tabMeta && tabsMeta) startValue = tabMeta.top - tabsMeta.top + tabsMeta.scrollTop;
-        } else {
-            startIndicator = isRtl ? "right" : "left";
-            if (tabMeta && tabsMeta) {
-                const correction = isRtl ? tabsMeta.scrollLeftNormalized + tabsMeta.clientWidth - tabsMeta.scrollWidth : tabsMeta.scrollLeft;
-                startValue = (isRtl ? -1 : 1) * (tabMeta[startIndicator] - tabsMeta[startIndicator] + correction);
-            }
-        }
-        const newIndicatorStyle = {
-            [startIndicator]: startValue,
-            // May be wrong until the font is loaded.
-            [size]: tabMeta ? tabMeta[size] : 0
-        };
-        // IE11 support, replace with Number.isNaN
-        // eslint-disable-next-line no-restricted-globals
-        if (isNaN(indicatorStyle[startIndicator]) || isNaN(indicatorStyle[size])) setIndicatorStyle(newIndicatorStyle);
-        else {
-            const dStart = Math.abs(indicatorStyle[startIndicator] - newIndicatorStyle[startIndicator]);
-            const dSize = Math.abs(indicatorStyle[size] - newIndicatorStyle[size]);
-            if (dStart >= 1 || dSize >= 1) setIndicatorStyle(newIndicatorStyle);
-        }
-    });
-    const scroll = (scrollValue, { animation: animation = true  } = {})=>{
-        if (animation) (0, $a2314a47f8234457$export$2e2bcd8739ae039)(scrollStart, tabsRef.current, scrollValue, {
-            duration: theme.transitions.duration.standard
-        });
-        else tabsRef.current[scrollStart] = scrollValue;
-    };
-    const moveTabsScroll = (delta)=>{
-        let scrollValue = tabsRef.current[scrollStart];
-        if (vertical) scrollValue += delta;
-        else {
-            scrollValue += delta * (isRtl ? -1 : 1);
-            // Fix for Edge
-            scrollValue *= isRtl && (0, $2da6400a34bc736c$export$a10970ffb6510128)() === "reverse" ? -1 : 1;
-        }
-        scroll(scrollValue);
-    };
-    const getScrollSize = ()=>{
-        const containerSize = tabsRef.current[clientSize];
-        let totalSize = 0;
-        const children = Array.from(tabListRef.current.children);
-        for(let i = 0; i < children.length; i += 1){
-            const tab = children[i];
-            if (totalSize + tab[clientSize] > containerSize) {
-                // If the first item is longer than the container size, then only scroll
-                // by the container size.
-                if (i === 0) totalSize = containerSize;
-                break;
-            }
-            totalSize += tab[clientSize];
-        }
-        return totalSize;
-    };
-    const handleStartScrollClick = ()=>{
-        moveTabsScroll(-1 * getScrollSize());
-    };
-    const handleEndScrollClick = ()=>{
-        moveTabsScroll(getScrollSize());
-    };
-    // TODO Remove <ScrollbarSize /> as browser support for hidding the scrollbar
-    // with CSS improves.
-    const handleScrollbarSizeChange = $d4J5n.useCallback((scrollbarWidth)=>{
-        setScrollerStyle({
-            overflow: null,
-            scrollbarWidth: scrollbarWidth
-        });
-    }, []);
-    const getConditionalElements = ()=>{
-        const conditionalElements = {};
-        conditionalElements.scrollbarSizeListener = scrollable ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($de9f03f465a99f00$var$TabsScrollbarSize, {
-            onChange: handleScrollbarSizeChange,
-            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.scrollableX, classes.hideScrollbar)
-        }) : null;
-        const scrollButtonsActive = displayScroll.start || displayScroll.end;
-        const showScrollButtons = scrollable && (scrollButtons === "auto" && scrollButtonsActive || scrollButtons === true);
-        conditionalElements.scrollButtonStart = showScrollButtons ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)(ScrollButtonComponent, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            orientation: orientation,
-            direction: isRtl ? "right" : "left",
-            onClick: handleStartScrollClick,
-            disabled: !displayScroll.start
-        }, TabScrollButtonProps, {
-            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.scrollButtons, TabScrollButtonProps.className)
-        })) : null;
-        conditionalElements.scrollButtonEnd = showScrollButtons ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)(ScrollButtonComponent, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            orientation: orientation,
-            direction: isRtl ? "left" : "right",
-            onClick: handleEndScrollClick,
-            disabled: !displayScroll.end
-        }, TabScrollButtonProps, {
-            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.scrollButtons, TabScrollButtonProps.className)
-        })) : null;
-        return conditionalElements;
-    };
-    const scrollSelectedIntoView = (0, $40f2e0d02fed9376$export$2e2bcd8739ae039)((animation)=>{
-        const { tabsMeta: tabsMeta , tabMeta: tabMeta  } = getTabsMeta();
-        if (!tabMeta || !tabsMeta) return;
-        if (tabMeta[start] < tabsMeta[start]) {
-            // left side of button is out of view
-            const nextScrollStart = tabsMeta[scrollStart] + (tabMeta[start] - tabsMeta[start]);
-            scroll(nextScrollStart, {
-                animation: animation
-            });
-        } else if (tabMeta[end] > tabsMeta[end]) {
-            // right side of button is out of view
-            const nextScrollStart = tabsMeta[scrollStart] + (tabMeta[end] - tabsMeta[end]);
-            scroll(nextScrollStart, {
-                animation: animation
-            });
-        }
-    });
-    const updateScrollButtonState = (0, $40f2e0d02fed9376$export$2e2bcd8739ae039)(()=>{
-        if (scrollable && scrollButtons !== false) {
-            const { scrollTop: scrollTop , scrollHeight: scrollHeight , clientHeight: clientHeight , scrollWidth: scrollWidth , clientWidth: clientWidth  } = tabsRef.current;
-            let showStartScroll;
-            let showEndScroll;
-            if (vertical) {
-                showStartScroll = scrollTop > 1;
-                showEndScroll = scrollTop < scrollHeight - clientHeight - 1;
-            } else {
-                const scrollLeft = (0, $2da6400a34bc736c$export$3c615b88e5d7e4f6)(tabsRef.current, theme.direction);
-                // use 1 for the potential rounding error with browser zooms.
-                showStartScroll = isRtl ? scrollLeft < scrollWidth - clientWidth - 1 : scrollLeft > 1;
-                showEndScroll = !isRtl ? scrollLeft < scrollWidth - clientWidth - 1 : scrollLeft > 1;
-            }
-            if (showStartScroll !== displayScroll.start || showEndScroll !== displayScroll.end) setDisplayScroll({
-                start: showStartScroll,
-                end: showEndScroll
-            });
-        }
-    });
-    $d4J5n.useEffect(()=>{
-        const handleResize = (0, $7cba1ad6d7d57dda$export$2e2bcd8739ae039)(()=>{
-            // If the Tabs component is replaced by Suspense with a fallback, the last
-            // ResizeObserver's handler that runs because of the change in the layout is trying to
-            // access a dom node that is no longer there (as the fallback component is being shown instead).
-            // See https://github.com/mui/material-ui/issues/33276
-            // TODO: Add tests that will ensure the component is not failing when
-            // replaced by Suspense with a fallback, once React is updated to version 18
-            if (tabsRef.current) {
-                updateIndicatorState();
-                updateScrollButtonState();
-            }
-        });
-        const win = (0, $9a3c96500d964713$export$2e2bcd8739ae039)(tabsRef.current);
-        win.addEventListener("resize", handleResize);
-        let resizeObserver;
-        if (typeof ResizeObserver !== "undefined") {
-            resizeObserver = new ResizeObserver(handleResize);
-            Array.from(tabListRef.current.children).forEach((child)=>{
-                resizeObserver.observe(child);
-            });
-        }
-        return ()=>{
-            handleResize.clear();
-            win.removeEventListener("resize", handleResize);
-            if (resizeObserver) resizeObserver.disconnect();
-        };
-    }, [
-        updateIndicatorState,
-        updateScrollButtonState
-    ]);
-    const handleTabsScroll = $d4J5n.useMemo(()=>(0, $7cba1ad6d7d57dda$export$2e2bcd8739ae039)(()=>{
-            updateScrollButtonState();
-        }), [
-        updateScrollButtonState
-    ]);
-    $d4J5n.useEffect(()=>{
-        return ()=>{
-            handleTabsScroll.clear();
-        };
-    }, [
-        handleTabsScroll
-    ]);
-    $d4J5n.useEffect(()=>{
-        setMounted(true);
-    }, []);
-    $d4J5n.useEffect(()=>{
-        updateIndicatorState();
-        updateScrollButtonState();
-    });
-    $d4J5n.useEffect(()=>{
-        // Don't animate on the first render.
-        scrollSelectedIntoView($de9f03f465a99f00$var$defaultIndicatorStyle !== indicatorStyle);
-    }, [
-        scrollSelectedIntoView,
-        indicatorStyle
-    ]);
-    $d4J5n.useImperativeHandle(action, ()=>({
-            updateIndicator: updateIndicatorState,
-            updateScrollButtons: updateScrollButtonState
-        }), [
-        updateIndicatorState,
-        updateScrollButtonState
-    ]);
-    const indicator = /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($de9f03f465a99f00$var$TabsIndicator, (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, TabIndicatorProps, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.indicator, TabIndicatorProps.className),
-        ownerState: ownerState,
-        style: (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, indicatorStyle, TabIndicatorProps.style)
-    }));
-    let childIndex = 0;
-    const children1 = $d4J5n.Children.map(childrenProp, (child)=>{
-        if (!/*#__PURE__*/ $d4J5n.isValidElement(child)) return null;
-        const childValue = child.props.value === undefined ? childIndex : child.props.value;
-        valueToIndex.set(childValue, childIndex);
-        const selected = childValue === value;
-        childIndex += 1;
-        return /*#__PURE__*/ $d4J5n.cloneElement(child, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            fullWidth: variant === "fullWidth",
-            indicator: selected && !mounted && indicator,
-            selected: selected,
-            selectionFollowsFocus: selectionFollowsFocus,
-            onChange: onChange,
-            textColor: textColor,
-            value: childValue
-        }, childIndex === 1 && value === false && !child.props.tabIndex ? {
-            tabIndex: 0
-        } : {}));
-    });
-    const handleKeyDown = (event)=>{
-        const list = tabListRef.current;
-        const currentFocus = (0, $ada992583889f30c$export$2e2bcd8739ae039)(list).activeElement;
-        // Keyboard navigation assumes that [role="tab"] are siblings
-        // though we might warn in the future about nested, interactive elements
-        // as a a11y violation
-        const role = currentFocus.getAttribute("role");
-        if (role !== "tab") return;
-        let previousItemKey = orientation === "horizontal" ? "ArrowLeft" : "ArrowUp";
-        let nextItemKey = orientation === "horizontal" ? "ArrowRight" : "ArrowDown";
-        if (orientation === "horizontal" && isRtl) {
-            // swap previousItemKey with nextItemKey
-            previousItemKey = "ArrowRight";
-            nextItemKey = "ArrowLeft";
-        }
-        switch(event.key){
-            case previousItemKey:
-                event.preventDefault();
-                $de9f03f465a99f00$var$moveFocus(list, currentFocus, $de9f03f465a99f00$var$previousItem);
-                break;
-            case nextItemKey:
-                event.preventDefault();
-                $de9f03f465a99f00$var$moveFocus(list, currentFocus, $de9f03f465a99f00$var$nextItem);
-                break;
-            case "Home":
-                event.preventDefault();
-                $de9f03f465a99f00$var$moveFocus(list, null, $de9f03f465a99f00$var$nextItem);
-                break;
-            case "End":
-                event.preventDefault();
-                $de9f03f465a99f00$var$moveFocus(list, null, $de9f03f465a99f00$var$previousItem);
-                break;
-            default:
-                break;
-        }
-    };
-    const conditionalElements1 = getConditionalElements();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($de9f03f465a99f00$var$TabsRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ownerState: ownerState,
-        ref: ref,
-        as: component
-    }, other, {
-        children: [
-            conditionalElements1.scrollButtonStart,
-            conditionalElements1.scrollbarSizeListener,
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($de9f03f465a99f00$var$TabsScroller, {
-                className: classes.scroller,
-                ownerState: ownerState,
-                style: {
-                    overflow: scrollerStyle.overflow,
-                    [vertical ? `margin${isRtl ? "Left" : "Right"}` : "marginBottom"]: visibleScrollbar ? undefined : -scrollerStyle.scrollbarWidth
-                },
-                ref: tabsRef,
-                onScroll: handleTabsScroll,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($de9f03f465a99f00$var$FlexContainer, {
-                        "aria-label": ariaLabel,
-                        "aria-labelledby": ariaLabelledBy,
-                        "aria-orientation": orientation === "vertical" ? "vertical" : null,
-                        className: classes.flexContainer,
-                        ownerState: ownerState,
-                        onKeyDown: handleKeyDown,
-                        ref: tabListRef,
-                        role: "tablist",
-                        children: children1
-                    }),
-                    mounted && indicator
-                ]
-            }),
-            conditionalElements1.scrollButtonEnd
-        ]
-    }));
-});
-var $de9f03f465a99f00$export$2e2bcd8739ae039 = $de9f03f465a99f00$var$Tabs;
 
 
 
@@ -43357,18 +41863,24 @@ function $d99881d9fee9589c$export$5839ba03810e8481({ children: children  }) {
     (0, $d4J5n.useEffect)(()=>{
         if (autoRefresh) {
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-            if (template.obj.actions instanceof Array && template.obj.actions.length > 0) (0, $98393c94ae7378a9$export$f78a296632f66e69)(template, contract).then((result)=>{
-                setResult(result);
-            });
-            else setResult(undefined);
+            // only auto refresh if there is a single select action
+            if (template.children.length === 1 && template.children[0].name === "select") refresh();
         }
     }, [
         json,
         autoRefresh
     ]);
+    async function refresh() {
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
+            const result = await (0, $98393c94ae7378a9$export$f78a296632f66e69)(template, contract);
+            setResult(result);
+        } else setResult(undefined);
+    }
     const value = {
         result: result1,
-        setResult: setResult
+        setResult: setResult,
+        refresh: refresh
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d99881d9fee9589c$export$3dbf83a64597832d.Provider, {
         value: value,
@@ -43380,7 +41892,8 @@ function $d99881d9fee9589c$export$5929441add3e8278() {
 }
 const $d99881d9fee9589c$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     result: undefined,
-    setResult: ()=>{}
+    setResult: ()=>{},
+    refresh: async ()=>{}
 });
 
 
@@ -43395,11 +41908,11 @@ var $f6391d21c4d8d137$export$2e2bcd8739ae039 = ()=>{
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "message"
+                                children: "error"
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
                                 width: 100,
-                                children: "code"
+                                children: "error-code"
                             })
                         ]
                     })
@@ -43466,102 +41979,19 @@ var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                        style: {
-                            fontWeight: "bold",
-                            backgroundColor: "#f0f8ff"
-                        },
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
+                children: keys.map((key)=>{
+                    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "Key"
+                                children: key
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "Value"
+                                children: typeof obj[key] !== "object" ? String(obj[key]) : JSON.stringify(obj[key])
                             })
                         ]
-                    }),
-                    keys.map((key)=>{
-                        return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                    children: key
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                    children: typeof obj[key] !== "object" ? String(obj[key]) : JSON.stringify(obj[key])
-                                })
-                            ]
-                        });
-                    })
-                ]
-            })
-        })
-    });
-};
-
-
-
-
-var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
-    const [tab, setTab] = (0, $d4J5n.useState)(0);
-    const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
-        result
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d99881d9fee9589c$export$5839ba03810e8481), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
-            container: true,
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $a8c96cc3b002d944$export$2e2bcd8739ae039), {
-                item: true,
-                xs: 12,
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9ef80e5cd9ca7bff$export$2e2bcd8739ae039), {
-                        position: "static",
-                        color: "default",
-                        style: {
-                            marginBottom: 12
-                        },
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $de9f03f465a99f00$export$2e2bcd8739ae039), {
-                            value: tab,
-                            onChange: (event, value)=>setTab(value),
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                    label: "RESULTS"
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                    label: "JSON"
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                    label: "RESPONSE"
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be9f8767ed1da178$export$2e2bcd8739ae039), {
-                                    label: "ERRORS"
-                                })
-                            ]
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 0 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 1 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 2 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        component: "div",
-                        display: tab === 3 ? "block" : "none",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6391d21c4d8d137$export$2e2bcd8739ae039), {})
-                    })
-                ]
+                    });
+                })
             })
         })
     });
@@ -43572,10 +42002,6 @@ var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
 
 var $d4J5n = parcelRequire("d4J5n");
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
-parcelRequire("d4J5n");
 
 
 
@@ -43726,6 +42152,12 @@ var $09e60e810ff3d65b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $4a39d82b58b72568$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM4 12c0-4.4 3.6-8 8-8 1.8 0 3.5.6 4.9 1.7L5.7 16.9C4.6 15.5 4 13.8 4 12zm8 8c-1.8 0-3.5-.6-4.9-1.7L18.3 7.1C19.4 8.5 20 10.2 20 12c0 4.4-3.6 8-8 8z"
+}), "DoDisturb");
+
+
+
 var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
 }), "DoNotDisturb");
@@ -43776,6 +42208,12 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
         d: "M11 14h2v2h-2zm0-7h2v5h-2z"
     }, "1")
 ], "GppMaybeOutlined");
+
+
+
+var $244e4efd21d39d5d$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"
+}), "GridOn");
 
 
 
@@ -43923,6 +42361,24 @@ var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $ea5eca716117fce3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6.5 9H3v6h1.5v-2h1.1l.9 2H8l-.9-2.1c.5-.3.9-.8.9-1.4v-1C8 9.7 7.3 9 6.5 9zm0 2.5h-2v-1h2v1zM10.25 9l-1.5 6h1.5l.38-1.5h1.75l.37 1.5h1.5l-1.5-6h-2.5zm.75 3 .25-1h.5l.25 1h-1zm8.98-3-.74 3-.74-3h-1.52l-.74 3-.74-3H14l1.5 6h1.48l.76-3.04.76 3.04h1.48l1.5-6z"
+}), "RawOn");
+
+
+
+var $5ba9247ae7a5d2a1$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
+}), "Refresh");
+
+
+
+var $dd58ec53e901ec5b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+}), "ReportProblem");
+
+
+
 var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
 }), "Rule");
@@ -43963,6 +42419,178 @@ var $b960753d486198ce$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
     d: "M12 5.99 19.53 19H4.47L12 5.99M12 2 1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z"
 }), "WarningAmberOutlined");
 
+
+
+var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
+    const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { result: result , setResult: setResult , refresh: refresh  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
+        result
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        divider: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
+            orientation: "vertical",
+            flexItem: true
+        }),
+        spacing: 2,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "auto-refresh",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            size: "small",
+                            checked: autoRefresh,
+                            onChange: ()=>{
+                                setAutoRefresh(!autoRefresh);
+                            },
+                            sx: {
+                                position: "relative",
+                                top: 2,
+                                mr: 1
+                            }
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "refresh now",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: ()=>{
+                                refresh();
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5ba9247ae7a5d2a1$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "clear",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: ()=>{
+                                setResult(undefined);
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a39d82b58b72568$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "table",
+                        onClick: (event)=>onChange(event, "table"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "table" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $244e4efd21d39d5d$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "json",
+                        onClick: (event)=>onChange(event, "json"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "json" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "raw",
+                        onClick: (event)=>onChange(event, "raw"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "raw" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea5eca716117fce3$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "errors",
+                        onClick: (event)=>onChange(event, "errors"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "errors" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dd58ec53e901ec5b$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    errors > 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                        label: errors,
+                        color: "error",
+                        variant: "filled",
+                        size: "small",
+                        sx: {
+                            position: "relative",
+                            left: -10,
+                            height: 14,
+                            fontSize: "x-small"
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
+
+var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
+    const [mode1, setMode] = (0, $d4J5n.useState)("table");
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d99881d9fee9589c$export$5839ba03810e8481), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+            direction: "column",
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5debad09420a9f9$export$2e2bcd8739ae039), {
+                    mode: mode1,
+                    onChange: (event, mode)=>setMode(mode)
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: mode1 === "table" ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: mode1 === "json" ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: mode1 === "raw" ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    component: "div",
+                    display: mode1 === "errors" ? "block" : "none",
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6391d21c4d8d137$export$2e2bcd8739ae039), {})
+                })
+            ]
+        })
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+parcelRequire("d4J5n");
 
 
 var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open = !!message , onClose: onClose , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039), {
@@ -46225,7 +44853,7 @@ parcelRequire("d4J5n");
 
 
 var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { advanced: advanced , setAdvanced: setAdvanced , autoOpen: autoOpen , setAutoOpen: setAutoOpen , autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh , debug: debug , setDebug: setDebug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { advanced: advanced , setAdvanced: setAdvanced , autoOpen: autoOpen , setAutoOpen: setAutoOpen , debug: debug , setDebug: setDebug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -46259,14 +44887,6 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 onChange: ()=>setAutoOpen(!autoOpen)
                             }),
                             "Automatically opens the template default URL if enabled."
-                        ],
-                        [
-                            "Auto refresh data",
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                                checked: autoRefresh,
-                                onChange: ()=>setAutoRefresh(!autoRefresh)
-                            }),
-                            "Automatically refreshes the data view."
                         ],
                         [
                             "Advanced mode",
@@ -46380,12 +45000,10 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
-
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { template: json , file: file  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { file: file  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
             display: "flex",
@@ -47923,12 +46541,25 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             ],
             [
                 "snooze",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
-                    value: obj.snooze,
-                    onChange: (event, value)=>{
-                        obj.snooze = value;
-                        onChange(event);
-                    }
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e629e483c13aa557$export$2e2bcd8739ae039), {
+                            value: obj.snooze,
+                            onChange: (event, value)=>{
+                                obj.snooze = value;
+                                onChange(event);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            sx: {
+                                ml: 1,
+                                mt: 1
+                            },
+                            children: "seconds"
+                        })
+                    ]
                 }),
                 "Number of seconds to snooze before the click.",
                 false
@@ -48480,9 +47111,8 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                             fontSize: "small",
                             sx: {
-                                position: "relative",
-                                top: 8,
-                                ml: 1
+                                ml: 1,
+                                mt: 1
                             },
                             children: "seconds"
                         })
@@ -48658,14 +47288,27 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             ],
             [
                 "timeout",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj1.timeout,
-                    onChange: (event, value)=>{
-                        obj1.timeout = value;
-                        onChange(event);
-                    }
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                            value: obj1.timeout,
+                            onChange: (event, value)=>{
+                                obj1.timeout = value;
+                                onChange(event);
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            fontSize: "small",
+                            sx: {
+                                ml: 1,
+                                mt: 1
+                            },
+                            children: "seconds"
+                        })
+                    ]
                 }),
-                "Number of seconds to wait before timing out.",
+                "Number of seconds to wait before timing out. (default=30)",
                 obj1.timeout !== undefined
             ],
             [
@@ -49497,7 +48140,8 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
                                     elevation: 3,
                                     className: "panel",
                                     sx: {
-                                        width: 1
+                                        width: 1,
+                                        height: 250
                                     },
                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
                                 })

@@ -26,7 +26,7 @@ export default ({ item, onChange }: Props) => {
                                 onChange(event);
                             }}
                         />
-                        <Typography fontSize="small" sx={{ position: "relative", top: 8, ml: 1 }}>seconds</Typography>
+                        <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
                     </Stack>,
                     "Defines timeframe to snooze in seconds. Specify eitehr a single number or a range to define a random interval.",
                     true

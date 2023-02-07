@@ -22,7 +22,7 @@ export default () => {
                             {mode === "code-editor" && <CodeEditorView />}
                             {mode === "test-runner" && <TestRunnerView />}
                             {mode === "template-settings" && <TemplateSettingsView />}
-                            <Paper elevation={3} className="panel" sx={{ width: 1 }}>
+                            <Paper elevation={3} className="panel" sx={{ width: 1, height: 250 }}>
                                 <DataView />
                             </Paper>
                         </>

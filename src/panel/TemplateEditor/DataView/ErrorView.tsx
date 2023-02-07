@@ -17,8 +17,8 @@ export default () => {
             <Table size="small">
                 <TableHead>
                     <TableRow>
-                        <TableCell>message</TableCell>
-                        <TableCell width={100}>code</TableCell>
+                        <TableCell>error</TableCell>
+                        <TableCell width={100}>error-code</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

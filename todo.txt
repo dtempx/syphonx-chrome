@@ -1,3 +1,10 @@
+fix open template busy status
+data panel doesn't refresh automatically after opening a template
+clear data result after opening new template
+ability to select steps to run
+indicate when autorefresh is disabled
+waitfor forever (timeout = -1 or null)
+
 Data contracts
 Template test case runner
 query builder: context sensitive function parameters for replace, etc.

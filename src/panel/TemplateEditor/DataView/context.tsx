@@ -7,6 +7,7 @@ import * as syphonx from "syphonx-lib";
 export interface TemplateDataState {
     result: syphonx.ExtractResult | undefined;
     setResult: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
+    refresh: () => Promise<void>;
 }
 
 export function TemplateDataProvider({ children }: { children: JSX.Element }) {
@@ -18,21 +19,27 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
     useEffect(() => {
         if (autoRefresh) {
             const template = new Template(json);
-            if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
-                applyTemplate(template, contract)
-                .then(result => {
-                    setResult(result);
-                });
-            }
-            else {
-                setResult(undefined);
-            }
+            // only auto refresh if there is a single select action
+            if (template.children.length === 1 && template.children[0].name === "select")
+                refresh();
         }
     }, [json, autoRefresh]);
+
+    async function refresh() {
+        const template = new Template(json);
+        if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
+            const result = await applyTemplate(template, contract);
+            setResult(result);
+        }
+        else {
+            setResult(undefined);
+        }
+    }
  
     const value = {
         result,
-        setResult
+        setResult,
+        refresh
     };
 
     return (
@@ -48,7 +55,8 @@ export function useTemplateData() {
 
 export const TemplateDataContext = React.createContext<TemplateDataState>({
     result: undefined,
-    setResult: () => {}
+    setResult: () => {},
+    refresh: async () => {}
 });
 
 export * from "../context";

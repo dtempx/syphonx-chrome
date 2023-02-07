@@ -3,7 +3,6 @@ import { Table, TableContainer, TableBody, TableCell, TableRow } from "@mui/mate
 import { useTemplateData } from "./context";
 import { isObject, removeDOMRefs } from "../lib";
 
-
 export default () => {
     const { result } = useTemplateData();
     const keys = result && isObject(result.data) ? Object.keys(result.data) : [];
@@ -13,14 +12,6 @@ export default () => {
         <TableContainer>
             <Table size="small">
                 <TableBody>
-                    <TableRow style={{ fontWeight: "bold", backgroundColor: "#f0f8ff" }}>
-                        <TableCell>
-                            Key
-                        </TableCell>
-                        <TableCell>
-                            Value
-                        </TableCell>
-                    </TableRow>
                     {keys.map(key => {
                         return (
                             <TableRow>
