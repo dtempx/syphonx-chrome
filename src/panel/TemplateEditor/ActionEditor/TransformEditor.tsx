@@ -1,5 +1,4 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
@@ -44,6 +43,7 @@ export default ({ item, onChange }: Props) => {
                     "A formula that determines whether the transform is evaluated.",
                     obj.when !== undefined
                 ],
+                /*
                 [
                     "active",
                     <Switch
@@ -55,7 +55,8 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "Determines whether the transform is active or bypassed.",
                     obj.active !== undefined
-                ]        
+                ]
+                */
             ]}
         />
     ) : null;

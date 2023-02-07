@@ -1,5 +1,4 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
@@ -70,6 +69,7 @@ export default ({ item, onChange }: Props) => {
                     "A formula that determines whether to break out of the current loop.",
                     obj.when !== undefined
                 ],
+                /*
                 [
                     "active",
                     <Switch
@@ -82,6 +82,7 @@ export default ({ item, onChange }: Props) => {
                     "Determines whether the property is active or bypassed.",
                     obj.active !== undefined
                 ]
+                */
             ]}
         />
     ) : null;

@@ -1,16 +1,7 @@
 import React from "react";
+import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
-
-import {
-    Stack,
-    Switch,
-    Typography
-} from "@mui/material";
-
-import {
-    WarningAmberOutlined as AlertIcon
-} from "@mui/icons-material";
 
 import {
     ComplexPropertyGrid,
@@ -28,10 +19,7 @@ export default ({ item, onChange }: Props) => {
     return obj ? (
         <ComplexPropertyGrid items={[
             [
-                <Stack direction="row">
-                    <Typography fontSize="small">message</Typography>
-                    {!obj.query && <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />}
-                </Stack>,
+                "query",
                 <QueryEditorField
                     name="each"
                     query={obj.query}
@@ -41,7 +29,8 @@ export default ({ item, onChange }: Props) => {
                     }}
                 />,
                 "A CSS selector or jQuery expression that determines the set of elements to loop over.",
-                true
+                true,
+                !obj.query ? "query required" : ""
             ],
             [
                 "global",

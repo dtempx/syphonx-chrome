@@ -1,4 +1,7 @@
 import React, { useMemo } from "react";
+import { TemplateItem } from "../lib";
+import SelectTypeDropdown from "./SelectTypeDropdown";
+import * as syphonx from "syphonx-lib";
 
 import {
     Stack,
@@ -9,10 +12,11 @@ import {
     Tooltip
 } from "@mui/material";
 
-import { TemplateItem } from "../lib";
-import ActionIcon from "../../ActionIcon";
-import SelectTypeDropdown from "./SelectTypeDropdown";
-import * as syphonx from "syphonx-lib";
+import {
+    HighlightAlt as SelectIcon,
+    PivotTableChart as PivotIcon,
+    Mediation as UnionIcon
+} from "@mui/icons-material";
 
 export interface Props {
     item: TemplateItem;
@@ -81,13 +85,19 @@ export default ({ item, onChange, sx }: Props) => {
                     sx={{ ml: 1 }}
                 >
                     <ToggleButton value="select">
-                        <ActionIcon name="select" fontSize="small" />
+                        <Tooltip title="sub-select">
+                            <SelectIcon fontSize="small" />
+                        </Tooltip>
                     </ToggleButton>
                     <ToggleButton value="pivot">
-                        <ActionIcon name="pivot" fontSize="small" />
+                        <Tooltip title="pivot">
+                            <PivotIcon fontSize="small" />    
+                        </Tooltip>                        
                     </ToggleButton>
                     <ToggleButton value="union">
-                        <ActionIcon name="union" fontSize="small" />
+                        <Tooltip title="union">
+                            <UnionIcon fontSize="small" />                            
+                        </Tooltip>
                     </ToggleButton>
                 </ToggleButtonGroup>
             )}

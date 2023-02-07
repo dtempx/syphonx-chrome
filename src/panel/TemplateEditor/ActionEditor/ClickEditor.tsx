@@ -1,16 +1,7 @@
 import React from "react";
+import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
-
-import {
-    Stack,
-    Switch,
-    Typography
-} from "@mui/material";
-
-import {
-    WarningAmberOutlined as AlertIcon
-} from "@mui/icons-material";
 
 import {
     ComplexPropertyGrid,
@@ -30,10 +21,7 @@ export default ({ item, onChange }: Props) => {
     return obj ? (
         <ComplexPropertyGrid items={[
             [
-                <Stack direction="row">
-                    <Typography fontSize="small">query</Typography>
-                    {!obj.query && <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />}
-                </Stack>,
+                "query",
                 <QueryEditorField
                     name="click"
                     query={obj.query}
@@ -43,7 +31,8 @@ export default ({ item, onChange }: Props) => {
                     }}
                 />,
                 "A CSS selector or jQuery expression that determines the click target.",
-                true
+                true,
+                !obj.query ? "query required" : ""
             ],
             [
                 "required",
@@ -67,7 +56,7 @@ export default ({ item, onChange }: Props) => {
                     }}
                     min={0}
                 />,
-                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
+                "Determines the number of attempts to retry clicking and testing for the expected result. Requires a waitfor condition. (default=0)",
                 obj.retry !== undefined
             ],
             [
@@ -83,6 +72,18 @@ export default ({ item, onChange }: Props) => {
                 false
             ],
             [
+                "waitfor",
+                <Switch
+                    checked={!!obj.waitfor}
+                    onChange={(event, value) => {
+                        obj.waitfor = value ? {} : undefined;
+                        onChange(event);
+                    }}
+                />,
+                "Waits for content on the page to confirm the click. Can be used with retry to perform multiple attempts at clicking and verifying the result.",
+                true
+            ],
+            [
                 "when",
                 <FormulaField
                     value={obj.when}
@@ -94,6 +95,7 @@ export default ({ item, onChange }: Props) => {
                 "A formula that determines whether the click is evaluated or bypassed.",
                 obj.when !== undefined
             ],
+            /*
             [
                 "active",
                 <Switch
@@ -106,6 +108,7 @@ export default ({ item, onChange }: Props) => {
                 "Determines whether the property is active or bypassed.",
                 obj.active !== undefined
             ]
+            */
         ]} />
     ) : null;
 };

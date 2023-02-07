@@ -1,16 +1,7 @@
 import React from "react";
+import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
-
-import {
-    Stack,
-    Switch,
-    Typography
-} from "@mui/material";
-
-import {
-    WarningAmberOutlined as AlertIcon
-} from "@mui/icons-material";
 
 import {
     ComplexPropertyGrid,
@@ -32,10 +23,7 @@ export default ({ item, onChange }: Props) => {
         <ComplexPropertyGrid
             items={[
                 [
-                    <Stack direction="row">
-                        <Typography fontSize="small">message</Typography>
-                        {!obj.message && <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />}
-                    </Stack>,
+                    "message",
                     <VariantField
                         variants={["string", "dynamic-string"]}
                         value={obj.message}
@@ -45,7 +33,8 @@ export default ({ item, onChange }: Props) => {
                         }}
                     />,
                     "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
-                    true
+                    true,
+                    !obj.message ? "message required" : ""
                 ],
                 [
                     "code",
@@ -83,7 +72,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A CSS selector or jQuery expression that determines whether an error is produced.",
+                    "A CSS selector or jQuery expression that determines whether an error is produced. An error is produced unconditionally if not specified.",
                     true
                 ],    
                 [
@@ -110,6 +99,7 @@ export default ({ item, onChange }: Props) => {
                     "A formula returning a true or false result that determines whether an error is produced.",
                     obj.when !== undefined
                 ],
+                /*
                 [
                     "active",
                     <Switch
@@ -122,6 +112,7 @@ export default ({ item, onChange }: Props) => {
                     "Determines whether the property is active or bypassed.",
                     obj.active !== undefined
                 ]
+                */
             ]}
         />
     ) : null;

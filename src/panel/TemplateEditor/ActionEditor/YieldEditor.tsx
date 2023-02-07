@@ -1,5 +1,4 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { NumberField } from "./components";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
@@ -57,6 +56,7 @@ export default ({ item, onChange }: Props) => {
                         "Determines the amount of time in seconds to wait for a renavigation before a timeout error occurs.",
                         obj.timeout !== undefined
                     ],
+                    /*
                     [
                         "active",
                         <Switch
@@ -69,6 +69,7 @@ export default ({ item, onChange }: Props) => {
                         "Determines whether the property is active or bypassed.",
                         obj.active !== undefined
                     ]
+                    */
                 ]}
             />
         </>

@@ -14,6 +14,7 @@ import {
 import {
     WarningAmberOutlined as AlertIcon,
     LowPriority as ConditionalIcon,
+    DoNotDisturb as DisabledIcon,
     MoreVert as RepeatedIcon,
     PivotTableChart as PivotIcon,
     Mediation as UnionIcon
@@ -43,13 +44,13 @@ export default ({ item }: Props) => {
         <Stack direction="row" justifyContent="space-between">
             <Typography align="left" sx={{ mt: 1 }}>
                 {item.type === "action" && (
-                    <Tooltip title="sequence #">
+                    <Tooltip title="step #">
                         <Typography
                             variant="caption"
                             color="primary.light"
                             sx={{ position: "relative", top: -6, width: 24, mr: 1 }}
                         >
-                            {item.index + 1}
+                            {item.step}
                         </Typography>
                     </Tooltip>
                 )}
@@ -60,6 +61,7 @@ export default ({ item }: Props) => {
                 {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
                 {item.alert && <Tooltip title={item.alert}><AlertIcon color="warning" fontSize="small" /></Tooltip>}
+                {item.active === false && <Tooltip title="disabled"><DisabledIcon color="warning" fontSize="small" /></Tooltip>}
             </Typography>
             {selected?.key === item.key ? <ActionTreeItemMenu item={item} /> : undefined}
         </Stack>

@@ -5,11 +5,11 @@ export class Placeholder extends TemplateItem {
         super({
             template: parent.template,
             key: `${parent.key}.?`,
-            name: "(add sub-item)",
+            name: `(add ${parent.name} action)`,
             type: "placeholder",
             icon: "placeholder",
             parent,
-            collection: [],
+            collection: undefined,
             unit: undefined,
             obj: undefined,
             index: 0    

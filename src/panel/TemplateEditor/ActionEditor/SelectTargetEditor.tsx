@@ -36,7 +36,8 @@ export default ({ item, onChange }: Props) => {
                         }}
                     />,
                     "A CSS selector or jQuery expression that determines what data is selected on the page.",
-                    true
+                    true,
+                    !obj.query && !obj.value ? "query or value required" : ""
                 ],
                 [
                     "value",
@@ -123,6 +124,7 @@ export default ({ item, onChange }: Props) => {
                     "A formula that determines whether the select is evaluated or bypassed.",
                     obj.when !== undefined
                 ],
+                /*
                 [
                     "active",
                     <Switch
@@ -135,6 +137,7 @@ export default ({ item, onChange }: Props) => {
                     "Determines whether the property is active or bypassed",
                     obj.active !== undefined
                 ]
+                */
             ]}
         />
     ) : null;

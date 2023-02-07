@@ -42678,6 +42678,8 @@ class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
         this.unit = item.unit;
         this.obj = item.obj;
         this.index = item.index;
+        this.step = item.step;
+        this.active = item.active;
     }
 }
 
@@ -42688,11 +42690,11 @@ class $549379eae42a48da$export$84712d0562a614b8 extends (0, $1238fd0f4bef3443$ex
         super({
             template: parent.template,
             key: `${parent.key}.?`,
-            name: "(add sub-item)",
+            name: `(add ${parent.name} action)`,
             type: "placeholder",
             icon: "placeholder",
             parent: parent,
-            collection: [],
+            collection: undefined,
             unit: undefined,
             obj: undefined,
             index: 0
@@ -42834,9 +42836,11 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         }
     }
     duplicateItem(item) {
-        const unit = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(item.unit);
-        item.collection.splice(item.index + 1, 0, unit);
-        this.setSelected(unit);
+        if (item.collection && item.index !== undefined) {
+            const unit = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(item.unit);
+            item.collection.splice(item.index + 1, 0, unit);
+            this.setSelected(unit);
+        }
     }
     empty() {
         return this.children.length === 0;
@@ -42854,21 +42858,21 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         return JSON.stringify(this.obj, null, 2) || "";
     }
     moveItemDown(item) {
-        if (item.index < item.collection.length - 1) {
+        if (item.collection && item.index !== undefined && item.index < item.collection.length - 1) {
             item.collection.splice(item.index, 1);
             item.collection.splice(item.index + 1, 0, item.unit);
             this.setSelected(item.unit);
         }
     }
     moveItemUp(item) {
-        if (item.index > 0) {
+        if (item.collection && item.index !== undefined && item.index > 0) {
             item.collection.splice(item.index, 1);
             item.collection.splice(item.index - 1, 0, item.unit);
             this.setSelected(item.unit);
         }
     }
     removeItem(item) {
-        if (item.index >= 0) {
+        if (item.collection && item.index !== undefined && item.collection.length > 1 && item.index >= 0) {
             item.collection.splice(item.index, 1);
             if (item.collection.length > 1) {
                 const index = item.index >= item.collection.length ? item.index - 1 : item.index;
@@ -42904,13 +42908,43 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             click: {}
         };
         else if (type === "each") action = {
-            each: {}
+            each: {
+                actions: [
+                    {
+                        select: [
+                            {
+                                name: "value1",
+                                query: [
+                                    [
+                                        "h1"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         };
         else if (type === "error") action = {
             error: {}
         };
         else if (type === "repeat") action = {
-            repeat: {}
+            repeat: {
+                actions: [
+                    {
+                        select: [
+                            {
+                                name: "value1",
+                                query: [
+                                    [
+                                        "h1"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
         };
         else if (type === "select") action = {
             select: [
@@ -42932,7 +42966,13 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         };
         else if (type === "transform") action = {
             transform: [
-                {}
+                {
+                    select: [
+                        {
+                            name: "value1"
+                        }
+                    ]
+                }
             ]
         };
         else if (type === "yield") action = {
@@ -42942,7 +42982,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             waitfor: {}
         };
         else return;
-        if (item) actions.splice(item.index + 1, 0, action);
+        if (item && item.index !== undefined) actions.splice(item.index + 1, 0, action);
         else actions.push(action);
         this.setSelected(action);
     }
@@ -42962,7 +43002,6 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
     }
     addSelected() {
         const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
-        debugger;
         if (item) {
             if (item.type === "placeholder") return this.addPlaceholder(item);
             else if (item.type === "select" && item.collection) {
@@ -42993,6 +43032,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                     name: name,
                     type: "action",
                     icon: name,
+                    step: parent ? `${parent.step}.${index + 1}` : `${index + 1}`,
                     conditional: conditional,
                     parent: parent,
                     collection: collection,
@@ -43003,10 +43043,15 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 if (name === "break") {
                     const breakObj = obj;
                     item.conditional = !!breakObj.when;
+                    item.active = breakObj.active;
                 } else if (name === "click") {
                     const clickObj = obj;
+                    item.children = clickObj.waitfor ? [
+                        this.renderClickWaitfor(clickObj.waitfor, item)
+                    ] : [];
                     if (!clickObj.query && !clickObj.waitfor) item.alert = "query or waitfor required";
                     item.conditional = !!clickObj.when;
+                    item.active = clickObj.active;
                 } else if (name === "each") {
                     const eachObj = obj;
                     if (eachObj.actions instanceof Array && eachObj.actions.length > 0) item.children = this.renderActions(eachObj.actions, item);
@@ -43016,11 +43061,14 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                         ];
                         item.alert = "action required";
                     }
+                    if (!eachObj.query) item.alert = "query required";
                     item.conditional = !!eachObj.when;
+                    item.active = eachObj.active;
                 } else if (name === "error") {
                     const errorObj = obj;
                     if (!errorObj.message) item.alert = "uninitialized";
                     item.conditional = !!errorObj.when;
+                    item.active = errorObj.active;
                 } else if (name === "repeat") {
                     const repeatObj = obj;
                     if (repeatObj.actions instanceof Array) item.children = this.renderActions(repeatObj.actions, item);
@@ -43030,28 +43078,42 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                         ];
                         item.alert = "action required";
                     }
-                // item.conditional = !!repeatObj.when; // todo
+                //item.conditional = !!repeatObj.when; // todo
+                //item.active = repeatObj.active; // todo
                 } else if (name === "select") {
                     const selectObj = obj;
-                    if (selectObj instanceof Array && selectObj.length > 0) item.children = this.renderSelect(selectObj, item);
+                    item.children = this.renderSelect(selectObj, item);
                     item.conditional = item.children ? item.children.some((child)=>child.conditional) : false;
                 } else if (name === "snooze") ;
-                else if (name === "transform") {
-                    const transformObj = obj;
-                // todo: implement transform adapters
-                //item.conditional = item.children ? item.children.some(child => child.conditional) : false;
-                } else if (name === "waitfor") {
+                else if (name === "transform") ;
+                else if (name === "waitfor") {
                     const waitforObj = obj;
+                    item.children = this.renderSelect(waitforObj.select, item);
                     if (!waitforObj.query && !waitforObj.select) item.alert = "query or select required";
                     item.conditional = !!waitforObj.when;
+                    item.active = waitforObj.active;
                 } else if (name === "yield") {
                     const yieldObj = obj;
                     item.conditional = !!yieldObj.when;
+                    item.active = yieldObj.active;
                 }
                 if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
                 return item;
             });
         } else return [];
+    }
+    renderClickWaitfor(waitfor, parent) {
+        const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+            template: this,
+            key: `${parent.key}.waitfor`,
+            name: "waitfor",
+            type: "action",
+            icon: "waitfor",
+            parent: parent,
+            obj: waitfor
+        });
+        item.children = this.renderSelect(waitfor.select, item);
+        return item;
     }
     renderPivot(obj, parent) {
         const key = `${parent.key}.pivot`;
@@ -43071,7 +43133,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         return item;
     }
     renderSelect(collection, parent) {
-        return collection.map((select, index)=>{
+        if (collection instanceof Array) return collection.map((select, index)=>{
             const key = `${parent.key}.${select.name || "?"}`;
             const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
                 template: this,
@@ -43085,13 +43147,15 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 collection: collection,
                 unit: select,
                 obj: select,
-                index: index
+                index: index,
+                active: select.active
             });
             item.children = this.renderSubselect(select, item);
             if (!select.query && !select.value && !select.union) item.alert = "query or value required";
             if (select.type === "object" && !select.select && !select.pivot && !select.union) item.alert = "object type requires additional initialization";
             return item;
         });
+        else return [];
     }
     renderSubselect(obj, parent) {
         if (obj.pivot) return [
@@ -43114,7 +43178,8 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 collection: collection,
                 unit: obj,
                 obj: obj,
-                index: index
+                index: index,
+                active: obj.active
             });
             item.children = this.renderSubselect(obj, item);
             return item;
@@ -43661,6 +43726,12 @@ var $09e60e810ff3d65b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
+}), "DoNotDisturb");
+
+
+
 var $d5665a6538726d48$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
 }), "Edit");
@@ -43676,6 +43747,12 @@ var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $3152ee484e1d7499$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
 }), "ExpandMore");
+
+
+
+var $59832171647634df$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 4h7l5 5v8.58l-1.84-1.84c1.28-1.94 1.07-4.57-.64-6.28C14.55 8.49 13.28 8 12 8c-1.28 0-2.55.49-3.53 1.46-1.95 1.95-1.95 5.11 0 7.05.97.97 2.25 1.46 3.53 1.46.96 0 1.92-.28 2.75-.83L17.6 20H6V4zm8.11 11.1c-.56.56-1.31.88-2.11.88s-1.55-.31-2.11-.88c-.56-.56-.88-1.31-.88-2.11s.31-1.55.88-2.11c.56-.57 1.31-.88 2.11-.88s1.55.31 2.11.88c.56.56.88 1.31.88 2.11s-.31 1.55-.88 2.11z"
+}), "FindInPageOutlined");
 
 
 
@@ -45921,7 +45998,25 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
     const { advanced: advanced  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const visibleItems = items.filter((item)=>item[3] || expanded || advanced).map((item)=>[
-            item[0],
+            item[4] ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        fontSize: "small",
+                        children: item[0]
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: item[4],
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small",
+                            sx: {
+                                ml: 1
+                            }
+                        })
+                    })
+                ]
+            }) : item[0],
             item[1],
             item[2]
         ]);
@@ -46414,7 +46509,6 @@ parcelRequire("d4J5n");
 
 
 
-
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -46639,9 +46733,6 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
-        ...props
-    });
     else if (name === "placeholder") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb466aae3024022c$export$2e2bcd8739ae039), {
         ...props
     });
@@ -46664,9 +46755,6 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
         ...props
     });
     else if (name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $43454011a3067c9f$export$2e2bcd8739ae039), {
-        ...props
-    });
-    else if (name === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cf56af1cd2ad706b$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a1f3cbed4353f602$export$2e2bcd8739ae039), {
@@ -47589,23 +47677,29 @@ var $ab597aea378e8072$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
                         value: "select",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "select",
-                            fontSize: "small"
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: "sub-select",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ffcd2e035197e27e$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
                         value: "pivot",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "pivot",
-                            fontSize: "small"
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: "pivot",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
                         value: "union",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f7c43758b0386c3f$export$2e2bcd8739ae039), {
-                            name: "union",
-                            fontSize: "small"
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: "union",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cf56af1cd2ad706b$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
                         })
                     })
                 ]
@@ -47774,18 +47868,6 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether to break out of the current loop.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -47796,28 +47878,12 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
-
 var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "query"
-                        }),
-                        !obj.query && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    ]
-                }),
+                "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "click",
                     query: obj.query,
@@ -47827,7 +47893,8 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "A CSS selector or jQuery expression that determines the click target.",
-                true
+                true,
+                !obj.query ? "query required" : ""
             ],
             [
                 "required",
@@ -47851,7 +47918,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     },
                     min: 0
                 }),
-                "Determines the number of attempts to retry clicking and testing for the expected result. (default=0)",
+                "Determines the number of attempts to retry clicking and testing for the expected result. Requires a waitfor condition. (default=0)",
                 obj.retry !== undefined
             ],
             [
@@ -47867,6 +47934,18 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 false
             ],
             [
+                "waitfor",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: !!obj.waitfor,
+                    onChange: (event, value)=>{
+                        obj.waitfor = value ? {} : undefined;
+                        onChange(event);
+                    }
+                }),
+                "Waits for content on the page to confirm the click. Can be used with retry to perform multiple attempts at clicking and verifying the result.",
+                true
+            ],
+            [
                 "when",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
                     value: obj.when,
@@ -47877,18 +47956,6 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether the click is evaluated or bypassed.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -47899,28 +47966,12 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
-
 var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "message"
-                        }),
-                        !obj.query && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    ]
-                }),
+                "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "each",
                     query: obj.query,
@@ -47930,7 +47981,8 @@ var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "A CSS selector or jQuery expression that determines the set of elements to loop over.",
-                true
+                true,
+                !obj.query ? "query required" : ""
             ],
             [
                 "global",
@@ -47977,28 +48029,12 @@ var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
-
 var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "message"
-                        }),
-                        !obj.message && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    ]
-                }),
+                "message",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f4cfb68b239954cb$export$2e2bcd8739ae039), {
                     variants: [
                         "string",
@@ -48011,7 +48047,8 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
-                true
+                true,
+                !obj.message ? "message required" : ""
             ],
             [
                 "code",
@@ -48049,7 +48086,7 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A CSS selector or jQuery expression that determines whether an error is produced.",
+                "A CSS selector or jQuery expression that determines whether an error is produced. An error is produced unconditionally if not specified.",
                 true
             ],
             [
@@ -48075,18 +48112,6 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula returning a true or false result that determines whether an error is produced.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -48095,7 +48120,6 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 
 
 parcelRequire("d4J5n");
-
 
 var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj; //todo: remove shim when syphonx-core updated
@@ -48138,18 +48162,6 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -48158,7 +48170,6 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 
 
 parcelRequire("d4J5n");
-
 
 
 var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
@@ -48180,22 +48191,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 true
             ],
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "query"
-                        }),
-                        !obj.query && !obj.value && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    ]
-                }),
+                "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     query: obj.query,
                     name: obj.name,
@@ -48207,31 +48203,18 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "A CSS selector or jQuery expression that determines what data is selected on the page.",
-                true
+                true,
+                !obj.query && !obj.value ? "query or value required" : ""
             ],
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "type"
-                        }),
-                        obj.type === "object" && !obj.select && !obj.pivot && !obj.union && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
-                        })
-                    ]
-                }),
+                "type",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ab597aea378e8072$export$2e2bcd8739ae039), {
                     item: item,
                     onChange: onChange
                 }),
                 "Determines the type of the property value.",
-                true
+                true,
+                obj.type === "object" && !obj.select && !obj.pivot && !obj.union ? "choose mode" : ""
             ],
             [
                 "repeated",
@@ -48347,18 +48330,6 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether the select is evaluated or bypassed.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -48386,7 +48357,8 @@ var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "A CSS selector or jQuery expression that determines what data is selected on the page.",
-                true
+                true,
+                !obj.query && !obj.value ? "query or value required" : ""
             ],
             [
                 "value",
@@ -48478,18 +48450,6 @@ var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether the select is evaluated or bypassed.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -48539,7 +48499,6 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 
 parcelRequire("d4J5n");
 
-
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
@@ -48568,18 +48527,6 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A formula that determines whether the transform is evaluated.",
                 obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the transform is active or bypassed.",
-                obj.active !== undefined
             ]
         ]
     }) : null;
@@ -48587,113 +48534,151 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 
 
 
-parcelRequire("d4J5n");
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
 var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
-    const obj = item?.obj;
-    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+    const mode = (0, $d4J5n.useMemo)(()=>{
+        const obj = item?.obj;
+        if (obj.query) return "query";
+        else if (obj.select) return "select";
+        else return undefined;
+    }, [
+        item
+    ]);
+    function handleChangeMode(event, value) {
+        const obj = item?.obj;
+        if (value === "query") {
+            obj.query = [
+                [
+                    ""
+                ]
+            ];
+            obj.select = undefined;
+            onChange(event);
+        } else if (value === "select") {
+            obj.select = [
+                {
+                    name: "value1"
+                }
+            ];
+            obj.query = undefined;
+            onChange(event);
+        }
+    }
+    const obj1 = item?.obj;
+    return obj1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                    direction: "row",
+                "mode",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $267ddc6d673c1b4e$export$2e2bcd8739ae039), {
+                    value: mode,
+                    size: "small",
+                    exclusive: true,
+                    onChange: handleChangeMode,
+                    sx: {
+                        ml: 1
+                    },
                     children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                            fontSize: "small",
-                            children: "query"
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
+                            value: "query",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "query mode",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $59832171647634df$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
                         }),
-                        !obj.query && !obj.select && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
-                            color: "warning",
-                            fontSize: "small",
-                            sx: {
-                                ml: 1
-                            }
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
+                            value: "select",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "select mode",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ffcd2e035197e27e$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
                         })
                     ]
                 }),
+                "Choose query or select mode",
+                true,
+                mode === undefined ? "query or select required" : ""
+            ],
+            [
+                "query",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
                     name: "waitfor",
-                    query: obj.query,
+                    query: obj1.query,
                     onChange: (event, value)=>{
-                        obj.query = value;
+                        obj1.query = value;
                         onChange(event);
                     }
                 }),
                 "A CSS selector or jQuery expression that determines the content to wait for on the page.",
-                true
-            ],
-            [
-                "required",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.required ?? false,
-                    onChange: (event, value)=>{
-                        obj.required = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the click is optional or required, producing if no click target is found on the page.",
-                obj.required !== undefined
+                mode === "query",
+                (!obj1.query || JSON.stringify(obj1.query) === `[[""]]`) && !obj1.select ? "query or select required" : ""
             ],
             [
                 "on",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $741e31916b8e1873$export$2e2bcd8739ae039), {
-                    value: obj.on,
+                    value: obj1.on,
                     onChange: (event, value)=>{
-                        obj.on = value;
+                        obj1.on = value;
                         onChange(event);
                     }
                 }),
-                "Determines whether to wait for any, all, or none of the selectors.",
-                obj.on !== undefined
+                "Determines whether to wait for any, all, or none of the sub-selectors.",
+                mode === "select"
+            ],
+            [
+                "required",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                    checked: obj1.required ?? false,
+                    onChange: (event, value)=>{
+                        obj1.required = value;
+                        onChange(event);
+                    }
+                }),
+                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                obj1.required !== undefined
             ],
             [
                 "pattern",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bc149888b566c89c$export$2e2bcd8739ae039), {
-                    value: obj.pattern,
+                    value: obj1.pattern,
                     onChange: (event, value)=>{
-                        obj.pattern = value;
+                        obj1.pattern = value;
                         onChange(event);
                     }
                 }),
                 "Waits for a specific text pattern if specified.",
-                obj.pattern !== undefined
+                obj1.pattern !== undefined
             ],
             [
                 "timeout",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
-                    value: obj.timeout,
+                    value: obj1.timeout,
                     onChange: (event, value)=>{
-                        obj.timeout = value;
+                        obj1.timeout = value;
                         onChange(event);
                     }
                 }),
                 "Number of seconds to wait before timing out.",
-                obj.timeout !== undefined
+                obj1.timeout !== undefined
             ],
             [
                 "when",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
-                    value: obj.when,
+                    value: obj1.when,
                     onChange: (event, value)=>{
-                        obj.when = value || undefined;
+                        obj1.when = value || undefined;
                         onChange(event);
                     }
                 }),
                 "A formula that determines whether the click is evaluated or bypassed.",
-                obj.when !== undefined
-            ],
-            [
-                "active",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                    checked: obj.active ?? true,
-                    onChange: (event, value)=>{
-                        obj.active = value;
-                        onChange(event);
-                    }
-                }),
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
+                obj1.when !== undefined
             ]
         ]
     }) : null;
@@ -48702,7 +48687,6 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 
 
 parcelRequire("d4J5n");
-
 
 
 var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
@@ -48745,18 +48729,6 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }),
                     "Determines the amount of time in seconds to wait for a renavigation before a timeout error occurs.",
                     obj.timeout !== undefined
-                ],
-                [
-                    "active",
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                        checked: obj.active ?? true,
-                        onChange: (event, value)=>{
-                            obj.active = value;
-                            onChange(event);
-                        }
-                    }),
-                    "Determines whether the property is active or bypassed.",
-                    obj.active !== undefined
                 ]
             ]
         })
@@ -49002,7 +48974,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                 },
                 children: [
                     item1.type === "action" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "sequence #",
+                        title: "step #",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                             variant: "caption",
                             color: "primary.light",
@@ -49012,7 +48984,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                                 width: 24,
                                 mr: 1
                             },
-                            children: item1.index + 1
+                            children: item1.step
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -49075,6 +49047,13 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item1  })=>{
                     item1.alert && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: item1.alert,
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b960753d486198ce$export$2e2bcd8739ae039), {
+                            color: "warning",
+                            fontSize: "small"
+                        })
+                    }),
+                    item1.active === false && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "disabled",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $695a066753958329$export$2e2bcd8739ae039), {
                             color: "warning",
                             fontSize: "small"
                         })

@@ -60,9 +60,11 @@ export class Template {
     }
 
     duplicateItem(item: TemplateItem): void {
-        const unit = clone(item.unit);
-        item.collection.splice(item.index + 1, 0, unit);
-        this.setSelected(unit);
+        if (item.collection && item.index !== undefined) {
+            const unit = clone(item.unit);
+            item.collection.splice(item.index + 1, 0, unit);
+            this.setSelected(unit);
+        }
     }
 
     empty(): boolean {
@@ -85,7 +87,7 @@ export class Template {
     }
 
     moveItemDown(item: TemplateItem): void {
-        if (item.index < item.collection.length - 1) {
+        if (item.collection && item.index !== undefined && item.index < item.collection.length - 1) {
             item.collection.splice(item.index, 1);
             item.collection.splice(item.index + 1, 0, item.unit);
             this.setSelected(item.unit);
@@ -93,7 +95,7 @@ export class Template {
     }
 
     moveItemUp(item: TemplateItem): void {
-        if (item.index > 0) {
+        if (item.collection && item.index !== undefined && item.index > 0) {
             item.collection.splice(item.index, 1);
             item.collection.splice(item.index - 1, 0, item.unit);
             this.setSelected(item.unit);
@@ -101,7 +103,7 @@ export class Template {
     }
 
     removeItem(item: TemplateItem): void {
-        if (item.index >= 0) {
+        if (item.collection && item.index !== undefined && item.collection.length > 1 && item.index >= 0) {
             item.collection.splice(item.index, 1);
             if (item.collection.length > 1) {
                 const index = item.index >= item.collection.length ? item.index - 1 : item.index;
@@ -149,17 +151,17 @@ export class Template {
         else if (type === "click")
             action = { click: {} };
         else if (type === "each")
-            action = { each: {} };
+            action = { each: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
         else if (type === "error")
             action = { error: {} };
         else if (type === "repeat")
-            action = { repeat: {} };
+            action = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
         else if (type === "select")
             action = { select: [{ name: "value1", query: [["h1"]] }] };
         else if (type === "snooze")
             action = { snooze: [1, 2] };
         else if (type === "transform")
-            action = { transform: [{}] };
+            action = { transform: [{ select: [{ name: "value1" }] }] };
         else if (type === "yield")
             action = { yield: {} };
         else if (type === "waitfor")
@@ -167,7 +169,7 @@ export class Template {
         else
             return;
 
-        if (item)
+        if (item && item.index !== undefined)
             actions.splice(item.index + 1, 0, action);
         else
             actions.push(action);
@@ -188,7 +190,6 @@ export class Template {
 
     private addSelected(): boolean {
         const item = findItem(this.children, this.obj.selected);
-        debugger;
         if (item) {
             if (item.type === "placeholder") {
                 return this.addPlaceholder(item);
@@ -220,6 +221,7 @@ export class Template {
                     name,
                     type: "action",
                     icon: name,
+                    step: parent ? `${parent.step}.${index + 1}` : `${index + 1}`,
                     conditional,
                     parent,
                     collection,
@@ -231,12 +233,15 @@ export class Template {
                 if (name === "break") {
                     const breakObj = obj as syphonx.Break;
                     item.conditional = !!breakObj.when;
+                    item.active = breakObj.active;
                 }
                 else if (name === "click") {
                     const clickObj = obj as syphonx.Click;
+                    item.children = clickObj.waitfor ? [this.renderClickWaitfor(clickObj.waitfor, item)] : [];
                     if (!clickObj.query && !clickObj.waitfor)
                         item.alert = "query or waitfor required";
                     item.conditional = !!clickObj.when;
+                    item.active = clickObj.active;
                 }
                 else if (name === "each") {
                     const eachObj = obj as syphonx.Each;
@@ -247,7 +252,10 @@ export class Template {
                         item.children = [new Placeholder(item)];
                         item.alert = "action required";
                     }
+                    if (!eachObj.query)
+                        item.alert = "query required";
                     item.conditional = !!eachObj.when;
+                    item.active = eachObj.active;
                 }
                 else if (name === "error") {
                     const errorObj = obj as syphonx.Error;
@@ -255,6 +263,7 @@ export class Template {
                         item.alert = "uninitialized";
                     }
                     item.conditional = !!errorObj.when;
+                    item.active = errorObj.active;
                 }
                 else if (name === "repeat") {
                     const repeatObj = obj as syphonx.Repeat;
@@ -265,31 +274,34 @@ export class Template {
                         item.children = [new Placeholder(item)];
                         item.alert = "action required";
                     }
-                    // item.conditional = !!repeatObj.when; // todo
+                    //item.conditional = !!repeatObj.when; // todo
+                    //item.active = repeatObj.active; // todo
                 }
                 else if (name === "select") {
                     const selectObj = obj as syphonx.Select[];
-                    if (selectObj instanceof Array && selectObj.length > 0)
-                        item.children = this.renderSelect(selectObj as syphonx.Select[], item);
+                    item.children = this.renderSelect(selectObj, item);
                     item.conditional = item.children ? item.children.some(child => child.conditional) : false;
                 }
                 else if (name === "snooze") {
                     // nothing to do
                 }
                 else if (name === "transform") {
-                    const transformObj = obj as syphonx.Transform[];
-                    // todo: implement transform adapters
+                    //todo: implement transform adapters
+                    //const transformObj = obj as syphonx.Transform[];
                     //item.conditional = item.children ? item.children.some(child => child.conditional) : false;
                 }
                 else if (name === "waitfor") {
                     const waitforObj = obj as syphonx.WaitFor;
+                    item.children = this.renderSelect(waitforObj.select as syphonx.Select[], item);
                     if (!waitforObj.query && !waitforObj.select)
                         item.alert = "query or select required";
                     item.conditional = !!waitforObj.when;
+                    item.active = waitforObj.active;
                 }
                 else if (name === "yield") {
                     const yieldObj = obj as syphonx.Yield;
                     item.conditional = !!yieldObj.when;
+                    item.active = yieldObj.active;
                 }
 
                 if (item.children && item.children.some(child => child.alert)) {
@@ -302,6 +314,20 @@ export class Template {
         else {
             return [];
         }
+    }
+
+    private renderClickWaitfor(waitfor: syphonx.WaitFor, parent: TemplateItem): TemplateItem {
+        const item = new TemplateItem({
+            template: this,
+            key: `${parent.key}.waitfor`,
+            name: "waitfor",
+            type: "action",
+            icon: "waitfor",
+            parent,
+            obj: waitfor
+        });
+        item.children = this.renderSelect(waitfor.select, item);
+        return item;
     }
     
     private renderPivot(obj: syphonx.SelectTarget, parent: TemplateItem): TemplateItem {
@@ -322,34 +348,38 @@ export class Template {
         return item;
     }
 
-    private renderSelect(collection: syphonx.Select[], parent: TemplateItem): TemplateItem[] {
-        return collection.map((select, index) => {
-            const key = `${parent.key}.${select.name || "?"}`;
-            const item = new TemplateItem({
-                template: this,
-                key,
-                name: select.name || "",
-                type: "select",
-                icon: select.type || "string",
-                required: select.required,
-                repeated: select.repeated,
-                parent,
-                collection,
-                unit: select,
-                obj: select,
-                index
+    private renderSelect(collection: syphonx.Select[] | undefined, parent: TemplateItem): TemplateItem[] {
+        if (collection instanceof Array)
+            return collection.map((select, index) => {
+                const key = `${parent.key}.${select.name || "?"}`;
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name: select.name || "",
+                    type: "select",
+                    icon: select.type || "string",
+                    required: select.required,
+                    repeated: select.repeated,
+                    parent,
+                    collection,
+                    unit: select,
+                    obj: select,
+                    index,
+                    active: select.active
+                });
+
+                item.children = this.renderSubselect(select, item);
+                
+                if (!select.query && !select.value && !select.union)
+                    item.alert = "query or value required";
+
+                if (select.type === "object" && !select.select && !select.pivot && !select.union)
+                    item.alert = "object type requires additional initialization";
+
+                return item;
             });
-
-            item.children = this.renderSubselect(select, item);
-            
-            if (!select.query && !select.value && !select.union)
-                item.alert = "query or value required";
-
-            if (select.type === "object" && !select.select && !select.pivot && !select.union)
-                item.alert = "object type requires additional initialization";
-
-            return item;
-        });
+        else
+            return [];
     }
     
     private renderSubselect(obj: syphonx.Select, parent: TemplateItem): TemplateItem[] | undefined {
@@ -380,7 +410,8 @@ export class Template {
                 collection,
                 unit: obj,
                 obj,
-                index
+                index,
+                active: obj.active
             });
             item.children = this.renderSubselect(obj, item);
             return item;

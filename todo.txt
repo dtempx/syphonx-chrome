@@ -1,6 +1,8 @@
 Data contracts
 Template test case runner
-template autorun user setting
+query builder: context sensitive function parameters for replace, etc.
+
+refactor queryTracking to not use polling
 test out repeated objects (can't add)
 
 Data View
@@ -14,16 +16,6 @@ Data View
     autorun/manual-mode
     tree picker
     breakpoints
-
-sub-items
-    repeat -> sub-actions
-    each -> sub-actions (with numbering)
-    select[type=object] -> sub-selects
-    click -> waitfor (subselect)
-    pivot DONE
-    union DONE
-    finalize FAB selection context
-
 
 highlight dom on hover over tree or query
 select steps to run in action tree
@@ -117,6 +109,14 @@ manually set outer context
 
 
 
+CHORES
+investigate if js files in dist folder can be copied from node_modules (jquery.slim.js, syphonx.js)
+
+
+VALIDATION
+multiple DOM hits with repeated=false should be flagged
+
+
 
 DONE
 chrome extension setup: react, mui, build, panel
@@ -146,14 +146,17 @@ Action Views
 field editors: formula, regexp, symbolic name
 Template settings: url, key
 open page on template open
+template autorun user setting
 
 FIXED
 Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
 file save debug
 
-CHORES
-investigate if js files in dist folder can be copied from node_modules (jquery.slim.js, syphonx.js)
-
-
-VALIDATION
-multiple DOM hits with repeated=false should be flagged
+sub-items
+    repeat -> sub-actions DONE
+    each -> sub-actions (with numbering) DONE
+    select[type=object] -> sub-selects DONE
+    click -> waitfor (subselect) DONE
+    pivot DONE
+    union DONE
+    finalize FAB selection context DONE

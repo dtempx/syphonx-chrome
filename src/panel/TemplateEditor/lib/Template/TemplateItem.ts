@@ -37,6 +37,11 @@ export class TemplateItem {
     icon: string;
 
     /**
+     * Step number of the an within a collection.
+     */
+    step?: string;
+
+    /**
      * Indicates whether item specifies a when condition.
      */    
     conditional?: boolean;
@@ -73,7 +78,7 @@ export class TemplateItem {
      * An action collection contains a set of action units like `{"actions": [{"select": [...]},{"click",{...}}, ...]}`.
      * A selector collection contains a set of selector units like `{"select": [{"query":{...}}, ...]}`.
      */
-    collection: unknown[];
+    collection?: unknown[];
 
     /**
      * A unit is an object within an collection.
@@ -82,7 +87,7 @@ export class TemplateItem {
      * An action unit within an action collection like `{"select": [...]}` or `{"click": {...}}` or `{"waitfor": {...}}`.
      * A selector unit within a selector collection.
      */
-    unit: unknown;
+    unit?: unknown;
 
     /**
      * An obj is a reference to the inner object of the unit, for example the [...] in {"select":[...]} or the {...} in {"click":{...}}.
@@ -91,12 +96,17 @@ export class TemplateItem {
      * In the case of an action unit, `unit` refers to `{"click":{...}}` and `obj` refers to `{...}`.
      * In the case of a selector `unit` and `obj` refer to the same object.
      */
-    obj: unknown;
+    obj?: unknown;
 
     /**
      * Index of the unit within a collection.
      */
-    index: number;
+    index?: number;
+
+    /**
+     * Indicates whether the item is active or disabled.
+     */
+    active?: boolean;
 
     constructor(item: TemplateItem) {
         this.template = item.template;
@@ -113,5 +123,7 @@ export class TemplateItem {
         this.unit = item.unit;
         this.obj = item.obj;
         this.index = item.index;
+        this.step = item.step;
+        this.active = item.active;
     }
 }
