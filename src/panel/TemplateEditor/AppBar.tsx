@@ -12,7 +12,7 @@ import {
 
 import {
     Code as CodeIcon,
-    Category as EditorIcon,
+    AccountTree as EditorIcon,
     InsertDriveFileOutlined as FileIcon,
     Menu as MenuIcon,
     MiscellaneousServices as SettingsIcon,

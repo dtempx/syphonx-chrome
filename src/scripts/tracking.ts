@@ -90,11 +90,12 @@ export function queryTracking(): string[] {
         // reject if any digits are present in the name
         if (/\d/.test(name))
             return false;
-        
+
         // split words by "-" including only word lengths greater than 3 
         const words = name.split("-").filter(word => word.length > 3);
-        // reject if any word of length greater than 3 is not in the English dictionary
-        return words.length > 0 && words.every(word => syphonx.dictionary.has(word));
+        return words.length > 0
+            && words.every(word => syphonx.dictionary.has(word)) // reject if any word of length greater than 3 is not in the English dictionary
+            && words.some(word => ["selected"].includes(word)); // reject if any word is on the blacklist
     }
 
     function singleSelector(element: Element | null): string[] {

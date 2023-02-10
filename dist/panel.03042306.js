@@ -34922,6 +34922,11 @@ function $fee381e3400c58a7$export$de139376c1f60602(obj) {
 }
 
 
+function $c3cebfc3ffd3af63$export$e772c8ff12451969(ms) {
+    return new Promise((resolve)=>setTimeout(resolve, ms));
+}
+
+
 function $3ee7bf181cfaaad0$export$1d20a92cf1845969(key, delim = "_") {
     return key.replace(/[A-Z]/g, (char)=>`${delim}${char.toLowerCase()}`);
 }
@@ -41777,14 +41782,6 @@ function $f9d66397304cae7a$export$5c3a5f48c762cb34() {
 
 
 
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-parcelRequire("d4J5n");
-
-
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -41818,7 +41815,7 @@ $b9093140ea6d98ca$export$a22775fa5e2eebd9 = function(instance, schema, options) 
 
 
 
-async function $98393c94ae7378a9$export$f78a296632f66e69(template, schema) {
+async function $72b699ca83b4a379$export$f78a296632f66e69(template, schema) {
     if ((0, $6767c619f5de943e$exports).active) try {
         const result = await (0, $6767c619f5de943e$exports).applyTemplate(template.obj);
         if (result?.data && schema) {
@@ -41854,52 +41851,70 @@ async function $98393c94ae7378a9$export$f78a296632f66e69(template, schema) {
 }
 
 
-
-function $d99881d9fee9589c$export$5839ba03810e8481({ children: children  }) {
+function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
     const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const { contract: contract  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
     const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const [result1, setResult] = (0, $d4J5n.useState)();
+    const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
+    const [simple1, setSimple] = (0, $d4J5n.useState)(true);
     (0, $d4J5n.useEffect)(()=>{
-        if (autoRefresh) {
-            const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-            // only auto refresh if there is a single select action
-            if (template.children.length === 1 && template.children[0].name === "select") refresh();
-        }
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        const simple = template.children.length === 0 || template.children.length === 1 && template.children[0].name === "select";
+        setSimple(simple);
+        if (autoRefresh && simple) refresh();
     }, [
         json,
         autoRefresh
     ]);
     async function refresh() {
+        setResult(undefined);
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
-            const result = await (0, $98393c94ae7378a9$export$f78a296632f66e69)(template, contract);
+            setRefreshing(true);
+            const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
             setResult(result);
-        } else setResult(undefined);
+        }
+        setRefreshing(false);
     }
     const value = {
         result: result1,
         setResult: setResult,
-        refresh: refresh
+        refresh: refresh,
+        refreshing: refreshing,
+        simple: simple1
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d99881d9fee9589c$export$3dbf83a64597832d.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a354b7b9e59df128$export$3dbf83a64597832d.Provider, {
         value: value,
         children: children
     });
 }
-function $d99881d9fee9589c$export$5929441add3e8278() {
-    return (0, $d4J5n.useContext)($d99881d9fee9589c$export$3dbf83a64597832d);
+function $a354b7b9e59df128$export$5929441add3e8278() {
+    return (0, $d4J5n.useContext)($a354b7b9e59df128$export$3dbf83a64597832d);
 }
-const $d99881d9fee9589c$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     result: undefined,
     setResult: ()=>{},
-    refresh: async ()=>{}
+    refresh: async ()=>{},
+    refreshing: false,
+    simple: true
 });
 
 
 
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+parcelRequire("d4J5n");
+
+
+
+
 var $f6391d21c4d8d137$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     return result?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
@@ -41941,7 +41956,7 @@ parcelRequire("d4J5n");
 
 
 var $b452db4f8da5fc67$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
@@ -41956,7 +41971,7 @@ parcelRequire("d4J5n");
 
 
 var $fd9e77c6eb352991$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const { actions: actions , ...response } = result || {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
@@ -41973,7 +41988,7 @@ parcelRequire("d4J5n");
 
 
 var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
     const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
@@ -42009,6 +42024,12 @@ var $d4J5n = parcelRequire("d4J5n");
 var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
 }), "Abc");
+
+
+
+var $be29d9f5149bc99b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
+}), "AccountTree");
 
 
 
@@ -42049,22 +42070,6 @@ var $2fa39c758beb1829$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
         r: "1.5"
     }, "2")
 ], "Biotech");
-
-
-
-var $70f423fa97015aa4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "m12 2-5.5 9h11z"
-    }, "0"),
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
-        cx: "17.5",
-        cy: "17.5",
-        r: "4.5"
-    }, "1"),
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "M3 13.5h8v8H3z"
-    }, "2")
-], "Category");
 
 
 
@@ -42367,12 +42372,6 @@ var $ea5eca716117fce3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $5ba9247ae7a5d2a1$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"
-}), "Refresh");
-
-
-
 var $dd58ec53e901ec5b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
 }), "ReportProblem");
@@ -42423,10 +42422,21 @@ var $b960753d486198ce$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
     const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { result: result , setResult: setResult , refresh: refresh  } = (0, $d99881d9fee9589c$export$5929441add3e8278)();
+    const { result: result , setResult: setResult , refresh: refresh , refreshing: refreshing , simple: simple  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
         result
     ]);
+    const spinAnimation = {
+        animation: "spin 2s linear infinite",
+        "@keyframes spin": {
+            "0%": {
+                transform: "rotate(0deg)"
+            },
+            "100%": {
+                transform: "rotate(360deg)"
+            }
+        }
+    };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         divider: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
@@ -42439,12 +42449,12 @@ var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                 direction: "row",
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "auto-refresh",
+                        title: `auto-refresh${!simple ? " (disabled)" : ""}`,
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
                             size: "small",
-                            checked: autoRefresh,
+                            checked: autoRefresh && simple,
                             onChange: ()=>{
-                                setAutoRefresh(!autoRefresh);
+                                if (simple) setAutoRefresh(!autoRefresh);
                             },
                             sx: {
                                 position: "relative",
@@ -42460,8 +42470,9 @@ var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                             onClick: ()=>{
                                 refresh();
                             },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5ba9247ae7a5d2a1$export$2e2bcd8739ae039), {
-                                fontSize: "small"
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
+                                fontSize: "small",
+                                sx: refreshing ? spinAnimation : undefined
                             })
                         })
                     }),
@@ -42546,39 +42557,36 @@ var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
 
 
 
-
 var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
     const [mode1, setMode] = (0, $d4J5n.useState)("table");
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d99881d9fee9589c$export$5839ba03810e8481), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-            direction: "column",
-            children: [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5debad09420a9f9$export$2e2bcd8739ae039), {
-                    mode: mode1,
-                    onChange: (event, mode)=>setMode(mode)
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: mode1 === "table" ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: mode1 === "json" ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: mode1 === "raw" ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    component: "div",
-                    display: mode1 === "errors" ? "block" : "none",
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6391d21c4d8d137$export$2e2bcd8739ae039), {})
-                })
-            ]
-        })
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "column",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5debad09420a9f9$export$2e2bcd8739ae039), {
+                mode: mode1,
+                onChange: (event, mode)=>setMode(mode)
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "table" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "json" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "raw" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "errors" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6391d21c4d8d137$export$2e2bcd8739ae039), {})
+            })
+        ]
     });
 };
 
@@ -44722,6 +44730,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const { autoOpen: autoOpen  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const { setFile: setContractFile  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
     const { setFile: setTemplateFile , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const [files1, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -44748,8 +44757,13 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     async function onSelectFile(event, file1) {
         try {
             setOpening(true);
+            setResult(undefined);
             const json = await (0, $80e77e55da602fd0$exports).read(file1);
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+            if (autoOpen && template.obj.url) {
+                (0, $6767c619f5de943e$exports).navigate(template.obj.url);
+                await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000); // give some time for page to navigate before setting template
+            }
             setTemplate(template.json());
             setTemplateFile(file1);
             const dirname = (0, $89382e3cfd90d03a$exports).dirname(file1);
@@ -44759,7 +44773,6 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             onClose(event);
             setOpening(false);
             setError("");
-            if (autoOpen && template.obj.url) (0, $6767c619f5de943e$exports).navigate(template.obj.url);
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
@@ -44917,6 +44930,7 @@ var $4a984d03c08866a0$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
     const [userSettingsOpen, setUserSettingsOpen] = (0, $d4J5n.useState)(false);
@@ -44952,6 +44966,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aff1417d5558df81$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
+                                    setResult(undefined);
                                     onClose(event);
                                 }
                             ],
@@ -44976,6 +44991,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb87d55b2c409428$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
+                                    setResult(undefined);
                                     onClose(event);
                                 }
                             ],
@@ -45050,7 +45066,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "visual-editor" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70f423fa97015aa4$export$2e2bcd8739ae039), {})
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $be29d9f5149bc99b$export$2e2bcd8739ae039), {})
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -48123,32 +48139,34 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                sx: {
-                    minWidth: 500
-                },
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                            children: [
-                                mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $929f6a752088f49b$export$2e2bcd8739ae039), {}),
-                                mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aaa1ac035959e1a9$export$2e2bcd8739ae039), {}),
-                                mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $53af5c4d3cc3573a$export$2e2bcd8739ae039), {}),
-                                mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25ed3c2a8beb606c$export$2e2bcd8739ae039), {}),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                    elevation: 3,
-                                    className: "panel",
-                                    sx: {
-                                        width: 1,
-                                        height: 250
-                                    },
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
-                                })
-                            ]
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a354b7b9e59df128$export$5839ba03810e8481), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                    sx: {
+                        minWidth: 500
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                                children: [
+                                    mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $929f6a752088f49b$export$2e2bcd8739ae039), {}),
+                                    mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aaa1ac035959e1a9$export$2e2bcd8739ae039), {}),
+                                    mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $53af5c4d3cc3573a$export$2e2bcd8739ae039), {}),
+                                    mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25ed3c2a8beb606c$export$2e2bcd8739ae039), {}),
+                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                        elevation: 3,
+                                        className: "panel",
+                                        sx: {
+                                            width: 1,
+                                            height: 250
+                                        },
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
+                                    })
+                                ]
+                            })
                         })
-                    })
-                ]
+                    ]
+                })
             })
         })
     });

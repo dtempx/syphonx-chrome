@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Paper } from "@mui/material";
-import { useApp, ContractProvider, TemplateProvider } from "./context";
+import { useApp, ContractProvider, TemplateProvider, TemplateDataProvider } from "./context";
 import DataView from "./DataView";
 import AppBar from "./AppBar";
 import AppFrame from "./AppFrame";
@@ -14,20 +14,22 @@ export default () => {
     return (
         <ContractProvider>
             <TemplateProvider>
-                <Box sx={{ minWidth: 500 }}>
-                    <AppBar />
-                    <AppFrame>
-                        <>
-                            {mode === "visual-editor" && <VisualEditorView />}
-                            {mode === "code-editor" && <CodeEditorView />}
-                            {mode === "test-runner" && <TestRunnerView />}
-                            {mode === "template-settings" && <TemplateSettingsView />}
-                            <Paper elevation={3} className="panel" sx={{ width: 1, height: 250 }}>
-                                <DataView />
-                            </Paper>
-                        </>
-                    </AppFrame>
-                </Box>
+                <TemplateDataProvider>
+                    <Box sx={{ minWidth: 500 }}>
+                        <AppBar />
+                        <AppFrame>
+                            <>
+                                {mode === "visual-editor" && <VisualEditorView />}
+                                {mode === "code-editor" && <CodeEditorView />}
+                                {mode === "test-runner" && <TestRunnerView />}
+                                {mode === "template-settings" && <TemplateSettingsView />}
+                                <Paper elevation={3} className="panel" sx={{ width: 1, height: 250 }}>
+                                    <DataView />
+                                </Paper>
+                            </>
+                        </AppFrame>
+                    </Box>
+                </TemplateDataProvider>
             </TemplateProvider>
         </ContractProvider>
     );

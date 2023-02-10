@@ -14,7 +14,7 @@ import {
     ReportProblem as ErrorIcon,
     DataObject as JsonIcon,
     RawOn as RawIcon,
-    Refresh as RefreshIcon,
+    Autorenew as RefreshIcon,
     DoDisturb as ResetIcon,
     GridOn as TableIcon
 } from "@mui/icons-material";
@@ -28,22 +28,37 @@ export interface Props {
 
 export default ({ mode, onChange } : Props) => {
     const { autoRefresh, setAutoRefresh } = useApp();
-    const { result, setResult, refresh } = useTemplateData();
+    const { result, setResult, refresh, refreshing, simple } = useTemplateData();
     const errors = useMemo(() => result?.errors ? result.errors.length : 0, [result]);
+
+    const spinAnimation = {
+        animation: "spin 2s linear infinite",
+        "@keyframes spin": {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          }
+        }            
+    };
 
     return (
         <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={2}>
             <Stack direction="row">
-                <Tooltip title="auto-refresh">
+                <Tooltip title={`auto-refresh${!simple ? " (disabled)" : ""}`}>
                     <Switch
                         size="small"
-                        checked={autoRefresh}
-                        onChange={() => { setAutoRefresh(!autoRefresh)}}
+                        checked={autoRefresh && simple}
+                        onChange={() => {
+                            if (simple)
+                                setAutoRefresh(!autoRefresh);
+                        }}
                         sx={{ position: "relative", top: 2, mr: 1 }}
                     />
                 </Tooltip>
                 <Tooltip title="refresh now">
-                    <IconButton size="small" onClick={() => { refresh(); }}><RefreshIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" onClick={() => { refresh(); }}><RefreshIcon fontSize="small" sx={refreshing ? spinAnimation : undefined} /></IconButton>
                 </Tooltip>
                 <Tooltip title="clear">
                     <IconButton size="small" onClick={() => { setResult(undefined); }}><ResetIcon fontSize="small" /></IconButton>

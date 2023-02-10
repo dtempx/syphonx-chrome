@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
-import { background, cloud, path, Template } from "../lib";
-import { useApp, useContract, useTemplate } from "../context";
+import { background, cloud, path, sleep, Template } from "../lib";
+import { useApp, useContract, useTemplate, useTemplateData } from "../context";
 
 export interface Props {
     open: boolean;
@@ -12,6 +12,7 @@ export default ({ open, onClose }: Props) => {
     const { autoOpen } = useApp();
     const { setFile: setContractFile } = useContract();
     const { setFile: setTemplateFile, setTemplate } = useTemplate();
+    const { setResult } = useTemplateData();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -43,8 +44,15 @@ export default ({ open, onClose }: Props) => {
     async function onSelectFile(event: React.SyntheticEvent, file: string) {
         try {
             setOpening(true);
+            setResult(undefined);
             const json = await cloud.read(file);
             const template = new Template(json);
+
+            if (autoOpen && template.obj.url) {
+                background.navigate(template.obj.url);
+                await sleep(1000); // give some time for page to navigate before setting template
+            }
+
             setTemplate(template.json());
             setTemplateFile(file);
 
@@ -56,8 +64,6 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
             setOpening(false);
             setError("");
-            if (autoOpen && template.obj.url)
-                background.navigate(template.obj.url);
         }
         catch (err) {
             debugger;

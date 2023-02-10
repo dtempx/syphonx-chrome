@@ -25,6 +25,8 @@ function executeScript<T = unknown>(tabId: number, func: () => void, ...args: an
                 // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
                 if (results instanceof Array && results.length > 0)
                     resolve(results[0].result); // only take the first frame result for now
+                else if (chrome.runtime.lastError) // avoids error "Unchecked runtime.lastError: Exactly one of 'func' and 'files' must be specified"
+                    console.warn(chrome.runtime.lastError.message); // https://stackoverflow.com/questions/28431505/unchecked-runtime-lasterror-when-using-chrome-api
                 else
                     resolve();
             }
@@ -49,6 +51,8 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
                 // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
                 if (results instanceof Array && results.length > 0)
                     resolve(results[0].result); // only take the first frame result for now
+                else if (chrome.runtime.lastError) // avoids error "Unchecked runtime.lastError: Exactly one of 'func' and 'files' must be specified"
+                    console.warn(chrome.runtime.lastError.message); // https://stackoverflow.com/questions/28431505/unchecked-runtime-lasterror-when-using-chrome-api
                 else
                     reject({ message: `Failed to execute script file ${file}` });
             }

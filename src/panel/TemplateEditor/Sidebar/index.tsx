@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { List } from "../components";
-import { useTemplate } from "../context";
+import { useTemplate, useTemplateData } from "../context";
 import OpenFileDialog from "./OpenFileDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
@@ -25,6 +25,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { setTemplate } = useTemplate();
+    const { setResult } = useTemplateData();
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
     const [userSettingsOpen, setUserSettingsOpen] = useState(false);
@@ -46,12 +47,29 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={[
-                    ["New Template", <FileNewIcon />, event => { setTemplate(""); onClose(event); }],
-                    ["Open Template", <FileOpenIcon />, event => { setFileOpenOpen(true); onClose(event); }],
-                    ["Save Template", <FileSaveIcon />, event => { setFileSaveOpen(true); onClose(event); }],
-                    ["Close Template", <FileCloseIcon />, event => { setTemplate(""); onClose(event); }],
+                    ["New Template", <FileNewIcon />, event => {
+                        setTemplate("");
+                        setResult(undefined);
+                        onClose(event);
+                    }],
+                    ["Open Template", <FileOpenIcon />, event => {
+                        setFileOpenOpen(true);
+                        onClose(event);
+                    }],
+                    ["Save Template", <FileSaveIcon />, event => {
+                        setFileSaveOpen(true);
+                        onClose(event);
+                    }],
+                    ["Close Template", <FileCloseIcon />, event => {
+                        setTemplate("");
+                        setResult(undefined);
+                        onClose(event);
+                    }],
                     null,
-                    ["User Settings", <SettingsIcon />, event => { setUserSettingsOpen(true); onClose(event); }]
+                    ["User Settings", <SettingsIcon />, event => {
+                        setUserSettingsOpen(true);
+                        onClose(event);
+                    }]
                 ]} />
             </Box>
         </Drawer>

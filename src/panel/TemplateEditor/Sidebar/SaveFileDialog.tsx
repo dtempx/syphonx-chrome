@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { template: json, file: templateFile } = useTemplate();
+    const { template: json, file: templateFile, setFile: setTemplateFile } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -47,9 +47,10 @@ export default ({ open, onClose }: Props) => {
             setSaving(true);
             const json = template.file();
             await cloud.write(file, json);
-            onClose(event);
+            setTemplateFile(file);
             setSaving(false);
             setError("");
+            onClose(event);
         }
         catch (err) {
             debugger;

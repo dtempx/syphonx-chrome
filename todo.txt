@@ -1,43 +1,46 @@
-fix open template busy status
-data panel doesn't refresh automatically after opening a template
-clear data result after opening new template
-ability to select steps to run
-indicate when autorefresh is disabled
-waitfor forever (timeout = -1 or null)
+Test urls
+Test runner
+Test checks
+Test groups
 
-Data contracts
-Template test case runner
+fix open template busy status
+
+ability to select steps to run
+waitfor mode: exact, range, forever (timeout = -1 or null)
+specify input params
+new template should have a default select
+opening a template loads contract from closest parent directory
+ability to create and edit a data contract
+case action { "case": [ { "when": "...", "actions": [...] } ] }
+default select action with auto-populated selectors from contract
+cut/paste nodes in editor tree
+multi-transforms
+
+middle mouse button not always working
+dialog pulsing on justin's template was jarring
+action scroll to element
+type action for example to hit escape key to close a dialog
+busy indicator for manual refresh (spin refresh button)
+select.query is optional when type=object
+
 query builder: context sensitive function parameters for replace, etc.
+query builder: ability to set outer context for a query
+query builder: remove duplicate alternate selector suggestions
+query builder: selectMultiple
+query builder: text selection :has
+query builder: arrange order of functions
+query builder: refactor to enable inter-function view state
+query builder: jump to node in elements panel
 
 refactor queryTracking to not use polling
-test out repeated objects (can't add)
-
-Data View
-    data view: single object view
-    data view: table view
-    data view: json view
-    data view: error view
-    data view: log view
-    data view: data contract view
-    DOM highlighting
-    autorun/manual-mode
-    tree picker
-    breakpoints
+data explorer (single object view -> table view)
+view debug log output in data panel
+DOM highlighting in data panel
 
 highlight dom on hover over tree or query
 select steps to run in action tree
 
-VariantField
-file open progress animation on file open/save dialogs
-select cover page
-
-    
-
-Query Builder
-    context sensitive function parameters for replace, etc.
-    selectMultiple
-    arrange order of functions
-    fix function stage view state
+implement VariantField
 
 
 User settings: api-key, email
@@ -56,20 +59,6 @@ ghosted state in tree for disabled actions or subitems
 selector help & tasks
 
 
-BUGS
-Crash opening schwabe/person.json, error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
-CSS Selector not highlighting in DOM on change
-output is only updating the first time
-wait to dismiss file dialog until after file operation is complete, on error set ribbon and don't close the dialog
-file save doesn't work
-prompt for unsaved changes
-selector highlighting doesn't work on property page
-Disable autorun for non-select-only templates
-Fix position of add button so it doesn't scroll within the tree
-Add button blocks menu on selected item
-Change key for undefined name to ? (so it doesn't collide with a name of "undefined")
-A directory that only contains sub-directories (i.e. no files) is not visible in the file dialog
-
 CONSIDER
 Consider renaming SelectorField to QueryField, and how to pass other properites to it
 Consider refactoring to useQueryBuilder pattern
@@ -87,7 +76,6 @@ template params
 save data to Google sheets
 scheduled runs locally
 scheduled runs from cloud
-multi-transform
 Selector quality feedback (good, fair, poor)
 persist templates locally in chrome.storage
 paste HTML sandbox
@@ -97,7 +85,7 @@ Venom conversion tool
 IFRAME drilling
 Support shadow roots with Playwright
 GPT3 chatbot integration
-
+automated test url runner
 
 
 CURRENT: QUERY BUILDER
@@ -158,6 +146,10 @@ template autorun user setting
 FIXED
 Crash opening person.json (schwabe, kirkland, bannerwitcoff)... error: Objects are not valid as a React child (found: object with keys {name}). If you meant to render a collection of children, use an array instead.
 file save debug
+indicate when autorefresh is disabled
+clear data result after opening new template
+data panel doesn't refresh automatically after opening a template
+
 
 sub-items
     repeat -> sub-actions DONE

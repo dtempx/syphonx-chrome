@@ -83,8 +83,10 @@ function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
         if (/\d/.test(name)) return false;
         // split words by "-" including only word lengths greater than 3 
         const words = name.split("-").filter((word)=>word.length > 3);
-        // reject if any word of length greater than 3 is not in the English dictionary
-        return words.length > 0 && words.every((word)=>syphonx.dictionary.has(word));
+        return words.length > 0 && words.every((word)=>syphonx.dictionary.has(word)) // reject if any word of length greater than 3 is not in the English dictionary
+         && words.some((word)=>[
+                "selected"
+            ].includes(word)); // reject if any word is on the blacklist
     }
     function singleSelector(element) {
         let open = [];
@@ -170,6 +172,7 @@ const $07c03eb40a016611$var$scriptMap = {
         }, (results)=>{
             // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
             if (results instanceof Array && results.length > 0) resolve(results[0].result); // only take the first frame result for now
+            else if (chrome.runtime.lastError) console.warn(chrome.runtime.lastError.message); // https://stackoverflow.com/questions/28431505/unchecked-runtime-lasterror-when-using-chrome-api
             else resolve();
         }));
 }
@@ -192,6 +195,7 @@ const $07c03eb40a016611$var$scriptMap = {
         }, (results)=>{
             // The results of executing JavaScript are passed to the extension. A single result is included per-frame. The main frame is guaranteed to be the first index in the resulting array; all other frames are in a non-deterministic order.
             if (results instanceof Array && results.length > 0) resolve(results[0].result); // only take the first frame result for now
+            else if (chrome.runtime.lastError) console.warn(chrome.runtime.lastError.message); // https://stackoverflow.com/questions/28431505/unchecked-runtime-lasterror-when-using-chrome-api
             else reject({
                 message: `Failed to execute script file ${file}`
             });
