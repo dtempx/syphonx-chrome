@@ -218,10 +218,21 @@ async function $07c03eb40a016611$var$injectAll(tabId) {
         console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }
+function $07c03eb40a016611$var$waitForNavigation() {
+    return new Promise((resolve)=>{
+        function onCompleted(details) {
+            if (details.frameId === 0) {
+                chrome.webNavigation.onCompleted.removeListener(onCompleted);
+                resolve();
+            }
+        }
+        chrome.webNavigation.onCompleted.addListener(onCompleted);
+    });
+}
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (message.log) {
         console.log("MESSAGE", message.log);
-        return false;
+        return false; // immediate synchronous response
     }
     if (typeof message.tabId !== "number") {
         console.warn("MESSAGE", message.key, {
@@ -229,23 +240,52 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
             sender: sender,
             error: `Property "tabId" is invalid: "${message.tabId}"`
         });
-        return false;
+        return false; // immediate synchronous response
     }
     if (message.key === "navigate") {
         console.log("MESSAGE", message.key, {
             message: message,
             sender: sender
         });
-        chrome.tabs.update({
-            url: message.params[0]
+        (async ()=>{
+            await chrome.tabs.update({
+                url: message.params[0]
+            });
+            await $07c03eb40a016611$var$waitForNavigation();
+            sendResponse();
+        })();
+        return true; // response will be sent asynchronously
+    } else if (message.key === "reload") {
+        console.log("MESSAGE", message.key, {
+            message: message,
+            sender: sender
         });
+        (async ()=>{
+            await chrome.tabs.reload();
+            await $07c03eb40a016611$var$waitForNavigation();
+            sendResponse();
+        })();
+        return true; // response will be sent asynchronously
+    } else if (message.key === "tab") {
+        (async ()=>{
+            const tab = await chrome.tabs.get(message.tabId);
+            sendResponse({
+                tab: tab
+            });
+            console.log("MESSAGE", message.key, {
+                message: message,
+                sender: sender,
+                tab: tab
+            });
+        })();
+        return true; // response will be sent asynchronously
     } else if (!Object.keys($07c03eb40a016611$var$scriptMap).includes(message.key)) {
         console.warn("MESSAGE", {
             message: message,
             sender: sender,
             error: `Property "key" is invalid: "${message.key}"`
         });
-        return false;
+        return false; // immediate synchronous response
     }
     (async ()=>{
         try {

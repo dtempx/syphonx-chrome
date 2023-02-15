@@ -1,5 +1,13 @@
 import * as React from "react";
-import { ListItemIcon, ListItemText, MenuList, MenuItem, SxProps, Theme  } from "@mui/material";
+
+import {
+    ListItemIcon,
+    ListItemText,
+    MenuList,
+    MenuItem,
+    SxProps,
+    Theme
+} from "@mui/material";
 
 export interface Props {
     items: Array<[string, JSX.Element, (event: React.MouseEvent) => void]>;

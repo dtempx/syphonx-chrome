@@ -16,7 +16,7 @@ import {
     InsertDriveFileOutlined as FileIcon,
     Menu as MenuIcon,
     MiscellaneousServices as SettingsIcon,
-    Biotech as TestIcon
+    Science as TestIcon
 } from "@mui/icons-material";
 
 export default () => {

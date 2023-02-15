@@ -1,13 +1,13 @@
 import React from "react";
 import { Box, Paper } from "@mui/material";
 import { useApp, ContractProvider, TemplateProvider, TemplateDataProvider } from "./context";
-import DataView from "./DataView";
 import AppBar from "./AppBar";
 import AppFrame from "./AppFrame";
-import VisualEditorView from "./VisualEditorView";
-import CodeEditorView from "./CodeEditorView";
-import TestRunnerView from "./TestRunnerView";
-import TemplateSettingsView from "./TemplateSettingsView";
+import CodeEditor from "./CodeEditor";
+import DataPanel from "./DataPanel";
+import TemplateSettings from "./TemplateSettings";
+import TestRunner from "./TestRunner";
+import VisualEditor from "./VisualEditor";
 
 export default () => {
     const { mode } = useApp();
@@ -19,12 +19,12 @@ export default () => {
                         <AppBar />
                         <AppFrame>
                             <>
-                                {mode === "visual-editor" && <VisualEditorView />}
-                                {mode === "code-editor" && <CodeEditorView />}
-                                {mode === "test-runner" && <TestRunnerView />}
-                                {mode === "template-settings" && <TemplateSettingsView />}
+                                {mode === "visual-editor" && <VisualEditor />}
+                                {mode === "code-editor" && <CodeEditor />}
+                                {mode === "test-runner" && <TestRunner />}
+                                {mode === "template-settings" && <TemplateSettings />}
                                 <Paper elevation={3} className="panel" sx={{ width: 1, height: 250 }}>
-                                    <DataView />
+                                    <DataPanel />
                                 </Paper>
                             </>
                         </AppFrame>

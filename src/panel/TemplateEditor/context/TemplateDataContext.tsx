@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useApp, useContract, useTemplate } from "../context";
-import { Template } from "../lib";
+import { background, Template } from "../lib";
 import { applyTemplate } from "./applyTemplate";
 import * as syphonx from "syphonx-lib";
 
@@ -33,6 +33,8 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
         const template = new Template(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
+            if (!refreshing)
+                await background.inspectedWindow.reload();
             const result = await applyTemplate(template, contract);
             setResult(result);
         }

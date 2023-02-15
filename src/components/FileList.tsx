@@ -1,7 +1,19 @@
 import React from "react";
-import { List, ListItemButton, ListItemIcon, ListItemText, SxProps, Theme } from "@mui/material";
-import { InsertDriveFileOutlined as FileIcon, Folder as FolderIcon } from "@mui/icons-material";
 import { path } from "../lib";
+
+import {
+    List,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    SxProps,
+    Theme
+} from "@mui/material";
+
+import {
+    InsertDriveFileOutlined as FileIcon,
+    Folder as FolderIcon
+} from "@mui/icons-material";
 
 export interface Props {
     files: string[];

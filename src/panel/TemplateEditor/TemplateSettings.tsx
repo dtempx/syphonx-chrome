@@ -28,7 +28,7 @@ export default () => {
                             }}
                         />
                         <IconButton
-                            onClick={() => background.navigate(template.obj.url!)}
+                            onClick={() => background.inspectedWindow.navigate(template.obj.url!)}
                             sx={{ visibility: template.obj.url ? "visible" : "hidden" }}
                         >
                             <Tooltip title="Navigate to the url">

@@ -4,24 +4,29 @@ Test checks
 Test groups
 
 fix open template busy status
+match contract by filename (product-page, search-page, etc.)
+allow _ in file names in cloud storage
 
+refresh should have an option to renavigate the page
 ability to select steps to run
 waitfor mode: exact, range, forever (timeout = -1 or null)
 specify input params
 new template should have a default select
 opening a template loads contract from closest parent directory
 ability to create and edit a data contract
-case action { "case": [ { "when": "...", "actions": [...] } ] }
+
 default select action with auto-populated selectors from contract
 cut/paste nodes in editor tree
 multi-transforms
 
 middle mouse button not always working
 dialog pulsing on justin's template was jarring
+
 action scroll to element
-type action for example to hit escape key to close a dialog
-busy indicator for manual refresh (spin refresh button)
+sendkeys action for example to hit escape key to close a dialog
+case action { "case": [ { "when": "...", "actions": [...] } ] }
 select.query is optional when type=object
+save manifest version in template
 
 query builder: context sensitive function parameters for replace, etc.
 query builder: ability to set outer context for a query
@@ -34,6 +39,7 @@ query builder: jump to node in elements panel
 
 refactor queryTracking to not use polling
 data explorer (single object view -> table view)
+copy data to clipboard
 view debug log output in data panel
 DOM highlighting in data panel
 
@@ -149,7 +155,7 @@ file save debug
 indicate when autorefresh is disabled
 clear data result after opening new template
 data panel doesn't refresh automatically after opening a template
-
+busy indicator for manual refresh (spin refresh button)
 
 sub-items
     repeat -> sub-actions DONE

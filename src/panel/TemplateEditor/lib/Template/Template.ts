@@ -11,8 +11,13 @@ import {
     ordinalName
 } from "./utilities/index";
 
+interface TemplateTest {
+    url: string;
+}
+
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
+    tests?: TemplateTest[]
 }
 
 /**
@@ -57,6 +62,17 @@ export class Template {
             const added = this.addSelected();
             return added;
         }
+    }
+
+    addTest({ url }: { url: string }): boolean {
+        if (!(this.obj.tests instanceof Array))
+            this.obj.tests = [];
+        const test = this.obj.tests.find(obj => obj.url === url);
+        if (!test) {
+            this.obj.tests.push({ url });
+            this.obj.tests.sort((a, b) => a.url.localeCompare(b.url));
+        }
+        return !test;
     }
 
     duplicateItem(item: TemplateItem): void {
@@ -136,6 +152,10 @@ export class Template {
             this.obj.selected = undefined;
             return undefined;
         }
+    }
+
+    tests(): TemplateTest[] {
+        return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
 
     private addAction(type: TemplateAction): void {

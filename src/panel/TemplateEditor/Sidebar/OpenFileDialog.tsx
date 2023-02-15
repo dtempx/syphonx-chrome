@@ -49,7 +49,7 @@ export default ({ open, onClose }: Props) => {
             const template = new Template(json);
 
             if (autoOpen && template.obj.url) {
-                background.navigate(template.obj.url);
+                background.inspectedWindow.navigate(template.obj.url);
                 await sleep(1000); // give some time for page to navigate before setting template
             }
 

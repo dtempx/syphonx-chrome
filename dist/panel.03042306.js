@@ -30,6 +30,9 @@ function $parcel$exportWildcard(dest, source) {
 
   return dest;
 }
+function $parcel$defineInteropFlag(a) {
+  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
+}
 var $parcel$modules = {};
 var $parcel$inits = {};
 
@@ -20820,6 +20823,12 @@ var $5e35e7f068f55b96$export$2e2bcd8739ae039 = $5e35e7f068f55b96$var$Chip;
 
 
 
+var $3aecab0568aeb1c8$exports = {};
+
+$parcel$defineInteropFlag($3aecab0568aeb1c8$exports);
+
+$parcel$export($3aecab0568aeb1c8$exports, "default", () => $67d9684704896024$export$2e2bcd8739ae039);
+$parcel$export($3aecab0568aeb1c8$exports, "inputBaseClasses", () => $e3d87702158544c9$export$2e2bcd8739ae039);
 
 
 
@@ -21364,6 +21373,9 @@ const $67d9684704896024$var$inputGlobalStyles = /*#__PURE__*/ (0, $17b288f07ec57
     });
 });
 var $67d9684704896024$export$2e2bcd8739ae039 = $67d9684704896024$var$InputBase;
+
+
+
 
 
 
@@ -23252,6 +23264,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $3fab0efee1ba3066$exports = {};
+
+$parcel$defineInteropFlag($3fab0efee1ba3066$exports);
+
+$parcel$export($3fab0efee1ba3066$exports, "default", () => $fd29e14a923db841$export$2e2bcd8739ae039);
+
 
 
 
@@ -24255,6 +24273,8 @@ var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
 
 
 
+
+
 function $ca3ee0292200f2a5$export$2177af0aa15c34c2(slot) {
     return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiDialog", slot);
 }
@@ -24763,6 +24783,12 @@ var $0d0d12e54088d016$export$2e2bcd8739ae039 = $0d0d12e54088d016$var$DialogTitle
 
 
 
+var $a58ae39c5161f204$exports = {};
+
+$parcel$defineInteropFlag($a58ae39c5161f204$exports);
+
+$parcel$export($a58ae39c5161f204$exports, "default", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
+$parcel$export($a58ae39c5161f204$exports, "dividerClasses", () => $6fc412c0ce53bfbd$export$2e2bcd8739ae039);
 
 
 
@@ -24968,6 +24994,9 @@ const $7d334022fa9e4e25$var$Divider = /*#__PURE__*/ $d4J5n.forwardRef(function D
     }));
 });
 var $7d334022fa9e4e25$export$2e2bcd8739ae039 = $7d334022fa9e4e25$var$Divider;
+
+
+
 
 
 
@@ -26461,6 +26490,12 @@ const $e1f9aacd35535f0f$var$listItemClasses = (0, $8100014debd01602$export$2e2bc
 var $e1f9aacd35535f0f$export$2e2bcd8739ae039 = $e1f9aacd35535f0f$var$listItemClasses;
 
 
+var $5e3eddf31c86d517$exports = {};
+
+$parcel$defineInteropFlag($5e3eddf31c86d517$exports);
+
+$parcel$export($5e3eddf31c86d517$exports, "default", () => $daacc79c176159c4$export$2e2bcd8739ae039);
+$parcel$export($5e3eddf31c86d517$exports, "listItemButtonClasses", () => $e2dd11622fde5186$export$2e2bcd8739ae039);
 
 
 
@@ -26641,6 +26676,9 @@ const $daacc79c176159c4$var$ListItemButton = /*#__PURE__*/ $d4J5n.forwardRef(fun
     });
 });
 var $daacc79c176159c4$export$2e2bcd8739ae039 = $daacc79c176159c4$var$ListItemButton;
+
+
+
 
 
 
@@ -26974,6 +27012,12 @@ var $299786ec18bb6fc2$export$2e2bcd8739ae039 = $299786ec18bb6fc2$var$ListItem;
 
 
 
+var $c0a08a0f88a65246$exports = {};
+
+$parcel$defineInteropFlag($c0a08a0f88a65246$exports);
+
+$parcel$export($c0a08a0f88a65246$exports, "default", () => $525a0986dfeaa305$export$2e2bcd8739ae039);
+$parcel$export($c0a08a0f88a65246$exports, "listItemIconClasses", () => $4ab234d350ea8bc5$export$2e2bcd8739ae039);
 
 
 
@@ -27054,6 +27098,15 @@ var $525a0986dfeaa305$export$2e2bcd8739ae039 = $525a0986dfeaa305$var$ListItemIco
 
 
 
+
+
+
+var $e822d4aced53a119$exports = {};
+
+$parcel$defineInteropFlag($e822d4aced53a119$exports);
+
+$parcel$export($e822d4aced53a119$exports, "default", () => $e892f9464432086f$export$2e2bcd8739ae039);
+$parcel$export($e822d4aced53a119$exports, "listItemTextClasses", () => $17cdf6c187d9fdfe$export$2e2bcd8739ae039);
 
 
 
@@ -27185,6 +27238,9 @@ const $e892f9464432086f$var$ListItemText = /*#__PURE__*/ $d4J5n.forwardRef(funct
     }));
 });
 var $e892f9464432086f$export$2e2bcd8739ae039 = $e892f9464432086f$var$ListItemText;
+
+
+
 
 
 
@@ -27382,6 +27438,11 @@ var $fb0eb384587a3ae4$export$2e2bcd8739ae039 = $fb0eb384587a3ae4$var$MenuList;
 
 
 
+var $653eb297fb09c134$exports = {};
+
+$parcel$defineInteropFlag($653eb297fb09c134$exports);
+
+$parcel$export($653eb297fb09c134$exports, "default", () => $625b48b719d538f0$export$2e2bcd8739ae039);
 
 
 
@@ -27848,6 +27909,10 @@ const $625b48b719d538f0$var$Popover = /*#__PURE__*/ $d4J5n.forwardRef(function P
     }));
 });
 var $625b48b719d538f0$export$2e2bcd8739ae039 = $625b48b719d538f0$var$Popover;
+
+
+
+
 
 
 
@@ -31502,6 +31567,12 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+var $807a1d539ec88b4c$exports = {};
+
+$parcel$defineInteropFlag($807a1d539ec88b4c$exports);
+
+$parcel$export($807a1d539ec88b4c$exports, "default", () => $f8e9b85224d1dbe5$export$2e2bcd8739ae039);
+$parcel$export($807a1d539ec88b4c$exports, "formLabelClasses", () => $02d545d40cf45079$export$2e2bcd8739ae039);
 
 
 
@@ -31644,6 +31715,10 @@ const $f8e9b85224d1dbe5$var$FormLabel = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $f8e9b85224d1dbe5$export$2e2bcd8739ae039 = $f8e9b85224d1dbe5$var$FormLabel;
+
+
+
+
 
 
 
@@ -33356,6 +33431,10 @@ var $16d648c397460623$export$2e2bcd8739ae039 = $16d648c397460623$var$Tooltip;
 
 
 
+$parcel$exportWildcard($86049548edbb86a7$exports, $a58ae39c5161f204$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $5e3eddf31c86d517$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $c0a08a0f88a65246$exports);
+$parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 
@@ -33489,13 +33568,13 @@ $parcel$export($6767c619f5de943e$exports, "active", () => $6767c619f5de943e$expo
 $parcel$export($6767c619f5de943e$exports, "applyTemplate", () => $6767c619f5de943e$export$f78a296632f66e69);
 $parcel$export($6767c619f5de943e$exports, "disableTracking", () => $6767c619f5de943e$export$e684be5f4b22cc14);
 $parcel$export($6767c619f5de943e$exports, "enableTracking", () => $6767c619f5de943e$export$1f8ffc6fd33b1d16);
-$parcel$export($6767c619f5de943e$exports, "navigate", () => $6767c619f5de943e$export$ff7962acd6052c28);
+$parcel$export($6767c619f5de943e$exports, "inspectedWindow", () => $6767c619f5de943e$export$cbe410dad4f45b36);
 $parcel$export($6767c619f5de943e$exports, "log", () => $6767c619f5de943e$export$bef1f36f5486a6a3);
 $parcel$export($6767c619f5de943e$exports, "queryTracking", () => $6767c619f5de943e$export$225ea495d1fa0d5);
 $parcel$export($6767c619f5de943e$exports, "selectElements", () => $6767c619f5de943e$export$f2909722c7f0f932);
 const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
 async function $6767c619f5de943e$export$f78a296632f66e69(template) {
-    const result = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
+    const { result: result  } = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
     return result;
 }
 async function $6767c619f5de943e$export$e684be5f4b22cc14() {
@@ -33504,16 +33583,22 @@ async function $6767c619f5de943e$export$e684be5f4b22cc14() {
 async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
     await $6767c619f5de943e$var$sendMessage("enableTracking");
 }
-function $6767c619f5de943e$export$ff7962acd6052c28(url) {
-    const tabId = chrome.devtools.inspectedWindow.tabId;
-    chrome.runtime.sendMessage({
-        key: "navigate",
-        params: [
-            url
-        ],
-        tabId: tabId
-    });
-}
+let $6767c619f5de943e$export$cbe410dad4f45b36;
+(function(inspectedWindow1) {
+    async function activeTab() {
+        const { tab: tab  } = await $6767c619f5de943e$var$sendMessage("tab");
+        return tab;
+    }
+    inspectedWindow1.activeTab = activeTab;
+    async function navigate(url) {
+        await $6767c619f5de943e$var$sendMessage("navigate", url);
+    }
+    inspectedWindow1.navigate = navigate;
+    async function reload() {
+        await $6767c619f5de943e$var$sendMessage("reload");
+    }
+    inspectedWindow1.reload = reload;
+})($6767c619f5de943e$export$cbe410dad4f45b36 || ($6767c619f5de943e$export$cbe410dad4f45b36 = {}));
 function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
     if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
         log: message
@@ -33530,20 +33615,15 @@ async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
 }
 function $6767c619f5de943e$var$sendMessage(key, ...params) {
     return new Promise((resolve, reject)=>{
-        if ($6767c619f5de943e$export$89da14300d534261) {
-            const tabId = chrome.devtools.inspectedWindow.tabId;
-            chrome.runtime.sendMessage({
-                key: key,
-                params: params,
-                tabId: tabId
-            }, (response)=>{
-                if (response?.error) reject(response.error);
-                else resolve(response?.result);
-            });
-        } else {
-            console.log("BACKGROUND", key, ...params);
-            resolve(undefined);
-        }
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.runtime.sendMessage({
+            key: key,
+            params: params,
+            tabId: tabId
+        }, (response)=>{
+            if (response?.error) reject(response.error);
+            else resolve(response);
+        });
     });
 }
 
@@ -41261,7 +41341,7 @@ function $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc(json, key) {
         const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
         if (j > i) {
             json = `${json.substring(0, i)}${JSON.stringify(JSON.parse(json.substring(i, j)))}${json.substring(j)}`;
-            i = json.indexOf(`"${key}": [\n`, j);
+            i = json.indexOf(`"${key}": [\n`, i + 1);
         } else break;
     }
     return json;
@@ -41346,6 +41426,17 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             return added;
         }
     }
+    addTest({ url: url  }) {
+        if (!(this.obj.tests instanceof Array)) this.obj.tests = [];
+        const test = this.obj.tests.find((obj)=>obj.url === url);
+        if (!test) {
+            this.obj.tests.push({
+                url: url
+            });
+            this.obj.tests.sort((a, b)=>a.url.localeCompare(b.url));
+        }
+        return !test;
+    }
     duplicateItem(item) {
         if (item.collection && item.index !== undefined) {
             const unit = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(item.unit);
@@ -41406,6 +41497,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             this.obj.selected = undefined;
             return undefined;
         }
+    }
+    tests() {
+        return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
     addAction(type) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
@@ -41872,6 +41966,7 @@ function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
+            if (!refreshing) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
             const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
             setResult(result);
         }
@@ -41908,115 +42003,10 @@ const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__
 
 var $d4J5n = parcelRequire("d4J5n");
 
-parcelRequire("d4J5n");
-
-
-
-
-var $f6391d21c4d8d137$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    return result?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
-            size: "small",
-            children: [
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70776c1ed0e29d8a$export$2e2bcd8739ae039), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "error"
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                width: 100,
-                                children: "error-code"
-                            })
-                        ]
-                    })
-                }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
-                    children: result.errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                            children: [
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                    children: error.message
-                                }),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                    children: error.code
-                                })
-                            ]
-                        }))
-                })
-            ]
-        })
-    }) : null;
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-
-var $b452db4f8da5fc67$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-        multiline: true,
-        fullWidth: true,
-        value: result && result.data ? JSON.stringify((0, $fee381e3400c58a7$export$de139376c1f60602)(result.data), null, 2) : "",
-        variant: "outlined"
-    });
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-var $fd9e77c6eb352991$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const { actions: actions , ...response } = result || {};
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-        multiline: true,
-        fullWidth: true,
-        value: response ? JSON.stringify(response, null, 2) : "",
-        variant: "outlined"
-    });
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-
-var $e892abffbd196051$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
-    const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
-            size: "small",
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
-                children: keys.map((key)=>{
-                    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: key
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: typeof obj[key] !== "object" ? String(obj[key]) : JSON.stringify(obj[key])
-                            })
-                        ]
-                    });
-                })
-            })
-        })
-    });
-};
-
-
-
 
 var $d4J5n = parcelRequire("d4J5n");
 
+parcelRequire("d4J5n");
 
 
 
@@ -42054,22 +42044,6 @@ var $f9e34cee13fe7931$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $ba263eacaf41f616$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
 }), "Autorenew");
-
-
-
-var $2fa39c758beb1829$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "M7 19c-1.1 0-2 .9-2 2h14c0-1.1-.9-2-2-2h-4v-2h3c1.1 0 2-.9 2-2h-8c-1.66 0-3-1.34-3-3 0-1.09.59-2.04 1.46-2.56C8.17 9.03 8 8.54 8 8c0-.21.04-.42.09-.62C6.28 8.13 5 9.92 5 12c0 2.76 2.24 5 5 5v2H7z"
-    }, "0"),
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-        d: "M10.56 5.51C11.91 5.54 13 6.64 13 8c0 .75-.33 1.41-.85 1.87l.59 1.62.94-.34.34.94 1.88-.68-.34-.94.94-.34-2.74-7.53-.94.34-.34-.94-1.88.68.34.94-.94.35.56 1.54z"
-    }, "1"),
-    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("circle", {
-        cx: "10.5",
-        cy: "8",
-        r: "1.5"
-    }, "2")
-], "Biotech");
 
 
 
@@ -42384,6 +42358,12 @@ var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $a3962f29b210932e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.8 18.4 14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"
+}), "Science");
+
+
+
 var $a1d75b31022e04c3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M7.88 3.39 6.6 1.86 2 5.71l1.29 1.53 4.59-3.85zM22 5.72l-4.6-3.86-1.29 1.53 4.6 3.86L22 5.72zM12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7zm-3-9h3.63L9 15.2V17h6v-2h-3.63L15 10.8V9H9v2z"
 }), "Snooze");
@@ -42420,187 +42400,6 @@ var $b960753d486198ce$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $f5debad09420a9f9$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
-    const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { result: result , setResult: setResult , refresh: refresh , refreshing: refreshing , simple: simple  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
-        result
-    ]);
-    const spinAnimation = {
-        animation: "spin 2s linear infinite",
-        "@keyframes spin": {
-            "0%": {
-                transform: "rotate(0deg)"
-            },
-            "100%": {
-                transform: "rotate(360deg)"
-            }
-        }
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-        direction: "row",
-        divider: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
-            orientation: "vertical",
-            flexItem: true
-        }),
-        spacing: 2,
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                direction: "row",
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: `auto-refresh${!simple ? " (disabled)" : ""}`,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
-                            size: "small",
-                            checked: autoRefresh && simple,
-                            onChange: ()=>{
-                                if (simple) setAutoRefresh(!autoRefresh);
-                            },
-                            sx: {
-                                position: "relative",
-                                top: 2,
-                                mr: 1
-                            }
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "refresh now",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            onClick: ()=>{
-                                refresh();
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
-                                fontSize: "small",
-                                sx: refreshing ? spinAnimation : undefined
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "clear",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            onClick: ()=>{
-                                setResult(undefined);
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a39d82b58b72568$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    })
-                ]
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                direction: "row",
-                children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "table",
-                        onClick: (event)=>onChange(event, "table"),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            color: mode === "table" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $244e4efd21d39d5d$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "json",
-                        onClick: (event)=>onChange(event, "json"),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            color: mode === "json" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "raw",
-                        onClick: (event)=>onChange(event, "raw"),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            color: mode === "raw" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea5eca716117fce3$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "errors",
-                        onClick: (event)=>onChange(event, "errors"),
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            color: mode === "errors" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dd58ec53e901ec5b$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
-                    }),
-                    errors > 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                        label: errors,
-                        color: "error",
-                        variant: "filled",
-                        size: "small",
-                        sx: {
-                            position: "relative",
-                            left: -10,
-                            height: 14,
-                            fontSize: "x-small"
-                        }
-                    })
-                ]
-            })
-        ]
-    });
-};
-
-
-
-var $790a5edc90e63541$export$2e2bcd8739ae039 = ()=>{
-    const [mode1, setMode] = (0, $d4J5n.useState)("table");
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-        direction: "column",
-        children: [
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5debad09420a9f9$export$2e2bcd8739ae039), {
-                mode: mode1,
-                onChange: (event, mode)=>setMode(mode)
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode1 === "table" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892abffbd196051$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode1 === "json" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b452db4f8da5fc67$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode1 === "raw" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd9e77c6eb352991$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode1 === "errors" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f6391d21c4d8d137$export$2e2bcd8739ae039), {})
-            })
-        ]
-    });
-};
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-parcelRequire("d4J5n");
-
-
 var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open = !!message , onClose: onClose , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a3f9eeff0fd7f158$export$2e2bcd8739ae039), {
         in: open,
         sx: sx,
@@ -42620,6 +42419,36 @@ var $28c3cb74dc8fadb1$export$2e2bcd8739ae039 = ({ message: message , open: open 
             children: message
         })
     });
+
+
+
+parcelRequire("d4J5n");
+
+var $f67c5ea15815a2ed$export$2e2bcd8739ae039 = ({ data: data , sx: sx  })=>{
+    const keys = new Set();
+    for (const row1 of data)for (const key1 of Object.keys(row1))if (!keys.has(key1)) keys.add(key1);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70776c1ed0e29d8a$export$2e2bcd8739ae039), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                        children: Array.from(keys).map((key)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                children: key
+                            }))
+                    })
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
+                    children: data.map((row)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                            children: Array.from(keys).map((key)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                    children: row[key] !== undefined ? row[key] : null
+                                }))
+                        }))
+                })
+            ]
+        })
+    });
+};
 
 
 
@@ -42647,6 +42476,39 @@ var $26f0b3b6f2bba30f$export$2e2bcd8739ae039 = ({ value: value , onEdit: onEdit 
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
+
+var $7b42a1209722603f$exports = {};
+
+$parcel$export($7b42a1209722603f$exports, "LoadingButton", () => $be534f7264953969$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
+$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43041,6 +42903,72 @@ const $be534f7264953969$var$LoadingButton = /*#__PURE__*/ $d4J5n.forwardRef(func
     }));
 });
 var $be534f7264953969$export$2e2bcd8739ae039 = $be534f7264953969$var$LoadingButton;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43611,6 +43539,8 @@ const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function 
     }));
 });
 var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
+
+
 
 
 
@@ -44229,6 +44159,13 @@ var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
 
 
 
+
+
+
+
+
+
+
 var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , mode: mode , open: open , loading: loading , opening: opening , saving: saving , error: error , selectedFile: selectedFile , onSelectFile: onSelectFile , onClearError: onClearError , onClose: onClose  })=>{
     const [currentDirectory, setCurrentDirectory] = (0, $d4J5n.useState)("");
     const [text1, setText] = (0, $d4J5n.useState)("");
@@ -44761,7 +44698,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             const json = await (0, $80e77e55da602fd0$exports).read(file1);
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
             if (autoOpen && template.obj.url) {
-                (0, $6767c619f5de943e$exports).navigate(template.obj.url);
+                (0, $6767c619f5de943e$exports).inspectedWindow.navigate(template.obj.url);
                 await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000); // give some time for page to navigate before setting template
             }
             setTemplate(template.json());
@@ -44801,7 +44738,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { template: json1 , file: templateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json1 , file: templateFile , setFile: setTemplateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const [files1, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -44835,9 +44772,10 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             setSaving(true);
             const json = template.file();
             await (0, $80e77e55da602fd0$exports).write(file, json);
-            onClose(event);
+            setTemplateFile(file);
             setSaving(false);
             setError("");
+            onClose(event);
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
@@ -45084,7 +45022,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
                             color: mode === "test-runner" ? "primary" : "default",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2fa39c758beb1829$export$2e2bcd8739ae039), {})
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a3962f29b210932e$export$2e2bcd8739ae039), {})
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
@@ -45130,6 +45068,537 @@ var $4e6279b9ecb1b8f5$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
             children: children
         })
     });
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $f9ff0d55efab4341$export$2e2bcd8739ae039 = ()=>{
+    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        const code = template.file();
+        return {
+            template: template,
+            code: code
+        };
+    }, [
+        json
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+        elevation: 3,
+        className: "panel",
+        sx: {
+            width: 1,
+            height: 300
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+            variant: "outlined",
+            size: "small",
+            multiline: true,
+            fullWidth: true,
+            value: code1,
+            sx: {
+                height: "100%",
+                overflow: "scroll"
+            }
+        })
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+parcelRequire("d4J5n");
+
+
+
+
+var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    return result?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
+            size: "small",
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70776c1ed0e29d8a$export$2e2bcd8739ae039), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                children: "error"
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                width: 100,
+                                children: "error-code"
+                            })
+                        ]
+                    })
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
+                    children: result.errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                    children: error.message
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                    children: error.code
+                                })
+                            ]
+                        }))
+                })
+            ]
+        })
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+
+var $239f53bd6025a4d3$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        multiline: true,
+        fullWidth: true,
+        value: result && result.data ? JSON.stringify((0, $fee381e3400c58a7$export$de139376c1f60602)(result.data), null, 2) : "",
+        variant: "outlined"
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { actions: actions , ...response } = result || {};
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        multiline: true,
+        fullWidth: true,
+        value: response ? JSON.stringify(response, null, 2) : "",
+        variant: "outlined"
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+
+var $a71c5db2600073d4$export$2e2bcd8739ae039 = ()=>{
+    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
+    const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
+            size: "small",
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
+                children: keys.map((key)=>{
+                    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                children: key
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                children: typeof obj[key] !== "object" ? String(obj[key]) : JSON.stringify(obj[key])
+                            })
+                        ]
+                    });
+                })
+            })
+        })
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
+    const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { result: result , setResult: setResult , refresh: refresh , refreshing: refreshing , simple: simple  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
+        result
+    ]);
+    const spinAnimation = {
+        animation: "spin 2s linear infinite",
+        "@keyframes spin": {
+            "0%": {
+                transform: "rotate(0deg)"
+            },
+            "100%": {
+                transform: "rotate(360deg)"
+            }
+        }
+    };
+    function onRefresh() {
+        refresh();
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        divider: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
+            orientation: "vertical",
+            flexItem: true
+        }),
+        spacing: 2,
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: `auto-refresh${!simple ? " (disabled)" : ""}`,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                            size: "small",
+                            checked: autoRefresh && simple,
+                            onChange: ()=>{
+                                if (simple) setAutoRefresh(!autoRefresh);
+                            },
+                            sx: {
+                                position: "relative",
+                                top: 2,
+                                mr: 1
+                            }
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "refresh now",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: onRefresh,
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
+                                fontSize: "small",
+                                sx: refreshing ? spinAnimation : undefined
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "clear",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: ()=>{
+                                setResult(undefined);
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a39d82b58b72568$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                direction: "row",
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "table",
+                        onClick: (event)=>onChange(event, "table"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "table" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $244e4efd21d39d5d$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "json",
+                        onClick: (event)=>onChange(event, "json"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "json" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "raw",
+                        onClick: (event)=>onChange(event, "raw"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "raw" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea5eca716117fce3$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "errors",
+                        onClick: (event)=>onChange(event, "errors"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "errors" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $dd58ec53e901ec5b$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    errors > 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                        label: errors,
+                        color: "error",
+                        variant: "filled",
+                        size: "small",
+                        sx: {
+                            position: "relative",
+                            left: -10,
+                            height: 14,
+                            fontSize: "x-small"
+                        }
+                    })
+                ]
+            })
+        ]
+    });
+};
+
+
+
+var $e322818ad30de054$export$2e2bcd8739ae039 = ()=>{
+    const [mode1, setMode] = (0, $d4J5n.useState)("table");
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "column",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bb01957673566bdf$export$2e2bcd8739ae039), {
+                mode: mode1,
+                onChange: (event, mode)=>setMode(mode)
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "table" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a71c5db2600073d4$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "json" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $239f53bd6025a4d3$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "raw" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode1 === "errors" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7ff981b1d360305$export$2e2bcd8739ae039), {})
+            })
+        ]
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+
+
+
+var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+        elevation: 3,
+        className: "panel",
+        sx: {
+            width: 1,
+            height: 300
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
+            items: [
+                [
+                    "url",
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
+                                variant: "standard",
+                                size: "small",
+                                fullWidth: true,
+                                value: template.obj.url,
+                                onChange: (event, value)=>{
+                                    template.obj.url = value || undefined;
+                                    setTemplate(template.json());
+                                },
+                                onValidate: (event, value)=>{
+                                    return value ? /^https?:\/\/[^\/]/.test(value) : true;
+                                }
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                onClick: ()=>(0, $6767c619f5de943e$exports).inspectedWindow.navigate(template.obj.url),
+                                sx: {
+                                    visibility: template.obj.url ? "visible" : "hidden"
+                                },
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    title: "Navigate to the url",
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0045e6ed43c27179$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            })
+                        ]
+                    }),
+                    "A default URL for the template."
+                ],
+                [
+                    "key",
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
+                        variant: "standard",
+                        size: "small",
+                        fullWidth: true,
+                        value: template.obj.key,
+                        onChange: (event, value)=>{
+                            template.obj.key = value || undefined;
+                            setTemplate(template.json());
+                        },
+                        onValidate: (event, value)=>{
+                            return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
+                        }
+                    }),
+                    "A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data."
+                ]
+            ]
+        })
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+parcelRequire("d4J5n");
+
+
+
+
+var $b42892e434d2e578$export$2e2bcd8739ae039 = ()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    async function onAdd() {
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        const tab = await (0, $6767c619f5de943e$exports).inspectedWindow.activeTab();
+        if (tab.url) {
+            template.addTest({
+                url: tab.url
+            });
+            setTemplate(template.json());
+        }
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+            title: "Add url",
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                size: "small",
+                onClick: onAdd,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                    fontSize: "small"
+                })
+            })
+        })
+    });
+};
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+var $581f65c901be6788$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
+    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const tests = (0, $d4J5n.useMemo)(()=>{
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        return template.tests();
+    }, [
+        json
+    ]);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ee1e133ccba2d879$export$2e2bcd8739ae039), {
+        dense: true,
+        sx: sx,
+        children: tests.map((test)=>test.url).map((url)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $299786ec18bb6fc2$export$2e2bcd8739ae039), {
+                dense: true,
+                secondaryAction: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                    direction: "row",
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            onClick: ()=>{
+                                (0, $6767c619f5de943e$exports).inspectedWindow.navigate(url);
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Open page",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0045e6ed43c27179$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Remove url",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                    fontSize: "small"
+                                })
+                            })
+                        })
+                    ]
+                }),
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
+                    dense: true,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: url,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                            primary: url,
+                            primaryTypographyProps: {
+                                variant: "subtitle2",
+                                style: {
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis"
+                                }
+                            }
+                        })
+                    })
+                })
+            }, url))
+    });
+};
+
+
+
+var $e39c2ccebfc12579$export$2e2bcd8739ae039 = ()=>{
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+        elevation: 3,
+        className: "panel",
+        sx: {
+            width: 1,
+            height: 300
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+            direction: "column",
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b42892e434d2e578$export$2e2bcd8739ae039), {}),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $581f65c901be6788$export$2e2bcd8739ae039), {
+                    sx: {
+                        mt: 1
+                    }
+                })
+            ]
+        })
+    });
+};
 
 
 
@@ -47965,7 +48434,7 @@ var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
 };
 
 
-var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+var $23d5c3b2516abd1b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         sx: {
             width: 1,
@@ -48003,138 +48472,6 @@ var $929f6a752088f49b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
     });
 
 
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-var $aaa1ac035959e1a9$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { code: code1  } = (0, $d4J5n.useMemo)(()=>{
-        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        const code = template.file();
-        return {
-            template: template,
-            code: code
-        };
-    }, [
-        json
-    ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-        elevation: 3,
-        className: "panel",
-        sx: {
-            width: 1,
-            height: 300
-        },
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-            variant: "outlined",
-            size: "small",
-            multiline: true,
-            fullWidth: true,
-            value: code1,
-            sx: {
-                height: "100%",
-                overflow: "scroll"
-            }
-        })
-    });
-};
-
-
-
-parcelRequire("d4J5n");
-
-var $53af5c4d3cc3573a$export$2e2bcd8739ae039 = ()=>{
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-        elevation: 3,
-        className: "panel",
-        sx: {
-            width: 1,
-            height: 300
-        },
-        children: "TEST RUNNER"
-    });
-};
-
-
-
-parcelRequire("d4J5n");
-
-
-
-
-
-var $25ed3c2a8beb606c$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-        elevation: 3,
-        className: "panel",
-        sx: {
-            width: 1,
-            height: 300
-        },
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
-            items: [
-                [
-                    "url",
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                        direction: "row",
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
-                                variant: "standard",
-                                size: "small",
-                                fullWidth: true,
-                                value: template.obj.url,
-                                onChange: (event, value)=>{
-                                    template.obj.url = value || undefined;
-                                    setTemplate(template.json());
-                                },
-                                onValidate: (event, value)=>{
-                                    return value ? /^https?:\/\/[^\/]/.test(value) : true;
-                                }
-                            }),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                onClick: ()=>(0, $6767c619f5de943e$exports).navigate(template.obj.url),
-                                sx: {
-                                    visibility: template.obj.url ? "visible" : "hidden"
-                                },
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                    title: "Navigate to the url",
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0045e6ed43c27179$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    })
-                                })
-                            })
-                        ]
-                    }),
-                    "A default URL for the template."
-                ],
-                [
-                    "key",
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
-                        variant: "standard",
-                        size: "small",
-                        fullWidth: true,
-                        value: template.obj.key,
-                        onChange: (event, value)=>{
-                            template.obj.key = value || undefined;
-                            setTemplate(template.json());
-                        },
-                        onValidate: (event, value)=>{
-                            return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
-                        }
-                    }),
-                    "A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data."
-                ]
-            ]
-        })
-    });
-};
-
-
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
@@ -48149,10 +48486,10 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
                                 children: [
-                                    mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $929f6a752088f49b$export$2e2bcd8739ae039), {}),
-                                    mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aaa1ac035959e1a9$export$2e2bcd8739ae039), {}),
-                                    mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $53af5c4d3cc3573a$export$2e2bcd8739ae039), {}),
-                                    mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25ed3c2a8beb606c$export$2e2bcd8739ae039), {}),
+                                    mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
+                                    mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
+                                    mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
+                                    mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
                                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
                                         elevation: 3,
                                         className: "panel",
@@ -48160,7 +48497,7 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
                                             width: 1,
                                             height: 250
                                         },
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $790a5edc90e63541$export$2e2bcd8739ae039), {})
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
                                     })
                                 ]
                             })

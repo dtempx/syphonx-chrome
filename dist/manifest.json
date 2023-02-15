@@ -3,10 +3,17 @@
   "version": "0.9.4",
   "manifest_version": 3,
   "minimum_chrome_version": "10.0",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
   "permissions": [
     "activeTab",
     "scripting",
     "storage",
+    "webNavigation",
     "webRequest"
   ],
   "host_permissions": [

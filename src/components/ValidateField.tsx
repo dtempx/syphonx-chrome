@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { BaseTextFieldProps, IconButton, InputAdornment, TextField } from "@mui/material";
-import { Check as CommitIcon, Clear as CancelIcon } from "@mui/icons-material";
+
+import {
+    BaseTextFieldProps,
+    IconButton,
+    InputAdornment,
+    TextField
+} from "@mui/material";
+
+import {
+    Check as CommitIcon,
+    Clear as CancelIcon
+} from "@mui/icons-material";
 
 export interface Props extends BaseTextFieldProps {
     value?: unknown;

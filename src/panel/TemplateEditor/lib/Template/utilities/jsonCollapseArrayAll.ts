@@ -7,7 +7,7 @@ export function jsonCollapseArrayAll(json: string, key: string): string {
         const j = jsonMatchClosingBraceAt(json, i, "[]");
         if (j > i) {
             json = `${json.substring(0, i)}${JSON.stringify(JSON.parse(json.substring(i, j)))}${json.substring(j)}`;
-            i = json.indexOf(`"${key}": [\n`, j);
+            i = json.indexOf(`"${key}": [\n`, i + 1);
         }
         else {
             break;

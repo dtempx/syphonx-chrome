@@ -1,6 +1,17 @@
 import React from "react";
-import { AppBar, IconButton, SxProps, Theme, Toolbar, Typography } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+
+import {
+    AppBar,
+    IconButton,
+    SxProps,
+    Theme,
+    Toolbar,
+    Typography
+} from "@mui/material";
+
+import {
+    Close as CloseIcon
+} from "@mui/icons-material";
 
 export interface Props {
     title: JSX.Element | string;

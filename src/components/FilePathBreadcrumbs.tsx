@@ -1,7 +1,17 @@
 import React from "react";
-import { Breadcrumbs, Link, SxProps, Theme, Typography } from "@mui/material";
-import { Cloud as RootIcon } from "@mui/icons-material";
 import * as path from "../lib/path";
+
+import {
+    Breadcrumbs,
+    Link,
+    SxProps,
+    Theme,
+    Typography
+} from "@mui/material";
+
+import {
+    Cloud as RootIcon
+} from "@mui/icons-material";
 
 export interface Props {
     file: string;

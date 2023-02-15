@@ -1,6 +1,16 @@
 import React from "react";
-import { Alert, Collapse, IconButton, SxProps, Theme } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+
+import {
+    Alert,
+    Collapse,
+    IconButton,
+    SxProps,
+    Theme
+} from "@mui/material";
+
+import {
+    Close as CloseIcon
+} from "@mui/icons-material";
 
 export interface Props {
     message: JSX.Element | string;

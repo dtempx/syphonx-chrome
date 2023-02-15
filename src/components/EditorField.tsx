@@ -1,6 +1,15 @@
 import React from "react";
-import { BaseTextFieldProps, IconButton, InputAdornment, TextField } from "@mui/material";
-import { Edit as EditIcon } from "@mui/icons-material";
+
+import {
+    BaseTextFieldProps,
+    IconButton,
+    InputAdornment,
+    TextField
+} from "@mui/material";
+
+import {
+    Edit as EditIcon
+} from "@mui/icons-material";
 
 export interface Props extends BaseTextFieldProps {
     value: unknown;

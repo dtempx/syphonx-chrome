@@ -58,10 +58,10 @@ export default ({ mode, onChange } : Props) => {
                     />
                 </Tooltip>
                 <Tooltip title="refresh now">
-                    <IconButton size="small" onClick={() => { refresh(); }}><RefreshIcon fontSize="small" sx={refreshing ? spinAnimation : undefined} /></IconButton>
+                    <IconButton size="small" onClick={() => refresh()}><RefreshIcon fontSize="small" sx={refreshing ? spinAnimation : undefined} /></IconButton>
                 </Tooltip>
                 <Tooltip title="clear">
-                    <IconButton size="small" onClick={() => { setResult(undefined); }}><ResetIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" onClick={() => setResult(undefined)}><ResetIcon fontSize="small" /></IconButton>
                 </Tooltip>
             </Stack>
             <Stack direction="row">
