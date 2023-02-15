@@ -7,7 +7,7 @@ import * as syphonx from "syphonx-lib";
 export interface TemplateDataState {
     result: syphonx.ExtractResult | undefined;
     setResult: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
-    refresh: () => Promise<void>;
+    refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
     simple: boolean;
 }
@@ -28,12 +28,12 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
             refresh();
     }, [json, autoRefresh]);
 
-    async function refresh() {
+    async function refresh(reload = !refreshing) {
         setResult(undefined);
         const template = new Template(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
-            if (!refreshing)
+            if (reload)
                 await background.inspectedWindow.reload();
             const result = await applyTemplate(template, contract);
             setResult(result);

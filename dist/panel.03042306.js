@@ -41483,6 +41483,13 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             else this.setSelected(undefined);
         }
     }
+    removeTest(url) {
+        if (this.obj.tests instanceof Array) {
+            const i = this.obj.tests.findIndex((obj)=>obj.url === url);
+            if (i >= 0) this.obj.tests.splice(i, 1);
+        }
+        return false;
+    }
     selected() {
         const item = (0, $72249484b46a0533$export$a2dea178c28a0308)(this.children, this.obj.selected);
         return item;
@@ -41961,12 +41968,12 @@ function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
         json,
         autoRefresh
     ]);
-    async function refresh() {
+    async function refresh(reload = !refreshing) {
         setResult(undefined);
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
-            if (!refreshing) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
+            if (reload) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
             const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
             setResult(result);
         }
@@ -42026,6 +42033,12 @@ var $be29d9f5149bc99b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $9e18df9763fa5c16$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
 }), "Add");
+
+
+
+var $f796c2ef92e4cb76$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"
+}), "AddCircle");
 
 
 
@@ -45242,9 +45255,6 @@ var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
             }
         }
     };
-    function onRefresh() {
-        refresh();
-    }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         divider: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d334022fa9e4e25$export$2e2bcd8739ae039), {
@@ -45275,7 +45285,7 @@ var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                         title: "refresh now",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
-                            onClick: onRefresh,
+                            onClick: ()=>refresh(),
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
                                 fontSize: "small",
                                 sx: refreshing ? spinAnimation : undefined
@@ -45286,9 +45296,7 @@ var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                         title: "clear",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
-                            onClick: ()=>{
-                                setResult(undefined);
-                            },
+                            onClick: ()=>setResult(undefined),
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a39d82b58b72568$export$2e2bcd8739ae039), {
                                 fontSize: "small"
                             })
@@ -45500,7 +45508,7 @@ var $b42892e434d2e578$export$2e2bcd8739ae039 = ()=>{
             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                 size: "small",
                 onClick: onAdd,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e18df9763fa5c16$export$2e2bcd8739ae039), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f796c2ef92e4cb76$export$2e2bcd8739ae039), {
                     fontSize: "small"
                 })
             })
@@ -45517,59 +45525,55 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $581f65c901be6788$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const tests = (0, $d4J5n.useMemo)(()=>{
+    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { refresh: refresh  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { template: template1 , tests: tests1  } = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        return template.tests();
+        const tests = template.tests();
+        return {
+            template: template,
+            tests: tests
+        };
     }, [
         json
     ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ee1e133ccba2d879$export$2e2bcd8739ae039), {
         dense: true,
         sx: sx,
-        children: tests.map((test)=>test.url).map((url)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $299786ec18bb6fc2$export$2e2bcd8739ae039), {
+        children: tests1.map((test)=>test.url).map((url)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $299786ec18bb6fc2$export$2e2bcd8739ae039), {
                 dense: true,
-                secondaryAction: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                secondaryAction: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                     direction: "row",
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            onClick: ()=>{
-                                (0, $6767c619f5de943e$exports).inspectedWindow.navigate(url);
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Open page",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0045e6ed43c27179$export$2e2bcd8739ae039), {
-                                    fontSize: "small"
-                                })
-                            })
-                        }),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            size: "small",
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "Remove url",
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                                    fontSize: "small"
-                                })
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                        size: "small",
+                        onClick: ()=>{
+                            template1.removeTest(url);
+                            setTemplate(template1.json());
+                        },
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            title: "Remove url",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                fontSize: "small"
                             })
                         })
-                    ]
+                    })
                 }),
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
                     dense: true,
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: url,
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
-                            primary: url,
-                            primaryTypographyProps: {
-                                variant: "subtitle2",
-                                style: {
-                                    whiteSpace: "nowrap",
-                                    overflow: "hidden",
-                                    textOverflow: "ellipsis"
-                                }
+                    onClick: async ()=>{
+                        await (0, $6767c619f5de943e$exports).inspectedWindow.navigate(url);
+                        await refresh(false);
+                    },
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
+                        primary: url,
+                        primaryTypographyProps: {
+                            variant: "subtitle2",
+                            style: {
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis"
                             }
-                        })
+                        }
                     })
                 })
             }, url))

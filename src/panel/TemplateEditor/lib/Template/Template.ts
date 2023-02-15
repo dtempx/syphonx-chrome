@@ -134,6 +134,15 @@ export class Template {
         }
     }
 
+    removeTest(url: string): boolean {
+        if (this.obj.tests instanceof Array) {
+            const i = this.obj.tests.findIndex(obj => obj.url === url);
+            if (i >= 0)
+                this.obj.tests.splice(i, 1);
+        }
+        return false;
+    }
+
     selected(): TemplateItem | undefined {
         const item = findItem(this.children, this.obj.selected);
         return item;

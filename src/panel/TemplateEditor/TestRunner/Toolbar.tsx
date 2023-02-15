@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import {
-    Add as AddIcon
+    AddCircle as AddIcon
 } from "@mui/icons-material";
 
 export default () => {

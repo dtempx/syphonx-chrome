@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTemplate } from "../context";
+import { useTemplate, useTemplateData } from "../context";
 import { background, Template } from "../lib";
 
 import {
@@ -26,11 +26,13 @@ export interface Props {
 }
 
 export default ({ sx }: Props) => {
-    const { template: json } = useTemplate();
+    const { template: json, setTemplate } = useTemplate();
+    const { refresh } = useTemplateData();
 
-    const tests = useMemo(() => {
+    const { template, tests } = useMemo(() => {
         const template = new Template(json);
-        return template.tests();        
+        const tests = template.tests();
+        return { template, tests };
     }, [json]);
 
     return (
@@ -41,14 +43,13 @@ export default ({ sx }: Props) => {
                     dense
                     secondaryAction={
                         <Stack direction="row">
-                            <IconButton size="small" onClick={() => {
-                                background.inspectedWindow.navigate(url);
-                            }}>
-                                <Tooltip title="Open page">
-                                    <OpenIcon fontSize="small" />
-                                </Tooltip>
-                            </IconButton>
-                            <IconButton size="small">
+                            <IconButton
+                                size="small"
+                                onClick={() => {
+                                    template.removeTest(url);
+                                    setTemplate(template.json());
+                                }}
+                            >
                                 <Tooltip title="Remove url">
                                     <DeleteIcon fontSize="small" />
                                 </Tooltip>
@@ -56,25 +57,29 @@ export default ({ sx }: Props) => {
                         </Stack>
                     }
                 >
-                    <ListItemButton dense>
+                    <ListItemButton
+                        dense
+                        onClick={async () => {
+                            await background.inspectedWindow.navigate(url);
+                            await refresh(false);
+                        }}
+                    >
                         {/*
                         <ListItemIcon>
                             <Checkbox edge="start" size="small" />
                         </ListItemIcon>
                         */}
-                        <Tooltip title={url}>
-                            <ListItemText
-                                primary={url}
-                                primaryTypographyProps={{
-                                    variant: "subtitle2",
-                                    style: {
-                                        whiteSpace: "nowrap",
-                                        overflow: "hidden",
-                                        textOverflow: "ellipsis"
-                                    }
-                                }}
-                            />
-                        </Tooltip>
+                        <ListItemText
+                            primary={url}
+                            primaryTypographyProps={{
+                                variant: "subtitle2",
+                                style: {
+                                    whiteSpace: "nowrap",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis"
+                                }
+                            }}
+                        />
                     </ListItemButton>
                 </ListItem>
             ))}
