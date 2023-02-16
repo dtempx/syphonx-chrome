@@ -6,3 +6,7 @@ Toolbar should not scroll out of view in data view
 Add button blocks menu on selected item
 A directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
 File open doesn't display busy status when opening template
+
+selector hilighting not working on coned
+click eyeball crashes on coned
+entering values for snooze don't persist

@@ -33568,10 +33568,10 @@ $parcel$export($6767c619f5de943e$exports, "active", () => $6767c619f5de943e$expo
 $parcel$export($6767c619f5de943e$exports, "applyTemplate", () => $6767c619f5de943e$export$f78a296632f66e69);
 $parcel$export($6767c619f5de943e$exports, "disableTracking", () => $6767c619f5de943e$export$e684be5f4b22cc14);
 $parcel$export($6767c619f5de943e$exports, "enableTracking", () => $6767c619f5de943e$export$1f8ffc6fd33b1d16);
-$parcel$export($6767c619f5de943e$exports, "inspectedWindow", () => $6767c619f5de943e$export$cbe410dad4f45b36);
 $parcel$export($6767c619f5de943e$exports, "log", () => $6767c619f5de943e$export$bef1f36f5486a6a3);
 $parcel$export($6767c619f5de943e$exports, "queryTracking", () => $6767c619f5de943e$export$225ea495d1fa0d5);
 $parcel$export($6767c619f5de943e$exports, "selectElements", () => $6767c619f5de943e$export$f2909722c7f0f932);
+$parcel$export($6767c619f5de943e$exports, "inspectedWindow", () => $6767c619f5de943e$export$cbe410dad4f45b36);
 const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
 async function $6767c619f5de943e$export$f78a296632f66e69(template) {
     const { result: result  } = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
@@ -33582,6 +33582,33 @@ async function $6767c619f5de943e$export$e684be5f4b22cc14() {
 }
 async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
     await $6767c619f5de943e$var$sendMessage("enableTracking");
+}
+function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
+    if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
+        log: message
+    });
+    else console.log("BACKGROUND", message);
+}
+async function $6767c619f5de943e$export$225ea495d1fa0d5() {
+    const { result: result  } = await $6767c619f5de943e$var$sendMessage("queryTracking");
+    return result || [];
+}
+async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
+    const { result: result  } = await $6767c619f5de943e$var$sendMessage("selectElements", selectors);
+    return result || [];
+}
+function $6767c619f5de943e$var$sendMessage(key, ...params) {
+    return new Promise((resolve, reject)=>{
+        const tabId = chrome.devtools.inspectedWindow.tabId;
+        chrome.runtime.sendMessage({
+            key: key,
+            params: params,
+            tabId: tabId
+        }, (response)=>{
+            if (response?.error) reject(response.error);
+            else resolve(response);
+        });
+    });
 }
 let $6767c619f5de943e$export$cbe410dad4f45b36;
 (function(inspectedWindow1) {
@@ -33599,33 +33626,6 @@ let $6767c619f5de943e$export$cbe410dad4f45b36;
     }
     inspectedWindow1.reload = reload;
 })($6767c619f5de943e$export$cbe410dad4f45b36 || ($6767c619f5de943e$export$cbe410dad4f45b36 = {}));
-function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
-    if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
-        log: message
-    });
-    else console.log("BACKGROUND", message);
-}
-async function $6767c619f5de943e$export$225ea495d1fa0d5() {
-    const result = await $6767c619f5de943e$var$sendMessage("queryTracking");
-    return result || [];
-}
-async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
-    const result = await $6767c619f5de943e$var$sendMessage("selectElements", selectors);
-    return result || [];
-}
-function $6767c619f5de943e$var$sendMessage(key, ...params) {
-    return new Promise((resolve, reject)=>{
-        const tabId = chrome.devtools.inspectedWindow.tabId;
-        chrome.runtime.sendMessage({
-            key: key,
-            params: params,
-            tabId: tabId
-        }, (response)=>{
-            if (response?.error) reject(response.error);
-            else resolve(response);
-        });
-    });
-}
 
 
 function $90fa643a8d44e1af$export$9cd59f9826255e47(value) {

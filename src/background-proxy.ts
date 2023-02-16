@@ -15,21 +15,6 @@ export async function enableTracking(): Promise<void> {
     await sendMessage("enableTracking");
 }
 
-export namespace inspectedWindow {
-    export async function activeTab(): Promise<Partial<chrome.tabs.Tab>> {
-        const { tab } = await sendMessage<{ tab: chrome.tabs.Tab }>("tab");
-        return tab;
-    }
-
-    export async function navigate(url: string): Promise<void> {
-        await sendMessage("navigate", url);
-    }
-
-    export async function reload(): Promise<void> {
-        await sendMessage("reload");
-    }
-}
-
 export function log(message: string): void {
     if (active)
         chrome.runtime.sendMessage({ log: message });
@@ -38,12 +23,12 @@ export function log(message: string): void {
 }
 
 export async function queryTracking(): Promise<string[]> {
-    const result = await sendMessage<string[]>("queryTracking");
+    const { result } = await sendMessage<{ result: string[] }>("queryTracking");
     return result || [];
 }
 
 export async function selectElements(selectors: string[]): Promise<Array<string | null>> {
-    const result = await sendMessage<Array<string | null>>("selectElements", selectors);
+    const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", selectors);
     return result || [];
 }
 
@@ -62,4 +47,19 @@ function sendMessage<T = unknown>(key: string, ...params: unknown[]): Promise<T>
             }
         );
     });
+}
+
+export namespace inspectedWindow {
+    export async function activeTab(): Promise<Partial<chrome.tabs.Tab>> {
+        const { tab } = await sendMessage<{ tab: chrome.tabs.Tab }>("tab");
+        return tab;
+    }
+
+    export async function navigate(url: string): Promise<void> {
+        await sendMessage("navigate", url);
+    }
+
+    export async function reload(): Promise<void> {
+        await sendMessage("reload");
+    }
 }

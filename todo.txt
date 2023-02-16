@@ -6,6 +6,7 @@ Test groups
 fix open template busy status
 match contract by filename (product-page, search-page, etc.)
 allow _ in file names in cloud storage
+show contextual info in tree after name
 
 refresh should have an option to renavigate the page
 ability to select steps to run
@@ -14,6 +15,7 @@ specify input params
 new template should have a default select
 opening a template loads contract from closest parent directory
 ability to create and edit a data contract
+selector name picker when there is a contract
 
 default select action with auto-populated selectors from contract
 cut/paste nodes in editor tree
