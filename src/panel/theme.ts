@@ -1,4 +1,4 @@
-import { createTheme, Color, colors } from "@mui/material";
+import { createTheme, colors } from "@mui/material";
 
 const theme = createTheme({
     palette: {

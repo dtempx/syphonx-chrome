@@ -7,7 +7,7 @@ import * as syphonx from "syphonx-lib";
 export interface TemplateDataState {
     result: syphonx.ExtractResult | undefined;
     setResult: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
-    refresh: (reload: boolean) => Promise<void>;
+    refresh: (reload?: boolean) => Promise<void>;
     refreshing: boolean;
     simple: boolean;
 }

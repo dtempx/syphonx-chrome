@@ -15,6 +15,19 @@ export async function directory(): Promise<File[]> {
     return files;
 }
 
+export type LogDataType = "error";
+
+export interface LogData extends Record<string, unknown> {
+    key: LogDataType
+}
+
+export async function log(data: LogData): Promise<string> {
+    const body = JSON.stringify(data);
+    const response = await fetch(`${serviceUrl}/log`, { method: "POST", body, headers: { "Content-Type": "application/json" } });
+    const result = await response.text();
+    return result;
+}
+
 export async function read(file: string): Promise<string> {
     if (file.startsWith("/"))
         file = file.slice(1);

@@ -30,9 +30,6 @@ function $parcel$exportWildcard(dest, source) {
 
   return dest;
 }
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
-}
 var $parcel$modules = {};
 var $parcel$inits = {};
 
@@ -10098,13 +10095,18 @@ var $86049548edbb86a7$exports = {};
 
 $parcel$export($86049548edbb86a7$exports, "colors", () => $f3f6e40c7d4244e9$exports);
 $parcel$export($86049548edbb86a7$exports, "Alert", () => $c4319dabadcb67cb$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "AlertTitle", () => $164f1c7a2b0604ff$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "AppBar", () => $9ef80e5cd9ca7bff$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Autocomplete", () => $8461efb96d774bba$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Box", () => $7f9bf0f8ac9034c0$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Breadcrumbs", () => $84658de54e7b7e12$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Button", () => $ea19855709905d04$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Card", () => $39e324a9615e1421$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "CardActions", () => $71ba481453b18f7b$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "CardContent", () => $ceef3f0a560e9286$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Chip", () => $5e35e7f068f55b96$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Collapse", () => $a3f9eeff0fd7f158$export$2e2bcd8739ae039);
+$parcel$export($86049548edbb86a7$exports, "Container", () => $88ceea9c93573776$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "CssBaseline", () => $5d05c50dc13d9129$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "Dialog", () => $d2872d03d2a30200$export$2e2bcd8739ae039);
 $parcel$export($86049548edbb86a7$exports, "DialogActions", () => $da0540f5852f2a4e$export$2e2bcd8739ae039);
@@ -14725,6 +14727,124 @@ var $4feb3478c82adef5$export$2e2bcd8739ae039 = $4feb3478c82adef5$var$ThemeProvid
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+const $64e514457cd02726$var$styled = (0, $c477b1d519d7075f$export$2e2bcd8739ae039)();
+var $64e514457cd02726$export$2e2bcd8739ae039 = $64e514457cd02726$var$styled;
+
+
+
+
+const $73636efa2110a653$var$_excluded = [
+    "className",
+    "component",
+    "disableGutters",
+    "fixed",
+    "maxWidth",
+    "classes"
+];
+const $73636efa2110a653$var$defaultTheme = (0, $59ab6c1b60587580$export$2e2bcd8739ae039)();
+const $73636efa2110a653$var$defaultCreateStyledComponent = (0, $64e514457cd02726$export$2e2bcd8739ae039)("div", {
+    name: "MuiContainer",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            styles[`maxWidth${(0, $2ded6215ee1adfb2$export$2e2bcd8739ae039)(String(ownerState.maxWidth))}`],
+            ownerState.fixed && styles.fixed,
+            ownerState.disableGutters && styles.disableGutters
+        ];
+    }
+});
+const $73636efa2110a653$var$useThemePropsDefault = (inProps)=>(0, $c3dca1a1edaf8a88$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiContainer",
+        defaultTheme: $73636efa2110a653$var$defaultTheme
+    });
+const $73636efa2110a653$var$useUtilityClasses = (ownerState, componentName)=>{
+    const getContainerUtilityClass = (slot)=>{
+        return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)(componentName, slot);
+    };
+    const { classes: classes , fixed: fixed , disableGutters: disableGutters , maxWidth: maxWidth  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            maxWidth && `maxWidth${(0, $2ded6215ee1adfb2$export$2e2bcd8739ae039)(String(maxWidth))}`,
+            fixed && "fixed",
+            disableGutters && "disableGutters"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, getContainerUtilityClass, classes);
+};
+function $73636efa2110a653$export$2e2bcd8739ae039(options = {}) {
+    const { createStyledComponent: // This will allow adding custom styled fn (for example for custom sx style function)
+    createStyledComponent = $73636efa2110a653$var$defaultCreateStyledComponent , useThemeProps: useThemeProps = $73636efa2110a653$var$useThemePropsDefault , componentName: componentName = "MuiContainer"  } = options;
+    const ContainerRoot = createStyledComponent(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            width: "100%",
+            marginLeft: "auto",
+            boxSizing: "border-box",
+            marginRight: "auto",
+            display: "block"
+        }, !ownerState.disableGutters && {
+            paddingLeft: theme.spacing(2),
+            paddingRight: theme.spacing(2),
+            // @ts-ignore module augmentation fails if custom breakpoints are used
+            [theme.breakpoints.up("sm")]: {
+                paddingLeft: theme.spacing(3),
+                paddingRight: theme.spacing(3)
+            }
+        }), ({ theme: theme , ownerState: ownerState  })=>ownerState.fixed && Object.keys(theme.breakpoints.values).reduce((acc, breakpointValueKey)=>{
+            const breakpoint = breakpointValueKey;
+            const value = theme.breakpoints.values[breakpoint];
+            if (value !== 0) // @ts-ignore
+            acc[theme.breakpoints.up(breakpoint)] = {
+                maxWidth: `${value}${theme.breakpoints.unit}`
+            };
+            return acc;
+        }, {}), ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.maxWidth === "xs" && {
+            // @ts-ignore module augmentation fails if custom breakpoints are used
+            [theme.breakpoints.up("xs")]: {
+                // @ts-ignore module augmentation fails if custom breakpoints are used
+                maxWidth: Math.max(theme.breakpoints.values.xs, 444)
+            }
+        }, ownerState.maxWidth && // @ts-ignore module augmentation fails if custom breakpoints are used
+        ownerState.maxWidth !== "xs" && {
+            // @ts-ignore module augmentation fails if custom breakpoints are used
+            [theme.breakpoints.up(ownerState.maxWidth)]: {
+                // @ts-ignore module augmentation fails if custom breakpoints are used
+                maxWidth: `${theme.breakpoints.values[ownerState.maxWidth]}${theme.breakpoints.unit}`
+            }
+        }));
+    const Container = /*#__PURE__*/ $d4J5n.forwardRef(function Container(inProps, ref) {
+        const props = useThemeProps(inProps);
+        const { className: className , component: component = "div" , disableGutters: disableGutters = false , fixed: fixed = false , maxWidth: maxWidth = "lg"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $73636efa2110a653$var$_excluded);
+        const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+            component: component,
+            disableGutters: disableGutters,
+            fixed: fixed,
+            maxWidth: maxWidth
+        });
+        // @ts-ignore module augmentation fails if custom breakpoints are used
+        const classes = $73636efa2110a653$var$useUtilityClasses(ownerState, componentName);
+        return(/*#__PURE__*/ // @ts-ignore theme is injected by the styled util
+        (0, $17b288f07ec57b56$exports.jsx)(ContainerRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            as: component,
+            ownerState: ownerState,
+            className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+            ref: ref
+        }, other)));
+    });
+    return Container;
+}
+
+
+
+
 
 
 
@@ -18168,6 +18288,221 @@ var $c4319dabadcb67cb$export$2e2bcd8739ae039 = $c4319dabadcb67cb$var$Alert;
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+
+
+function $a41e53fc63de5006$export$24c1f8f60cbac79e(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTypography", slot);
+}
+const $a41e53fc63de5006$var$typographyClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTypography", [
+    "root",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "subtitle1",
+    "subtitle2",
+    "body1",
+    "body2",
+    "inherit",
+    "button",
+    "caption",
+    "overline",
+    "alignLeft",
+    "alignRight",
+    "alignCenter",
+    "alignJustify",
+    "noWrap",
+    "gutterBottom",
+    "paragraph"
+]);
+var $a41e53fc63de5006$export$2e2bcd8739ae039 = $a41e53fc63de5006$var$typographyClasses;
+
+
+
+const $8588119983b778db$var$_excluded = [
+    "align",
+    "className",
+    "component",
+    "gutterBottom",
+    "noWrap",
+    "paragraph",
+    "variant",
+    "variantMapping"
+];
+const $8588119983b778db$var$useUtilityClasses = (ownerState)=>{
+    const { align: align , gutterBottom: gutterBottom , noWrap: noWrap , paragraph: paragraph , variant: variant , classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant,
+            ownerState.align !== "inherit" && `align${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(align)}`,
+            gutterBottom && "gutterBottom",
+            noWrap && "noWrap",
+            paragraph && "paragraph"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $a41e53fc63de5006$export$24c1f8f60cbac79e), classes);
+};
+const $8588119983b778db$export$140e2f5526d3cad8 = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiTypography",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            ownerState.variant && styles[ownerState.variant],
+            ownerState.align !== "inherit" && styles[`align${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.align)}`],
+            ownerState.noWrap && styles.noWrap,
+            ownerState.gutterBottom && styles.gutterBottom,
+            ownerState.paragraph && styles.paragraph
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        margin: 0
+    }, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== "inherit" && {
+        textAlign: ownerState.align
+    }, ownerState.noWrap && {
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap"
+    }, ownerState.gutterBottom && {
+        marginBottom: "0.35em"
+    }, ownerState.paragraph && {
+        marginBottom: 16
+    }));
+const $8588119983b778db$var$defaultVariantMapping = {
+    h1: "h1",
+    h2: "h2",
+    h3: "h3",
+    h4: "h4",
+    h5: "h5",
+    h6: "h6",
+    subtitle1: "h6",
+    subtitle2: "h6",
+    body1: "p",
+    body2: "p",
+    inherit: "p"
+};
+// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
+const $8588119983b778db$var$colorTransformations = {
+    primary: "primary.main",
+    textPrimary: "text.primary",
+    secondary: "secondary.main",
+    textSecondary: "text.secondary",
+    error: "error.main"
+};
+const $8588119983b778db$var$transformDeprecatedColors = (color)=>{
+    return $8588119983b778db$var$colorTransformations[color] || color;
+};
+const $8588119983b778db$var$Typography = /*#__PURE__*/ $d4J5n.forwardRef(function Typography(inProps, ref) {
+    const themeProps = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiTypography"
+    });
+    const color = $8588119983b778db$var$transformDeprecatedColors(themeProps.color);
+    const props = (0, $7f0d8ce753bc6e5e$export$2e2bcd8739ae039)((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, themeProps, {
+        color: color
+    }));
+    const { align: align = "inherit" , className: className , component: component , gutterBottom: gutterBottom = false , noWrap: noWrap = false , paragraph: paragraph = false , variant: variant = "body1" , variantMapping: variantMapping = $8588119983b778db$var$defaultVariantMapping  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $8588119983b778db$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        align: align,
+        color: color,
+        className: className,
+        component: component,
+        gutterBottom: gutterBottom,
+        noWrap: noWrap,
+        paragraph: paragraph,
+        variant: variant,
+        variantMapping: variantMapping
+    });
+    const Component = component || (paragraph ? "p" : variantMapping[variant] || $8588119983b778db$var$defaultVariantMapping[variant]) || "span";
+    const classes = $8588119983b778db$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($8588119983b778db$export$140e2f5526d3cad8, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        as: Component,
+        ref: ref,
+        ownerState: ownerState,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className)
+    }, other));
+});
+var $8588119983b778db$export$2e2bcd8739ae039 = $8588119983b778db$var$Typography;
+
+
+
+
+
+function $56e1094cf08e9de1$export$5269a5bce2c2f987(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiAlertTitle", slot);
+}
+const $56e1094cf08e9de1$var$alertTitleClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiAlertTitle", [
+    "root"
+]);
+var $56e1094cf08e9de1$export$2e2bcd8739ae039 = $56e1094cf08e9de1$var$alertTitleClasses;
+
+
+
+const $164f1c7a2b0604ff$var$_excluded = [
+    "className"
+];
+const $164f1c7a2b0604ff$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $56e1094cf08e9de1$export$5269a5bce2c2f987), classes);
+};
+const $164f1c7a2b0604ff$var$AlertTitleRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+    name: "MuiAlertTitle",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})(({ theme: theme  })=>{
+    return {
+        fontWeight: theme.typography.fontWeightMedium,
+        marginTop: -2
+    };
+});
+const $164f1c7a2b0604ff$var$AlertTitle = /*#__PURE__*/ $d4J5n.forwardRef(function AlertTitle(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiAlertTitle"
+    });
+    const { className: className  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $164f1c7a2b0604ff$var$_excluded);
+    const ownerState = props;
+    const classes = $164f1c7a2b0604ff$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($164f1c7a2b0604ff$var$AlertTitleRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        gutterBottom: true,
+        component: "div",
+        ownerState: ownerState,
+        ref: ref,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className)
+    }, other));
+});
+var $164f1c7a2b0604ff$export$2e2bcd8739ae039 = $164f1c7a2b0604ff$var$AlertTitle;
+
+
+
+
+
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -20823,12 +21158,6 @@ var $5e35e7f068f55b96$export$2e2bcd8739ae039 = $5e35e7f068f55b96$var$Chip;
 
 
 
-var $3aecab0568aeb1c8$exports = {};
-
-$parcel$defineInteropFlag($3aecab0568aeb1c8$exports);
-
-$parcel$export($3aecab0568aeb1c8$exports, "default", () => $67d9684704896024$export$2e2bcd8739ae039);
-$parcel$export($3aecab0568aeb1c8$exports, "inputBaseClasses", () => $e3d87702158544c9$export$2e2bcd8739ae039);
 
 
 
@@ -21373,9 +21702,6 @@ const $67d9684704896024$var$inputGlobalStyles = /*#__PURE__*/ (0, $17b288f07ec57
     });
 });
 var $67d9684704896024$export$2e2bcd8739ae039 = $67d9684704896024$var$InputBase;
-
-
-
 
 
 
@@ -22109,158 +22435,6 @@ $0a1734d9abfbf4dc$exports = (parcelRequire("lQcey"));
 
 
 
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-
-
-function $a41e53fc63de5006$export$24c1f8f60cbac79e(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiTypography", slot);
-}
-const $a41e53fc63de5006$var$typographyClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiTypography", [
-    "root",
-    "h1",
-    "h2",
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "subtitle1",
-    "subtitle2",
-    "body1",
-    "body2",
-    "inherit",
-    "button",
-    "caption",
-    "overline",
-    "alignLeft",
-    "alignRight",
-    "alignCenter",
-    "alignJustify",
-    "noWrap",
-    "gutterBottom",
-    "paragraph"
-]);
-var $a41e53fc63de5006$export$2e2bcd8739ae039 = $a41e53fc63de5006$var$typographyClasses;
-
-
-
-const $8588119983b778db$var$_excluded = [
-    "align",
-    "className",
-    "component",
-    "gutterBottom",
-    "noWrap",
-    "paragraph",
-    "variant",
-    "variantMapping"
-];
-const $8588119983b778db$var$useUtilityClasses = (ownerState)=>{
-    const { align: align , gutterBottom: gutterBottom , noWrap: noWrap , paragraph: paragraph , variant: variant , classes: classes  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            variant,
-            ownerState.align !== "inherit" && `align${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(align)}`,
-            gutterBottom && "gutterBottom",
-            noWrap && "noWrap",
-            paragraph && "paragraph"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $a41e53fc63de5006$export$24c1f8f60cbac79e), classes);
-};
-const $8588119983b778db$export$140e2f5526d3cad8 = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
-    name: "MuiTypography",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.root,
-            ownerState.variant && styles[ownerState.variant],
-            ownerState.align !== "inherit" && styles[`align${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(ownerState.align)}`],
-            ownerState.noWrap && styles.noWrap,
-            ownerState.gutterBottom && styles.gutterBottom,
-            ownerState.paragraph && styles.paragraph
-        ];
-    }
-})(({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        margin: 0
-    }, ownerState.variant && theme.typography[ownerState.variant], ownerState.align !== "inherit" && {
-        textAlign: ownerState.align
-    }, ownerState.noWrap && {
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap"
-    }, ownerState.gutterBottom && {
-        marginBottom: "0.35em"
-    }, ownerState.paragraph && {
-        marginBottom: 16
-    }));
-const $8588119983b778db$var$defaultVariantMapping = {
-    h1: "h1",
-    h2: "h2",
-    h3: "h3",
-    h4: "h4",
-    h5: "h5",
-    h6: "h6",
-    subtitle1: "h6",
-    subtitle2: "h6",
-    body1: "p",
-    body2: "p",
-    inherit: "p"
-};
-// TODO v6: deprecate these color values in v5.x and remove the transformation in v6
-const $8588119983b778db$var$colorTransformations = {
-    primary: "primary.main",
-    textPrimary: "text.primary",
-    secondary: "secondary.main",
-    textSecondary: "text.secondary",
-    error: "error.main"
-};
-const $8588119983b778db$var$transformDeprecatedColors = (color)=>{
-    return $8588119983b778db$var$colorTransformations[color] || color;
-};
-const $8588119983b778db$var$Typography = /*#__PURE__*/ $d4J5n.forwardRef(function Typography(inProps, ref) {
-    const themeProps = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiTypography"
-    });
-    const color = $8588119983b778db$var$transformDeprecatedColors(themeProps.color);
-    const props = (0, $7f0d8ce753bc6e5e$export$2e2bcd8739ae039)((0, $19121be03c962dba$export$2e2bcd8739ae039)({}, themeProps, {
-        color: color
-    }));
-    const { align: align = "inherit" , className: className , component: component , gutterBottom: gutterBottom = false , noWrap: noWrap = false , paragraph: paragraph = false , variant: variant = "body1" , variantMapping: variantMapping = $8588119983b778db$var$defaultVariantMapping  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $8588119983b778db$var$_excluded);
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        align: align,
-        color: color,
-        className: className,
-        component: component,
-        gutterBottom: gutterBottom,
-        noWrap: noWrap,
-        paragraph: paragraph,
-        variant: variant,
-        variantMapping: variantMapping
-    });
-    const Component = component || (paragraph ? "p" : variantMapping[variant] || $8588119983b778db$var$defaultVariantMapping[variant]) || "span";
-    const classes = $8588119983b778db$var$useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($8588119983b778db$export$140e2f5526d3cad8, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        as: Component,
-        ref: ref,
-        ownerState: ownerState,
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className)
-    }, other));
-});
-var $8588119983b778db$export$2e2bcd8739ae039 = $8588119983b778db$var$Typography;
-
-
-
-
 parcelRequire("d4J5n");
 
 
@@ -22849,7 +23023,212 @@ var $ea19855709905d04$export$2e2bcd8739ae039 = $ea19855709905d04$var$Button;
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
 
+
+
+
+
+
+
+
+
+function $05ce9481b36537a1$export$f3b76d2cce458caa(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiCard", slot);
+}
+const $05ce9481b36537a1$var$cardClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiCard", [
+    "root"
+]);
+var $05ce9481b36537a1$export$2e2bcd8739ae039 = $05ce9481b36537a1$var$cardClasses;
+
+
+
+const $39e324a9615e1421$var$_excluded = [
+    "className",
+    "raised"
+];
+const $39e324a9615e1421$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $05ce9481b36537a1$export$f3b76d2cce458caa), classes);
+};
+const $39e324a9615e1421$var$CardRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+    name: "MuiCard",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})(()=>{
+    return {
+        overflow: "hidden"
+    };
+});
+const $39e324a9615e1421$var$Card = /*#__PURE__*/ $d4J5n.forwardRef(function Card(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiCard"
+    });
+    const { className: className , raised: raised = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $39e324a9615e1421$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        raised: raised
+    });
+    const classes = $39e324a9615e1421$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($39e324a9615e1421$var$CardRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        elevation: raised ? 8 : undefined,
+        ref: ref,
+        ownerState: ownerState
+    }, other));
+});
+var $39e324a9615e1421$export$2e2bcd8739ae039 = $39e324a9615e1421$var$Card;
+
+
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $88e15a28e8a217b0$export$2a5c27c211442e3c(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiCardActions", slot);
+}
+const $88e15a28e8a217b0$var$cardActionsClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiCardActions", [
+    "root",
+    "spacing"
+]);
+var $88e15a28e8a217b0$export$2e2bcd8739ae039 = $88e15a28e8a217b0$var$cardActionsClasses;
+
+
+
+const $71ba481453b18f7b$var$_excluded = [
+    "disableSpacing",
+    "className"
+];
+const $71ba481453b18f7b$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , disableSpacing: disableSpacing  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            !disableSpacing && "spacing"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $88e15a28e8a217b0$export$2a5c27c211442e3c), classes);
+};
+const $71ba481453b18f7b$var$CardActionsRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiCardActions",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            !ownerState.disableSpacing && styles.spacing
+        ];
+    }
+})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        display: "flex",
+        alignItems: "center",
+        padding: 8
+    }, !ownerState.disableSpacing && {
+        "& > :not(:first-of-type)": {
+            marginLeft: 8
+        }
+    }));
+const $71ba481453b18f7b$var$CardActions = /*#__PURE__*/ $d4J5n.forwardRef(function CardActions(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiCardActions"
+    });
+    const { disableSpacing: disableSpacing = false , className: className  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $71ba481453b18f7b$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        disableSpacing: disableSpacing
+    });
+    const classes = $71ba481453b18f7b$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($71ba481453b18f7b$var$CardActionsRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ownerState: ownerState,
+        ref: ref
+    }, other));
+});
+var $71ba481453b18f7b$export$2e2bcd8739ae039 = $71ba481453b18f7b$var$CardActions;
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
+function $331d0b2170a4432b$export$964336739a8c7119(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiCardContent", slot);
+}
+const $331d0b2170a4432b$var$cardContentClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiCardContent", [
+    "root"
+]);
+var $331d0b2170a4432b$export$2e2bcd8739ae039 = $331d0b2170a4432b$var$cardContentClasses;
+
+
+
+const $ceef3f0a560e9286$var$_excluded = [
+    "className",
+    "component"
+];
+const $ceef3f0a560e9286$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes  } = ownerState;
+    const slots = {
+        root: [
+            "root"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $331d0b2170a4432b$export$964336739a8c7119), classes);
+};
+const $ceef3f0a560e9286$var$CardContentRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiCardContent",
+    slot: "Root",
+    overridesResolver: (props, styles)=>styles.root
+})(()=>{
+    return {
+        padding: 16,
+        "&:last-child": {
+            paddingBottom: 24
+        }
+    };
+});
+const $ceef3f0a560e9286$var$CardContent = /*#__PURE__*/ $d4J5n.forwardRef(function CardContent(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiCardContent"
+    });
+    const { className: className , component: component = "div"  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $ceef3f0a560e9286$var$_excluded);
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        component: component
+    });
+    const classes = $ceef3f0a560e9286$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($ceef3f0a560e9286$var$CardContentRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        as: component,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ownerState: ownerState,
+        ref: ref
+    }, other));
+});
+var $ceef3f0a560e9286$export$2e2bcd8739ae039 = $ceef3f0a560e9286$var$CardContent;
 
 
 
@@ -23169,6 +23548,33 @@ var $a3f9eeff0fd7f158$export$2e2bcd8739ae039 = $a3f9eeff0fd7f158$var$Collapse;
 
 
 
+
+const $88ceea9c93573776$var$Container = (0, $73636efa2110a653$export$2e2bcd8739ae039)({
+    createStyledComponent: (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+        name: "MuiContainer",
+        slot: "Root",
+        overridesResolver: (props, styles)=>{
+            const { ownerState: ownerState  } = props;
+            return [
+                styles.root,
+                styles[`maxWidth${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(String(ownerState.maxWidth))}`],
+                ownerState.fixed && styles.fixed,
+                ownerState.disableGutters && styles.disableGutters
+            ];
+        }
+    }),
+    useThemeProps: (inProps)=>(0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+            props: inProps,
+            name: "MuiContainer"
+        })
+});
+var $88ceea9c93573776$export$2e2bcd8739ae039 = $88ceea9c93573776$var$Container;
+
+
+
+
+
+
 var $d4J5n = parcelRequire("d4J5n");
 
 
@@ -23263,12 +23669,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-
-var $3fab0efee1ba3066$exports = {};
-
-$parcel$defineInteropFlag($3fab0efee1ba3066$exports);
-
-$parcel$export($3fab0efee1ba3066$exports, "default", () => $fd29e14a923db841$export$2e2bcd8739ae039);
 
 
 
@@ -24273,8 +24673,6 @@ var $fd29e14a923db841$export$2e2bcd8739ae039 = $fd29e14a923db841$var$Modal;
 
 
 
-
-
 function $ca3ee0292200f2a5$export$2177af0aa15c34c2(slot) {
     return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiDialog", slot);
 }
@@ -24783,12 +25181,6 @@ var $0d0d12e54088d016$export$2e2bcd8739ae039 = $0d0d12e54088d016$var$DialogTitle
 
 
 
-var $a58ae39c5161f204$exports = {};
-
-$parcel$defineInteropFlag($a58ae39c5161f204$exports);
-
-$parcel$export($a58ae39c5161f204$exports, "default", () => $7d334022fa9e4e25$export$2e2bcd8739ae039);
-$parcel$export($a58ae39c5161f204$exports, "dividerClasses", () => $6fc412c0ce53bfbd$export$2e2bcd8739ae039);
 
 
 
@@ -24994,9 +25386,6 @@ const $7d334022fa9e4e25$var$Divider = /*#__PURE__*/ $d4J5n.forwardRef(function D
     }));
 });
 var $7d334022fa9e4e25$export$2e2bcd8739ae039 = $7d334022fa9e4e25$var$Divider;
-
-
-
 
 
 
@@ -26490,12 +26879,6 @@ const $e1f9aacd35535f0f$var$listItemClasses = (0, $8100014debd01602$export$2e2bc
 var $e1f9aacd35535f0f$export$2e2bcd8739ae039 = $e1f9aacd35535f0f$var$listItemClasses;
 
 
-var $5e3eddf31c86d517$exports = {};
-
-$parcel$defineInteropFlag($5e3eddf31c86d517$exports);
-
-$parcel$export($5e3eddf31c86d517$exports, "default", () => $daacc79c176159c4$export$2e2bcd8739ae039);
-$parcel$export($5e3eddf31c86d517$exports, "listItemButtonClasses", () => $e2dd11622fde5186$export$2e2bcd8739ae039);
 
 
 
@@ -26676,9 +27059,6 @@ const $daacc79c176159c4$var$ListItemButton = /*#__PURE__*/ $d4J5n.forwardRef(fun
     });
 });
 var $daacc79c176159c4$export$2e2bcd8739ae039 = $daacc79c176159c4$var$ListItemButton;
-
-
-
 
 
 
@@ -27012,12 +27392,6 @@ var $299786ec18bb6fc2$export$2e2bcd8739ae039 = $299786ec18bb6fc2$var$ListItem;
 
 
 
-var $c0a08a0f88a65246$exports = {};
-
-$parcel$defineInteropFlag($c0a08a0f88a65246$exports);
-
-$parcel$export($c0a08a0f88a65246$exports, "default", () => $525a0986dfeaa305$export$2e2bcd8739ae039);
-$parcel$export($c0a08a0f88a65246$exports, "listItemIconClasses", () => $4ab234d350ea8bc5$export$2e2bcd8739ae039);
 
 
 
@@ -27098,15 +27472,6 @@ var $525a0986dfeaa305$export$2e2bcd8739ae039 = $525a0986dfeaa305$var$ListItemIco
 
 
 
-
-
-
-var $e822d4aced53a119$exports = {};
-
-$parcel$defineInteropFlag($e822d4aced53a119$exports);
-
-$parcel$export($e822d4aced53a119$exports, "default", () => $e892f9464432086f$export$2e2bcd8739ae039);
-$parcel$export($e822d4aced53a119$exports, "listItemTextClasses", () => $17cdf6c187d9fdfe$export$2e2bcd8739ae039);
 
 
 
@@ -27238,9 +27603,6 @@ const $e892f9464432086f$var$ListItemText = /*#__PURE__*/ $d4J5n.forwardRef(funct
     }));
 });
 var $e892f9464432086f$export$2e2bcd8739ae039 = $e892f9464432086f$var$ListItemText;
-
-
-
 
 
 
@@ -27438,11 +27800,6 @@ var $fb0eb384587a3ae4$export$2e2bcd8739ae039 = $fb0eb384587a3ae4$var$MenuList;
 
 
 
-var $653eb297fb09c134$exports = {};
-
-$parcel$defineInteropFlag($653eb297fb09c134$exports);
-
-$parcel$export($653eb297fb09c134$exports, "default", () => $625b48b719d538f0$export$2e2bcd8739ae039);
 
 
 
@@ -27909,10 +28266,6 @@ const $625b48b719d538f0$var$Popover = /*#__PURE__*/ $d4J5n.forwardRef(function P
     }));
 });
 var $625b48b719d538f0$export$2e2bcd8739ae039 = $625b48b719d538f0$var$Popover;
-
-
-
-
 
 
 
@@ -31567,12 +31920,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $807a1d539ec88b4c$exports = {};
-
-$parcel$defineInteropFlag($807a1d539ec88b4c$exports);
-
-$parcel$export($807a1d539ec88b4c$exports, "default", () => $f8e9b85224d1dbe5$export$2e2bcd8739ae039);
-$parcel$export($807a1d539ec88b4c$exports, "formLabelClasses", () => $02d545d40cf45079$export$2e2bcd8739ae039);
 
 
 
@@ -31715,10 +32062,6 @@ const $f8e9b85224d1dbe5$var$FormLabel = /*#__PURE__*/ $d4J5n.forwardRef(function
     }));
 });
 var $f8e9b85224d1dbe5$export$2e2bcd8739ae039 = $f8e9b85224d1dbe5$var$FormLabel;
-
-
-
-
 
 
 
@@ -33431,10 +33774,6 @@ var $16d648c397460623$export$2e2bcd8739ae039 = $16d648c397460623$var$Tooltip;
 
 
 
-$parcel$exportWildcard($86049548edbb86a7$exports, $a58ae39c5161f204$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $5e3eddf31c86d517$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $c0a08a0f88a65246$exports);
-$parcel$exportWildcard($86049548edbb86a7$exports, $e822d4aced53a119$exports);
 
 
 
@@ -33497,6 +33836,141 @@ const $bda87eb62dcce197$var$AppContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel
 
 
 parcelRequire("d4J5n");
+
+var $1aceca34d291fb49$exports = {};
+
+(function(global, factory) {
+    factory($1aceca34d291fb49$exports, (parcelRequire("d4J5n")));
+})($1aceca34d291fb49$exports, function(exports, React) {
+    "use strict";
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) Object.keys(e).forEach(function(k) {
+            if (k !== "default") {
+                var d = Object.getOwnPropertyDescriptor(e, k);
+                Object.defineProperty(n, k, d.get ? d : {
+                    enumerable: true,
+                    get: function() {
+                        return e[k];
+                    }
+                });
+            }
+        });
+        n["default"] = e;
+        return Object.freeze(n);
+    }
+    var React__namespace = /*#__PURE__*/ _interopNamespace(React);
+    function _setPrototypeOf(o1, p1) {
+        _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+            o.__proto__ = p;
+            return o;
+        };
+        return _setPrototypeOf(o1, p1);
+    }
+    function _inheritsLoose(subClass, superClass) {
+        subClass.prototype = Object.create(superClass.prototype);
+        subClass.prototype.constructor = subClass;
+        _setPrototypeOf(subClass, superClass);
+    }
+    var changedArray = function changedArray(a, b) {
+        if (a === void 0) a = [];
+        if (b === void 0) b = [];
+        return a.length !== b.length || a.some(function(item, index) {
+            return !Object.is(item, b[index]);
+        });
+    };
+    var initialState = {
+        error: null
+    };
+    var ErrorBoundary1 = /*#__PURE__*/ function(_React$Component) {
+        _inheritsLoose(ErrorBoundary, _React$Component);
+        function ErrorBoundary() {
+            var _this;
+            for(var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++)_args[_key] = arguments[_key];
+            _this = _React$Component.call.apply(_React$Component, [
+                this
+            ].concat(_args)) || this;
+            _this.state = initialState;
+            _this.resetErrorBoundary = function() {
+                var _this$props;
+                for(var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++)args[_key2] = arguments[_key2];
+                _this.props.onReset == null || (_this$props = _this.props).onReset.apply(_this$props, args);
+                _this.reset();
+            };
+            return _this;
+        }
+        ErrorBoundary.getDerivedStateFromError = function getDerivedStateFromError(error) {
+            return {
+                error: error
+            };
+        };
+        var _proto = ErrorBoundary.prototype;
+        _proto.reset = function reset() {
+            this.setState(initialState);
+        };
+        _proto.componentDidCatch = function componentDidCatch(error, info) {
+            var _this$props$onError, _this$props2;
+            (_this$props$onError = (_this$props2 = this.props).onError) == null || _this$props$onError.call(_this$props2, error, info);
+        };
+        _proto.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
+            var error = this.state.error;
+            var resetKeys = this.props.resetKeys; // There's an edge case where if the thing that triggered the error
+            // happens to *also* be in the resetKeys array, we'd end up resetting
+            // the error boundary immediately. This would likely trigger a second
+            // error to be thrown.
+            // So we make sure that we don't check the resetKeys on the first call
+            // of cDU after the error is set
+            if (error !== null && prevState.error !== null && changedArray(prevProps.resetKeys, resetKeys)) {
+                var _this$props$onResetKe, _this$props3;
+                (_this$props$onResetKe = (_this$props3 = this.props).onResetKeysChange) == null || _this$props$onResetKe.call(_this$props3, prevProps.resetKeys, resetKeys);
+                this.reset();
+            }
+        };
+        _proto.render = function render() {
+            var error = this.state.error;
+            var _this$props4 = this.props, fallbackRender = _this$props4.fallbackRender, FallbackComponent = _this$props4.FallbackComponent, fallback = _this$props4.fallback;
+            if (error !== null) {
+                var _props = {
+                    error: error,
+                    resetErrorBoundary: this.resetErrorBoundary
+                };
+                if (/*#__PURE__*/ React__namespace.isValidElement(fallback)) return fallback;
+                else if (typeof fallbackRender === "function") return fallbackRender(_props);
+                else if (FallbackComponent) return /*#__PURE__*/ React__namespace.createElement(FallbackComponent, _props);
+                else throw new Error("react-error-boundary requires either a fallback, fallbackRender, or FallbackComponent prop");
+            }
+            return this.props.children;
+        };
+        return ErrorBoundary;
+    }(React__namespace.Component);
+    function withErrorBoundary(Component, errorBoundaryProps) {
+        var Wrapped = function Wrapped(props) {
+            return /*#__PURE__*/ React__namespace.createElement(ErrorBoundary1, errorBoundaryProps, /*#__PURE__*/ React__namespace.createElement(Component, props));
+        }; // Format for display in DevTools
+        var name = Component.displayName || Component.name || "Unknown";
+        Wrapped.displayName = "withErrorBoundary(" + name + ")";
+        return Wrapped;
+    }
+    function useErrorHandler(givenError) {
+        var _React$useState = React__namespace.useState(null), error = _React$useState[0], setError = _React$useState[1];
+        if (givenError != null) throw givenError;
+        if (error != null) throw error;
+        return setError;
+    }
+    /*
+  eslint
+    @typescript-eslint/sort-type-union-intersection-members: "off",
+    @typescript-eslint/no-throw-literal: "off",
+    @typescript-eslint/prefer-nullish-coalescing: "off"
+  */ exports.ErrorBoundary = ErrorBoundary1;
+    exports.useErrorHandler = useErrorHandler;
+    exports.withErrorBoundary = withErrorBoundary;
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+});
+
 
 
 
@@ -35019,6 +35493,7 @@ function $3ee7bf181cfaaad0$export$1d20a92cf1845969(key, delim = "_") {
 var $80e77e55da602fd0$exports = {};
 
 $parcel$export($80e77e55da602fd0$exports, "directory", () => $80e77e55da602fd0$export$18e11c4ddd562c9d);
+$parcel$export($80e77e55da602fd0$exports, "log", () => $80e77e55da602fd0$export$bef1f36f5486a6a3);
 $parcel$export($80e77e55da602fd0$exports, "read", () => $80e77e55da602fd0$export$aafa59e2e03f2942);
 $parcel$export($80e77e55da602fd0$exports, "write", () => $80e77e55da602fd0$export$68d8715fc104d294);
 const $80e77e55da602fd0$var$serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
@@ -35027,6 +35502,18 @@ async function $80e77e55da602fd0$export$18e11c4ddd562c9d() {
     const files = await response.json();
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
+}
+async function $80e77e55da602fd0$export$bef1f36f5486a6a3(data) {
+    const body = JSON.stringify(data);
+    const response = await fetch(`${$80e77e55da602fd0$var$serviceUrl}/log`, {
+        method: "POST",
+        body: body,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    const result = await response.text();
+    return result;
 }
 async function $80e77e55da602fd0$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
@@ -41806,212 +42293,114 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
 
 
 
-const $bfee1339be77dabb$var$ContractContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    file: "",
-    setFile: ()=>{},
-    loading: false,
-    error: "",
-    contract: undefined
-});
-function $bfee1339be77dabb$export$f8ba26717a2a2005({ children: children  }) {
-    const [file, setFile] = (0, $d4J5n.useState)("");
-    const [loading, setLoading] = (0, $d4J5n.useState)(false);
-    const [error, setError] = (0, $d4J5n.useState)("");
-    const [contract1, setContract] = (0, $d4J5n.useState)();
-    (0, $d4J5n.useEffect)(()=>{
-        (async ()=>{
-            setContract(undefined);
-            setLoading(true);
-            try {
-                const json = await (0, $80e77e55da602fd0$exports).read(file);
-                const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(json);
-                if (contract) setContract(contract);
-                else setError("Format of contract JSON is invalid.");
-            } catch (err) {
-                debugger;
-                setError(err instanceof Error ? err.message : JSON.stringify(err));
-            }
-        })();
-        setLoading(false);
-    }, [
-        file
-    ]);
-    const value = {
-        file: file,
-        setFile: setFile,
-        loading: loading,
-        error: error,
-        contract: contract1
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$var$ContractContext.Provider, {
-        value: value,
-        children: children
+
+var $815f6225cac30e41$export$2e2bcd8739ae039 = ({ error: error , resetErrorBoundary: resetErrorBoundary  })=>{
+    const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
+    const [comments, setComments] = (0, $d4J5n.useState)("");
+    const [sent, setSent] = (0, $d4J5n.useState)(false);
+    async function reportError() {
+        setSent(true);
+        await (0, $80e77e55da602fd0$exports).log({
+            key: "error",
+            comments: comments,
+            error: error.stack || error.message
+        });
+    }
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $88ceea9c93573776$export$2e2bcd8739ae039), {
+        sx: {
+            backgroundColor: "#e7ebf0",
+            padding: 4
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $39e324a9615e1421$export$2e2bcd8739ae039), {
+            sx: {
+                width: 500
+            },
+            children: [
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ceef3f0a560e9286$export$2e2bcd8739ae039), {
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $c4319dabadcb67cb$export$2e2bcd8739ae039), {
+                            variant: "filled",
+                            severity: "error",
+                            action: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                                color: "inherit",
+                                size: "small",
+                                onClick: ()=>setExpanded(!expanded),
+                                children: "Details"
+                            }),
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $164f1c7a2b0604ff$export$2e2bcd8739ae039), {
+                                    children: "An error occurred"
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    children: "Sorry about that! Please report the error or start over."
+                                })
+                            ]
+                        }),
+                        expanded && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                            sx: {
+                                mt: 1
+                            },
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("pre", {
+                                style: {
+                                    height: 150,
+                                    backgroundColor: "#eee",
+                                    fontFamily: "monospace",
+                                    fontSize: "xx-small",
+                                    overflowX: "scroll",
+                                    overflowY: "scroll",
+                                    padding: "8px"
+                                },
+                                children: error.stack
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                            multiline: true,
+                            fullWidth: true,
+                            value: comments,
+                            onChange: (event)=>setComments(event.target.value),
+                            rows: 2,
+                            disabled: sent,
+                            placeholder: "Any additional comments to report on this error?",
+                            sx: {
+                                mt: 1
+                            }
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                            display: "flex",
+                            justifyContent: "flex-end",
+                            alignItems: "flex-end",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                                variant: "outlined",
+                                size: "small",
+                                disabled: sent,
+                                sx: {
+                                    width: 120,
+                                    mt: 1
+                                },
+                                onClick: reportError,
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    children: !sent ? "Report Error" : "Thanks!"
+                                })
+                            })
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71ba481453b18f7b$export$2e2bcd8739ae039), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                        variant: "contained",
+                        size: "small",
+                        onClick: resetErrorBoundary,
+                        children: "Start Over"
+                    })
+                })
+            ]
+        })
     });
-}
-function $bfee1339be77dabb$export$5556fed9e469df03() {
-    return (0, $d4J5n.useContext)($bfee1339be77dabb$var$ContractContext);
-}
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-const $f9d66397304cae7a$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    template: "",
-    setTemplate: ()=>{},
-    file: "",
-    setFile: ()=>{}
-});
-function $f9d66397304cae7a$export$5abfb1150fa6da6a({ children: children  }) {
-    const [template, setTemplate] = (0, $d4J5n.useState)("");
-    const [file, setFile] = (0, $d4J5n.useState)("");
-    const value = {
-        template: template,
-        setTemplate: setTemplate,
-        file: file,
-        setFile: setFile
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$var$TemplateContext.Provider, {
-        value: value,
-        children: children
-    });
-}
-function $f9d66397304cae7a$export$5c3a5f48c762cb34() {
-    return (0, $d4J5n.useContext)($f9d66397304cae7a$var$TemplateContext);
-}
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-var $b9093140ea6d98ca$export$9eeb22c0bba4ed5e;
-var $b9093140ea6d98ca$export$b0184c04dbb75cbd;
-var $b9093140ea6d98ca$export$93b9911b232b246c;
-var $b9093140ea6d98ca$export$2191b9da168c6cf0;
-var $b9093140ea6d98ca$export$44dde8d2b17fc96a;
-var $b9093140ea6d98ca$export$fa2f6d6458e494ac;
-var $b9093140ea6d98ca$export$c87d910e63d22ed6;
-var $b9093140ea6d98ca$export$a22775fa5e2eebd9;
-"use strict";
-
-var $b9093140ea6d98ca$var$Validator = $b9093140ea6d98ca$export$9eeb22c0bba4ed5e = (parcelRequire("kAoUr"));
-
-$b9093140ea6d98ca$export$b0184c04dbb75cbd = (parcelRequire("hpI3p")).ValidatorResult;
-
-$b9093140ea6d98ca$export$93b9911b232b246c = (parcelRequire("hpI3p")).ValidatorResultError;
-
-$b9093140ea6d98ca$export$2191b9da168c6cf0 = (parcelRequire("hpI3p")).ValidationError;
-
-$b9093140ea6d98ca$export$44dde8d2b17fc96a = (parcelRequire("hpI3p")).SchemaError;
-
-$b9093140ea6d98ca$export$fa2f6d6458e494ac = (parcelRequire("74FPd")).SchemaScanResult;
-
-$b9093140ea6d98ca$export$c87d910e63d22ed6 = (parcelRequire("74FPd")).scan;
-$b9093140ea6d98ca$export$a22775fa5e2eebd9 = function(instance, schema, options) {
-    var v = new $b9093140ea6d98ca$var$Validator();
-    return v.validate(instance, schema, options);
 };
 
 
-
-async function $72b699ca83b4a379$export$f78a296632f66e69(template, schema) {
-    if ((0, $6767c619f5de943e$exports).active) try {
-        const result = await (0, $6767c619f5de943e$exports).applyTemplate(template.obj);
-        if (result?.data && schema) {
-            const validator = new (0, $b9093140ea6d98ca$export$9eeb22c0bba4ed5e)();
-            const data = (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data);
-            const { errors: errors  } = validator.validate(data, schema);
-            for (const error of errors){
-                const code = `contract-${(0, $3ee7bf181cfaaad0$export$1d20a92cf1845969)(error.name)}`;
-                const message = error.stack.replace(/^(instance\b)/, "Object");
-                result.errors.push({
-                    code: code,
-                    message: message,
-                    level: 1
-                });
-            }
-        }
-        return result;
-    } catch (err) {
-        return {
-            errors: [
-                {
-                    message: err instanceof Error ? err.message : JSON.stringify(err)
-                }
-            ]
-        };
-    }
-    else return {
-        data: {
-            title: "Example Domain",
-            href: "https://www.example.com/"
-        }
-    };
-}
-
-
-function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
-    const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { contract: contract  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const [result1, setResult] = (0, $d4J5n.useState)();
-    const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
-    const [simple1, setSimple] = (0, $d4J5n.useState)(true);
-    (0, $d4J5n.useEffect)(()=>{
-        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        const simple = template.children.length === 0 || template.children.length === 1 && template.children[0].name === "select";
-        setSimple(simple);
-        if (autoRefresh && simple) refresh();
-    }, [
-        json,
-        autoRefresh
-    ]);
-    async function refresh(reload = !refreshing) {
-        setResult(undefined);
-        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
-            setRefreshing(true);
-            if (reload) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
-            const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
-            setResult(result);
-        }
-        setRefreshing(false);
-    }
-    const value = {
-        result: result1,
-        setResult: setResult,
-        refresh: refresh,
-        refreshing: refreshing,
-        simple: simple1
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a354b7b9e59df128$export$3dbf83a64597832d.Provider, {
-        value: value,
-        children: children
-    });
-}
-function $a354b7b9e59df128$export$5929441add3e8278() {
-    return (0, $d4J5n.useContext)($a354b7b9e59df128$export$3dbf83a64597832d);
-}
-const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    result: undefined,
-    setResult: ()=>{},
-    refresh: async ()=>{},
-    refreshing: false,
-    simple: true
-});
-
-
-
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-var $d4J5n = parcelRequire("d4J5n");
 
 parcelRequire("d4J5n");
 
@@ -42491,39 +42880,6 @@ var $26f0b3b6f2bba30f$export$2e2bcd8739ae039 = ({ value: value , onEdit: onEdit 
 var $d4J5n = parcelRequire("d4J5n");
 
 
-var $7b42a1209722603f$exports = {};
-
-$parcel$export($7b42a1209722603f$exports, "LoadingButton", () => $be534f7264953969$export$2e2bcd8739ae039);
-$parcel$export($7b42a1209722603f$exports, "TreeItem", () => $4e62f391705b5047$export$2e2bcd8739ae039);
-$parcel$export($7b42a1209722603f$exports, "TreeView", () => $4ed19a9323b6d50c$export$2e2bcd8739ae039);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -42916,72 +43272,6 @@ const $be534f7264953969$var$LoadingButton = /*#__PURE__*/ $d4J5n.forwardRef(func
     }));
 });
 var $be534f7264953969$export$2e2bcd8739ae039 = $be534f7264953969$var$LoadingButton;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -43552,8 +43842,6 @@ const $4e62f391705b5047$var$TreeItem = /*#__PURE__*/ $d4J5n.forwardRef(function 
     }));
 });
 var $4e62f391705b5047$export$2e2bcd8739ae039 = $4e62f391705b5047$var$TreeItem;
-
-
 
 
 
@@ -44172,13 +44460,6 @@ var $4ed19a9323b6d50c$export$2e2bcd8739ae039 = $4ed19a9323b6d50c$var$TreeView;
 
 
 
-
-
-
-
-
-
-
 var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , mode: mode , open: open , loading: loading , opening: opening , saving: saving , error: error , selectedFile: selectedFile , onSelectFile: onSelectFile , onClearError: onClearError , onClose: onClose  })=>{
     const [currentDirectory, setCurrentDirectory] = (0, $d4J5n.useState)("");
     const [text1, setText] = (0, $d4J5n.useState)("");
@@ -44668,6 +44949,217 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
 
 
 
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+const $bfee1339be77dabb$var$ContractContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    file: "",
+    setFile: ()=>{},
+    loading: false,
+    error: "",
+    contract: undefined
+});
+function $bfee1339be77dabb$export$f8ba26717a2a2005({ children: children  }) {
+    const [file, setFile] = (0, $d4J5n.useState)("");
+    const [loading, setLoading] = (0, $d4J5n.useState)(false);
+    const [error, setError] = (0, $d4J5n.useState)("");
+    const [contract1, setContract] = (0, $d4J5n.useState)();
+    (0, $d4J5n.useEffect)(()=>{
+        (async ()=>{
+            setContract(undefined);
+            setLoading(true);
+            try {
+                const json = await (0, $80e77e55da602fd0$exports).read(file);
+                const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(json);
+                if (contract) setContract(contract);
+                else setError("Format of contract JSON is invalid.");
+            } catch (err) {
+                debugger;
+                setError(err instanceof Error ? err.message : JSON.stringify(err));
+            }
+        })();
+        setLoading(false);
+    }, [
+        file
+    ]);
+    const value = {
+        file: file,
+        setFile: setFile,
+        loading: loading,
+        error: error,
+        contract: contract1
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$var$ContractContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+function $bfee1339be77dabb$export$5556fed9e469df03() {
+    return (0, $d4J5n.useContext)($bfee1339be77dabb$var$ContractContext);
+}
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+const $f9d66397304cae7a$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    template: "",
+    setTemplate: ()=>{},
+    file: "",
+    setFile: ()=>{}
+});
+function $f9d66397304cae7a$export$5abfb1150fa6da6a({ children: children  }) {
+    const [template, setTemplate] = (0, $d4J5n.useState)("");
+    const [file, setFile] = (0, $d4J5n.useState)("");
+    const value = {
+        template: template,
+        setTemplate: setTemplate,
+        file: file,
+        setFile: setFile
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$var$TemplateContext.Provider, {
+        value: value,
+        children: children
+    });
+}
+function $f9d66397304cae7a$export$5c3a5f48c762cb34() {
+    return (0, $d4J5n.useContext)($f9d66397304cae7a$var$TemplateContext);
+}
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $b9093140ea6d98ca$export$9eeb22c0bba4ed5e;
+var $b9093140ea6d98ca$export$b0184c04dbb75cbd;
+var $b9093140ea6d98ca$export$93b9911b232b246c;
+var $b9093140ea6d98ca$export$2191b9da168c6cf0;
+var $b9093140ea6d98ca$export$44dde8d2b17fc96a;
+var $b9093140ea6d98ca$export$fa2f6d6458e494ac;
+var $b9093140ea6d98ca$export$c87d910e63d22ed6;
+var $b9093140ea6d98ca$export$a22775fa5e2eebd9;
+"use strict";
+
+var $b9093140ea6d98ca$var$Validator = $b9093140ea6d98ca$export$9eeb22c0bba4ed5e = (parcelRequire("kAoUr"));
+
+$b9093140ea6d98ca$export$b0184c04dbb75cbd = (parcelRequire("hpI3p")).ValidatorResult;
+
+$b9093140ea6d98ca$export$93b9911b232b246c = (parcelRequire("hpI3p")).ValidatorResultError;
+
+$b9093140ea6d98ca$export$2191b9da168c6cf0 = (parcelRequire("hpI3p")).ValidationError;
+
+$b9093140ea6d98ca$export$44dde8d2b17fc96a = (parcelRequire("hpI3p")).SchemaError;
+
+$b9093140ea6d98ca$export$fa2f6d6458e494ac = (parcelRequire("74FPd")).SchemaScanResult;
+
+$b9093140ea6d98ca$export$c87d910e63d22ed6 = (parcelRequire("74FPd")).scan;
+$b9093140ea6d98ca$export$a22775fa5e2eebd9 = function(instance, schema, options) {
+    var v = new $b9093140ea6d98ca$var$Validator();
+    return v.validate(instance, schema, options);
+};
+
+
+
+async function $72b699ca83b4a379$export$f78a296632f66e69(template, schema) {
+    if ((0, $6767c619f5de943e$exports).active) try {
+        const result = await (0, $6767c619f5de943e$exports).applyTemplate(template.obj);
+        if (result?.data && schema) {
+            const validator = new (0, $b9093140ea6d98ca$export$9eeb22c0bba4ed5e)();
+            const data = (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data);
+            const { errors: errors  } = validator.validate(data, schema);
+            for (const error of errors){
+                const code = `contract-${(0, $3ee7bf181cfaaad0$export$1d20a92cf1845969)(error.name)}`;
+                const message = error.stack.replace(/^(instance\b)/, "Object");
+                result.errors.push({
+                    code: code,
+                    message: message,
+                    level: 1
+                });
+            }
+        }
+        return result;
+    } catch (err) {
+        return {
+            errors: [
+                {
+                    message: err instanceof Error ? err.message : JSON.stringify(err)
+                }
+            ]
+        };
+    }
+    else return {
+        data: {
+            title: "Example Domain",
+            href: "https://www.example.com/"
+        }
+    };
+}
+
+
+function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
+    const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    const { contract: contract  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
+    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const [result1, setResult] = (0, $d4J5n.useState)();
+    const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
+    const [simple1, setSimple] = (0, $d4J5n.useState)(true);
+    (0, $d4J5n.useEffect)(()=>{
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        const simple = template.children.length === 0 || template.children.length === 1 && template.children[0].name === "select";
+        setSimple(simple);
+        if (autoRefresh && simple) refresh();
+    }, [
+        json,
+        autoRefresh
+    ]);
+    async function refresh(reload = !refreshing) {
+        setResult(undefined);
+        const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+        if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
+            setRefreshing(true);
+            if (reload) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
+            const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
+            setResult(result);
+        }
+        setRefreshing(false);
+    }
+    const value = {
+        result: result1,
+        setResult: setResult,
+        refresh: refresh,
+        refreshing: refreshing,
+        simple: simple1
+    };
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a354b7b9e59df128$export$3dbf83a64597832d.Provider, {
+        value: value,
+        children: children
+    });
+}
+function $a354b7b9e59df128$export$5929441add3e8278() {
+    return (0, $d4J5n.useContext)($a354b7b9e59df128$export$3dbf83a64597832d);
+}
+const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    result: undefined,
+    setResult: ()=>{},
+    refresh: async ()=>{},
+    refreshing: false,
+    simple: true
+});
+
+
+
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+var $d4J5n = parcelRequire("d4J5n");
 
 
 
@@ -48478,35 +48970,44 @@ var $23d5c3b2516abd1b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
 
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a354b7b9e59df128$export$5839ba03810e8481), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                    sx: {
-                        minWidth: 500
-                    },
-                    children: [
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                                children: [
-                                    mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
-                                    mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
-                                    mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
-                                    mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                        elevation: 3,
-                                        className: "panel",
-                                        sx: {
-                                            width: 1,
-                                            height: 250
-                                        },
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
-                                    })
-                                ]
+    const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aceca34d291fb49$exports.ErrorBoundary), {
+        FallbackComponent: (0, $815f6225cac30e41$export$2e2bcd8739ae039),
+        onReset: ()=>{
+            setTemplate("");
+            setResult(undefined);
+        },
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a354b7b9e59df128$export$5839ba03810e8481), {
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        sx: {
+                            minWidth: 500
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                                    children: [
+                                        mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
+                                        mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
+                                        mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
+                                        mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                            elevation: 3,
+                                            className: "panel",
+                                            sx: {
+                                                width: 1,
+                                                height: 250
+                                            },
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
+                                        })
+                                    ]
+                                })
                             })
-                        })
-                    ]
+                        ]
+                    })
                 })
             })
         })
@@ -48521,6 +49022,8 @@ const $c401fe30c7c41bae$var$theme = (0, $3de943553a18032e$export$2e2bcd8739ae039
     }
 });
 var $c401fe30c7c41bae$export$2e2bcd8739ae039 = $c401fe30c7c41bae$var$theme;
+
+
 
 
 var $2c03b064dfadf63b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $4feb3478c82adef5$export$2e2bcd8739ae039), {
