@@ -65,11 +65,11 @@ function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
     }
 }
 function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
-    const element1 = document.querySelector(".sx-click");
-    if (element1) {
-        element1.classList.remove("sx-click");
-        if (element1.classList.length === 0) element1.removeAttribute("class");
-        return singleSelector(element1);
+    const element = document.querySelector(".sx-click");
+    if (element) {
+        element.classList.remove("sx-click");
+        if (element.classList.length === 0) element.removeAttribute("class");
+        return singleSelector(element);
     } else return [];
     function semantic(name) {
         if (!name) return false;
@@ -121,14 +121,14 @@ function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
                     "title",
                     "lang"
                 ].includes(attr.name)).forEach((attr)=>append(`[${attr.name}${semantic(attr.value) ? `='${attr.value.replace(/'/g, "\\'")}'` : ""}]`));
-            for (const path1 of paths){
-                let selector = path1 ? `${tag} > ${path1}` : tag;
+            for (const path of paths){
+                let selector = path ? `${tag} > ${path}` : tag;
                 if (document.querySelectorAll(selector).length === 1) closed.push(selector);
                 if (element.parentElement) {
                     const n = element.parentElement.querySelectorAll(tag).length;
                     if (n > 1) {
                         const i = Array.from(element.parentElement.children).filter((child)=>child.tagName.toLowerCase() === tag).findIndex((child)=>child === element);
-                        selector = `${tag}:nth-of-type(${i + 1})${path1 ? ` > ${path1}` : ""}`;
+                        selector = `${tag}:nth-of-type(${i + 1})${path ? ` > ${path}` : ""}`;
                     }
                     next.push(selector);
                 }

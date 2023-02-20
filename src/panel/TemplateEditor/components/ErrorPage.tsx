@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FallbackProps } from "react-error-boundary";
+import { LoadingButton } from "@mui/lab";
 import { cloud } from "../lib";
 
 import {
@@ -15,18 +16,32 @@ import {
     Typography
 } from "@mui/material";
 
+type Status = "unsent" | "sending" | "sent" | "error";
+
 export default ({ error, resetErrorBoundary }: FallbackProps) => {
     const [expanded, setExpanded] = useState(false);
     const [comments, setComments] = useState("");
-    const [sent, setSent] = useState(false);
+    const [status, setStatus] = useState<Status>("unsent");
+
+    useEffect(() => {
+        setExpanded(false);
+        setComments("");
+        setStatus("unsent");
+    }, [error]);
 
     async function reportError() {
-        setSent(true);
-        await cloud.log({
+        const manifest = chrome.runtime.getManifest();
+        setStatus("sending");
+        const ok = await cloud.log({
             key: "error",
-            comments,
-            error: error.stack || error.message
+            version: manifest.version,
+            error: error.stack || error.message,
+            comments
         });
+        if (ok)
+            setStatus("sent");
+        else
+            setStatus("error");
     }
 
     return (
@@ -52,20 +67,26 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
                         value={comments}
                         onChange={event => setComments(event.target.value)}
                         rows={2}
-                        disabled={sent}
+                        disabled={status !== "unsent" && status !== "error"}
                         placeholder="Any additional comments to report on this error?"
                         sx={{ mt: 1 }}
                     />
                     <Box display="flex" justifyContent="flex-end" alignItems="flex-end">
-                        <Button
+                        <LoadingButton
                             variant="outlined"
                             size="small"
-                            disabled={sent}
+                            color={status === "error" ? "error" : undefined}
+                            disabled={status !== "unsent" && status !== "error"}
+                            loading={status === "sending"}
+                            loadingPosition="end"
                             sx={{ width: 120, mt: 1 }}
                             onClick={reportError}
                         >
-                            <Typography fontSize="small">{!sent ? "Report Error" : "Thanks!"}</Typography>
-                        </Button>
+                            {status === "unsent" && <Typography fontSize="small">Report Error</Typography>}
+                            {status === "sending" && <Typography fontSize="small">Sending…</Typography>}
+                            {status === "sent" && <Typography fontSize="small">Got it!</Typography>}
+                            {status === "error" && <Typography fontSize="small">Try again</Typography>}
+                        </LoadingButton>
                     </Box>
                 </CardContent>
                 <CardActions>

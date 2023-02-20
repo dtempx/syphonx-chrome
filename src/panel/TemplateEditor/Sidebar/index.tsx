@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { List } from "../components";
 import { useTemplate, useTemplateData } from "../context";
+
+import AboutDialog from "./AboutDialog";
 import OpenFileDialog from "./OpenFileDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
@@ -11,6 +13,7 @@ import {
 } from "@mui/material";
 
 import {
+    Info as AboutIcon,
     NoteAdd as FileNewIcon,
     CloudDownload as FileOpenIcon,
     CloudUpload as FileSaveIcon,
@@ -26,11 +29,13 @@ export interface Props {
 export default ({ open, onClose }: Props) => {
     const { setTemplate } = useTemplate();
     const { setResult } = useTemplateData();
+    const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
     const [userSettingsOpen, setUserSettingsOpen] = useState(false);
 
     return (<>
+        <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
         <OpenFileDialog open={fileOpenOpen} onClose={() => setFileOpenOpen(false)} />
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
@@ -68,6 +73,10 @@ export default ({ open, onClose }: Props) => {
                     null,
                     ["User Settings", <SettingsIcon />, event => {
                         setUserSettingsOpen(true);
+                        onClose(event);
+                    }],
+                    ["About", <AboutIcon />, event => {
+                        setAboutOpen(true);
                         onClose(event);
                     }]
                 ]} />
