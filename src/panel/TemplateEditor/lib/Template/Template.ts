@@ -1,5 +1,6 @@
 import * as syphonx from "syphonx-lib";
 import { clone, omit } from "..";
+import defaultTemplate from "./default-template.json";
 
 import { TemplateItem } from "./TemplateItem";
 import { Placeholder } from "./Placeholder";
@@ -30,8 +31,8 @@ export class Template {
 
     constructor(obj?: string | TemplateObj) {
         if (typeof obj === "string") {
-            if (obj === "") { //todo: remove this check when lib updated
-                this.obj = {};
+            if (obj === "") {
+                this.obj = defaultTemplate as TemplateObj;
             }
             else {
                 try {

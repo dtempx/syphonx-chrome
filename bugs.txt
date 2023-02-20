@@ -10,3 +10,6 @@ File open doesn't display busy status when opening template
 selector hilighting not working on coned
 click eyeball crashes on coned
 entering values for snooze don't persist
+
+add button when union is selected doesn't add another union case
+can't create a union unless type=object, union should be supported for any type

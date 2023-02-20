@@ -18,6 +18,7 @@ import {
     Snooze as SnoozeIcon,
     Abc as StringTypeIcon,
     Transform as TransformIcon,
+    Mediation as UnionIcon,
     QuestionMark as UnknownIcon,
     HourglassEmpty as WaitforIcon,
     ExitToApp as YieldIcon
@@ -60,6 +61,8 @@ export default ({ name, ...props }: Props) => {
         return <SnoozeIcon {...props} />;
     else if (name === "transform")
         return <TransformIcon {...props} />;
+    else if (name === "union")
+        return <UnionIcon {...props} />;
     else if (name === "waitfor")
         return <WaitforIcon {...props} />;
     else if (name === "yield")

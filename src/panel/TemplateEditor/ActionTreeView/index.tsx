@@ -19,16 +19,17 @@ export default () => {
 
     useEffect(() => {
         const key = template.selected()?.key;
-        setSelected(key ? [key] : []);
+        if (key)
+            setSelected([key]);
     }, [json]);
 
     return (
         <Box>
             <TreeView
-                defaultCollapseIcon={<CollapseIcon sx={{ color: "primary.light" }} />}
-                defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
                 expanded={expanded}
                 selected={selected}
+                defaultCollapseIcon={<CollapseIcon sx={{ color: "primary.light" }} />}
+                defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
                 onNodeSelect={(event: any, value: any) => {
                     template.setSelected(value);

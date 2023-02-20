@@ -7,7 +7,7 @@ import * as syphonx from "syphonx-lib";
 export interface TemplateDataState {
     result: syphonx.ExtractResult | undefined;
     setResult: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
-    refresh: (reload?: boolean) => Promise<void>;
+    refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
     simple: boolean;
 }
@@ -25,10 +25,10 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
         const simple = template.children.length === 0 || (template.children.length === 1 && template.children[0].name === "select");
         setSimple(simple);
         if (autoRefresh && simple) // only auto refresh if there is a single select action
-            refresh();
+            refresh(false);
     }, [json, autoRefresh]);
 
-    async function refresh(reload = !refreshing) {
+    async function refresh(reload: boolean) {
         setResult(undefined);
         const template = new Template(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
