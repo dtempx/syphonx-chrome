@@ -3,52 +3,54 @@ import { Schema } from "jsonschema";
 import { cloud, tryParseJson } from "../lib";
 
 export interface ContractState {
-    file: string;
-    setFile: React.Dispatch<React.SetStateAction<string>>;
-    loading: boolean;
-    error: string;
+    contractFile: string;
+    setContractFile: React.Dispatch<React.SetStateAction<string>>;
+    contractLoading: boolean;
+    contractError: string;
     contract: Schema | undefined;
 }
 
 const ContractContext = React.createContext<ContractState>({
-    file: "",
-    setFile: () => {},
-    loading: false,
-    error: "",
+    contractFile: "",
+    setContractFile: () => {},
+    contractLoading: false,
+    contractError: "",
     contract: undefined
 });
 
 export function ContractProvider({ children }: { children: JSX.Element }) {
-    const [file, setFile] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [contractFile, setContractFile] = useState("");
+    const [contractLoading, setContractLoading] = useState(false);
+    const [contractError, setContractError] = useState("");
     const [contract, setContract] = useState<Schema | undefined>();
 
     useEffect(() => {
         (async () => {
             setContract(undefined);
-            setLoading(true);
-            try {
-                const json = await cloud.read(file);
-                const contract = tryParseJson(json);
-                if (contract)
-                    setContract(contract);
-                else
-                    setError("Format of contract JSON is invalid.");
-            }
-            catch (err) {
-                debugger;
-                setError(err instanceof Error ? err.message : JSON.stringify(err));
+            if (contractFile) {
+                setContractLoading(true);
+                try {
+                    const json = await cloud.read(contractFile);
+                    const contract = tryParseJson(json);
+                    if (contract)
+                        setContract(contract);
+                    else
+                        setContractError("Format of contract JSON is invalid.");
+                }
+                catch (err) {
+                    debugger;
+                    setContractError(err instanceof Error ? err.message : JSON.stringify(err));
+                }
             }
         })();
-        setLoading(false);
-    }, [file]);
+        setContractLoading(false);
+    }, [contractFile]);
 
     const value = {
-        file,
-        setFile,
-        loading,
-        error,
+        contractFile,
+        setContractFile,
+        contractLoading,
+        contractError,
         contract
     };
 

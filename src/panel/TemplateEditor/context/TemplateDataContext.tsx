@@ -5,48 +5,44 @@ import { applyTemplate } from "./applyTemplate";
 import * as syphonx from "syphonx-lib";
 
 export interface TemplateDataState {
-    result: syphonx.ExtractResult | undefined;
-    setResult: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
+    extract: syphonx.ExtractResult | undefined;
+    setExtract: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
     refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
-    simple: boolean;
 }
 
 export function TemplateDataProvider({ children }: { children: JSX.Element }) {
     const { autoRefresh } = useApp();
     const { contract } = useContract();
     const { template: json } = useTemplate();
-    const [result, setResult] = useState<syphonx.ExtractResult | undefined>();
+    const [extract, setExtract] = useState<syphonx.ExtractResult | undefined>();
     const [refreshing, setRefreshing] = useState(false);
-    const [simple, setSimple] = useState(true);
 
     useEffect(() => {
         const template = new Template(json);
-        const simple = template.children.length === 0 || (template.children.length === 1 && template.children[0].name === "select");
-        setSimple(simple);
+        const simple = template.simple();
         if (autoRefresh && simple) // only auto refresh if there is a single select action
             refresh(false);
     }, [json, autoRefresh]);
 
     async function refresh(reload: boolean) {
-        setResult(undefined);
+        setExtract(undefined);
         const template = new Template(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
             if (reload)
                 await background.inspectedWindow.reload();
             const result = await applyTemplate(template, contract);
-            setResult(result);
+            setExtract(result);
         }
         setRefreshing(false);
     }
  
     const value = {
-        result,
-        setResult,
+        extract,
+        setExtract,
         refresh,
-        refreshing,
-        simple
+        refreshing
     };
 
     return (
@@ -61,9 +57,8 @@ export function useTemplateData() {
 }
 
 export const TemplateDataContext = React.createContext<TemplateDataState>({
-    result: undefined,
-    setResult: () => {},
+    extract: undefined,
+    setExtract: () => {},
     refresh: async () => {},
-    refreshing: false,
-    simple: true
+    refreshing: false
 });

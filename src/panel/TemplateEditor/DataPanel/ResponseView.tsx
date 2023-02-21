@@ -3,8 +3,8 @@ import { TextField } from "@mui/material";
 import { useTemplateData } from "./context";
 
 export default () => {
-    const { result } = useTemplateData();
-    const { actions, ...response } = result || {};
+    const { extract } = useTemplateData();
+    const { actions, ...response } = extract || {};
     return (
         <TextField
             multiline

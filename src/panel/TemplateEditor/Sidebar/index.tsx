@@ -28,7 +28,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { setTemplate } = useTemplate();
-    const { setResult } = useTemplateData();
+    const { setExtract } = useTemplateData();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
@@ -54,7 +54,7 @@ export default ({ open, onClose }: Props) => {
                 <List items={[
                     ["New Template", <FileNewIcon />, event => {
                         setTemplate("");
-                        setResult(undefined);
+                        setExtract(undefined);
                         onClose(event);
                     }],
                     ["Open Template", <FileOpenIcon />, event => {
@@ -67,7 +67,7 @@ export default ({ open, onClose }: Props) => {
                     }],
                     ["Close Template", <FileCloseIcon />, event => {
                         setTemplate("");
-                        setResult(undefined);
+                        setExtract(undefined);
                         onClose(event);
                     }],
                     null,

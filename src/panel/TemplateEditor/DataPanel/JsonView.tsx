@@ -1,15 +1,15 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useTemplateData } from "./context";
-import { removeDOMRefs } from "../lib";
+import { removeDOMRefs } from "./lib";
 
 export default () => {
-    const { result } = useTemplateData();
+    const { extract } = useTemplateData();
     return (
         <TextField
             multiline
             fullWidth
-            value={result && result.data ? JSON.stringify(removeDOMRefs(result.data), null, 2) : ""}
+            value={extract && extract.data ? JSON.stringify(removeDOMRefs(extract.data), null, 2) : ""}
             variant="outlined"
         />
     );

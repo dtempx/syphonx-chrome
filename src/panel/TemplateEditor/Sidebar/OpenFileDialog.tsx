@@ -10,9 +10,9 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { autoOpen } = useApp();
-    const { setFile: setContractFile } = useContract();
-    const { setFile: setTemplateFile, setTemplate } = useTemplate();
-    const { setResult } = useTemplateData();
+    const { setContractFile } = useContract();
+    const { setTemplateFile, setTemplate } = useTemplate();
+    const { setExtract } = useTemplateData();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -44,7 +44,7 @@ export default ({ open, onClose }: Props) => {
     async function onSelectFile(event: React.SyntheticEvent, file: string) {
         try {
             setOpening(true);
-            setResult(undefined);
+            setExtract(undefined);
             const json = await cloud.read(file);
             const template = new Template(json);
 

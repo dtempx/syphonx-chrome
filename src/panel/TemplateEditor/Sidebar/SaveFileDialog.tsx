@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { template: json, file: templateFile, setFile: setTemplateFile } = useTemplate();
+    const { template: json, templateFile, setTemplateFile } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");

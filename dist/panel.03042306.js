@@ -23563,6 +23563,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             return undefined;
         }
     }
+    simple() {
+        return this.children.length === 0 || this.children.length === 1 && this.children[0].name === "select";
+    }
     tests() {
         return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
@@ -37841,40 +37844,42 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
 var $d4J5n = parcelRequire("d4J5n");
 
 const $bfee1339be77dabb$var$ContractContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    file: "",
-    setFile: ()=>{},
-    loading: false,
-    error: "",
+    contractFile: "",
+    setContractFile: ()=>{},
+    contractLoading: false,
+    contractError: "",
     contract: undefined
 });
 function $bfee1339be77dabb$export$f8ba26717a2a2005({ children: children  }) {
-    const [file, setFile] = (0, $d4J5n.useState)("");
-    const [loading, setLoading] = (0, $d4J5n.useState)(false);
-    const [error, setError] = (0, $d4J5n.useState)("");
+    const [contractFile, setContractFile] = (0, $d4J5n.useState)("");
+    const [contractLoading, setContractLoading] = (0, $d4J5n.useState)(false);
+    const [contractError, setContractError] = (0, $d4J5n.useState)("");
     const [contract, setContract] = (0, $d4J5n.useState)();
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             setContract(undefined);
-            setLoading(true);
-            try {
-                const json = await (0, $80e77e55da602fd0$exports).read(file);
-                const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(json);
-                if (contract) setContract(contract);
-                else setError("Format of contract JSON is invalid.");
-            } catch (err) {
-                debugger;
-                setError(err instanceof Error ? err.message : JSON.stringify(err));
+            if (contractFile) {
+                setContractLoading(true);
+                try {
+                    const json = await (0, $80e77e55da602fd0$exports).read(contractFile);
+                    const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(json);
+                    if (contract) setContract(contract);
+                    else setContractError("Format of contract JSON is invalid.");
+                } catch (err) {
+                    debugger;
+                    setContractError(err instanceof Error ? err.message : JSON.stringify(err));
+                }
             }
         })();
-        setLoading(false);
+        setContractLoading(false);
     }, [
-        file
+        contractFile
     ]);
     const value = {
-        file: file,
-        setFile: setFile,
-        loading: loading,
-        error: error,
+        contractFile: contractFile,
+        setContractFile: setContractFile,
+        contractLoading: contractLoading,
+        contractError: contractError,
         contract: contract
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$var$ContractContext.Provider, {
@@ -37893,17 +37898,17 @@ var $d4J5n = parcelRequire("d4J5n");
 const $f9d66397304cae7a$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     template: "",
     setTemplate: ()=>{},
-    file: "",
-    setFile: ()=>{}
+    templateFile: "",
+    setTemplateFile: ()=>{}
 });
 function $f9d66397304cae7a$export$5abfb1150fa6da6a({ children: children  }) {
     const [template, setTemplate] = (0, $d4J5n.useState)("");
-    const [file, setFile] = (0, $d4J5n.useState)("");
+    const [templateFile, setTemplateFile] = (0, $d4J5n.useState)("");
     const value = {
         template: template,
         setTemplate: setTemplate,
-        file: file,
-        setFile: setFile
+        templateFile: templateFile,
+        setTemplateFile: setTemplateFile
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$var$TemplateContext.Provider, {
         value: value,
@@ -37990,35 +37995,32 @@ function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
     const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const { contract: contract  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
     const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const [result, setResult] = (0, $d4J5n.useState)();
+    const [extract, setExtract] = (0, $d4J5n.useState)();
     const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
-    const [simple, setSimple] = (0, $d4J5n.useState)(true);
     (0, $d4J5n.useEffect)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        const simple = template.children.length === 0 || template.children.length === 1 && template.children[0].name === "select";
-        setSimple(simple);
+        const simple = template.simple();
         if (autoRefresh && simple) refresh(false);
     }, [
         json,
         autoRefresh
     ]);
     async function refresh(reload) {
-        setResult(undefined);
+        setExtract(undefined);
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
             if (reload) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
             const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
-            setResult(result);
+            setExtract(result);
         }
         setRefreshing(false);
     }
     const value = {
-        result: result,
-        setResult: setResult,
+        extract: extract,
+        setExtract: setExtract,
         refresh: refresh,
-        refreshing: refreshing,
-        simple: simple
+        refreshing: refreshing
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a354b7b9e59df128$export$3dbf83a64597832d.Provider, {
         value: value,
@@ -38029,11 +38031,10 @@ function $a354b7b9e59df128$export$5929441add3e8278() {
     return (0, $d4J5n.useContext)($a354b7b9e59df128$export$3dbf83a64597832d);
 }
 const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    result: undefined,
-    setResult: ()=>{},
+    extract: undefined,
+    setExtract: ()=>{},
     refresh: async ()=>{},
-    refreshing: false,
-    simple: true
+    refreshing: false
 });
 
 
@@ -38100,9 +38101,9 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { autoOpen: autoOpen  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { setFile: setContractFile  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
-    const { setFile: setTemplateFile , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setContractFile: setContractFile  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
+    const { setTemplateFile: setTemplateFile , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const [files, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -38129,7 +38130,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     async function onSelectFile(event, file) {
         try {
             setOpening(true);
-            setResult(undefined);
+            setExtract(undefined);
             const json = await (0, $80e77e55da602fd0$exports).read(file);
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
             if (autoOpen && template.obj.url) {
@@ -38173,7 +38174,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { template: json , file: templateFile , setFile: setTemplateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , templateFile: templateFile , setTemplateFile: setTemplateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const [files, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -39007,7 +39008,7 @@ var $95fcda3d073203b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     const [aboutOpen, setAboutOpen] = (0, $d4J5n.useState)(false);
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
@@ -39048,7 +39049,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $aff1417d5558df81$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
-                                    setResult(undefined);
+                                    setExtract(undefined);
                                     onClose(event);
                                 }
                             ],
@@ -39073,7 +39074,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb87d55b2c409428$export$2e2bcd8739ae039), {}),
                                 (event)=>{
                                     setTemplate("");
-                                    setResult(undefined);
+                                    setExtract(undefined);
                                     onClose(event);
                                 }
                             ],
@@ -39597,7 +39598,7 @@ var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { file: file  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { templateFile: templateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
@@ -39617,8 +39618,8 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         onClick: ()=>setSidebarOpen(true),
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {})
                     }),
-                    file ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                        label: file,
+                    templateFile ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                        label: templateFile,
                         variant: "outlined",
                         color: "primary",
                         size: "small",
@@ -39761,8 +39762,8 @@ parcelRequire("d4J5n");
 
 
 var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    return result?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
+    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    return extract?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
             children: [
@@ -39780,7 +39781,7 @@ var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
                     })
                 }),
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
-                    children: result.errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                    children: extract.errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
                             children: [
                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
                                     children: error.message
@@ -39802,12 +39803,14 @@ parcelRequire("d4J5n");
 
 
 
+
+
 var $239f53bd6025a4d3$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
-        value: result && result.data ? JSON.stringify((0, $fee381e3400c58a7$export$de139376c1f60602)(result.data), null, 2) : "",
+        value: extract && extract.data ? JSON.stringify((0, $fee381e3400c58a7$export$de139376c1f60602)(extract.data), null, 2) : "",
         variant: "outlined"
     });
 };
@@ -39818,8 +39821,8 @@ parcelRequire("d4J5n");
 
 
 var $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const { actions: actions , ...response } = result || {};
+    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { actions: actions , ...response } = extract || {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
@@ -39835,9 +39838,9 @@ parcelRequire("d4J5n");
 
 
 var $a71c5db2600073d4$export$2e2bcd8739ae039 = ()=>{
-    const { result: result  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const keys = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? Object.keys(result.data) : [];
-    const obj = result && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(result.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(result.data) : {};
+    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const keys = extract && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(extract.data) ? Object.keys(extract.data) : [];
+    const obj = extract && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(extract.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(extract.data) : {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
@@ -39863,6 +39866,7 @@ var $a71c5db2600073d4$export$2e2bcd8739ae039 = ()=>{
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
 
 
 
@@ -39904,10 +39908,13 @@ var $dd58ec53e901ec5b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
     const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { result: result , setResult: setResult , refresh: refresh , refreshing: refreshing , simple: simple  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
-    const errors = (0, $d4J5n.useMemo)(()=>result?.errors ? result.errors.length : 0, [
-        result
+    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { extract: extract , setExtract: setExtract , refresh: refresh , refreshing: refreshing  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const errors = (0, $d4J5n.useMemo)(()=>extract?.errors ? extract.errors.length : 0, [
+        extract
     ]);
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+    const simple = template.simple();
     const spinAnimation = {
         animation: "spin 2s linear infinite",
         "@keyframes spin": {
@@ -39960,7 +39967,7 @@ var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                         title: "clear",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                             size: "small",
-                            onClick: ()=>setResult(undefined),
+                            onClick: ()=>setExtract(undefined),
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a39d82b58b72568$export$2e2bcd8739ae039), {
                                 fontSize: "small"
                             })
@@ -47092,12 +47099,12 @@ var $23d5c3b2516abd1b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setResult: setResult  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aceca34d291fb49$exports.ErrorBoundary), {
         FallbackComponent: (0, $815f6225cac30e41$export$2e2bcd8739ae039),
         onReset: ()=>{
             setTemplate("");
-            setResult(undefined);
+            setExtract(undefined);
         },
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {

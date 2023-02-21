@@ -164,6 +164,11 @@ export class Template {
         }
     }
 
+    simple(): boolean {
+        return this.children.length === 0
+            || (this.children.length === 1 && this.children[0].name === "select");
+    }
+
     tests(): TemplateTest[] {
         return this.obj.tests instanceof Array ? this.obj.tests : [];
     }

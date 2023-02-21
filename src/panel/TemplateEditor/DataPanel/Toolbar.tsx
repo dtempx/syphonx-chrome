@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
-import { useApp, useTemplateData } from "./context";
+import { useApp, useTemplate, useTemplateData } from "./context";
+import { Template } from "./lib";
 
 import {
     Chip,
@@ -28,8 +29,12 @@ export interface Props {
 
 export default ({ mode, onChange } : Props) => {
     const { autoRefresh, setAutoRefresh } = useApp();
-    const { result, setResult, refresh, refreshing, simple } = useTemplateData();
-    const errors = useMemo(() => result?.errors ? result.errors.length : 0, [result]);
+    const { template: json } = useTemplate();
+    const { extract, setExtract, refresh, refreshing } = useTemplateData();
+
+    const errors = useMemo(() => extract?.errors ? extract.errors.length : 0, [extract]);
+    const template = new Template(json);
+    const simple = template.simple();
 
     const spinAnimation = {
         animation: "spin 2s linear infinite",
@@ -63,7 +68,7 @@ export default ({ mode, onChange } : Props) => {
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="clear">
-                    <IconButton size="small" onClick={() => setResult(undefined)}>
+                    <IconButton size="small" onClick={() => setExtract(undefined)}>
                         <ResetIcon fontSize="small" />
                     </IconButton>
                 </Tooltip>

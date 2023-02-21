@@ -21,7 +21,7 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { file } = useTemplate();
+    const { templateFile } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -33,9 +33,9 @@ export default () => {
                     <MenuIcon />
                 </IconButton>
 
-                {file ? (
+                {templateFile ? (
                     <Chip
-                        label={file}
+                        label={templateFile}
                         variant="outlined"
                         color="primary"
                         size="small"

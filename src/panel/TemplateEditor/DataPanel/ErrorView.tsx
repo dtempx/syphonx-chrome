@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 
 export default () => {
-    const { result } = useTemplateData();
-    return result?.errors ? (
+    const { extract } = useTemplateData();
+    return extract?.errors ? (
         <TableContainer>
             <Table size="small">
                 <TableHead>
@@ -22,7 +22,7 @@ export default () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {result.errors.map(error => (
+                    {extract.errors.map(error => (
                         <TableRow>
                             <TableCell>{error.message}</TableCell>
                             <TableCell>{error.code}</TableCell>

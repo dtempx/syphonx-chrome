@@ -14,13 +14,13 @@ import VisualEditor from "./VisualEditor";
 export default () => {
     const { mode } = useApp();
     const { setTemplate } = useTemplate();
-    const { setResult } = useTemplateData();
+    const { setExtract } = useTemplateData();
     return (
         <ErrorBoundary
             FallbackComponent={ErrorPage}
             onReset={() => {
                 setTemplate("");
-                setResult(undefined);
+                setExtract(undefined);
             }}
         >
             <ContractProvider>
