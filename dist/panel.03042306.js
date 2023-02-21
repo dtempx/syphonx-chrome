@@ -37840,10 +37840,12 @@ var $a54c31726664078f$export$2e2bcd8739ae039 = ({ items: items , ...props })=>{
 
 
 
+var $d4J5n = parcelRequire("d4J5n");
+
 
 var $d4J5n = parcelRequire("d4J5n");
 
-const $bfee1339be77dabb$var$ContractContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+const $bfee1339be77dabb$export$eae686c5662f0382 = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     contractFile: "",
     setContractFile: ()=>{},
     contractLoading: false,
@@ -37882,20 +37884,17 @@ function $bfee1339be77dabb$export$f8ba26717a2a2005({ children: children  }) {
         contractError: contractError,
         contract: contract
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$var$ContractContext.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$export$eae686c5662f0382.Provider, {
         value: value,
         children: children
     });
-}
-function $bfee1339be77dabb$export$5556fed9e469df03() {
-    return (0, $d4J5n.useContext)($bfee1339be77dabb$var$ContractContext);
 }
 
 
 
 
 var $d4J5n = parcelRequire("d4J5n");
-const $f9d66397304cae7a$var$TemplateContext = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+const $f9d66397304cae7a$export$150b486c2606fb1 = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
     template: "",
     setTemplate: ()=>{},
     templateFile: "",
@@ -37910,13 +37909,10 @@ function $f9d66397304cae7a$export$5abfb1150fa6da6a({ children: children  }) {
         templateFile: templateFile,
         setTemplateFile: setTemplateFile
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$var$TemplateContext.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$export$150b486c2606fb1.Provider, {
         value: value,
         children: children
     });
-}
-function $f9d66397304cae7a$export$5c3a5f48c762cb34() {
-    return (0, $d4J5n.useContext)($f9d66397304cae7a$var$TemplateContext);
 }
 
 
@@ -37991,10 +37987,15 @@ async function $72b699ca83b4a379$export$f78a296632f66e69(template, schema) {
 }
 
 
-function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
+const $d19803726287b231$export$58d75f9829cbe158 = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
+    extract: undefined,
+    setExtract: ()=>{},
+    refresh: async ()=>{},
+    refreshing: false
+});
+function $d19803726287b231$export$43c6ed89e8a21a35({ children: children  }) {
     const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { contract: contract  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , contract: contract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [extract, setExtract] = (0, $d4J5n.useState)();
     const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
@@ -38022,23 +38023,36 @@ function $a354b7b9e59df128$export$5839ba03810e8481({ children: children  }) {
         refresh: refresh,
         refreshing: refreshing
     };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($a354b7b9e59df128$export$3dbf83a64597832d.Provider, {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d19803726287b231$export$58d75f9829cbe158.Provider, {
         value: value,
         children: children
     });
 }
-function $a354b7b9e59df128$export$5929441add3e8278() {
-    return (0, $d4J5n.useContext)($a354b7b9e59df128$export$3dbf83a64597832d);
+
+
+
+parcelRequire("d4J5n");
+
+
+
+var $82ac1358084decf3$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d19803726287b231$export$43c6ed89e8a21a35), {
+                children: children
+            })
+        })
+    });
+
+
+
+function $c1a28ccf972eabfc$export$5c3a5f48c762cb34() {
+    const context = {
+        ...(0, $d4J5n.useContext)((0, $bfee1339be77dabb$export$eae686c5662f0382)),
+        ...(0, $d4J5n.useContext)((0, $f9d66397304cae7a$export$150b486c2606fb1)),
+        ...(0, $d4J5n.useContext)((0, $d19803726287b231$export$58d75f9829cbe158))
+    };
+    return context;
 }
-const $a354b7b9e59df128$export$3dbf83a64597832d = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    extract: undefined,
-    setExtract: ()=>{},
-    refresh: async ()=>{},
-    refreshing: false
-});
-
-
-
 
 
 
@@ -38101,9 +38115,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { autoOpen: autoOpen  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { setContractFile: setContractFile  } = (0, $bfee1339be77dabb$export$5556fed9e469df03)();
-    const { setTemplateFile: setTemplateFile , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setTemplateFile: setTemplateFile , setTemplate: setTemplate , setContractFile: setContractFile , setExtract: setExtract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [files, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -38174,7 +38186,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { template: json , templateFile: templateFile , setTemplateFile: setTemplateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , templateFile: templateFile , setTemplateFile: setTemplateFile  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [files, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -39007,8 +39019,7 @@ var $95fcda3d073203b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
-    const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setTemplate: setTemplate , setExtract: setExtract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [aboutOpen, setAboutOpen] = (0, $d4J5n.useState)(false);
     const [fileOpenOpen, setFileOpenOpen] = (0, $d4J5n.useState)(false);
     const [fileSaveOpen, setFileSaveOpen] = (0, $d4J5n.useState)(false);
@@ -39598,7 +39609,7 @@ var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { templateFile: templateFile  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { templateFile: templateFile  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         sx: {
@@ -39719,7 +39730,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $f9ff0d55efab4341$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const { code: code  } = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const code = template.file();
@@ -39762,7 +39773,7 @@ parcelRequire("d4J5n");
 
 
 var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
-    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     return extract?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $795ce8072056b061$export$2e2bcd8739ae039), {
             size: "small",
@@ -39806,7 +39817,7 @@ parcelRequire("d4J5n");
 
 
 var $239f53bd6025a4d3$export$2e2bcd8739ae039 = ()=>{
-    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
         fullWidth: true,
@@ -39821,7 +39832,7 @@ parcelRequire("d4J5n");
 
 
 var $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039 = ()=>{
-    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const { actions: actions , ...response } = extract || {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
         multiline: true,
@@ -39838,7 +39849,7 @@ parcelRequire("d4J5n");
 
 
 var $a71c5db2600073d4$export$2e2bcd8739ae039 = ()=>{
-    const { extract: extract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const keys = extract && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(extract.data) ? Object.keys(extract.data) : [];
     const obj = extract && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(extract.data) ? (0, $fee381e3400c58a7$export$de139376c1f60602)(extract.data) : {};
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
@@ -39908,8 +39919,7 @@ var $dd58ec53e901ec5b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
     const { autoRefresh: autoRefresh , setAutoRefresh: setAutoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { extract: extract , setExtract: setExtract , refresh: refresh , refreshing: refreshing  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { template: json , extract: extract , setExtract: setExtract , refresh: refresh , refreshing: refreshing  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const errors = (0, $d4J5n.useMemo)(()=>extract?.errors ? extract.errors.length : 0, [
         extract
     ]);
@@ -40090,7 +40100,7 @@ var $0045e6ed43c27179$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
@@ -40173,7 +40183,7 @@ var $f796c2ef92e4cb76$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $b42892e434d2e578$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     async function onAdd() {
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const tab = await (0, $6767c619f5de943e$exports).inspectedWindow.activeTab();
@@ -40214,8 +40224,7 @@ var $841217854c3384ae$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $581f65c901be6788$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { refresh: refresh  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { template: json , setTemplate: setTemplate , refresh: refresh  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const { template: template , tests: tests  } = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const tests = template.tests();
@@ -40311,7 +40320,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $0e37e1e37cd5d52f$export$2e2bcd8739ae039 = ()=>{
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const { debug: debug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const code = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
@@ -45090,7 +45099,7 @@ var $7d8e9cab3e33d886$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 
 var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const { template: template , item: item  } = (0, $d4J5n.useMemo)(()=>{
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         const item = template.selected();
@@ -46392,7 +46401,7 @@ var $09e60e810ff3d65b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     const open = !!anchor;
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
@@ -46510,7 +46519,7 @@ var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
-    const { template: json  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     const selected = template.selected();
     function name(item) {
@@ -46653,7 +46662,7 @@ var $d26849bb34d8b0e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
     const [expanded, setExpanded] = (0, $d4J5n.useState)([]);
     const [selected, setSelected] = (0, $d4J5n.useState)([]);
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     (0, $d4J5n.useEffect)(()=>{
         const key = template.selected()?.key;
@@ -46936,7 +46945,7 @@ const $d92259c5199083bc$var$ActionTypes = [
 ];
 var $d92259c5199083bc$export$2e2bcd8739ae039 = (props)=>{
     const { advanced: advanced  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { template: json , setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
+    const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [anchor, setAnchor] = (0, $d4J5n.useState)();
@@ -47098,45 +47107,40 @@ var $23d5c3b2516abd1b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
 
 var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { setTemplate: setTemplate  } = (0, $f9d66397304cae7a$export$5c3a5f48c762cb34)();
-    const { setExtract: setExtract  } = (0, $a354b7b9e59df128$export$5929441add3e8278)();
+    const { setTemplate: setTemplate , setExtract: setExtract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1aceca34d291fb49$exports.ErrorBoundary), {
         FallbackComponent: (0, $815f6225cac30e41$export$2e2bcd8739ae039),
         onReset: ()=>{
             setTemplate("");
             setExtract(undefined);
         },
-        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a354b7b9e59df128$export$5839ba03810e8481), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        sx: {
-                            minWidth: 500
-                        },
-                        children: [
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
-                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
-                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                                    children: [
-                                        mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
-                                        mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
-                                        mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
-                                        mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
-                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                            elevation: 3,
-                                            className: "panel",
-                                            sx: {
-                                                width: 1,
-                                                height: 250
-                                            },
-                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
-                                        })
-                                    ]
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $82ac1358084decf3$export$2e2bcd8739ae039), {
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    minWidth: 500
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                            children: [
+                                mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
+                                mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
+                                mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
+                                mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                    elevation: 3,
+                                    className: "panel",
+                                    sx: {
+                                        width: 1,
+                                        height: 250
+                                    },
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
                                 })
-                            })
-                        ]
+                            ]
+                        })
                     })
-                })
+                ]
             })
         })
     });

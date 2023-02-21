@@ -10,7 +10,7 @@ export interface ContractState {
     contract: Schema | undefined;
 }
 
-const ContractContext = React.createContext<ContractState>({
+export const ContractContext = React.createContext<ContractState>({
     contractFile: "",
     setContractFile: () => {},
     contractLoading: false,
@@ -59,8 +59,4 @@ export function ContractProvider({ children }: { children: JSX.Element }) {
             {children}
         </ContractContext.Provider>
     );
-}
-
-export function useContract() {
-    return useContext(ContractContext);
 }

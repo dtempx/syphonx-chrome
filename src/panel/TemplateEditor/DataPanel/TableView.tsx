@@ -1,10 +1,10 @@
 import React from "react";
 import { Table, TableContainer, TableBody, TableCell, TableRow } from "@mui/material";
-import { useTemplateData } from "./context";
+import { useTemplate } from "./context";
 import { isObject, removeDOMRefs } from "./lib";
 
 export default () => {
-    const { extract } = useTemplateData();
+    const { extract } = useTemplate();
     const keys = extract && isObject(extract.data) ? Object.keys(extract.data) : [];
     const obj = (extract && isObject(extract.data) ? removeDOMRefs(extract.data) : {}) as Record<string, string>;
 

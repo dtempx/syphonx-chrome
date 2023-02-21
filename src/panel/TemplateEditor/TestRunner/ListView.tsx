@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useTemplate, useTemplateData } from "../context";
+import { useTemplate } from "../context";
 import { background, Template } from "../lib";
 
 import {
@@ -26,8 +26,7 @@ export interface Props {
 }
 
 export default ({ sx }: Props) => {
-    const { template: json, setTemplate } = useTemplate();
-    const { refresh } = useTemplateData();
+    const { template: json, setTemplate, refresh } = useTemplate();
 
     const { template, tests } = useMemo(() => {
         const template = new Template(json);

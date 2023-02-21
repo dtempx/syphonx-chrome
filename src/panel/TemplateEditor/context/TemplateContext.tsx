@@ -7,14 +7,14 @@ export interface TemplateState {
     setTemplateFile: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TemplateContext = React.createContext<TemplateState>({
+export const TemplateContext = React.createContext<TemplateState>({
     template: "",
     setTemplate: () => {},
     templateFile: "",
     setTemplateFile: () => {}
 });
 
-export function TemplateProvider({ children }: { children: JSX.Element }) {
+export function TemplateProvider({ children }: { children?: JSX.Element }) {
     const [template, setTemplate] = useState("");
     const [templateFile, setTemplateFile] = useState("");
 
@@ -30,8 +30,4 @@ export function TemplateProvider({ children }: { children: JSX.Element }) {
             {children}
         </TemplateContext.Provider>
     );
-}
-
-export function useTemplate() {
-    return useContext(TemplateContext);
 }

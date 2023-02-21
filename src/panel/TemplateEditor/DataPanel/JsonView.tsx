@@ -1,10 +1,10 @@
 import React from "react";
 import { TextField } from "@mui/material";
-import { useTemplateData } from "./context";
+import { useTemplate } from "./context";
 import { removeDOMRefs } from "./lib";
 
 export default () => {
-    const { extract } = useTemplateData();
+    const { extract } = useTemplate();
     return (
         <TextField
             multiline

@@ -1,20 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useApp, useContract, useTemplate } from "../context";
+import { useApp, useTemplate } from "../context";
 import { background, Template } from "../lib";
 import { applyTemplate } from "./applyTemplate";
 import * as syphonx from "syphonx-lib";
 
-export interface TemplateDataState {
+export interface DataState {
     extract: syphonx.ExtractResult | undefined;
     setExtract: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
     refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
 }
 
-export function TemplateDataProvider({ children }: { children: JSX.Element }) {
+export const DataContext = React.createContext<DataState>({
+    extract: undefined,
+    setExtract: () => {},
+    refresh: async () => {},
+    refreshing: false
+});
+
+export function DataProvider({ children }: { children: JSX.Element }) {
     const { autoRefresh } = useApp();
-    const { contract } = useContract();
-    const { template: json } = useTemplate();
+    const { template: json, contract } = useTemplate();
     const [extract, setExtract] = useState<syphonx.ExtractResult | undefined>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -46,19 +52,8 @@ export function TemplateDataProvider({ children }: { children: JSX.Element }) {
     };
 
     return (
-        <TemplateDataContext.Provider value={value}>
+        <DataContext.Provider value={value}>
             {children}
-        </TemplateDataContext.Provider>
+        </DataContext.Provider>
     );
 }
-
-export function useTemplateData() {
-    return useContext(TemplateDataContext);
-}
-
-export const TemplateDataContext = React.createContext<TemplateDataState>({
-    extract: undefined,
-    setExtract: () => {},
-    refresh: async () => {},
-    refreshing: false
-});

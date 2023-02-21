@@ -1,5 +1,5 @@
 import React from "react";
-import { useTemplateData } from "./context";
+import { useTemplate } from "./context";
 
 import {
     Table,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 
 export default () => {
-    const { extract } = useTemplateData();
+    const { extract } = useTemplate();
     return extract?.errors ? (
         <TableContainer>
             <Table size="small">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { List } from "../components";
-import { useTemplate, useTemplateData } from "../context";
+import { useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
 import OpenFileDialog from "./OpenFileDialog";
@@ -27,8 +27,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { setTemplate } = useTemplate();
-    const { setExtract } = useTemplateData();
+    const { setTemplate, setExtract } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);

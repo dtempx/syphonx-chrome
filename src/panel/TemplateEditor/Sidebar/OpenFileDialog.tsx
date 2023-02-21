@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FileDialog } from "../components";
 import { background, cloud, path, sleep, Template } from "../lib";
-import { useApp, useContract, useTemplate, useTemplateData } from "../context";
+import { useApp, useTemplate } from "../context";
 
 export interface Props {
     open: boolean;
@@ -10,9 +10,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { autoOpen } = useApp();
-    const { setContractFile } = useContract();
-    const { setTemplateFile, setTemplate } = useTemplate();
-    const { setExtract } = useTemplateData();
+    const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
