@@ -15,7 +15,7 @@ import {
     WarningAmberOutlined as AlertIcon,
     LowPriority as ConditionalIcon,
     DoNotDisturb as DisabledIcon,
-    MoreVert as RepeatedIcon,
+    FormatListNumberedRtl as RepeatedIcon,
     PivotTableChart as PivotIcon,
     Mediation as UnionIcon
 } from "@mui/icons-material";

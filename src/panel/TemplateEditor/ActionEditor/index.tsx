@@ -5,7 +5,7 @@ import EachEditor from "./EachEditor";
 import ErrorEditor from "./ErrorEditor";
 import RepeatEditor from "./RepeatEditor";
 import SelectEditor from "./SelectEditor";
-import SelectTargetEditor from "./SelectTargetEditor";
+import SubSelectEditor from "./SubSelectEditor";
 import SnoozeEditor from "./SnoozeEditor";
 import TransformEditor from "./TransformEditor";
 import WaitforEditor from "./WaitforEditor";
@@ -35,9 +35,9 @@ export default () => {
                 else if (item.type === "select")
                     return <SelectEditor item={item} onChange={onChange} />;
                 else if (item.type === "union")
-                    return <SelectTargetEditor item={item} onChange={onChange} />;
+                    return <SubSelectEditor item={item} onChange={onChange} />;
                 else if (item.type === "pivot")
-                    return <SelectTargetEditor item={item} onChange={onChange} />;
+                    return <SubSelectEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "click")
                     return <ClickEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "break")

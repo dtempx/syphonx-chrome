@@ -10,9 +10,10 @@ import {
     Abc as ItemIcon,
     Numbers as NumberTypeIcon,
     DataObject as ObjectTypeIcon,
+    PivotTableChart as PivotIcon,
     Loupe as PlaceholderIcon,
     Autorenew as RepeatIcon,
-    MoreVert as RepeatedIcon,
+    FormatListNumberedRtl as RepeatedIcon,
     PriorityHighOutlined as RequiredIcon,
     HighlightAlt as SelectIcon,
     Snooze as SnoozeIcon,
@@ -45,6 +46,8 @@ export default ({ name, ...props }: Props) => {
         return <NumberTypeIcon {...props} />;
     else if (name === "object")
         return <ObjectTypeIcon {...props} />;
+    else if (name === "pivot")
+        return <PivotIcon {...props} />;
     else if (name === "placeholder")
         return <PlaceholderIcon {...props} />;
     else if (name === "repeat")

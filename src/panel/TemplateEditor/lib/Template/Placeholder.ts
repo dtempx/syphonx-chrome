@@ -5,7 +5,7 @@ export class Placeholder extends TemplateItem {
         super({
             template: parent.template,
             key: `${parent.key}.?`,
-            name: `(add ${parent.name} action)`,
+            name: "(add)",
             type: "placeholder",
             icon: "placeholder",
             parent,

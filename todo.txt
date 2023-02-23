@@ -1,3 +1,8 @@
+action scroll to element
+sendkeys action for example to hit escape key to close a dialog
+case action { "case": [ { "when": "...", "actions": [...] } ] }
+
+
 Test urls
 Test runner
 Test checks
@@ -8,6 +13,10 @@ match contract by filename (product-page, search-page, etc.)
 allow _ in file names in cloud storage
 show contextual info in tree after name
 
+add field dialog that shows a picker from the contract or sets name, type, repeated and validates not a duplicate
+
+add icon button to copy inspected window url to texbox in template settings
+view unlinked fields from contract
 refresh should have an option to renavigate the page
 ability to select steps to run
 waitfor mode: exact, range, forever (timeout = -1 or null)
@@ -16,6 +25,7 @@ new template should have a default select
 opening a template loads contract from closest parent directory
 ability to create and edit a data contract
 selector name picker when there is a contract
+toolbar should not scroll offscreen
 
 default select action with auto-populated selectors from contract
 cut/paste nodes in editor tree
@@ -24,9 +34,6 @@ multi-transforms
 middle mouse button not always working
 dialog pulsing on justin's template was jarring
 
-action scroll to element
-sendkeys action for example to hit escape key to close a dialog
-case action { "case": [ { "when": "...", "actions": [...] } ] }
 select.query is optional when type=object
 save manifest version in template
 
@@ -38,6 +45,7 @@ query builder: text selection :has
 query builder: arrange order of functions
 query builder: refactor to enable inter-function view state
 query builder: jump to node in elements panel
+query builder: if <a> or <img> selected then make adding attr more prominent
 
 refactor queryTracking to not use polling
 data explorer (single object view -> table view)

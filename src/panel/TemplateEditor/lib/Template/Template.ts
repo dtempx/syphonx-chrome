@@ -9,7 +9,8 @@ import {
     findItem,
     findParentActionCollection,
     formatTemplateJson,
-    ordinalName
+    ordinalName,
+    parseTemplate
 } from "./utilities/index";
 
 interface TemplateTest {
@@ -36,7 +37,7 @@ export class Template {
             }
             else {
                 try {
-                    this.obj = syphonx.parseTemplate(obj);
+                    this.obj = parseTemplate(obj);
                 }
                 catch (err) {
                     this.error = err instanceof Error ? err.message : JSON.stringify(err);
@@ -213,8 +214,9 @@ export class Template {
     }
 
     private addPlaceholder(placeholder: Placeholder): boolean {
-        if (placeholder.parent?.type === "select") {
-            const parentObj = placeholder.parent.obj as syphonx.Select;
+        const type = placeholder.parent?.type;
+        if (type === "select" || type === "union") {
+            const parentObj = placeholder.parent!.obj as syphonx.SelectTarget;
             const select = { name: "value1" };
             parentObj.select = [select];
             this.setSelected(select);
@@ -232,6 +234,12 @@ export class Template {
             else if (item.type === "select" && item.collection) {
                 const name = ordinalName(item.collection as Array<{ name: string }>, "value");
                 const obj = { name };
+                item.collection.push(obj);
+                this.setSelected(obj);
+                return true;
+            }
+            else if (item.type === "union" && item.collection) {
+                const obj = {};
                 item.collection.push(obj);
                 this.setSelected(obj);
                 return true;
@@ -379,7 +387,19 @@ export class Template {
             obj,
             index: 0
         });
+
         item.children = this.renderSubselect(obj, item);
+        if (!item.children) {
+            const parentObj = item.parent?.obj as syphonx.Select;
+            if (parentObj?.type === "object") {
+                item.children = [new Placeholder(item)];
+                item.alert = "select required";
+            }
+        }
+
+        if (item.children && item.children.some(child => child.alert))
+            item.alert = "One or more child items has an alert.";
+
         return item;
     }
 
@@ -405,11 +425,14 @@ export class Template {
 
                 item.children = this.renderSubselect(select, item);
                 
-                if (!select.query && !select.value && !select.union)
+                if (!select.query && !select.value && !select.union && select.type !== "object")
                     item.alert = "query or value required";
 
                 if (select.type === "object" && !select.select && !select.pivot && !select.union)
                     item.alert = "object type requires additional initialization";
+
+                if (item.children && item.children.some(child => child.alert))
+                    item.alert = "One or more child items has an alert.";
 
                 return item;
             });
@@ -417,15 +440,15 @@ export class Template {
             return [];
     }
     
-    private renderSubselect(obj: syphonx.Select, parent: TemplateItem): TemplateItem[] | undefined {
+    private renderSubselect(obj: syphonx.Select, item: TemplateItem): TemplateItem[] | undefined {
         if (obj.pivot) {
-            return [this.renderPivot(obj.pivot, parent)];
+            return [this.renderPivot(obj.pivot, item)];
         }
         else if (obj.union) {
-            return this.renderUnion(obj.union, parent);
+            return this.renderUnion(obj.union, item);
         }
         else if (obj.select) {
-            return this.renderSelect(obj.select, parent);
+            return this.renderSelect(obj.select, item);
         }
         else {
             return undefined;
@@ -448,7 +471,19 @@ export class Template {
                 index,
                 active: obj.active
             });
+
             item.children = this.renderSubselect(obj, item);
+            if (!item.children) {
+                const parentObj = item.parent?.obj as syphonx.Select;
+                if (parentObj?.type === "object") {
+                    item.children = [new Placeholder(item)];
+                    item.alert = "select required";
+                }
+            }
+
+            if (item.children && item.children.some(child => child.alert))
+                item.alert = "One or more child items has an alert.";
+
             return item;
         });
     }

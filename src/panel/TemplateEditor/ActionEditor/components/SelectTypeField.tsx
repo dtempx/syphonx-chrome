@@ -52,20 +52,21 @@ export default ({ item, onChange, sx }: Props) => {
 
     function handleChangeMode(event: React.MouseEvent<HTMLElement, MouseEvent>, value: any): void {
         const obj = item?.obj as syphonx.Select;
+        const subitem = (obj.select||[])[0] || obj.pivot || (obj.union||[])[0] || {};
         if (value === "select") {
-            obj.select = [{}];
+            obj.select = [subitem];
             obj.pivot = undefined;
             obj.union = undefined;
         }
         else if (value === "pivot") {
             obj.select = undefined;
-            obj.pivot = {};
+            obj.pivot = subitem;
             obj.union = undefined;
         }
         else if (value === "union") {
             obj.select = undefined;
             obj.pivot = undefined;
-            obj.union = [{}];
+            obj.union = [subitem];
         }
         onChange(event);
     }

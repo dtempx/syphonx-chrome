@@ -18417,6 +18417,158 @@ let $6767c619f5de943e$export$cbe410dad4f45b36;
 
 
 
+
+var $f608a5c537b18bf1$exports = {};
+$f608a5c537b18bf1$exports = JSON.parse('{"actions":[{"select":[{"name":"title","query":[["h1"]]}]}],"selected":"select.1.title"}');
+
+
+class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
+    constructor(item){
+        this.template = item.template;
+        this.key = item.key;
+        this.type = item.type;
+        this.name = item.name;
+        this.icon = item.icon;
+        this.alert = item.alert;
+        this.required = item.required;
+        this.repeated = item.repeated;
+        this.parent = item.parent;
+        this.children = item.children;
+        this.collection = item.collection;
+        this.unit = item.unit;
+        this.obj = item.obj;
+        this.index = item.index;
+        this.step = item.step;
+        this.active = item.active;
+    }
+}
+
+
+
+class $549379eae42a48da$export$84712d0562a614b8 extends (0, $1238fd0f4bef3443$export$67c95d00e574f6b6) {
+    constructor(parent){
+        super({
+            template: parent.template,
+            key: `${parent.key}.?`,
+            name: "(add)",
+            type: "placeholder",
+            icon: "placeholder",
+            parent: parent,
+            collection: undefined,
+            unit: undefined,
+            obj: undefined,
+            index: 0
+        });
+    }
+}
+
+
+function $72249484b46a0533$export$a2dea178c28a0308(items, key) {
+    for (const item of items){
+        if (item === key || item.key === key || item.unit === key || item.obj === key) return item;
+        if (item.children) {
+            const subitem = $72249484b46a0533$export$a2dea178c28a0308(item.children, key);
+            if (subitem) return subitem;
+        }
+    }
+}
+
+
+function $a0bb46a5ccd801f1$export$a1556c689e18ef72(item) {
+    if (item?.type === "action") return item.collection;
+    else if (item?.parent) return $a0bb46a5ccd801f1$export$a1556c689e18ef72(item.parent);
+    else return undefined;
+}
+
+
+function $5b9ddcc4fe863a71$export$70345b78b6a836e5(json, i) {
+    if (i >= 0 && i < json.length && json[i] === `"`) while(i++ < json.length){
+        if (json[i] === `"`) return i + 1;
+        else if (json[i] === "\\") i += 1;
+    }
+    return -1;
+}
+
+
+function $ffc1945cfaeda047$export$a9ff923210c231c8(json, i, token) {
+    if (i >= 0 && i < json.length && json[i] === token[0]) {
+        let n = 0;
+        while(i >= 0 && i++ < json.length){
+            if (json[i] === token[1] && --n < 0) return i + 1;
+            else if (json[i] === token[0]) n += 1;
+            else if (json[i] === `"`) i = (0, $5b9ddcc4fe863a71$export$70345b78b6a836e5)(json, i);
+        }
+    }
+    return -1;
+}
+
+
+function $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc(json, key) {
+    let i = json.indexOf(`"${key}": [\n`);
+    while(i >= 0){
+        i = json.indexOf("[", i);
+        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
+        if (j > i) {
+            json = `${json.substring(0, i)}${JSON.stringify(JSON.parse(json.substring(i, j)))}${json.substring(j)}`;
+            i = json.indexOf(`"${key}": [\n`, i + 1);
+        } else break;
+    }
+    return json;
+}
+
+
+
+function $7f694ef22f2a8c3f$export$ef7cf49fcd65861d(json, i) {
+    let m = -1;
+    let n = -1;
+    while(--i >= 0){
+        if (json[i] === " ") n = n === -1 ? i + 1 : n;
+        else if (json[i] === "\n") {
+            m = i + 1;
+            break;
+        } else if (n !== -1) n = -1;
+    }
+    return m >= 0 && n > m ? json.substring(m, n) : "";
+}
+
+
+function $d8166acd30588c40$export$53a08cb12bacbe86(json) {
+    let i = json.indexOf(`"query": [\n`);
+    while(i >= 0){
+        i = json.indexOf("[", i);
+        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
+        if (j > i) {
+            const array = JSON.parse(json.substring(i, j));
+            let replace;
+            if (array.length < 2) replace = JSON.stringify(array);
+            else {
+                const whitespace = (0, $7f694ef22f2a8c3f$export$ef7cf49fcd65861d)(json, i);
+                replace = "[\n" + array.map((obj)=>whitespace + "  " + JSON.stringify(obj)).join(",\n") + "\n" + whitespace + "]";
+            }
+            json = `${json.substring(0, i)}${replace}${json.substring(j)}`;
+            i = json.indexOf(`"query": [\n`, i + replace.length);
+        } else break;
+    }
+    return json;
+}
+
+
+function $932c041178f6dd7a$export$5adbceee7f7ddc90(text) {
+    text = (0, $d8166acd30588c40$export$53a08cb12bacbe86)(text);
+    text = (0, $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc)(text, "snooze");
+    return text;
+}
+
+
+function $621975ba229ea888$export$490ebbf7c6884638(list, basename) {
+    for(let n = 1; n <= 100; ++n){
+        const name = `${basename}${n}`;
+        if (!list.some((obj)=>obj.name === name)) return name;
+    }
+    return "";
+}
+
+
 async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
     function collapseWhitespace(text, newlines = true) {
         if (typeof text === "string" && text.trim().length === 0) return null;
@@ -23306,155 +23458,20 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
  //# sourceMappingURL=index.js.map
 
 
-
-var $f608a5c537b18bf1$exports = {};
-$f608a5c537b18bf1$exports = JSON.parse('{"actions":[{"select":[{"name":"title","query":[["h1"]]}]}],"selected":"select.1.title"}');
-
-
-class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
-    constructor(item){
-        this.template = item.template;
-        this.key = item.key;
-        this.type = item.type;
-        this.name = item.name;
-        this.icon = item.icon;
-        this.alert = item.alert;
-        this.required = item.required;
-        this.repeated = item.repeated;
-        this.parent = item.parent;
-        this.children = item.children;
-        this.collection = item.collection;
-        this.unit = item.unit;
-        this.obj = item.obj;
-        this.index = item.index;
-        this.step = item.step;
-        this.active = item.active;
+function $401570bab3f64861$export$2e2dbd43b49fd373(text) {
+    const template = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text);
+    $401570bab3f64861$var$traverseObject(template, (value, key)=>{
+        if (key === "query" && JSON.stringify(value) === "[[]]") return undefined;
+        else return value;
+    });
+    return template;
+}
+function $401570bab3f64861$var$traverseObject(obj, replacer) {
+    for(const key in obj)if (obj.hasOwnProperty(key)) {
+        const value = replacer(obj[key], key);
+        if (value !== obj[key]) obj[key] = value;
+        if (typeof value === "object" && value !== null && !(value instanceof Date)) $401570bab3f64861$var$traverseObject(value, replacer);
     }
-}
-
-
-
-class $549379eae42a48da$export$84712d0562a614b8 extends (0, $1238fd0f4bef3443$export$67c95d00e574f6b6) {
-    constructor(parent){
-        super({
-            template: parent.template,
-            key: `${parent.key}.?`,
-            name: `(add ${parent.name} action)`,
-            type: "placeholder",
-            icon: "placeholder",
-            parent: parent,
-            collection: undefined,
-            unit: undefined,
-            obj: undefined,
-            index: 0
-        });
-    }
-}
-
-
-function $72249484b46a0533$export$a2dea178c28a0308(items, key) {
-    for (const item of items){
-        if (item === key || item.key === key || item.unit === key || item.obj === key) return item;
-        if (item.children) {
-            const subitem = $72249484b46a0533$export$a2dea178c28a0308(item.children, key);
-            if (subitem) return subitem;
-        }
-    }
-}
-
-
-function $a0bb46a5ccd801f1$export$a1556c689e18ef72(item) {
-    if (item?.type === "action") return item.collection;
-    else if (item?.parent) return $a0bb46a5ccd801f1$export$a1556c689e18ef72(item.parent);
-    else return undefined;
-}
-
-
-function $5b9ddcc4fe863a71$export$70345b78b6a836e5(json, i) {
-    if (i >= 0 && i < json.length && json[i] === `"`) while(i++ < json.length){
-        if (json[i] === `"`) return i + 1;
-        else if (json[i] === "\\") i += 1;
-    }
-    return -1;
-}
-
-
-function $ffc1945cfaeda047$export$a9ff923210c231c8(json, i, token) {
-    if (i >= 0 && i < json.length && json[i] === token[0]) {
-        let n = 0;
-        while(i >= 0 && i++ < json.length){
-            if (json[i] === token[1] && --n < 0) return i + 1;
-            else if (json[i] === token[0]) n += 1;
-            else if (json[i] === `"`) i = (0, $5b9ddcc4fe863a71$export$70345b78b6a836e5)(json, i);
-        }
-    }
-    return -1;
-}
-
-
-function $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc(json, key) {
-    let i = json.indexOf(`"${key}": [\n`);
-    while(i >= 0){
-        i = json.indexOf("[", i);
-        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
-        if (j > i) {
-            json = `${json.substring(0, i)}${JSON.stringify(JSON.parse(json.substring(i, j)))}${json.substring(j)}`;
-            i = json.indexOf(`"${key}": [\n`, i + 1);
-        } else break;
-    }
-    return json;
-}
-
-
-
-function $7f694ef22f2a8c3f$export$ef7cf49fcd65861d(json, i) {
-    let m = -1;
-    let n = -1;
-    while(--i >= 0){
-        if (json[i] === " ") n = n === -1 ? i + 1 : n;
-        else if (json[i] === "\n") {
-            m = i + 1;
-            break;
-        } else if (n !== -1) n = -1;
-    }
-    return m >= 0 && n > m ? json.substring(m, n) : "";
-}
-
-
-function $d8166acd30588c40$export$53a08cb12bacbe86(json) {
-    let i = json.indexOf(`"query": [\n`);
-    while(i >= 0){
-        i = json.indexOf("[", i);
-        const j = (0, $ffc1945cfaeda047$export$a9ff923210c231c8)(json, i, "[]");
-        if (j > i) {
-            const array = JSON.parse(json.substring(i, j));
-            let replace;
-            if (array.length < 2) replace = JSON.stringify(array);
-            else {
-                const whitespace = (0, $7f694ef22f2a8c3f$export$ef7cf49fcd65861d)(json, i);
-                replace = "[\n" + array.map((obj)=>whitespace + "  " + JSON.stringify(obj)).join(",\n") + "\n" + whitespace + "]";
-            }
-            json = `${json.substring(0, i)}${replace}${json.substring(j)}`;
-            i = json.indexOf(`"query": [\n`, i + replace.length);
-        } else break;
-    }
-    return json;
-}
-
-
-function $932c041178f6dd7a$export$5adbceee7f7ddc90(text) {
-    text = (0, $d8166acd30588c40$export$53a08cb12bacbe86)(text);
-    text = (0, $ab0f0f2b912ded7f$export$3b7e1b1645c7d5fc)(text, "snooze");
-    return text;
-}
-
-
-function $621975ba229ea888$export$490ebbf7c6884638(list, basename) {
-    for(let n = 1; n <= 100; ++n){
-        const name = `${basename}${n}`;
-        if (!list.some((obj)=>obj.name === name)) return name;
-    }
-    return "";
 }
 
 
@@ -23466,7 +23483,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         if (typeof obj === "string") {
             if (obj === "") this.obj = (0, (/*@__PURE__*/$parcel$interopDefault($f608a5c537b18bf1$exports)));
             else try {
-                this.obj = $e0c00b8ee858cb54$export$2e2dbd43b49fd373(obj);
+                this.obj = (0, $401570bab3f64861$export$2e2dbd43b49fd373)(obj);
             } catch (err) {
                 this.error = err instanceof Error ? err.message : JSON.stringify(err);
                 this.obj = {};
@@ -23660,7 +23677,8 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         this.setSelected(action);
     }
     addPlaceholder(placeholder) {
-        if (placeholder.parent?.type === "select") {
+        const type = placeholder.parent?.type;
+        if (type === "select" || type === "union") {
             const parentObj = placeholder.parent.obj;
             const select = {
                 name: "value1"
@@ -23682,6 +23700,11 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 const obj = {
                     name: name
                 };
+                item.collection.push(obj);
+                this.setSelected(obj);
+                return true;
+            } else if (item.type === "union" && item.collection) {
+                const obj = {};
                 item.collection.push(obj);
                 this.setSelected(obj);
                 return true;
@@ -23803,6 +23826,16 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             index: 0
         });
         item.children = this.renderSubselect(obj, item);
+        if (!item.children) {
+            const parentObj = item.parent?.obj;
+            if (parentObj?.type === "object") {
+                item.children = [
+                    new (0, $549379eae42a48da$export$84712d0562a614b8)(item)
+                ];
+                item.alert = "select required";
+            }
+        }
+        if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
         return item;
     }
     renderSelect(collection, parent) {
@@ -23824,18 +23857,19 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 active: select.active
             });
             item.children = this.renderSubselect(select, item);
-            if (!select.query && !select.value && !select.union) item.alert = "query or value required";
+            if (!select.query && !select.value && !select.union && select.type !== "object") item.alert = "query or value required";
             if (select.type === "object" && !select.select && !select.pivot && !select.union) item.alert = "object type requires additional initialization";
+            if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
             return item;
         });
         else return [];
     }
-    renderSubselect(obj, parent) {
+    renderSubselect(obj, item) {
         if (obj.pivot) return [
-            this.renderPivot(obj.pivot, parent)
+            this.renderPivot(obj.pivot, item)
         ];
-        else if (obj.union) return this.renderUnion(obj.union, parent);
-        else if (obj.select) return this.renderSelect(obj.select, parent);
+        else if (obj.union) return this.renderUnion(obj.union, item);
+        else if (obj.select) return this.renderSelect(obj.select, item);
         else return undefined;
     }
     renderUnion(collection, parent) {
@@ -23855,6 +23889,16 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 active: obj.active
             });
             item.children = this.renderSubselect(obj, item);
+            if (!item.children) {
+                const parentObj = item.parent?.obj;
+                if (parentObj?.type === "object") {
+                    item.children = [
+                        new (0, $549379eae42a48da$export$84712d0562a614b8)(item)
+                    ];
+                    item.alert = "select required";
+                }
+            }
+            if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
             return item;
         });
     }
@@ -40514,9 +40558,9 @@ var $d4J5n = parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 
-var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
-}), "Abc");
+var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
+}), "Rule");
 
 
 
@@ -40526,9 +40570,9 @@ var $b84bdb52d4a3451a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-}), "ExitToApp");
+var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
+}), "TouchAppOutlined");
 
 
 
@@ -40549,15 +40593,21 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M17 5h-2V3h2v2zm-2 16h2v-2.59L19.59 21 21 19.59 18.41 17H21v-2h-6v6zm4-12h2V7h-2v2zm0 4h2v-2h-2v2zm-8 8h2v-2h-2v2zM7 5h2V3H7v2zM3 17h2v-2H3v2zm2 4v-2H3c0 1.1.9 2 2 2zM19 3v2h2c0-1.1-.9-2-2-2zm-8 2h2V3h-2v2zM3 9h2V7H3v2zm4 12h2v-2H7v2zm-4-8h2v-2H3v2zm0-8h2V3c-1.1 0-2 .9-2 2z"
-}), "HighlightAlt");
+var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
+}), "Abc");
 
 
 
-var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
-}), "HourglassEmpty");
+var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
+}), "Numbers");
+
+
+
+var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
+}), "PivotTableChart");
 
 
 
@@ -40567,21 +40617,9 @@ var $fb466aae3024022c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
-}), "Mediation");
-
-
-
-var $77baa0da2e03e76e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-}), "MoreVert");
-
-
-
-var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
-}), "Numbers");
+var $33ca1c5aa099d9fb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3zm1-9h1V4h-2v1h1zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3zM2 5h14v2H2zm0 12h14v2H2zm0-6h14v2H2z"
+}), "FormatListNumberedRtl");
 
 
 
@@ -40598,15 +40636,9 @@ var $63595ca7c2ce92eb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
-}), "QuestionMark");
-
-
-
-var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
-}), "Rule");
+var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M17 5h-2V3h2v2zm-2 16h2v-2.59L19.59 21 21 19.59 18.41 17H21v-2h-6v6zm4-12h2V7h-2v2zm0 4h2v-2h-2v2zm-8 8h2v-2h-2v2zM7 5h2V3H7v2zM3 17h2v-2H3v2zm2 4v-2H3c0 1.1.9 2 2 2zM19 3v2h2c0-1.1-.9-2-2-2zm-8 2h2V3h-2v2zM3 9h2V7H3v2zm4 12h2v-2H7v2zm-4-8h2v-2H3v2zm0-8h2V3c-1.1 0-2 .9-2 2z"
+}), "HighlightAlt");
 
 
 
@@ -40616,15 +40648,33 @@ var $a1d75b31022e04c3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
-}), "TouchAppOutlined");
-
-
-
 var $43454011a3067c9f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z"
 }), "Transform");
+
+
+
+var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
+}), "Mediation");
+
+
+
+var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
+}), "HourglassEmpty");
+
+
+
+var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+}), "ExitToApp");
+
+
+
+var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
+}), "QuestionMark");
 
 
 var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
@@ -40652,13 +40702,16 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "object") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $830dc22ac55da04f$export$2e2bcd8739ae039), {
         ...props
     });
+    else if (name === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e95e001508cf9ed2$export$2e2bcd8739ae039), {
+        ...props
+    });
     else if (name === "placeholder") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fb466aae3024022c$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "repeat") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ba263eacaf41f616$export$2e2bcd8739ae039), {
         ...props
     });
-    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $77baa0da2e03e76e$export$2e2bcd8739ae039), {
+    else if (name === "repeated") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $33ca1c5aa099d9fb$export$2e2bcd8739ae039), {
         ...props
     });
     else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
@@ -43924,12 +43977,6 @@ var $fc79f6ee39fd6680$export$2e2bcd8739ae039 = $fc79f6ee39fd6680$var$ToggleButto
 
 
 
-
-var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
-}), "PivotTableChart");
-
-
 var $ab597aea378e8072$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange , sx: sx  })=>{
     const { type: type , mode: mode  } = (0, $d4J5n.useMemo)(()=>{
         const obj = item?.obj;
@@ -43956,21 +44003,22 @@ var $ab597aea378e8072$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
     }
     function handleChangeMode(event, value) {
         const obj = item?.obj;
+        const subitem = (obj.select || [])[0] || obj.pivot || (obj.union || [])[0] || {};
         if (value === "select") {
             obj.select = [
-                {}
+                subitem
             ];
             obj.pivot = undefined;
             obj.union = undefined;
         } else if (value === "pivot") {
             obj.select = undefined;
-            obj.pivot = {};
+            obj.pivot = subitem;
             obj.union = undefined;
         } else if (value === "union") {
             obj.select = undefined;
             obj.pivot = undefined;
             obj.union = [
-                {}
+                subitem
             ];
         }
         onChange(event);
@@ -44534,7 +44582,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 }),
                 "A CSS selector or jQuery expression that determines what data is selected on the page.",
                 true,
-                !obj.query && !obj.value ? "query or value required" : ""
+                !obj.query && !obj.value && obj.type !== "object" ? "query or value required" : ""
             ],
             [
                 "type",
@@ -44670,7 +44718,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 
-var $d52a09e5da791f6c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+var $0141884a14923ee1$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
     const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
@@ -45120,11 +45168,11 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
                 item: item,
                 onChange: onChange
             });
-            else if (item.type === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {
+            else if (item.type === "union") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0141884a14923ee1$export$2e2bcd8739ae039), {
                 item: item,
                 onChange: onChange
             });
-            else if (item.type === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d52a09e5da791f6c$export$2e2bcd8739ae039), {
+            else if (item.type === "pivot") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0141884a14923ee1$export$2e2bcd8739ae039), {
                 item: item,
                 onChange: onChange
             });
@@ -46507,15 +46555,15 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
-var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
-}), "LowPriority");
-
-
-
 var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
 }), "DoNotDisturb");
+
+
+
+var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
+}), "LowPriority");
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
@@ -46584,7 +46632,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                     }),
                     item.repeated && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "repeated",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $77baa0da2e03e76e$export$2e2bcd8739ae039), {
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $33ca1c5aa099d9fb$export$2e2bcd8739ae039), {
                             fontSize: "small",
                             sx: {
                                 color: "primary.light"
