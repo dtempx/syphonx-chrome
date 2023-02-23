@@ -37,9 +37,14 @@ export class TemplateItem {
     icon: string;
 
     /**
-     * Step number of the an within a collection.
+     * Step number of an action within a collection.
      */
     step?: string;
+
+    /**
+     * Number of a union or transform item within a collection.
+     */
+    num?: number;
 
     /**
      * Indicates whether item specifies a when condition.
@@ -124,6 +129,7 @@ export class TemplateItem {
         this.obj = item.obj;
         this.index = item.index;
         this.step = item.step;
+        this.num = item.num;
         this.active = item.active;
     }
 }

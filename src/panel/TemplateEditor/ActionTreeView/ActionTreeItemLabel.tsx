@@ -42,7 +42,7 @@ export default ({ item }: Props) => {
 
     return (
         <Stack direction="row" justifyContent="space-between">
-            <Typography align="left" sx={{ mt: 1 }}>
+            <Typography align="left" noWrap sx={{ mt: 1 }}>
                 {item.type === "action" && (
                     <Tooltip title="step #">
                         <Typography
@@ -55,7 +55,10 @@ export default ({ item }: Props) => {
                     </Tooltip>
                 )}
                 <Tooltip title={item.icon}><ActionIcon name={item.icon} fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>
-                <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>{name(item)}</Typography>
+                <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>
+                    <Typography variant="caption">{name(item)}</Typography>
+                    {item.num && <Typography variant="caption" color="primary.light" sx={{ ml: 1 }}>#{item.num}</Typography>}
+                </Typography>
                 {item.conditional && <Tooltip title="conditional"><ConditionalIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
                 {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}

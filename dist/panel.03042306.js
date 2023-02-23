@@ -18439,6 +18439,7 @@ class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
         this.obj = item.obj;
         this.index = item.index;
         this.step = item.step;
+        this.num = item.num;
         this.active = item.active;
     }
 }
@@ -23886,6 +23887,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 unit: obj,
                 obj: obj,
                 index: index,
+                num: index + 1,
                 active: obj.active
             });
             item.children = this.renderSubselect(obj, item);
@@ -46582,6 +46584,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                 align: "left",
+                noWrap: true,
                 sx: {
                     mt: 1
                 },
@@ -46610,7 +46613,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                             }
                         })
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                         variant: "caption",
                         sx: {
                             position: "relative",
@@ -46619,7 +46622,20 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                             height: 12,
                             mr: 1
                         },
-                        children: name(item)
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                variant: "caption",
+                                children: name(item)
+                            }),
+                            item.num && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                variant: "caption",
+                                color: "primary.light",
+                                children: [
+                                    "#",
+                                    item.num
+                                ]
+                            })
+                        ]
                     }),
                     item.conditional && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "conditional",

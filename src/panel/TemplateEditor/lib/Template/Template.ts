@@ -469,6 +469,7 @@ export class Template {
                 unit: obj,
                 obj,
                 index,
+                num: index + 1,
                 active: obj.active
             });
 
