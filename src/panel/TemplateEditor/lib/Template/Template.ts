@@ -197,7 +197,7 @@ export class Template {
         else if (type === "snooze")
             action = { snooze: [1, 2] };
         else if (type === "transform")
-            action = { transform: [{ select: [{ name: "value1" }] }] };
+            action = { transform: [{}] };
         else if (type === "yield")
             action = { yield: {} };
         else if (type === "waitfor")

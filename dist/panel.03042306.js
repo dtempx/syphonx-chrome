@@ -23657,13 +23657,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         };
         else if (type === "transform") action = {
             transform: [
-                {
-                    select: [
-                        {
-                            name: "value1"
-                        }
-                    ]
-                }
+                {}
             ]
         };
         else if (type === "yield") action = {
@@ -43433,7 +43427,7 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
                             ml: 1
                         },
                         onClick: onSave,
-                        children: "Save"
+                        children: "OK"
                     })
                 ]
             })

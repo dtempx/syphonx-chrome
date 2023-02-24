@@ -115,7 +115,7 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
                 <Tooltip title="Edit the raw jQuery code, or copy/paste a jQuery expression here">
                     <RawQueryEditor query={select[index]} onChange={onChangeQuery} />
                 </Tooltip>
-                <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>Save</Button>
+                <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>OK</Button>
             </DialogActions>
         </Dialog>
     );
