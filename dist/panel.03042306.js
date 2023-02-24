@@ -23524,7 +23524,11 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         return this.children.length === 0;
     }
     file() {
-        const obj = (0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected");
+        const manifest = chrome.runtime.getManifest();
+        const obj = {
+            ...(0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected"),
+            toolVersion: manifest.version
+        };
         let json = JSON.stringify(obj, null, 2) || "";
         json = (0, $932c041178f6dd7a$export$5adbceee7f7ddc90)(json);
         return json;

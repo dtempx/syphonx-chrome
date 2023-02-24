@@ -90,7 +90,11 @@ export class Template {
     }
 
     file(): string {
-        const obj = omit(this.obj, "selected");
+        const manifest = chrome.runtime.getManifest();
+        const obj = {
+            ...omit(this.obj, "selected"),
+            toolVersion: manifest.version
+        };
         let json = JSON.stringify(obj, null, 2) || "";
         json = formatTemplateJson(json);
         return json;
