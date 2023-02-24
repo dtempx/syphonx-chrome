@@ -11,12 +11,12 @@ selector hilighting not working on coned
 click eyeball crashes on coned
 entering values for snooze don't persist
 
-number the union cases
-add button when union is selected doesn't add another union case
 can't create a union unless type=object, union should be supported for any type
+duplicating a property doesn't change the name and screws up selection
+
+
+FIXED number the union cases
+FIXED: add button when union is selected doesn't add another union case
 FIXED: query shouldn't be required if union is defined
 FIXED: query shouldn't be required if type=object
 FIXED: warnings on union don't bubble up to the property
-
-duplicating a property doesn't change the name and screws up selection
-

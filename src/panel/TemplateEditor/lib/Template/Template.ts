@@ -238,7 +238,7 @@ export class Template {
                 this.setSelected(obj);
                 return true;
             }
-            else if (item.type === "union" && item.collection) {
+            else if (["transform", "union"].includes(item.type) && item.collection) {
                 const obj = {};
                 item.collection.push(obj);
                 this.setSelected(obj);
@@ -329,9 +329,9 @@ export class Template {
                     // nothing to do
                 }
                 else if (name === "transform") {
-                    //todo: implement transform adapters
-                    //const transformObj = obj as syphonx.Transform[];
-                    //item.conditional = item.children ? item.children.some(child => child.conditional) : false;
+                    const transformObj = obj as syphonx.Transform[];
+                    item.children = this.renderTransform(transformObj, item);
+                    item.conditional = item.children ? item.children.some(child => child.conditional) : false;
                 }
                 else if (name === "waitfor") {
                     const waitforObj = obj as syphonx.WaitFor;
@@ -454,7 +454,38 @@ export class Template {
             return undefined;
         }
     }
-    
+
+    private renderTransform(collection: syphonx.Transform[] | undefined, parent: TemplateItem): TemplateItem[] {
+        if (collection instanceof Array)
+            return collection.map((transform, index) => {
+                const key = `${parent.key}.${index}`;
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name: "transform",
+                    type: "transform",
+                    icon: "transform",
+                    parent,
+                    collection,
+                    unit: transform,
+                    obj: transform,
+                    index,
+                    num: index + 1,
+                    active: transform.active
+                });
+
+                if (!transform.query)
+                    item.alert = "query required";
+
+                if (item.children && item.children.some(child => child.alert))
+                    item.alert = "One or more child items has an alert.";
+
+                return item;
+            });
+        else
+            return [];
+    }
+
     private renderUnion(collection: syphonx.SelectTarget[], parent: TemplateItem): TemplateItem[] {
         return collection.map((obj, index) => {
             const key = `${parent.key}.union.${index}`;

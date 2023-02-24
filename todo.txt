@@ -2,7 +2,6 @@ action scroll to element
 sendkeys action for example to hit escape key to close a dialog
 case action { "case": [ { "when": "...", "actions": [...] } ] }
 
-
 Test urls
 Test runner
 Test checks
@@ -29,7 +28,7 @@ toolbar should not scroll offscreen
 
 default select action with auto-populated selectors from contract
 cut/paste nodes in editor tree
-multi-transforms
+
 
 middle mouse button not always working
 dialog pulsing on justin's template was jarring
@@ -166,6 +165,7 @@ indicate when autorefresh is disabled
 clear data result after opening new template
 data panel doesn't refresh automatically after opening a template
 busy indicator for manual refresh (spin refresh button)
+multi-transforms
 
 sub-items
     repeat -> sub-actions DONE
@@ -175,3 +175,4 @@ sub-items
     pivot DONE
     union DONE
     finalize FAB selection context DONE
+

@@ -38,6 +38,8 @@ export default () => {
                     return <SubSelectEditor item={item} onChange={onChange} />;
                 else if (item.type === "pivot")
                     return <SubSelectEditor item={item} onChange={onChange} />;
+                else if (item.type === "transform")
+                    return <TransformEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "click")
                     return <ClickEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "break")
@@ -52,8 +54,8 @@ export default () => {
                     return <SelectEditor item={item.children[0]} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "snooze")
                     return <SnoozeEditor item={item} onChange={onChange} />;
-                else if (item.type === "action" && item.name === "transform")
-                    return <TransformEditor item={item} onChange={onChange} />;
+                else if (item.type === "action" && item.name === "transform" && item.children && item.children[0])
+                    return <TransformEditor item={item.children[0]} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "waitfor")
                     return <WaitforEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "yield")

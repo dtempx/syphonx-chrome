@@ -1,6 +1,6 @@
 import { Template } from "./Template";
 
-export type TemplateItemType = "action" | "pivot" | "select" | "union" | "placeholder";
+export type TemplateItemType = "action" | "pivot" | "placeholder" | "select" | "transform" | "union";
 
 /**
  * Adapts an item within a template document, adding state and behavior for manipulation by a UI editor.

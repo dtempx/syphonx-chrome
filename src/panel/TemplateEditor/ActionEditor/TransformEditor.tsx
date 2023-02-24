@@ -14,7 +14,7 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    const obj = item?.obj instanceof Array ? item.obj[0] as syphonx.Transform : undefined;
+    const obj = item?.obj as syphonx.Transform;
     return obj ? (
         <ComplexPropertyGrid
             items={[

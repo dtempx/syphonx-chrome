@@ -23704,7 +23704,10 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 item.collection.push(obj);
                 this.setSelected(obj);
                 return true;
-            } else if (item.type === "union" && item.collection) {
+            } else if ([
+                "transform",
+                "union"
+            ].includes(item.type) && item.collection) {
                 const obj = {};
                 item.collection.push(obj);
                 this.setSelected(obj);
@@ -23782,8 +23785,11 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                     item.children = this.renderSelect(selectObj, item);
                     item.conditional = item.children ? item.children.some((child)=>child.conditional) : false;
                 } else if (name === "snooze") ;
-                else if (name === "transform") ;
-                else if (name === "waitfor") {
+                else if (name === "transform") {
+                    const transformObj = obj;
+                    item.children = this.renderTransform(transformObj, item);
+                    item.conditional = item.children ? item.children.some((child)=>child.conditional) : false;
+                } else if (name === "waitfor") {
                     const waitforObj = obj;
                     item.children = this.renderSelect(waitforObj.select, item);
                     if (!waitforObj.query && !waitforObj.select) item.alert = "query or select required";
@@ -23872,6 +23878,29 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         else if (obj.union) return this.renderUnion(obj.union, item);
         else if (obj.select) return this.renderSelect(obj.select, item);
         else return undefined;
+    }
+    renderTransform(collection, parent) {
+        if (collection instanceof Array) return collection.map((transform, index)=>{
+            const key = `${parent.key}.${index}`;
+            const item = new (0, $1238fd0f4bef3443$export$67c95d00e574f6b6)({
+                template: this,
+                key: key,
+                name: "transform",
+                type: "transform",
+                icon: "transform",
+                parent: parent,
+                collection: collection,
+                unit: transform,
+                obj: transform,
+                index: index,
+                num: index + 1,
+                active: transform.active
+            });
+            if (!transform.query) item.alert = "query required";
+            if (item.children && item.children.some((child)=>child.alert)) item.alert = "One or more child items has an alert.";
+            return item;
+        });
+        else return [];
     }
     renderUnion(collection, parent) {
         return collection.map((obj, index)=>{
@@ -44879,7 +44908,7 @@ var $0cefddcd9c67e5db$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
-    const obj = item?.obj instanceof Array ? item.obj[0] : undefined;
+    const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
@@ -45178,6 +45207,10 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
                 item: item,
                 onChange: onChange
             });
+            else if (item.type === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {
+                item: item,
+                onChange: onChange
+            });
             else if (item.type === "action" && item.name === "click") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fd14d1b8ed549e2f$export$2e2bcd8739ae039), {
                 item: item,
                 onChange: onChange
@@ -45206,8 +45239,8 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
                 item: item,
                 onChange: onChange
             });
-            else if (item.type === "action" && item.name === "transform") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {
-                item: item,
+            else if (item.type === "action" && item.name === "transform" && item.children && item.children[0]) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3adf854178975e9e$export$2e2bcd8739ae039), {
+                item: item.children[0],
                 onChange: onChange
             });
             else if (item.type === "action" && item.name === "waitfor") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51eec4df4627b90$export$2e2bcd8739ae039), {
@@ -46630,6 +46663,9 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                             item.num && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 variant: "caption",
                                 color: "primary.light",
+                                sx: {
+                                    ml: "2px"
+                                },
                                 children: [
                                     "#",
                                     item.num
