@@ -1,3 +1,6 @@
+regex's display with single back slashes in query editor but with double back slashes in property sheet
+clearing selector in query builder should delete the query
+
 File chip doesn't change when saving to a different file name
 Save template dialog path should change in edit box as different folders are clicked
 Prompt for unsaved changes
@@ -8,7 +11,8 @@ A directory that only contains sub-directories (i.e. no files) is not visible in
 File open doesn't display busy status when opening template
 
 selector hilighting not working on coned
-click eyeball crashes on coned
+selector gadget crashes on coned
+selector gadget not picking up semantic names on cwlaw
 entering values for snooze don't persist
 
 can't create a union unless type=object, union should be supported for any type

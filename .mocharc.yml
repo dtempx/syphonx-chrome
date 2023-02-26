@@ -1,0 +1,6 @@
+# https://github.com/mochajs/mocha/blob/master/example/config/.mocharc.yml
+color: true
+spec:
+  - './src/**/*.test.js'
+slow: 5000
+timeout: 999999

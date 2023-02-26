@@ -135,6 +135,12 @@ https://www.youtube.com/watch?v=EuGxrTCj5Ac&list=PL699Xf-_ilW7aQ6lBWXjaIheZsduOp
 ## Workaround for unit tests
 Note the `--experimental-specifier-resolution=node` flag added to the `test` command in `package.json`. Without this flag tests will fail with a `ERR_MODULE_NOT_FOUND` error. This project uses more modern ECMAScript modules (ESM) which are enabled by specifying `"type": "module"` in `package.json`. However, ESM also requires specifying the `.js` extension in all imports throughout the code. Unfortunately, this is incompatible with the parcel packager that builds the bundled chrome extension. Adding this flag causes the Node.js to relax requiring the `.js` file extensions when loading ESM modules, thereby providing a workaround that allows running tests and bundling the chrome extension.
 
+To enable debugging of unit tests within vscode, change `program` from `${workspaceFolder}/node_modules/mocha/bin/_mocha` to `${workspaceFolder}/node_modules/mocha/lib/cli/cli.js` in the `launch.json` configuration. The `_mocha` entry point is nothing more than shim to `cli.js` but it uses `require` which doesn't work with ESM.
+
+## Debug code running in the browser
+Try https://www.builder.io/blog/debug-nodejs
+
+
 See the following links for more info...
 * https://github.com/TypeStrong/ts-node/discussions/1781
 * https://github.com/nodejs/node/issues/41465
