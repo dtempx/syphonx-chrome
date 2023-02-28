@@ -1,0 +1,10 @@
+migration: venom-to-syphonx
+basic test runner
+new actions: scroll, case, sendkeys
+selector/regexp AI
+contract matcher (product-page, search-page, etc.)
+template access control: email, api-key
+template change history: viewer (who, when, waht/diffs), rollback
+selector comments
+selector flagging
+automated test runner

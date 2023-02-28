@@ -1,6 +1,9 @@
 # https://github.com/mochajs/mocha/blob/master/example/config/.mocharc.yml
+# https://mochajs.org/#command-line-usage
+
 color: true
 spec:
   - './src/**/*.test.js'
+  - './src/**/test/**/*.js'
 slow: 5000
-timeout: 999999
+timeout: 0

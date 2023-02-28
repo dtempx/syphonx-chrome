@@ -7,6 +7,8 @@ Test runner
 Test checks
 Test groups
 
+cloud log endpoint
+
 fix open template busy status
 match contract by filename (product-page, search-page, etc.)
 allow _ in file names in cloud storage
@@ -47,7 +49,7 @@ query builder: jump to node in elements panel
 query builder: if <a> or <img> selected then make adding attr more prominent
 
 refactor queryTracking to not use polling
-data explorer (single object view -> table view)
+data explorer (single object view -> table view, copy to clipboard)
 copy data to clipboard
 view debug log output in data panel
 DOM highlighting in data panel
@@ -83,8 +85,8 @@ Consider adding a context field to Yield in core
 
 FEATURES
 comments
-about box with version
-persist user settings
+DONE: about box with version
+DONE: persist user settings
 persist open templates
 ability to switch between multiple open templates
 template params
