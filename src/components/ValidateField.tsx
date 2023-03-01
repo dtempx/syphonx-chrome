@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { sleep } from "../lib";
 
 import {
     BaseTextFieldProps,
@@ -16,11 +17,12 @@ export interface Props extends BaseTextFieldProps {
     value?: unknown;
     showCommitButton?: boolean;
     showCancelButton?: boolean;
-    onChange?: (event: React.SyntheticEvent, value: string) => void
-    onValidate?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => boolean
+    onChange?: (event: React.SyntheticEvent, value: string) => void;
+    onValidate?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => boolean;
+    onHitEnterKey?: (event: React.KeyboardEvent) => void;
 }
 
-export default ({ value, onChange, onValidate, showCommitButton, showCancelButton, ...props }: Props) => {
+export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, showCancelButton, ...props }: Props) => {
     const [ input, setInput ] = useState<string | undefined>();
     const [ valid, setValid ] = useState(true);
 
@@ -52,10 +54,18 @@ export default ({ value, onChange, onValidate, showCommitButton, showCancelButto
     }
 
     function keydown(event: React.KeyboardEvent) {
-        if (event.key === "Escape")
+        if (event.key === "Escape") {
             cancel();
-        if (event.key === "Enter")
+        }
+        if (event.key === "Enter") {
             commit(event);
+            if (onHitEnterKey) {
+                (async () => {
+                    await sleep(1000);
+                    onHitEnterKey(event);
+                })();
+            }
+        }   
     }
 
     return (

@@ -37,6 +37,7 @@ export default ({ item, onChange }: Props) => {
             [
                 "required",
                 <Switch
+                    size="small"
                     checked={obj.required ?? false}
                     onChange={(event, value) => {
                         obj.required = value;
@@ -77,6 +78,7 @@ export default ({ item, onChange }: Props) => {
             [
                 "waitfor",
                 <Switch
+                    size="small"
                     checked={!!obj.waitfor}
                     onChange={(event, value) => {
                         obj.waitfor = value ? {} : undefined;
@@ -102,6 +104,7 @@ export default ({ item, onChange }: Props) => {
             [
                 "active",
                 <Switch
+                    size="small"
                     checked={obj.active ?? true}
                     onChange={(event, value) => {
                         obj.active = value;

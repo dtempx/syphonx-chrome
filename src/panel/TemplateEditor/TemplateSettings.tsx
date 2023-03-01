@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Paper, Stack, Tooltip } from "@mui/material";
+import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
 import { background, Template } from "./lib";
@@ -12,7 +12,9 @@ export default () => {
         <Paper elevation={3} className="panel" sx={{ width: 1, height: 300 }}>
             <PropertyGrid items={[
                 [
-                    "url",
+                    <Tooltip title="A default URL for the template.">
+                        <Typography>url</Typography>
+                    </Tooltip>,
                     <Stack direction="row">
                         <ValidateField
                             variant="standard"
@@ -35,11 +37,12 @@ export default () => {
                                 <LaunchIcon fontSize="small" />
                             </Tooltip>
                         </IconButton>
-                    </Stack>,
-                    "A default URL for the template."
+                    </Stack>
                 ],
                 [
-                    "key",
+                    <Tooltip title="A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data.">
+                        <Typography>key</Typography>
+                    </Tooltip>,
                     <ValidateField
                         variant="standard"
                         size="small"
@@ -52,8 +55,7 @@ export default () => {
                         onValidate={(event, value) => {
                             return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
                         }}
-                    />,
-                    "A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data."
+                    />
                 ]
             ]} />
         </Paper>

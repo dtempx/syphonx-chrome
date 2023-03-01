@@ -29,17 +29,6 @@ export default ({ item }: Props) => {
     const template = new Template(json);
     const selected = template.selected();
 
-    function name(item: TemplateItem) {
-        if (item.name)
-            return item.name;
-        else if (item.repeated)
-            return "(array)";
-        else if (item.type === "select" && (item.obj as syphonx.Select)?.type === "object")
-            return "(object)";
-        else
-            return "(value)";
-    }
-
     return (
         <Stack direction="row" justifyContent="space-between">
             <Typography align="left" noWrap sx={{ mt: 1 }}>
@@ -56,7 +45,7 @@ export default ({ item }: Props) => {
                 )}
                 <Tooltip title={item.icon}><ActionIcon name={item.icon} fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>
                 <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>
-                    <Typography variant="caption">{name(item)}</Typography>
+                    <Typography variant="caption">{item.caption}</Typography>
                     {item.num && <Typography variant="caption" color="primary.light" sx={{ ml: "2px" }}>#{item.num}</Typography>}
                 </Typography>
                 {item.conditional && <Tooltip title="conditional"><ConditionalIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}

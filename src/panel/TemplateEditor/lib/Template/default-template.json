@@ -3,7 +3,6 @@
         {
             "select": [
                 {
-                    "name": "title",
                     "query": [["h1"]]
                 }
             ]

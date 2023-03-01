@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useApp, useTemplate } from "./context";
 import { Template, TemplateAction } from "./lib";
+import { AddSelectorDialog } from "./ActionEditor/components";
 import ActionIcon from "./ActionIcon";
 
 import {
@@ -80,12 +81,43 @@ const ActionTypes: Array<{ name: TemplateAction, advanced: boolean, help: string
 export default (props?: Props) => {
     const { advanced } = useApp();
     const { template: json, setTemplate } = useTemplate();
-    const [open, setOpen] = useState(false);
-    const [expanded, setExpanded] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuExpanded, setMenuExpanded] = useState(false);
     const [anchor, setAnchor] = useState<Element | undefined>();
 
-    const actions = advanced || expanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => expanded || !type.advanced);
+    const actions = advanced || menuExpanded ? ActionTypes.sort((a, b) => a.name.localeCompare(b.name)) : ActionTypes.filter(type => menuExpanded || !type.advanced);
     const template = new Template(json);
+
+    function onAdd(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        const selected = template.selected();
+        if (selected?.type === "select") {
+            setDialogOpen(true);
+        }
+        else {
+            const added = template.addItem();
+            if (added) {
+                setTemplate(template.json());
+            }
+            else {
+                setAnchor(event.currentTarget);
+                setMenuOpen(true);    
+            }
+        }
+    }
+
+    function onMenu(event: React.MouseEvent<HTMLLIElement, MouseEvent>, action: TemplateAction): void {
+        const selected = template.selected();
+        if (action === "select" && selected?.type === "action" && selected?.name === "select") {
+            setDialogOpen(true);
+            setMenuOpen(false);
+        }
+        else {
+            template.addItem(action);
+            setTemplate(template.json());
+            setMenuOpen(false);
+        }
+    }
 
     return (
         <>
@@ -110,24 +142,15 @@ export default (props?: Props) => {
                     {...props}
                     size="small"
                     color="secondary"
-                    onClick={event => {
-                        const added = template.addItem();
-                        if (added) {
-                            setTemplate(template.json());
-                        }
-                        else {
-                            setAnchor(event.currentTarget);
-                            setOpen(true);    
-                        }
-                    }}
+                    onClick={onAdd}
                 >
                     <AddIcon />
                 </Fab>
             </Tooltip>
             <Menu
                 anchorEl={anchor}
-                open={open}
-                onClose={() => setOpen(false)}
+                open={menuOpen}
+                onClose={() => setMenuOpen(false)}
                 anchorOrigin={{
                     vertical: "top",
                     horizontal: "right",
@@ -139,11 +162,7 @@ export default (props?: Props) => {
             >
                 {actions.map(action => (
                     <Tooltip title={action.help} arrow placement="right">
-                        <MenuItem onClick={() => {
-                            template.addItem(action.name);
-                            setTemplate(template.json());
-                            setOpen(false);
-                        }}>
+                        <MenuItem onClick={event => onMenu(event, action.name)}>
                             <ActionIcon name={action.name} fontSize="small" />
                             <Typography sx={{ ml: 1 }}>{action.name}</Typography>
                         </MenuItem>
@@ -154,24 +173,28 @@ export default (props?: Props) => {
                     <Divider />
                 )}
 
-                {!advanced && expanded && (
+                {!advanced && menuExpanded && (
                     <Tooltip title="Hide advanced actions" arrow placement="right">
-                        <MenuItem onClick={() => setExpanded(false)}>
+                        <MenuItem onClick={() => setMenuExpanded(false)}>
                             <CollapseIcon fontSize="small" />
                             <Typography sx={{ ml: 1 }}>Less</Typography>
                         </MenuItem>
                     </Tooltip>
                 )}
 
-                {!advanced && !expanded && (
+                {!advanced && !menuExpanded && (
                     <Tooltip title="Show advanced actions" arrow placement="right">
-                        <MenuItem onClick={() => setExpanded(true)}>
+                        <MenuItem onClick={() => setMenuExpanded(true)}>
                             <ExpandIcon fontSize="small" />
                             <Typography sx={{ ml: 1 }}>More</Typography>
                         </MenuItem>
                     </Tooltip>
                 )}
             </Menu>
+            <AddSelectorDialog
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+            />
         </>
     );
 }

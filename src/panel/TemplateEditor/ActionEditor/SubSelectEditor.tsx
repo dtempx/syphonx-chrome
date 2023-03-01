@@ -55,6 +55,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "all",
                     <Switch
+                        size="small"
                         checked={obj.all ?? false}
                         onChange={(event, value) => {
                             obj.all = value;
@@ -103,6 +104,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "collate",
                     <Switch
+                        size="small"
                         checked={obj.collate ?? false}
                         onChange={(event, value) => {
                             obj.collate = value;
@@ -128,6 +130,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "active",
                     <Switch
+                        size="small"
                         checked={obj.active ?? true}
                         onChange={(event, value) => {
                             obj.active = value;

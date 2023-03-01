@@ -73,6 +73,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "active",
                     <Switch
+                        size="small"
                         checked={obj.active ?? true}
                         onChange={(event, value) => {
                             obj.active = value;

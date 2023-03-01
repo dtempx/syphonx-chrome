@@ -17,6 +17,11 @@ interface TemplateTest {
     url: string;
 }
 
+interface AddSelectResult {
+    ok: boolean;
+    error?: string;
+}
+
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
     tests?: TemplateTest[]
@@ -63,6 +68,32 @@ export class Template {
         else {
             const added = this.addSelected();
             return added;
+        }
+    }
+
+    addSelect(select: syphonx.Select): AddSelectResult {
+        const item = this.selected();
+        let collection: syphonx.Select[] | undefined = undefined;
+        if (item?.type === "action" && item?.name === "select") {
+            collection = item.obj as syphonx.Select[];
+        }
+        else if (item?.type === "select") {
+            collection = item.collection as syphonx.Select[];
+        }
+
+        if (collection) {
+            if (!select.name && collection.some(obj => !obj.name))
+                return { ok: false, error: "Another unnamed item already exists." };
+
+            if (collection.some(obj => obj.name === select.name))
+                return { ok: false, error: `Another item named "${select.name}" already exists.` };
+
+            collection.push(select);
+            this.setSelected(select);
+            return { ok: true };
+        }
+        else {
+            return { ok: false, error: "Invalid selection." };
         }
     }
 
@@ -178,43 +209,43 @@ export class Template {
         return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
 
-    private addAction(type: TemplateAction): void {
+    private addAction(action: TemplateAction): void {
         if (!(this.obj.actions instanceof Array))
             this.obj.actions = []; // ensure actions is an array
 
         const item = this.selected();
         const actions = findParentActionCollection(item) || this.obj.actions;
 
-        let action;
-        if (type === "break")
-            action = { break: {} };
-        else if (type === "click")
-            action = { click: {} };
-        else if (type === "each")
-            action = { each: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
-        else if (type === "error")
-            action = { error: {} };
-        else if (type === "repeat")
-            action = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
-        else if (type === "select")
-            action = { select: [{ name: "value1", query: [["h1"]] }] };
-        else if (type === "snooze")
-            action = { snooze: [1, 2] };
-        else if (type === "transform")
-            action = { transform: [{}] };
-        else if (type === "yield")
-            action = { yield: {} };
-        else if (type === "waitfor")
-            action = { waitfor: {} };
+        let obj;
+        if (action === "break")
+            obj = { break: {} };
+        else if (action === "click")
+            obj = { click: {} };
+        else if (action === "each")
+            obj = { each: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
+        else if (action === "error")
+            obj = { error: {} };
+        else if (action === "repeat")
+            obj = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
+        else if (action === "select")
+            obj = { select: [{ name: "value1", query: [["h1"]] }] };
+        else if (action === "snooze")
+            obj = { snooze: [1, 2] };
+        else if (action === "transform")
+            obj = { transform: [{}] };
+        else if (action === "yield")
+            obj = { yield: {} };
+        else if (action === "waitfor")
+            obj = { waitfor: {} };
         else
             return;
 
         if (item && item.index !== undefined)
-            actions.splice(item.index + 1, 0, action);
+            actions.splice(item.index + 1, 0, obj);
         else
-            actions.push(action);
+            actions.push(obj);
 
-        this.setSelected(action);
+        this.setSelected(obj);
     }
 
     private addPlaceholder(placeholder: Placeholder): boolean {
@@ -428,7 +459,10 @@ export class Template {
                 });
 
                 item.children = this.renderSubselect(select, item);
-                
+
+                if (!select.name && item.collection!.length > 1)
+                    item.alert = "unnamed item must be exclusive";
+
                 if (!select.query && !select.value && !select.union && select.type !== "object")
                     item.alert = "query or value required";
 

@@ -9,6 +9,7 @@ export interface Props {
 
 export default ({ value, onChange }: Props) => (
     <Select
+        variant="standard"
         size="small"
         value={value || "default"}
         onChange={event => onChange(event as React.SyntheticEvent, event.target.value !== "default" ? event.target.value as syphonx.SelectOn : undefined)}

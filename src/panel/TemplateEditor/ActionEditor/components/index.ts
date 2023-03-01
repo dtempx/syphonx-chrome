@@ -1,6 +1,8 @@
 export * from "../../components";
+export { default as AddSelectorDialog } from "./AddSelectorDialog";
 export { default as DebugView } from "./DebugView";
 export { default as FormulaField } from "./FormulaField";
+export { default as NameField } from "./NameField";
 export { default as NumberField } from "./NumberField";
 export { default as NumberRangeField } from "./NumberRangeField";
 export { default as PlainTextField } from "./PlainTextField";
@@ -11,5 +13,4 @@ export { default as SelectOnDropdown } from "./SelectOnDropdown";
 export { default as SelectTypeDropdown } from "./SelectTypeDropdown";
 export { default as SelectTypeField } from "./SelectTypeField";
 export { default as SingleQueryEditorField } from "./SingleQueryEditorField";
-export { default as SymbolicNameField } from "./SymbolicNameField";
 export { default as VariantField } from "./VariantField";

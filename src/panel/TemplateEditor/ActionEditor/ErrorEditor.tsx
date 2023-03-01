@@ -8,7 +8,7 @@ import {
     FormulaField,
     QueryEditorField,
     NumberField,
-    SymbolicNameField,
+    NameField,
     VariantField
 } from "./components";
 
@@ -38,8 +38,8 @@ export default ({ item, onChange }: Props) => {
                 ],
                 [
                     "code",
-                    <SymbolicNameField
-                        variant="kebab-case"
+                    <NameField
+                        validation="kebab-case"
                         value={obj.code}
                         onChange={(event, value) => {
                             obj.code = value as syphonx.ExtractErrorCode;
@@ -78,6 +78,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "stop",
                     <Switch
+                        size="small"
                         checked={obj.stop ?? false}
                         onChange={(event, value) => {
                             obj.stop = value;
@@ -103,6 +104,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "active",
                     <Switch
+                        size="small"
                         checked={obj.active ?? true}
                         onChange={(event, value) => {
                             obj.active = value;

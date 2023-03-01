@@ -18,6 +18,8 @@ entering values for snooze don't persist
 can't create a union unless type=object, union should be supported for any type
 duplicating a property doesn't change the name and screws up selection
 
+choosing subselect with type=object and name=(none) causes rendering error... Cannot read properties of null (reading 'key')
+
 
 FIXED number the union cases
 FIXED: add button when union is selected doesn't add another union case

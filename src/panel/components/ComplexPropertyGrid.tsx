@@ -39,16 +39,19 @@ export default ({ items, ...props }: Props) => {
     const visibleItems = items
         .filter(item => item[3] || expanded || advanced)
         .map(item => [
-            item[4] ? (
+            (
                 <Stack direction="row">
-                    <Typography fontSize="small">{item[0]}</Typography>
-                    <Tooltip title={item[4]}>
-                        <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />
+                    <Tooltip title={item[2]}>
+                        <Typography fontSize="small">{item[0]}</Typography>
                     </Tooltip>
+                    {item[4] && (
+                        <Tooltip title={item[4]}>
+                            <AlertIcon color="warning" fontSize="small" sx={{ ml: 1 }} />
+                        </Tooltip>
+                    )}
                 </Stack>
-            ) : item[0],
-            item[1],
-            item[2]
+            ),
+            item[1]
         ] as PropertyGridItem);
 
     return (

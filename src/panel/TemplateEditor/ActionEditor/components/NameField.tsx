@@ -1,12 +1,13 @@
 import React from "react";
-import { SxProps, Theme } from "@mui/material";
+import { BaseTextFieldProps } from "@mui/material";
 import { ValidateField } from ".";
 
-export interface Props {
+export interface Props extends BaseTextFieldProps {
     value: string | undefined;
+    variant?: "standard" | "outlined" | "filled";
+    validation?: "snake-case" | "kebab-case";
     onChange: (event: React.SyntheticEvent, value: string | undefined) => void
-    variant?: "snake-case" | "kebab-case";
-    sx?: SxProps<Theme>;
+    onHitEnterKey?: (event: React.KeyboardEvent) => void;
 }
 
 const regexps = {
@@ -14,10 +15,10 @@ const regexps = {
     "kebab-case": /^[a-z][a-z0-9-]*$/
 };
 
-export default ({ value, onChange, variant = "snake-case", sx }: Props) => {
+export default ({ value, validation, onChange, onHitEnterKey, ...props }: Props) => {
 
     function handleValidate(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
-        return value ? regexps[variant].test(value) : true;
+        return value && validation ? regexps[validation].test(value) : true;
     }
 
     return (
@@ -29,7 +30,8 @@ export default ({ value, onChange, variant = "snake-case", sx }: Props) => {
             value={value}
             onChange={(event, value) => onChange(event, value || undefined)}
             onValidate={handleValidate}
-            sx={sx}
+            onHitEnterKey={onHitEnterKey}
+            {...props}
         />
     );
 }

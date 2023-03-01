@@ -1,4 +1,5 @@
 import { Template } from "./Template";
+import * as syphonx from "syphonx-lib";
 
 export type TemplateItemType = "action" | "pivot" | "placeholder" | "select" | "transform" | "union";
 
@@ -30,6 +31,11 @@ export class TemplateItem {
       *
     */
     name: string;
+
+    /**
+     * Supplemental display name for the object in the UI editor.
+     */
+    caption?: string;
 
     /**
      * Display icon for this object in the UI editor.
@@ -118,6 +124,7 @@ export class TemplateItem {
         this.key = item.key;
         this.type = item.type;
         this.name = item.name;
+        this.caption = item.caption;
         this.icon = item.icon;
         this.alert = item.alert;
         this.required = item.required;
@@ -131,5 +138,16 @@ export class TemplateItem {
         this.step = item.step;
         this.num = item.num;
         this.active = item.active;
+
+        if (!item.caption) {
+          if (this.name)
+              this.caption = this.name;
+          else if (this.repeated)
+              this.caption = "(array)";
+          else if (this.type === "select" && (this.obj as syphonx.Select)?.type === "object")
+              this.caption = "(object)";
+          else
+              this.caption = "(value)";
+        }  
     }
 }

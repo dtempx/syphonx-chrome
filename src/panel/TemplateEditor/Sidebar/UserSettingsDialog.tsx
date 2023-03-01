@@ -7,7 +7,9 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Switch
+    Switch,
+    Tooltip,
+    Typography
 } from "@mui/material";
 
 
@@ -41,28 +43,35 @@ export default ({ open, onClose }: Props) => {
                     columns={[{ width: 400 }]}
                     items={[
                         [
-                            "Auto-open template default URL",
+                            <Tooltip title="Automatically opens the template default URL if enabled.">
+                                <Typography>Auto-open template default URL</Typography>
+                            </Tooltip>,
                             <Switch
+                                size="small"
                                 checked={autoOpen}
                                 onChange={() => setAutoOpen(!autoOpen)}
-                            />,
-                            "Automatically opens the template default URL if enabled."
+                            />
+                            
                         ],
                         [
-                            "Advanced mode",
+                            <Tooltip title="Shows or hides advanced settings.">
+                                <Typography>Advanced mode</Typography>
+                            </Tooltip>,
                             <Switch
+                                size="small"
                                 checked={advanced}
                                 onChange={() => setAdvanced(!advanced)}
-                            />,
-                            "Shows or hides advanced settings."
+                            />
                         ],
                         [
-                            "Debug mode",
+                            <Tooltip title="Shows or hides additional debug info.">
+                                <Typography>Debug mode</Typography>
+                            </Tooltip>,
                             <Switch
+                                size="small"
                                 checked={debug}
                                 onChange={() => setDebug(!debug)}
-                            />,
-                            "Shows or hides additional debug info."
+                            />
                         ]
                     ]}
                 />

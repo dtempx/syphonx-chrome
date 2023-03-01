@@ -1,21 +1,18 @@
 import React from "react";
 
 import {
-    Box,
     Table,
     TableContainer,
     TableBody,
     TableCell,
     TableRow,
-    Tooltip,
     SxProps,
     Theme
 } from "@mui/material";
 
 export type PropertyGridItem = [
     JSX.Element | string, // name
-    JSX.Element | string | number | boolean, // editor
-    string // help
+    JSX.Element | string | number | boolean // editor
 ];
 
 export interface Props {
@@ -31,11 +28,7 @@ export default ({ items, columns = [{ width: 100 }], sx }: Props) => (
                 {items.map(item => (
                     <TableRow>
                         <TableCell sx={{ width: columns[0]?.width }}>
-                            <Tooltip title={item[2]}>
-                                <Box>
-                                    {item[0]}                                    
-                                </Box>
-                            </Tooltip>
+                            {item[0]}                                    
                         </TableCell>
                         <TableCell sx={{ width: columns[1]?.width }}>
                             {item[1]}

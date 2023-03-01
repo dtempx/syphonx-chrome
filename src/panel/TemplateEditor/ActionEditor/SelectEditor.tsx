@@ -1,7 +1,11 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
+
+import {
+    Switch,
+    TextField
+} from "@mui/material";
 
 import {
     ComplexPropertyGrid,
@@ -11,7 +15,6 @@ import {
     RegexpField,
     SelectFormatDropdown,
     SelectTypeField,
-    SymbolicNameField,
     VariantField
 } from "./components";
 
@@ -27,17 +30,14 @@ export default ({ item, onChange }: Props) => {
             items={[
                 [
                     "name",
-                    <SymbolicNameField
-                        variant="snake-case"
-                        value={obj.name}
-                        onChange={(event, value) => {
-                            obj.name = value;
-                            item.template.setSelected(obj);
-                            onChange(event);                    
-                        }}
+                    <TextField
+                        variant="standard"
+                        size="small"
+                        value={item.caption}
                     />,
-                    "Determines the name of the selected value, or blank representing a single unnamed value.",
-                    true
+                    "Name of selected value, or blank representing a single unnamed value.",
+                    true,
+                    !obj.name && item.collection!.length > 1 ? "unnamed item must be exclusive" : ""
                 ],
                 [
                     "query",
@@ -68,6 +68,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "repeated",
                     <Switch
+                        size="small"
                         checked={obj.repeated ?? false}
                         onChange={(event, value) => {
                             obj.repeated = value;
@@ -80,6 +81,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "required",
                     <Switch
+                        size="small"
                         checked={obj.required ?? false}
                         onChange={(event, value) => {
                             obj.required = value;
@@ -105,6 +107,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "all",
                     <Switch
+                        size="small"
                         checked={obj.all ?? false}
                         onChange={(event, value) => {
                             obj.all = value;
@@ -153,6 +156,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "collate",
                     <Switch
+                        size="small"
                         checked={obj.collate ?? false}
                         onChange={(event, value) => {
                             obj.collate = value;
@@ -178,6 +182,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "active",
                     <Switch
+                        size="small"
                         checked={obj.active ?? true}
                         onChange={(event, value) => {
                             obj.active = value;
