@@ -8,6 +8,7 @@ export { default as NumberRangeField } from "./NumberRangeField";
 export { default as PlainTextField } from "./PlainTextField";
 export { default as QueryEditorField } from "./QueryEditorField";
 export { default as RegexpField } from "./RegexpField";
+export { default as ScrollToDropdown } from "./ScrollToDropdown";
 export { default as SelectFormatDropdown } from "./SelectFormatDropdown";
 export { default as SelectOnDropdown } from "./SelectOnDropdown";
 export { default as SelectTypeDropdown } from "./SelectTypeDropdown";

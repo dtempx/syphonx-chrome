@@ -4,6 +4,7 @@ import ClickEditor from "./ClickEditor";
 import EachEditor from "./EachEditor";
 import ErrorEditor from "./ErrorEditor";
 import RepeatEditor from "./RepeatEditor";
+import ScrollEditor from "./ScrollEditor";
 import SelectEditor from "./SelectEditor";
 import SubSelectEditor from "./SubSelectEditor";
 import SnoozeEditor from "./SnoozeEditor";
@@ -52,6 +53,8 @@ export default () => {
                     return <RepeatEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "select" && item.children && item.children[0])
                     return <SelectEditor item={item.children[0]} onChange={onChange} />;
+                else if (item.type === "action" && item.name === "scroll")
+                    return <ScrollEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "snooze")
                     return <SnoozeEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "transform" && item.children && item.children[0])

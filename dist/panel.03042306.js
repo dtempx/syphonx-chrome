@@ -18781,6 +18781,19 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
         else if (typeof obj === "object") return "object";
         else return "unknown";
     }
+    function waitForScrollEnd() {
+        return new Promise((resolve)=>{
+            let timer = setTimeout(()=>resolve(), 3000);
+            function onScroll() {
+                clearTimeout(timer);
+                timer = setTimeout(()=>{
+                    removeEventListener("scroll", onScroll);
+                    resolve();
+                }, 200);
+            }
+            addEventListener("scroll", onScroll);
+        });
+    }
     function $merge(source, target) {
         for (const targetAttr of target[0].attributes){
             const sourceAttr = Array.from(source[0].attributes).find((attr)=>attr.name === targetAttr.name);
@@ -18872,8 +18885,8 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
             } else this.log(`BREAK BYPASSED ${when}`);
             return false;
         }
-        async click({ query: query , waitfor: waitfor , snooze: snooze , required: required , retry: retry , active: active , when: when  }) {
-            if (this.online && (active ?? true)) {
+        async click({ query: query , waitfor: waitfor , snooze: snooze , required: required , retry: retry , when: when , active: active = true  }) {
+            if (this.online && active) {
                 if (this.when(when, "CLICK")) {
                     const mode = snooze ? snooze[2] || "before" : undefined;
                     if (snooze && (mode === "before" || mode === "before-and-after")) {
@@ -18982,6 +18995,7 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
             } else if (action.hasOwnProperty("each")) await this.each(action.each);
             else if (action.hasOwnProperty("error")) this.error(action.error);
             else if (action.hasOwnProperty("repeat")) await this.repeat(action.repeat);
+            else if (action.hasOwnProperty("scroll")) await this.scroll(action.scroll);
             else if (action.hasOwnProperty("snooze")) await this.snooze(action.snooze);
             else if (action.hasOwnProperty("transform")) await this.transform(action.transform);
             else if (action.hasOwnProperty("waitfor")) {
@@ -18993,16 +19007,18 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
                 if (y) {
                     this.state.yield = {
                         step: step + 1,
-                        timeout: y.timeout
+                        context: y.context,
+                        timeout: y.timeout,
+                        params: y.params
                     };
                     return "yield";
                 }
             }
             return null;
         }
-        async each({ query: query , actions: actions , context: context , active: active , when: when  }) {
+        async each({ query: query , actions: actions , context: context , when: when , active: active = true  }) {
             const $1 = this.jquery;
-            if (active ?? true) {
+            if (active) {
                 if (this.when(when, "CLICK")) {
                     const result = this.query({
                         query: query,
@@ -19037,7 +19053,7 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
                 }
             }
         }
-        error({ query: query , code: code = "custom-error" , message: message = "Custom template error" , level: level = 1 , stop: stop , active: active = true , when: when  }) {
+        error({ query: query , code: code = "custom-error" , message: message = "Custom template error" , level: level = 1 , stop: stop , when: when , active: active = true  }) {
             if (active) {
                 if (query) {
                     const result = this.query({
@@ -19169,13 +19185,13 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
             for (const element of elements){
                 const $parent = $1(element).parent();
                 const tag = element.tagName.toLowerCase();
-                const id = $1(element).attr("id");
-                const className = $1(element).attr("class")?.split(" ")[0];
+                const id = $1(element).attr("id") || "";
+                const className = $1(element).attr("class")?.split(" ")[0] || "";
                 const n = $1(element).index() + 1;
-                const uniqueId = $1(`#${id}`).length === 1;
-                const uniqueClassName = $1(`${tag}.${className}`).length === 1;
+                const uniqueId = /^[A-Za-z0-9_-]+$/.test(id) ? $1(`#${id}`).length === 1 : false;
+                const uniqueClassName = /^[A-Za-z0-9_-]+$/.test(className) ? $1(`${tag}.${className}`).length === 1 : false;
                 const onlyTag = $parent.children(tag).length === 1;
-                const onlyClassName = className ? $parent.children(`${tag}.${className}`).length === 1 : false;
+                const onlyClassName = /^[A-Za-z0-9_-]+$/.test(className) ? $parent.children(`${tag}.${className}`).length === 1 : false;
                 if (uniqueId) {
                     path.push(`#${id}`);
                     break;
@@ -19301,32 +19317,36 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
                 result
             ];
         }
-        async repeat({ actions: actions , limit: limit = 100 , errors: errors = 1  }) {
-            let errorCount = 0;
-            let baselineErrorCount = this.state.errors.length;
-            let i = 0;
-            let code = undefined;
-            while(i < limit){
-                this.log(`REPEAT #${++i} (limit=${limit})`);
-                this.state.vars._page = i;
-                for (const action of actions){
-                    const step = actions.indexOf(action) + 1;
-                    code = await this.dispatch(action, step);
-                    if (code) {
-                        this.log(`REPEAT #${i} -> break at step ${step}/${actions.length}, code=${code}`);
-                        break;
+        async repeat({ actions: actions , limit: limit = 100 , errors: errors = 1 , when: when , active: active = true  }) {
+            if (active) {
+                if (this.when(when, "REPEAT")) {
+                    let errorCount = 0;
+                    let baselineErrorCount = this.state.errors.length;
+                    let i = 0;
+                    let code = undefined;
+                    while(i < limit){
+                        this.log(`REPEAT #${++i} (limit=${limit})`);
+                        this.state.vars._page = i;
+                        for (const action of actions){
+                            const step = actions.indexOf(action) + 1;
+                            code = await this.dispatch(action, step);
+                            if (code) {
+                                this.log(`REPEAT #${i} -> break at step ${step}/${actions.length}, code=${code}`);
+                                break;
+                            }
+                        }
+                        if (!code) {
+                            this.log(`REPEAT #${i} -> ${actions.length} steps completed`);
+                            errorCount = this.state.errors.length - baselineErrorCount;
+                            if (errorCount >= errors) {
+                                this.appendError("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`, 1);
+                                break;
+                            }
+                        } else break;
                     }
-                }
-                if (!code) {
-                    this.log(`REPEAT #${i} -> ${actions.length} steps completed`);
-                    errorCount = this.state.errors.length - baselineErrorCount;
-                    if (errorCount >= errors) {
-                        this.appendError("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`, 1);
-                        break;
-                    }
-                } else break;
-            }
-            this.log(`REPEAT ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
+                    this.log(`REPEAT ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
+                } else this.log(`REPEAT SKIPPED ${when}`);
+            } else this.log(`REPEAT BYPASSED ${when}`);
         }
         resolveOperands(operands, result) {
             for(let i = 0; i < operands.length; ++i)if (isFormula(operands[i]) || isRegexp(operands[i])) this.eachNode(result, (node, value)=>{
@@ -19683,6 +19703,59 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
             }
             this.log(`${actions.length} steps completed`);
         }
+        async scroll({ query: query , target: target , behavior: behavior = "smooth" , block: block , inline: inline , when: when , active: active = true  }) {
+            if (this.online && active) {
+                if (this.when(when, "SCROLL")) {
+                    if (target === "top" || target === "bottom") {
+                        const top = target === "bottom" ? document.body.scrollHeight : 0;
+                        const left = 0;
+                        window.scrollTo({
+                            top: top,
+                            left: left,
+                            behavior: behavior
+                        });
+                        const w0 = [
+                            Math.floor(window.scrollX),
+                            Math.floor(window.scrollY)
+                        ];
+                        await waitForScrollEnd();
+                        const w1 = [
+                            Math.floor(window.scrollX),
+                            Math.floor(window.scrollY)
+                        ];
+                        this.log(`SCROLL ${when || "(default)"} scroll to ${target} from [${w0}] to [${w1}]`);
+                    } else if (query) {
+                        const result = this.query({
+                            query: query,
+                            repeated: false
+                        });
+                        if (result && result.nodes.length > 0) {
+                            const element = result.nodes[0];
+                            const { top: top , left: left  } = element.getBoundingClientRect();
+                            const elementPos = [
+                                window.scrollX + Math.floor(left),
+                                window.scrollY + Math.floor(top)
+                            ];
+                            const w0 = [
+                                Math.floor(window.scrollX),
+                                Math.floor(window.scrollY)
+                            ];
+                            element.scrollIntoView({
+                                behavior: behavior,
+                                block: block,
+                                inline: inline
+                            });
+                            await waitForScrollEnd();
+                            const w1 = [
+                                Math.floor(window.scrollX),
+                                Math.floor(window.scrollY)
+                            ];
+                            this.log(`SCROLL ${when || "(default)"} -> [${this.nodeKey(result.nodes)}] scroll to element at [${elementPos}] from [${w0}] to [${w1}]`);
+                        }
+                    } else this.log(`SCROLL ${when || "(default)"} INVALID TARGET`);
+                } else this.log(`SCROLL SKIPPED ${when}`);
+            } else this.log(`SCROLL BYPASSED ${when}`);
+        }
         select(selects, pivot = false) {
             const data = {};
             for (const select of selects)if (select.active ?? true) {
@@ -19915,8 +19988,8 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
                 return false;
             } else return true;
         }
-        async waitfor({ query: query , select: select , timeout: timeout , on: on = "any" , required: required , pattern: pattern , when: when , active: active  }, context) {
-            if (this.online && (active ?? true)) {
+        async waitfor({ query: query , select: select , timeout: timeout , on: on = "any" , required: required , pattern: pattern , when: when , active: active = true  }, context) {
+            if (this.online && active) {
                 if (this.when(when, "WAITFOR")) {
                     if (timeout === undefined) timeout = 30;
                     else if (timeout === null || timeout <= 0) timeout = Infinity;
@@ -20009,12 +20082,14 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
             }
             return true;
         }
-        yield({ active: active , when: when , timeout: timeout  }) {
-            if (this.online && (active ?? true)) {
+        yield({ when: when , context: context , timeout: timeout , params: params , active: active = true  }) {
+            if (this.online && active) {
                 if (this.when(when, "YIELD")) {
-                    this.log(`YIELD ${when || "(default)"} -> timeout=${timeout || "(default)"}`);
+                    this.log(`YIELD ${when || "(default)"} -> timeout=${timeout || "(default)"}${params ? `\n${JSON.stringify(params)}` : ""}`);
                     return {
-                        timeout: timeout
+                        context: context,
+                        timeout: timeout,
+                        params: params
                     };
                 } else this.log(`YIELD SKIPPED ${when}`);
             } else this.log(`YIELD BYPASSED ${when}`);
@@ -20034,7 +20109,7 @@ async function $5890b588cfdaa989$export$f9380c9a627682d3(state) {
 } //# sourceMappingURL=index.js.map
 
 
-function $8f015fe631ec2dd6$export$633ae63c2897642e(query) {
+function $2f7a27ae2b8f13c7$export$dc9d31e0a9c059f8(query) {
     const valid = query instanceof Array && query.length > 0 && typeof query[0] === "string" && query.slice(1).every((op)=>op instanceof Array);
     if (valid) {
         const selector = query[0];
@@ -20044,7 +20119,7 @@ function $8f015fe631ec2dd6$export$633ae63c2897642e(query) {
             ...ops.map((op)=>`${op[0]}(${op.slice(1).map((param)=>JSON.stringify(param)).join(", ")})`)
         ].join(".");
     }
-} //# sourceMappingURL=format.js.map
+} //# sourceMappingURL=render.js.map
 
 
 /*! js-yaml 4.1.0 https://github.com/nodeca/js-yaml @license MIT */ function $60fc0aeefd2bcf3f$var$isNothing(subject) {
@@ -23382,7 +23457,7 @@ function $75371f08c5d7238f$var$convertWaitForAction(obj) {
 function $75371f08c5d7238f$var$parseMultiQuery(obj) {
     if (typeof obj === "string") {
         if (obj.startsWith("$(")) {
-            const query = $75371f08c5d7238f$export$dd48e276a5eff34c(obj);
+            const query = $75371f08c5d7238f$export$9c549c9d692f7e84(obj);
             return query ? [
                 query
             ] : undefined;
@@ -23395,13 +23470,13 @@ function $75371f08c5d7238f$var$parseMultiQuery(obj) {
 }
 function $75371f08c5d7238f$var$parseSingleQuery(obj) {
     if (typeof obj === "string") {
-        if (obj.startsWith("$(")) return $75371f08c5d7238f$export$dd48e276a5eff34c(obj);
+        if (obj.startsWith("$(")) return $75371f08c5d7238f$export$9c549c9d692f7e84(obj);
         else return [
             obj
         ];
     }
 }
-function $75371f08c5d7238f$export$dd48e276a5eff34c(text) {
+function $75371f08c5d7238f$export$9c549c9d692f7e84(text) {
     const result = [];
     let expression = (0, $c10bc05a64dffc8e$export$2e2bcd8739ae039)(text);
     while(expression){
@@ -23454,7 +23529,10 @@ function $e0c00b8ee858cb54$export$2e2dbd43b49fd373(text) {
     if (text.trim().startsWith("{") && text.trim().endsWith("}")) {
         const obj = (0, (/*@__PURE__*/$parcel$interopDefault($44eae22270aa4472$exports))).parse(text);
         return obj;
-    } else {
+    } else if (text === "") return {
+        actions: []
+    };
+    else {
         const obj = $60fc0aeefd2bcf3f$export$11e63f7b0f3d9900(text);
         const template = (0, $75371f08c5d7238f$export$fda399eb1db879ef)(obj);
         return template;
@@ -23517,7 +23595,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         if (collection) {
             if (!select.name && collection.some((obj)=>!obj.name)) return {
                 ok: false,
-                error: "Another no-name item already exists."
+                error: "Another unnamed item already exists."
             };
             if (collection.some((obj)=>obj.name === select.name)) return {
                 ok: false,
@@ -23672,6 +23750,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                 ]
             }
         };
+        else if (action === "scroll") obj = {
+            scroll: {}
+        };
         else if (action === "select") obj = {
             select: [
                 {
@@ -23809,6 +23890,10 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
                     }
                 //item.conditional = !!repeatObj.when; // todo
                 //item.active = repeatObj.active; // todo
+                } else if (name === "scroll") {
+                    const scrollObj = obj;
+                    if (!scrollObj.target && !scrollObj.query) item.alert = "query required";
+                    item.conditional = !!scrollObj.when;
                 } else if (name === "select") {
                     const selectObj = obj;
                     item.children = this.renderSelect(selectObj, item);
@@ -40801,7 +40886,6 @@ var $99ae21f38aa0b2b8$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                                 label: "Type",
                                 variant: "standard",
-                                fullWidth: false,
                                 value: type,
                                 defaultValue: "default",
                                 onChange: handleMenu,
@@ -41066,9 +41150,9 @@ var $d4J5n = parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 
-var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
-}), "Rule");
+var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
+}), "Abc");
 
 
 
@@ -41078,15 +41162,21 @@ var $b84bdb52d4a3451a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
-}), "TouchAppOutlined");
+var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+}), "ExitToApp");
 
 
 
 var $f6e84161dd14880c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
 }), "FormatListNumbered");
+
+
+
+var $33ca1c5aa099d9fb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3zm1-9h1V4h-2v1h1zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3zM2 5h14v2H2zm0 12h14v2H2zm0-6h14v2H2z"
+}), "FormatListNumberedRtl");
 
 
 
@@ -41101,9 +41191,33 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
-}), "Abc");
+var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M17 5h-2V3h2v2zm-2 16h2v-2.59L19.59 21 21 19.59 18.41 17H21v-2h-6v6zm4-12h2V7h-2v2zm0 4h2v-2h-2v2zm-8 8h2v-2h-2v2zM7 5h2V3H7v2zM3 17h2v-2H3v2zm2 4v-2H3c0 1.1.9 2 2 2zM19 3v2h2c0-1.1-.9-2-2-2zm-8 2h2V3h-2v2zM3 9h2V7H3v2zm4 12h2v-2H7v2zm-4-8h2v-2H3v2zm0-8h2V3c-1.1 0-2 .9-2 2z"
+}), "HighlightAlt");
+
+
+
+var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
+}), "HourglassEmpty");
+
+
+
+var $04b26bfdc0741493$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9 3 5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"
+}), "ImportExport");
+
+
+
+var $fb466aae3024022c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10h8c1.1 0 2-.9 2-2v-8c0-5.51-4.49-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+}), "Loupe");
+
+
+
+var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
+}), "Mediation");
 
 
 
@@ -41116,18 +41230,6 @@ var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
 }), "PivotTableChart");
-
-
-
-var $fb466aae3024022c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.49 2 2 6.49 2 12s4.49 10 10 10h8c1.1 0 2-.9 2-2v-8c0-5.51-4.49-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
-}), "Loupe");
-
-
-
-var $33ca1c5aa099d9fb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3zm1-9h1V4h-2v1h1zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3zM2 5h14v2H2zm0 12h14v2H2zm0-6h14v2H2z"
-}), "FormatListNumberedRtl");
 
 
 
@@ -41144,9 +41246,15 @@ var $63595ca7c2ce92eb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M17 5h-2V3h2v2zm-2 16h2v-2.59L19.59 21 21 19.59 18.41 17H21v-2h-6v6zm4-12h2V7h-2v2zm0 4h2v-2h-2v2zm-8 8h2v-2h-2v2zM7 5h2V3H7v2zM3 17h2v-2H3v2zm2 4v-2H3c0 1.1.9 2 2 2zM19 3v2h2c0-1.1-.9-2-2-2zm-8 2h2V3h-2v2zM3 9h2V7H3v2zm4 12h2v-2H7v2zm-4-8h2v-2H3v2zm0-8h2V3c-1.1 0-2 .9-2 2z"
-}), "HighlightAlt");
+var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
+}), "QuestionMark");
+
+
+
+var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
+}), "Rule");
 
 
 
@@ -41156,33 +41264,15 @@ var $a1d75b31022e04c3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
+}), "TouchAppOutlined");
+
+
+
 var $43454011a3067c9f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z"
 }), "Transform");
-
-
-
-var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
-}), "Mediation");
-
-
-
-var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
-}), "HourglassEmpty");
-
-
-
-var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-}), "ExitToApp");
-
-
-
-var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
-}), "QuestionMark");
 
 
 var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
@@ -41225,6 +41315,9 @@ var $f7c43758b0386c3f$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
     else if (name === "required") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $63595ca7c2ce92eb$export$2e2bcd8739ae039), {
         ...props
     });
+    else if (name === "scroll") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $04b26bfdc0741493$export$2e2bcd8739ae039), {
+        ...props
+    });
     else if (name === "select") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ffcd2e035197e27e$export$2e2bcd8739ae039), {
         ...props
     });
@@ -41260,14 +41353,14 @@ var $d4J5n = parcelRequire("d4J5n");
 var $5dd869992b20fc34$export$2e2bcd8739ae039 = ({ query: query , onChange: onChange  })=>{
     const [value, setValue] = (0, $d4J5n.useState)("");
     (0, $d4J5n.useEffect)(()=>{
-        const value = $8f015fe631ec2dd6$export$633ae63c2897642e(query);
+        const value = $2f7a27ae2b8f13c7$export$dc9d31e0a9c059f8(query);
         setValue(value || "");
     }, [
         query
     ]);
     function validate(event, value) {
         try {
-            $75371f08c5d7238f$export$dd48e276a5eff34c(event.target.value);
+            $75371f08c5d7238f$export$9c549c9d692f7e84(event.target.value);
             return true;
         } catch (err) {
             return false;
@@ -41277,7 +41370,7 @@ var $5dd869992b20fc34$export$2e2bcd8739ae039 = ({ query: query , onChange: onCha
         if (value) {
             let query;
             try {
-                query = $75371f08c5d7238f$export$dd48e276a5eff34c(value);
+                query = $75371f08c5d7238f$export$9c549c9d692f7e84(value);
             } catch (err) {
                 console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening
                 return;
@@ -43925,7 +44018,7 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
 var $2130d30de6a4afe4$export$2e2bcd8739ae039 = ({ query: query , name: name , type: type , repeated: repeated , onChange: onChange  })=>{
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const value = (0, $d4J5n.useMemo)(()=>{
-        if (query && query.length > 0 && query[0]) return $8f015fe631ec2dd6$export$633ae63c2897642e(query[0]) || "";
+        if (query && query.length > 0 && query[0]) return $2f7a27ae2b8f13c7$export$dc9d31e0a9c059f8(query[0]) || "";
         else return "";
     }, [
         query
@@ -43950,7 +44043,7 @@ var $2130d30de6a4afe4$export$2e2bcd8739ae039 = ({ query: query , name: name , ty
                                     style: {
                                         whiteSpace: "pre-line"
                                     },
-                                    children: query ? query.map((q)=>$8f015fe631ec2dd6$export$633ae63c2897642e(q)).join("\n") : null
+                                    children: query ? query.map((q)=>$2f7a27ae2b8f13c7$export$dc9d31e0a9c059f8(q)).join("\n") : null
                                 }),
                                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
                                     label: query.length,
@@ -44031,6 +44124,31 @@ var $bc149888b566c89c$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
         sx: sx
     });
 };
+
+
+
+parcelRequire("d4J5n");
+
+var $4b8d23ad598a2164$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+        variant: "standard",
+        size: "small",
+        value: value || "element",
+        onChange: (event)=>onChange(event, event.target.value !== "element" ? event.target.value : undefined),
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "top",
+                children: "top"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "bottom",
+                children: "bottom"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                value: "element",
+                children: "element"
+            })
+        ]
+    });
 
 
 
@@ -44595,7 +44713,7 @@ var $d4J5n = parcelRequire("d4J5n");
 var $720d345d88dda83e$export$2e2bcd8739ae039 = ({ query: query , name: name , onChange: onChange  })=>{
     const [open, setOpen] = (0, $d4J5n.useState)(false);
     const value = (0, $d4J5n.useMemo)(()=>{
-        if (query && query.length > 0 && query[0]) return $8f015fe631ec2dd6$export$633ae63c2897642e(query) || "";
+        if (query && query.length > 0 && query[0]) return $2f7a27ae2b8f13c7$export$dc9d31e0a9c059f8(query) || "";
         else return "";
     }, [
         query
@@ -44992,7 +45110,7 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
 parcelRequire("d4J5n");
 
 var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
-    const obj = item?.obj; //todo: remove shim when syphonx-core updated
+    const obj = item?.obj;
     return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
         items: [
             [
@@ -45031,6 +45149,135 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     }
                 }),
                 "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
+                obj.when !== undefined
+            ]
+        ]
+    }) : null;
+};
+
+
+
+parcelRequire("d4J5n");
+
+
+var $5336a1e77bfac892$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange  })=>{
+    const obj = item?.obj;
+    return obj ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a54c31726664078f$export$2e2bcd8739ae039), {
+        items: [
+            [
+                "target",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4b8d23ad598a2164$export$2e2bcd8739ae039), {
+                    value: obj.target,
+                    onChange: (event, value)=>{
+                        obj.target = value;
+                        if (value) {
+                            obj.query = undefined;
+                            obj.block = undefined;
+                            obj.inline = undefined;
+                        }
+                        onChange(event);
+                    }
+                }),
+                "Determines whether to scroll to the top or bottom of the page, or to an element.",
+                true,
+                ""
+            ],
+            [
+                "query",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $2130d30de6a4afe4$export$2e2bcd8739ae039), {
+                    query: obj.query,
+                    name: "scroll",
+                    onChange: (event, value)=>{
+                        obj.query = value;
+                        onChange(event);
+                    }
+                }),
+                "A CSS selector or jQuery expression that targets the element to scroll to.",
+                !obj.target,
+                !obj.query ? "query required" : ""
+            ],
+            [
+                "vertical",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+                    variant: "standard",
+                    size: "small",
+                    value: obj.block || "default",
+                    onChange: (event)=>{
+                        obj.block = event.target.value !== "default" ? event.target.value : undefined;
+                        onChange(event);
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "default",
+                            children: "(default)"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "start",
+                            children: "scroll to top of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "center",
+                            children: "scroll to middle of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "end",
+                            children: "scroll to bottom of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "nearest",
+                            children: "don't move if already in view"
+                        })
+                    ]
+                }),
+                "Determines vertical scrolling behavior.",
+                obj.block !== undefined
+            ],
+            [
+                "horizontal",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+                    variant: "standard",
+                    size: "small",
+                    value: obj.inline || "default",
+                    onChange: (event)=>{
+                        obj.inline = event.target.value !== "default" ? event.target.value : undefined;
+                        onChange(event);
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "default",
+                            children: "(default)"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "start",
+                            children: "scroll to left of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "center",
+                            children: "scroll to middle of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "end",
+                            children: "scroll to right of container"
+                        }),
+                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                            value: "nearest",
+                            children: "don't move if already in view"
+                        })
+                    ]
+                }),
+                "Determines horizontal scrolling behavior.",
+                obj.inline !== undefined
+            ],
+            [
+                "when",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9e61779fc08ef5f9$export$2e2bcd8739ae039), {
+                    value: obj.when,
+                    onChange: (event, value)=>{
+                        obj.when = value || undefined;
+                        onChange(event);
+                    }
+                }),
+                "A formula that determines whether the select is evaluated or bypassed.",
                 obj.when !== undefined
             ]
         ]
@@ -45698,6 +45945,10 @@ var $a14b100ac6e4875e$export$2e2bcd8739ae039 = ()=>{
             });
             else if (item.type === "action" && item.name === "select" && item.children && item.children[0]) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $091ebf7d4ef406ba$export$2e2bcd8739ae039), {
                 item: item.children[0],
+                onChange: onChange
+            });
+            else if (item.type === "action" && item.name === "scroll") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5336a1e77bfac892$export$2e2bcd8739ae039), {
+                item: item,
                 onChange: onChange
             });
             else if (item.type === "action" && item.name === "snooze") return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0cefddcd9c67e5db$export$2e2bcd8739ae039), {
@@ -47055,15 +47306,15 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item  })=>{
 
 
 
-var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
-}), "DoNotDisturb");
-
-
-
 var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
 }), "LowPriority");
+
+
+
+var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
+}), "DoNotDisturb");
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
@@ -47486,6 +47737,11 @@ const $d92259c5199083bc$var$ActionTypes = [
         name: "repeat",
         advanced: true,
         help: "Repeat a set of actions until a condition is met."
+    },
+    {
+        name: "scroll",
+        advanced: true,
+        help: "Scroll to the top or bottom of the page, or to an element."
     },
     {
         name: "snooze",

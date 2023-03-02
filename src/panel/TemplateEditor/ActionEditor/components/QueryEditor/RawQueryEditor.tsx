@@ -11,13 +11,13 @@ export default ({ query, onChange }: Props) => {
     const [value, setValue] = useState("");
 
     useEffect(() => {
-        const value = syphonx.formatJQueryExpression(query);
+        const value = syphonx.renderJQuery(query);
         setValue(value || "");
     }, [query]);
 
     function validate(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         try {            
-            syphonx.parseJQueryExpression(event.target.value);
+            syphonx.parseJQuery(event.target.value);
             return true;
         }
         catch (err) {
@@ -29,7 +29,7 @@ export default ({ query, onChange }: Props) => {
         if (value) {
             let query: syphonx.SelectQuery | undefined;
             try {
-                query = syphonx.parseJQueryExpression(value);
+                query = syphonx.parseJQuery(value);
             }
             catch (err) {
                 console.error("Attempt to commit invalid query", err); // validation should prevent this from ever happening

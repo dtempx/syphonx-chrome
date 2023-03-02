@@ -27,7 +27,7 @@ export default ({ query, name, type, repeated, onChange }: Props) => {
 
     const value = useMemo(() => {
         if (query && query.length > 0 && query[0])
-            return syphonx.formatJQueryExpression(query[0]) || "";
+            return syphonx.renderJQuery(query[0]) || "";
         else
             return "";
     }, [query]);
@@ -46,7 +46,7 @@ export default ({ query, name, type, repeated, onChange }: Props) => {
                         <InputAdornment position="end">
                             {query && query.length > 1 ? (
                                 <Tooltip
-                                    title={<span style={{ whiteSpace: "pre-line" }}>{query ? query.map(q => syphonx.formatJQueryExpression(q)).join("\n") : null}</span>}
+                                    title={<span style={{ whiteSpace: "pre-line" }}>{query ? query.map(q => syphonx.renderJQuery(q)).join("\n") : null}</span>}
                                 >
                                     <Chip
                                         label={query.length}

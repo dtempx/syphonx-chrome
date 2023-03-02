@@ -62,6 +62,11 @@ const ActionTypes: Array<{ name: TemplateAction, advanced: boolean, help: string
         help: "Repeat a set of actions until a condition is met."
     },
     {
+        name: "scroll",
+        advanced: true,
+        help: "Scroll to the top or bottom of the page, or to an element."
+    },
+    {
         name: "snooze",
         advanced: true,
         help: "Snooze for a set period of time."

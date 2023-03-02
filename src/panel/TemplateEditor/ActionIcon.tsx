@@ -15,6 +15,7 @@ import {
     Autorenew as RepeatIcon,
     FormatListNumberedRtl as RepeatedIcon,
     PriorityHighOutlined as RequiredIcon,
+    ImportExport as ScrollIcon,
     HighlightAlt as SelectIcon,
     Snooze as SnoozeIcon,
     Abc as StringTypeIcon,
@@ -56,6 +57,8 @@ export default ({ name, ...props }: Props) => {
         return <RepeatedIcon {...props} />;
     else if (name === "required")
         return <RequiredIcon {...props} />;
+    else if (name === "scroll")
+        return <ScrollIcon {...props} />;
     else if (name === "select")
         return <SelectIcon {...props} />;
     else if (name === "string")

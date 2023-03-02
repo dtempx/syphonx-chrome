@@ -24,7 +24,7 @@ export default ({ query, name, onChange }: Props) => {
 
     const value = useMemo(() => {
         if (query && query.length > 0 && query[0])
-            return syphonx.formatJQueryExpression(query) || "";
+            return syphonx.renderJQuery(query) || "";
         else
             return "";
     }, [query]);

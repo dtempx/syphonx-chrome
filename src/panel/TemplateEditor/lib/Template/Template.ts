@@ -227,6 +227,8 @@ export class Template {
             obj = { error: {} };
         else if (action === "repeat")
             obj = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
+        else if (action === "scroll")
+            obj = { scroll: {} };
         else if (action === "select")
             obj = { select: [{ name: "value1", query: [["h1"]] }] };
         else if (action === "snooze")
@@ -354,6 +356,13 @@ export class Template {
                     }
                     //item.conditional = !!repeatObj.when; // todo
                     //item.active = repeatObj.active; // todo
+                }
+                else if (name === "scroll") {
+                    const scrollObj = obj as syphonx.Scroll;
+                    if (!scrollObj.target && !scrollObj.query) {
+                        item.alert = "query required";
+                    }
+                    item.conditional = !!scrollObj.when;
                 }
                 else if (name === "select") {
                     const selectObj = obj as syphonx.Select[];
@@ -567,6 +576,7 @@ export type TemplateAction =
     "item" |
     "repeat" |
     "select" |
+    "scroll" |
     "snooze" |
     "transform" |
     "waitfor" |

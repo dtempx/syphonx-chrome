@@ -324,6 +324,19 @@ async function extract(state) {
         else
             return "unknown";
     }
+    function waitForScrollEnd() {
+        return new Promise(resolve => {
+            let timer = setTimeout(() => resolve(), 3000);
+            function onScroll() {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    removeEventListener("scroll", onScroll);
+                    resolve();
+                }, 200);
+            }
+            addEventListener("scroll", onScroll);
+        });
+    }
     function $merge(source, target) {
         for (const targetAttr of target[0].attributes) {
             const sourceAttr = Array.from(source[0].attributes).find(attr => attr.name === targetAttr.name);
@@ -422,8 +435,8 @@ async function extract(state) {
             }
             return false;
         }
-        async click({ query, waitfor, snooze, required, retry, active, when }) {
-            if (this.online && (active ?? true)) {
+        async click({ query, waitfor, snooze, required, retry, when, active = true }) {
+            if (this.online && active) {
                 if (this.when(when, "CLICK")) {
                     const mode = snooze ? snooze[2] || "before" : undefined;
                     if (snooze && (mode === "before" || mode === "before-and-after")) {
@@ -561,6 +574,9 @@ async function extract(state) {
             else if (action.hasOwnProperty("repeat")) {
                 await this.repeat(action.repeat);
             }
+            else if (action.hasOwnProperty("scroll")) {
+                await this.scroll(action.scroll);
+            }
             else if (action.hasOwnProperty("snooze")) {
                 await this.snooze(action.snooze);
             }
@@ -579,16 +595,18 @@ async function extract(state) {
                 if (y) {
                     this.state.yield = {
                         step: step + 1,
-                        timeout: y.timeout
+                        context: y.context,
+                        timeout: y.timeout,
+                        params: y.params
                     };
                     return "yield";
                 }
             }
             return null;
         }
-        async each({ query, actions, context, active, when }) {
+        async each({ query, actions, context, when, active = true }) {
             const $ = this.jquery;
-            if (active ?? true) {
+            if (active) {
                 if (this.when(when, "CLICK")) {
                     const result = this.query({ query, repeated: true });
                     if (result && result.nodes.length > 0) {
@@ -622,7 +640,7 @@ async function extract(state) {
                 }
             }
         }
-        error({ query, code = "custom-error", message = "Custom template error", level = 1, stop, active = true, when }) {
+        error({ query, code = "custom-error", message = "Custom template error", level = 1, stop, when, active = true }) {
             if (active) {
                 if (query) {
                     const result = this.query({ query, type: "boolean", repeated: false });
@@ -926,35 +944,45 @@ async function extract(state) {
             }
             return [pass, result];
         }
-        async repeat({ actions, limit = 100, errors = 1 }) {
-            let errorCount = 0;
-            let baselineErrorCount = this.state.errors.length;
-            let i = 0;
-            let code = undefined;
-            while (i < limit) {
-                this.log(`REPEAT #${++i} (limit=${limit})`);
-                this.state.vars._page = i;
-                for (const action of actions) {
-                    const step = actions.indexOf(action) + 1;
-                    code = await this.dispatch(action, step);
-                    if (code) {
-                        this.log(`REPEAT #${i} -> break at step ${step}/${actions.length}, code=${code}`);
-                        break;
+        async repeat({ actions, limit = 100, errors = 1, when, active = true }) {
+            if (active) {
+                if (this.when(when, "REPEAT")) {
+                    let errorCount = 0;
+                    let baselineErrorCount = this.state.errors.length;
+                    let i = 0;
+                    let code = undefined;
+                    while (i < limit) {
+                        this.log(`REPEAT #${++i} (limit=${limit})`);
+                        this.state.vars._page = i;
+                        for (const action of actions) {
+                            const step = actions.indexOf(action) + 1;
+                            code = await this.dispatch(action, step);
+                            if (code) {
+                                this.log(`REPEAT #${i} -> break at step ${step}/${actions.length}, code=${code}`);
+                                break;
+                            }
+                        }
+                        if (!code) {
+                            this.log(`REPEAT #${i} -> ${actions.length} steps completed`);
+                            errorCount = this.state.errors.length - baselineErrorCount;
+                            if (errorCount >= errors) {
+                                this.appendError("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`, 1);
+                                break;
+                            }
+                        }
+                        else {
+                            break;
+                        }
                     }
-                }
-                if (!code) {
-                    this.log(`REPEAT #${i} -> ${actions.length} steps completed`);
-                    errorCount = this.state.errors.length - baselineErrorCount;
-                    if (errorCount >= errors) {
-                        this.appendError("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`, 1);
-                        break;
-                    }
+                    this.log(`REPEAT ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
                 }
                 else {
-                    break;
+                    this.log(`REPEAT SKIPPED ${when}`);
                 }
             }
-            this.log(`REPEAT ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
+            else {
+                this.log(`REPEAT BYPASSED ${when}`);
+            }
         }
         resolveOperands(operands, result) {
             for (let i = 0; i < operands.length; ++i) {
@@ -1349,6 +1377,43 @@ async function extract(state) {
             }
             this.log(`${actions.length} steps completed`);
         }
+        async scroll({ query, target, behavior = "smooth", block, inline, when, active = true }) {
+            if (this.online && active) {
+                if (this.when(when, "SCROLL")) {
+                    if (target === "top" || target === "bottom") {
+                        const top = target === "bottom" ? document.body.scrollHeight : 0;
+                        const left = 0;
+                        window.scrollTo({ top, left, behavior });
+                        const w0 = [Math.floor(window.scrollX), Math.floor(window.scrollY)];
+                        await waitForScrollEnd();
+                        const w1 = [Math.floor(window.scrollX), Math.floor(window.scrollY)];
+                        this.log(`SCROLL ${when || "(default)"} scroll to ${target} from [${w0}] to [${w1}]`);
+                    }
+                    else if (query) {
+                        const result = this.query({ query, repeated: false });
+                        if (result && result.nodes.length > 0) {
+                            const element = result.nodes[0];
+                            const { top, left } = element.getBoundingClientRect();
+                            const elementPos = [window.scrollX + Math.floor(left), window.scrollY + Math.floor(top)];
+                            const w0 = [Math.floor(window.scrollX), Math.floor(window.scrollY)];
+                            element.scrollIntoView({ behavior, block, inline });
+                            await waitForScrollEnd();
+                            const w1 = [Math.floor(window.scrollX), Math.floor(window.scrollY)];
+                            this.log(`SCROLL ${when || "(default)"} -> [${this.nodeKey(result.nodes)}] scroll to element at [${elementPos}] from [${w0}] to [${w1}]`);
+                        }
+                    }
+                    else {
+                        this.log(`SCROLL ${when || "(default)"} INVALID TARGET`);
+                    }
+                }
+                else {
+                    this.log(`SCROLL SKIPPED ${when}`);
+                }
+            }
+            else {
+                this.log(`SCROLL BYPASSED ${when}`);
+            }
+        }
         select(selects, pivot = false) {
             const data = {};
             for (const select of selects) {
@@ -1628,8 +1693,8 @@ async function extract(state) {
                 return true;
             }
         }
-        async waitfor({ query, select, timeout, on = "any", required, pattern, when, active }, context) {
-            if (this.online && (active ?? true)) {
+        async waitfor({ query, select, timeout, on = "any", required, pattern, when, active = true }, context) {
+            if (this.online && active) {
                 if (this.when(when, "WAITFOR")) {
                     if (timeout === undefined) {
                         timeout = 30;
@@ -1753,11 +1818,11 @@ async function extract(state) {
             }
             return true;
         }
-        yield({ active, when, timeout }) {
-            if (this.online && (active ?? true)) {
+        yield({ when, context, timeout, params, active = true }) {
+            if (this.online && active) {
                 if (this.when(when, "YIELD")) {
-                    this.log(`YIELD ${when || "(default)"} -> timeout=${timeout || "(default)"}`);
-                    return { timeout };
+                    this.log(`YIELD ${when || "(default)"} -> timeout=${timeout || "(default)"}${params ? `\n${JSON.stringify(params)}` : ""}`);
+                    return { context, timeout, params };
                 }
                 else {
                     this.log(`YIELD SKIPPED ${when}`);

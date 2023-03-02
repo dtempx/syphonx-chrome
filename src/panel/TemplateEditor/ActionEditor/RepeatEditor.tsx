@@ -14,7 +14,7 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    const obj = item?.obj as syphonx.Repeat & { when: string | undefined, active: boolean }; //todo: remove shim when syphonx-core updated
+    const obj = item?.obj as syphonx.Repeat;
     return obj ? (
         <ComplexPropertyGrid
             items={[
