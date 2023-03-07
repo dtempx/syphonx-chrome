@@ -34,6 +34,7 @@ yarn install
 # Build/Package
 * `yarn build` to build Chrome Extension package
 * `yarn start` to test UI outside of Chrome
+* `yarn upgrade syphonx-lib --latest` to update dependencies
 
 
 # Test Chrome Extension

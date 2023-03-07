@@ -3,11 +3,14 @@ import { useTemplate } from "../context";
 import { Template, TemplateItem } from "../lib";
 
 import {
+    Box,
     IconButton,
     ListItemIcon,
     ListItemText,
     Menu,
-    MenuItem
+    MenuItem,
+    SxProps,
+    Theme
 } from "@mui/material";
 
 import {
@@ -21,16 +24,17 @@ from "@mui/icons-material";
 
 export interface Props {
     item: TemplateItem;
+    sx?: SxProps<Theme>;
 }
 
-export default ({ item }: Props) => {
+export default ({ item, sx }: Props) => {
     const [anchor, setAnchor] = useState<HTMLElement | undefined>();
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
     const open = !!anchor;
 
     return (
-        <>
+        <Box sx={sx}>
             <IconButton
                 size="small"
                 onClick={event => setAnchor(event.currentTarget)}
@@ -84,6 +88,6 @@ export default ({ item }: Props) => {
                     <ListItemText>Delete</ListItemText>
                 </MenuItem>
             </Menu>
-        </>
+        </Box>
     );
 };

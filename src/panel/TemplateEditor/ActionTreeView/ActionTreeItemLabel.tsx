@@ -45,17 +45,20 @@ export default ({ item }: Props) => {
                 )}
                 <Tooltip title={item.icon}><ActionIcon name={item.icon} fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>
                 <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>
-                    <Typography variant="caption">{item.caption}</Typography>
+                    <Typography variant="caption">{item.name || item.caption}</Typography>
                     {item.num && <Typography variant="caption" color="primary.light" sx={{ ml: "2px" }}>#{item.num}</Typography>}
+                    {item.name && item.caption && <Tooltip title={item.caption}><Typography variant="caption" color="primary.light" sx={{ ml: 1 }}>{item.caption}</Typography></Tooltip>}
                 </Typography>
-                {item.conditional && <Tooltip title="conditional"><ConditionalIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
-                {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
-                {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
-                {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>}
-                {item.alert && <Tooltip title={item.alert}><AlertIcon color="warning" fontSize="small" /></Tooltip>}
-                {item.active === false && <Tooltip title="disabled"><DisabledIcon color="warning" fontSize="small" /></Tooltip>}
             </Typography>
-            {selected?.key === item.key ? <ActionTreeItemMenu item={item} /> : undefined}
+            <Stack direction="row">
+                {item.alert && <Tooltip title={item.alert}><AlertIcon color="warning" fontSize="small" sx={{ position: "relative", top: 4 }} /></Tooltip>}
+                {item.conditional && <Tooltip title="conditional"><ConditionalIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
+                {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
+                {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
+                {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
+                {item.active === false && <Tooltip title="disabled"><DisabledIcon color="warning" fontSize="small" sx={{ position: "relative", top: 4 }} /></Tooltip>}
+                <ActionTreeItemMenu item={item} sx={{ visibility: selected?.key === item.key ? "visible" : "hidden" }} />
+            </Stack>
         </Stack>
     );
 };

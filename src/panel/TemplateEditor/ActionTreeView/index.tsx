@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Box } from "@mui/material";
 import { TreeView } from "@mui/lab";
 import { useTemplate } from "../context";
 import { Template } from "../lib";
 import ActionTreeItem from "./ActionTreeItem";
+
+import {
+    Alert,
+    Box
+} from "@mui/material";
 
 import {
     ExpandMore as CollapseIcon,
@@ -25,6 +29,7 @@ export default () => {
 
     return (
         <Box>
+            {template.error && <Alert severity="error">{template.error}</Alert>}
             <TreeView
                 expanded={expanded}
                 selected={selected}

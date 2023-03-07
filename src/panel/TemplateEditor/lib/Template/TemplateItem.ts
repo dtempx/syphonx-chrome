@@ -11,7 +11,7 @@ export class TemplateItem {
      * A reference to the template wrapper that contains this template item wrapper.
      */
     template: Template;
-  
+
     /**
      * A unique identifier for a template object within the template document.
      */
@@ -54,7 +54,7 @@ export class TemplateItem {
 
     /**
      * Indicates whether item specifies a when condition.
-     */    
+     */
     conditional?: boolean;
 
     /**
@@ -124,7 +124,6 @@ export class TemplateItem {
         this.key = item.key;
         this.type = item.type;
         this.name = item.name;
-        this.caption = item.caption;
         this.icon = item.icon;
         this.alert = item.alert;
         this.required = item.required;
@@ -139,15 +138,18 @@ export class TemplateItem {
         this.num = item.num;
         this.active = item.active;
 
-        if (!item.caption) {
-          if (this.name)
-              this.caption = this.name;
-          else if (this.repeated)
-              this.caption = "(array)";
-          else if (this.type === "select" && (this.obj as syphonx.Select)?.type === "object")
-              this.caption = "(object)";
-          else
-              this.caption = "(value)";
-        }  
+        if (this.type === "select" && !this.name) {
+            if (this.name)
+                this.caption = this.name;
+            else if (this.repeated)
+                this.caption = "(array)";
+            else if (this.type === "select" && (this.obj as syphonx.Select)?.type === "object")
+                this.caption = "(object)";
+            else
+                this.caption = "(value)";
+        }
+        else if (typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) {
+            this.caption = (this.obj as Record<string, string>).name;
+        }
     }
 }

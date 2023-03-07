@@ -1,7 +1,11 @@
 import React from "react";
-import { Switch } from "@mui/material";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
+
+import {
+    Switch,
+    TextField
+} from "@mui/material";
 
 import {
     ComplexPropertyGrid,
@@ -18,6 +22,22 @@ export default ({ item, onChange }: Props) => {
     const obj = item?.obj as syphonx.Each;
     return obj ? (
         <ComplexPropertyGrid items={[
+            [
+                "name",
+                <TextField
+                    variant="standard"
+                    size="small"
+                    placeholder="Name for this action"
+                    inputProps={{ maxLength: 32 }}
+                    value={obj.name}
+                    onChange={event => {
+                        obj.name = event.target.value || undefined;
+                        onChange(event);
+                    }}
+                />,
+                "An optional descriptive name briefly summarizing the purpose of the each action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
+                true
+            ],
             [
                 "query",
                 <QueryEditorField
