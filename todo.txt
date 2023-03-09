@@ -1,6 +1,11 @@
-action scroll to element
-sendkeys action for example to hit escape key to close a dialog
+PropertyGridEditor for template and yield params
+Change add action to a dialog
+Adding a select should prompt for the first selector
+
+DONE: action scroll to element
 case action { "case": [ { "when": "...", "actions": [...] } ] }
+sendkeys action for example to hit escape key to close a dialog
+
 
 Test urls
 Test runner
@@ -21,7 +26,6 @@ view unlinked fields from contract
 refresh should have an option to renavigate the page
 ability to select steps to run
 waitfor mode: exact, range, forever (timeout = -1 or null)
-specify input params
 new template should have a default select
 opening a template loads contract from closest parent directory
 ability to create and edit a data contract

@@ -139,16 +139,15 @@ export class TemplateItem {
         this.active = item.active;
 
         if (this.type === "select" && !this.name) {
-            if (this.name)
-                this.caption = this.name;
-            else if (this.repeated)
-                this.caption = "(array)";
+            if (this.repeated)
+                this.name = "(array)";
             else if (this.type === "select" && (this.obj as syphonx.Select)?.type === "object")
-                this.caption = "(object)";
+                this.name = "(object)";
             else
-                this.caption = "(value)";
+                this.name = "(value)";
         }
-        else if (typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) {
+
+        if (this.type === "action" && typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) {
             this.caption = (this.obj as Record<string, string>).name;
         }
     }

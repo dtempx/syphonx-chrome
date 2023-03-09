@@ -24789,11 +24789,11 @@ class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
         this.num = item.num;
         this.active = item.active;
         if (this.type === "select" && !this.name) {
-            if (this.name) this.caption = this.name;
-            else if (this.repeated) this.caption = "(array)";
-            else if (this.type === "select" && this.obj?.type === "object") this.caption = "(object)";
-            else this.caption = "(value)";
-        } else if (typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) this.caption = this.obj.name;
+            if (this.repeated) this.name = "(array)";
+            else if (this.type === "select" && this.obj?.type === "object") this.name = "(object)";
+            else this.name = "(value)";
+        }
+        if (this.type === "action" && typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) this.caption = this.obj.name;
     }
 }
 
@@ -46827,7 +46827,14 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                     variant: "standard",
                     size: "small",
-                    value: item.caption
+                    placeholder: "(unnamed)",
+                    value: obj.name,
+                    inputProps: {
+                        readOnly: true
+                    },
+                    sx: {
+                        caretColor: "transparent"
+                    }
                 }),
                 "Name of selected value, or blank representing a single unnamed value.",
                 true,
@@ -47431,7 +47438,7 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     true
                 ],
                 [
-                    "context",
+                    "params",
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a51aaad515892d7c$export$2e2bcd8739ae039), {
                         value: obj.context,
                         onChange: (event, value)=>{
@@ -47439,8 +47446,8 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                             onChange(event);
                         }
                     }),
-                    "Specifies host context. Used to trigger screenshots and other host responsibilities.",
-                    obj.context !== undefined
+                    "Specifies parameters to pass back to the host. Can be used to trigger screenshots and other host responsibilities.",
+                    obj.params !== undefined
                 ],
                 [
                     "timeout",
@@ -48953,7 +48960,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 variant: "caption",
-                                children: item.name || item.caption
+                                children: item.name
                             }),
                             item.num && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                 variant: "caption",
@@ -48966,7 +48973,7 @@ var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
                                     item.num
                                 ]
                             }),
-                            item.name && item.caption && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                            item.caption && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                                 title: item.caption,
                                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                                     variant: "caption",

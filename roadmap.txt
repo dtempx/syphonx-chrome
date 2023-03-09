@@ -1,10 +1,14 @@
-migration: venom-to-syphonx
-basic test runner
-new actions: scroll, case, sendkeys
-selector/regexp AI
+venom-to-syphonx conversion tool
+scroll action
 contract matcher (product-page, search-page, etc.)
+basic test runner
+selector/regexp AI
+case action
+type action
 template access control: email, api-key
 template change history: viewer (who, when, waht/diffs), rollback
 selector comments
 selector flagging
 automated test runner
+
+https://pricespider.atlassian.net/jira/software/c/projects/PLATFORM/boards/364?selectedIssue=PLATFORM-73

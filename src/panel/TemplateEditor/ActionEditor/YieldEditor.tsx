@@ -53,7 +53,7 @@ export default ({ item, onChange }: Props) => {
                         true
                     ],
                     [
-                        "context",
+                        "params",
                         <PlainTextField
                             value={obj.context}
                             onChange={(event, value) => {
@@ -61,8 +61,8 @@ export default ({ item, onChange }: Props) => {
                                 onChange(event);
                             }}
                         />,
-                        "Specifies host context. Used to trigger screenshots and other host responsibilities.",
-                        obj.context !== undefined
+                        "Specifies parameters to pass back to the host. Can be used to trigger screenshots and other host responsibilities.",
+                        obj.params !== undefined
                     ],
                     [
                         "timeout",

@@ -45,9 +45,9 @@ export default ({ item }: Props) => {
                 )}
                 <Tooltip title={item.icon}><ActionIcon name={item.icon} fontSize="small" sx={{ color: "primary.light" }} /></Tooltip>
                 <Typography variant="caption" sx={{ position: "relative", top: -6, left: 2, height: 12, mr: 1 }}>
-                    <Typography variant="caption">{item.name || item.caption}</Typography>
+                    <Typography variant="caption">{item.name}</Typography>
                     {item.num && <Typography variant="caption" color="primary.light" sx={{ ml: "2px" }}>#{item.num}</Typography>}
-                    {item.name && item.caption && <Tooltip title={item.caption}><Typography variant="caption" color="primary.light" sx={{ ml: 1 }}>{item.caption}</Typography></Tooltip>}
+                    {item.caption && <Tooltip title={item.caption}><Typography variant="caption" color="primary.light" sx={{ ml: 1 }}>{item.caption}</Typography></Tooltip>}
                 </Typography>
             </Typography>
             <Stack direction="row">

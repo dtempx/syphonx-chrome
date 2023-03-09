@@ -33,7 +33,10 @@ export default ({ item, onChange }: Props) => {
                     <TextField
                         variant="standard"
                         size="small"
-                        value={item.caption}
+                        placeholder="(unnamed)"
+                        value={obj.name}
+                        inputProps={{ readOnly: true }}
+                        sx={{ caretColor: "transparent" }}
                     />,
                     "Name of selected value, or blank representing a single unnamed value.",
                     true,
