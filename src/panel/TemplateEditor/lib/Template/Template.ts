@@ -124,7 +124,8 @@ export class Template {
         const manifest = chrome.runtime.getManifest();
         const obj = {
             ...omit(this.obj, "selected"),
-            toolVersion: manifest.version
+            toolVersion: undefined,
+            editorVersion: manifest.version
         };
         let json = JSON.stringify(obj, null, 2) || "";
         json = formatTemplateJson(json);

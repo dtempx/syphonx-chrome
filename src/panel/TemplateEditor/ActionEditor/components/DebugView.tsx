@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import { useApp, useTemplate } from "../../context";
-import { formatTemplateJson, Template } from "../lib";
+import { useApp, useTemplate } from "./context";
+import { formatTemplateJson, Template } from "./lib";
 
 export default () => {
     const { template: json } = useTemplate();

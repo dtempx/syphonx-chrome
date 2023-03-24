@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import * as syphonx from "syphonx-lib";
-import { clone } from "../../../../../../lib";
+import { clone } from "../lib";
 import FunctionEditor from "../FunctionEditor/index";
 import SelectorField from "../SelectorField";
 
@@ -13,10 +13,11 @@ import {
 export interface Props {
     value: syphonx.SelectQuery;
     onChange: (event: React.SyntheticEvent, value: syphonx.SelectQuery) => void;
+    context?: string;
     sx?: SxProps<Theme>;
 }
 
-export default ({ value, onChange, sx }: Props) => {
+export default ({ value, onChange, context, sx }: Props) => {
     const select = useMemo(() => value || [""], [value]);
 
     function onChangeSelector(event: Event | React.SyntheticEvent, value: string) {
@@ -42,6 +43,7 @@ export default ({ value, onChange, sx }: Props) => {
             <SelectorField
                 value={select[0]}
                 onChange={(event, value) => onChangeSelector(event, value)}
+                context={context}
             />
 
             {/* !select[0] && <Overview /> */}

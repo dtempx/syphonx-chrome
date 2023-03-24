@@ -22,14 +22,14 @@ export function log(message: string): void {
         console.log("BACKGROUND", message);
 }
 
-export async function queryTracking(): Promise<string[]> {
-    const { result } = await sendMessage<{ result: string[] }>("queryTracking");
-    return result || [];
-}
-
 export async function selectElements(selectors: string[]): Promise<Array<string | null>> {
     const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", selectors);
     return result || [];
+}
+
+export async function sliceHtml(upLimit = 3, downLimit = 3): Promise<string> {
+    const { result } = await sendMessage<{ result: string }>("sliceHtml", upLimit, downLimit);
+    return result;
 }
 
 function sendMessage<T = unknown>(key: string, ...params: unknown[]): Promise<T> {

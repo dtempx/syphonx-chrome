@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { TransitionUp } from "../components/";
-import { useTemplate } from "../../context";
-import { Template } from "../lib";
+import { useTemplate } from "./context";
+import { Template } from "./lib";
 import NameField from "./NameField";
 
 import {

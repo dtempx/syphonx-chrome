@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FallbackProps } from "react-error-boundary";
 import { LoadingButton } from "@mui/lab";
 import { cloud } from "../lib";
+import { useApp } from "../context";
 
 import {
     Alert,
@@ -19,6 +20,7 @@ import {
 type Status = "unsent" | "sending" | "sent" | "error";
 
 export default ({ error, resetErrorBoundary }: FallbackProps) => {
+    const { email } = useApp();
     const [expanded, setExpanded] = useState(false);
     const [comments, setComments] = useState("");
     const [status, setStatus] = useState<Status>("unsent");
@@ -35,7 +37,8 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
         const ok = await cloud.log({
             key: "error",
             version: manifest.version,
-            error: error.stack || error.message,
+            error: error.stack || error.message || JSON.stringify(error),
+            email,
             comments
         });
         if (ok)

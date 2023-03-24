@@ -1,6 +1,7 @@
 import React from "react";
 import { BaseTextFieldProps } from "@mui/material";
 import { ValidateField } from ".";
+import { regexp } from "./lib";
 
 export interface Props extends BaseTextFieldProps {
     value: string | undefined;
@@ -11,8 +12,8 @@ export interface Props extends BaseTextFieldProps {
 }
 
 const regexps = {
-    "snake-case": /^_?[a-z][a-z0-9_]*$/,
-    "kebab-case": /^[a-z][a-z0-9-]*$/
+    "snake-case": regexp.snakeCase,
+    "kebab-case": regexp.kebabCase
 };
 
 export default ({ value, validation, onChange, onHitEnterKey, ...props }: Props) => {

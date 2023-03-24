@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useApp, useTemplate } from "../context";
 import { background, Template } from "../lib";
 import { applyTemplate } from "./applyTemplate";

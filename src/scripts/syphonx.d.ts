@@ -2,8 +2,8 @@ import * as syphonx from "syphonx-lib";
 
 export interface SyphonX {
     extract: (template: syphonx.Template) => Promise<syphonx.ExtractResult | undefined>;
-    dictionary: Set<string>;
     tracking: boolean;
+    reset?: () => void;
 }
 
 declare global {

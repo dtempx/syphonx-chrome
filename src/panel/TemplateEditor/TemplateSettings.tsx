@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
-import { background, Template } from "./lib";
+import { background, regexp, Template } from "./lib";
 import { PropertyGrid, ValidateField } from "./components";
 
 export default () => {
@@ -26,7 +26,7 @@ export default () => {
                                 setTemplate(template.json());                
                             }}
                             onValidate={(event, value) => {
-                                return value ? /^https?:\/\/[^\/]/.test(value) : true;
+                                return value ? regexp.url.test(value) : true;
                             }}
                         />
                         <IconButton

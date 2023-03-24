@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { TemplateItem } from "../lib";
+import { TemplateItem } from "./lib";
 import SelectTypeDropdown from "./SelectTypeDropdown";
 import * as syphonx from "syphonx-lib";
 

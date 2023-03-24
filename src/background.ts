@@ -4,8 +4,8 @@ const scriptMap: Record<string, Function> = {
     "applyTemplate": scripts.applyTemplate,
     "disableTracking": scripts.disableTracking,
     "enableTracking": scripts.enableTracking,
-    "queryTracking": scripts.queryTracking,
     "selectElements": scripts.selectElements,
+    "sliceHtml": scripts.sliceHtml
 };
 
 /**
@@ -65,7 +65,6 @@ async function injectAll(tabId: number): Promise<void> {
     if (!injected) {
         await executeScriptFile(tabId, "jquery.slim.js");
         await executeScriptFile(tabId, "syphonx.js");
-        await executeScriptFile(tabId, "syphonx.dictionary.js");
         await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
         console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
@@ -79,13 +78,18 @@ function waitForNavigation(): Promise<void> {
                 resolve();
             }
         }
-        chrome.webNavigation.onCompleted.addListener(onCompleted);    
+        chrome.webNavigation.onCompleted.addListener(onCompleted);
     });
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.log) {
         console.log("MESSAGE", message.log);
+        return false; // immediate synchronous response
+    }
+
+    if (message.click) {
+        console.log("MESSAGE", "click", { message, sender });
         return false; // immediate synchronous response
     }
 
@@ -137,5 +141,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse({ error });
         }
     })();
+
     return true; // response will be sent asynchronously
 });
+
+console.log("BACKGROUND ready");

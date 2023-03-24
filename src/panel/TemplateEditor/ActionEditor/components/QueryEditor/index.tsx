@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { TitleBar, TransitionUp } from "../../components";
-import { clone } from "../../lib";
+import { clone } from "./lib";
 import ActionIcon from "../../../ActionIcon";
 import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
@@ -108,7 +108,11 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
                 </Box>
 
                 <Divider sx={{ mt: 1, mb: 2 }} />
-                <SelectorEditor value={select[index]} onChange={onChangeQuery} />
+                <SelectorEditor
+                    value={select[index]}
+                    onChange={onChangeQuery}
+                    context={name}
+                />
             </DialogContent>
 
             <DialogActions>

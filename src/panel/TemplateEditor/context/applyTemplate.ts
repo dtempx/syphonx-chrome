@@ -1,5 +1,5 @@
 import { Schema, Validator } from "jsonschema";
-import { background, removeDOMRefs, snakeify, Template } from "../lib";
+import { background, snakeify, Template } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 export async function applyTemplate(template: Template, schema?: Schema): Promise<syphonx.ExtractResult> {
@@ -9,7 +9,7 @@ export async function applyTemplate(template: Template, schema?: Schema): Promis
 
             if (result?.data && schema) {
                 const validator = new Validator();
-                const data = removeDOMRefs(result.data);
+                const data = syphonx.removeDOMRefs(result.data);
                 const { errors } = validator.validate(data, schema);
                 for (const error of errors) {
                     const code = `contract-${snakeify(error.name)}` as syphonx.ExtractErrorCode;

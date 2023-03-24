@@ -1,4 +1,5 @@
-const serviceUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+const defaultUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+let serviceUrl = defaultUrl;
 
 export interface File {
     name: string;
@@ -18,12 +19,23 @@ export async function directory(): Promise<File[]> {
 export type LogDataType = "error";
 
 export interface LogData extends Record<string, unknown> {
-    key: LogDataType
+    key: LogDataType;
+}
+
+export async function autoselect(html: string, context = ""): Promise<string> {
+    const method = "POST";
+    const body = JSON.stringify({ html, context });
+    const headers = { "Content-Type": "application/json" };
+    const response = await fetch(`${serviceUrl}/autoselect`, { method, body, headers });
+    const result = await response.json();
+    return result.selector;
 }
 
 export async function log(data: LogData): Promise<boolean> {
+    const method = "POST";
     const body = JSON.stringify(data);
-    const response = await fetch(`${serviceUrl}/log`, { method: "POST", body, headers: { "Content-Type": "application/json" } });
+    const headers = { "Content-Type": "application/json" };
+    const response = await fetch(`${serviceUrl}/log`, { method, body, headers });
     return response.ok;
 }
 
@@ -41,6 +53,10 @@ export async function read(file: string): Promise<string> {
         throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
     const content = await response2.text();
     return content;
+}
+
+export function setServiceUrl(url: string): void {
+    serviceUrl = url || defaultUrl;
 }
 
 export async function write(file: string, content: string): Promise<void> {

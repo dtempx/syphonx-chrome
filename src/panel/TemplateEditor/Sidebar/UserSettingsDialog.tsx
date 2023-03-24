@@ -1,6 +1,13 @@
 import React from "react";
-import { PropertyGrid, TitleBar, TransitionUp } from "../components";
-import { useApp } from "../context";
+import { useApp, useTemplate } from "../context";
+import { regexp } from "../lib";
+
+import {
+    PropertyGrid,
+    TitleBar,
+    TransitionUp,
+    ValidateField
+} from "../components";
 
 import {
     Dialog,
@@ -12,7 +19,6 @@ import {
     Typography
 } from "@mui/material";
 
-
 export interface Props {
     open: boolean;
     onClose: (event: React.SyntheticEvent) => void;
@@ -22,11 +28,21 @@ export default ({ open, onClose }: Props) => {
     const {
         advanced,
         setAdvanced,
+        apiKey,
+        setApiKey,
         autoOpen,
         setAutoOpen,
         debug,
-        setDebug
+        setDebug,
+        email,
+        setEmail
     } = useApp();
+
+    const {
+        serviceUrl,
+        setServiceUrl
+    } = useTemplate();
+
     return (
         <Dialog
             fullScreen
@@ -43,6 +59,33 @@ export default ({ open, onClose }: Props) => {
                     columns={[{ width: 400 }]}
                     items={[
                         [
+                            <Tooltip title="An email address used to identity your changes.">
+                                <Typography>Email</Typography>
+                            </Tooltip>,
+                            <ValidateField
+                                variant="standard"
+                                size="small"
+                                fullWidth
+                                value={email}
+                                onChange={(event, value) => setEmail(value)}
+                                onValidate={(event, value) => value ? regexp.email.test(value) : true}
+                                inputProps={{ maxLength: 64 }}
+                            />
+                        ],
+                        [
+                            <Tooltip title="A system generated API key used to grant access.">
+                                <Typography>API Key</Typography>
+                            </Tooltip>,
+                            <ValidateField
+                                variant="standard"
+                                size="small"
+                                value={apiKey}
+                                onChange={(event, value) => setApiKey(value)}
+                                onValidate={(event, value) => value ? regexp.apiKey.test(value) : true}
+                                inputProps={{ maxLength: 20 }}
+                            />
+                        ],
+                        [
                             <Tooltip title="Automatically opens the template default URL if enabled.">
                                 <Typography>Auto-open template default URL</Typography>
                             </Tooltip>,
@@ -51,7 +94,6 @@ export default ({ open, onClose }: Props) => {
                                 checked={autoOpen}
                                 onChange={() => setAutoOpen(!autoOpen)}
                             />
-                            
                         ],
                         [
                             <Tooltip title="Shows or hides advanced settings.">
@@ -71,6 +113,19 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 checked={debug}
                                 onChange={() => setDebug(!debug)}
+                            />
+                        ],
+                        [
+                            <Tooltip title="Overrides the cloud service URL for development and testing purposes.">
+                                <Typography>Cloud Service URL</Typography>
+                            </Tooltip>,
+                            <ValidateField
+                                variant="standard"
+                                size="small"
+                                fullWidth
+                                value={serviceUrl}
+                                onChange={(event, value) => setServiceUrl(value)}
+                                onValidate={(event, value) => value ? regexp.url.test(value) : true}
                             />
                         ]
                     ]}

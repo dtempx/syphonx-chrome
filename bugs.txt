@@ -1,3 +1,5 @@
+add selector dialog should reset type and repeated settings every timestamp
+
 regex's display with single back slashes in query editor but with double back slashes in property sheet
 clearing selector in query builder should delete the query
 

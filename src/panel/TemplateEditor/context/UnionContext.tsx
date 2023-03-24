@@ -1,15 +1,21 @@
 import React from "react";
 
 import { ContractProvider } from "./ContractContext";
-import { TemplateProvider } from "./TemplateContext";
 import { DataProvider } from "./DataContext";
+import { DebugProvider } from "./DebugContext";
+import { PageProvider } from "./PageContext";
+import { TemplateProvider } from "./TemplateContext";
 
 export default ({ children }: { children: JSX.Element }) => (
-    <TemplateProvider>
-        <ContractProvider>
-            <DataProvider>
-                {children}
-            </DataProvider>
-        </ContractProvider>
-    </TemplateProvider>
+    <DebugProvider>
+        <TemplateProvider>
+            <ContractProvider>
+                <PageProvider>
+                    <DataProvider>
+                        {children}
+                    </DataProvider>
+                </PageProvider>
+            </ContractProvider>
+        </TemplateProvider>
+    </DebugProvider>
 );

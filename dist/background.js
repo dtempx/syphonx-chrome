@@ -16,6 +16,102 @@ function $46d53147699ca8a7$export$f2909722c7f0f932(selectors, limit = 100) {
 }
 
 
+function $1740b9fa11a9f8ad$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
+    const elements = mark();
+    const output = [];
+    render(document.documentElement);
+    unmark();
+    return output.join("\n");
+    function mark() {
+        const elements = Array.from(document.querySelectorAll(".sx-click"));
+        removeAllTrackingClasses();
+        for (const element of elements){
+            element.setAttribute("marked", "");
+            traverseUp(element);
+            if (element.parentElement) traverseDown(element.parentElement);
+        }
+        return elements;
+    }
+    function removeAllTrackingClasses() {
+        removeTrackingClass("sx-click");
+        removeTrackingClass("sx-hover");
+        removeTrackingClass("sx-select");
+    }
+    function removeTrackingClass(className) {
+        document.querySelectorAll(`.${className}`).forEach((element)=>{
+            element.classList.remove(className);
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+    }
+    function unmark() {
+        document.querySelectorAll("[marked]").forEach((element)=>element.removeAttribute("marked"));
+    }
+    function traverseUp(element, n = 0) {
+        if (element.parentElement && n <= upLimit) {
+            element.parentElement.setAttribute("marked", "");
+            traverseUp(element.parentElement, n + 1);
+        }
+    }
+    function traverseDown(element, level = Infinity, n = 0) {
+        if (--level >= 0 && n <= downLimit) for (const child of element.children){
+            child.setAttribute("marked", "");
+            traverseDown(child, level, n + 1);
+        }
+    }
+    function render(element) {
+        const tag = element.tagName.toLowerCase();
+        const exclude = [
+            "noscript",
+            "script",
+            "style",
+            "svg"
+        ];
+        const container = ![
+            "area",
+            "base",
+            "br",
+            "col",
+            "embed",
+            "hr",
+            "img",
+            "input",
+            "link",
+            "meta",
+            "param",
+            "source",
+            "track",
+            "wbr"
+        ].includes(tag);
+        const attributes = renderAttributes(element.attributes);
+        const marked = element.hasAttribute("marked");
+        if (elements.includes(element) && marked) output.push(`<!-- SELECT THE FOLLOWING ELEMENT -->`);
+        if (!container && marked) output.push(`<${tag}${attributes}>`);
+        else if (element.children.length > 0) {
+            if (marked) output.push(`<${tag}${attributes}>`);
+            const children = Array.from(element.children).filter((child)=>!exclude.includes(child.tagName.toLocaleLowerCase()));
+            for (const child of children)render(child);
+            if (marked) output.push(`</${tag}>`);
+        } else if (element.textContent !== null && element.textContent.trim().length > 0 && marked) {
+            const text = truncateText(element.textContent.trim().replace(/\s+/gm, " "));
+            output.push(`<${tag}${attributes}>${text}</${tag}>`);
+        } else if (marked) output.push(`<${tag}${attributes}></${tag}>`);
+        function renderAttributes(attributes) {
+            const text = Array.from(element.attributes).filter((attr)=>attr.value && attr.name !== "marked").map((attr)=>`${attr.name}="${attr.value.replace(/"/g, '"')}"`).join(" ");
+            return text ? " " + text : "";
+        }
+        function truncateText(text, max = 80) {
+            if (text.length > max) {
+                const k = Math.floor(max / 2);
+                const i = Math.max(text.slice(0, k).lastIndexOf(" "), k);
+                const j = Math.max(k - text.slice(-k).indexOf(" "), k);
+                text = text.slice(0, i) + " … " + text.slice(-j);
+            }
+            return text;
+        }
+    }
+}
+
+
 function $b2515d1c013cc4bc$export$e684be5f4b22cc14() {
     syphonx.tracking = false;
     document.querySelectorAll(".sx-hover").forEach((element)=>{
@@ -26,27 +122,23 @@ function $b2515d1c013cc4bc$export$e684be5f4b22cc14() {
         element.classList.remove("sx-click");
         if (element.classList.length === 0) element.removeAttribute("class");
     });
+    if (syphonx.reset) {
+        syphonx.reset();
+        syphonx.reset = undefined;
+    }
 }
 function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
     syphonx.tracking = true;
-    window.addEventListener("beforeunload", (event)=>{
-        if (syphonx.tracking) {
-            event.preventDefault();
-            event.stopPropagation();
-            return "";
-        }
-    });
-    document.addEventListener("mousemove", (event)=>{
-        document.querySelectorAll(".sx-hover").forEach((element)=>{
-            element.classList.remove("sx-hover");
-            if (element.classList.length === 0) element.removeAttribute("class");
-        });
-        if (syphonx.tracking) {
-            if (event.target instanceof HTMLElement) event.target.classList.add("sx-hover");
-        }
-    });
+    syphonx.reset = ()=>{
+        document.removeEventListener("click", onClick);
+        document.removeEventListener("auxclick", onClick);
+        document.removeEventListener("contextmenu", onContext);
+        document.removeEventListener("mousemove", onMouseMove);
+    };
     document.addEventListener("click", onClick);
     document.addEventListener("auxclick", onClick);
+    document.addEventListener("contextmenu", onContext);
+    document.addEventListener("mousemove", onMouseMove);
     function onClick(event) {
         document.querySelectorAll(".sx-click").forEach((element)=>{
             element.classList.remove("sx-click");
@@ -57,90 +149,34 @@ function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
             if (element.classList.length === 0) element.removeAttribute("class");
         });
         if (syphonx.tracking) {
-            if (event.target instanceof HTMLElement) event.target.classList.add("sx-click");
+            if (event.target instanceof HTMLElement) {
+                event.target.classList.add("sx-click");
+                chrome.runtime.sendMessage({
+                    click: {
+                        altKey: event.altKey,
+                        button: event.button,
+                        ctrlKey: event.ctrlKey,
+                        shiftKey: event.shiftKey,
+                        x: event.x,
+                        y: event.y
+                    }
+                });
+            }
             event.preventDefault();
             event.stopPropagation();
-            return false;
         }
     }
-}
-function $b2515d1c013cc4bc$export$225ea495d1fa0d5() {
-    const element = document.querySelector(".sx-click");
-    if (element) {
-        element.classList.remove("sx-click");
-        if (element.classList.length === 0) element.removeAttribute("class");
-        return singleSelector(element);
-    } else return [];
-    function semantic(name) {
-        if (!name) return false;
-        name = name.replace(/[^a-z0-9_-]/gi, "") // remove any characters that aren't letters, digits, dashes, or underscores
-        .replace(/^[-_]+|[-_]+$/g, "") // trim "-" or "_" from beginning or end of a string
-        .replace(/_/g, "-") // replace all "_" with "-"
-        .replace(/-{2,}/g, "-") // dedup "-"
-        .replace(/([a-z])([A-Z])/g, "$1-$2") // convert from camel-case
-        .toLowerCase();
-        // reject if any digits are present in the name
-        if (/\d/.test(name)) return false;
-        // split words by "-" including only word lengths greater than 3 
-        const words = name.split("-").filter((word)=>word.length > 3);
-        return words.length > 0 && words.every((word)=>syphonx.dictionary.has(word)) // reject if any word of length greater than 3 is not in the English dictionary
-         && words.some((word)=>[
-                "selected"
-            ].includes(word)); // reject if any word is on the blacklist
+    function onContext(event) {
+        event.preventDefault();
     }
-    function singleSelector(element) {
-        let open = [];
-        const closed = [];
-        while(element && element.tagName !== "BODY"){
-            const tag = element.tagName.toLowerCase();
-            const paths = open.length > 0 ? open : [
-                ""
-            ];
-            const next = [];
-            function append(target) {
-                for (const path of paths){
-                    const selector = path ? `${target} > ${path}` : target;
-                    if (document.querySelectorAll(selector).length === 1) closed.push(selector);
-                    else if (element.parentElement) {
-                        const n = element.parentElement.querySelectorAll(tag).length;
-                        if (n === 1) next.push(selector);
-                    }
-                }
-            }
-            const id = element.getAttribute("id");
-            if (semantic(id)) append(`#${id}`);
-            // find class-names that don't start with "sx-" and appear to have semantic meaning
-            (element.getAttribute("class") || "").split(" ").filter((className)=>!className.startsWith("sx-") && semantic(className)).forEach((className)=>append(`.${className}`));
-            // find attributes with exceptions
-            Array.from(element.attributes).filter((attr)=>![
-                    "id",
-                    "class",
-                    "style",
-                    "src",
-                    "href",
-                    "title",
-                    "lang"
-                ].includes(attr.name)).forEach((attr)=>append(`[${attr.name}${semantic(attr.value) ? `='${attr.value.replace(/'/g, "\\'")}'` : ""}]`));
-            for (const path of paths){
-                let selector = path ? `${tag} > ${path}` : tag;
-                if (document.querySelectorAll(selector).length === 1) closed.push(selector);
-                if (element.parentElement) {
-                    const n = element.parentElement.querySelectorAll(tag).length;
-                    if (n > 1) {
-                        const i = Array.from(element.parentElement.children).filter((child)=>child.tagName.toLowerCase() === tag).findIndex((child)=>child === element);
-                        selector = `${tag}:nth-of-type(${i + 1})${path ? ` > ${path}` : ""}`;
-                    }
-                    next.push(selector);
-                }
-            }
-            if (next.length === 0) break; // no more open paths so nothing left to do (shouldn't ever happen)
-            open = next;
-            element = element.parentElement;
+    function onMouseMove(event) {
+        document.querySelectorAll(".sx-hover").forEach((element)=>{
+            element.classList.remove("sx-hover");
+            if (element.classList.length === 0) element.removeAttribute("class");
+        });
+        if (syphonx.tracking) {
+            if (event.target instanceof HTMLElement) event.target.classList.add("sx-hover");
         }
-        return [
-            ...closed,
-            ...open
-        ].sort((a, b)=>(a.match(/:nth-/g) || []).length - (b.match(/:nth-/g) || []).length || (a.match(/>/g) || []).length - (b.match(/>/g) || []).length || a.length - b.length || a.localeCompare(b));
     }
 }
 
@@ -151,8 +187,8 @@ const $07c03eb40a016611$var$scriptMap = {
     "applyTemplate": $12ab43309876626d$export$f78a296632f66e69,
     "disableTracking": $b2515d1c013cc4bc$export$e684be5f4b22cc14,
     "enableTracking": $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16,
-    "queryTracking": $b2515d1c013cc4bc$export$225ea495d1fa0d5,
-    "selectElements": $46d53147699ca8a7$export$f2909722c7f0f932
+    "selectElements": $46d53147699ca8a7$export$f2909722c7f0f932,
+    "sliceHtml": $1740b9fa11a9f8ad$export$ff5493406baa93c1
 };
 /**
  * Executes a function in the context of the page corresponding to a tabId.
@@ -206,7 +242,6 @@ async function $07c03eb40a016611$var$injectAll(tabId) {
     if (!injected) {
         await $07c03eb40a016611$var$executeScriptFile(tabId, "jquery.slim.js");
         await $07c03eb40a016611$var$executeScriptFile(tabId, "syphonx.js");
-        await $07c03eb40a016611$var$executeScriptFile(tabId, "syphonx.dictionary.js");
         await chrome.scripting.insertCSS({
             target: {
                 tabId: tabId
@@ -232,6 +267,13 @@ function $07c03eb40a016611$var$waitForNavigation() {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (message.log) {
         console.log("MESSAGE", message.log);
+        return false; // immediate synchronous response
+    }
+    if (message.click) {
+        console.log("MESSAGE", "click", {
+            message: message,
+            sender: sender
+        });
         return false; // immediate synchronous response
     }
     if (typeof message.tabId !== "number") {
@@ -312,6 +354,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     })();
     return true; // response will be sent asynchronously
 });
+console.log("BACKGROUND ready");
 
 })();
 //# sourceMappingURL=background.js.map
