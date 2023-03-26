@@ -1,11 +1,11 @@
 (() => {
-async function $12ab43309876626d$export$f78a296632f66e69(template) {
+async function $01621980ace9efc3$export$f78a296632f66e69(template) {
     const result = await syphonx.extract(template);
     return result;
 }
 
 
-function $46d53147699ca8a7$export$f2909722c7f0f932(selectors, limit = 100) {
+function $f29204d28571a071$export$f2909722c7f0f932(selectors, limit = 100) {
     document.querySelectorAll(".sx-select").forEach((element)=>element.classList.remove("sx-select"));
     const result = [];
     for (const selector of selectors)if (selector && result.length <= limit) document.querySelectorAll(selector).forEach((element)=>{
@@ -16,7 +16,7 @@ function $46d53147699ca8a7$export$f2909722c7f0f932(selectors, limit = 100) {
 }
 
 
-function $1740b9fa11a9f8ad$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
+function $859ab05ff1145d6e$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
     const elements = mark();
     const output = [];
     render(document.documentElement);
@@ -112,7 +112,7 @@ function $1740b9fa11a9f8ad$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
 }
 
 
-function $b2515d1c013cc4bc$export$e684be5f4b22cc14() {
+function $f112e3412bcef94d$export$e684be5f4b22cc14() {
     syphonx.tracking = false;
     document.querySelectorAll(".sx-hover").forEach((element)=>{
         element.classList.remove("sx-hover");
@@ -127,7 +127,7 @@ function $b2515d1c013cc4bc$export$e684be5f4b22cc14() {
         syphonx.reset = undefined;
     }
 }
-function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
+function $f112e3412bcef94d$export$1f8ffc6fd33b1d16() {
     syphonx.tracking = true;
     syphonx.reset = ()=>{
         document.removeEventListener("click", onClick);
@@ -183,12 +183,12 @@ function $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16() {
 
 
 
-const $07c03eb40a016611$var$scriptMap = {
-    "applyTemplate": $12ab43309876626d$export$f78a296632f66e69,
-    "disableTracking": $b2515d1c013cc4bc$export$e684be5f4b22cc14,
-    "enableTracking": $b2515d1c013cc4bc$export$1f8ffc6fd33b1d16,
-    "selectElements": $46d53147699ca8a7$export$f2909722c7f0f932,
-    "sliceHtml": $1740b9fa11a9f8ad$export$ff5493406baa93c1
+const $a84d1809a4222847$var$scriptMap = {
+    "applyTemplate": (0, $01621980ace9efc3$export$f78a296632f66e69),
+    "disableTracking": (0, $f112e3412bcef94d$export$e684be5f4b22cc14),
+    "enableTracking": (0, $f112e3412bcef94d$export$1f8ffc6fd33b1d16),
+    "selectElements": (0, $f29204d28571a071$export$f2909722c7f0f932),
+    "sliceHtml": (0, $859ab05ff1145d6e$export$ff5493406baa93c1)
 };
 /**
  * Executes a function in the context of the page corresponding to a tabId.
@@ -198,7 +198,7 @@ const $07c03eb40a016611$var$scriptMap = {
  * @param args Optional arguments to pass to the function.
  * @returns The result returned by the function. If the resulting value of the function execution is a promise, Chrome will wait for the promise to settle and return the resulting value. {@link https://developer.chrome.com/docs/extensions/reference/scripting/#promises}
  * @see {@link https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions}
- */ function $07c03eb40a016611$var$executeScript(tabId, func, ...args) {
+ */ function $a84d1809a4222847$var$executeScript(tabId, func, ...args) {
     return new Promise((resolve)=>chrome.scripting.executeScript({
             target: {
                 tabId: tabId
@@ -220,7 +220,7 @@ const $07c03eb40a016611$var$scriptMap = {
  * @param file A file containing the script to execute in the context of the page.
  * @returns The result returned by executing the script.
  * @see {@link https://developer.chrome.com/docs/extensions/reference/scripting/#runtime-functions}
- */ function $07c03eb40a016611$var$executeScriptFile(tabId, file) {
+ */ function $a84d1809a4222847$var$executeScriptFile(tabId, file) {
     return new Promise((resolve, reject)=>chrome.scripting.executeScript({
             target: {
                 tabId: tabId
@@ -237,11 +237,11 @@ const $07c03eb40a016611$var$scriptMap = {
             });
         }));
 }
-async function $07c03eb40a016611$var$injectAll(tabId) {
-    const injected = await $07c03eb40a016611$var$executeScript(tabId, ()=>typeof window.syphonx === "object");
+async function $a84d1809a4222847$var$injectAll(tabId) {
+    const injected = await $a84d1809a4222847$var$executeScript(tabId, ()=>typeof window.syphonx === "object");
     if (!injected) {
-        await $07c03eb40a016611$var$executeScriptFile(tabId, "jquery.slim.js");
-        await $07c03eb40a016611$var$executeScriptFile(tabId, "syphonx.js");
+        await $a84d1809a4222847$var$executeScriptFile(tabId, "jquery.slim.js");
+        await $a84d1809a4222847$var$executeScriptFile(tabId, "syphonx.js");
         await chrome.scripting.insertCSS({
             target: {
                 tabId: tabId
@@ -253,7 +253,7 @@ async function $07c03eb40a016611$var$injectAll(tabId) {
         console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }
-function $07c03eb40a016611$var$waitForNavigation() {
+function $a84d1809a4222847$var$waitForNavigation() {
     return new Promise((resolve)=>{
         function onCompleted(details) {
             if (details.frameId === 0) {
@@ -293,7 +293,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
             await chrome.tabs.update({
                 url: message.params[0]
             });
-            await $07c03eb40a016611$var$waitForNavigation();
+            await $a84d1809a4222847$var$waitForNavigation();
             sendResponse();
         })();
         return true; // response will be sent asynchronously
@@ -304,7 +304,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
         });
         (async ()=>{
             await chrome.tabs.reload();
-            await $07c03eb40a016611$var$waitForNavigation();
+            await $a84d1809a4222847$var$waitForNavigation();
             sendResponse();
         })();
         return true; // response will be sent asynchronously
@@ -321,7 +321,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
             });
         })();
         return true; // response will be sent asynchronously
-    } else if (!Object.keys($07c03eb40a016611$var$scriptMap).includes(message.key)) {
+    } else if (!Object.keys($a84d1809a4222847$var$scriptMap).includes(message.key)) {
         console.warn("MESSAGE", {
             message: message,
             sender: sender,
@@ -331,8 +331,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     }
     (async ()=>{
         try {
-            await $07c03eb40a016611$var$injectAll(message.tabId);
-            const result = await $07c03eb40a016611$var$executeScript(message.tabId, $07c03eb40a016611$var$scriptMap[message.key], ...message.params);
+            await $a84d1809a4222847$var$injectAll(message.tabId);
+            const result = await $a84d1809a4222847$var$executeScript(message.tabId, $a84d1809a4222847$var$scriptMap[message.key], ...message.params);
             console.log("MESSAGE", message.key, {
                 message: message,
                 sender: sender,
@@ -357,4 +357,4 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
 console.log("BACKGROUND ready");
 
 })();
-//# sourceMappingURL=background.js.map
+//# sourceMappingURL=service_worker.js.map

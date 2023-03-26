@@ -1,11 +1,17 @@
-import * as scripts from "./scripts";
+import {
+    applyTemplate,
+    disableTracking,
+    enableTracking,
+    selectElements,
+    sliceHtml
+} from "./service_worker_scripts";
 
 const scriptMap: Record<string, Function> = {
-    "applyTemplate": scripts.applyTemplate,
-    "disableTracking": scripts.disableTracking,
-    "enableTracking": scripts.enableTracking,
-    "selectElements": scripts.selectElements,
-    "sliceHtml": scripts.sliceHtml
+    "applyTemplate": applyTemplate,
+    "disableTracking": disableTracking,
+    "enableTracking": enableTracking,
+    "selectElements": selectElements,
+    "sliceHtml": sliceHtml
 };
 
 /**

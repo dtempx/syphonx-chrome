@@ -24749,42 +24749,42 @@ const $360e2ccc4c1cad7a$export$feae9a740c003485 = /^_?[a-z][a-z0-9_]*$/;
 const $360e2ccc4c1cad7a$export$128fa18b7194ef = /^https?:\/\/[^\/]/;
 
 
-var $6767c619f5de943e$exports = {};
+var $af9fac753574b590$exports = {};
 
-$parcel$export($6767c619f5de943e$exports, "active", () => $6767c619f5de943e$export$89da14300d534261);
-$parcel$export($6767c619f5de943e$exports, "applyTemplate", () => $6767c619f5de943e$export$f78a296632f66e69);
-$parcel$export($6767c619f5de943e$exports, "disableTracking", () => $6767c619f5de943e$export$e684be5f4b22cc14);
-$parcel$export($6767c619f5de943e$exports, "enableTracking", () => $6767c619f5de943e$export$1f8ffc6fd33b1d16);
-$parcel$export($6767c619f5de943e$exports, "log", () => $6767c619f5de943e$export$bef1f36f5486a6a3);
-$parcel$export($6767c619f5de943e$exports, "selectElements", () => $6767c619f5de943e$export$f2909722c7f0f932);
-$parcel$export($6767c619f5de943e$exports, "sliceHtml", () => $6767c619f5de943e$export$ff5493406baa93c1);
-$parcel$export($6767c619f5de943e$exports, "inspectedWindow", () => $6767c619f5de943e$export$cbe410dad4f45b36);
-const $6767c619f5de943e$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
-async function $6767c619f5de943e$export$f78a296632f66e69(template) {
-    const { result: result  } = await $6767c619f5de943e$var$sendMessage("applyTemplate", template);
+$parcel$export($af9fac753574b590$exports, "active", () => $af9fac753574b590$export$89da14300d534261);
+$parcel$export($af9fac753574b590$exports, "applyTemplate", () => $af9fac753574b590$export$f78a296632f66e69);
+$parcel$export($af9fac753574b590$exports, "disableTracking", () => $af9fac753574b590$export$e684be5f4b22cc14);
+$parcel$export($af9fac753574b590$exports, "enableTracking", () => $af9fac753574b590$export$1f8ffc6fd33b1d16);
+$parcel$export($af9fac753574b590$exports, "log", () => $af9fac753574b590$export$bef1f36f5486a6a3);
+$parcel$export($af9fac753574b590$exports, "selectElements", () => $af9fac753574b590$export$f2909722c7f0f932);
+$parcel$export($af9fac753574b590$exports, "sliceHtml", () => $af9fac753574b590$export$ff5493406baa93c1);
+$parcel$export($af9fac753574b590$exports, "inspectedWindow", () => $af9fac753574b590$export$cbe410dad4f45b36);
+const $af9fac753574b590$export$89da14300d534261 = typeof chrome === "object" && chrome.devtools;
+async function $af9fac753574b590$export$f78a296632f66e69(template) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("applyTemplate", template);
     return result;
 }
-async function $6767c619f5de943e$export$e684be5f4b22cc14() {
-    await $6767c619f5de943e$var$sendMessage("disableTracking");
+async function $af9fac753574b590$export$e684be5f4b22cc14() {
+    await $af9fac753574b590$var$sendMessage("disableTracking");
 }
-async function $6767c619f5de943e$export$1f8ffc6fd33b1d16() {
-    await $6767c619f5de943e$var$sendMessage("enableTracking");
+async function $af9fac753574b590$export$1f8ffc6fd33b1d16() {
+    await $af9fac753574b590$var$sendMessage("enableTracking");
 }
-function $6767c619f5de943e$export$bef1f36f5486a6a3(message) {
-    if ($6767c619f5de943e$export$89da14300d534261) chrome.runtime.sendMessage({
+function $af9fac753574b590$export$bef1f36f5486a6a3(message) {
+    if ($af9fac753574b590$export$89da14300d534261) chrome.runtime.sendMessage({
         log: message
     });
     else console.log("BACKGROUND", message);
 }
-async function $6767c619f5de943e$export$f2909722c7f0f932(selectors) {
-    const { result: result  } = await $6767c619f5de943e$var$sendMessage("selectElements", selectors);
+async function $af9fac753574b590$export$f2909722c7f0f932(selectors) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("selectElements", selectors);
     return result || [];
 }
-async function $6767c619f5de943e$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
-    const { result: result  } = await $6767c619f5de943e$var$sendMessage("sliceHtml", upLimit, downLimit);
+async function $af9fac753574b590$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("sliceHtml", upLimit, downLimit);
     return result;
 }
-function $6767c619f5de943e$var$sendMessage(key, ...params) {
+function $af9fac753574b590$var$sendMessage(key, ...params) {
     return new Promise((resolve, reject)=>{
         const tabId = chrome.devtools.inspectedWindow.tabId;
         chrome.runtime.sendMessage({
@@ -24797,22 +24797,22 @@ function $6767c619f5de943e$var$sendMessage(key, ...params) {
         });
     });
 }
-let $6767c619f5de943e$export$cbe410dad4f45b36;
+let $af9fac753574b590$export$cbe410dad4f45b36;
 (function(inspectedWindow) {
     async function activeTab() {
-        const { tab: tab  } = await $6767c619f5de943e$var$sendMessage("tab");
+        const { tab: tab  } = await $af9fac753574b590$var$sendMessage("tab");
         return tab;
     }
     inspectedWindow.activeTab = activeTab;
     async function navigate(url) {
-        await $6767c619f5de943e$var$sendMessage("navigate", url);
+        await $af9fac753574b590$var$sendMessage("navigate", url);
     }
     inspectedWindow.navigate = navigate;
     async function reload() {
-        await $6767c619f5de943e$var$sendMessage("reload");
+        await $af9fac753574b590$var$sendMessage("reload");
     }
     inspectedWindow.reload = reload;
-})($6767c619f5de943e$export$cbe410dad4f45b36 || ($6767c619f5de943e$export$cbe410dad4f45b36 = {}));
+})($af9fac753574b590$export$cbe410dad4f45b36 || ($af9fac753574b590$export$cbe410dad4f45b36 = {}));
 
 
 
@@ -25733,8 +25733,8 @@ $b9093140ea6d98ca$export$a22775fa5e2eebd9 = function(instance, schema, options) 
 
 
 async function $72b699ca83b4a379$export$f78a296632f66e69(template, schema) {
-    if ((0, $6767c619f5de943e$exports).active) try {
-        const result = await (0, $6767c619f5de943e$exports).applyTemplate(template.obj);
+    if ((0, $af9fac753574b590$exports).active) try {
+        const result = await (0, $af9fac753574b590$exports).applyTemplate(template.obj);
         if (result?.data && schema) {
             const validator = new (0, $b9093140ea6d98ca$export$9eeb22c0bba4ed5e)();
             const data = $f416d917bf40aa13$exports.removeDOMRefs(result.data);
@@ -25792,7 +25792,7 @@ function $d19803726287b231$export$43c6ed89e8a21a35({ children: children  }) {
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
-            if (reload) await (0, $6767c619f5de943e$exports).inspectedWindow.reload();
+            if (reload) await (0, $af9fac753574b590$exports).inspectedWindow.reload();
             const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)(template, contract);
             setExtract(result);
         }
@@ -39933,7 +39933,7 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             const json = await (0, $80e77e55da602fd0$exports).read(file);
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
             if (autoOpen && template.obj.url) {
-                (0, $6767c619f5de943e$exports).inspectedWindow.navigate(template.obj.url);
+                (0, $af9fac753574b590$exports).inspectedWindow.navigate(template.obj.url);
                 await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000); // give some time for page to navigate before setting template
             }
             setTemplate(template.json());
@@ -41993,7 +41993,7 @@ var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
                                 }
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                                onClick: ()=>(0, $6767c619f5de943e$exports).inspectedWindow.navigate(template.obj.url),
+                                onClick: ()=>(0, $af9fac753574b590$exports).inspectedWindow.navigate(template.obj.url),
                                 sx: {
                                     visibility: template.obj.url ? "visible" : "hidden"
                                 },
@@ -42052,7 +42052,7 @@ var $b42892e434d2e578$export$2e2bcd8739ae039 = ()=>{
     const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     async function onAdd() {
         const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
-        const tab = await (0, $6767c619f5de943e$exports).inspectedWindow.activeTab();
+        const tab = await (0, $af9fac753574b590$exports).inspectedWindow.activeTab();
         if (tab.url) {
             template.addTest({
                 url: tab.url
@@ -42125,7 +42125,7 @@ var $581f65c901be6788$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $daacc79c176159c4$export$2e2bcd8739ae039), {
                     dense: true,
                     onClick: async ()=>{
-                        await (0, $6767c619f5de943e$exports).inspectedWindow.navigate(url);
+                        await (0, $af9fac753574b590$exports).inspectedWindow.navigate(url);
                         await refresh(false);
                     },
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e892f9464432086f$export$2e2bcd8739ae039), {
@@ -44687,7 +44687,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             try {
-                const html = await (0, $6767c619f5de943e$exports).sliceHtml(3, 3);
+                const html = await (0, $af9fac753574b590$exports).sliceHtml(3, 3);
                 if (html) {
                     const selector = await (0, $80e77e55da602fd0$exports).autoselect(html, context);
                     if (selector) {
@@ -44707,13 +44707,13 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     ]);
     (0, $d4J5n.useEffect)(()=>{
         if (value) (async ()=>{
-            const output = await (0, $6767c619f5de943e$exports).selectElements([
+            const output = await (0, $af9fac753574b590$exports).selectElements([
                 value
             ]);
             setOutput(output);
         })();
         return ()=>{
-            (0, $6767c619f5de943e$exports).selectElements([]);
+            (0, $af9fac753574b590$exports).selectElements([]);
         };
     }, [
         value
@@ -44728,10 +44728,10 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
         };
     }, [value]);
     */ (0, $d4J5n.useEffect)(()=>{
-        if (tracking) (0, $6767c619f5de943e$exports).enableTracking();
-        else (0, $6767c619f5de943e$exports).disableTracking();
+        if (tracking) (0, $af9fac753574b590$exports).enableTracking();
+        else (0, $af9fac753574b590$exports).disableTracking();
         return ()=>{
-            (0, $6767c619f5de943e$exports).disableTracking();
+            (0, $af9fac753574b590$exports).disableTracking();
         };
     }, [
         tracking

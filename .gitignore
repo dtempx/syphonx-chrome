@@ -11,4 +11,5 @@ node_modules
 Thumbs.db
 private
 !dist/*.js
+!dist/*.js.map
 !src/scripts/syphonx.d.ts

@@ -6,4 +6,4 @@ export * from "./sleep";
 export * from "./snakeify";
 export * as path from "./path";
 export * as regexp from "./regexp";
-export * as background from "../background-proxy";
+export * as background from "../background";
