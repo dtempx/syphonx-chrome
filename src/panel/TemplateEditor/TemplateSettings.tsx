@@ -3,7 +3,7 @@ import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
 import { background, regexp, Template } from "./lib";
-import { PropertyGrid, ValidateField } from "./components";
+import { PropertyGrid, SwitchedObjectEditor, ValidateField } from "./components";
 
 export default () => {
     const { template: json, setTemplate } = useTemplate();
@@ -50,10 +50,34 @@ export default () => {
                         value={template.obj.key}
                         onChange={(event, value) => {
                             template.obj.key = value || undefined;
-                            setTemplate(template.json());            
+                            setTemplate(template.json());
                         }}
                         onValidate={(event, value) => {
                             return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Template parameters that can be referenced from within a formula providing dynamic, data-driven control of template evaluation.">
+                        <Typography>params</Typography>
+                    </Tooltip>,
+                    <SwitchedObjectEditor
+                        obj={template.obj.params}
+                        onChange={(event, obj) => {
+                            template.obj.params = obj;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Specific HTTP headers such as cookies or other request info that may be required by a site.">
+                        <Typography>headers</Typography>
+                    </Tooltip>,
+                    <SwitchedObjectEditor
+                        obj={template.obj.headers}
+                        onChange={(event, obj) => {
+                            template.obj.headers = obj;
+                            setTemplate(template.json());
                         }}
                     />
                 ]

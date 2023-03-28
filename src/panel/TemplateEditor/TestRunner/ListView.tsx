@@ -17,8 +17,7 @@ import {
 } from "@mui/material";
 
 import {
-    Delete as DeleteIcon,
-    Launch as OpenIcon
+    Delete as DeleteIcon
 } from "@mui/icons-material";
 
 export interface Props {

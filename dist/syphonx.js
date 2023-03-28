@@ -182,7 +182,7 @@
             return undefined;
         }
         function parseUrl(url) {
-            if (/^https?:\/\//.test(url)) {
+            if (typeof url === "string" && /^https?:\/\//.test(url)) {
                 const [protocol, , host] = url.split("/");
                 const a = host.split(":")[0].split(".").reverse();
                 return {
@@ -394,22 +394,26 @@
             constructor(state) {
                 this.jquery = state.root || $;
                 this.online = typeof this.jquery.noConflict === "function";
-                state.params = state.params || {};
-                state.errors = state.errors || [];
-                state.debug = state.debug;
-                state.log = state.log || "";
-                state.vars = {
-                    __instance: 0,
-                    __context: [],
-                    ...state.vars
-                };
-                if (this.online) {
+                if (this.online)
                     state.url = window.location.href;
-                }
                 const { domain, origin } = parseUrl(state.url);
-                state.domain = domain || "";
-                state.origin = origin || "";
-                this.state = state;
+                this.state = {
+                    params: {},
+                    errors: [],
+                    log: "",
+                    ...state,
+                    yield: undefined,
+                    vars: {
+                        __instance: 0,
+                        __context: [],
+                        __repeat: {},
+                        ...state.vars,
+                        __step: [],
+                        __yield: state.yield?.step
+                    },
+                    domain,
+                    origin
+                };
             }
             appendError(code, message, level, stack) {
                 const key = this.contextKey();
@@ -417,24 +421,27 @@
                 const text = `ERROR ${key ? `${key}: ` : ""}${message} code=${code} level=${level}${stack ? `\n${stack}` : ""}`;
                 this.log(text);
             }
-            break({ name, query, on = "any", pattern, when, active = true }) {
+            break({ name = "", query, on = "any", pattern, when, active = true }) {
+                if (name)
+                    name = " " + name;
                 if (this.online && active) {
                     if (this.when(when, "BREAK")) {
                         if (query) {
-                            this.log(`BREAK${name ? ` ${name}` : ""} WAITFOR QUERY ${trunc($)} on=${on}, pattern=${pattern}`);
-                            const result = this.queryCheck(query, on, pattern);
-                            if (result === null) {
-                                this.log(`BREAK${name ? ` ${name}` : ""} ${when}`);
+                            this.log(`BREAK${name} WAITFOR QUERY ${trunc($)} on=${on}, pattern=${pattern}`);
+                            const [pass, result] = this.queryCheck(query, on, pattern);
+                            this.log(`BREAK${name} QUERY ${$statements(query)} -> ${trunc(result?.value)}${pattern ? ` (valid=${result?.valid})` : ""} -> on=${on} -> ${pass}`);
+                            if (pass) {
+                                this.log(`BREAK${name} ${when || ""}`);
                                 return true;
                             }
                         }
                         else {
-                            this.log(`BREAK${name ? ` ${name}` : ""} ${when}`);
+                            this.log(`BREAK${name} ${when || ""}`);
                             return true;
                         }
                     }
                     else {
-                        this.log(`BREAK${name ? ` ${name}` : ""} SKIPPED ${when}`);
+                        this.log(`BREAK${name} SKIPPED ${when}`);
                     }
                 }
                 else {
@@ -597,23 +604,15 @@
                     }
                 }
                 else if (action.hasOwnProperty("yield")) {
-                    const y = this.yield(action.yield || {});
-                    if (y) {
-                        this.state.yield = {
-                            step: step + 1,
-                            context: y.context,
-                            timeout: y.timeout,
-                            params: y.params
-                        };
-                        return "yield";
-                    }
+                    this.yield(action.yield || {});
                 }
                 return null;
             }
             async each({ name, query, actions, context, when, active = true }) {
                 const $ = this.jquery;
                 if (active) {
-                    if (this.when(when, `EACH${name ? ` ${name}` : ""}`)) {
+                    const label = `EACH${name ? ` ${name}` : ""}`;
+                    if (this.when(when, label)) {
                         const result = this.query({ query, repeated: true });
                         if (result && result.nodes.length > 0) {
                             const elements = result.nodes.toArray();
@@ -625,7 +624,7 @@
                                     action: "each",
                                     index: elements.indexOf(element)
                                 }, context);
-                                const code = await this.run(actions);
+                                const code = await this.run(actions, label, true);
                                 this.popContext();
                                 if (code === "break") {
                                     break;
@@ -948,29 +947,22 @@
                 }
                 return [pass, result];
             }
-            async repeat({ name, actions, limit = 100, errors = 1, when, active = true }) {
+            async repeat({ name = "", actions, limit = 100, errors = 1, when, active = true }) {
+                if (name)
+                    name = " " + name;
                 if (active) {
-                    if (this.when(when, `REPEAT${name ? ` ${name}` : ""}`)) {
-                        let errorCount = 0;
-                        let baselineErrorCount = this.state.errors.length;
-                        let i = 0;
-                        let code = undefined;
-                        while (i < limit) {
-                            this.log(`REPEAT${name ? ` ${name}` : ""} #${++i} (limit=${limit})`);
-                            this.state.vars._page = i;
-                            for (const action of actions) {
-                                const step = actions.indexOf(action) + 1;
-                                code = await this.dispatch(action, step);
-                                if (code) {
-                                    this.log(`REPEAT${name ? ` ${name}` : ""} #${i} -> break at step ${step}/${actions.length}, code=${code}`);
-                                    break;
-                                }
-                            }
+                    if (this.when(when, `REPEAT${name}`)) {
+                        const state = this.acquireRepeatState();
+                        let errorOffset = 0;
+                        while (state.index < limit) {
+                            const label = `REPEAT${name} #${++state.index}`;
+                            this.log(`${label} (limit=${limit})`);
+                            const code = await this.run(actions, label, true);
                             if (!code) {
-                                this.log(`REPEAT${name ? ` ${name}` : ""} #${i} -> ${actions.length} steps completed`);
-                                errorCount = this.state.errors.length - baselineErrorCount;
-                                if (errorCount >= errors) {
-                                    this.appendError("error-limit", `${errorCount} errors in repeat (error ${errors} limit exceeded)`, 1);
+                                this.log(`${label} -> ${actions.length} steps completed`);
+                                errorOffset = this.state.errors.length - state.errors;
+                                if (errorOffset >= errors) {
+                                    this.appendError("error-limit", `${errorOffset} errors in repeat (error limit of ${errors} exceeded)`, 1);
                                     break;
                                 }
                             }
@@ -978,15 +970,29 @@
                                 break;
                             }
                         }
-                        this.log(`REPEAT${name ? ` ${name}` : ""} ${i} iterations completed (limit=${limit}, errors=${errorCount}/${errors})`);
+                        this.clearRepeatState();
+                        this.log(`REPEAT${name} ${state.index} iterations completed (limit=${limit}, errors=${errorOffset}/${errors})`);
                     }
                     else {
-                        this.log(`REPEAT${name ? ` ${name}` : ""} SKIPPED ${when}`);
+                        this.log(`REPEAT${name} SKIPPED ${when}`);
                     }
                 }
                 else {
-                    this.log(`REPEAT${name ? ` ${name}` : ""} BYPASSED ${when}`);
+                    this.log(`REPEAT${name} BYPASSED ${when}`);
                 }
+            }
+            acquireRepeatState() {
+                const depth = this.state.vars.__step.length;
+                if (!this.state.vars.__repeat[depth])
+                    this.state.vars.__repeat[depth] = {
+                        index: 0,
+                        errors: this.state.errors.length
+                    };
+                return this.state.vars.__repeat[depth];
+            }
+            clearRepeatState() {
+                const depth = this.state.vars.__step.length;
+                this.state.vars.__repeat[depth] = undefined;
             }
             resolveOperands(operands, result) {
                 for (let i = 0; i < operands.length; ++i) {
@@ -1361,25 +1367,45 @@
                 }
                 return this.formatResult(result, type, all, limit, format, pattern);
             }
-            async run(actions) {
-                const resumeStep = this.state.yield?.step || 0;
-                if (this.state.yield) {
-                    this.log(`YIELD SKIPPING TO STEP #${this.state.yield.step}`);
-                    this.state.yield = undefined;
-                }
-                for (const action of actions) {
-                    const step = actions.indexOf(action) + 1;
-                    if (step >= resumeStep) {
-                        this.log(`STEP #${step}/${actions.length}`);
-                        this.state.vars._step = step;
-                        const result = await this.dispatch(action, step);
-                        if (result) {
-                            this.log(`BREAK AT STEP #${step}/${actions.length}, code=${result}`);
-                            return result;
-                        }
+            async run(actions, label = "", wraparound = false) {
+                if (label)
+                    label += " ";
+                const steps = actions.length;
+                this.state.vars.__step.unshift(0);
+                const j = this.runRestoreIndexFromYield(actions, label, wraparound);
+                for (let i = j; i < actions.length; i++) {
+                    const action = actions[i];
+                    const step = i + 1;
+                    this.state.vars.__step[0] = step;
+                    const [key] = Object.keys(action);
+                    this.log(`${label}STEP #${step}/${steps} {${key}}`);
+                    const code = await this.dispatch(action, step);
+                    if (code) {
+                        this.log(`${label}BREAK at step #${step}/${actions.length}, code=${code}`);
+                        this.state.vars.__step.shift();
+                        return code;
                     }
                 }
-                this.log(`${actions.length} steps completed`);
+                this.state.vars.__step.shift();
+                this.log(`${label}${steps} steps completed`);
+            }
+            runRestoreIndexFromYield(actions, label, wraparound) {
+                let index = 0;
+                if (this.state.vars.__yield) {
+                    const step = this.state.vars.__yield.pop();
+                    if (step > actions.length && wraparound) {
+                        this.log(`${label}YIELD wraparound to step #1/${actions.length}, index=${index}`);
+                    }
+                    else {
+                        index = step - 1;
+                        this.log(`${label}YIELD skipping to step #${step}/${actions.length}, index=${index}`);
+                    }
+                    if (this.state.vars.__yield.length === 0) {
+                        this.state.vars.__yield = undefined;
+                        this.log(`${label}YIELD state cleared`);
+                    }
+                }
+                return index;
             }
             async scroll({ name, query, target, behavior = "smooth", block, inline, when, active = true }) {
                 if (this.online && active) {
@@ -1697,7 +1723,9 @@
                     return true;
                 }
             }
-            async waitfor({ name, query, select, timeout, on = "any", required, pattern, when, active = true }, context) {
+            async waitfor({ name, query, select, timeout, on = "any", required, pattern, when, active = true }, label = "") {
+                if (label)
+                    label += " ";
                 if (this.online && active) {
                     if (this.when(when, `WAITFOR${name ? ` ${name}` : ""}`)) {
                         if (timeout === undefined) {
@@ -1708,26 +1736,28 @@
                         }
                         let code = null;
                         if (query) {
-                            this.log(`${context ? `${context} ` : ""}WAITFOR${name ? ` ${name}` : ""} QUERY ${trunc(query)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
-                            code = await this.waitforQuery(query, on, timeout, required, pattern, context);
+                            this.log(`${label}WAITFOR${name ? ` ${name}` : ""} QUERY ${trunc(query)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
+                            code = await this.waitforQuery(query, on, timeout, required, pattern, label);
                         }
                         else if (select) {
-                            this.log(`${context ? `${context} ` : ""}WAITFOR${name ? ` ${name}` : ""} SELECT ${trunc(select)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
-                            code = await this.waitforSelect(select, on, timeout, required, pattern, context);
+                            this.log(`${label}WAITFOR${name ? ` ${name}` : ""} SELECT ${trunc(select)} on=${on}, timeout=${timeout}, pattern=${pattern}`);
+                            code = await this.waitforSelect(select, on, timeout, required, pattern, label);
                         }
                         return code;
                     }
                     else {
-                        this.log(`${context ? `${context} ` : ""}WAITFOR${name ? ` ${name}` : ""} BYPASSSED ${$statements(query)}`);
+                        this.log(`${label}WAITFOR${name ? ` ${name}` : ""} BYPASSSED ${$statements(query)}`);
                         return null;
                     }
                 }
                 else {
-                    this.log(`${context ? `${context} ` : ""}WAITFOR${name ? ` ${name}` : ""} SKIPPED ${$statements(query)}`);
+                    this.log(`${label}WAITFOR${name ? ` ${name}` : ""} SKIPPED ${$statements(query)}`);
                     return null;
                 }
             }
-            async waitforQuery(query, on, timeout, required, pattern, context) {
+            async waitforQuery(query, on, timeout, required, pattern, label = "") {
+                if (label)
+                    label += " ";
                 const t0 = new Date().valueOf();
                 let elapsed = 0;
                 let pass = false;
@@ -1739,7 +1769,7 @@
                     }
                     elapsed = (new Date().valueOf() - t0) / 1000;
                 }
-                const message = `${context ? `${context} ` : ""}WAITFOR QUERY ${$statements(query)} -> ${trunc(result?.value)}${pattern ? ` (valid=${result?.valid})` : ""} -> on=${on} -> ${pass} (${elapsed.toFixed(1)}s${elapsed > timeout ? " TIMEOUT" : ""})`;
+                const message = `${label}WAITFOR QUERY ${$statements(query)} -> ${trunc(result?.value)}${pattern ? ` (valid=${result?.valid})` : ""} -> on=${on} -> ${pass} (${elapsed.toFixed(1)}s${elapsed > timeout ? " TIMEOUT" : ""})`;
                 this.log(message);
                 if (pass) {
                     return null;
@@ -1752,7 +1782,9 @@
                     return null;
                 }
             }
-            async waitforSelect(selects, on, timeout, required, pattern, context) {
+            async waitforSelect(selects, on, timeout, required, pattern, label = "") {
+                if (label)
+                    label += " ";
                 for (const select of selects) {
                     if (!select.name || !select.name.startsWith("_") || !(!select.type || select.type === "boolean") || select.repeated) {
                         this.appendError("invalid-select", "waitfor select must all be internal, boolean, and not repeated", 0);
@@ -1795,7 +1827,7 @@
                     }
                     elapsed = (new Date().valueOf() - t0) / 1000;
                 }
-                const message = `${context ? `${context} ` : ""}WAITFOR SELECT ${JSON.stringify(state)}${pattern ? "valid=???" : ""} -> on=${on} -> ${pass} (${elapsed.toFixed(1)}s${elapsed > timeout ? " TIMEOUT" : ""})`;
+                const message = `${label}WAITFOR SELECT ${JSON.stringify(state)}${pattern ? "valid=???" : ""} -> on=${on} -> ${pass} (${elapsed.toFixed(1)}s${elapsed > timeout ? " TIMEOUT" : ""})`;
                 this.log(message);
                 if (pass) {
                     return null;
@@ -1808,32 +1840,39 @@
                     return null;
                 }
             }
-            when(when, context) {
+            when(when, label = "") {
+                if (label)
+                    label += " ";
                 if (when) {
                     try {
                         const result = !!this.evaluate(when);
-                        this.log(`${context ? `${context} ` : ""}WHEN ${JSON.stringify(when)} -> ${result}`);
+                        this.log(`${label}WHEN ${JSON.stringify(when)} -> ${result}`);
                         return result;
                     }
                     catch (err) {
-                        this.log(`${context ? `${context} ` : ""}WHEN ${JSON.stringify(when)} -> ERROR ${err instanceof Error ? err.message : JSON.stringify(err)}`);
+                        this.log(`${label}WHEN ${JSON.stringify(when)} -> ERROR ${err instanceof Error ? err.message : JSON.stringify(err)}`);
                         return false;
                     }
                 }
                 return true;
             }
-            yield({ name, when, context, timeout, params, active = true }) {
+            yield({ name = "", params, when, active = true }) {
+                if (name)
+                    name = " " + name;
                 if (this.online && active) {
-                    if (this.when(when, `YIELD${name ? ` ${name}` : ""}`)) {
-                        this.log(`YIELD${name ? ` ${name}` : ""} ${when || "(default)"} -> timeout=${timeout || "(default)"}${params ? `\n${JSON.stringify(params)}` : ""}`);
-                        return { context, timeout, params };
+                    if (this.when(when, `YIELD${name}`)) {
+                        this.state.vars.__step[0] += 1;
+                        const step = this.state.vars.__step;
+                        this.log(`YIELD${name} step=${JSON.stringify(step)} params=${JSON.stringify(params || {})}`);
+                        this.state.yield = { step, params };
+                        throw "YIELD";
                     }
                     else {
-                        this.log(`YIELD${name ? ` ${name}` : ""} SKIPPED ${when}`);
+                        this.log(`YIELD${name} SKIPPED ${when}`);
                     }
                 }
                 else {
-                    this.log(`YIELD${name ? ` ${name}` : ""} BYPASSED ${when}`);
+                    this.log(`YIELD${name} BYPASSED ${when}`);
                 }
                 return undefined;
             }
@@ -1842,12 +1881,16 @@
             state.vars.__instance += 1;
         }
         const obj = new ExtractContext(state);
-        obj.log(`INSTANCE #${obj.state.vars.__instance}${obj.online ? ` ${window.location.href}` : ""}`);
+        obj.log(`ENTRY #${obj.state.vars.__instance}${obj.online ? ` ${window.location.href}` : ""}`);
         try {
             await obj.run(obj.state.actions);
+            obj.log("EXIT");
         }
         catch (err) {
-            if (err === "STOP") {
+            if (err === "YIELD") {
+                obj.log("YIELDING");
+            }
+            else if (err === "STOP") {
                 obj.log("STOPPED");
             }
             else {

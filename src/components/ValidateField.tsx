@@ -5,6 +5,7 @@ import {
     BaseTextFieldProps,
     IconButton,
     InputAdornment,
+    InputProps,
     TextField
 } from "@mui/material";
 
@@ -20,9 +21,10 @@ export interface Props extends BaseTextFieldProps {
     onChange?: (event: React.SyntheticEvent, value: string) => void;
     onValidate?: (event: React.ChangeEvent<HTMLInputElement>, value: string) => boolean;
     onHitEnterKey?: (event: React.KeyboardEvent) => void;
+    InputProps?: Partial<InputProps>;
 }
 
-export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, showCancelButton, ...props }: Props) => {
+export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, showCancelButton, InputProps, ...props }: Props) => {
     const [ input, setInput ] = useState<string | undefined>();
     const [ valid, setValid ] = useState(true);
 
@@ -77,6 +79,7 @@ export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, 
             onKeyDown={keydown}
             onBlur={commit}
             InputProps={showCommitButton || showCancelButton ? {
+                ...InputProps,
                 endAdornment:
                     <InputAdornment
                         position="end"
@@ -100,7 +103,7 @@ export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, 
                             </IconButton>
                         }
                     </InputAdornment>
-            } : undefined}
+            } : InputProps}
         />
     );
 }

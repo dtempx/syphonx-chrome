@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { PropertyGrid, PropertyGridItem } from ".";
 import { useApp } from "../context";
 
-
 import {
     Link,
     Stack,

@@ -27,7 +27,7 @@ export default ({ items, columns = [{ width: 100 }], sx }: Props) => (
             <TableBody>
                 {items.map(item => (
                     <TableRow>
-                        <TableCell sx={{ width: columns[0]?.width }}>
+                        <TableCell sx={{ width: columns[0]?.width, verticalAlign: "top" }}>
                             {item[0]}                                    
                         </TableCell>
                         <TableCell sx={{ width: columns[1]?.width }}>

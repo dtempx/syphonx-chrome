@@ -1,5 +1,4 @@
 import React from "react";
-import { NumberField } from "./components";
 import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
@@ -10,7 +9,7 @@ import {
 import {
     ComplexPropertyGrid,
     FormulaField,
-    PlainTextField
+    SwitchedObjectEditor
 } from "./components";
 
 export interface Props {
@@ -54,27 +53,15 @@ export default ({ item, onChange }: Props) => {
                     ],
                     [
                         "params",
-                        <PlainTextField
-                            value={obj.context}
+                        <SwitchedObjectEditor
+                            obj={obj.params}
                             onChange={(event, value) => {
-                                obj.context = value;
+                                obj.params = value;
                                 onChange(event);
                             }}
                         />,
-                        "Specifies parameters to pass back to the host. Can be used to trigger screenshots and other host responsibilities.",
-                        obj.params !== undefined
-                    ],
-                    [
-                        "timeout",
-                        <NumberField
-                            value={obj.timeout}
-                            onChange={(event, value) => {
-                                obj.timeout = value;
-                                onChange(event);
-                            }}
-                        />,
-                        "Determines the amount of time in seconds to wait for a renavigation before a timeout error occurs.",
-                        obj.timeout !== undefined
+                        "Specifies parameters to pass back to the host enviornment. Used for page renavigations, triggering screenshots and other tasks that require host intervention.",
+                        true
                     ],
                     /*
                     [

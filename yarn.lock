@@ -2430,18 +2430,6 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-playwright-core@1.31.2:
-  version "1.31.2"
-  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.31.2.tgz#debf4b215d14cb619adb7e511c164d068075b2ed"
-  integrity sha512-a1dFgCNQw4vCsG7bnojZjDnPewZcw7tZUNFN0ZkcLYKj+mPmXvg4MpaaKZ5SgqPsOmqIf2YsVRkgqiRDxD+fDQ==
-
-playwright@^1.31.2:
-  version "1.31.2"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.31.2.tgz#4252280586c596746122cd1fdf9f8ff6a63fa852"
-  integrity sha512-jpC47n2PKQNtzB7clmBuWh6ftBRS/Bt5EGLigJ9k2QAKcNeYXZkEaDH5gmvb6+AbcE0DO6GnXdbl9ogG6Eh+og==
-  dependencies:
-    playwright-core "1.31.2"
-
 portfinder@^1.0.28:
   version "1.0.28"
   resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.28.tgz#67c4622852bd5374dd1dd900f779f53462fac778"
@@ -2804,22 +2792,21 @@ svgo@^2.4.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
-syphonx-core@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.6.tgz#e0a01545057e8aac886b26dc2c7a3641a68545c7"
-  integrity sha512-xUkThuiV8kCxpgbEy9YzMhK+3o9aEh47BYa2+0T4pFCTf1NnNFUmLW6AqwUbBqBJs5xun5OyWl1tekFVv5XsSg==
-  dependencies:
-    playwright "^1.31.2"
+syphonx-core@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.9.tgz#1082c319c652299618694918c6009c0342b661b6"
+  integrity sha512-6b2Yg7BD1y60l04LhgF3owRsXZwNFdwmqKaS+5puMFFDjvNqJU2szpBHvrgXRCvFSn3DFTQYIGcZJEbQ4ALx3Q==
 
-syphonx-lib@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.8.tgz#6da557103f7442bf9ae9de19d54d0bcf5c565cfa"
-  integrity sha512-h9OHcbPOjy5Ks5RAhGtHztDH0p4bdOZdxyM/F4wrs4qF9tEkm5aOGw97B+qUTZu/k0UuqQ7plFUzjiWFZCfc4g==
+syphonx-lib@^1.2.9:
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.9.tgz#a462dcf6a910d6e4fc23fda5c7c0b3a333a35c2f"
+  integrity sha512-Zi0glTNnX3qftQ+qdIAIGoSnv0XUgbArKBV/f103hxR4u6S3GU9yd7OT/rjLOAtO8D32DFzd+Z+ZCKxSkUWQQg==
   dependencies:
     js-yaml "^4.1.0"
     jsep "^1.3.7"
     json5 "^2.2.1"
-    syphonx-core "^1.2.6"
+    jsonschema "^1.4.1"
+    syphonx-core "^1.2.9"
 
 term-size@^2.2.1:
   version "2.2.1"
