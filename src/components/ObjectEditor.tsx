@@ -56,8 +56,10 @@ export default ({ obj, onChange, sx }: Props) => {
                             <TableCell>
                                 <Stack direction="row">
                                     <ValidateField
-                                        variant="standard"
+                                        variant={obj[key] ? "standard" : "outlined"}
                                         size="small"
+                                        placeholder="Specify value"
+                                        fullWidth
                                         value={obj[key]}
                                         onChange={(event, value) => {
                                             onChange(event, { ...obj, [key]: value });
@@ -84,6 +86,7 @@ export default ({ obj, onChange, sx }: Props) => {
                             <ValidateField
                                 variant="outlined"
                                 size="small"
+                                placeholder="New property"
                                 value=""
                                 onChange={(event, value) => {
                                     onChange(event, { ...obj, [value]: "" });

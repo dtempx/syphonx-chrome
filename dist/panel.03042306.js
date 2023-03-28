@@ -39810,8 +39810,10 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                             direction: "row",
                                             children: [
                                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
-                                                    variant: "standard",
+                                                    variant: obj[key] ? "standard" : "outlined",
                                                     size: "small",
+                                                    placeholder: "Specify value",
+                                                    fullWidth: true,
                                                     value: obj[key],
                                                     onChange: (event, value)=>{
                                                         onChange(event, {
@@ -39847,6 +39849,7 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
                                         variant: "outlined",
                                         size: "small",
+                                        placeholder: "New property",
                                         value: "",
                                         onChange: (event, value)=>{
                                             onChange(event, {
@@ -47960,7 +47963,7 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         }
                     }),
                     "Specifies parameters to pass back to the host enviornment. Used for page renavigations, triggering screenshots and other tasks that require host intervention.",
-                    obj.params !== undefined
+                    true
                 ]
             ]
         })

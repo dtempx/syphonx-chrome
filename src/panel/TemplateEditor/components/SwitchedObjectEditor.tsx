@@ -23,6 +23,11 @@ export default ({ obj, onChange, sx }: Props) => (
                 onChange(event, checked ? {} : undefined);
             }}
         />
-        {!!obj && <ObjectEditor obj={obj} onChange={onChange} />}
+        {!!obj &&
+            <ObjectEditor
+                obj={obj}
+                onChange={onChange}
+            />
+        }
     </Stack>
 );
