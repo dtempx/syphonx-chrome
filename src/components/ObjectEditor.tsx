@@ -27,77 +27,80 @@ export interface Props {
     sx?: SxProps<Theme>;
 }
 
-export default ({ obj, onChange, sx }: Props) => {
-    return (
-        <TableContainer sx={{ ...sx, maxHeight: 200, border: 1, borderColor: "secondary.main" }}>
-            <Table size="small" stickyHeader>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Name</TableCell>
-                        <TableCell>Value</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {Object.keys(obj).map(key => (
-                        <TableRow>
-                            <TableCell>
-                                <ValidateField
-                                    variant="standard"
-                                    size="small"
-                                    value={key}
-                                    onChange={(event, newKey) => {
-                                        const value = obj[key];
-                                        delete obj[key];
-                                        onChange(event, { ...obj, [newKey]: value });
-                                    }}
-                                    InputProps={{ disableUnderline: true }}
-                                />
-                            </TableCell>
-                            <TableCell>
-                                <Stack direction="row">
-                                    <ValidateField
-                                        variant={obj[key] ? "standard" : "outlined"}
-                                        size="small"
-                                        placeholder="Specify value"
-                                        fullWidth
-                                        value={obj[key]}
-                                        onChange={(event, value) => {
-                                            onChange(event, { ...obj, [key]: value });
-                                        }}
-                                        InputProps={{ disableUnderline: true }}
-                                    />
-                                    <IconButton
-                                        size="small"
-                                        onClick={event => {
-                                            delete obj[key];
-                                            onChange(event, obj);
-                                        }}
-                                    >
-                                        <Tooltip title="Remove this property">
-                                            <DeleteIcon fontSize="small" />
-                                        </Tooltip>
-                                    </IconButton>
-                                </Stack>
-                            </TableCell>
-                        </TableRow>
-                    ))}
+export default ({ obj, onChange, sx }: Props) => (
+    <TableContainer sx={{ ...sx, maxHeight: 200, border: 1, borderColor: "secondary.main" }}>
+        <Table size="small" stickyHeader>
+            <TableHead>
+                <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>Value</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {Object.keys(obj).map(key => (
                     <TableRow>
                         <TableCell>
                             <ValidateField
-                                variant="outlined"
+                                variant="standard"
                                 size="small"
-                                placeholder="New property"
-                                value=""
-                                onChange={(event, value) => {
-                                    onChange(event, { ...obj, [value]: "" });
+                                value={key}
+                                onChange={(event, newKey) => {
+                                    const value = obj[key];
+                                    delete obj[key];
+                                    onChange(event, { ...obj, [newKey]: value });
                                 }}
+                                InputProps={{ disableUnderline: true }}
                             />
                         </TableCell>
                         <TableCell>
+                            <Stack direction="row">
+                                <ValidateField
+                                    variant={obj[key] ? "standard" : "outlined"}
+                                    size="small"
+                                    placeholder="Specify value"
+                                    fullWidth
+                                    value={obj[key]}
+                                    onChange={(event, value) => {
+                                        onChange(event, { ...obj, [key]: value });
+                                    }}
+                                    ref={element => {
+                                        if (element && obj[key] === undefined)
+                                            setTimeout(() => element.focus(), 250);
+                                    }}
+                                    InputProps={{ disableUnderline: true }}
+                                />
+                                <IconButton
+                                    size="small"
+                                    onClick={event => {
+                                        delete obj[key];
+                                        onChange(event, obj);
+                                    }}
+                                    sx={{ ml: 1 }}
+                                >
+                                    <Tooltip title="Remove this property">
+                                        <DeleteIcon fontSize="small" />
+                                    </Tooltip>
+                                </IconButton>
+                            </Stack>
                         </TableCell>
                     </TableRow>
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
-};
+                ))}
+                <TableRow>
+                    <TableCell>
+                        <ValidateField
+                            variant="outlined"
+                            size="small"
+                            placeholder="New property"
+                            value=""
+                            onChange={(event, value) => {
+                                onChange(event, { ...obj, [value]: "" });
+                            }}
+                        />
+                    </TableCell>
+                    <TableCell>
+                    </TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </TableContainer>
+);

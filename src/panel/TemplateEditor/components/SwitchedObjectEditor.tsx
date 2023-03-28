@@ -27,6 +27,7 @@ export default ({ obj, onChange, sx }: Props) => (
             <ObjectEditor
                 obj={obj}
                 onChange={onChange}
+                sx={{ mt: 1, mb: 1 }}
             />
         }
     </Stack>

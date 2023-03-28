@@ -33484,7 +33484,11 @@ var $74468517893f764e$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
             }),
             !!obj && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a1d558db957b733c$export$2e2bcd8739ae039), {
                 obj: obj,
-                onChange: onChange
+                onChange: onChange,
+                sx: {
+                    mt: 1,
+                    mb: 1
+                }
             })
         ]
     });
@@ -39759,8 +39763,7 @@ var $1808d8a09151f49f$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
 };
 
 
-var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange , sx: sx  })=>{
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
+var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
         sx: {
             ...sx,
             maxHeight: 200,
@@ -39821,6 +39824,9 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                                             [key]: value
                                                         });
                                                     },
+                                                    ref: (element)=>{
+                                                        if (element && obj[key] === undefined) setTimeout(()=>element.focus(), 250);
+                                                    },
                                                     InputProps: {
                                                         disableUnderline: true
                                                     }
@@ -39830,6 +39836,9 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                                     onClick: (event)=>{
                                                         delete obj[key];
                                                         onChange(event, obj);
+                                                    },
+                                                    sx: {
+                                                        ml: 1
                                                     },
                                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                                                         title: "Remove this property",
@@ -39867,7 +39876,6 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
             ]
         })
     });
-};
 
 
 
