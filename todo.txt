@@ -1,15 +1,27 @@
+BLOCKER: error loading template: homedepot/product_page1
+Fix open template busy status
+
+
 Change add action to a dialog
     Adding a select should prompt for the first selector
 Move lightbulb out
+Bring back non-AI driven selectors
 Selector hightlighting on hover
-Fix open template busy status
 Data contract matching (product-page, search-page, etc.)
 Welcome dialog with prompt for email
+Typing filter for open file
+
+
+persist folder you are in
+add on option to error so we can break on any or none or any
+break on=any what does that mean
 
 
 Test urls
 Test runner
 Test groups
+
+URL param to autoopen extension
 
 
 DONE: PropertyGridEditor for template and yield params

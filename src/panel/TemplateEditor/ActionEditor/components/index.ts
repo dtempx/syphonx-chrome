@@ -1,5 +1,4 @@
 export * from "../../components";
-export { default as AddSelectorDialog } from "./AddSelectorDialog";
 export { default as DebugView } from "./DebugView";
 export { default as FormulaField } from "./FormulaField";
 export { default as NameField } from "./NameField";

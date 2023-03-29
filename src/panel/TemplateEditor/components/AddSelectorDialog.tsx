@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { TransitionUp } from "../components/";
-import { useTemplate } from "./context";
-import { Template } from "./lib";
-import NameField from "./NameField";
+import { TransitionUp } from "../ActionEditor/components";
+import { useTemplate } from "../ActionEditor/components/context";
+import { Template } from "../ActionEditor/components/lib";
+import NameField from "../ActionEditor/components/NameField";
 
 import {
     Alert,
@@ -14,10 +14,16 @@ import {
     DialogTitle,
     FormGroup,
     FormControlLabel,
+    IconButton,
     MenuItem,
     Switch,
-    TextField
+    TextField,
+    Typography
 } from "@mui/material";
+
+import {
+    Close as CloseIcon
+} from "@mui/icons-material"
 
 export interface Props {
     open: boolean;
@@ -64,8 +70,21 @@ export default ({ open, onClose }: Props) => {
             fullWidth
             maxWidth="sm"
         >
-            <DialogTitle>Add selector</DialogTitle>
-            <DialogContent>
+            <DialogTitle>
+                <Typography>Add Action</Typography>
+                <IconButton
+                    onClick={handleClose}
+                    sx={{
+                        position: "absolute",
+                        top: theme => theme.spacing(1),
+                        right: theme => theme.spacing(1),
+                        color: theme => theme.palette.grey[500]
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent sx={{ height: 250 }}>
                 {error && <Alert severity="error" onClose={() => setError(undefined)} sx={{ mb: 2 }}>{error}</Alert>}
                 <FormGroup>
                     <NameField
@@ -83,7 +102,7 @@ export default ({ open, onClose }: Props) => {
                         defaultValue="default"
                         onChange={handleMenu}
                         select
-                        sx={{ mt: 2 }}
+                        sx={{ mt: 4 }}
                     >
                         <MenuItem value="default">(default)</MenuItem>
                         <MenuItem value="string">string</MenuItem>
@@ -107,7 +126,7 @@ export default ({ open, onClose }: Props) => {
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleCommit}>OK</Button>
+                <Button onClick={handleCommit}>Add</Button>
             </DialogActions>
         </Dialog>
     );

@@ -22,9 +22,15 @@ export default () => {
     const template = new Template(json);
 
     useEffect(() => {
-        const key = template.selected()?.key;
-        if (key)
-            setSelected([key]);
+        if (template.selected()) {
+            const key = template.selected()?.key;
+            if (key)
+                setSelected([key]);
+        }
+        else if (template.children[0]) {
+            template.setSelected(template.children[0]);
+            setTemplate(template.json());
+        }
     }, [json]);
 
     return (
@@ -38,7 +44,7 @@ export default () => {
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
                 onNodeSelect={(event: any, value: any) => {
                     template.setSelected(value);
-                    setTemplate(template.json());            
+                    setTemplate(template.json());
                 }}
             >
                 {template?.children?.map(item => <ActionTreeItem item={item} />)}

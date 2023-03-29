@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { TitleBar, TransitionUp } from "../../components";
+import { ActionIcon, TitleBar, TransitionUp } from "./components";
 import { clone } from "./lib";
-import ActionIcon from "../../../ActionIcon";
 import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";

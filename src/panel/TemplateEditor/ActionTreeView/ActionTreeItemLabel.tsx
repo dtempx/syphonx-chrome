@@ -1,9 +1,9 @@
 import React from "react";
 import * as syphonx from "syphonx-lib";
-import ActionIcon from "../ActionIcon";
 import ActionTreeItemMenu from "./ActionTreeItemMenu";
 import { useTemplate } from "../context";
 import { Template, TemplateItem } from "../lib";
+import { ActionIcon } from "../components";
 
 import {
     Stack,
