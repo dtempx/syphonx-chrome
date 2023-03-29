@@ -11,7 +11,8 @@ import {
     Tooltip,
     Stack,
     SxProps,
-    Theme
+    Theme,
+    Typography
 } from "@mui/material";
 
 import {
@@ -32,8 +33,12 @@ export default ({ obj, onChange, sx }: Props) => (
         <Table size="small" stickyHeader>
             <TableHead>
                 <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Value</TableCell>
+                    <TableCell>
+                        <Typography fontSize="small" color="secondary.main">Name</Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography fontSize="small" color="secondary.main">Value</Typography>
+                    </TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -49,7 +54,10 @@ export default ({ obj, onChange, sx }: Props) => (
                                     delete obj[key];
                                     onChange(event, { ...obj, [newKey]: value });
                                 }}
-                                InputProps={{ disableUnderline: true }}
+                                InputProps={{
+                                    disableUnderline: true,
+                                    style: { fontSize: "small" }
+                                }}
                             />
                         </TableCell>
                         <TableCell>
@@ -67,7 +75,10 @@ export default ({ obj, onChange, sx }: Props) => (
                                         if (element && obj[key] === undefined)
                                             setTimeout(() => element.focus(), 250);
                                     }}
-                                    InputProps={{ disableUnderline: true }}
+                                    InputProps={{
+                                        disableUnderline: true,
+                                        style: { fontSize: "small" }
+                                    }}
                                 />
                                 <IconButton
                                     size="small"
@@ -94,6 +105,9 @@ export default ({ obj, onChange, sx }: Props) => (
                             value=""
                             onChange={(event, value) => {
                                 onChange(event, { ...obj, [value]: "" });
+                            }}
+                            InputProps={{
+                                style: { fontSize: "small" }
                             }}
                         />
                     </TableCell>

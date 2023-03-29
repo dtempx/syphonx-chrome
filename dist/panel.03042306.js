@@ -39778,10 +39778,18 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
                         children: [
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "Name"
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    color: "secondary.main",
+                                    children: "Name"
+                                })
                             }),
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                children: "Value"
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                    fontSize: "small",
+                                    color: "secondary.main",
+                                    children: "Value"
+                                })
                             })
                         ]
                     })
@@ -39804,7 +39812,10 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                                 });
                                             },
                                             InputProps: {
-                                                disableUnderline: true
+                                                disableUnderline: true,
+                                                style: {
+                                                    fontSize: "small"
+                                                }
                                             }
                                         })
                                     }),
@@ -39828,7 +39839,10 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                                         if (element && obj[key] === undefined) setTimeout(()=>element.focus(), 250);
                                                     },
                                                     InputProps: {
-                                                        disableUnderline: true
+                                                        disableUnderline: true,
+                                                        style: {
+                                                            fontSize: "small"
+                                                        }
                                                     }
                                                 }),
                                                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
@@ -39865,6 +39879,11 @@ var $a1d558db957b733c$export$2e2bcd8739ae039 = ({ obj: obj , onChange: onChange 
                                                 ...obj,
                                                 [value]: ""
                                             });
+                                        },
+                                        InputProps: {
+                                            style: {
+                                                fontSize: "small"
+                                            }
                                         }
                                     })
                                 }),
