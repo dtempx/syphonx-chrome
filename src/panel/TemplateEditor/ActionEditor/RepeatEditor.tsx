@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     FormulaField,
     NumberField
 } from "./components";
@@ -20,7 +20,7 @@ export interface Props {
 export default ({ item, onChange }: Props) => {
     const obj = item?.obj as syphonx.Repeat;
     return obj ? (
-        <ComplexPropertyGrid
+        <AdvancedPropertyGrid
             items={[
                 [
                     "name",

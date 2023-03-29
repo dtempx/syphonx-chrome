@@ -1,22 +1,29 @@
-PropertyGridEditor for template and yield params
 Change add action to a dialog
-Adding a select should prompt for the first selector
-
-DONE: action scroll to element
-case action { "case": [ { "when": "...", "actions": [...] } ] }
-sendkeys action for example to hit escape key to close a dialog
+    Adding a select should prompt for the first selector
+Move lightbulb out
+Selector hightlighting on hover
+Fix open template busy status
+Data contract matching (product-page, search-page, etc.)
+Welcome dialog with prompt for email
 
 
 Test urls
 Test runner
-Test checks
 Test groups
 
-cloud log endpoint
 
-fix open template busy status
-match contract by filename (product-page, search-page, etc.)
+DONE: PropertyGridEditor for template and yield params
+DONE: action scroll to element
+DONE: cloud log endpoint (not deployed)
+
+
+update is available message
 allow _ in file names in cloud storage
+
+case action { "case": [ { "when": "...", "actions": [...] } ] }
+sendkeys action for example to hit escape key to close a dialog
+
+
 show contextual info in tree after name
 
 add field dialog that shows a picker from the contract or sets name, type, repeated and validates not a duplicate

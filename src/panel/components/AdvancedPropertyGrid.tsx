@@ -67,10 +67,7 @@ export default ({ items, ...props }: Props) => {
                     sx={{ margin: 1 }}
                 >
                     <Tooltip title="Show advanced settings">
-                        <Typography>
-                            More
-                            <MoreIcon fontSize="small" sx={{ position: "relative", top: 6 }} />
-                        </Typography>
+                        <Typography fontSize="small">More <MoreIcon fontSize="small" sx={{ position: "relative", top: 6 }} /></Typography>
                     </Tooltip>
                 </Link>
             }
@@ -82,10 +79,7 @@ export default ({ items, ...props }: Props) => {
                     sx={{ margin: 1 }}
                 >
                     <Tooltip title="Hide unused advanced settings">
-                        <Typography>
-                            Less
-                            <LessIcon fontSize="small" sx={{ position: "relative", top: 6 }} />
-                        </Typography>
+                        <Typography fontSize="small">Less <LessIcon fontSize="small" sx={{ position: "relative", top: 6 }} /></Typography>
                     </Tooltip>
                 </Link>
             }

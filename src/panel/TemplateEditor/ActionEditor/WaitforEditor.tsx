@@ -18,7 +18,7 @@ import {
 } from "@mui/icons-material";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     FormulaField,
     QueryEditorField,
     NumberField,
@@ -59,7 +59,7 @@ export default ({ item, onChange }: Props) => {
 
     const obj = item?.obj as syphonx.WaitFor;
     return obj ? (
-        <ComplexPropertyGrid
+        <AdvancedPropertyGrid
             items={[
                 [
                     "name",

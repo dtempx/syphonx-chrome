@@ -4,7 +4,7 @@ import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     FormulaField,
     QueryEditorField,
     NumberField,
@@ -21,7 +21,7 @@ export interface Props {
 export default ({ item, onChange }: Props) => {
     const obj = item?.obj as syphonx.Select;
     return obj ? (
-        <ComplexPropertyGrid
+        <AdvancedPropertyGrid
             items={[
                 [
                     "query",

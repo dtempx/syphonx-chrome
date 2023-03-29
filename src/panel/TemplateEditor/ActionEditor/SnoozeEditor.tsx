@@ -3,7 +3,7 @@ import { Stack, Typography } from "@mui/material";
 import { TemplateItem } from "../lib";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     NumberRangeField
 } from "./components";
 
@@ -14,7 +14,7 @@ export interface Props {
 
 export default ({ item, onChange }: Props) => {
     return item ? (
-        <ComplexPropertyGrid
+        <AdvancedPropertyGrid
             items={[
                 [
                     "timeframe",

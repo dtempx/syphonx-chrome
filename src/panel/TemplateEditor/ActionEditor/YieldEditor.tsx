@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     FormulaField,
     SwitchedObjectEditor
 } from "./components";
@@ -21,7 +21,7 @@ export default ({ item, onChange }: Props) => {
     const obj = item?.obj as syphonx.Yield & { context?: string }; // todo: remove shim when syphonx-core updated
     return obj ? (
         <>
-            <ComplexPropertyGrid
+            <AdvancedPropertyGrid
                 items={[
                     [
                         "name",

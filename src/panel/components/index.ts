@@ -1,2 +1,2 @@
 export * from "../../components";
-export { default as ComplexPropertyGrid } from "./ComplexPropertyGrid";
+export { default as AdvancedPropertyGrid } from "./AdvancedPropertyGrid";

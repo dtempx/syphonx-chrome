@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import {
-    ComplexPropertyGrid,
+    AdvancedPropertyGrid,
     FormulaField,
     QueryEditorField,
     ScrollToDropdown
@@ -23,7 +23,7 @@ export interface Props {
 export default ({ item, onChange }: Props) => {
     const obj = item?.obj as syphonx.Scroll;
     return obj ? (
-        <ComplexPropertyGrid
+        <AdvancedPropertyGrid
             items={[
                 [
                     "name",
