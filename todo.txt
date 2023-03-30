@@ -5,7 +5,7 @@ Bring back non-AI driven selectors
 Selector hightlighting on hover
 Data contract matching (product-page, search-page, etc.)
 Welcome dialog with prompt for email
-Typing filter for open file
+
 
 
 persist folder you are in
@@ -20,6 +20,7 @@ Test groups
 URL param to autoopen extension
 
 DONE: Fix open template busy status
+DONE: Typing filter for open file
 DONE: PropertyGridEditor for template and yield params
 DONE: action scroll to element
 DONE: cloud log endpoint (not deployed)

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
 import { useApp, useTemplate } from "./context";
+import { path } from "./lib";
 
 import {
     Box,
@@ -34,14 +35,16 @@ export default () => {
                 </IconButton>
 
                 {templateFile ? (
-                    <Chip
-                        label={templateFile}
-                        variant="outlined"
-                        color="primary"
-                        size="small"
-                        icon={<FileIcon sx={{ ml: 1 }} />}
-                        sx={{ m: 1 }}
-                    />
+                    <Tooltip title={templateFile}>
+                        <Chip
+                            label={path.shorten(templateFile, 60)}
+                            variant="outlined"
+                            color="primary"
+                            size="small"
+                            icon={<FileIcon sx={{ ml: 1 }} />}
+                            sx={{ m: 1 }}
+                        />
+                    </Tooltip>
                 ) : null}
             </Stack>
 

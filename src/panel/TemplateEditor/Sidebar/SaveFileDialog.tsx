@@ -42,7 +42,7 @@ export default ({ open, onClose }: Props) => {
         }
     }, [open]);
 
-    async function handleSelectFile(event: React.SyntheticEvent, file: string) {
+    async function handleSelectFile(event: React.SyntheticEvent, file: string): Promise<boolean> {
         try {
             setSaving(true);
             const json = template.file();
@@ -51,11 +51,13 @@ export default ({ open, onClose }: Props) => {
             setSaving(false);
             setError("");
             onClose(event);
+            return true;
         }
         catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setSaving(false);
+            return false;
         }
     }
 

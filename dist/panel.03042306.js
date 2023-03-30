@@ -23033,6 +23033,44 @@ function $54aab56c424914ec$export$f7ad0328861e2f03(...segments) {
 }
 
 
+var $50b7b7f7b1835c80$exports = {};
+
+$parcel$export($50b7b7f7b1835c80$exports, "shorten", () => $50b7b7f7b1835c80$export$dd78866213f805a5);
+/**
+ * Shortens a file path for display such that the length does not exceed a specified maximum.
+ * @param name The input file path.
+ * @returns The shortened file path.
+ * @example shorten("/very/long/path/to/file.txt", 20) -> "/very/…/to/file.txt"
+ * @description
+ * Substitues an "…" into middle part of a path, attempting to smartly break on "/" boundaries.
+ * For display purposes only, returned result may not be a valid path.
+ */ function $50b7b7f7b1835c80$export$dd78866213f805a5(filepath, maxLength = 40) {
+    if (filepath.length <= maxLength) return filepath;
+    const parts = filepath.split("/");
+    let result = filepath;
+    if (result.length > maxLength) {
+        const i = Math.floor(parts.length / 2);
+        if (i > 1 && i < parts.length - 1) {
+            parts.splice(i, 1, "…"); // replace the middle part with "…"
+            result = parts.join("/");
+        }
+    }
+    while(result.length > maxLength){
+        const i = parts.indexOf("…");
+        if (i > 2) {
+            parts.splice(i - 1, 1);
+            result = parts.join("/");
+        } else if (i < parts.length - 2) {
+            parts.splice(i + 1, 1);
+            result = parts.join("/");
+        } else break;
+    }
+    if (result.length > maxLength) result = parts.pop(); // drop down to just the filename
+    if (result.length > maxLength) result = `${result.slice(0, maxLength - 1)}…`; // shorten the filename to fit
+    return result;
+}
+
+
 var $93aa002deec8ce00$exports = {};
 
 $parcel$export($93aa002deec8ce00$exports, "slice", () => $93aa002deec8ce00$export$58adb3bec8346d0f);
@@ -23052,6 +23090,7 @@ $parcel$exportWildcard($89382e3cfd90d03a$exports, $34e20e8040e4c784$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $54aab56c424914ec$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $50b7b7f7b1835c80$exports);
 
 
 var $360e2ccc4c1cad7a$exports = {};
@@ -45902,10 +45941,12 @@ var $9c7488a3ccb37ae1$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             setSaving(false);
             setError("");
             onClose(event);
+            return true;
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setSaving(false);
+            return false;
         }
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $932acd7bba086cc0$export$2e2bcd8739ae039), {
@@ -46446,6 +46487,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
+
 var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
 }), "Menu");
@@ -46497,19 +46539,22 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
                         onClick: ()=>setSidebarOpen(true),
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $832969ad3fbafab7$export$2e2bcd8739ae039), {})
                     }),
-                    templateFile ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
-                        label: templateFile,
-                        variant: "outlined",
-                        color: "primary",
-                        size: "small",
-                        icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
+                    templateFile ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: templateFile,
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                            label: (0, $89382e3cfd90d03a$exports).shorten(templateFile, 60),
+                            variant: "outlined",
+                            color: "primary",
+                            size: "small",
+                            icon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $00be98c6ac63b133$export$2e2bcd8739ae039), {
+                                sx: {
+                                    ml: 1
+                                }
+                            }),
                             sx: {
-                                ml: 1
+                                m: 1
                             }
-                        }),
-                        sx: {
-                            m: 1
-                        }
+                        })
                     }) : null
                 ]
             }),
