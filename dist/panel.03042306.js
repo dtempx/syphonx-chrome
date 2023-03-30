@@ -23058,11 +23058,13 @@ var $360e2ccc4c1cad7a$exports = {};
 
 $parcel$export($360e2ccc4c1cad7a$exports, "apiKey", () => $360e2ccc4c1cad7a$export$c34289b98f0a8d7e);
 $parcel$export($360e2ccc4c1cad7a$exports, "email", () => $360e2ccc4c1cad7a$export$d290fa47940df19d);
+$parcel$export($360e2ccc4c1cad7a$exports, "filepath", () => $360e2ccc4c1cad7a$export$5b7640f3ec0f1c25);
 $parcel$export($360e2ccc4c1cad7a$exports, "kebabCase", () => $360e2ccc4c1cad7a$export$7428e6464c9e15e8);
 $parcel$export($360e2ccc4c1cad7a$exports, "snakeCase", () => $360e2ccc4c1cad7a$export$feae9a740c003485);
 $parcel$export($360e2ccc4c1cad7a$exports, "url", () => $360e2ccc4c1cad7a$export$128fa18b7194ef);
 const $360e2ccc4c1cad7a$export$c34289b98f0a8d7e = /^[a-z0-9]{20}$/i;
 const $360e2ccc4c1cad7a$export$d290fa47940df19d = /^[a-z0-9+_.-]+@[a-z0-9.-]+$/i;
+const $360e2ccc4c1cad7a$export$5b7640f3ec0f1c25 = /^[/][a-z][a-z0-9_/]+[.](yaml|json)$/;
 const $360e2ccc4c1cad7a$export$7428e6464c9e15e8 = /^[a-z][a-z0-9-]*$/;
 const $360e2ccc4c1cad7a$export$feae9a740c003485 = /^_?[a-z][a-z0-9_]*$/;
 const $360e2ccc4c1cad7a$export$128fa18b7194ef = /^https?:\/\/[^\/]/;
@@ -40580,6 +40582,94 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+function $c328579d08306784$export$d72d4cbdc30b331f(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormGroup", slot);
+}
+const $c328579d08306784$var$formGroupClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormGroup", [
+    "root",
+    "row",
+    "error"
+]);
+var $c328579d08306784$export$2e2bcd8739ae039 = $c328579d08306784$var$formGroupClasses;
+
+
+
+
+
+const $d7126578d7ff4afb$var$_excluded = [
+    "className",
+    "row"
+];
+const $d7126578d7ff4afb$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , row: row , error: error  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            row && "row",
+            error && "error"
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $c328579d08306784$export$d72d4cbdc30b331f), classes);
+};
+const $d7126578d7ff4afb$var$FormGroupRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiFormGroup",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        return [
+            styles.root,
+            ownerState.row && styles.row
+        ];
+    }
+})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        display: "flex",
+        flexDirection: "column",
+        flexWrap: "wrap"
+    }, ownerState.row && {
+        flexDirection: "row"
+    }));
+/**
+ * `FormGroup` wraps controls such as `Checkbox` and `Switch`.
+ * It provides compact row layout.
+ * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
+ */ const $d7126578d7ff4afb$var$FormGroup = /*#__PURE__*/ $d4J5n.forwardRef(function FormGroup(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiFormGroup"
+    });
+    const { className: className , row: row = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $d7126578d7ff4afb$var$_excluded);
+    const muiFormControl = (0, $54fed768a65d42d6$export$2e2bcd8739ae039)();
+    const fcs = (0, $789e4d36d491b8e0$export$2e2bcd8739ae039)({
+        props: props,
+        muiFormControl: muiFormControl,
+        states: [
+            "error"
+        ]
+    });
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        row: row,
+        error: fcs.error
+    });
+    const classes = $d7126578d7ff4afb$var$useUtilityClasses(ownerState);
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d7126578d7ff4afb$var$FormGroupRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        ownerState: ownerState,
+        ref: ref
+    }, other));
+});
+var $d7126578d7ff4afb$export$2e2bcd8739ae039 = $d7126578d7ff4afb$var$FormGroup;
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
+
+
+
 
 
 
@@ -40736,94 +40826,6 @@ const $23a46d6993216966$export$1b479270917a5676 = (0, $28cddbc9c45fcc54$export$2
     }));
 });
 var $23a46d6993216966$export$2e2bcd8739ae039 = $23a46d6993216966$var$FormControlLabel;
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-
-
-
-function $c328579d08306784$export$d72d4cbdc30b331f(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiFormGroup", slot);
-}
-const $c328579d08306784$var$formGroupClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiFormGroup", [
-    "root",
-    "row",
-    "error"
-]);
-var $c328579d08306784$export$2e2bcd8739ae039 = $c328579d08306784$var$formGroupClasses;
-
-
-
-
-
-const $d7126578d7ff4afb$var$_excluded = [
-    "className",
-    "row"
-];
-const $d7126578d7ff4afb$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , row: row , error: error  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            row && "row",
-            error && "error"
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $c328579d08306784$export$d72d4cbdc30b331f), classes);
-};
-const $d7126578d7ff4afb$var$FormGroupRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiFormGroup",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        return [
-            styles.root,
-            ownerState.row && styles.row
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        display: "flex",
-        flexDirection: "column",
-        flexWrap: "wrap"
-    }, ownerState.row && {
-        flexDirection: "row"
-    }));
-/**
- * `FormGroup` wraps controls such as `Checkbox` and `Switch`.
- * It provides compact row layout.
- * For the `Radio`, you should be using the `RadioGroup` component instead of this one.
- */ const $d7126578d7ff4afb$var$FormGroup = /*#__PURE__*/ $d4J5n.forwardRef(function FormGroup(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiFormGroup"
-    });
-    const { className: className , row: row = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $d7126578d7ff4afb$var$_excluded);
-    const muiFormControl = (0, $54fed768a65d42d6$export$2e2bcd8739ae039)();
-    const fcs = (0, $789e4d36d491b8e0$export$2e2bcd8739ae039)({
-        props: props,
-        muiFormControl: muiFormControl,
-        states: [
-            "error"
-        ]
-    });
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        row: row,
-        error: fcs.error
-    });
-    const classes = $d7126578d7ff4afb$var$useUtilityClasses(ownerState);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($d7126578d7ff4afb$var$FormGroupRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        ownerState: ownerState,
-        ref: ref
-    }, other));
-});
-var $d7126578d7ff4afb$export$2e2bcd8739ae039 = $d7126578d7ff4afb$var$FormGroup;
 
 
 
@@ -43956,15 +43958,29 @@ var $2f97f7a2aae17371$export$2e2bcd8739ae039 = $2f97f7a2aae17371$var$LinearProgr
 
 
 
+var $e2e5d022b98a42f0$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+}), "Clear");
+
+
+
 var $00393b3fb564f209$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"
 }), "CloudUpload");
+
+
+
+var $93a0c9b332efe71b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M7 6h10l-5.01 6.3L7 6zm-2.75-.39C6.27 8.2 10 13 10 13v6c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-6s3.72-4.8 5.74-7.39c.51-.66.04-1.61-.79-1.61H5.04c-.83 0-1.3.95-.79 1.61z"
+}), "FilterAltOutlined");
+
 
 
 var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , mode: mode , open: open , loading: loading , opening: opening , saving: saving , error: error , selectedFile: selectedFile , onSelectFile: onSelectFile , onClearError: onClearError , onClose: onClose  })=>{
     const [currentDirectory, setCurrentDirectory] = (0, $d4J5n.useState)("");
     const [text, setText] = (0, $d4J5n.useState)("");
     const [valid, setValid] = (0, $d4J5n.useState)(true);
+    const [filter, setFilter] = (0, $d4J5n.useState)("");
     (0, $d4J5n.useEffect)(()=>{
         setText(selectedFile && validateFilename(selectedFile) ? selectedFile : "");
         setCurrentDirectory(selectedFile && validateFilename(selectedFile) && selectedFile.lastIndexOf("/") > 0 ? selectedFile?.slice(0, selectedFile?.lastIndexOf("/") + 1) : "/");
@@ -43974,10 +43990,10 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
     function handleSave(event) {
         if (valid) onSelectFile(event, text);
     }
-    function handleSelectFile(event, file) {
+    async function handleSelectFile(event, file) {
         if (mode === "open") {
-            onSelectFile(event, file);
-            onClose(event);
+            const ok = await onSelectFile(event, file);
+            if (ok) onClose(event);
         } else if (mode === "save") setText(file);
     }
     function handleTextChange(event) {
@@ -43987,16 +44003,18 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
         setValid(valid);
     }
     function validateFilename(text) {
-        return /^[/][a-z][a-z0-9_/]+[.](yaml|json)$/.test(text);
+        return (0, $360e2ccc4c1cad7a$exports).filepath.test(text);
     }
-    const currentFiles = files.filter((file)=>{
+    const currentFiles = files// narrow down to files in current directory
+    .filter((file)=>{
         if (file.startsWith(currentDirectory) && file !== currentDirectory) {
             const name = file.slice(currentDirectory.length);
             const i = name.indexOf("/");
             if (i < 0 || name.length === i + 1) return true;
         }
         return false;
-    });
+    })// only include files that match the filter
+    .filter((file)=>!filter || (0, $89382e3cfd90d03a$exports).filename(file).includes(filter));
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $d2872d03d2a30200$export$2e2bcd8739ae039), {
         fullScreen: true,
         open: open,
@@ -44031,22 +44049,79 @@ var $932acd7bba086cc0$export$2e2bcd8739ae039 = ({ files: files , title: title , 
                     }),
                     files.length > 0 && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdf9880214f9840f$export$2e2bcd8739ae039), {
                         file: currentDirectory,
-                        onClick: (event, key)=>setCurrentDirectory(key),
+                        onClick: (event, key)=>{
+                            setCurrentDirectory(key);
+                            setFilter("");
+                        },
                         sx: {
                             m: 2
                         }
+                    }),
+                    !loading && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        sx: {
+                            m: 2
+                        },
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                                variant: "standard",
+                                placeholder: "Type here to filter the current view",
+                                size: "small",
+                                fullWidth: true,
+                                value: filter,
+                                onChange: (event)=>setFilter(event.target.value),
+                                InputProps: {
+                                    startAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                                        position: "start",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                            edge: "start",
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $93a0c9b332efe71b$export$2e2bcd8739ae039), {})
+                                        })
+                                    }),
+                                    endAdornment: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $224cf55292bca498$export$2e2bcd8739ae039), {
+                                        position: "end",
+                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                            edge: "end",
+                                            onClick: ()=>setFilter(""),
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e2e5d022b98a42f0$export$2e2bcd8739ae039), {})
+                                        })
+                                    })
+                                }
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                label: currentFiles.length,
+                                color: "primary",
+                                variant: "filled",
+                                size: "small",
+                                sx: {
+                                    ml: 2
+                                }
+                            })
+                        ]
                     })
                 ]
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ccdb7eb0c8e273cb$export$2e2bcd8739ae039), {
                 sx: {
                     p: 0
                 },
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $748ee72bf4f4617f$export$2e2bcd8739ae039), {
-                    files: currentFiles,
-                    onSelectFile: handleSelectFile,
-                    onSelectFolder: (event, key)=>setCurrentDirectory(key)
-                })
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $748ee72bf4f4617f$export$2e2bcd8739ae039), {
+                        files: currentFiles,
+                        onSelectFile: handleSelectFile,
+                        onSelectFolder: (event, file)=>{
+                            setCurrentDirectory(file);
+                            setFilter("");
+                        }
+                    }),
+                    currentFiles.length === 0 && filter && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c4319dabadcb67cb$export$2e2bcd8739ae039), {
+                        severity: "info",
+                        sx: {
+                            m: 2
+                        },
+                        children: "No files match the filter."
+                    })
+                ]
             }),
             mode === "save" ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $da0540f5852f2a4e$export$2e2bcd8739ae039), {
                 children: [
@@ -44819,12 +44894,6 @@ var $d4J5n = parcelRequire("d4J5n");
 var $2f0f81fa11552061$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
 }), "Check");
-
-
-
-var $e2e5d022b98a42f0$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-}), "Clear");
 
 
 var $1808d8a09151f49f$export$2e2bcd8739ae039 = ({ value: value , onChange: onChange , onValidate: onValidate , onHitEnterKey: onHitEnterKey , showCommitButton: showCommitButton , showCancelButton: showCancelButton , InputProps: InputProps , ...props })=>{
@@ -45765,10 +45834,12 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             onClose(event);
             setOpening(false);
             setError("");
+            return true;
         } catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setOpening(false);
+            return false;
         }
     }
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $932acd7bba086cc0$export$2e2bcd8739ae039), {
@@ -48209,7 +48280,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
                             value: "query",
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "query mode",
+                                title: "Wait for a single DOM query result",
                                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $59832171647634df$export$2e2bcd8739ae039), {
                                     fontSize: "small"
                                 })
@@ -48218,7 +48289,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fc79f6ee39fd6680$export$2e2bcd8739ae039), {
                             value: "select",
                             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                title: "select mode",
+                                title: "Wait for the result of any, all, or none DOM queries produced from a sub-select",
                                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ffcd2e035197e27e$export$2e2bcd8739ae039), {
                                     fontSize: "small"
                                 })
@@ -48226,7 +48297,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         })
                     ]
                 }),
-                "Choose query or select mode",
+                "Determines whether to wait for a single DOM query, or the result of a multiple DOM query from a sub-select",
                 true,
                 mode === undefined ? "query or select required" : ""
             ],
@@ -48240,7 +48311,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A CSS selector or jQuery expression that determines the content to wait for on the page.",
+                "A CSS selector or jQuery expression that determines the content to wait for on the page. Only used when mode=query.",
                 mode === "query",
                 (!obj.query || JSON.stringify(obj.query) === `[[""]]`) && !obj.select ? "query or select required" : ""
             ],
@@ -48253,7 +48324,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "Determines whether to wait for any, all, or none of the sub-selectors.",
+                "Determines whether to wait for any, all, or none of the sub-selectors. Only used when mode=select.",
                 mode === "select"
             ],
             [

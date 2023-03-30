@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { path, regexp } from "../lib";
 
 import {
-    AlertBar,
-    FileList,
-    FilePathBreadcrumbs,
-    TitleBar,
-    TransitionUp
-} from ".";
-
-import {
+    Alert,
+    Chip,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
+    IconButton,
+    InputAdornment,
     LinearProgress,
+    Stack,
     TextField,
     Typography
 } from "@mui/material";
@@ -23,8 +21,18 @@ import {
 } from "@mui/lab"
 
 import {
-    CloudUpload as SaveIcon
+    Clear as ClearIcon,
+    CloudUpload as SaveIcon,
+    FilterAltOutlined as FilterIcon
 } from "@mui/icons-material";
+
+import {
+    AlertBar,
+    FileList,
+    FilePathBreadcrumbs,
+    TitleBar,
+    TransitionUp
+} from ".";
 
 export interface Props {
     files: string[];
@@ -36,7 +44,7 @@ export interface Props {
     opening?: boolean;
     saving?: boolean;
     selectedFile?: string;
-    onSelectFile: (event: React.SyntheticEvent, file: string) => void;
+    onSelectFile: (event: React.SyntheticEvent, file: string) => Promise<boolean>;
     onClearError: (event: React.SyntheticEvent) => void;
     onClose: (event: React.SyntheticEvent) => void;
 }
@@ -45,6 +53,7 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
     const [currentDirectory, setCurrentDirectory] = useState("");
     const [text, setText] = useState("");
     const [valid, setValid] = useState(true);
+    const [filter, setFilter] = useState("");
 
     useEffect(() => {
         setText(selectedFile && validateFilename(selectedFile) ? selectedFile : "");
@@ -56,10 +65,11 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
             onSelectFile(event, text);
     }
 
-    function handleSelectFile(event: React.SyntheticEvent, file: string) {
+    async function handleSelectFile(event: React.SyntheticEvent, file: string): Promise<void> {
         if (mode === "open") {
-            onSelectFile(event, file);
-            onClose(event);
+            const ok = await onSelectFile(event, file);
+            if (ok)
+                onClose(event);
         }
         else if (mode === "save") {
             setText(file);
@@ -74,10 +84,11 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
     }
 
     function validateFilename(text: string): boolean {
-        return /^[/][a-z][a-z0-9_/]+[.](yaml|json)$/.test(text);
+        return regexp.filepath.test(text);
     }
 
     const currentFiles = files
+        // narrow down to files in current directory
         .filter(file => {
             if (file.startsWith(currentDirectory) && file !== currentDirectory) {
                 const name = file.slice(currentDirectory.length);
@@ -86,7 +97,9 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
                     return true;
             }
             return false;
-        });
+        })
+        // only include files that match the filter
+        .filter(file => !filter || path.filename(file).includes(filter));
 
     return (
         <Dialog
@@ -104,16 +117,66 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
                         visibility: loading || opening || saving ? "visible" : "hidden"
                     }}
                 />
-                {files.length === 0 && <Typography sx={{ m: 2 }}>One moment please…</Typography>}
-                {files.length > 0 && <FilePathBreadcrumbs file={currentDirectory} onClick={(event, key) => setCurrentDirectory(key)} sx={{ m: 2 }} />}
+                {files.length === 0 &&
+                    <Typography sx={{ m: 2 }}>One moment please…</Typography>
+                }
+                {files.length > 0 &&
+                    <FilePathBreadcrumbs
+                        file={currentDirectory}
+                        onClick={(event, key) => {
+                            setCurrentDirectory(key);
+                            setFilter("");
+                        }}
+                        sx={{ m: 2 }}
+                    />
+                }
+                {!loading &&
+                    <Stack direction="row" sx={{ m: 2 }}>
+                        <TextField
+                            variant="standard"
+                            placeholder="Type here to filter the current view"
+                            size="small"
+                            fullWidth
+                            value={filter}
+                            onChange={event => setFilter(event.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                <InputAdornment position="start">
+                                    <IconButton edge="start">
+                                    <FilterIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                                ),
+                                endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton edge="end" onClick={() => setFilter("")}>
+                                    <ClearIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <Chip
+                            label={currentFiles.length}
+                            color="primary"
+                            variant="filled"
+                            size="small"
+                            sx={{ ml: 2 }}
+                        />
+                    </Stack>
+                }
             </DialogTitle>
 
             <DialogContent sx={{ p: 0 }}>
                 <FileList
                     files={currentFiles}
                     onSelectFile={handleSelectFile}
-                    onSelectFolder={(event, key) => setCurrentDirectory(key)}
+                    onSelectFolder={(event, file) => {
+                        setCurrentDirectory(file);
+                        setFilter("");
+                    }}
                 />
+                {currentFiles.length === 0 && filter && <Alert severity="info" sx={{ m: 2 }}>No files match the filter.</Alert>}
             </DialogContent>
             
             {mode === "save" ? (

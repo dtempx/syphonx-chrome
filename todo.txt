@@ -1,7 +1,3 @@
-BLOCKER: error loading template: homedepot/product_page1
-Fix open template busy status
-
-
 Change add action to a dialog
     Adding a select should prompt for the first selector
 Move lightbulb out
@@ -23,7 +19,7 @@ Test groups
 
 URL param to autoopen extension
 
-
+DONE: Fix open template busy status
 DONE: PropertyGridEditor for template and yield params
 DONE: action scroll to element
 DONE: cloud log endpoint (not deployed)

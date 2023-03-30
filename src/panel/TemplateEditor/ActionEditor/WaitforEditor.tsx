@@ -87,17 +87,17 @@ export default ({ item, onChange }: Props) => {
                         sx={{ ml: 1 }}
                     >
                         <ToggleButton value="query">
-                            <Tooltip title="query mode">
+                            <Tooltip title="Wait for a single DOM query result">
                                 <QueryIcon fontSize="small" />
                             </Tooltip>
                         </ToggleButton>
                         <ToggleButton value="select">
-                            <Tooltip title="select mode">
+                            <Tooltip title="Wait for the result of any, all, or none DOM queries produced from a sub-select">
                                 <SelectIcon fontSize="small" />
                             </Tooltip>
                         </ToggleButton>
                     </ToggleButtonGroup>,
-                    "Choose query or select mode",
+                    "Determines whether to wait for a single DOM query, or the result of a multiple DOM query from a sub-select",
                     true,
                     mode === undefined ? "query or select required" : ""
                 ],
@@ -111,7 +111,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A CSS selector or jQuery expression that determines the content to wait for on the page.",
+                    "A CSS selector or jQuery expression that determines the content to wait for on the page. Only used when mode=query.",
                     mode === "query",
                     (!obj.query || JSON.stringify(obj.query) === `[[""]]`) && !obj.select ? "query or select required" : ""
                 ],
@@ -124,7 +124,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "Determines whether to wait for any, all, or none of the sub-selectors.",
+                    "Determines whether to wait for any, all, or none of the sub-selectors. Only used when mode=select.",
                     mode === "select"
                 ],
                 [

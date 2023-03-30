@@ -39,7 +39,7 @@ export default ({ open, onClose }: Props) => {
         }
     }, [open]);
 
-    async function onSelectFile(event: React.SyntheticEvent, file: string) {
+    async function onSelectFile(event: React.SyntheticEvent, file: string): Promise<boolean> {
         try {
             setOpening(true);
             setExtract(undefined);
@@ -62,11 +62,13 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
             setOpening(false);
             setError("");
+            return true;
         }
         catch (err) {
             debugger;
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setOpening(false);
+            return false;
         }
     }
 
