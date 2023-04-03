@@ -341,6 +341,11 @@
         "help": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."
     },
     {
+        "key": "val",
+        "advanced": true,
+        "help": "Return the current value of the first element in the set of matched elements."
+    },
+    {
         "key": "wrap",
         "advanced": true,
         "help": "Wrap each element in the set of matched elements with the specified HTML."

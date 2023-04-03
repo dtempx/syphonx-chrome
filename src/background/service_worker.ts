@@ -2,6 +2,7 @@ import {
     applyTemplate,
     disableTracking,
     enableTracking,
+    queryTracking,
     selectElements,
     sliceHtml
 } from "./service_worker_scripts";
@@ -10,6 +11,7 @@ const scriptMap: Record<string, Function> = {
     "applyTemplate": applyTemplate,
     "disableTracking": disableTracking,
     "enableTracking": enableTracking,
+    "queryTracking": queryTracking,
     "selectElements": selectElements,
     "sliceHtml": sliceHtml
 };

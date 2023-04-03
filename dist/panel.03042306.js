@@ -23089,8 +23089,8 @@ function $93aa002deec8ce00$export$58adb3bec8346d0f(path) {
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $34e20e8040e4c784$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $596d45310e010dc1$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $54aab56c424914ec$exports);
-$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
 $parcel$exportWildcard($89382e3cfd90d03a$exports, $50b7b7f7b1835c80$exports);
+$parcel$exportWildcard($89382e3cfd90d03a$exports, $93aa002deec8ce00$exports);
 
 
 var $360e2ccc4c1cad7a$exports = {};
@@ -23116,6 +23116,7 @@ $parcel$export($af9fac753574b590$exports, "applyTemplate", () => $af9fac753574b5
 $parcel$export($af9fac753574b590$exports, "disableTracking", () => $af9fac753574b590$export$e684be5f4b22cc14);
 $parcel$export($af9fac753574b590$exports, "enableTracking", () => $af9fac753574b590$export$1f8ffc6fd33b1d16);
 $parcel$export($af9fac753574b590$exports, "log", () => $af9fac753574b590$export$bef1f36f5486a6a3);
+$parcel$export($af9fac753574b590$exports, "queryTracking", () => $af9fac753574b590$export$225ea495d1fa0d5);
 $parcel$export($af9fac753574b590$exports, "selectElements", () => $af9fac753574b590$export$f2909722c7f0f932);
 $parcel$export($af9fac753574b590$exports, "sliceHtml", () => $af9fac753574b590$export$ff5493406baa93c1);
 $parcel$export($af9fac753574b590$exports, "inspectedWindow", () => $af9fac753574b590$export$cbe410dad4f45b36);
@@ -23135,6 +23136,10 @@ function $af9fac753574b590$export$bef1f36f5486a6a3(message) {
         log: message
     });
     else console.log("BACKGROUND", message);
+}
+async function $af9fac753574b590$export$225ea495d1fa0d5(className, remove) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("queryTracking", className, remove);
+    return result || [];
 }
 async function $af9fac753574b590$export$f2909722c7f0f932(selectors) {
     const { result: result  } = await $af9fac753574b590$var$sendMessage("selectElements", selectors);
@@ -23911,75 +23916,73 @@ $parcel$export($80e77e55da602fd0$exports, "directory", () => $80e77e55da602fd0$e
 $parcel$export($80e77e55da602fd0$exports, "autoselect", () => $80e77e55da602fd0$export$1674e6ab029f92dd);
 $parcel$export($80e77e55da602fd0$exports, "log", () => $80e77e55da602fd0$export$bef1f36f5486a6a3);
 $parcel$export($80e77e55da602fd0$exports, "read", () => $80e77e55da602fd0$export$aafa59e2e03f2942);
-$parcel$export($80e77e55da602fd0$exports, "setServiceUrl", () => $80e77e55da602fd0$export$7277dfbfac8fea1c);
 $parcel$export($80e77e55da602fd0$exports, "write", () => $80e77e55da602fd0$export$68d8715fc104d294);
-const $80e77e55da602fd0$var$defaultUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-let $80e77e55da602fd0$var$serviceUrl = $80e77e55da602fd0$var$defaultUrl;
+$parcel$export($80e77e55da602fd0$exports, "setServiceUrl", () => $b9bc8a0ec4119218$export$7277dfbfac8fea1c);
+const $b9bc8a0ec4119218$var$defaultUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
+let $b9bc8a0ec4119218$var$serviceUrl = $b9bc8a0ec4119218$var$defaultUrl;
+async function $b9bc8a0ec4119218$export$7b419323e6ed4f31(path, { method: method = "GET" , headers: headers = {} , obj: obj  } = {}) {
+    headers["Content-Type"] = "application/json";
+    const body = obj ? JSON.stringify(obj) : undefined;
+    const url = `${$b9bc8a0ec4119218$var$serviceUrl}/${path}`;
+    const response = await fetch(url, {
+        method: method,
+        body: body,
+        headers: headers
+    });
+    if (!response.ok) throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+    const result = await response.json();
+    return result;
+}
+async function $b9bc8a0ec4119218$export$299ba2dee77727e9(path, obj) {
+    const result = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(path, {
+        method: "POST",
+        obj: obj
+    });
+    return result;
+}
+function $b9bc8a0ec4119218$export$7277dfbfac8fea1c(url) {
+    $b9bc8a0ec4119218$var$serviceUrl = url || $b9bc8a0ec4119218$var$defaultUrl;
+}
+
+
+
 async function $80e77e55da602fd0$export$18e11c4ddd562c9d() {
-    const response = await fetch(`${$80e77e55da602fd0$var$serviceUrl}/templates/`);
-    const files = await response.json();
+    const files = await $b9bc8a0ec4119218$export$7b419323e6ed4f31("templates");
     files.forEach((file)=>file.timestamp = new Date(file.timestamp));
     return files;
 }
 async function $80e77e55da602fd0$export$1674e6ab029f92dd(html, context = "") {
-    const method = "POST";
-    const body = JSON.stringify({
-        html: html,
-        context: context
-    });
-    const headers = {
-        "Content-Type": "application/json"
-    };
-    const response = await fetch(`${$80e77e55da602fd0$var$serviceUrl}/autoselect`, {
-        method: method,
-        body: body,
-        headers: headers
-    });
-    const result = await response.json();
+    const result = await $b9bc8a0ec4119218$export$7b419323e6ed4f31("autoselect");
     return result.selector;
 }
 async function $80e77e55da602fd0$export$bef1f36f5486a6a3(data) {
-    const method = "POST";
-    const body = JSON.stringify(data);
-    const headers = {
-        "Content-Type": "application/json"
-    };
-    const response = await fetch(`${$80e77e55da602fd0$var$serviceUrl}/log`, {
-        method: method,
-        body: body,
-        headers: headers
-    });
-    return response.ok;
+    try {
+        await $b9bc8a0ec4119218$export$299ba2dee77727e9("log", data);
+        return true;
+    } catch (err) {
+        return false;
+    }
 }
 async function $80e77e55da602fd0$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$80e77e55da602fd0$var$serviceUrl}/template/${file}?mode=read`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok) throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
-    const { url: url  } = await response1.json();
-    const response2 = await fetch(url);
-    if (!response2.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
-    const content = await response2.text();
+    const { url: url  } = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(`template/${file}`);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response.status}.`);
+    const content = await response.text();
     return content;
-}
-function $80e77e55da602fd0$export$7277dfbfac8fea1c(url) {
-    $80e77e55da602fd0$var$serviceUrl = url || $80e77e55da602fd0$var$defaultUrl;
 }
 async function $80e77e55da602fd0$export$68d8715fc104d294(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
-    const apiUrl = `${$80e77e55da602fd0$var$serviceUrl}/template/${file}?write`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok) throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
-    const { url: url  } = await response1.json();
-    const response2 = await fetch(url, {
+    const { url: url  } = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(`template/${file}?write`);
+    const response = await fetch(url, {
         method: "PUT",
         body: content,
         headers: {
             "Content-Type": "application/json"
         }
     });
-    if (!response2.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
-    const result = await response2.text();
+    if (!response.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response.status}.`);
+    const result = await response.text();
     console.log(result);
 }
 
@@ -30531,7 +30534,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $d4J5n = parcelRequire("d4J5n");
 var $a96c103c091a20a8$exports = {};
-$a96c103c091a20a8$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":true,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":true,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":false,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+$a96c103c091a20a8$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":true,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":true,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":false,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"val","advanced":true,"help":"Return the current value of the first element in the set of matched elements."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
 
 
 
@@ -34476,6 +34479,12 @@ var $fa1dfc78f8375ab9$export$2e2bcd8739ae039 = $fa1dfc78f8375ab9$var$IconButton;
 
 
 
+var $841217854c3384ae$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+}), "Delete");
+
+
+
 var $e0e97e6a0b304950$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
         d: "M17.59 18 19 16.59 14.42 12 19 7.41 17.59 6l-6 6z"
@@ -34495,12 +34504,6 @@ var $cdeb595f73f319bc$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
         d: "m13 6-1.41 1.41L16.17 12l-4.58 4.59L13 18l6-6z"
     }, "1")
 ], "KeyboardDoubleArrowRight");
-
-
-
-var $841217854c3384ae$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-}), "Delete");
 
 
 
@@ -34657,6 +34660,31 @@ var $d9035591e653d6fe$export$2e2bcd8739ae039 = ({ value: value = [
 var $d4J5n = parcelRequire("d4J5n");
 
 
+
+
+
+parcelRequire("d4J5n");
+
+
+var $25013b265971a096$export$2e2bcd8739ae039 = ({ output: output , html: html , sx: sx  })=>{
+    const { debug: debug  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
+    let value = output.map((line)=>line?.trim() || "").join("\n");
+    if (debug) value += "\n\n" + html;
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: sx,
+        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $9d1908352d4b1fda$export$2e2bcd8739ae039), {
+            minRows: 2,
+            maxRows: 6,
+            value: value,
+            style: {
+                marginTop: "16px",
+                width: "100%",
+                overflow: "scroll",
+                backgroundColor: "LightGray"
+            }
+        })
+    });
+};
 
 
 
@@ -36952,20 +36980,24 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     const [selectors, setSelectors] = (0, $d4J5n.useState)([]);
     const [output, setOutput] = (0, $d4J5n.useState)([]);
     const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    const [html, setHtml] = (0, $d4J5n.useState)("");
     //const [showTooltip, setShowTooltip] = useState(false);
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             try {
-                const html = await (0, $af9fac753574b590$exports).sliceHtml(3, 3);
+                const selectors = await (0, $af9fac753574b590$exports).queryTracking("sx-click", false);
+                setSelectors(selectors);
+                const html = await (0, $af9fac753574b590$exports).sliceHtml(10, 3);
+                setHtml(html);
+                /*
                 if (html) {
-                    const selector = await (0, $80e77e55da602fd0$exports).autoselect(html, context);
+                    const selector = await cloud.autoselect(html, context);
                     if (selector) {
-                        setSelectors([
-                            selector
-                        ]);
+                        setSelectors([selector]);
                         onChange(new Event("change"), selector);
                     }
                 }
+                */ onChange(new Event("change"), selectors[0]);
             } catch (err) {
                 console.error(err);
                 debugger;
@@ -36987,16 +37019,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     }, [
         value
     ]);
-    /*
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowTooltip(!value);
-        }, 250);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [value]);
-    */ (0, $d4J5n.useEffect)(()=>{
+    (0, $d4J5n.useEffect)(()=>{
         if (tracking) (0, $af9fac753574b590$exports).enableTracking();
         else (0, $af9fac753574b590$exports).disableTracking();
         return ()=>{
@@ -37005,10 +37028,11 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     }, [
         tracking
     ]);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "column",
+        ...props,
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
-                ...props,
                 direction: "row",
                 spacing: 0,
                 children: [
@@ -37026,16 +37050,17 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8461efb96d774bba$export$2e2bcd8739ae039), {
+                        freeSolo: true,
+                        forcePopupIcon: true,
+                        fullWidth: true,
+                        openOnFocus: true,
                         size: "small",
                         value: value,
                         options: selectors,
-                        fullWidth: true,
-                        freeSolo: true,
-                        openOnFocus: true,
-                        forcePopupIcon: true,
                         sx: {
                             ml: 1
                         },
+                        filterOptions: (options)=>selectors,
                         renderInput: (params)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                                 ...params,
                                 placeholder: "Selector",
@@ -37043,7 +37068,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                                 onChange: (event)=>onChange(event, event.target.value)
                             })
                     }),
-                    output.length > 0 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                    value && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
                         color: "primary",
                         label: output.length,
                         size: "small",
@@ -37052,7 +37077,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                             top: "8px",
                             ml: 1
                         }
-                    }) : null,
+                    }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: showOutput ? "Hide stage output" : "Show stage output",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
@@ -37066,24 +37091,10 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                     })
                 ]
             }),
-            showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                variant: "outlined",
-                multiline: true,
-                rows: 3,
-                value: output.map((line)=>line?.trim() || "").join("\n"),
-                sx: {
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "LightGray",
-                    ".MuiInputBase-root": {
-                        p: 0
-                    },
-                    ".MuiInputBase-input": {
-                        p: "4px",
-                        fontSize: "smaller"
-                    }
-                }
-            }) : null
+            showOutput && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $25013b265971a096$export$2e2bcd8739ae039), {
+                output: output,
+                html: html
+            })
         ]
     });
 };
@@ -39563,15 +39574,15 @@ var $ffcd2e035197e27e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
-}), "PivotTableChart");
-
-
-
 var $cf56af1cd2ad706b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m22 12-4 4-1.41-1.41L18.17 13h-5.23c-.34 3.1-2.26 5.72-4.94 7.05C7.96 21.69 6.64 23 5 23c-1.66 0-3-1.34-3-3s1.34-3 3-3c.95 0 1.78.45 2.33 1.14 1.9-1.03 3.26-2.91 3.58-5.14h-3.1C7.4 14.16 6.3 15 5 15c-1.66 0-3-1.34-3-3s1.34-3 3-3c1.3 0 2.4.84 2.82 2h3.1c-.32-2.23-1.69-4.1-3.59-5.14C6.78 6.55 5.95 7 5 7 3.34 7 2 5.66 2 4s1.34-3 3-3c1.64 0 2.96 1.31 2.99 2.95 2.68 1.33 4.6 3.95 4.94 7.05h5.23l-1.58-1.59L18 8l4 4z"
 }), "Mediation");
+
+
+
+var $e95e001508cf9ed2$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10 8h11V5c0-1.1-.9-2-2-2h-9v5zM3 8h5V3H5c-1.1 0-2 .9-2 2v3zm2 13h3V10H3v9c0 1.1.9 2 2 2zm8 1-4-4 4-4zm1-9 4-4 4 4zm.58 6H13v-2h1.58c1.33 0 2.42-1.08 2.42-2.42V13h2v1.58c0 2.44-1.98 4.42-4.42 4.42z"
+}), "PivotTableChart");
 
 
 var $ab597aea378e8072$export$2e2bcd8739ae039 = ({ item: item , onChange: onChange , sx: sx  })=>{
@@ -39762,9 +39773,15 @@ parcelRequire("d4J5n");
 parcelRequire("d4J5n");
 
 
-var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
-}), "Rule");
+var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
+}), "Abc");
+
+
+
+var $ba263eacaf41f616$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
+}), "Autorenew");
 
 
 
@@ -39774,15 +39791,27 @@ var $b84bdb52d4a3451a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
-}), "TouchAppOutlined");
+var $830dc22ac55da04f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M4 7v2c0 .55-.45 1-1 1H2v4h1c.55 0 1 .45 1 1v2c0 1.65 1.35 3 3 3h3v-2H7c-.55 0-1-.45-1-1v-2c0-1.3-.84-2.42-2-2.83v-.34C5.16 11.42 6 10.3 6 9V7c0-.55.45-1 1-1h3V4H7C5.35 4 4 5.35 4 7zm17 3c-.55 0-1-.45-1-1V7c0-1.65-1.35-3-3-3h-3v2h3c.55 0 1 .45 1 1v2c0 1.3.84 2.42 2 2.83v.34c-1.16.41-2 1.52-2 2.83v2c0 .55-.45 1-1 1h-3v2h3c1.65 0 3-1.35 3-3v-2c0-.55.45-1 1-1h1v-4h-1z"
+}), "DataObject");
+
+
+
+var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+}), "ExitToApp");
 
 
 
 var $f6e84161dd14880c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M2 17h2v.5H3v1h1v.5H2v1h3v-4H2v1zm1-9h1V4H2v1h1v3zm-1 3h1.8L2 13.1v.9h3v-1H3.2L5 10.9V10H2v1zm5-6v2h14V5H7zm0 14h14v-2H7v2zm0-6h14v-2H7v2z"
 }), "FormatListNumbered");
+
+
+
+var $33ca1c5aa099d9fb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3zm1-9h1V4h-2v1h1zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3zM2 5h14v2H2zm0 12h14v2H2zm0-6h14v2H2z"
+}), "FormatListNumberedRtl");
 
 
 
@@ -39797,21 +39826,15 @@ var $7bb6f719f47e063b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $344080bf51b4e6c7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M21 11h-1.5v-.5h-2v3h2V13H21v1c0 .55-.45 1-1 1h-3c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1h3c.55 0 1 .45 1 1v1zM8 10v5H6.5v-1.5h-2V15H3v-5c0-.55.45-1 1-1h3c.55 0 1 .45 1 1zm-1.5.5h-2V12h2v-1.5zm7 1.5c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1h-4V9h4c.55 0 1 .45 1 1v1c0 .55-.45 1-1 1zM11 10.5v.75h2v-.75h-2zm2 2.25h-2v.75h2v-.75z"
-}), "Abc");
+var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
+}), "HourglassEmpty");
 
 
 
-var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
-}), "Numbers");
-
-
-
-var $830dc22ac55da04f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M4 7v2c0 .55-.45 1-1 1H2v4h1c.55 0 1 .45 1 1v2c0 1.65 1.35 3 3 3h3v-2H7c-.55 0-1-.45-1-1v-2c0-1.3-.84-2.42-2-2.83v-.34C5.16 11.42 6 10.3 6 9V7c0-.55.45-1 1-1h3V4H7C5.35 4 4 5.35 4 7zm17 3c-.55 0-1-.45-1-1V7c0-1.65-1.35-3-3-3h-3v2h3c.55 0 1 .45 1 1v2c0 1.3.84 2.42 2 2.83v.34c-1.16.41-2 1.52-2 2.83v2c0 .55-.45 1-1 1h-3v2h3c1.65 0 3-1.35 3-3v-2c0-.55.45-1 1-1h1v-4h-1z"
-}), "DataObject");
+var $04b26bfdc0741493$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M9 3 5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"
+}), "ImportExport");
 
 
 
@@ -39821,15 +39844,9 @@ var $fb466aae3024022c$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $ba263eacaf41f616$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"
-}), "Autorenew");
-
-
-
-var $33ca1c5aa099d9fb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M18 17h2v.5h-1v1h1v.5h-2v1h3v-4h-3zm1-9h1V4h-2v1h1zm-1 3h1.8L18 13.1v.9h3v-1h-1.8l1.8-2.1V10h-3zM2 5h14v2H2zm0 12h14v2H2zm0-6h14v2H2z"
-}), "FormatListNumberedRtl");
+var $b1faf5f98bbb111e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m20.5 10 .5-2h-4l1-4h-2l-1 4h-4l1-4h-2L9 8H5l-.5 2h4l-1 4h-4L3 16h4l-1 4h2l1-4h4l-1 4h2l1-4h4l.5-2h-4l1-4h4zm-7 4h-4l1-4h4l-1 4z"
+}), "Numbers");
 
 
 
@@ -39846,9 +39863,15 @@ var $63595ca7c2ce92eb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $04b26bfdc0741493$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M9 3 5 6.99h3V14h2V6.99h3L9 3zm7 14.01V10h-2v7.01h-3L15 21l4-3.99h-3z"
-}), "ImportExport");
+var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
+}), "QuestionMark");
+
+
+
+var $290e23fc548da9ea$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M16.54 11 13 7.46l1.41-1.41 2.12 2.12 4.24-4.24 1.41 1.41L16.54 11zM11 7H2v2h9V7zm10 6.41L19.59 12 17 14.59 14.41 12 13 13.41 15.59 16 13 18.59 14.41 20 17 17.41 19.59 20 21 18.59 18.41 16 21 13.41zM11 15H2v2h9v-2z"
+}), "Rule");
 
 
 
@@ -39858,27 +39881,15 @@ var $a1d75b31022e04c3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $7cc2bf8a0939df3a$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m18.19 12.44-3.24-1.62c1.29-1 2.12-2.56 2.12-4.32 0-3.03-2.47-5.5-5.5-5.5s-5.5 2.47-5.5 5.5c0 2.13 1.22 3.98 3 4.89v3.26c-2.15-.46-2.02-.44-2.26-.44-.53 0-1.03.21-1.41.59L4 16.22l5.09 5.09c.43.44 1.03.69 1.65.69h6.3c.98 0 1.81-.7 1.97-1.67l.8-4.71c.22-1.3-.43-2.58-1.62-3.18zm-.35 2.85-.8 4.71h-6.3c-.09 0-.17-.04-.24-.1l-3.68-3.68 4.25.89V6.5c0-.28.22-.5.5-.5s.5.22.5.5v6h1.76l3.46 1.73c.4.2.62.63.55 1.06zM8.07 6.5c0-1.93 1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5c0 .95-.38 1.81-1 2.44V6.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v2.44c-.62-.63-1-1.49-1-2.44z"
+}), "TouchAppOutlined");
+
+
+
 var $43454011a3067c9f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M22 18v-2H8V4h2L7 1 4 4h2v2H2v2h4v8c0 1.1.9 2 2 2h8v2h-2l3 3 3-3h-2v-2h4zM10 8h6v6h2V8c0-1.1-.9-2-2-2h-6v2z"
 }), "Transform");
-
-
-
-var $a1f3cbed4353f602$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h-.01L18 16l-4-4 4-3.99-.01-.01H18V2H6zm10 14.5V20H8v-3.5l4-4 4 4zm-4-5-4-4V4h8v3.5l-4 4z"
-}), "HourglassEmpty");
-
-
-
-var $8bd75d7133cf3395$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
-}), "ExitToApp");
-
-
-
-var $10cdc2163f15d747$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M11.07 12.85c.77-1.39 2.25-2.21 3.11-3.44.91-1.29.4-3.7-2.18-3.7-1.69 0-2.52 1.28-2.87 2.34L6.54 6.96C7.25 4.83 9.18 3 11.99 3c2.35 0 3.96 1.07 4.78 2.41.7 1.15 1.11 3.3.03 4.9-1.2 1.77-2.35 2.31-2.97 3.45-.25.46-.35.76-.35 2.24h-2.89c-.01-.78-.13-2.05.48-3.15zM14 20c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"
-}), "QuestionMark");
 
 
 var $f5fa8eeb99429fe0$export$2e2bcd8739ae039 = ({ name: name , ...props })=>{
@@ -46350,12 +46361,6 @@ var $89021ce2ce45d642$export$2e2bcd8739ae039 = $89021ce2ce45d642$var$Drawer;
 
 
 
-var $aff1417d5558df81$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z"
-}), "NoteAdd");
-
-
-
 var $b727c7ac90130205$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"
 }), "CloudDownload");
@@ -46365,6 +46370,12 @@ var $b727c7ac90130205$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $fb87d55b2c409428$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M19.35 10.04C18.67 6.59 15.64 4 12 4c-1.48 0-2.85.43-4.01 1.17l1.46 1.46C10.21 6.23 11.08 6 12 6c3.04 0 5.5 2.46 5.5 5.5v.5H19c1.66 0 3 1.34 3 3 0 1.13-.64 2.11-1.56 2.62l1.45 1.45C23.16 18.16 24 16.68 24 15c0-2.64-2.05-4.78-4.65-4.96zM3 5.27l2.75 2.74C2.56 8.15 0 10.77 0 14c0 3.31 2.69 6 6 6h11.73l2 2L21 20.73 4.27 4 3 5.27zM7.73 10l8 8H6c-2.21 0-4-1.79-4-4s1.79-4 4-4h1.73z"
 }), "CloudOff");
+
+
+
+var $95fcda3d073203b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+}), "Info");
 
 
 
@@ -46381,9 +46392,9 @@ var $d441ee9f6f9a92ef$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $95fcda3d073203b6$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
-}), "Info");
+var $aff1417d5558df81$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 14h-3v3h-2v-3H8v-2h3v-3h2v3h3v2zm-3-7V3.5L18.5 9H13z"
+}), "NoteAdd");
 
 
 var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
@@ -46488,12 +46499,6 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
-var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-}), "Menu");
-
-
-
 var $be29d9f5149bc99b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
 }), "AccountTree");
@@ -46506,15 +46511,21 @@ var $6c65cc6bd5ac31b5$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
-var $a3962f29b210932e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M19.8 18.4 14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"
-}), "Science");
+var $832969ad3fbafab7$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+}), "Menu");
 
 
 
 var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m14.17 13.71 1.4-2.42c.09-.15.05-.34-.08-.45l-1.48-1.16c.03-.22.05-.45.05-.68s-.02-.46-.05-.69l1.48-1.16c.13-.11.17-.3.08-.45l-1.4-2.42c-.09-.15-.27-.21-.43-.15l-1.74.7c-.36-.28-.75-.51-1.18-.69l-.26-1.85c-.03-.16-.18-.29-.35-.29h-2.8c-.17 0-.32.13-.35.3L6.8 4.15c-.42.18-.82.41-1.18.69l-1.74-.7c-.16-.06-.34 0-.43.15l-1.4 2.42c-.09.15-.05.34.08.45l1.48 1.16c-.03.22-.05.45-.05.68s.02.46.05.69l-1.48 1.16c-.13.11-.17.3-.08.45l1.4 2.42c.09.15.27.21.43.15l1.74-.7c.36.28.75.51 1.18.69l.26 1.85c.03.16.18.29.35.29h2.8c.17 0 .32-.13.35-.3l.26-1.85c.42-.18.82-.41 1.18-.69l1.74.7c.16.06.34 0 .43-.15zM8.81 11c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm13.11 7.67-.96-.74c.02-.14.04-.29.04-.44 0-.15-.01-.3-.04-.44l.95-.74c.08-.07.11-.19.05-.29l-.9-1.55c-.05-.1-.17-.13-.28-.1l-1.11.45c-.23-.18-.48-.33-.76-.44l-.17-1.18c-.01-.12-.11-.2-.21-.2h-1.79c-.11 0-.21.08-.22.19l-.17 1.18c-.27.12-.53.26-.76.44l-1.11-.45c-.1-.04-.22 0-.28.1l-.9 1.55c-.05.1-.04.22.05.29l.95.74c-.02.14-.03.29-.03.44 0 .15.01.3.03.44l-.95.74c-.08.07-.11.19-.05.29l.9 1.55c.05.1.17.13.28.1l1.11-.45c.23.18.48.33.76.44l.17 1.18c.02.11.11.19.22.19h1.79c.11 0 .21-.08.22-.19l.17-1.18c.27-.12.53-.26.75-.44l1.12.45c.1.04.22 0 .28-.1l.9-1.55c.06-.09.03-.21-.05-.28zm-4.29.16c-.74 0-1.35-.6-1.35-1.35s.6-1.35 1.35-1.35 1.35.6 1.35 1.35-.61 1.35-1.35 1.35z"
 }), "MiscellaneousServices");
+
+
+
+var $a3962f29b210932e$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M19.8 18.4 14 10.67V6.5l1.35-1.69c.26-.33.03-.81-.39-.81H9.04c-.42 0-.65.48-.39.81L10 6.5v4.17L4.2 18.4c-.49.66-.02 1.6.8 1.6h14c.82 0 1.29-.94.8-1.6z"
+}), "Science");
 
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
@@ -49794,15 +49805,15 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $f9e34cee13fe7931$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
-}), "ArrowUpward");
-
-
-
 var $9c740d0fb0ef5c42$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "m20 12-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
 }), "ArrowDownward");
+
+
+
+var $f9e34cee13fe7931$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "m4 12 1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+}), "ArrowUpward");
 
 
 
@@ -49927,15 +49938,15 @@ var $dabc6387771e563e$export$2e2bcd8739ae039 = ({ item: item , sx: sx  })=>{
 
 
 
-var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
-}), "LowPriority");
-
-
-
 var $695a066753958329$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z"
 }), "DoNotDisturb");
+
+
+
+var $5317019d8b872cfb$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M14 5h8v2h-8zm0 5.5h8v2h-8zm0 5.5h8v2h-8zM2 11.5C2 15.08 4.92 18 8.5 18H9v2l3-3-3-3v2h-.5C6.02 16 4 13.98 4 11.5S6.02 7 8.5 7H12V5H8.5C4.92 5 2 7.92 2 11.5z"
+}), "LowPriority");
 
 
 var $5ec2061eb08335c8$export$2e2bcd8739ae039 = ({ item: item  })=>{
@@ -50115,15 +50126,15 @@ function $ec7899798df4c4f5$export$2e2bcd8739ae039({ item: item  }) {
 
 
 
-var $3152ee484e1d7499$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
-}), "ExpandMore");
-
-
-
 var $d26849bb34d8b0e4$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
 }), "ChevronRight");
+
+
+
+var $3152ee484e1d7499$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
+}), "ExpandMore");
 
 
 var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{

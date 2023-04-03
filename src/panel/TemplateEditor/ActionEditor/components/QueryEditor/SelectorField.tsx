@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { background, cloud } from "./lib";
 import { useTemplate } from "./context";
+import SelectorOutput from "./SelectorOutput";
 
 import {
     Autocomplete,
@@ -34,12 +35,18 @@ export default ({ value, onChange, context, ...props }: Props) => {
     const [selectors, setSelectors] = useState<string[]>([]);
     const [output, setOutput] = useState<Array<string | null>>([]);
     const [showOutput, setShowOutput] = useState(false);
+    const [html, setHtml] = useState("");
     //const [showTooltip, setShowTooltip] = useState(false);
 
     useEffect(() => {
         (async () => {
             try {
-                const html = await background.sliceHtml(3, 3);
+                const selectors = await background.queryTracking("sx-click", false);
+                setSelectors(selectors);
+
+                const html = await background.sliceHtml(10, 3);
+                setHtml(html);
+                /*
                 if (html) {
                     const selector = await cloud.autoselect(html, context);
                     if (selector) {
@@ -47,6 +54,8 @@ export default ({ value, onChange, context, ...props }: Props) => {
                         onChange(new Event("change"), selector);
                     }
                 }
+                */
+                onChange(new Event("change"), selectors[0]);
             }
             catch (err) {
                 console.error(err);
@@ -67,17 +76,6 @@ export default ({ value, onChange, context, ...props }: Props) => {
         };
     }, [value]);
 
-    /*
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowTooltip(!value);
-        }, 250);
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [value]);
-    */
-
     useEffect(() => {
         if (tracking)
             background.enableTracking();
@@ -88,20 +86,31 @@ export default ({ value, onChange, context, ...props }: Props) => {
         }
     }, [tracking]);
 
-    return (<>
-        <Stack {...props} direction="row" spacing={0}>
-            {/*
-            <Tooltip
-                arrow
-                placement="bottom"
-                open={showTooltip}
-                title={!tracking ? (
-                    "Click here to automatically generate a CSS selector by clicking on the page."
-                ) : (
-                    "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page."
-                )}
-                PopperProps={{ style: { pointerEvents: "none" } }}
-            >            
+    return (
+        <Stack direction="column" {...props}>
+            <Stack direction="row" spacing={0}>
+                {/*
+                <Tooltip
+                    arrow
+                    placement="bottom"
+                    open={showTooltip}
+                    title={!tracking ? (
+                        "Click here to automatically generate a CSS selector by clicking on the page."
+                    ) : (
+                        "Now click anywhere on the page to generate a CSS selector. You can also use the middle mouse button to avoid triggering anything on the page."
+                    )}
+                    PopperProps={{ style: { pointerEvents: "none" } }}
+                >            
+                    <Button
+                        variant={tracking ? "contained" : "outlined"}
+                        size="small"
+                        onClick={() => setTracking(!tracking)}
+                        sx={{ minWidth: 48 }}
+                    >
+                        {tracking ? <TrackOnIcon fontSize="small" /> : <TrackOffIcon fontSize="small" />}
+                    </Button>
+                </Tooltip>
+                */}
                 <Button
                     variant={tracking ? "contained" : "outlined"}
                     size="small"
@@ -110,67 +119,45 @@ export default ({ value, onChange, context, ...props }: Props) => {
                 >
                     {tracking ? <TrackOnIcon fontSize="small" /> : <TrackOffIcon fontSize="small" />}
                 </Button>
-            </Tooltip>
-            */}
-            <Button
-                variant={tracking ? "contained" : "outlined"}
-                size="small"
-                onClick={() => setTracking(!tracking)}
-                sx={{ minWidth: 48 }}
-            >
-                {tracking ? <TrackOnIcon fontSize="small" /> : <TrackOffIcon fontSize="small" />}
-            </Button>
-            <Autocomplete
-                size="small"
-                value={value}
-                options={selectors}
-                fullWidth={true}
-                freeSolo={true}
-                openOnFocus={true}
-                forcePopupIcon={true}
-                sx={{ ml: 1 }}
-                renderInput={params =>
-                    <TextField
-                        {...params}
-                        placeholder="Selector"
-                        label="Selector"
-                        onChange={event => onChange(event, event.target.value)}
-                    />
-                }
-            />
-            {output.length > 0 ? (
-                <Chip
-                    color="primary"
-                    label={output.length}
+                <Autocomplete
+                    freeSolo
+                    forcePopupIcon
+                    fullWidth
+                    openOnFocus
                     size="small"
-                    sx={{ position: "relative", top: "8px", ml: 1 }}
-                />
-            ) : null}
-            <Tooltip title={showOutput ? "Hide stage output" : "Show stage output"}>
-                <IconButton onClick={() => setShowOutput(!showOutput) }>
-                    {showOutput ? <ShowOutputIcon fontSize="small" /> : <HideOutputIcon fontSize="small" />}
-                </IconButton>
-            </Tooltip>
-        </Stack>
-        {showOutput ? (
-            <TextField
-                variant="outlined"
-                multiline
-                rows={3}
-                value={output.map(line => line?.trim() || "").join("\n")}
-                sx={{
-                    mt: 1,
-                    width: "100%",
-                    backgroundColor: "LightGray",
-                    ".MuiInputBase-root": {
-                        p: 0
-                    },
-                    ".MuiInputBase-input": {
-                        p: "4px",
-                        fontSize: "smaller"
+                    value={value}
+                    options={selectors}
+                    sx={{ ml: 1 }}
+                    filterOptions={() => selectors}
+                    renderInput={params =>
+                        <TextField
+                            {...params}
+                            placeholder="Selector"
+                            label="Selector"
+                            onChange={event => onChange(event, event.target.value)}
+                        />
                     }
-                }}
-            />
-        ) : null}
-    </>);
+                />
+                {value && (
+                    <Chip
+                        color="primary"
+                        label={output.length}
+                        size="small"
+                        sx={{ position: "relative", top: "8px", ml: 1 }}
+                    />
+                )}
+                <Tooltip title={showOutput ? "Hide stage output" : "Show stage output"}>
+                    <IconButton onClick={() => setShowOutput(!showOutput) }>
+                        {showOutput ? <ShowOutputIcon fontSize="small" /> : <HideOutputIcon fontSize="small" />}
+                    </IconButton>
+                </Tooltip>
+            </Stack>
+            {showOutput && (
+                <SelectorOutput
+                    output={output}
+                    html={html}
+                />
+            )}
+        </Stack>
+    );
 };

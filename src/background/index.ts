@@ -22,6 +22,11 @@ export function log(message: string): void {
         console.log("BACKGROUND", message);
 }
 
+export async function queryTracking(className: string, remove: boolean | undefined): Promise<string[]> {
+    const { result } = await sendMessage<{ result: string[] }>("queryTracking", className, remove);
+    return result || [];
+}
+
 export async function selectElements(selectors: string[]): Promise<Array<string | null>> {
     const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", selectors);
     return result || [];

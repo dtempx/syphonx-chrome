@@ -1,5 +1,6 @@
-const defaultUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
-let serviceUrl = defaultUrl;
+import * as request from "./request";
+
+export { setServiceUrl } from "./request";
 
 export interface File {
     name: string;
@@ -9,70 +10,54 @@ export interface File {
     hash: string;
 }
 
-export async function directory(): Promise<File[]> {
-    const response = await fetch(`${serviceUrl}/templates/`);
-    const files = await response.json() as File[];
-    files.forEach(file => file.timestamp = new Date(file.timestamp));
-    return files;
-}
-
 export type LogDataType = "error";
 
 export interface LogData extends Record<string, unknown> {
     key: LogDataType;
 }
 
+export async function directory(): Promise<File[]> {
+    const files = await request.json("templates") as File[];
+    files.forEach(file => file.timestamp = new Date(file.timestamp));
+    return files;
+}
+
 export async function autoselect(html: string, context = ""): Promise<string> {
-    const method = "POST";
-    const body = JSON.stringify({ html, context });
-    const headers = { "Content-Type": "application/json" };
-    const response = await fetch(`${serviceUrl}/autoselect`, { method, body, headers });
-    const result = await response.json();
+    const result = await request.json("autoselect") as { selector: string };
     return result.selector;
 }
 
 export async function log(data: LogData): Promise<boolean> {
-    const method = "POST";
-    const body = JSON.stringify(data);
-    const headers = { "Content-Type": "application/json" };
-    const response = await fetch(`${serviceUrl}/log`, { method, body, headers });
-    return response.ok;
+    try {
+        await request.post("log", data);
+        return true;
+    }
+    catch (err) {
+        return false;
+    }
 }
 
 export async function read(file: string): Promise<string> {
     if (file.startsWith("/"))
         file = file.slice(1);
-    const apiUrl = `${serviceUrl}/template/${file}?mode=read`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok)
-        throw new Error(`Unable to read template $/${file}. GET ${apiUrl} returned status ${response1.status}.`);
 
-    const { url } = await response1.json() as { url: string };
-    const response2 = await fetch(url);
-    if (!response2.ok)
-        throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response2.status}.`);
-    const content = await response2.text();
+    const { url } = await request.json(`template/${file}`) as { url: string };
+    const response = await fetch(url);
+    if (!response.ok)
+        throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response.status}.`);
+    const content = await response.text();
     return content;
-}
-
-export function setServiceUrl(url: string): void {
-    serviceUrl = url || defaultUrl;
 }
 
 export async function write(file: string, content: string): Promise<void> {
     if (file.startsWith("/"))
         file = file.slice(1);
 
-    const apiUrl = `${serviceUrl}/template/${file}?write`;
-    const response1 = await fetch(apiUrl);
-    if (!response1.ok)
-        throw new Error(`Unable to update template $/${file}. PUT ${apiUrl} returned status ${response1.status}.`);
+    const { url } = await request.json(`template/${file}?write`) as { url: string };
+    const response = await fetch(url, { method: "PUT", body: content, headers: { "Content-Type": "application/json" } });
+    if (!response.ok)
+        throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response.status}.`);
 
-    const { url } = await response1.json() as { url: string };
-    const response2 = await fetch(url, { method: "PUT", body: content, headers: { "Content-Type": "application/json" } });
-    if (!response2.ok)
-        throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response2.status}.`);
-
-    const result = await response2.text();
+    const result = await response.text();
     console.log(result);
 }

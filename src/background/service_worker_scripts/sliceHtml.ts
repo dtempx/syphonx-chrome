@@ -58,7 +58,7 @@ export function sliceHtml(upLimit = 3, downLimit = 3): string {
         const attributes = renderAttributes(element.attributes);
         const marked = element.hasAttribute("marked");
         if (elements.includes(element) && marked) {
-            output.push(`<!-- SELECT THE FOLLOWING ELEMENT -->`);
+            output.push(`<!---->`);
         }
         if (!container && marked) {
             output.push(`<${tag}${attributes}>`);
