@@ -6,7 +6,8 @@ query builder: context sensitive function parameters for replace, etc.
 Move lightbulb out
 
 DONE: Bring back non-AI driven selectors
-Selector hightlighting on hover
+DONE: Selector hightlighting on hover
+
 Data contract matching (product-page, search-page, etc.)
 Welcome dialog with prompt for email
 
