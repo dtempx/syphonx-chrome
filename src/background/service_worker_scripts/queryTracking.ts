@@ -20,7 +20,11 @@ export function queryTracking({ className, nthOfTypeRunLimit = 3 }: QueryTrackin
             if (id)
                 append(`#${id}`);
 
-            const classes = element.getAttribute("class") !== null ? element.getAttribute("class")!.split(" ").filter(name => name !== className) : [];
+            const classes = element.getAttribute("class") ?
+                element.getAttribute("class")!.split(" ")
+                    .filter(name => name !== className) // filter out target class name
+                    .filter(name => /-?[_a-z]+[_a-z0-9-]*/i.test(name)) // filter out invalid class names
+                : [];
             classes.forEach(name => append(`.${name}`));
 
             const attributes = Array.from(element.attributes)

@@ -18,7 +18,9 @@ function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5({ className: className , nthOf
             append(tag);
             const id = element.getAttribute("id");
             if (id) append(`#${id}`);
-            const classes = element.getAttribute("class") !== null ? element.getAttribute("class").split(" ").filter((name)=>name !== className) : [];
+            const classes = element.getAttribute("class") ? element.getAttribute("class").split(" ").filter((name)=>name !== className) // filter out target class name
+            .filter((name)=>/-?[_a-z]+[_a-z0-9-]*/i.test(name)) // filter out invalid class names
+             : [];
             classes.forEach((name)=>append(`.${name}`));
             const attributes = Array.from(element.attributes).filter((attr)=>![
                     "id",
