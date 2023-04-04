@@ -5,7 +5,7 @@ async function $01621980ace9efc3$export$f78a296632f66e69(template) {
 }
 
 
-function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5(className) {
+function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5({ className: className , nthOfTypeRunLimit: nthOfTypeRunLimit = 3  }) {
     const result = [];
     const targetElement = document.querySelector(`.${className}`);
     if (targetElement) {
@@ -25,7 +25,7 @@ function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5(className) {
                     "class",
                     "style",
                     "src",
-                    "hrefı",
+                    "href",
                     "title",
                     "lang"
                 ].includes(attr.name)).map((attr)=>({
@@ -76,7 +76,7 @@ function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5(className) {
                 if (elements1.length === elements2.length && elements1[0].isEqualNode(elements2[0])) selectors.splice(i, 1, selector2);
                 else if (selectors.length > 1) {
                     const hits = Array.from(selector1.matchAll(/( > [a-z]+:(?:first-of-type|nth-of-type\(\d+\)))/g));
-                    if (hits.length - 1 > 3) selectors.splice(i, 1); // remove if run length exceeds limit, but don't remove the last selector
+                    if (hits.length - 1 > nthOfTypeRunLimit) selectors.splice(i, 1); // remove if run length exceeds limit, but don't remove the last selector
                 }
             }
         }
@@ -86,26 +86,25 @@ function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5(className) {
 }
 
 
-function $f29204d28571a071$export$f2909722c7f0f932(selectors, limit = 100) {
-    document.querySelectorAll(".sx-select").forEach((element)=>element.classList.remove("sx-select"));
+function $f29204d28571a071$export$f2909722c7f0f932({ selectors: selectors , className: className , limit: limit = 100  }) {
+    document.querySelectorAll(`.${className}`).forEach((element)=>element.classList.remove(className));
     const result = [];
     for (const selector of selectors)if (selector && result.length <= limit) document.querySelectorAll(selector).forEach((element)=>{
-        element.classList.add("sx-select");
+        element.classList.add(className);
         result.push(element.textContent);
     });
     return result;
 }
 
 
-function $859ab05ff1145d6e$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
+function $859ab05ff1145d6e$export$ff5493406baa93c1({ selector: selector , up: up = 3 , down: down = 3  }) {
     const elements = mark();
     const output = [];
     render(document.documentElement);
     unmark();
     return output.join("\n");
     function mark() {
-        const elements = Array.from(document.querySelectorAll(".sx-click"));
-        removeAllTrackingClasses();
+        const elements = Array.from(document.querySelectorAll(selector));
         for (const element of elements){
             element.setAttribute("marked", "");
             traverseUp(element);
@@ -113,28 +112,17 @@ function $859ab05ff1145d6e$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
         }
         return elements;
     }
-    function removeAllTrackingClasses() {
-        removeTrackingClass("sx-click");
-        removeTrackingClass("sx-hover");
-        removeTrackingClass("sx-select");
-    }
-    function removeTrackingClass(className) {
-        document.querySelectorAll(`.${className}`).forEach((element)=>{
-            element.classList.remove(className);
-            if (element.classList.length === 0) element.removeAttribute("class");
-        });
-    }
     function unmark() {
         document.querySelectorAll("[marked]").forEach((element)=>element.removeAttribute("marked"));
     }
     function traverseUp(element, n = 0) {
-        if (element.parentElement && n <= upLimit) {
+        if (element.parentElement && n <= up) {
             element.parentElement.setAttribute("marked", "");
             traverseUp(element.parentElement, n + 1);
         }
     }
     function traverseDown(element, level = Infinity, n = 0) {
-        if (--level >= 0 && n <= downLimit) for (const child of element.children){
+        if (--level >= 0 && n <= down) for (const child of element.children){
             child.setAttribute("marked", "");
             traverseDown(child, level, n + 1);
         }
@@ -173,14 +161,14 @@ function $859ab05ff1145d6e$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
             for (const child of children)render(child);
             if (marked) output.push(`</${tag}>`);
         } else if (element.textContent !== null && element.textContent.trim().length > 0 && marked) {
-            const text = truncateText(element.textContent.trim().replace(/\s+/gm, " "));
+            const text = trunc(element.textContent.trim().replace(/\s+/gm, " "));
             output.push(`<${tag}${attributes}>${text}</${tag}>`);
         } else if (marked) output.push(`<${tag}${attributes}></${tag}>`);
         function renderAttributes(attributes) {
-            const text = Array.from(element.attributes).filter((attr)=>attr.value && attr.name !== "marked").map((attr)=>`${attr.name}="${attr.value.replace(/"/g, '"')}"`).join(" ");
+            const text = Array.from(element.attributes).filter((attr)=>attr.value && attr.name !== "marked" && !attr.name.startsWith("sx-")).map((attr)=>`${attr.name}="${trunc(attr.value.replace(/"/g, '"'))}"`).join(" ");
             return text ? " " + text : "";
         }
-        function truncateText(text, max = 80) {
+        function trunc(text, max = 80) {
             if (text.length > max) {
                 const k = Math.floor(max / 2);
                 const i = Math.max(text.slice(0, k).lastIndexOf(" "), k);
@@ -329,7 +317,7 @@ async function $a84d1809a4222847$var$injectAll(tabId) {
                 tabId: tabId
             },
             files: [
-                "sx.css"
+                "syphonx.css"
             ]
         });
         console.log(`BACKGROUND sx injected tabId=${tabId}`);

@@ -41,12 +41,14 @@ export default ({ value, onChange, context, ...props }: Props) => {
     useEffect(() => {
         (async () => {
             try {
-                const selectors = await background.queryTracking("sx-click", false);
+                const selectors = await background.queryTracking({
+                    className: "sx-click",
+                    nthOfTypeRunLimit: 3
+                });
                 setSelectors(selectors);
-
-                const html = await background.sliceHtml(10, 3);
-                setHtml(html);
                 /*
+                const html = await background.sliceHtml({ selector: ".sx-click", up: 6, down: 3 });
+                setHtml(html);
                 if (html) {
                     const selector = await cloud.autoselect(html, context);
                     if (selector) {
@@ -67,12 +69,25 @@ export default ({ value, onChange, context, ...props }: Props) => {
     useEffect(() => {
         if (value) {
             (async () => {
-                const output = await background.selectElements([value]);
+                const output = await background.selectElements({
+                    selectors: [value],
+                    className: "sx-select"
+                });
                 setOutput(output);
+
+                const html = await background.sliceHtml({
+                    selector: ".sx-select",
+                    up: 6,
+                    down: 3
+                });
+                setHtml(html);
             })();
         }
         return () => {
-            background.selectElements([]);
+            background.selectElements({
+                selectors: [],
+                className: "sx-select"
+            });
         };
     }, [value]);
 

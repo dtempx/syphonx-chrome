@@ -1,4 +1,10 @@
-export function sliceHtml(upLimit = 3, downLimit = 3): string {
+export interface SliceHtmlOptions {
+    selector: string;
+    up?: number;
+    down?: number;
+}
+
+export function sliceHtml({ selector, up = 3, down = 3 }: SliceHtmlOptions): string {
     const elements = mark();
     const output: string[] = [];
     render(document.documentElement);
@@ -6,8 +12,7 @@ export function sliceHtml(upLimit = 3, downLimit = 3): string {
     return output.join("\n");
 
     function mark(): Element[] {
-        const elements = Array.from(document.querySelectorAll(".sx-click"));
-        removeAllTrackingClasses();
+        const elements = Array.from(document.querySelectorAll(selector));
         for (const element of elements) {
             element.setAttribute("marked", "");
             traverseUp(element);
@@ -17,33 +22,19 @@ export function sliceHtml(upLimit = 3, downLimit = 3): string {
         return elements;
     }
 
-    function removeAllTrackingClasses(): void {
-        removeTrackingClass("sx-click");
-        removeTrackingClass("sx-hover");
-        removeTrackingClass("sx-select");
-    }
-
-    function removeTrackingClass(className: string): void {
-        document.querySelectorAll(`.${className}`).forEach(element => {
-            element.classList.remove(className);
-            if (element.classList.length === 0)
-                element.removeAttribute("class");
-        });
-    }
-
     function unmark(): void {
         document.querySelectorAll("[marked]").forEach(element => element.removeAttribute("marked"));
     }
 
     function traverseUp(element: Element, n = 0): void {
-        if (element.parentElement && n <= upLimit) {
+        if (element.parentElement && n <= up) {
             element.parentElement.setAttribute("marked", "");
             traverseUp(element.parentElement, n + 1);
         }            
     }
     
     function traverseDown(element: Element, level = Infinity, n = 0): void {
-        if (--level >= 0 && n <= downLimit) {
+        if (--level >= 0 && n <= down) {
             for (const child of element.children) {
                 child.setAttribute("marked", "");
                 traverseDown(child, level, n + 1);
@@ -74,7 +65,7 @@ export function sliceHtml(upLimit = 3, downLimit = 3): string {
                 output.push(`</${tag}>`);
         }
         else if (element.textContent !== null && element.textContent.trim().length > 0 && marked) {
-            const text = truncateText(element.textContent.trim().replace(/\s+/gm, " "));
+            const text = trunc(element.textContent.trim().replace(/\s+/gm, " "));
             output.push(`<${tag}${attributes}>${text}</${tag}>`);
         }
         else if (marked) {
@@ -83,13 +74,13 @@ export function sliceHtml(upLimit = 3, downLimit = 3): string {
     
         function renderAttributes(attributes: NamedNodeMap): string {
             const text = Array.from(element.attributes)
-                .filter(attr => attr.value && attr.name !== "marked")
-                .map(attr => `${attr.name}="${attr.value.replace(/"/g,'\"')}"`)
+                .filter(attr => attr.value && attr.name !== "marked" && !attr.name.startsWith("sx-"))
+                .map(attr => `${attr.name}="${trunc(attr.value.replace(/"/g,'\"'))}"`)
                 .join(" ");
             return text ? " " + text : "";
         }
     
-        function truncateText(text: string, max = 80): string {
+        function trunc(text: string, max = 80): string {
             if (text.length > max) {
                 const k = Math.floor(max / 2);
                 const i = Math.max(text.slice(0, k).lastIndexOf(" "), k);

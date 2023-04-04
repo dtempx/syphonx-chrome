@@ -1,4 +1,9 @@
-export function queryTracking(className: string): string[] {
+export interface QueryTrackingOptions {
+    className: string;
+    nthOfTypeRunLimit?: number;
+}
+
+export function queryTracking({ className, nthOfTypeRunLimit = 3 }: QueryTrackingOptions): string[] {
     const result: string[] = [];
     const targetElement = document.querySelector(`.${className}`);
     if (targetElement) {
@@ -19,7 +24,7 @@ export function queryTracking(className: string): string[] {
             classes.forEach(name => append(`.${name}`));
 
             const attributes = Array.from(element.attributes)
-                .filter(attr => !["id", "class", "style", "src", "hrefı", "title", "lang"].includes(attr.name))
+                .filter(attr => !["id", "class", "style", "src", "href", "title", "lang"].includes(attr.name))
                 .map(attr => ({ name: attr.name, value: attr.value }));
             attributes.forEach(attr => append(`[${attr.name}${attr.value ? `='${attr.value.replace(/'/g, "\\'")}'` : ""}]`));
 
@@ -76,7 +81,7 @@ export function queryTracking(className: string): string[] {
                 }
                 else if (selectors.length > 1) {
                     const hits = Array.from(selector1.matchAll(/( > [a-z]+:(?:first-of-type|nth-of-type\(\d+\)))/g));
-                    if (hits.length - 1 > 3)
+                    if (hits.length - 1 > nthOfTypeRunLimit)
                         selectors.splice(i, 1); // remove if run length exceeds limit, but don't remove the last selector
                 }
             }

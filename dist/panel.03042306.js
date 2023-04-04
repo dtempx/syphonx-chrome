@@ -23137,16 +23137,16 @@ function $af9fac753574b590$export$bef1f36f5486a6a3(message) {
     });
     else console.log("BACKGROUND", message);
 }
-async function $af9fac753574b590$export$225ea495d1fa0d5(className, remove) {
-    const { result: result  } = await $af9fac753574b590$var$sendMessage("queryTracking", className, remove);
+async function $af9fac753574b590$export$225ea495d1fa0d5(options) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("queryTracking", options);
     return result || [];
 }
-async function $af9fac753574b590$export$f2909722c7f0f932(selectors) {
-    const { result: result  } = await $af9fac753574b590$var$sendMessage("selectElements", selectors);
+async function $af9fac753574b590$export$f2909722c7f0f932(options) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("selectElements", options);
     return result || [];
 }
-async function $af9fac753574b590$export$ff5493406baa93c1(upLimit = 3, downLimit = 3) {
-    const { result: result  } = await $af9fac753574b590$var$sendMessage("sliceHtml", upLimit, downLimit);
+async function $af9fac753574b590$export$ff5493406baa93c1(options) {
+    const { result: result  } = await $af9fac753574b590$var$sendMessage("sliceHtml", options);
     return result;
 }
 function $af9fac753574b590$var$sendMessage(key, ...params) {
@@ -36985,11 +36985,14 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             try {
-                const selectors = await (0, $af9fac753574b590$exports).queryTracking("sx-click", false);
+                const selectors = await (0, $af9fac753574b590$exports).queryTracking({
+                    className: "sx-click",
+                    nthOfTypeRunLimit: 3
+                });
                 setSelectors(selectors);
-                const html = await (0, $af9fac753574b590$exports).sliceHtml(10, 3);
-                setHtml(html);
                 /*
+                const html = await background.sliceHtml({ selector: ".sx-click", up: 6, down: 3 });
+                setHtml(html);
                 if (html) {
                     const selector = await cloud.autoselect(html, context);
                     if (selector) {
@@ -37008,13 +37011,25 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
     ]);
     (0, $d4J5n.useEffect)(()=>{
         if (value) (async ()=>{
-            const output = await (0, $af9fac753574b590$exports).selectElements([
-                value
-            ]);
+            const output = await (0, $af9fac753574b590$exports).selectElements({
+                selectors: [
+                    value
+                ],
+                className: "sx-select"
+            });
             setOutput(output);
+            const html = await (0, $af9fac753574b590$exports).sliceHtml({
+                selector: ".sx-select",
+                up: 6,
+                down: 3
+            });
+            setHtml(html);
         })();
         return ()=>{
-            (0, $af9fac753574b590$exports).selectElements([]);
+            (0, $af9fac753574b590$exports).selectElements({
+                selectors: [],
+                className: "sx-select"
+            });
         };
     }, [
         value
@@ -37060,7 +37075,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                         sx: {
                             ml: 1
                         },
-                        filterOptions: (options)=>selectors,
+                        filterOptions: ()=>selectors,
                         renderInput: (params)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
                                 ...params,
                                 placeholder: "Selector",

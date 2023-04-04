@@ -19,4 +19,5 @@ export async function jsdomFromUrl(url: string): Promise<void> {
     const page = await browser.newPage();
     await page.goto(url);
     const html = await page.content();
+    jsdom(html);
 }

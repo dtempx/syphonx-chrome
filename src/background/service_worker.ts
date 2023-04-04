@@ -73,7 +73,7 @@ async function injectAll(tabId: number): Promise<void> {
     if (!injected) {
         await executeScriptFile(tabId, "jquery.slim.js");
         await executeScriptFile(tabId, "syphonx.js");
-        await chrome.scripting.insertCSS({ target: { tabId }, files: ["sx.css"] });
+        await chrome.scripting.insertCSS({ target: { tabId }, files: ["syphonx.css"] });
         console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }

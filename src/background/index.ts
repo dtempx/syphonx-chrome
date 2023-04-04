@@ -1,5 +1,11 @@
 import * as syphonx from "syphonx-lib";
 
+import {
+    QueryTrackingOptions,
+    SelectElementsOptions,
+    SliceHtmlOptions
+} from "./service_worker_scripts"
+
 export const active = typeof chrome === "object" && chrome.devtools;
 
 export async function applyTemplate(template: syphonx.Template): Promise<syphonx.ExtractResult | undefined> {
@@ -22,18 +28,18 @@ export function log(message: string): void {
         console.log("BACKGROUND", message);
 }
 
-export async function queryTracking(className: string, remove: boolean | undefined): Promise<string[]> {
-    const { result } = await sendMessage<{ result: string[] }>("queryTracking", className, remove);
+export async function queryTracking(options: QueryTrackingOptions): Promise<string[]> {
+    const { result } = await sendMessage<{ result: string[] }>("queryTracking", options);
     return result || [];
 }
 
-export async function selectElements(selectors: string[]): Promise<Array<string | null>> {
-    const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", selectors);
+export async function selectElements(options: SelectElementsOptions): Promise<Array<string | null>> {
+    const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", options);
     return result || [];
 }
 
-export async function sliceHtml(upLimit = 3, downLimit = 3): Promise<string> {
-    const { result } = await sendMessage<{ result: string }>("sliceHtml", upLimit, downLimit);
+export async function sliceHtml(options: SliceHtmlOptions): Promise<string> {
+    const { result } = await sendMessage<{ result: string }>("sliceHtml", options);
     return result;
 }
 

@@ -50,14 +50,16 @@ export function enableTracking(): void {
         if (syphonx.tracking) {
             if (event.target instanceof HTMLElement) {
                 event.target.classList.add("sx-click");
-                chrome.runtime.sendMessage({ click: {
-                    altKey: event.altKey,
-                    button: event.button,
-                    ctrlKey: event.ctrlKey,
-                    shiftKey: event.shiftKey,
-                    x: event.x,
-                    y: event.y
-                } });
+                chrome.runtime.sendMessage({
+                    click: {
+                        altKey: event.altKey,
+                        button: event.button,
+                        ctrlKey: event.ctrlKey,
+                        shiftKey: event.shiftKey,
+                        x: event.x,
+                        y: event.y
+                    }
+                });
             }
             event.preventDefault();
             event.stopPropagation();

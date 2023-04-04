@@ -1,7 +1,11 @@
 Change add action to a dialog
     Adding a select should prompt for the first selector
+
+query builder: context sensitive function parameters for replace, etc.
+
 Move lightbulb out
-Bring back non-AI driven selectors
+
+DONE: Bring back non-AI driven selectors
 Selector hightlighting on hover
 Data contract matching (product-page, search-page, etc.)
 Welcome dialog with prompt for email
