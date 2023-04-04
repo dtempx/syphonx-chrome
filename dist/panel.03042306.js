@@ -36989,8 +36989,11 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                     className: "sx-click",
                     nthOfTypeRunLimit: 3
                 });
-                setSelectors(selectors);
-                /*
+                if (selectors.length > 0 && selectors[0]) {
+                    setSelectors(selectors);
+                    onChange(new Event("change"), selectors[0]);
+                }
+            /*
                 const html = await background.sliceHtml({ selector: ".sx-click", up: 6, down: 3 });
                 setHtml(html);
                 if (html) {
@@ -37000,8 +37003,7 @@ var $70df549096d55328$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                         onChange(new Event("change"), selector);
                     }
                 }
-                */ onChange(new Event("change"), selectors[0]);
-            } catch (err) {
+                */ } catch (err) {
                 console.error(err);
                 debugger;
             }
