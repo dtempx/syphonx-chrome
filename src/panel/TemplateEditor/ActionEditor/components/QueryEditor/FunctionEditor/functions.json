@@ -1,45 +1,99 @@
 [
     {
         "key": "add",
-        "args": [],
         "advanced": true,
-        "help": "Create a new object with elements added to the set of matched elements."
+        "help": "Create a new object with elements added to the set of matched elements.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector to find additional elements to add, or an HTML fragment.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "addBack",
-        "args": ["-selector"],
         "advanced": true,
-        "help": "Add the previous set of elements on the stack to the current set, optionally filtered by a selector."
+        "help": "Add the previous set of elements on the stack to the current set, optionally filtered by a selector.",
+        "args":[
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector to find additional elements to add."
+            }
+        ]
     },
     {
         "key": "addClass",
         "advanced": true,
-        "help": "Adds the specified class (or classes) to each element in the set of matched elements."
+        "help": "Adds the specified class (or classes) to each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Class name",
+                "type": "string",
+                "help": "One or more space-separated classes to be added to the class attribute of each matched element.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "after",
         "advanced": true,
-        "help": "Insert content, specified by the parameter, after each element in the set of matched elements."
+        "help": "Insert content, specified by the parameter, after each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Content",
+                "type": "string",
+                "help": "HTML to insert after each element in the set of matched elements.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "andSelf",
         "advanced": true,
-        "help": "Add the previous set of elements on the stack to the current set."
+        "help": "Add the previous set of elements on the stack to the current set.",
+        "args":[]
     },
     {
         "key": "append",
         "advanced": true,
-        "help": "Insert content, specified by the parameter, to the end of each element in the set of matched elements."
+        "help": "Insert content, specified by the parameter, to the end of each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Content",
+                "type": "string",
+                "help": "HTML to insert at the end of each element in the set of matched elements.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "attr",
         "advanced": false,
-        "help": "Return the value of a specified attribute in the set of matched elements."
+        "help": "Return the value of a specified attribute in the set of matched elements.",
+        "args": [
+            {
+                "name": "Attribute name",
+                "type": "string",
+                "help": "The name of the attribute to return.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "before",
         "advanced": true,
-        "help": "Insert content, specified by the parameter, before each element in the set of matched elements."
+        "help": "Insert content, specified by the parameter, before each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Content",
+                "type": "string",
+                "help": "HTML to insert before each element in the set of matched elements.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "blank",
@@ -50,22 +104,52 @@
     {
         "key": "children",
         "advanced": true,
-        "help": "Return the children of each element in the set of matched elements, optionally filtered by a selector."
+        "help": "Return the children of each element in the set of matched elements, optionally filtered by a selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector to filter the set of matched children, all children are matched if not specified."
+            }
+        ]
     },
     {
         "key": "closest",
         "advanced": true,
-        "help": "For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."
+        "help": "For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that determines the target of the closest match.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "contents",
         "advanced": true,
-        "help": "Return the children of each element in the set of matched elements, including text and comment nodes."
+        "help": "Return the children of each element in the set of matched elements, including text and comment nodes.",
+        "args": []
     },
     {
         "key": "css",
         "advanced": true,
-        "help": "Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."
+        "help": "Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element.",
+        "args": [
+            {
+                "name": "Property name",
+                "type": "string",
+                "help": "The name of the CSS property to get or set.",
+                "required": true
+            },
+            {
+                "name": "Value",
+                "type": "string",
+                "help": "A value to set for the property.",
+                "mutate": true
+            }
+        ]
     },
     {
         "key": "cut",
@@ -75,289 +159,622 @@
             {
                 "name": "Splitter",
                 "type": "string",
+                "help": "The substring to use to split the text.",
                 "required": true
             },
             {
                 "name": "Position",
-                "type": "number"
+                "type": "number",
+                "help": "A number starting from zero indicating the position wihtin the split to return. If negative, the position is counted backwards from the last item."
             },
             {
                 "name": "Limit",
-                "type": "number"
+                "type": "number",
+                "help": ""
             }
         ]
     },
     {
         "key": "empty",
         "advanced": true,
-        "help": "Remove all child nodes of the set of matched elements from the DOM."
+        "help": "Remove all child nodes of the set of matched elements from the DOM.",
+        "args": []
     },
     {
         "key": "eq",
         "advanced": false,
-        "help": "Reduce the set of matched elements to the one at the specified index."
+        "help": "Reduce the set of matched elements to the one at the specified index.",
+        "args": [
+            {
+                "name": "Index",
+                "type": "number",
+                "help": "A number starting from zero indicating the index position of the element to return. If negative, the index position is counted backwards from the last item.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "even",
         "advanced": true,
-        "help": "Reduce the set of matched elements to the even ones in the set, numbered from zero."
+        "help": "Reduce the set of matched elements to the even ones in the set, numbered from zero.",
+        "even": []
     },
     {
         "key": "extract",
-        "args": ["selector|regexp", "-keep-unmatched-items", "-trim-whitespace"],
         "advanced": false,
-        "help": "Extract text from the set of matched elements using a regular expression."
+        "help": "Extract text from the set of matched elements using a regular expression.",
+        "args": [
+            {
+                "name": "Regexp",
+                "type": "string",
+                "help": "A regular expression that matches the text to be extracted. The regular expression must start and end with a slash, and must contain a capturing group in parentheses. Add `g` for global or `i` for case insenstive matches after the ending slash. Example: `/^([a-z0-9]+)/`",
+                "required": true
+            }
+        ]
     },
     {
         "key": "filter",
-        "args": ["selector|regexp"],
         "advanced": false,
-        "help": "Reduce the set of matched elements to those that match a selector or a regular expression."
+        "help": "Reduce the set of matched elements to those that match a selector or a regular expression.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector, regular expression, or formula that targets the elements to be included.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "find",
-        "args": ["selector"],
+        "xargs": ["selector"],
         "advanced": false,
-        "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector."
+        "help": "Return the descendants of each element in the current set of matched elements, filtered by the specified selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector to match elements against.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "first",
         "advanced": false,
-        "help": "Reduce the set of matched elements to the first in the set."
+        "help": "Reduce the set of matched elements to the first in the set.",
+        "args": []
     },
     {
         "key": "has",
         "advanced": true,
-        "help": "Reduce the set of matched elements to those that have a descendant that matches the specified selector."
+        "help": "Reduce the set of matched elements to those that have a descendant that matches the specified selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that targets the elements to be included.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "hasClass",
         "advanced": true,
-        "help": "Determine whether any of the matched elements are assigned the given class."
+        "help": "Determine whether any of the matched elements are assigned the given class.",
+        "args": [
+            {
+                "name": "Class name",
+                "type": "string",
+                "help": "The class name to search for.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "html",
         "advanced": false,
-        "help": "Return the HTML contents of the set of matched elements."
+        "help": "Return the HTML contents of the set of matched elements.",
+        "args": [
+            {
+                "name": "mode",
+                "type": "string",
+                "help": "Indicates whether to capture the outer or inner HTML. (default=outer)"
+            }
+        ]
     },
     {
         "key": "index",
         "advanced": true,
-        "help": "Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."
+        "help": "Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector indicating the position of the first element relative to the elements matched by the selector."
+            }
+        ]
     },
     {
         "key": "is",
         "advanced": true,
-        "help": "Determines whether at least one element within the current matched set of elements matches the specified selector."
+        "help": "Determines whether at least one element within the current matched set of elements matches the specified selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that targets the elements to be matched.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "last",
         "advanced": false,
-        "help": "Reduce the set of matched elements to the final one in the set."
+        "help": "Reduce the set of matched elements to the final one in the set.",
+        "args": []
     },
     {
         "key": "length",
         "advanced": true,
-        "help": "Returns the number of matched elements."
+        "help": "Returns the number of matched elements.",
+        "args": []
     },
     {
         "key": "map",
-        "advanced": true,
-        "help": "Map the set of matched elements using a specified formula."
+        "advanced": false,
+        "help": "Map the set of matched elements using a specified formula.",
+        "args": [
+            {
+                "name": "Formula",
+                "type": "string",
+                "help": "A formula that is applied to each element in the set of matched elements. The formula can reference the current `value` or any previous property value using `data.name`, where name is the name of any previously evaluated property. A formula must start and end with curly braces and contain a valid Javascript expression within the curly braces.\n\nExamples:\n{value / 100}\n{data.price}\n{`${data.title} : ${data.product_name}`}\n{url}",
+                "required": true
+            }
+        ]
     },
     {
         "key": "next",
         "advanced": true,
-        "help": "Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."
+        "help": "Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the next elements to be matched."
+            }
+        ]
     },
     {
         "key": "nextAll",
         "advanced": true,
-        "help": "Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."
+        "help": "Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the next elements to be matched."
+            }
+        ]
     },
     {
         "key": "nextUntil",
         "advanced": true,
-        "help": "Return all following siblings of each element up to but not including the element matched by the specified selector."
+        "help": "Return all following siblings of each element up to but not including the element matched by the specified selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that determines where to stop matching following sibling elements.",
+                "required": true
+            },
+            {
+                "name": "Filter",
+                "type": "string",
+                "help": "A CSS selector that filters elements to be matched."
+            }
+        ]
     },
     {
         "key": "nonblank",
         "advanced": true,
-        "help": "Remove elements from the set of matched elements that have no content."
+        "help": "Remove elements from the set of matched elements that have no content.",
+        "args": []
     },
     {
         "key": "not",
         "advanced": true,
-        "help": "Remove elements from the set of matched elements."
+        "help": "Remove elements from the set of matched elements.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that targets the elements to be removed.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "odd",
         "advanced": true,
-        "help": "Reduce the set of matched elements to the odd ones in the set, numbered from zero."
+        "help": "Reduce the set of matched elements to the odd ones in the set, numbered from zero.",
+        "args": []
     },
     {
         "key": "parent",
         "advanced": true,
-        "help": "Return the parent of each element in the current set of matched elements, optionally filtered by a selector."
+        "help": "Return the parent of each element in the current set of matched elements, optionally filtered by a selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the parent elements to be matched."
+            }
+        ]
     },
     {
         "key": "parents",
         "advanced": true,
-        "help": "Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."
+        "help": "Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the parent elements to be matched."
+            }
+        ]
     },
     {
         "key": "parentsUntil",
         "advanced": true,
-        "help": "Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."
+        "help": "Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that determines where to stop matching ancestor elements.",
+                "required": true
+            },
+            {
+                "name": "Filter",
+                "type": "string",
+                "help": "A CSS selector that filters elements to be matched."
+            }
+        ]
     },
     {
         "key": "prepend",
         "advanced": true,
-        "help": "Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."
+        "help": "Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Content",
+                "type": "string",
+                "help": "HTML content to be inserted.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "prev",
         "advanced": true,
-        "help": "Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."
+        "help": "Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the previous elements to be matched."
+            }
+        ]
     },
     {
         "key": "prevAll",
         "advanced": true,
-        "help": "Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."
+        "help": "Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the previous elements to be matched."
+            }]
     },
     {
         "key": "prevUntil",
         "advanced": true,
-        "help": "Return all preceding siblings of each element up to but not including the element matched by the selector."
+        "help": "Return all preceding siblings of each element up to but not including the element matched by the selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that determines where to stop matching preceding sibling elements.",
+                "required": true
+            },
+            {
+                "name": "Filter",
+                "type": "string",
+                "help": "A CSS selector that filters elements to be matched."
+            }
+        ]
     },
     {
         "key": "prop",
         "advanced": true,
-        "help": "Return the value of a property in the set of matched elements."
+        "help": "Return the value of a property in the set of matched elements.",
+        "args": [
+            {
+                "name": "Property",
+                "type": "string",
+                "help": "The name of the property to get.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "remove",
         "advanced": true,
-        "help": "Remove the set of matched elements from the DOM."
+        "help": "Remove the set of matched elements from the DOM.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the elements to be removed."
+            }
+        ]
     },
     {
         "key": "removeAttr",
         "advanced": true,
-        "help": "Remove an attribute from each element in the set of matched elements."
+        "help": "Remove an attribute from each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Attribute",
+                "type": "string",
+                "help": "One or more space-separated attribute names to be removed from each matched element.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "removeClass",
         "advanced": true,
-        "help": "Remove a single class, multiple classes, or all classes from each element in the set of matched elements."
+        "help": "Remove a single class, multiple classes, or all classes from each element in the set of matched elements.",
+        "args": [
+            {
+                "name": "Class",
+                "type": "string",
+                "help": "One or more space-separated classes to be removed from the class attribute of each matched element."
+            }
+        ]
     },
     {
         "key": "removeData",
         "advanced": true,
-        "help": "Remove a previously-stored piece of data."
+        "help": "Remove a previously-stored piece of data.",
+        "args": [
+            {
+                "name": "Name",
+                "type": "string",
+                "help": "A string naming the piece of data to delete.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "removeProp",
         "advanced": true,
-        "help": "Remove a property for the set of matched elements."
+        "help": "Remove a property for the set of matched elements.",
+        "args": [
+            {
+                "name": "Property",
+                "type": "string",
+                "help": "The name of the property to remove.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "replace",
-        "args": ["regexp", "-replace-text"],
         "advanced": false,
-        "help": "Replace the set of matched elements."
+        "help": "Replace the set of matched elements.",
+        "args": [
+            {
+                "name": "Regexp",
+                "type": "string",
+                "help": "A regular expression that matches the text to be replaced. The regular expression must start and end with a slash, and must contain at least one capturing group in parentheses. Add `g` for global or `i` for case insenstive matches after the ending slash. Example: `/^([a-z0-9]+)/`",
+                "required": true
+            },
+            {
+                "name": "Replacement text",
+                "type": "string",
+                "help": "The text or formula that replaces the matched text. A formula must start and end with curly braces and contain a valid Javascript expression within the curly braces. Example: {value.toUpperCase()} Use $1, $2, etc. to refer to the captured groups in the regular expression. Example: \"$1,$2\"",
+                "required": true
+            }
+        ]
     },
     {
         "key": "replaceHTML",
-        "args": ["replace-html"],
         "advanced": true,
-        "help": "Replaces the HTML within the set of matched elements."
+        "help": "Replaces the HTML within the set of matched elements.",
+        "args": [
+            {
+                "name": "HTML",
+                "type": "string",
+                "help": "The HTML to replace the matched elements with.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "replaceTag",
-        "args": ["replace-tag", "-keep-props"],
         "advanced": true,
-        "help": "Replaces the HTML tag with a specified new tag."
+        "help": "Replaces the HTML tag with a specified new tag.",
+        "args": [
+            {
+                "name": "New tag",
+                "type": "string",
+                "help": "The new tag to replace the matched elements with.",
+                "required": true
+            },
+            {
+                "name": "Keep properties",
+                "type": "boolean",
+                "help": "Whether to keep the properties of the original tag."
+            }
+        ]
     },
     {
         "key": "replaceText",
-        "args": ["replace-text"],
         "advanced": true,
-        "help": "Replaces the text with the set of matched elements."
+        "help": "Replaces the text with the set of matched elements.",
+        "args": [
+            {
+                "name": "Text",
+                "type": "string",
+                "help": "The text to replace the matched elements with.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "replaceWith",
-        "args": ["replace-html"],
         "advanced": true,
-        "help": "Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."
+        "help": "Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.",
+        "args": [
+            {
+                "name": "HTML",
+                "type": "string",
+                "help": "The replacement HTML content.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "reverse",
-        "args": [],
         "advanced": true,
-        "help": "Reverses the order of the current set of matched elements."
-    },
-    {
-        "key": "scrollBottom",
-        "args": [],
-        "advanced": true,
-        "help": "Scrolls to the bottom of the current viewport."
-    },
-    {
-        "key": "scrollTop",
-        "args": [],
-        "advanced": true,
-        "help": "Scrolls to the top of the current viewport."
+        "help": "Reverses the order of the current set of matched elements.",
+        "args": []
     },
     {
         "key": "siblings",
         "advanced": true,
-        "help": "Return the siblings of each element in the set of matched elements, optionally filtered by a selector."
+        "help": "Return the siblings of each element in the set of matched elements, optionally filtered by a selector.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector that filters the set of siblings."
+            }
+        ]
     },
     {
         "key": "size",
         "advanced": true,
-        "help": "Returns the number of matched elements."
+        "help": "Returns the number of matched elements.",
+        "args": []
     },
     {
         "key": "slice",
         "advanced": true,
-        "help": "Reduce the set of matched elements to a subset specified by a range of indices."
+        "help": "Reduce the set of matched elements to a subset specified by a range of indices.",
+        "args": [
+            {
+                "name": "Start",
+                "type": "number",
+                "help": "An integer indicating the 0-based position at which the elements begin to be selected. If negative, it indicates an offset from the end of the set.",
+                "required": true
+            },
+            {
+                "name": "End",
+                "type": "number",
+                "help": "An integer indicating the 0-based position at which the elements stop being selected. If negative, it indicates an offset from the end of the set."
+            }
+        ]
     },
     {
         "key": "split",
-        "args": ["separator", "-limit", "-trim"],
         "advanced": true,
-        "help": "Split the text of the set of matched elements using the specified delimiter."
+        "help": "Split the text of the set of matched elements using the specified delimiter.",
+        "args": [
+            {
+                "name": "Separator",
+                "type": "string",
+                "help": "The delimiter to use to split the text.",
+                "required": true
+            },
+            {
+                "name": "Limit",
+                "type": "number",
+                "help": "The maximum number of elements to return."
+            },
+            {
+                "name": "Trim",
+                "type": "boolean",
+                "help": "Whether to trim the elements."
+            }
+        ]
     },
     {
         "key": "text",
-        "args": ["-inline"],
+        "xargs": ["-inline"],
         "advanced": true,
-        "help": "Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."
+        "help": "Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements.",
+        "args": []
     },
     {
         "key": "unwrap",
         "advanced": true,
-        "help": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."
+        "help": "Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.",
+        "args": [
+            {
+                "name": "Selector",
+                "type": "string",
+                "help": "A CSS selector to check the parent element against. If an element's parent does not match the selector, the element won't be unwrapped."
+            }
+        ]
     },
     {
         "key": "val",
         "advanced": true,
-        "help": "Return the current value of the first element in the set of matched elements."
+        "help": "Return the current value of the first element in the set of matched elements.",
+        "args": []
     },
     {
         "key": "wrap",
         "advanced": true,
-        "help": "Wrap each element in the set of matched elements with the specified HTML."
+        "help": "Wrap each element in the set of matched elements with the specified HTML.",
+        "args": [
+            {
+                "name": "HTML",
+                "type": "string",
+                "help": "The HTML to wrap around the set of matched elements.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "wrapAll",
         "advanced": true,
-        "help": "Wrap all elements in the set of matched elements with the specified HTML."
+        "help": "Wrap all elements in the set of matched elements with the specified HTML.",
+        "args": [
+            {
+                "name": "HTML",
+                "type": "string",
+                "help": "The HTML to wrap around the set of matched elements.",
+                "required": true
+            }
+        ]
     },
     {
         "key": "wrapInner",
         "advanced": true,
-        "help": "Wrap the content of each element in the set of matched elements with the specified HTML."
+        "help": "Wrap the content of each element in the set of matched elements with the specified HTML.",
+        "args": [
+            {
+                "name": "HTML",
+                "type": "string",
+                "help": "The HTML to wrap around the content of the set of matched elements.",
+                "required": true
+            }
+        ]
     }
 ]

@@ -31,7 +31,7 @@ export default ({ item, onChange }: Props) => {
                         type={obj.type}
                         repeated={obj.repeated}
                         onChange={(event, value) => {
-                            obj.query = value;
+                            obj.query = value && value.length > 0 ? value : undefined;
                             onChange(event);
                         }}
                     />,

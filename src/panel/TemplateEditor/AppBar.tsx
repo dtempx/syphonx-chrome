@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
 import { useApp, useTemplate } from "./context";
+import { SplitPane } from "./components";
 import { path } from "./lib";
 
 import {
@@ -26,7 +27,7 @@ export default () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <SplitPane>
             <SidebarMenu open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
             <Stack direction="row">
@@ -62,6 +63,6 @@ export default () => {
                     <IconButton size="small" color={mode === "template-settings" ? "primary" : "default"}><SettingsIcon /></IconButton>
                 </Tooltip>
             </Stack>
-        </Box>
+        </SplitPane>
     );
 };

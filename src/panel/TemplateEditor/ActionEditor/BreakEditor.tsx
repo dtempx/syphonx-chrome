@@ -46,7 +46,7 @@ export default ({ item, onChange }: Props) => {
                         name="break"
                         query={obj.query}
                         onChange={(event, value) => {
-                            obj.query = value;
+                            obj.query = value && value.length > 0 ? value : undefined;
                             onChange(event);
                         }}
                     />,

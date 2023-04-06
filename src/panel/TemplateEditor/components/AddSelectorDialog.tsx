@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
 import { TransitionUp } from "../ActionEditor/components";
 import { useTemplate } from "../ActionEditor/components/context";
@@ -27,10 +27,11 @@ import {
 
 export interface Props {
     open: boolean;
-    onClose: (event: React.KeyboardEvent | React.MouseEvent | {}) => void
+    onClose: (event: React.KeyboardEvent | React.MouseEvent | {}) => void;
+    addNewSelectAction?: boolean;
 }
 
-export default ({ open, onClose }: Props) => {
+export default ({ open, onClose, addNewSelectAction }: Props) => {
     const { template: json, setTemplate } = useTemplate();
     const [name, setName] = useState<string | undefined>();
     const [type, setType] = useState<syphonx.SelectType | undefined>();
@@ -39,7 +40,18 @@ export default ({ open, onClose }: Props) => {
 
     const template = new Template(json);
 
+    useEffect(() => {
+        if (open) {
+            setName(undefined);
+            setType(undefined);
+            setRepeated(false);
+            setError(undefined);
+        }
+    }, [open]);
+
     function handleCommit(event: React.SyntheticEvent): void {
+        if (addNewSelectAction)
+            template.addItem("select", false);
         const { ok, error } = template.addSelect({ name, type, repeated });
         setError(error);
         if (ok) {

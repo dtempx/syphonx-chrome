@@ -24,14 +24,25 @@ export interface Props {
 
 export default ({ selects, index, onChange, onAdd, onDelete }: Props) => {
     return selects.length <=1 ? (
-        <Link
-            underline="always"
-            fontSize="small"
-            sx={{ cursor: "pointer" }}
-            onClick={onAdd}
-        >
-            Add alternate selector
-        </Link>
+        <Stack direction="row">
+            <Link
+                underline="always"
+                fontSize="small"
+                sx={{ cursor: "pointer" }}
+                onClick={onAdd}
+            >
+                Add alternate selector
+            </Link>
+            <Tooltip
+                title="Completely removes the query"
+                sx={{
+                    top: "-4px",
+                    visibility: selects.length > 0 ? "visible" : "hidden"
+                }}
+            >
+                <IconButton size="small" onClick={onDelete}><DeleteIcon fontSize="small" /></IconButton>
+            </Tooltip>
+        </Stack>
     ) : (
         <Stack direction="row">
             <Tooltip title="Switches between query alternates">

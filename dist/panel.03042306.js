@@ -23186,7 +23186,7 @@ let $af9fac753574b590$export$cbe410dad4f45b36;
 
 
 var $f608a5c537b18bf1$exports = {};
-$f608a5c537b18bf1$exports = JSON.parse('{"actions":[{"select":[{"query":[["h1"]]}]}],"selected":"select.1.title"}');
+$f608a5c537b18bf1$exports = JSON.parse('{"actions":[{"select":[{"name":"title","query":[["h1"]]}]}],"selected":"select.1.title"}');
 
 
 class $1238fd0f4bef3443$export$67c95d00e574f6b6 {
@@ -23434,9 +23434,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         else this.obj = {};
         this.children = this.renderActions(this.obj.actions);
     }
-    addItem(action) {
+    addItem(action, defaultValue = true) {
         if (action) {
-            this.addAction(action);
+            this.addAction(action, defaultValue);
             return true;
         } else {
             const added = this.addSelected();
@@ -23557,7 +23557,7 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
     tests() {
         return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
-    addAction(action) {
+    addAction(action, defaultValue = true) {
         if (!(this.obj.actions instanceof Array)) this.obj.actions = []; // ensure actions is an array
         const item = this.selected();
         const actions = (0, $a0bb46a5ccd801f1$export$a1556c689e18ef72)(item) || this.obj.actions;
@@ -23610,7 +23610,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         else if (action === "scroll") obj = {
             scroll: {}
         };
-        else if (action === "select") obj = {
+        else if (action === "select") obj = !defaultValue ? {
+            select: []
+        } : {
             select: [
                 {
                     name: "value1",
@@ -30534,7 +30536,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $d4J5n = parcelRequire("d4J5n");
 var $a96c103c091a20a8$exports = {};
-$a96c103c091a20a8$exports = JSON.parse('[{"key":"add","args":[],"advanced":true,"help":"Create a new object with elements added to the set of matched elements."},{"key":"addBack","args":["-selector"],"advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector."},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements."},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements."},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set."},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements."},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements."},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements."},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector."},{"key":"closest","advanced":true,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree."},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes."},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element."},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","required":true},{"name":"Position","type":"number"},{"name":"Limit","type":"number"}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM."},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index."},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero."},{"key":"extract","args":["selector|regexp","-keep-unmatched-items","-trim-whitespace"],"advanced":false,"help":"Extract text from the set of matched elements using a regular expression."},{"key":"filter","args":["selector|regexp"],"advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression."},{"key":"find","args":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector."},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set."},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector."},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class."},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements."},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector."},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector."},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set."},{"key":"length","advanced":true,"help":"Returns the number of matched elements."},{"key":"map","advanced":true,"help":"Map the set of matched elements using a specified formula."},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector."},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector."},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector."},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content."},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements."},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero."},{"key":"parent","advanced":true,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parents","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector."},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector."},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements."},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector."},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order."},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector."},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements."},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM."},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements."},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements."},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data."},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements."},{"key":"replace","args":["regexp","-replace-text"],"advanced":false,"help":"Replace the set of matched elements."},{"key":"replaceHTML","args":["replace-html"],"advanced":true,"help":"Replaces the HTML within the set of matched elements."},{"key":"replaceTag","args":["replace-tag","-keep-props"],"advanced":true,"help":"Replaces the HTML tag with a specified new tag."},{"key":"replaceText","args":["replace-text"],"advanced":true,"help":"Replaces the text with the set of matched elements."},{"key":"replaceWith","args":["replace-html"],"advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed."},{"key":"reverse","args":[],"advanced":true,"help":"Reverses the order of the current set of matched elements."},{"key":"scrollBottom","args":[],"advanced":true,"help":"Scrolls to the bottom of the current viewport."},{"key":"scrollTop","args":[],"advanced":true,"help":"Scrolls to the top of the current viewport."},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector."},{"key":"size","advanced":true,"help":"Returns the number of matched elements."},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices."},{"key":"split","args":["separator","-limit","-trim"],"advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter."},{"key":"text","args":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements."},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place."},{"key":"val","advanced":true,"help":"Return the current value of the first element in the set of matched elements."},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML."},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML."},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML."}]');
+$a96c103c091a20a8$exports = JSON.parse('[{"key":"add","advanced":true,"help":"Create a new object with elements added to the set of matched elements.","args":[{"name":"Selector","type":"string","help":"A CSS selector to find additional elements to add, or an HTML fragment.","required":true}]},{"key":"addBack","advanced":true,"help":"Add the previous set of elements on the stack to the current set, optionally filtered by a selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector to find additional elements to add."}]},{"key":"addClass","advanced":true,"help":"Adds the specified class (or classes) to each element in the set of matched elements.","args":[{"name":"Class name","type":"string","help":"One or more space-separated classes to be added to the class attribute of each matched element.","required":true}]},{"key":"after","advanced":true,"help":"Insert content, specified by the parameter, after each element in the set of matched elements.","args":[{"name":"Content","type":"string","help":"HTML to insert after each element in the set of matched elements.","required":true}]},{"key":"andSelf","advanced":true,"help":"Add the previous set of elements on the stack to the current set.","args":[]},{"key":"append","advanced":true,"help":"Insert content, specified by the parameter, to the end of each element in the set of matched elements.","args":[{"name":"Content","type":"string","help":"HTML to insert at the end of each element in the set of matched elements.","required":true}]},{"key":"attr","advanced":false,"help":"Return the value of a specified attribute in the set of matched elements.","args":[{"name":"Attribute name","type":"string","help":"The name of the attribute to return.","required":true}]},{"key":"before","advanced":true,"help":"Insert content, specified by the parameter, before each element in the set of matched elements.","args":[{"name":"Content","type":"string","help":"HTML to insert before each element in the set of matched elements.","required":true}]},{"key":"blank","advanced":true,"help":"Retain only elements from the set of matched elements that have no content.","args":[]},{"key":"children","advanced":true,"help":"Return the children of each element in the set of matched elements, optionally filtered by a selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector to filter the set of matched children, all children are matched if not specified."}]},{"key":"closest","advanced":true,"help":"For each element in the set, get the first element that matches the selector by testing the element itself and traversing up through its ancestors in the DOM tree.","args":[{"name":"Selector","type":"string","help":"A CSS selector that determines the target of the closest match.","required":true}]},{"key":"contents","advanced":true,"help":"Return the children of each element in the set of matched elements, including text and comment nodes.","args":[]},{"key":"css","advanced":true,"help":"Return the value of a computed style property for the first element in the set of matched elements or set one or more CSS properties for every matched element.","args":[{"name":"Property name","type":"string","help":"The name of the CSS property to get or set.","required":true},{"name":"Value","type":"string","help":"A value to set for the property.","mutate":true}]},{"key":"cut","advanced":true,"help":"Cut text from the set of matched elements.","args":[{"name":"Splitter","type":"string","help":"The substring to use to split the text.","required":true},{"name":"Position","type":"number","help":"A number starting from zero indicating the position wihtin the split to return. If negative, the position is counted backwards from the last item."},{"name":"Limit","type":"number","help":""}]},{"key":"empty","advanced":true,"help":"Remove all child nodes of the set of matched elements from the DOM.","args":[]},{"key":"eq","advanced":false,"help":"Reduce the set of matched elements to the one at the specified index.","args":[{"name":"Index","type":"number","help":"A number starting from zero indicating the index position of the element to return. If negative, the index position is counted backwards from the last item.","required":true}]},{"key":"even","advanced":true,"help":"Reduce the set of matched elements to the even ones in the set, numbered from zero.","even":[]},{"key":"extract","advanced":false,"help":"Extract text from the set of matched elements using a regular expression.","args":[{"name":"Regexp","type":"string","help":"A regular expression that matches the text to be extracted. The regular expression must start and end with a slash, and must contain a capturing group in parentheses. Add `g` for global or `i` for case insenstive matches after the ending slash. Example: `/^([a-z0-9]+)/`","required":true}]},{"key":"filter","advanced":false,"help":"Reduce the set of matched elements to those that match a selector or a regular expression.","args":[{"name":"Selector","type":"string","help":"A CSS selector, regular expression, or formula that targets the elements to be included.","required":true}]},{"key":"find","xargs":["selector"],"advanced":false,"help":"Return the descendants of each element in the current set of matched elements, filtered by the specified selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector to match elements against.","required":true}]},{"key":"first","advanced":false,"help":"Reduce the set of matched elements to the first in the set.","args":[]},{"key":"has","advanced":true,"help":"Reduce the set of matched elements to those that have a descendant that matches the specified selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that targets the elements to be included.","required":true}]},{"key":"hasClass","advanced":true,"help":"Determine whether any of the matched elements are assigned the given class.","args":[{"name":"Class name","type":"string","help":"The class name to search for.","required":true}]},{"key":"html","advanced":false,"help":"Return the HTML contents of the set of matched elements.","args":[{"name":"mode","type":"string","help":"Indicates whether to capture the outer or inner HTML. (default=outer)"}]},{"key":"index","advanced":true,"help":"Return an integer indicating the position of the first element within the matched set of elemnts relative to the elements matched by the selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector indicating the position of the first element relative to the elements matched by the selector."}]},{"key":"is","advanced":true,"help":"Determines whether at least one element within the current matched set of elements matches the specified selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that targets the elements to be matched.","required":true}]},{"key":"last","advanced":false,"help":"Reduce the set of matched elements to the final one in the set.","args":[]},{"key":"length","advanced":true,"help":"Returns the number of matched elements.","args":[]},{"key":"map","advanced":false,"help":"Map the set of matched elements using a specified formula.","args":[{"name":"Formula","type":"string","help":"A formula that is applied to each element in the set of matched elements. The formula can reference the current `value` or any previous property value using `data.name`, where name is the name of any previously evaluated property. A formula must start and end with curly braces and contain a valid Javascript expression within the curly braces.\\n\\nExamples:\\n{value / 100}\\n{data.price}\\n{`${data.title} : ${data.product_name}`}\\n{url}","required":true}]},{"key":"next","advanced":true,"help":"Return the immediately following sibling of each element in the set of matched elements. If a selector is provided, it retrieves the next sibling only if it matches that selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the next elements to be matched."}]},{"key":"nextAll","advanced":true,"help":"Return all following siblings of each element in the set of matched elements, optionally filtered by a specified selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the next elements to be matched."}]},{"key":"nextUntil","advanced":true,"help":"Return all following siblings of each element up to but not including the element matched by the specified selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that determines where to stop matching following sibling elements.","required":true},{"name":"Filter","type":"string","help":"A CSS selector that filters elements to be matched."}]},{"key":"nonblank","advanced":true,"help":"Remove elements from the set of matched elements that have no content.","args":[]},{"key":"not","advanced":true,"help":"Remove elements from the set of matched elements.","args":[{"name":"Selector","type":"string","help":"A CSS selector that targets the elements to be removed.","required":true}]},{"key":"odd","advanced":true,"help":"Reduce the set of matched elements to the odd ones in the set, numbered from zero.","args":[]},{"key":"parent","advanced":true,"help":"Return the parent of each element in the current set of matched elements, optionally filtered by a selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the parent elements to be matched."}]},{"key":"parents","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, optionally filtered by a selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the parent elements to be matched."}]},{"key":"parentsUntil","advanced":true,"help":"Return the ancestors of each element in the current set of matched elements, up to but not including the element matched by the selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that determines where to stop matching ancestor elements.","required":true},{"name":"Filter","type":"string","help":"A CSS selector that filters elements to be matched."}]},{"key":"prepend","advanced":true,"help":"Insert content, specified by the parameter, to the beginning of each element in the set of matched elements.","args":[{"name":"Content","type":"string","help":"HTML content to be inserted.","required":true}]},{"key":"prev","advanced":true,"help":"Return the immediately preceding sibling of each element in the set of matched elements. If a selector is provided, it retrieves the previous sibling only if it matches that selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the previous elements to be matched."}]},{"key":"prevAll","advanced":true,"help":"Return all preceding siblings of each element in the set of matched elements, optionally filtered by a selector, in the reverse document order.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the previous elements to be matched."}]},{"key":"prevUntil","advanced":true,"help":"Return all preceding siblings of each element up to but not including the element matched by the selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that determines where to stop matching preceding sibling elements.","required":true},{"name":"Filter","type":"string","help":"A CSS selector that filters elements to be matched."}]},{"key":"prop","advanced":true,"help":"Return the value of a property in the set of matched elements.","args":[{"name":"Property","type":"string","help":"The name of the property to get.","required":true}]},{"key":"remove","advanced":true,"help":"Remove the set of matched elements from the DOM.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the elements to be removed."}]},{"key":"removeAttr","advanced":true,"help":"Remove an attribute from each element in the set of matched elements.","args":[{"name":"Attribute","type":"string","help":"One or more space-separated attribute names to be removed from each matched element.","required":true}]},{"key":"removeClass","advanced":true,"help":"Remove a single class, multiple classes, or all classes from each element in the set of matched elements.","args":[{"name":"Class","type":"string","help":"One or more space-separated classes to be removed from the class attribute of each matched element."}]},{"key":"removeData","advanced":true,"help":"Remove a previously-stored piece of data.","args":[{"name":"Name","type":"string","help":"A string naming the piece of data to delete.","required":true}]},{"key":"removeProp","advanced":true,"help":"Remove a property for the set of matched elements.","args":[{"name":"Property","type":"string","help":"The name of the property to remove.","required":true}]},{"key":"replace","advanced":false,"help":"Replace the set of matched elements.","args":[{"name":"Regexp","type":"string","help":"A regular expression that matches the text to be replaced. The regular expression must start and end with a slash, and must contain at least one capturing group in parentheses. Add `g` for global or `i` for case insenstive matches after the ending slash. Example: `/^([a-z0-9]+)/`","required":true},{"name":"Replacement text","type":"string","help":"The text or formula that replaces the matched text. A formula must start and end with curly braces and contain a valid Javascript expression within the curly braces. Example: {value.toUpperCase()} Use $1, $2, etc. to refer to the captured groups in the regular expression. Example: \\"$1,$2\\"","required":true}]},{"key":"replaceHTML","advanced":true,"help":"Replaces the HTML within the set of matched elements.","args":[{"name":"HTML","type":"string","help":"The HTML to replace the matched elements with.","required":true}]},{"key":"replaceTag","advanced":true,"help":"Replaces the HTML tag with a specified new tag.","args":[{"name":"New tag","type":"string","help":"The new tag to replace the matched elements with.","required":true},{"name":"Keep properties","type":"boolean","help":"Whether to keep the properties of the original tag."}]},{"key":"replaceText","advanced":true,"help":"Replaces the text with the set of matched elements.","args":[{"name":"Text","type":"string","help":"The text to replace the matched elements with.","required":true}]},{"key":"replaceWith","advanced":true,"help":"Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.","args":[{"name":"HTML","type":"string","help":"The replacement HTML content.","required":true}]},{"key":"reverse","advanced":true,"help":"Reverses the order of the current set of matched elements.","args":[]},{"key":"siblings","advanced":true,"help":"Return the siblings of each element in the set of matched elements, optionally filtered by a selector.","args":[{"name":"Selector","type":"string","help":"A CSS selector that filters the set of siblings."}]},{"key":"size","advanced":true,"help":"Returns the number of matched elements.","args":[]},{"key":"slice","advanced":true,"help":"Reduce the set of matched elements to a subset specified by a range of indices.","args":[{"name":"Start","type":"number","help":"An integer indicating the 0-based position at which the elements begin to be selected. If negative, it indicates an offset from the end of the set.","required":true},{"name":"End","type":"number","help":"An integer indicating the 0-based position at which the elements stop being selected. If negative, it indicates an offset from the end of the set."}]},{"key":"split","advanced":true,"help":"Split the text of the set of matched elements using the specified delimiter.","args":[{"name":"Separator","type":"string","help":"The delimiter to use to split the text.","required":true},{"name":"Limit","type":"number","help":"The maximum number of elements to return."},{"name":"Trim","type":"boolean","help":"Whether to trim the elements."}]},{"key":"text","xargs":["-inline"],"advanced":true,"help":"Return the combined text contents of each element in the set of matched elements, including their descendants, or set the text contents of the matched elements.","args":[]},{"key":"unwrap","advanced":true,"help":"Remove the parents of the set of matched elements from the DOM, leaving the matched elements in their place.","args":[{"name":"Selector","type":"string","help":"A CSS selector to check the parent element against. If an element\'s parent does not match the selector, the element won\'t be unwrapped."}]},{"key":"val","advanced":true,"help":"Return the current value of the first element in the set of matched elements.","args":[]},{"key":"wrap","advanced":true,"help":"Wrap each element in the set of matched elements with the specified HTML.","args":[{"name":"HTML","type":"string","help":"The HTML to wrap around the set of matched elements.","required":true}]},{"key":"wrapAll","advanced":true,"help":"Wrap all elements in the set of matched elements with the specified HTML.","args":[{"name":"HTML","type":"string","help":"The HTML to wrap around the set of matched elements.","required":true}]},{"key":"wrapInner","advanced":true,"help":"Wrap the content of each element in the set of matched elements with the specified HTML.","args":[{"name":"HTML","type":"string","help":"The HTML to wrap around the content of the set of matched elements.","required":true}]}]');
 
 
 
@@ -34329,6 +34331,465 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
+parcelRequire("d4J5n");
+
+
+var $badc5dd72a86ca95$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+}), "Cancel");
+
+
+
+
+
+
+
+
+
+
+function $a7e913e5e795549c$export$31444911e4ee6fdd(slot) {
+    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiChip", slot);
+}
+const $a7e913e5e795549c$var$chipClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiChip", [
+    "root",
+    "sizeSmall",
+    "sizeMedium",
+    "colorError",
+    "colorInfo",
+    "colorPrimary",
+    "colorSecondary",
+    "colorSuccess",
+    "colorWarning",
+    "disabled",
+    "clickable",
+    "clickableColorPrimary",
+    "clickableColorSecondary",
+    "deletable",
+    "deletableColorPrimary",
+    "deletableColorSecondary",
+    "outlined",
+    "filled",
+    "outlinedPrimary",
+    "outlinedSecondary",
+    "filledPrimary",
+    "filledSecondary",
+    "avatar",
+    "avatarSmall",
+    "avatarMedium",
+    "avatarColorPrimary",
+    "avatarColorSecondary",
+    "icon",
+    "iconSmall",
+    "iconMedium",
+    "iconColorPrimary",
+    "iconColorSecondary",
+    "label",
+    "labelSmall",
+    "labelMedium",
+    "deleteIcon",
+    "deleteIconSmall",
+    "deleteIconMedium",
+    "deleteIconColorPrimary",
+    "deleteIconColorSecondary",
+    "deleteIconOutlinedColorPrimary",
+    "deleteIconOutlinedColorSecondary",
+    "deleteIconFilledColorPrimary",
+    "deleteIconFilledColorSecondary",
+    "focusVisible"
+]);
+var $a7e913e5e795549c$export$2e2bcd8739ae039 = $a7e913e5e795549c$var$chipClasses;
+
+
+
+
+const $5e35e7f068f55b96$var$_excluded = [
+    "avatar",
+    "className",
+    "clickable",
+    "color",
+    "component",
+    "deleteIcon",
+    "disabled",
+    "icon",
+    "label",
+    "onClick",
+    "onDelete",
+    "onKeyDown",
+    "onKeyUp",
+    "size",
+    "variant",
+    "tabIndex",
+    "skipFocusWhenDisabled"
+];
+const $5e35e7f068f55b96$var$useUtilityClasses = (ownerState)=>{
+    const { classes: classes , disabled: disabled , size: size , color: color , iconColor: iconColor , onDelete: onDelete , clickable: clickable , variant: variant  } = ownerState;
+    const slots = {
+        root: [
+            "root",
+            variant,
+            disabled && "disabled",
+            `size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            `color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            clickable && "clickable",
+            clickable && `clickableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            onDelete && "deletable",
+            onDelete && `deletableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            `${variant}${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
+        ],
+        label: [
+            "label",
+            `label${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`
+        ],
+        avatar: [
+            "avatar",
+            `avatar${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            `avatarColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
+        ],
+        icon: [
+            "icon",
+            `icon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            `iconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(iconColor)}`
+        ],
+        deleteIcon: [
+            "deleteIcon",
+            `deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
+            `deleteIconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
+            `deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(variant)}Color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
+        ]
+    };
+    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $a7e913e5e795549c$export$31444911e4ee6fdd), classes);
+};
+const $5e35e7f068f55b96$var$ChipRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
+    name: "MuiChip",
+    slot: "Root",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        const { color: color , iconColor: iconColor , clickable: clickable , onDelete: onDelete , size: size , variant: variant  } = ownerState;
+        return [
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles.avatar
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles[`avatar${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles[`avatarColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles.icon
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles[`icon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles[`iconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(iconColor)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles.deleteIcon
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
+            },
+            {
+                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(variant)}Color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
+            },
+            styles.root,
+            styles[`size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`],
+            styles[`color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`],
+            clickable && styles.clickable,
+            clickable && color !== "default" && styles[`clickableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)})`],
+            onDelete && styles.deletable,
+            onDelete && color !== "default" && styles[`deletableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`],
+            styles[variant],
+            styles[`${variant}${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
+        ];
+    }
+})(({ theme: theme , ownerState: ownerState  })=>{
+    const deleteIconColor = (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.text.primary, 0.26);
+    const textColor = theme.palette.mode === "light" ? theme.palette.grey[700] : theme.palette.grey[300];
+    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        maxWidth: "100%",
+        fontFamily: theme.typography.fontFamily,
+        fontSize: theme.typography.pxToRem(13),
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: 32,
+        color: (theme.vars || theme).palette.text.primary,
+        backgroundColor: (theme.vars || theme).palette.action.selected,
+        borderRadius: 16,
+        whiteSpace: "nowrap",
+        transition: theme.transitions.create([
+            "background-color",
+            "box-shadow"
+        ]),
+        // label will inherit this from root, then `clickable` class overrides this for both
+        cursor: "default",
+        // We disable the focus ring for mouse, touch and keyboard users.
+        outline: 0,
+        textDecoration: "none",
+        border: 0,
+        // Remove `button` border
+        padding: 0,
+        // Remove `button` padding
+        verticalAlign: "middle",
+        boxSizing: "border-box",
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).disabled}`]: {
+            opacity: (theme.vars || theme).palette.action.disabledOpacity,
+            pointerEvents: "none"
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: {
+            marginLeft: 5,
+            marginRight: -6,
+            width: 24,
+            height: 24,
+            color: theme.vars ? theme.vars.palette.Chip.defaultAvatarColor : textColor,
+            fontSize: theme.typography.pxToRem(12)
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarColorPrimary}`]: {
+            color: (theme.vars || theme).palette.primary.contrastText,
+            backgroundColor: (theme.vars || theme).palette.primary.dark
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarColorSecondary}`]: {
+            color: (theme.vars || theme).palette.secondary.contrastText,
+            backgroundColor: (theme.vars || theme).palette.secondary.dark
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarSmall}`]: {
+            marginLeft: 4,
+            marginRight: -4,
+            width: 18,
+            height: 18,
+            fontSize: theme.typography.pxToRem(10)
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            marginLeft: 5,
+            marginRight: -6
+        }, ownerState.size === "small" && {
+            fontSize: 18,
+            marginLeft: 4,
+            marginRight: -4
+        }, ownerState.iconColor === ownerState.color && (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            color: theme.vars ? theme.vars.palette.Chip.defaultIconColor : textColor
+        }, ownerState.color !== "default" && {
+            color: "inherit"
+        })),
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+            WebkitTapHighlightColor: "transparent",
+            color: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / 0.26)` : deleteIconColor,
+            fontSize: 22,
+            cursor: "pointer",
+            margin: "0 5px 0 -6px",
+            "&:hover": {
+                color: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / 0.4)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(deleteIconColor, 0.4)
+            }
+        }, ownerState.size === "small" && {
+            fontSize: 16,
+            marginRight: 4,
+            marginLeft: -4
+        }, ownerState.color !== "default" && {
+            color: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].contrastTextChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].contrastText, 0.7),
+            "&:hover, &:active": {
+                color: (theme.vars || theme).palette[ownerState.color].contrastText
+            }
+        })
+    }, ownerState.size === "small" && {
+        height: 24
+    }, ownerState.color !== "default" && {
+        backgroundColor: (theme.vars || theme).palette[ownerState.color].main,
+        color: (theme.vars || theme).palette[ownerState.color].contrastText
+    }, ownerState.onDelete && {
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+        }
+    }, ownerState.onDelete && ownerState.color !== "default" && {
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: (theme.vars || theme).palette[ownerState.color].dark
+        }
+    });
+}, ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.clickable && {
+        userSelect: "none",
+        WebkitTapHighlightColor: "transparent",
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
+        },
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
+        },
+        "&:active": {
+            boxShadow: (theme.vars || theme).shadows[1]
+        }
+    }, ownerState.clickable && ownerState.color !== "default" && {
+        [`&:hover, &.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: (theme.vars || theme).palette[ownerState.color].dark
+        }
+    }), ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.variant === "outlined" && {
+        backgroundColor: "transparent",
+        border: theme.vars ? `1px solid ${theme.vars.palette.Chip.defaultBorder}` : `1px solid ${theme.palette.mode === "light" ? theme.palette.grey[400] : theme.palette.grey[700]}`,
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).clickable}:hover`]: {
+            backgroundColor: (theme.vars || theme).palette.action.hover
+        },
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: (theme.vars || theme).palette.action.focus
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: {
+            marginLeft: 4
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarSmall}`]: {
+            marginLeft: 2
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: {
+            marginLeft: 4
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).iconSmall}`]: {
+            marginLeft: 2
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: {
+            marginRight: 5
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIconSmall}`]: {
+            marginRight: 3
+        }
+    }, ownerState.variant === "outlined" && ownerState.color !== "default" && {
+        color: (theme.vars || theme).palette[ownerState.color].main,
+        border: `1px solid ${theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, 0.7)}`,
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).clickable}:hover`]: {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.hoverOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.hoverOpacity)
+        },
+        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
+            backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.focusOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.focusOpacity)
+        },
+        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: {
+            color: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, 0.7),
+            "&:hover, &:active": {
+                color: (theme.vars || theme).palette[ownerState.color].main
+            }
+        }
+    }));
+const $5e35e7f068f55b96$var$ChipLabel = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
+    name: "MuiChip",
+    slot: "Label",
+    overridesResolver: (props, styles)=>{
+        const { ownerState: ownerState  } = props;
+        const { size: size  } = ownerState;
+        return [
+            styles.label,
+            styles[`label${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
+        ];
+    }
+})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        paddingLeft: 12,
+        paddingRight: 12,
+        whiteSpace: "nowrap"
+    }, ownerState.size === "small" && {
+        paddingLeft: 8,
+        paddingRight: 8
+    }));
+function $5e35e7f068f55b96$var$isDeleteKeyboardEvent(keyboardEvent) {
+    return keyboardEvent.key === "Backspace" || keyboardEvent.key === "Delete";
+}
+/**
+ * Chips represent complex entities in small blocks, such as a contact.
+ */ const $5e35e7f068f55b96$var$Chip = /*#__PURE__*/ $d4J5n.forwardRef(function Chip(inProps, ref) {
+    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
+        props: inProps,
+        name: "MuiChip"
+    });
+    const { avatar: avatarProp , className: className , clickable: clickableProp , color: color = "default" , component: ComponentProp , deleteIcon: deleteIconProp , disabled: disabled = false , icon: iconProp , label: label , onClick: onClick , onDelete: onDelete , onKeyDown: onKeyDown , onKeyUp: onKeyUp , size: size = "medium" , variant: variant = "filled" , tabIndex: tabIndex , skipFocusWhenDisabled: skipFocusWhenDisabled = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $5e35e7f068f55b96$var$_excluded);
+    const chipRef = $d4J5n.useRef(null);
+    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(chipRef, ref);
+    const handleDeleteIconClick = (event)=>{
+        // Stop the event from bubbling up to the `Chip`
+        event.stopPropagation();
+        if (onDelete) onDelete(event);
+    };
+    const handleKeyDown = (event)=>{
+        // Ignore events from children of `Chip`.
+        if (event.currentTarget === event.target && $5e35e7f068f55b96$var$isDeleteKeyboardEvent(event)) // Will be handled in keyUp, otherwise some browsers
+        // might init navigation
+        event.preventDefault();
+        if (onKeyDown) onKeyDown(event);
+    };
+    const handleKeyUp = (event)=>{
+        // Ignore events from children of `Chip`.
+        if (event.currentTarget === event.target) {
+            if (onDelete && $5e35e7f068f55b96$var$isDeleteKeyboardEvent(event)) onDelete(event);
+            else if (event.key === "Escape" && chipRef.current) chipRef.current.blur();
+        }
+        if (onKeyUp) onKeyUp(event);
+    };
+    const clickable = clickableProp !== false && onClick ? true : clickableProp;
+    const component = clickable || onDelete ? (0, $87f61933867dae5e$export$2e2bcd8739ae039) : ComponentProp || "div";
+    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
+        component: component,
+        disabled: disabled,
+        size: size,
+        color: color,
+        iconColor: /*#__PURE__*/ $d4J5n.isValidElement(iconProp) ? iconProp.props.color || color : color,
+        onDelete: !!onDelete,
+        clickable: clickable,
+        variant: variant
+    });
+    const classes = $5e35e7f068f55b96$var$useUtilityClasses(ownerState);
+    const moreProps = component === (0, $87f61933867dae5e$export$2e2bcd8739ae039) ? (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        component: ComponentProp || "div",
+        focusVisibleClassName: classes.focusVisible
+    }, onDelete && {
+        disableRipple: true
+    }) : {};
+    let deleteIcon = null;
+    if (onDelete) deleteIcon = deleteIconProp && /*#__PURE__*/ $d4J5n.isValidElement(deleteIconProp) ? /*#__PURE__*/ $d4J5n.cloneElement(deleteIconProp, {
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(deleteIconProp.props.className, classes.deleteIcon),
+        onClick: handleDeleteIconClick
+    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $badc5dd72a86ca95$export$2e2bcd8739ae039), {
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.deleteIcon),
+        onClick: handleDeleteIconClick
+    });
+    let avatar = null;
+    if (avatarProp && /*#__PURE__*/ $d4J5n.isValidElement(avatarProp)) avatar = /*#__PURE__*/ $d4J5n.cloneElement(avatarProp, {
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.avatar, avatarProp.props.className)
+    });
+    let icon = null;
+    if (iconProp && /*#__PURE__*/ $d4J5n.isValidElement(iconProp)) icon = /*#__PURE__*/ $d4J5n.cloneElement(iconProp, {
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.icon, iconProp.props.className)
+    });
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($5e35e7f068f55b96$var$ChipRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
+        as: component,
+        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
+        disabled: clickable && disabled ? true : undefined,
+        onClick: onClick,
+        onKeyDown: handleKeyDown,
+        onKeyUp: handleKeyUp,
+        ref: handleRef,
+        tabIndex: skipFocusWhenDisabled && disabled ? -1 : tabIndex,
+        ownerState: ownerState
+    }, moreProps, other, {
+        children: [
+            avatar || icon,
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($5e35e7f068f55b96$var$ChipLabel, {
+                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.label),
+                ownerState: ownerState,
+                children: label
+            }),
+            deleteIcon
+        ]
+    }));
+});
+var $5e35e7f068f55b96$export$2e2bcd8739ae039 = $5e35e7f068f55b96$var$Chip;
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
+
+
 
 
 
@@ -34524,6 +34985,15 @@ var $d9035591e653d6fe$export$2e2bcd8739ae039 = ({ value: value = [
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [output, setOutput] = (0, $d4J5n.useState)("");
     const [showOutput, setShowOutput] = (0, $d4J5n.useState)(false);
+    const functionDef = (0, (/*@__PURE__*/$parcel$interopDefault($a96c103c091a20a8$exports))).find(({ key: key  })=>key === value[0]);
+    const args = functionDef ? functionDef.args || [
+        {
+            name: "Value",
+            type: "string",
+            help: "",
+            required: true
+        }
+    ] : undefined;
     function assignValue(newValue, i) {
         const obj = value.slice(0);
         obj[i] = newValue;
@@ -34535,106 +35005,146 @@ var $d9035591e653d6fe$export$2e2bcd8739ae039 = ({ value: value = [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                 direction: "row",
                 spacing: 0,
+                sx: {
+                    display: "flex",
+                    justifyContent: "space-between"
+                },
                 children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        value: value[0],
-                        displayEmpty: true,
-                        renderValue: (value)=>value || /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                variant: "subtitle1",
-                                sx: {
-                                    opacity: 0.5
-                                },
-                                children: "(Add a stage)"
-                            }),
-                        onChange: (event)=>onChange(event, [
-                                event.target.value,
-                                ...value.slice(1)
-                            ]),
-                        sx: {
-                            width: 300
-                        },
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        spacing: 0,
                         children: [
-                            (0, (/*@__PURE__*/$parcel$interopDefault($a96c103c091a20a8$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                    value: key,
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                                        title: help,
-                                        arrow: true,
-                                        placement: "right",
-                                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                            sx: {
-                                                width: "100%"
-                                            },
-                                            children: key
-                                        })
-                                    })
-                                })),
-                            expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(false),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $5cd693904b0d5801$export$2e2bcd8739ae039), {
+                                variant: "outlined",
+                                size: "small",
+                                value: value[0],
+                                displayEmpty: true,
+                                autoWidth: false,
+                                renderValue: (value)=>value || /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                        variant: "subtitle1",
                                         sx: {
-                                            ml: 1
+                                            opacity: 0.5
                                         },
-                                        children: "Less"
+                                        children: "(Add a stage)"
+                                    }),
+                                onChange: (event)=>onChange(event, [
+                                        event.target.value,
+                                        ...value.slice(1)
+                                    ]),
+                                sx: {
+                                    width: 200,
+                                    maxWidth: 200
+                                },
+                                children: [
+                                    (0, (/*@__PURE__*/$parcel$interopDefault($a96c103c091a20a8$exports))).filter(({ advanced: advanced  })=>expanded || !advanced).map(({ key: key , help: help  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                            value: key,
+                                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                                arrow: true,
+                                                placement: "right",
+                                                title: help,
+                                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                                    sx: {
+                                                        width: "100%"
+                                                    },
+                                                    children: key
+                                                })
+                                            })
+                                        })),
+                                    expanded ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                        onClick: ()=>setExpanded(false),
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e0e97e6a0b304950$export$2e2bcd8739ae039), {
+                                                fontSize: "small"
+                                            }),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                                sx: {
+                                                    ml: 1
+                                                },
+                                                children: "Less"
+                                            })
+                                        ]
+                                    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
+                                        onClick: ()=>setExpanded(true),
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
+                                                fontSize: "small"
+                                            }),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                                sx: {
+                                                    ml: 1
+                                                },
+                                                children: "More"
+                                            })
+                                        ]
                                     })
                                 ]
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $bde17d13cb330cfa$export$2e2bcd8739ae039), {
-                                onClick: ()=>setExpanded(true),
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $cdeb595f73f319bc$export$2e2bcd8739ae039), {
-                                        fontSize: "small"
+                            }),
+                            args?.map(({ name: name , type: type , help: help , required: required  }, index)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                    arrow: true,
+                                    placement: "bottom",
+                                    title: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                                        children: [
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                                variant: "caption",
+                                                children: help
+                                            }),
+                                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $5e35e7f068f55b96$export$2e2bcd8739ae039), {
+                                                variant: "filled",
+                                                color: "secondary",
+                                                size: "small",
+                                                label: required ? "required" : "optional",
+                                                sx: {
+                                                    ml: 1
+                                                }
+                                            })
+                                        ]
                                     }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+                                        label: required ? `${name} *` : name,
+                                        variant: "outlined",
+                                        size: "small",
+                                        fullWidth: true,
+                                        value: value[index + 1],
+                                        onChange: (event)=>onChange(event, assignValue(event.target.value, index + 1)),
                                         sx: {
-                                            ml: 1
-                                        },
-                                        children: "More"
+                                            ml: 1,
+                                            visibility: value[0] ? "visible" : "hidden"
+                                        }
                                     })
-                                ]
-                            })
+                                }))
                         ]
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                        variant: "outlined",
-                        size: "small",
-                        fullWidth: true,
-                        value: value[1],
-                        onChange: (event)=>onChange(event, assignValue(event.target.value, 1)),
-                        sx: {
-                            ml: 1,
-                            visibility: value[0] ? "visible" : "hidden"
-                        }
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "Delete this stage",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: onDelete,
-                            sx: {
-                                visibility: value[0] ? "visible" : "hidden"
-                            },
-                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
-                                fontSize: "small"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                        direction: "row",
+                        spacing: 0,
+                        children: [
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: "Delete this stage",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    onClick: onDelete,
+                                    sx: {
+                                        visibility: value[0] ? "visible" : "hidden"
+                                    },
+                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
+                            }),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                                title: showOutput ? "Hide stage output" : "Show stage output",
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                                    onClick: ()=>setShowOutput(!showOutput),
+                                    sx: {
+                                        visibility: value[0] ? "visible" : "hidden"
+                                    },
+                                    children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
+                                        fontSize: "small"
+                                    })
+                                })
                             })
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: showOutput ? "Hide stage output" : "Show stage output",
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
-                            onClick: ()=>setShowOutput(!showOutput),
-                            sx: {
-                                visibility: value[0] ? "visible" : "hidden"
-                            },
-                            children: showOutput ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b077eda8e4d472bc$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $47e9a2a37b32c3e4$export$2e2bcd8739ae039), {
-                                fontSize: "small"
-                            })
-                        })
+                        ]
                     })
                 ]
             }),
@@ -35860,465 +36370,6 @@ var $580ee67addf89f1f$export$2e2bcd8739ae039 = $580ee67addf89f1f$var$ListSubhead
 
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
-
-parcelRequire("d4J5n");
-
-
-var $badc5dd72a86ca95$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
-}), "Cancel");
-
-
-
-
-
-
-
-
-
-
-function $a7e913e5e795549c$export$31444911e4ee6fdd(slot) {
-    return (0, $81a4eb5b0cda9a59$export$2e2bcd8739ae039)("MuiChip", slot);
-}
-const $a7e913e5e795549c$var$chipClasses = (0, $8100014debd01602$export$2e2bcd8739ae039)("MuiChip", [
-    "root",
-    "sizeSmall",
-    "sizeMedium",
-    "colorError",
-    "colorInfo",
-    "colorPrimary",
-    "colorSecondary",
-    "colorSuccess",
-    "colorWarning",
-    "disabled",
-    "clickable",
-    "clickableColorPrimary",
-    "clickableColorSecondary",
-    "deletable",
-    "deletableColorPrimary",
-    "deletableColorSecondary",
-    "outlined",
-    "filled",
-    "outlinedPrimary",
-    "outlinedSecondary",
-    "filledPrimary",
-    "filledSecondary",
-    "avatar",
-    "avatarSmall",
-    "avatarMedium",
-    "avatarColorPrimary",
-    "avatarColorSecondary",
-    "icon",
-    "iconSmall",
-    "iconMedium",
-    "iconColorPrimary",
-    "iconColorSecondary",
-    "label",
-    "labelSmall",
-    "labelMedium",
-    "deleteIcon",
-    "deleteIconSmall",
-    "deleteIconMedium",
-    "deleteIconColorPrimary",
-    "deleteIconColorSecondary",
-    "deleteIconOutlinedColorPrimary",
-    "deleteIconOutlinedColorSecondary",
-    "deleteIconFilledColorPrimary",
-    "deleteIconFilledColorSecondary",
-    "focusVisible"
-]);
-var $a7e913e5e795549c$export$2e2bcd8739ae039 = $a7e913e5e795549c$var$chipClasses;
-
-
-
-
-const $5e35e7f068f55b96$var$_excluded = [
-    "avatar",
-    "className",
-    "clickable",
-    "color",
-    "component",
-    "deleteIcon",
-    "disabled",
-    "icon",
-    "label",
-    "onClick",
-    "onDelete",
-    "onKeyDown",
-    "onKeyUp",
-    "size",
-    "variant",
-    "tabIndex",
-    "skipFocusWhenDisabled"
-];
-const $5e35e7f068f55b96$var$useUtilityClasses = (ownerState)=>{
-    const { classes: classes , disabled: disabled , size: size , color: color , iconColor: iconColor , onDelete: onDelete , clickable: clickable , variant: variant  } = ownerState;
-    const slots = {
-        root: [
-            "root",
-            variant,
-            disabled && "disabled",
-            `size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
-            `color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
-            clickable && "clickable",
-            clickable && `clickableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
-            onDelete && "deletable",
-            onDelete && `deletableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
-            `${variant}${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
-        ],
-        label: [
-            "label",
-            `label${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`
-        ],
-        avatar: [
-            "avatar",
-            `avatar${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
-            `avatarColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
-        ],
-        icon: [
-            "icon",
-            `icon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
-            `iconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(iconColor)}`
-        ],
-        deleteIcon: [
-            "deleteIcon",
-            `deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`,
-            `deleteIconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`,
-            `deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(variant)}Color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`
-        ]
-    };
-    return (0, $bd40ddda315b2d8b$export$2e2bcd8739ae039)(slots, (0, $a7e913e5e795549c$export$31444911e4ee6fdd), classes);
-};
-const $5e35e7f068f55b96$var$ChipRoot = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("div", {
-    name: "MuiChip",
-    slot: "Root",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        const { color: color , iconColor: iconColor , clickable: clickable , onDelete: onDelete , size: size , variant: variant  } = ownerState;
-        return [
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles.avatar
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles[`avatar${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: styles[`avatarColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles.icon
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles[`icon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: styles[`iconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(iconColor)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles.deleteIcon
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIconColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
-            },
-            {
-                [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: styles[`deleteIcon${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(variant)}Color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
-            },
-            styles.root,
-            styles[`size${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`],
-            styles[`color${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`],
-            clickable && styles.clickable,
-            clickable && color !== "default" && styles[`clickableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)})`],
-            onDelete && styles.deletable,
-            onDelete && color !== "default" && styles[`deletableColor${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`],
-            styles[variant],
-            styles[`${variant}${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(color)}`]
-        ];
-    }
-})(({ theme: theme , ownerState: ownerState  })=>{
-    const deleteIconColor = (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.text.primary, 0.26);
-    const textColor = theme.palette.mode === "light" ? theme.palette.grey[700] : theme.palette.grey[300];
-    return (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        maxWidth: "100%",
-        fontFamily: theme.typography.fontFamily,
-        fontSize: theme.typography.pxToRem(13),
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 32,
-        color: (theme.vars || theme).palette.text.primary,
-        backgroundColor: (theme.vars || theme).palette.action.selected,
-        borderRadius: 16,
-        whiteSpace: "nowrap",
-        transition: theme.transitions.create([
-            "background-color",
-            "box-shadow"
-        ]),
-        // label will inherit this from root, then `clickable` class overrides this for both
-        cursor: "default",
-        // We disable the focus ring for mouse, touch and keyboard users.
-        outline: 0,
-        textDecoration: "none",
-        border: 0,
-        // Remove `button` border
-        padding: 0,
-        // Remove `button` padding
-        verticalAlign: "middle",
-        boxSizing: "border-box",
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).disabled}`]: {
-            opacity: (theme.vars || theme).palette.action.disabledOpacity,
-            pointerEvents: "none"
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: {
-            marginLeft: 5,
-            marginRight: -6,
-            width: 24,
-            height: 24,
-            color: theme.vars ? theme.vars.palette.Chip.defaultAvatarColor : textColor,
-            fontSize: theme.typography.pxToRem(12)
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarColorPrimary}`]: {
-            color: (theme.vars || theme).palette.primary.contrastText,
-            backgroundColor: (theme.vars || theme).palette.primary.dark
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarColorSecondary}`]: {
-            color: (theme.vars || theme).palette.secondary.contrastText,
-            backgroundColor: (theme.vars || theme).palette.secondary.dark
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarSmall}`]: {
-            marginLeft: 4,
-            marginRight: -4,
-            width: 18,
-            height: 18,
-            fontSize: theme.typography.pxToRem(10)
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            marginLeft: 5,
-            marginRight: -6
-        }, ownerState.size === "small" && {
-            fontSize: 18,
-            marginLeft: 4,
-            marginRight: -4
-        }, ownerState.iconColor === ownerState.color && (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            color: theme.vars ? theme.vars.palette.Chip.defaultIconColor : textColor
-        }, ownerState.color !== "default" && {
-            color: "inherit"
-        })),
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-            WebkitTapHighlightColor: "transparent",
-            color: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / 0.26)` : deleteIconColor,
-            fontSize: 22,
-            cursor: "pointer",
-            margin: "0 5px 0 -6px",
-            "&:hover": {
-                color: theme.vars ? `rgba(${theme.vars.palette.text.primaryChannel} / 0.4)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(deleteIconColor, 0.4)
-            }
-        }, ownerState.size === "small" && {
-            fontSize: 16,
-            marginRight: 4,
-            marginLeft: -4
-        }, ownerState.color !== "default" && {
-            color: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].contrastTextChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].contrastText, 0.7),
-            "&:hover, &:active": {
-                color: (theme.vars || theme).palette[ownerState.color].contrastText
-            }
-        })
-    }, ownerState.size === "small" && {
-        height: 24
-    }, ownerState.color !== "default" && {
-        backgroundColor: (theme.vars || theme).palette[ownerState.color].main,
-        color: (theme.vars || theme).palette[ownerState.color].contrastText
-    }, ownerState.onDelete && {
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
-        }
-    }, ownerState.onDelete && ownerState.color !== "default" && {
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: (theme.vars || theme).palette[ownerState.color].dark
-        }
-    });
-}, ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.clickable && {
-        userSelect: "none",
-        WebkitTapHighlightColor: "transparent",
-        cursor: "pointer",
-        "&:hover": {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.hoverOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.hoverOpacity)
-        },
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette.action.selectedChannel} / calc(${theme.vars.palette.action.selectedOpacity + theme.vars.palette.action.focusOpacity}))` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette.action.selected, theme.palette.action.selectedOpacity + theme.palette.action.focusOpacity)
-        },
-        "&:active": {
-            boxShadow: (theme.vars || theme).shadows[1]
-        }
-    }, ownerState.clickable && ownerState.color !== "default" && {
-        [`&:hover, &.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: (theme.vars || theme).palette[ownerState.color].dark
-        }
-    }), ({ theme: theme , ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({}, ownerState.variant === "outlined" && {
-        backgroundColor: "transparent",
-        border: theme.vars ? `1px solid ${theme.vars.palette.Chip.defaultBorder}` : `1px solid ${theme.palette.mode === "light" ? theme.palette.grey[400] : theme.palette.grey[700]}`,
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).clickable}:hover`]: {
-            backgroundColor: (theme.vars || theme).palette.action.hover
-        },
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: (theme.vars || theme).palette.action.focus
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatar}`]: {
-            marginLeft: 4
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).avatarSmall}`]: {
-            marginLeft: 2
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).icon}`]: {
-            marginLeft: 4
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).iconSmall}`]: {
-            marginLeft: 2
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: {
-            marginRight: 5
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIconSmall}`]: {
-            marginRight: 3
-        }
-    }, ownerState.variant === "outlined" && ownerState.color !== "default" && {
-        color: (theme.vars || theme).palette[ownerState.color].main,
-        border: `1px solid ${theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, 0.7)}`,
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).clickable}:hover`]: {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.hoverOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.hoverOpacity)
-        },
-        [`&.${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).focusVisible}`]: {
-            backgroundColor: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / ${theme.vars.palette.action.focusOpacity})` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, theme.palette.action.focusOpacity)
-        },
-        [`& .${(0, $a7e913e5e795549c$export$2e2bcd8739ae039).deleteIcon}`]: {
-            color: theme.vars ? `rgba(${theme.vars.palette[ownerState.color].mainChannel} / 0.7)` : (0, $5473337acbe386fa$export$58f0f39f63f3cf42)(theme.palette[ownerState.color].main, 0.7),
-            "&:hover, &:active": {
-                color: (theme.vars || theme).palette[ownerState.color].main
-            }
-        }
-    }));
-const $5e35e7f068f55b96$var$ChipLabel = (0, $28cddbc9c45fcc54$export$2e2bcd8739ae039)("span", {
-    name: "MuiChip",
-    slot: "Label",
-    overridesResolver: (props, styles)=>{
-        const { ownerState: ownerState  } = props;
-        const { size: size  } = ownerState;
-        return [
-            styles.label,
-            styles[`label${(0, $bfcdba26e76d4285$export$2e2bcd8739ae039)(size)}`]
-        ];
-    }
-})(({ ownerState: ownerState  })=>(0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        paddingLeft: 12,
-        paddingRight: 12,
-        whiteSpace: "nowrap"
-    }, ownerState.size === "small" && {
-        paddingLeft: 8,
-        paddingRight: 8
-    }));
-function $5e35e7f068f55b96$var$isDeleteKeyboardEvent(keyboardEvent) {
-    return keyboardEvent.key === "Backspace" || keyboardEvent.key === "Delete";
-}
-/**
- * Chips represent complex entities in small blocks, such as a contact.
- */ const $5e35e7f068f55b96$var$Chip = /*#__PURE__*/ $d4J5n.forwardRef(function Chip(inProps, ref) {
-    const props = (0, $5b5887070a10c7f2$export$2e2bcd8739ae039)({
-        props: inProps,
-        name: "MuiChip"
-    });
-    const { avatar: avatarProp , className: className , clickable: clickableProp , color: color = "default" , component: ComponentProp , deleteIcon: deleteIconProp , disabled: disabled = false , icon: iconProp , label: label , onClick: onClick , onDelete: onDelete , onKeyDown: onKeyDown , onKeyUp: onKeyUp , size: size = "medium" , variant: variant = "filled" , tabIndex: tabIndex , skipFocusWhenDisabled: skipFocusWhenDisabled = false  } = props, other = (0, $746383c9ca16b298$export$2e2bcd8739ae039)(props, $5e35e7f068f55b96$var$_excluded);
-    const chipRef = $d4J5n.useRef(null);
-    const handleRef = (0, $3323d1c35e32041d$export$2e2bcd8739ae039)(chipRef, ref);
-    const handleDeleteIconClick = (event)=>{
-        // Stop the event from bubbling up to the `Chip`
-        event.stopPropagation();
-        if (onDelete) onDelete(event);
-    };
-    const handleKeyDown = (event)=>{
-        // Ignore events from children of `Chip`.
-        if (event.currentTarget === event.target && $5e35e7f068f55b96$var$isDeleteKeyboardEvent(event)) // Will be handled in keyUp, otherwise some browsers
-        // might init navigation
-        event.preventDefault();
-        if (onKeyDown) onKeyDown(event);
-    };
-    const handleKeyUp = (event)=>{
-        // Ignore events from children of `Chip`.
-        if (event.currentTarget === event.target) {
-            if (onDelete && $5e35e7f068f55b96$var$isDeleteKeyboardEvent(event)) onDelete(event);
-            else if (event.key === "Escape" && chipRef.current) chipRef.current.blur();
-        }
-        if (onKeyUp) onKeyUp(event);
-    };
-    const clickable = clickableProp !== false && onClick ? true : clickableProp;
-    const component = clickable || onDelete ? (0, $87f61933867dae5e$export$2e2bcd8739ae039) : ComponentProp || "div";
-    const ownerState = (0, $19121be03c962dba$export$2e2bcd8739ae039)({}, props, {
-        component: component,
-        disabled: disabled,
-        size: size,
-        color: color,
-        iconColor: /*#__PURE__*/ $d4J5n.isValidElement(iconProp) ? iconProp.props.color || color : color,
-        onDelete: !!onDelete,
-        clickable: clickable,
-        variant: variant
-    });
-    const classes = $5e35e7f068f55b96$var$useUtilityClasses(ownerState);
-    const moreProps = component === (0, $87f61933867dae5e$export$2e2bcd8739ae039) ? (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        component: ComponentProp || "div",
-        focusVisibleClassName: classes.focusVisible
-    }, onDelete && {
-        disableRipple: true
-    }) : {};
-    let deleteIcon = null;
-    if (onDelete) deleteIcon = deleteIconProp && /*#__PURE__*/ $d4J5n.isValidElement(deleteIconProp) ? /*#__PURE__*/ $d4J5n.cloneElement(deleteIconProp, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(deleteIconProp.props.className, classes.deleteIcon),
-        onClick: handleDeleteIconClick
-    }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $badc5dd72a86ca95$export$2e2bcd8739ae039), {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.deleteIcon),
-        onClick: handleDeleteIconClick
-    });
-    let avatar = null;
-    if (avatarProp && /*#__PURE__*/ $d4J5n.isValidElement(avatarProp)) avatar = /*#__PURE__*/ $d4J5n.cloneElement(avatarProp, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.avatar, avatarProp.props.className)
-    });
-    let icon = null;
-    if (iconProp && /*#__PURE__*/ $d4J5n.isValidElement(iconProp)) icon = /*#__PURE__*/ $d4J5n.cloneElement(iconProp, {
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.icon, iconProp.props.className)
-    });
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)($5e35e7f068f55b96$var$ChipRoot, (0, $19121be03c962dba$export$2e2bcd8739ae039)({
-        as: component,
-        className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.root, className),
-        disabled: clickable && disabled ? true : undefined,
-        onClick: onClick,
-        onKeyDown: handleKeyDown,
-        onKeyUp: handleKeyUp,
-        ref: handleRef,
-        tabIndex: skipFocusWhenDisabled && disabled ? -1 : tabIndex,
-        ownerState: ownerState
-    }, moreProps, other, {
-        children: [
-            avatar || icon,
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($5e35e7f068f55b96$var$ChipLabel, {
-                className: (0, $c62da169c755bd5c$export$2e2bcd8739ae039)(classes.label),
-                ownerState: ownerState,
-                children: label
-            }),
-            deleteIcon
-        ]
-    }));
-});
-var $5e35e7f068f55b96$export$2e2bcd8739ae039 = $5e35e7f068f55b96$var$Chip;
-
-
-
-
 
 
 parcelRequire("d4J5n");
@@ -37147,7 +37198,7 @@ var $cea40509986280c6$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 onChange: (event, value)=>onChangeSelector(event, value),
                 context: context
             }),
-            select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+            select[0] && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 children: [
                     select.slice(1).map((obj, i)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d9035591e653d6fe$export$2e2bcd8739ae039), {
                             value: obj,
@@ -37953,14 +38004,33 @@ var $9e18df9763fa5c16$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 var $026ca9644150778a$export$2e2bcd8739ae039 = ({ selects: selects , index: index , onChange: onChange , onAdd: onAdd , onDelete: onDelete  })=>{
-    return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
-        underline: "always",
-        fontSize: "small",
-        sx: {
-            cursor: "pointer"
-        },
-        onClick: onAdd,
-        children: "Add alternate selector"
+    return selects.length <= 1 ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+        direction: "row",
+        children: [
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e4e6b7d90906fd0f$export$2e2bcd8739ae039), {
+                underline: "always",
+                fontSize: "small",
+                sx: {
+                    cursor: "pointer"
+                },
+                onClick: onAdd,
+                children: "Add alternate selector"
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: "Completely removes the query",
+                sx: {
+                    top: "-4px",
+                    visibility: selects.length > 0 ? "visible" : "hidden"
+                },
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                    size: "small",
+                    onClick: onDelete,
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $841217854c3384ae$export$2e2bcd8739ae039), {
+                        fontSize: "small"
+                    })
+                })
+            })
+        ]
     }) : /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
         children: [
@@ -38758,48 +38828,46 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
                     mt: 2
                 },
                 children: [
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                        style: {
-                            width: "100%"
-                        },
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $f91a29ece8374974$export$2e2bcd8739ae039), {
+                        fullWidth: true,
                         sx: {
-                            display: "flex",
-                            justifyContent: "space-between",
                             bgcolor: "background.paper",
                             borderRadius: 1,
                             p: 1,
                             m: 1
                         },
                         children: [
-                            !!name && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
                                 direction: "row",
-                                children: [
-                                    type && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5fa8eeb99429fe0$export$2e2bcd8739ae039), {
-                                        name: type || "string",
-                                        sx: {
-                                            color: "primary.light",
-                                            position: "relative",
-                                            top: "4px"
-                                        }
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                                        variant: "caption",
-                                        fontSize: "large",
-                                        sx: {
-                                            ml: 1
-                                        },
-                                        children: name || "(array)"
-                                    }),
-                                    repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5fa8eeb99429fe0$export$2e2bcd8739ae039), {
-                                        name: "repeated",
-                                        sx: {
-                                            color: "primary.light",
-                                            ml: 1,
-                                            position: "relative",
-                                            top: "4px"
-                                        }
-                                    }) : null
-                                ]
+                                children: name && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
+                                    children: [
+                                        type && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5fa8eeb99429fe0$export$2e2bcd8739ae039), {
+                                            name: type || "string",
+                                            sx: {
+                                                color: "primary.light",
+                                                position: "relative",
+                                                top: "4px"
+                                            }
+                                        }),
+                                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                                            variant: "caption",
+                                            fontSize: "large",
+                                            sx: {
+                                                ml: 1
+                                            },
+                                            children: name || "(array)"
+                                        }),
+                                        repeated ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f5fa8eeb99429fe0$export$2e2bcd8739ae039), {
+                                            name: "repeated",
+                                            sx: {
+                                                color: "primary.light",
+                                                ml: 1,
+                                                position: "relative",
+                                                top: "4px"
+                                            }
+                                        }) : null
+                                    ]
+                                })
                             }),
                             !single && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $026ca9644150778a$export$2e2bcd8739ae039), {
                                 selects: select,
@@ -38832,13 +38900,17 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
                             onChange: onChangeQuery
                         })
                     }),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
-                        variant: "contained",
-                        sx: {
-                            ml: 1
-                        },
-                        onClick: onSave,
-                        children: "OK"
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Closes the dialog and saves changes",
+                        placement: "left",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ea19855709905d04$export$2e2bcd8739ae039), {
+                            variant: "contained",
+                            sx: {
+                                ml: 1
+                            },
+                            onClick: onSave,
+                            children: "OK"
+                        })
                     })
                 ]
             })
@@ -41323,14 +41395,25 @@ var $4f33b287f8eb5d7f$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 }), "Close");
 
 
-var $7d79c14430128797$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
+var $7d79c14430128797$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose , addNewSelectAction: addNewSelectAction  })=>{
     const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [name, setName] = (0, $d4J5n.useState)();
     const [type, setType] = (0, $d4J5n.useState)();
     const [repeated, setRepeated] = (0, $d4J5n.useState)(false);
     const [error, setError] = (0, $d4J5n.useState)();
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
+    (0, $d4J5n.useEffect)(()=>{
+        if (open) {
+            setName(undefined);
+            setType(undefined);
+            setRepeated(false);
+            setError(undefined);
+        }
+    }, [
+        open
+    ]);
     function handleCommit(event) {
+        if (addNewSelectAction) template.addItem("select", false);
         const { ok: ok , error: error  } = template.addSelect({
             name: name,
             type: type,
@@ -41476,11 +41559,17 @@ var $4e7dac6bc7f95008$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
     const { template: json , setTemplate: setTemplate  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [expanded, setExpanded] = (0, $d4J5n.useState)(false);
     const [selectorDialogOpen, setSelectorDialogOpen] = (0, $d4J5n.useState)(false);
+    const [addNewSelectAction, setAddNewSelectAction] = (0, $d4J5n.useState)(false);
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     function onMenuClick(event, action) {
         const selected = template.selected();
-        if (action === "select" && selected?.type === "action" && selected?.name === "select") setSelectorDialogOpen(true);
-        else {
+        if (action === "select" && selected?.type === "action" && selected?.name === "select") {
+            setAddNewSelectAction(false);
+            setSelectorDialogOpen(true);
+        } else if (action === "select") {
+            setAddNewSelectAction(true);
+            setSelectorDialogOpen(true);
+        } else {
             template.addItem(action);
             setTemplate(template.json());
         }
@@ -41544,6 +41633,7 @@ var $4e7dac6bc7f95008$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                 ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7d79c14430128797$export$2e2bcd8739ae039), {
+                addNewSelectAction: addNewSelectAction,
                 open: selectorDialogOpen,
                 onClose: ()=>setSelectorDialogOpen(false)
             })
@@ -45210,6 +45300,24 @@ var $71b55ed5fcc7e1a3$export$2e2bcd8739ae039 = ({ items: items , columns: column
 
 parcelRequire("d4J5n");
 
+var $f91a29ece8374974$export$2e2bcd8739ae039 = ({ children: children , fullWidth: fullWidth , sx: sx  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+        sx: {
+            ...sx,
+            ...fullWidth ? {
+                width: "100%"
+            } : {
+                width: "auto"
+            },
+            display: "flex",
+            justifyContent: "space-between"
+        },
+        children: children
+    });
+
+
+
+parcelRequire("d4J5n");
+
 
 
 var $d4J5n = parcelRequire("d4J5n");
@@ -46516,6 +46624,7 @@ var $398720e75a8dc768$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
 
 
 
+
 var $be29d9f5149bc99b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3z"
 }), "AccountTree");
@@ -46549,11 +46658,7 @@ var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const { templateFile: templateFile  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-        sx: {
-            display: "flex",
-            justifyContent: "space-between"
-        },
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $f91a29ece8374974$export$2e2bcd8739ae039), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
                 open: sidebarOpen,
@@ -47304,7 +47409,7 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     name: "break",
                     query: obj.query,
                     onChange: (event, value)=>{
-                        obj.query = value;
+                        obj.query = value && value.length > 0 ? value : undefined;
                         onChange(event);
                     }
                 }),
@@ -47631,7 +47736,7 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     name: "error",
                     query: obj.query,
                     onChange: (event, value)=>{
-                        obj.query = value;
+                        obj.query = value && value.length > 0 ? value : undefined;
                         onChange(event);
                     }
                 }),
@@ -47894,16 +47999,13 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
         items: [
             [
                 "name",
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-                    variant: "standard",
-                    size: "small",
-                    placeholder: "(unnamed)",
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0c0a4695417faf18$export$2e2bcd8739ae039), {
+                    validation: "snake-case",
                     value: obj.name,
-                    inputProps: {
-                        readOnly: true
-                    },
-                    sx: {
-                        caretColor: "transparent"
+                    onChange: (event, value)=>{
+                        obj.name = value;
+                        item.template.setSelected(obj);
+                        onChange(event);
                     }
                 }),
                 "Name of selected value, or blank representing a single unnamed value.",
@@ -47918,7 +48020,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     type: obj.type,
                     repeated: obj.repeated,
                     onChange: (event, value)=>{
-                        obj.query = value;
+                        obj.query = value && value.length > 0 ? value : undefined;
                         onChange(event);
                     }
                 }),
@@ -48076,7 +48178,7 @@ var $0141884a14923ee1$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     type: obj.type,
                     repeated: obj.repeated,
                     onChange: (event, value)=>{
-                        obj.query = value;
+                        obj.query = value && value.length > 0 ? value : undefined;
                         onChange(event);
                     }
                 }),

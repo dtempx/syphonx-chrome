@@ -30,12 +30,18 @@ export default ({ open, onClose }: Props) => {
     const { template: json, setTemplate } = useTemplate();
     const [expanded, setExpanded] = useState(false);
     const [selectorDialogOpen, setSelectorDialogOpen] = useState(false);
+    const [addNewSelectAction, setAddNewSelectAction] = useState(false);
 
     const template = new Template(json);
 
     function onMenuClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>, action: string): void {
         const selected = template.selected();
         if (action === "select" && selected?.type === "action" && selected?.name === "select") {
+            setAddNewSelectAction(false);
+            setSelectorDialogOpen(true);
+        }
+        else if (action === "select") {
+            setAddNewSelectAction(true);
             setSelectorDialogOpen(true);
         }
         else {
@@ -99,6 +105,7 @@ export default ({ open, onClose }: Props) => {
             </Dialog>
 
             <AddSelectorDialog
+                addNewSelectAction={addNewSelectAction}
                 open={selectorDialogOpen}
                 onClose={() => setSelectorDialogOpen(false)}
             />

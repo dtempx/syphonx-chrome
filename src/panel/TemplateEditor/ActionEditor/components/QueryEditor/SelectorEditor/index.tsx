@@ -49,7 +49,7 @@ export default ({ value, onChange, context, sx }: Props) => {
             {/* !select[0] && <Overview /> */}
             {/* select[0] && select.length === 1 && <Tasks /> */}
             {select[0] && (
-                <>
+                <Box>
                     {select.slice(1).map((obj, i) =>
                         <FunctionEditor
                             value={obj as syphonx.SelectQueryOp}
@@ -63,7 +63,7 @@ export default ({ value, onChange, context, sx }: Props) => {
                         onChange={(event, obj) => onChangeQueryOp(event, obj, select.length)}
                         sx={{ mt: 1 }}
                     />
-                </>
+                </Box>
             )}
         </Box>
     );

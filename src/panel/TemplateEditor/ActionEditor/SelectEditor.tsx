@@ -3,8 +3,7 @@ import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
-    Switch,
-    TextField
+    Switch
 } from "@mui/material";
 
 import {
@@ -15,6 +14,7 @@ import {
     RegexpField,
     SelectFormatDropdown,
     SelectTypeField,
+    NameField,
     VariantField
 } from "./components";
 
@@ -30,13 +30,14 @@ export default ({ item, onChange }: Props) => {
             items={[
                 [
                     "name",
-                    <TextField
-                        variant="standard"
-                        size="small"
-                        placeholder="(unnamed)"
+                    <NameField
+                        validation="snake-case"
                         value={obj.name}
-                        inputProps={{ readOnly: true }}
-                        sx={{ caretColor: "transparent" }}
+                        onChange={(event, value) => {
+                            obj.name = value;
+                            item.template.setSelected(obj);
+                            onChange(event);                    
+                        }}
                     />,
                     "Name of selected value, or blank representing a single unnamed value.",
                     true,
@@ -50,7 +51,7 @@ export default ({ item, onChange }: Props) => {
                         type={obj.type}
                         repeated={obj.repeated}
                         onChange={(event, value) => {
-                            obj.query = value;
+                            obj.query = value && value.length > 0 ? value : undefined;
                             onChange(event);
                         }}
                     />,

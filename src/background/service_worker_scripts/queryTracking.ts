@@ -1,8 +1,19 @@
 export interface QueryTrackingOptions {
+    /**
+     * The class name of the element to target for which to find selectors.
+     */
     className: string;
+    /**
+     * The maximum number of consecutive nth-of-type or first-of-type selectors allowed in a selector.
+     */
     nthOfTypeRunLimit?: number;
 }
 
+/**
+ * Finds an array of selectors that uniquely identify the element targeted by the specified className.
+ * @param options The options for the query tracking.
+ * @returns An array of selectors that uniquely identify the target element.
+ */
 export function queryTracking({ className, nthOfTypeRunLimit = 3 }: QueryTrackingOptions): string[] {
     const result: string[] = [];
     const targetElement = document.querySelector(`.${className}`);

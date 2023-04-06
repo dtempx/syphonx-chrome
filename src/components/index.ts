@@ -8,6 +8,7 @@ export { default as List } from "./List";
 export { default as MenuList } from "./MenuList";
 export { default as ObjectEditor } from "./ObjectEditor";
 export { default as PropertyGrid, PropertyGridItem } from "./PropertyGrid";
+export { default as SplitPane } from "./SplitPane";
 export { default as TitleBar } from "./TitleBar";
 export { default as ValidateField } from "./ValidateField";
 

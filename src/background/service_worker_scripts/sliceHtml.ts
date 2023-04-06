@@ -1,9 +1,23 @@
 export interface SliceHtmlOptions {
+    /**
+     * A CSS selector that targets the element for the HTML slice.
+     */
     selector: string;
+    /**
+     * The number of parent elements to include in the slice.
+     */
     up?: number;
+    /**
+     * The number of child elements to include in the slice.
+     */
     down?: number;
 }
 
+/**
+ * Slices the HTML document to include the specified element and its ancestors and descendants.
+ * @param options The options for the HTML slice.
+ * @returns A string containing the HTML slice.
+ */
 export function sliceHtml({ selector, up = 3, down = 3 }: SliceHtmlOptions): string {
     const elements = mark();
     const output: string[] = [];

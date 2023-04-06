@@ -1,9 +1,15 @@
+expand formulas in url (example: tags.search)
+open template for this page (one click)
+
 Change add action to a dialog
     Adding a select should prompt for the first selector
 
-query builder: context sensitive function parameters for replace, etc.
+gadget: if just a tag we should look for more
 
-Move lightbulb out
+query builder: context sensitive function parameters for replace, etc.
+change default select to title with h1
+
+Move lightbulb out and highlight on hover
 
 DONE: Bring back non-AI driven selectors
 DONE: Selector hightlighting on hover

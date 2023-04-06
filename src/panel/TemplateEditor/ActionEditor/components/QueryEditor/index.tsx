@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import * as syphonx from "syphonx-lib";
-import { ActionIcon, TitleBar, TransitionUp } from "./components";
+import { ActionIcon, SplitPane, TitleBar, TransitionUp } from "./components";
 import { clone } from "./lib";
 import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";
 
 import {
-    Box,
     Button,
     Dialog,
     DialogActions,
@@ -77,24 +76,22 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
             </DialogTitle>
 
             <DialogContent sx={{ mt: 2 }}>
-                <Box
-                    style={{ width: "100%" }}
+                <SplitPane
+                    fullWidth
                     sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
                         bgcolor: "background.paper",
                         borderRadius: 1,
                         p: 1,
                         m: 1
                     }}
                 >
-                    {!!name &&
-                        <Stack direction="row">
+                    <Stack direction="row">
+                        {name && <>
                             {type && <ActionIcon name={type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />}
                             <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{name || "(array)"}</Typography>
                             {repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
-                        </Stack>
-                    }
+                        </>}
+                    </Stack>
                     {!single &&
                         <QueryPager
                             selects={select}
@@ -104,7 +101,7 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
                             onDelete={onDeleteQuery}
                         />
                     }
-                </Box>
+                </SplitPane>
 
                 <Divider sx={{ mt: 1, mb: 2 }} />
                 <SelectorEditor
@@ -118,7 +115,9 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
                 <Tooltip title="Edit the raw jQuery code, or copy/paste a jQuery expression here">
                     <RawQueryEditor query={select[index]} onChange={onChangeQuery} />
                 </Tooltip>
-                <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>OK</Button>
+                <Tooltip title="Closes the dialog and saves changes" placement="left">
+                    <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>OK</Button>
+                </Tooltip>
             </DialogActions>
         </Dialog>
     );

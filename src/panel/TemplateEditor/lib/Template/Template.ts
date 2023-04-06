@@ -60,9 +60,9 @@ export class Template {
         this.children = this.renderActions(this.obj.actions);
     }
 
-    addItem(action?: TemplateAction): boolean {
+    addItem(action?: TemplateAction, defaultValue = true): boolean {
         if (action) {
-            this.addAction(action);
+            this.addAction(action, defaultValue);
             return true;
         }
         else {
@@ -210,7 +210,7 @@ export class Template {
         return this.obj.tests instanceof Array ? this.obj.tests : [];
     }
 
-    private addAction(action: TemplateAction): void {
+    private addAction(action: TemplateAction, defaultValue = true): void {
         if (!(this.obj.actions instanceof Array))
             this.obj.actions = []; // ensure actions is an array
 
@@ -231,7 +231,7 @@ export class Template {
         else if (action === "scroll")
             obj = { scroll: {} };
         else if (action === "select")
-            obj = { select: [{ name: "value1", query: [["h1"]] }] };
+            obj = !defaultValue ? { select: [] } : { select: [{ name: "value1", query: [["h1"]] }] };
         else if (action === "snooze")
             obj = { snooze: [1, 2] };
         else if (action === "transform")

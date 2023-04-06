@@ -1,9 +1,23 @@
 export interface SelectElementsOptions {
+    /**
+     * An array of CSS selectors that target the elements to select.
+     */
     selectors: string[];
+    /**
+     * A class name that designates elements to appear as selected.
+     */
     className: string;
+    /**
+     * The maximum number of elements to select.
+     */
     limit?: number;
 }
 
+/**
+ * Adds the specified class to elements in the DOM that match a set of selectors.
+ * @param options
+ * @returns An array of strings containing the text content of the selected elements, or null if the element is not a text node.
+ */
 export function selectElements({ selectors, className, limit = 100 } : SelectElementsOptions): Array<string | null> {
     document.querySelectorAll(`.${className}`).forEach(element =>
         element.classList.remove(className));
