@@ -23099,12 +23099,14 @@ $parcel$export($360e2ccc4c1cad7a$exports, "apiKey", () => $360e2ccc4c1cad7a$expo
 $parcel$export($360e2ccc4c1cad7a$exports, "email", () => $360e2ccc4c1cad7a$export$d290fa47940df19d);
 $parcel$export($360e2ccc4c1cad7a$exports, "filepath", () => $360e2ccc4c1cad7a$export$5b7640f3ec0f1c25);
 $parcel$export($360e2ccc4c1cad7a$exports, "kebabCase", () => $360e2ccc4c1cad7a$export$7428e6464c9e15e8);
+$parcel$export($360e2ccc4c1cad7a$exports, "selectorName", () => $360e2ccc4c1cad7a$export$8c663e26335b8c60);
 $parcel$export($360e2ccc4c1cad7a$exports, "snakeCase", () => $360e2ccc4c1cad7a$export$feae9a740c003485);
 $parcel$export($360e2ccc4c1cad7a$exports, "url", () => $360e2ccc4c1cad7a$export$128fa18b7194ef);
 const $360e2ccc4c1cad7a$export$c34289b98f0a8d7e = /^[a-z0-9]{20}$/i;
 const $360e2ccc4c1cad7a$export$d290fa47940df19d = /^[a-z0-9+_.-]+@[a-z0-9.-]+$/i;
 const $360e2ccc4c1cad7a$export$5b7640f3ec0f1c25 = /^[/][a-z][a-z0-9_/]+[.](yaml|json)$/;
 const $360e2ccc4c1cad7a$export$7428e6464c9e15e8 = /^[a-z][a-z0-9-]*$/;
+const $360e2ccc4c1cad7a$export$8c663e26335b8c60 = /^(_{1,2})?[a-z]+[a-z0-9_]*$/i;
 const $360e2ccc4c1cad7a$export$feae9a740c003485 = /^_?[a-z][a-z0-9_]*$/;
 const $360e2ccc4c1cad7a$export$128fa18b7194ef = /^https?:\/\/[^\/]/;
 
@@ -24328,8 +24330,9 @@ parcelRequire("d4J5n");
 
 
 const $0c0a4695417faf18$var$regexps = {
-    "snake-case": (0, $360e2ccc4c1cad7a$exports).snakeCase,
-    "kebab-case": (0, $360e2ccc4c1cad7a$exports).kebabCase
+    "kebab-case": (0, $360e2ccc4c1cad7a$exports).kebabCase,
+    "selector-name": (0, $360e2ccc4c1cad7a$exports).selectorName,
+    "snake-case": (0, $360e2ccc4c1cad7a$exports).snakeCase
 };
 var $0c0a4695417faf18$export$2e2bcd8739ae039 = ({ value: value , validation: validation , onChange: onChange , onHitEnterKey: onHitEnterKey , ...props })=>{
     function handleValidate(event, value) {
@@ -41482,7 +41485,7 @@ var $7d79c14430128797$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0c0a4695417faf18$export$2e2bcd8739ae039), {
                                 label: "Name",
                                 variant: "standard",
-                                validation: "snake-case",
+                                validation: "selector-name",
                                 value: name,
                                 onChange: (event, value)=>setName(value),
                                 onHitEnterKey: handleCommit
@@ -48000,7 +48003,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "name",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $0c0a4695417faf18$export$2e2bcd8739ae039), {
-                    validation: "snake-case",
+                    validation: "selector-name",
                     value: obj.name,
                     onChange: (event, value)=>{
                         obj.name = value;

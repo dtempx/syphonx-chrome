@@ -1,5 +1,13 @@
 expand formulas in url (example: tags.search)
+ability to edit schema from the extension
+test command line
+automated testing for chrome extension
+
+REQUESTS
 open template for this page (one click)
+data explorer
+autosave
+
 
 Change add action to a dialog
     Adding a select should prompt for the first selector

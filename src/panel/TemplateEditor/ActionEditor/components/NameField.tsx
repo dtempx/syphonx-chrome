@@ -3,17 +3,20 @@ import { BaseTextFieldProps } from "@mui/material";
 import { ValidateField } from ".";
 import { regexp } from "./lib";
 
+export type ValidationTypes = "kebab-case" | "snake-case" | "selector-name";
+
 export interface Props extends BaseTextFieldProps {
     value: string | undefined;
     variant?: "standard" | "outlined" | "filled";
-    validation?: "snake-case" | "kebab-case";
+    validation?: ValidationTypes;
     onChange: (event: React.SyntheticEvent, value: string | undefined) => void
     onHitEnterKey?: (event: React.KeyboardEvent) => void;
 }
 
 const regexps = {
-    "snake-case": regexp.snakeCase,
-    "kebab-case": regexp.kebabCase
+    "kebab-case": regexp.kebabCase,
+    "selector-name": regexp.selectorName,
+    "snake-case": regexp.snakeCase
 };
 
 export default ({ value, validation, onChange, onHitEnterKey, ...props }: Props) => {

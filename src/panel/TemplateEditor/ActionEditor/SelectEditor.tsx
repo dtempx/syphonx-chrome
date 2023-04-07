@@ -31,7 +31,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "name",
                     <NameField
-                        validation="snake-case"
+                        validation="selector-name"
                         value={obj.name}
                         onChange={(event, value) => {
                             obj.name = value;

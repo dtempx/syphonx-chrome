@@ -102,7 +102,7 @@ export default ({ open, onClose, addNewSelectAction }: Props) => {
                     <NameField
                         label="Name"
                         variant="standard"
-                        validation="snake-case"
+                        validation="selector-name"
                         value={name}
                         onChange={(event, value) => setName(value)}
                         onHitEnterKey={handleCommit}
