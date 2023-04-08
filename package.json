@@ -1,13 +1,12 @@
 {
   "name": "syphonx-chrome",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "SyphonX is a light weight, no-code web-scraper that runs in any browser",
   "type": "module",
   "scripts": {
-    "compile": "npx tsc",
     "build": "bash ./build.sh",
+    "deploy": "bash ./deploy.sh",
     "clean": "bash ./clean.sh",
-    "start": "npx http-server dist -c-1 -o",
     "test": "node --experimental-specifier-resolution=node ./node_modules/mocha/lib/cli/cli.js --config .mocharc.yml"
   },
   "keywords": [],
@@ -26,7 +25,6 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "events": "^3.3.0",
-    "http-server": "^14.1.1",
     "https-browserify": "^1.0.0",
     "jsdom": "^21.1.1",
     "mocha": "^10.2.0",
