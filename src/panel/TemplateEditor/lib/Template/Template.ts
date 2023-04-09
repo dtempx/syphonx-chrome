@@ -1,5 +1,5 @@
 import * as syphonx from "syphonx-lib";
-import { clone, omit } from "..";
+import { clone, evaluateFormula, isFormula, omit } from "..";
 import defaultTemplate from "./default-template.json";
 
 import { TemplateItem } from "./TemplateItem";
@@ -118,6 +118,13 @@ export class Template {
 
     empty(): boolean {
         return this.children.length === 0;
+    }
+
+    async expandUrl(): Promise<string | undefined> {
+        let url = this.obj.url;
+        if (isFormula(url))
+            url = await evaluateFormula(url!.slice(1, -1).trim(), this.obj.params);
+        return url;
     }
 
     file(): string {

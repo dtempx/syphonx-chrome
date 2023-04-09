@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
-import { background, regexp, Template } from "./lib";
+import { background, evaluateFormula, isFormula, regexp, validateFormula, Template } from "./lib";
 import { PropertyGrid, SwitchedObjectEditor, ValidateField } from "./components";
 
 export default () => {
@@ -26,11 +26,20 @@ export default () => {
                                 setTemplate(template.json());                
                             }}
                             onValidate={(event, value) => {
-                                return value ? regexp.url.test(value) : true;
+                                if (!value)
+                                    return true;
+                                else if (isFormula(value))
+                                    return validateFormula(value);
+                                else
+                                    return regexp.url.test(value);
                             }}
                         />
                         <IconButton
-                            onClick={() => background.inspectedWindow.navigate(template.obj.url!)}
+                            onClick={async () => {
+                                const url = await template.expandUrl();
+                                if (url)
+                                    background.inspectedWindow.navigate(url);
+                            }}
                             sx={{ visibility: template.obj.url ? "visible" : "hidden" }}
                         >
                             <Tooltip title="Navigate to the url">

@@ -1,20 +1,4 @@
-import {
-    applyTemplate,
-    disableTracking,
-    enableTracking,
-    queryTracking,
-    selectElements,
-    sliceHtml
-} from "./service_worker_scripts";
-
-const scriptMap: Record<string, Function> = {
-    "applyTemplate": applyTemplate,
-    "disableTracking": disableTracking,
-    "enableTracking": enableTracking,
-    "queryTracking": queryTracking,
-    "selectElements": selectElements,
-    "sliceHtml": sliceHtml
-};
+import * as scripts from "./service_worker_scripts";
 
 /**
  * Executes a function in the context of the page corresponding to a tabId.
@@ -132,7 +116,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         })();
         return true; // response will be sent asynchronously
     }
-    else if (!Object.keys(scriptMap).includes(message.key)) {
+    else if (!Object.keys(scripts).includes(message.key)) {
         console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });
         return false; // immediate synchronous response
     }
@@ -140,7 +124,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     (async () => {
         try {
             await injectAll(message.tabId);
-            const result = await executeScript(message.tabId, scriptMap[message.key] as () => void, ...message.params);
+            const script = (scripts as unknown as Record<string, () => void>)[message.key];
+            const result = await executeScript(message.tabId, script, ...message.params);
+            //const result = await executeScript(message.tabId, scripts[message.key] as () => void, ...message.params);
             console.log("MESSAGE", message.key, { message, sender, result });
             sendResponse({ result });
         }

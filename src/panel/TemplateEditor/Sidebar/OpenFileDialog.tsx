@@ -46,9 +46,12 @@ export default ({ open, onClose }: Props) => {
             const json = await cloud.read(file);
             const template = new Template(json);
 
-            if (autoOpen && template.obj.url) {
-                background.inspectedWindow.navigate(template.obj.url);
-                await sleep(1000); // give some time for page to navigate before setting template
+            if (autoOpen) {
+                const url = await template.expandUrl();
+                if (url) {
+                    background.inspectedWindow.navigate(url);
+                    await sleep(1000); // give some time for page to navigate before setting template    
+                }
             }
 
             setTemplate(template.json());

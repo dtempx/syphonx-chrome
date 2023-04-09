@@ -7,7 +7,7 @@ REQUESTS
 open template for this page (one click)
 data explorer
 autosave
-
+auto open extension from url param
 
 Change add action to a dialog
     Adding a select should prompt for the first selector

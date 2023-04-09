@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>window.addEventListener("message", (event)=>{
+    const message = {};
+    try {
+        const { formula , params  } = event.data;
+        const keys = Object.keys(params);
+        const values = keys.map((key)=>params[key]);
+        const fn = new Function(...keys, `return ${formula}`);
+        message.result = fn(...values);
+    } catch (err) {
+        message.error = err;
+    }
+    event.source.window.postMessage(message, event.origin);
+});
+
+</script>        
+    </head>
+</html>

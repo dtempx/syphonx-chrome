@@ -1,5 +1,4 @@
 node_modules
-tmp
 *.js
 *.js.map
 *.d.ts
@@ -10,7 +9,7 @@ tmp
 .parcel-cache
 .DS_Store
 Thumbs.db
-private
+dist/syphonx.zip
 !dist/*.js
 !dist/*.js.map
 !src/scripts/syphonx.d.ts
