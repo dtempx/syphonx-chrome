@@ -13,22 +13,30 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    return item ? (
+    const obj = item?.obj as [number, number];
+    return obj ? (
         <AdvancedPropertyGrid
             items={[
                 [
                     "timeframe",
                     <Stack direction="row">
                         <NumberRangeField
-                            value={item.obj as [number, number]}
+                            value={obj}
                             onChange={(event, value) => {
-                                item!.obj = value || [1];
-                                onChange(event);
+                                if (value) {
+                                    if (value[0] !== undefined)
+                                        obj[0] = value[0];
+                                    if (value[1] !== undefined)
+                                        obj[1] = value[1];
+                                    if (value[1] === undefined)
+                                        obj.splice(1, 1);
+                                    onChange(event);
+                                }
                             }}
                         />
                         <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
                     </Stack>,
-                    "Defines timeframe to snooze in seconds. Specify eitehr a single number or a range to define a random interval.",
+                    "Defines timeframe to snooze in seconds. Specify either a single number or a range to define a random interval.",
                     true
                 ]
             ]}

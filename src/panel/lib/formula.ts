@@ -32,7 +32,7 @@ export function validateFormula(formula: string): boolean {
 }
 
 function iffy(fn: Function, ...params: unknown[]): string {
-    return `(${fn.toString().replace(/^function [^(]*/, "function ")})(${JSON.stringify(params).slice(1, -1)})`;
+    return `(${fn.toString()})(${JSON.stringify(params).slice(1, -1)})`;
 }
 
 function _evaluateFormula(formula: string, params: Record<string, unknown>): unknown {
