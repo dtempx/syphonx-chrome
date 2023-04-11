@@ -1,33 +1,43 @@
-expand formulas in url (example: tags.search)
-ability to edit schema from the extension
-test command line
-automated testing for chrome extension
+log output view
+Data contract matching (product-page, search-page, etc.)
 
 REQUESTS
 open template for this page (one click)
+auto open extension from url param
 data explorer
 autosave
-auto open extension from url param
+add selector dialog uses data contract when available (user doesn't have to type names)
 
-Change add action to a dialog
-    Adding a select should prompt for the first selector
+BUG: a directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
+BUG: entering values for snooze don't persist
+
+iframes
+
+formula evaluations don't work in chrome extension (mv3 sandbox issue)
+
+hightlighting selectors on page when hovering over tree
+
+query builder: selectMultiple
+query builder: text selection :has
+
+ability to edit schema from the extension
+automated testing for chrome extension
+
+URL param to autoopen extension
+case action { "case": [ { "when": "...", "actions": [...] } ] }
+sendkeys action for example to hit escape key to close a dialog
+
 
 gadget: if just a tag we should look for more
 
-query builder: context sensitive function parameters for replace, etc.
-change default select to title with h1
-
 Move lightbulb out and highlight on hover
 
-DONE: Bring back non-AI driven selectors
-DONE: Selector hightlighting on hover
-
-Data contract matching (product-page, search-page, etc.)
-Welcome dialog with prompt for email
-
+FTUI welcome dialog with prompt for email
 
 
 persist folder you are in
+
+ENGINE CHANGES
 add on option to error so we can break on any or none or any
 break on=any what does that mean
 
@@ -36,25 +46,13 @@ Test urls
 Test runner
 Test groups
 
-URL param to autoopen extension
-
-DONE: Fix open template busy status
-DONE: Typing filter for open file
-DONE: PropertyGridEditor for template and yield params
-DONE: action scroll to element
-DONE: cloud log endpoint (not deployed)
-
 
 update is available message
 allow _ in file names in cloud storage
 
-case action { "case": [ { "when": "...", "actions": [...] } ] }
-sendkeys action for example to hit escape key to close a dialog
 
 
-show contextual info in tree after name
-
-add field dialog that shows a picker from the contract or sets name, type, repeated and validates not a duplicate
+show more contextual info in tree after name
 
 add icon button to copy inspected window url to texbox in template settings
 view unlinked fields from contract
@@ -79,9 +77,6 @@ save manifest version in template
 
 query builder: context sensitive function parameters for replace, etc.
 query builder: ability to set outer context for a query
-query builder: remove duplicate alternate selector suggestions
-query builder: selectMultiple
-query builder: text selection :has
 query builder: arrange order of functions
 query builder: refactor to enable inter-function view state
 query builder: jump to node in elements panel
@@ -170,6 +165,16 @@ multiple DOM hits with repeated=false should be flagged
 
 
 DONE
+Bring back non-AI driven selectors
+query builder: context sensitive function parameters for replace, etc.
+Change add action to a dialog, adding a select should prompt for the first selector
+Fix open template busy status
+Typing filter for open file
+add field dialog that shows a picker from the contract or sets name, type, repeated and validates not a duplicate
+PropertyGridEditor for template and yield params
+action scroll to element
+cloud log endpoint (not deployed)
+expand formulas in url (example: tags.search)
 chrome extension setup: react, mui, build, panel
 integrate syphonx engine
 real time updates

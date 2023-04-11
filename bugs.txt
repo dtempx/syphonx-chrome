@@ -1,30 +1,29 @@
-add selector dialog should reset type and repeated settings every timestamp
+P1:
+a directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
+entering values for snooze don't persist
 
+P2:
 regex's display with single back slashes in query editor but with double back slashes in property sheet
-clearing selector in query builder should delete the query
-
 File chip doesn't change when saving to a different file name
 Save template dialog path should change in edit box as different folders are clicked
 Prompt for unsaved changes
 Add button should not scroll within the tree view
 Toolbar should not scroll out of view in data view
 Add button blocks menu on selected item
-A directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
 File open doesn't display busy status when opening template
-
 selector hilighting not working on coned
 selector gadget crashes on coned
 selector gadget not picking up semantic names on cwlaw
-entering values for snooze don't persist
-
 can't create a union unless type=object, union should be supported for any type
 duplicating a property doesn't change the name and screws up selection
-
 choosing subselect with type=object and name=(none) causes rendering error... Cannot read properties of null (reading 'key')
 when filename is too long it pushes the right aligned controls out of the viewport in the appbar
 
-FIXED number the union cases
-FIXED: add button when union is selected doesn't add another union case
-FIXED: query shouldn't be required if union is defined
-FIXED: query shouldn't be required if type=object
-FIXED: warnings on union don't bubble up to the property
+FIXED:
+add selector dialog should reset type and repeated settings every timestamp
+clearing selector in query builder should delete the query
+number the union cases
+add button when union is selected doesn't add another union case
+query shouldn't be required if union is defined
+query shouldn't be required if type=object
+warnings on union don't bubble up to the property

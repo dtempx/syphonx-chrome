@@ -14,13 +14,14 @@ import {
 import {
     ReportProblem as ErrorIcon,
     DataObject as JsonIcon,
+    Biotech as LogIcon,
     RawOn as RawIcon,
     Autorenew as RefreshIcon,
     DoDisturb as ResetIcon,
     GridOn as TableIcon
 } from "@mui/icons-material";
 
-export type DataViewMode = "table" | "json" | "errors" | "raw";
+export type DataViewMode = "table" | "json" | "errors" | "log" | "raw";
 
 export interface Props {
     mode: DataViewMode;
@@ -78,6 +79,9 @@ export default ({ mode, onChange } : Props) => {
                 </Tooltip>
                 <Tooltip title="json" onClick={event => onChange(event, "json")}>
                     <IconButton size="small" color={mode === "json" ? "primary" : "default"}><JsonIcon fontSize="small" /></IconButton>
+                </Tooltip>
+                <Tooltip title="log" onClick={event => onChange(event, "log")}>
+                    <IconButton size="small" color={mode === "log" ? "primary" : "default"}><LogIcon fontSize="small" /></IconButton>
                 </Tooltip>
                 <Tooltip title="raw" onClick={event => onChange(event, "raw")}>
                     <IconButton size="small" color={mode === "raw" ? "primary" : "default"}><RawIcon fontSize="small" /></IconButton>

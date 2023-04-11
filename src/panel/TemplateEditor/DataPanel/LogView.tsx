@@ -1,15 +1,15 @@
 import React from "react";
 import { TextField } from "@mui/material";
 import { useTemplate } from "./context";
-import * as syphonx from "syphonx-lib";
 
 export default () => {
     const { extract } = useTemplate();
+    const { log } = extract || {};
     return (
         <TextField
             multiline
             fullWidth
-            value={extract && extract.data ? JSON.stringify(syphonx.unwrap(extract.data), null, 2) : ""}
+            value={log}
             variant="outlined"
             size="small"
             InputProps={{

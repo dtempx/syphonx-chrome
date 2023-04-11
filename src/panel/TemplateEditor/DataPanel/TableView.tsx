@@ -7,7 +7,7 @@ import * as syphonx from "syphonx-lib";
 export default () => {
     const { extract } = useTemplate();
     const keys = extract && isObject(extract.data) ? Object.keys(extract.data) : [];
-    const obj = (extract && isObject(extract.data) ? syphonx.removeDOMRefs(extract.data) : {}) as Record<string, string>;
+    const obj = (extract && isObject(extract.data) ? syphonx.unwrap(extract.data) : {}) as Record<string, string>;
 
     return (
         <TableContainer>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ErrorView from "./ErrorView";
 import JsonView from "./JsonView";
+import LogView from "./LogView";
 import ResponseView from "./ResponseView";
 import TableView from "./TableView";
 import Toolbar, { DataViewMode } from "./Toolbar";
@@ -20,6 +21,9 @@ export default () => {
             </Box>
             <Box component="div" display={mode === "json" ? "block" : "none"}>
                 <JsonView />
+            </Box>
+            <Box component="div" display={mode === "log" ? "block" : "none"}>
+                <LogView />
             </Box>
             <Box component="div" display={mode === "raw" ? "block" : "none"}>
                 <ResponseView />

@@ -8,7 +8,7 @@ import {
 
 export const active = typeof chrome === "object" && chrome.devtools;
 
-export async function applyTemplate(template: syphonx.Template): Promise<syphonx.ExtractResult | undefined> {
+export async function applyTemplate(template: syphonx.Template & { debug?: boolean }): Promise<syphonx.ExtractResult | undefined> {
     const { result } = await sendMessage<{ result: syphonx.ExtractResult }>("applyTemplate", template);
     return result;
 }
@@ -66,11 +66,27 @@ export namespace inspectedWindow {
         return tab;
     }
 
+    export function evaluate<T = any>(expression: string): Promise<T> {
+        return new Promise<T>((resolve, reject) => {
+            chrome.devtools.inspectedWindow.eval(expression, (result, err) => {
+                if (err)
+                    reject(err);
+                else
+                    resolve(result as T);
+            });
+        });
+    }
+
     export async function navigate(url: string): Promise<void> {
         await sendMessage("navigate", url);
     }
 
     export async function reload(): Promise<void> {
         await sendMessage("reload");
+    }
+
+    export async function url(): Promise<string> {
+        const tab = await activeTab();
+        return tab.url || "";
     }
 }

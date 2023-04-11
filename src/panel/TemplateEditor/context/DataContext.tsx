@@ -38,7 +38,9 @@ export function DataProvider({ children }: { children: JSX.Element }) {
             setRefreshing(true);
             if (reload)
                 await background.inspectedWindow.reload();
-            const result = await applyTemplate(template, contract);
+
+            const url = await background.inspectedWindow.url();
+            const result = await applyTemplate({ template, contract, url, debug: true });
             setExtract(result);
         }
         setRefreshing(false);

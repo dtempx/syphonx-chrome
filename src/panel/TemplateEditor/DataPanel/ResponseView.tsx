@@ -4,13 +4,17 @@ import { useTemplate } from "./context";
 
 export default () => {
     const { extract } = useTemplate();
-    const { actions, ...response } = extract || {};
+    const { actions, log, ...response } = extract || {};
     return (
         <TextField
             multiline
             fullWidth
             value={response ? JSON.stringify(response, null, 2) : ""}
             variant="outlined"
+            size="small"
+            InputProps={{
+                style: { fontSize: "x-small" }
+            }}
         />
     );
 }
