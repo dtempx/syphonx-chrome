@@ -327,7 +327,7 @@ export class Template {
                     const clickObj = obj as syphonx.Click;
                     item.children = clickObj.waitfor ? [this.renderClickWaitfor(clickObj.waitfor, item)] : [];
                     if (!clickObj.query && !clickObj.waitfor)
-                        item.alert = "query or waitfor required";
+                        item.alert = "A query or waitfor must be specified.";
                     item.conditional = !!clickObj.when;
                     item.active = clickObj.active;
                 }
@@ -338,17 +338,17 @@ export class Template {
                     }
                     else {
                         item.children = [new Placeholder(item)];
-                        item.alert = "action required";
+                        item.alert = "At lest one action must be specified.";
                     }
                     if (!eachObj.query)
-                        item.alert = "query required";
+                        item.alert = "A query must be specified.";
                     item.conditional = !!eachObj.when;
                     item.active = eachObj.active;
                 }
                 else if (name === "error") {
                     const errorObj = obj as syphonx.Error;
                     if (!errorObj.message) {
-                        item.alert = "uninitialized";
+                        item.alert = "A message must be specified.";
                     }
                     item.conditional = !!errorObj.when;
                     item.active = errorObj.active;
@@ -360,7 +360,7 @@ export class Template {
                     }
                     else {
                         item.children = [new Placeholder(item)];
-                        item.alert = "action required";
+                        item.alert = "At least one action must be specified.";
                     }
                     //item.conditional = !!repeatObj.when; // todo
                     //item.active = repeatObj.active; // todo
@@ -368,7 +368,7 @@ export class Template {
                 else if (name === "scroll") {
                     const scrollObj = obj as syphonx.Scroll;
                     if (!scrollObj.target && !scrollObj.query) {
-                        item.alert = "query required";
+                        item.alert = "A query must be specified.";
                     }
                     item.conditional = !!scrollObj.when;
                 }
@@ -389,7 +389,7 @@ export class Template {
                     const waitforObj = obj as syphonx.WaitFor;
                     item.children = this.renderSelect(waitforObj.select as syphonx.Select[], item);
                     if (!waitforObj.query && !waitforObj.select)
-                        item.alert = "query or select required";
+                        item.alert = "A query or select must be specified.";
                     item.conditional = !!waitforObj.when;
                     item.active = waitforObj.active;
                 }
@@ -400,7 +400,7 @@ export class Template {
                 }
 
                 if (item.children && item.children.some(child => child.alert)) {
-                    item.alert = "One or more child items has an alert.";
+                    item.alert = "There is a problem with one or more subordinate items. Expand this item to find and resolve the problem.";
                 }
 
                 return item;
@@ -445,12 +445,12 @@ export class Template {
             const parentObj = item.parent?.obj as syphonx.Select;
             if (parentObj?.type === "object") {
                 item.children = [new Placeholder(item)];
-                item.alert = "select required";
+                item.alert = "A sub-select must be specified.";
             }
         }
 
         if (item.children && item.children.some(child => child.alert))
-            item.alert = "One or more child items has an alert.";
+            item.alert = "There is a problem with one or more subordinate items. Expand this item to find and resolve the problem.";
 
         return item;
     }
@@ -478,16 +478,16 @@ export class Template {
                 item.children = this.renderSubselect(select, item);
 
                 if (!select.name && item.collection!.length > 1)
-                    item.alert = "unnamed item must be exclusive";
+                    item.alert = "An unnamed item must be the only item within the group. Either remove this item or remove all of the other items.";
 
                 if (!select.query && !select.value && !select.union && select.type !== "object")
-                    item.alert = "query or value required";
+                    item.alert = "A query or value must be specified.";
 
                 if (select.type === "object" && !select.select && !select.pivot && !select.union)
-                    item.alert = "object type requires additional initialization";
+                    item.alert = "Choose whether to create a sub-select or a union.";
 
                 if (item.children && item.children.some(child => child.alert))
-                    item.alert = "One or more child items has an alert.";
+                    item.alert = "There is a problem with one or more subordinate items. Expand this item to find and resolve the problem.";
 
                 return item;
             });
@@ -530,7 +530,7 @@ export class Template {
                 });
 
                 if (!transform.query)
-                    item.alert = "query required";
+                    item.alert = "A query must be specified.";
 
                 if (item.children && item.children.some(child => child.alert))
                     item.alert = "One or more child items has an alert.";
@@ -564,12 +564,12 @@ export class Template {
                 const parentObj = item.parent?.obj as syphonx.Select;
                 if (parentObj?.type === "object") {
                     item.children = [new Placeholder(item)];
-                    item.alert = "select required";
+                    item.alert = "A sub-select must be specified.";
                 }
             }
 
             if (item.children && item.children.some(child => child.alert))
-                item.alert = "One or more child items has an alert.";
+                item.alert = "There is a problem with one or more subordinate items. Expand this item to find and resolve the problem.";
 
             return item;
         });

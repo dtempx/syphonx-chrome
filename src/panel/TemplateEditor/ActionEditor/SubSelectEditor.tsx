@@ -37,7 +37,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "A CSS selector or jQuery expression that determines what data is selected on the page.",
                     true,
-                    !obj.query && !obj.value ? "query or value required" : ""
+                    !obj.query && !obj.value ? "A query or value must be specified." : ""
                 ],
                 [
                     "value",

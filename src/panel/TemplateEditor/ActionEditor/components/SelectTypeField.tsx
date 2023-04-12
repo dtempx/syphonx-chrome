@@ -4,19 +4,13 @@ import SelectTypeDropdown from "./SelectTypeDropdown";
 import * as syphonx from "syphonx-lib";
 
 import {
+    Button,
+    ButtonGroup,
     Stack,
     SxProps,
     Theme,
-    ToggleButton,
-    ToggleButtonGroup,
     Tooltip
 } from "@mui/material";
-
-import {
-    HighlightAlt as SelectIcon,
-    PivotTableChart as PivotIcon,
-    Mediation as UnionIcon
-} from "@mui/icons-material";
 
 export interface Props {
     item: TemplateItem;
@@ -50,7 +44,7 @@ export default ({ item, onChange, sx }: Props) => {
         onChange(event);
     }
 
-    function handleChangeMode(event: React.MouseEvent<HTMLElement, MouseEvent>, value: any): void {
+    function handleChangeMode(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, value: string): void {
         const obj = item?.obj as syphonx.Select;
         const subitem = (obj.select||[])[0] || obj.pivot || (obj.union||[])[0] || {};
         if (value === "select") {
@@ -78,29 +72,19 @@ export default ({ item, onChange, sx }: Props) => {
                 onChange={handleChangeType}
             />
             {type === "object" && (
-                <ToggleButtonGroup
-                    value={mode}
-                    size="small"
-                    exclusive
-                    onChange={handleChangeMode}
-                    sx={{ ml: 1 }}
-                >
-                    <ToggleButton value="select">
-                        <Tooltip title="sub-select">
-                            <SelectIcon fontSize="small" />
-                        </Tooltip>
-                    </ToggleButton>
-                    <ToggleButton value="pivot">
-                        <Tooltip title="pivot">
-                            <PivotIcon fontSize="small" />    
-                        </Tooltip>                        
-                    </ToggleButton>
-                    <ToggleButton value="union">
-                        <Tooltip title="union">
-                            <UnionIcon fontSize="small" />                            
-                        </Tooltip>
-                    </ToggleButton>
-                </ToggleButtonGroup>
+                <ButtonGroup size="small" sx={{ ml: 1 }}>
+                    <Tooltip title="Create a group of sub-selectors that are nested under this selector. Choose this option when dealing with information that's organized very consistently, or if you're uncertain which option to choose.">
+                        <Button variant={mode === "select" ? "contained" : "outlined"} onClick={event => handleChangeMode(event, "select")} sx={{ fontSize: "x-small" }}>SUB-SELECT</Button>
+                    </Tooltip>
+                    {/*
+                    <Tooltip title="Create a selector that pivots off of this selector.">
+                        <Button variant={mode === "pivot" ? "contained" : "outlined"} onClick={event => handleChangeMode(event, "pivot")} sx={{ fontSize: "x-small" }}>PIVOT</Button>
+                    </Tooltip>
+                    */}
+                    <Tooltip title="Create multiple variants of sub-selector groups that are nested under this selector. Choose this option when dealing with information that's organized multiple different ways.">
+                        <Button variant={mode === "union" ? "contained" : "outlined"} onClick={event => handleChangeMode(event, "union")} sx={{ fontSize: "x-small" }}>UNION</Button>
+                    </Tooltip>
+                </ButtonGroup>
             )}
         </Stack>
     );

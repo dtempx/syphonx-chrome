@@ -3,11 +3,11 @@ import { TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
+    Button,
+    ButtonGroup,
     Stack,
     Switch,
     TextField,
-    ToggleButton,
-    ToggleButtonGroup,
     Tooltip,
     Typography
 } from "@mui/material";
@@ -79,27 +79,17 @@ export default ({ item, onChange }: Props) => {
                 ],
                 [
                     "mode",
-                    <ToggleButtonGroup
-                        value={mode}
-                        size="small"
-                        exclusive
-                        onChange={handleChangeMode}
-                        sx={{ ml: 1 }}
-                    >
-                        <ToggleButton value="query">
-                            <Tooltip title="Wait for a single DOM query result">
-                                <QueryIcon fontSize="small" />
-                            </Tooltip>
-                        </ToggleButton>
-                        <ToggleButton value="select">
-                            <Tooltip title="Wait for the result of any, all, or none DOM queries produced from a sub-select">
-                                <SelectIcon fontSize="small" />
-                            </Tooltip>
-                        </ToggleButton>
-                    </ToggleButtonGroup>,
+                    <ButtonGroup size="small">
+                        <Tooltip title="Wait for a single query result. Choose this option to wait for a single thing to appear on the page.">
+                            <Button variant={mode === "query" ? "contained" : "outlined"} onClick={event => handleChangeMode(event, "query")} sx={{ fontSize: "x-small" }}>QUERY</Button>
+                        </Tooltip>
+                        <Tooltip title="Wait for the result of multiple query results from a sub-select. Choose this option if there is more than one thing on the page to wait for, or if it is necessary to wait for something to disappear.">
+                            <Button variant={mode === "select" ? "contained" : "outlined"} onClick={event => handleChangeMode(event, "select")} sx={{ fontSize: "x-small" }}>SUB-SELECT</Button>
+                        </Tooltip>
+                    </ButtonGroup>,
                     "Determines whether to wait for a single DOM query, or the result of a multiple DOM query from a sub-select",
                     true,
-                    mode === undefined ? "query or select required" : ""
+                    mode === undefined ? "Choose query or sub-select." : ""
                 ],
                 [
                     "query",
@@ -113,7 +103,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "A CSS selector or jQuery expression that determines the content to wait for on the page. Only used when mode=query.",
                     mode === "query",
-                    (!obj.query || JSON.stringify(obj.query) === `[[""]]`) && !obj.select ? "query or select required" : ""
+                    (!obj.query || JSON.stringify(obj.query) === `[[""]]`) && !obj.select ? "Choose query or sub-select." : ""
                 ],
                 [
                     "on",

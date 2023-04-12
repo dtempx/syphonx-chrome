@@ -41,7 +41,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "Name of selected value, or blank representing a single unnamed value.",
                     true,
-                    !obj.name && item.collection!.length > 1 ? "unnamed item must be exclusive" : ""
+                    !obj.name && item.collection!.length > 1 ? "An unnamed item must be the only item within the group. Either remove this item or remove all of the other items." : ""
                 ],
                 [
                     "query",
@@ -57,7 +57,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "A CSS selector or jQuery expression that determines what data is selected on the page.",
                     true,
-                    !obj.query && !obj.value && obj.type !== "object" ? "query or value required" : ""
+                    !obj.query && !obj.value && obj.type !== "object" ? "A query or value must be specified." : ""
                 ],
                 [
                     "type",
@@ -67,7 +67,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "Determines the type of the property value.",
                     true,
-                    obj.type === "object" && !obj.select && !obj.pivot && !obj.union ? "choose mode" : ""
+                    obj.type === "object" && !obj.select && !obj.pivot && !obj.union ? "Choose whether to create a sub-select or a union." : ""
                 ],
                 [
                     "repeated",

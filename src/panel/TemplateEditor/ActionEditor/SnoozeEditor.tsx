@@ -36,7 +36,7 @@ export default ({ item, onChange }: Props) => {
                         />
                         <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
                     </Stack>,
-                    "Defines timeframe to snooze in seconds. Specify either a single number or a range to define a random interval.",
+                    "Defines timeframe to snooze in seconds. Specify either an exact number or a range to define a random interval. Consider using a waitfor instead of a snooze to look for a specific condition to be met on the page.",
                     true
                 ]
             ]}
