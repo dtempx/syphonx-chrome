@@ -30,6 +30,8 @@ export default ({ open, onClose }: Props) => {
         setAdvanced,
         apiKey,
         setApiKey,
+        autoScroll,
+        setAutoScroll,
         autoOpen,
         setAutoOpen,
         debug,
@@ -86,7 +88,7 @@ export default ({ open, onClose }: Props) => {
                             />
                         ],
                         [
-                            <Tooltip title="Automatically opens the template default URL if enabled.">
+                            <Tooltip title="Automatically open the template default URL if enabled.">
                                 <Typography>Auto-open template default URL</Typography>
                             </Tooltip>,
                             <Switch
@@ -96,7 +98,17 @@ export default ({ open, onClose }: Props) => {
                             />
                         ],
                         [
-                            <Tooltip title="Shows or hides advanced settings.">
+                            <Tooltip title="Automatically scroll the target element into view on the page when hovering over the tree view.">
+                                <Typography>Auto-scroll target into view</Typography>
+                            </Tooltip>,
+                            <Switch
+                                size="small"
+                                checked={autoScroll}
+                                onChange={() => setAutoScroll(!autoScroll)}
+                            />
+                        ],
+                        [
+                            <Tooltip title="Show or hide advanced settings.">
                                 <Typography>Advanced mode</Typography>
                             </Tooltip>,
                             <Switch
@@ -106,7 +118,7 @@ export default ({ open, onClose }: Props) => {
                             />
                         ],
                         [
-                            <Tooltip title="Shows or hides additional debug info.">
+                            <Tooltip title="Show or hide additional debug info.">
                                 <Typography>Debug mode</Typography>
                             </Tooltip>,
                             <Switch
@@ -116,7 +128,7 @@ export default ({ open, onClose }: Props) => {
                             />
                         ],
                         [
-                            <Tooltip title="Overrides the cloud service URL for development and testing purposes.">
+                            <Tooltip title="Override the cloud service URL for development and testing purposes.">
                                 <Typography>Cloud Service URL</Typography>
                             </Tooltip>,
                             <ValidateField

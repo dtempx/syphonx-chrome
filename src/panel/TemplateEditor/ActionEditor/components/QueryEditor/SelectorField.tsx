@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { background, cloud } from "./lib";
-import { useTemplate } from "./context";
+import { TrackButton } from "./components";
 import SelectorOutput from "./SelectorOutput";
 
 import {
     Autocomplete,
-    Button,
     Chip,
     IconButton,
     Stack,
@@ -16,8 +15,6 @@ import {
 } from "@mui/material";
 
 import {
-    LightbulbOutlined as TrackOffIcon,
-    Lightbulb as TrackOnIcon,
     Visibility as ShowOutputIcon,
     VisibilityOff as HideOutputIcon
 } from "@mui/icons-material";
@@ -30,43 +27,11 @@ export interface Props {
 }
 
 export default ({ value, onChange, context, ...props }: Props) => {
-    const { click } = useTemplate();
-    const [tracking, setTracking] = useState(false);
     const [selectors, setSelectors] = useState<string[]>([]);
     const [output, setOutput] = useState<Array<string | null>>([]);
     const [showOutput, setShowOutput] = useState(false);
     const [html, setHtml] = useState("");
     //const [showTooltip, setShowTooltip] = useState(false);
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const selectors = await background.queryTracking({
-                    className: "sx-click",
-                    nthOfTypeRunLimit: 3
-                });
-                if (selectors.length > 0 && selectors[0]) {
-                    setSelectors(selectors);
-                    onChange(new Event("change"), selectors[0]);
-                }                
-                /*
-                const html = await background.sliceHtml({ selector: ".sx-click", up: 6, down: 3 });
-                setHtml(html);
-                if (html) {
-                    const selector = await cloud.autoselect(html, context);
-                    if (selector) {
-                        setSelectors([selector]);
-                        onChange(new Event("change"), selector);
-                    }
-                }
-                */
-            }
-            catch (err) {
-                console.error(err);
-                debugger;
-            }
-        })();
-    }, [click]);
 
     useEffect(() => {
         if (value) {
@@ -93,16 +58,6 @@ export default ({ value, onChange, context, ...props }: Props) => {
         };
     }, [value]);
 
-    useEffect(() => {
-        if (tracking)
-            background.enableTracking();
-        else
-            background.disableTracking();
-        return () => {
-            background.disableTracking();
-        }
-    }, [tracking]);
-
     return (
         <Stack direction="column" {...props}>
             <Stack direction="row" spacing={0}>
@@ -128,14 +83,12 @@ export default ({ value, onChange, context, ...props }: Props) => {
                     </Button>
                 </Tooltip>
                 */}
-                <Button
-                    variant={tracking ? "contained" : "outlined"}
-                    size="small"
-                    onClick={() => setTracking(!tracking)}
-                    sx={{ minWidth: 48 }}
-                >
-                    {tracking ? <TrackOnIcon fontSize="small" /> : <TrackOffIcon fontSize="small" />}
-                </Button>
+                <TrackButton
+                    onChange={(event, selectors) => {
+                        setSelectors(selectors);
+                        onChange(event, selectors[0]);
+                    }}
+                />
                 <Autocomplete
                     freeSolo
                     forcePopupIcon
@@ -160,7 +113,11 @@ export default ({ value, onChange, context, ...props }: Props) => {
                         color="primary"
                         label={output.length}
                         size="small"
-                        sx={{ position: "relative", top: "8px", ml: 1 }}
+                        sx={{
+                            position: "relative",
+                            top: "8px",
+                            ml: 1
+                        }}
                     />
                 )}
                 <Tooltip title={showOutput ? "Hide stage output" : "Show stage output"}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TreeView } from "@mui/lab";
-import { useTemplate } from "../context";
-import { Template } from "../lib";
+import { useApp, useTemplate } from "../context";
+import { hiliteItem, Template } from "../lib";
 import ActionTreeItem from "./ActionTreeItem";
 
 import {
@@ -15,6 +15,7 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
+    const { autoScroll } = useApp();
     const [expanded, setExpanded] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
 
@@ -43,8 +44,9 @@ export default () => {
                 defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
                 onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
                 onNodeSelect={(event: any, value: any) => {
-                    template.setSelected(value);
+                    const item = template.setSelected(value);
                     setTemplate(template.json());
+                    hiliteItem(item, autoScroll);
                 }}
             >
                 {template?.children?.map(item => <ActionTreeItem item={item} />)}

@@ -1,5 +1,13 @@
-log output view
 Data contract matching (product-page, search-page, etc.)
+Add selectors without typing names
+Data explorer
+Formulas not working in chrome extension
+
+Multi
+backslash in split adds second backlash workaround remove second backslag
+
+backslash in split adds second backlash workaround remove second backslag
+make split not advanced
 
 REQUESTS
 open template for this page (one click)
@@ -8,8 +16,13 @@ data explorer
 autosave
 add selector dialog uses data contract when available (user doesn't have to type names)
 
+
+ability to save contracts
+autoopen syphonx template url params
+open template based on inspected window's url
+
+
 BUG: a directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
-BUG: entering values for snooze don't persist
 
 iframes
 
@@ -18,7 +31,7 @@ formula evaluations don't work in chrome extension (mv3 sandbox issue)
 hightlighting selectors on page when hovering over tree
 
 query builder: selectMultiple
-query builder: text selection :has
+query builder: text selection (:has doesn't work)
 
 ability to edit schema from the extension
 automated testing for chrome extension
@@ -165,7 +178,8 @@ multiple DOM hits with repeated=false should be flagged
 
 
 DONE
-Bring back non-AI driven selectors
+log output view
+bring back non-AI driven selectors
 query builder: context sensitive function parameters for replace, etc.
 Change add action to a dialog, adding a select should prompt for the first selector
 Fix open template busy status

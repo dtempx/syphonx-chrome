@@ -13,4 +13,5 @@ export { default as SelectOnDropdown } from "./SelectOnDropdown";
 export { default as SelectTypeDropdown } from "./SelectTypeDropdown";
 export { default as SelectTypeField } from "./SelectTypeField";
 export { default as SingleQueryEditorField } from "./SingleQueryEditorField";
+export { default as TrackButton } from "./TrackButton";
 export { default as VariantField } from "./VariantField";

@@ -11,6 +11,10 @@ export interface SelectElementsOptions {
      * The maximum number of elements to select.
      */
     limit?: number;
+    /**
+     * Whether to scroll the first selected element into view. Defaults to true.
+     */
+    scrollIntoView?: boolean;
 }
 
 /**
@@ -18,7 +22,7 @@ export interface SelectElementsOptions {
  * @param options
  * @returns An array of strings containing the text content of the selected elements, or null if the element is not a text node.
  */
-export function selectElements({ selectors, className, limit = 100 } : SelectElementsOptions): Array<string | null> {
+export function selectElements({ selectors, className, limit = 100, scrollIntoView = true } : SelectElementsOptions): Array<string | null> {
     document.querySelectorAll(`.${className}`).forEach(element =>
         element.classList.remove(className));
 
@@ -26,8 +30,19 @@ export function selectElements({ selectors, className, limit = 100 } : SelectEle
     for (const selector of selectors)
         if (selector && result.length <= limit)
             document.querySelectorAll(selector).forEach(element => {
+                if (scrollIntoView) {
+                    setTimeout(() => {
+                        element.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                            inline: "center"
+                        });    
+                    }, 500);
+                    scrollIntoView = false;
+                }
                 element.classList.add(className);
                 result.push(element.textContent);
             });
+    
     return result;
 }

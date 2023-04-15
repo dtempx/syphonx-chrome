@@ -153,7 +153,7 @@
     },
     {
         "key": "cut",
-        "advanced": true,
+        "advanced": false,
         "help": "Cut text from the set of matched elements.",
         "args": [
             {
@@ -674,7 +674,7 @@
     },
     {
         "key": "slice",
-        "advanced": true,
+        "advanced": false,
         "help": "Reduce the set of matched elements to a subset specified by a range of indices.",
         "args": [
             {
@@ -692,7 +692,7 @@
     },
     {
         "key": "split",
-        "advanced": true,
+        "advanced": false,
         "help": "Split the text of the set of matched elements using the specified delimiter.",
         "args": [
             {

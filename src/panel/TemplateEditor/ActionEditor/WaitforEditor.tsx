@@ -89,7 +89,7 @@ export default ({ item, onChange }: Props) => {
                     </ButtonGroup>,
                     "Determines whether to wait for a single DOM query, or the result of a multiple DOM query from a sub-select",
                     true,
-                    mode === undefined ? "Choose query or sub-select." : ""
+                    mode === undefined ? "Choose whether to create a query or a sub-select." : ""
                 ],
                 [
                     "query",

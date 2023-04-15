@@ -7,6 +7,8 @@ export interface AppState {
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
     apiKey: string;
     setApiKey: React.Dispatch<React.SetStateAction<string>>;
+    autoScroll: boolean;
+    setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>;
     autoOpen: boolean;
     setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     autoRefresh: boolean;
@@ -26,6 +28,7 @@ export function useApp() {
 export function AppProvider({ children }: { children: JSX.Element }) {
     const [advanced, setAdvanced] = useState(false);
     const [apiKey, setApiKey] = useState("");
+    const [autoScroll, setAutoScroll] = useState(true);
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
     const [debug, setDebug] = useState(false);
@@ -37,6 +40,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             [
                 "advanced",
                 "apiKey",
+                "autoScroll",
                 "autoOpen",
                 "autoRefresh",
                 "debug",
@@ -45,6 +49,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             ({
                 advanced,
                 apiKey,
+                autoScroll,
                 autoOpen,
                 autoRefresh,
                 debug,
@@ -54,6 +59,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                     setAdvanced(advanced);
                 if (apiKey !== undefined)
                     setApiKey(apiKey);
+                if (autoScroll !== undefined)
+                    setAutoScroll(autoScroll);
                 if (autoOpen !== undefined)
                     setAutoOpen(autoOpen);
                 if (autoRefresh !== undefined)
@@ -70,6 +77,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         chrome.storage.local.set({
             advanced,
             apiKey,
+            autoScroll,
             autoOpen,
             autoRefresh,
             debug,
@@ -78,6 +86,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     }, [
         advanced,
         apiKey,
+        autoScroll,
         autoOpen,
         autoRefresh,
         debug,
@@ -89,6 +98,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         setAdvanced,
         apiKey,
         setApiKey,
+        autoScroll,
+        setAutoScroll,
         autoOpen,
         setAutoOpen,
         autoRefresh,
