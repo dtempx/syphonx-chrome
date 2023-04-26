@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useApp, useTemplate } from "../context";
-import { background, Template } from "../lib";
+import { background, tryParseJson, Template } from "../lib";
 import { applyTemplate } from "./applyTemplate";
+import { Schema } from "jsonschema";
 import * as syphonx from "syphonx-lib";
 
 export interface DataState {
@@ -20,7 +21,7 @@ export const DataContext = React.createContext<DataState>({
 
 export function DataProvider({ children }: { children: JSX.Element }) {
     const { autoRefresh } = useApp();
-    const { template: json, contract } = useTemplate();
+    const { template: json, contract: contractJson } = useTemplate();
     const [extract, setExtract] = useState<syphonx.ExtractResult | undefined>();
     const [refreshing, setRefreshing] = useState(false);
 
@@ -40,6 +41,7 @@ export function DataProvider({ children }: { children: JSX.Element }) {
                 await background.inspectedWindow.reload();
 
             const url = await background.inspectedWindow.url();
+            const contract = tryParseJson(contractJson) as Schema | undefined;
             const result = await applyTemplate({ template, contract, url, debug: true });
             setExtract(result);
         }

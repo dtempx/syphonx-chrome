@@ -12,7 +12,7 @@ if [ "v$version" = "$last_tag" ]; then
 fi
 pushd dist
 zip -r syphonx-"$version".zip syphonx
-gh release create "v$version" syphonx.zip \
+gh release create "v$version" syphonx-"$version".zip \
     --prerelease \
     --notes-start-tag "$last_tag"
 popd

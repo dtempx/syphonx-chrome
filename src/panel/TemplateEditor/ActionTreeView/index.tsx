@@ -6,7 +6,9 @@ import ActionTreeItem from "./ActionTreeItem";
 
 import {
     Alert,
-    Box
+    Box,
+    Tooltip,
+    Typography
 } from "@mui/material";
 
 import {
@@ -36,7 +38,14 @@ export default () => {
 
     return (
         <Box>
-            {template.error && <Alert severity="error">{template.error}</Alert>}
+            {template.obj.error && (
+                <Tooltip title={template.obj.error}>
+                    <Alert severity="error" sx={{ mb: 2 }}>
+                        <Typography fontSize="small" noWrap>{template.obj.error}</Typography>
+                    </Alert>
+                </Tooltip>
+                
+            )}
             <TreeView
                 expanded={expanded}
                 selected={selected}

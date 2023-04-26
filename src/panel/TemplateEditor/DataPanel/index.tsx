@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ContractView from "./ContractView";
 import ErrorView from "./ErrorView";
 import JsonView from "./JsonView";
 import LogView from "./LogView";
@@ -21,6 +22,9 @@ export default () => {
             </Box>
             <Box component="div" display={mode === "json" ? "block" : "none"}>
                 <JsonView />
+            </Box>
+            <Box component="div" display={mode === "contract" ? "block" : "none"}>
+                <ContractView />
             </Box>
             <Box component="div" display={mode === "log" ? "block" : "none"}>
                 <LogView />

@@ -1,10 +1,15 @@
+Switch selectElements function to use jQuery, or use syphonx.extract instead
+Log output window needs a search textbox with next/previous to be really useful!
+Fetch directories individually, not all at once
+Require API key to access pricespider templates
+
+
 Data contract matching (product-page, search-page, etc.)
 Add selectors without typing names
 Data explorer
 Formulas not working in chrome extension
 
-Multi
-backslash in split adds second backlash workaround remove second backslag
+Multi backslash in split adds second backlash workaround remove second backslag
 
 backslash in split adds second backlash workaround remove second backslag
 make split not advanced

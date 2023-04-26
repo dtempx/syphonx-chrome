@@ -29,7 +29,7 @@ export async function autoselect(html: string, context = ""): Promise<string> {
 
 export async function log(data: LogData): Promise<boolean> {
     try {
-        await request.post("log", data);
+        await request.postJson("log", data);
         return true;
     }
     catch (err) {
@@ -42,11 +42,26 @@ export async function read(file: string): Promise<string> {
         file = file.slice(1);
 
     const { url } = await request.json(`template/${file}`) as { url: string };
-    const response = await fetch(url);
-    if (!response.ok)
-        throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response.status}.`);
-    const content = await response.text();
+    const content = await request.text(url);
     return content;
+}
+
+export interface TemplateFileInfo {
+    template: string;
+    contract?: string;
+}
+
+export async function getTemplate(file: string): Promise<TemplateFileInfo> {
+    if (file.startsWith("/"))
+        file = file.slice(1);
+
+    const data = await request.json(`template/${file}`) as any;
+    const { url, contract } = data;
+    const template = await request.text(url);
+    return {
+        template,
+        contract
+    };
 }
 
 export async function write(file: string, content: string): Promise<void> {
@@ -54,10 +69,5 @@ export async function write(file: string, content: string): Promise<void> {
         file = file.slice(1);
 
     const { url } = await request.json(`template/${file}?write`) as { url: string };
-    const response = await fetch(url, { method: "PUT", body: content, headers: { "Content-Type": "application/json" } });
-    if (!response.ok)
-        throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response.status}.`);
-
-    const result = await response.text();
-    console.log(result);
+    await request.putJson(url, content);
 }

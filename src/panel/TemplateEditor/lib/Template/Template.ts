@@ -25,6 +25,7 @@ interface AddSelectResult {
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
     tests?: TemplateTest[];
+    error?: string;
 }
 
 /**
@@ -33,7 +34,6 @@ interface TemplateObj extends Partial<syphonx.Template> {
 export class Template {
     obj: TemplateObj;
     children: TemplateItem[];
-    error?: string;
 
     constructor(obj?: string | TemplateObj) {
         if (typeof obj === "string") {
@@ -45,8 +45,9 @@ export class Template {
                     this.obj = parseTemplate(obj);
                 }
                 catch (err) {
-                    this.error = err instanceof Error ? err.message : JSON.stringify(err);
-                    this.obj = {};
+                    this.obj = {
+                        error: err instanceof Error ? err.message : JSON.stringify(err)
+                    };
                 }
             }
         }
@@ -121,16 +122,26 @@ export class Template {
     }
 
     async expandUrl(): Promise<string | undefined> {
-        let url = this.obj.url;
-        if (isFormula(url))
-            url = await evaluateFormula(url!.slice(1, -1).trim(), this.obj.params);
-        return url;
+        try {
+            let url = this.obj.url;
+            if (isFormula(url))
+                url = await evaluateFormula(url!.slice(1, -1).trim(), { params: this.obj.params });
+            return url;
+        }
+        catch (err) {
+            if (err instanceof Error)
+                this.obj.error = err.message;
+            else if (typeof err === "object" && err !== null && err.hasOwnProperty("value"))
+                this.obj.error = (err as { value: string }).value;
+            else
+                this.obj.error = JSON.stringify(err);
+        }
     }
 
     file(): string {
         const manifest = chrome.runtime.getManifest();
         const obj = {
-            ...omit(this.obj, "selected"),
+            ...omit(this.obj, "selected", "error"),
             toolVersion: undefined,
             editorVersion: manifest.version
         };

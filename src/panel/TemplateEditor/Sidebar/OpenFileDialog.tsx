@@ -10,7 +10,8 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { autoOpen } = useApp();
-    const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
+    //const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
+    const { setTemplateFile, setTemplate, setContract, setExtract } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -43,7 +44,8 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             setExtract(undefined);
-            const json = await cloud.read(file);
+            //const json = await cloud.read(file);
+            const { template: json, contract } = await cloud.getTemplate(file);
             const template = new Template(json);
 
             if (autoOpen) {
@@ -56,11 +58,17 @@ export default ({ open, onClose }: Props) => {
 
             setTemplate(template.json());
             setTemplateFile(file);
+            setContract(contract || "");
 
-            const dirname = path.dirname(file);
-            const contractFile = path.resolve(dirname, "contract.json");
-            const contractExists = files.some(file => file === contractFile);
-            setContractFile(contractExists ? contractFile : "");
+            //TODO: consider
+            //const { contract, error } = tryParseContract(contractJson) as Schema | undefined;
+            //setContract(contract);
+            //setError(error);
+
+            //const dirname = path.dirname(file);
+            //const contractFile = path.resolve(dirname, "contract.json");
+            //const contractExists = files.some(file => file === contractFile);
+            //setContractFile(contractExists ? contractFile : "");
 
             onClose(event);
             setOpening(false);

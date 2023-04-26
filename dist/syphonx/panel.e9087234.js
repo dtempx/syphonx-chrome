@@ -22962,6 +22962,7 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 var $d4J5n = parcelRequire("d4J5n");
+
 function $90fa643a8d44e1af$export$9cd59f9826255e47(value) {
     return JSON.parse(JSON.stringify(value));
 }
@@ -23495,8 +23496,9 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
             else try {
                 this.obj = (0, $401570bab3f64861$export$2e2dbd43b49fd373)(obj);
             } catch (err) {
-                this.error = err instanceof Error ? err.message : JSON.stringify(err);
-                this.obj = {};
+                this.obj = {
+                    error: err instanceof Error ? err.message : JSON.stringify(err)
+                };
             }
         } else if (typeof obj === "object") this.obj = (0, $90fa643a8d44e1af$export$9cd59f9826255e47)(obj);
         else this.obj = {};
@@ -23557,14 +23559,22 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
         return this.children.length === 0;
     }
     async expandUrl() {
-        let url = this.obj.url;
-        if ((0, $299b35aeb8608453$export$37932bc064813fd0)(url)) url = await (0, $299b35aeb8608453$export$6614160a7506204e)(url.slice(1, -1).trim(), this.obj.params);
-        return url;
+        try {
+            let url = this.obj.url;
+            if ((0, $299b35aeb8608453$export$37932bc064813fd0)(url)) url = await (0, $299b35aeb8608453$export$6614160a7506204e)(url.slice(1, -1).trim(), {
+                params: this.obj.params
+            });
+            return url;
+        } catch (err) {
+            if (err instanceof Error) this.obj.error = err.message;
+            else if (typeof err === "object" && err !== null && err.hasOwnProperty("value")) this.obj.error = err.value;
+            else this.obj.error = JSON.stringify(err);
+        }
     }
     file() {
         const manifest = chrome.runtime.getManifest();
         const obj = {
-            ...(0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected"),
+            ...(0, $c183e629fad26e04$export$30a06c8d3562193f)(this.obj, "selected", "error"),
             toolVersion: undefined,
             editorVersion: manifest.version
         };
@@ -23991,14 +24001,15 @@ $parcel$export($80e77e55da602fd0$exports, "directory", () => $80e77e55da602fd0$e
 $parcel$export($80e77e55da602fd0$exports, "autoselect", () => $80e77e55da602fd0$export$1674e6ab029f92dd);
 $parcel$export($80e77e55da602fd0$exports, "log", () => $80e77e55da602fd0$export$bef1f36f5486a6a3);
 $parcel$export($80e77e55da602fd0$exports, "read", () => $80e77e55da602fd0$export$aafa59e2e03f2942);
+$parcel$export($80e77e55da602fd0$exports, "getTemplate", () => $80e77e55da602fd0$export$9b1a70d8e05b0fa6);
 $parcel$export($80e77e55da602fd0$exports, "write", () => $80e77e55da602fd0$export$68d8715fc104d294);
 $parcel$export($80e77e55da602fd0$exports, "setServiceUrl", () => $b9bc8a0ec4119218$export$7277dfbfac8fea1c);
 const $b9bc8a0ec4119218$var$defaultUrl = "https://syphonx-35w5m5egbq-uc.a.run.app";
 let $b9bc8a0ec4119218$var$serviceUrl = $b9bc8a0ec4119218$var$defaultUrl;
 async function $b9bc8a0ec4119218$export$7b419323e6ed4f31(path, { method: method = "GET" , headers: headers = {} , obj: obj  } = {}) {
     headers["Content-Type"] = "application/json";
-    const body = obj ? JSON.stringify(obj) : undefined;
-    const url = `${$b9bc8a0ec4119218$var$serviceUrl}/${path}`;
+    const body = $b9bc8a0ec4119218$var$formatBody(obj);
+    const url = $b9bc8a0ec4119218$var$formatUrl(path, $b9bc8a0ec4119218$var$serviceUrl);
     const response = await fetch(url, {
         method: method,
         body: body,
@@ -24008,15 +24019,65 @@ async function $b9bc8a0ec4119218$export$7b419323e6ed4f31(path, { method: method 
     const result = await response.json();
     return result;
 }
-async function $b9bc8a0ec4119218$export$299ba2dee77727e9(path, obj) {
-    const result = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(path, {
+async function $b9bc8a0ec4119218$export$c776284ef4b1209a(path, obj) {
+    const url = $b9bc8a0ec4119218$var$formatUrl(path, $b9bc8a0ec4119218$var$serviceUrl);
+    const body = $b9bc8a0ec4119218$var$formatBody(obj);
+    const response = await fetch(url, {
         method: "POST",
-        obj: obj
+        body: body,
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
-    return result;
+    if (!response.ok) throw new Error(`POST ${url} failed with status=${response.status} ${response.statusText}`);
+}
+async function $b9bc8a0ec4119218$export$d9ed129193d2f249(path, obj) {
+    const url = $b9bc8a0ec4119218$var$formatUrl(path, $b9bc8a0ec4119218$var$serviceUrl);
+    const body = $b9bc8a0ec4119218$var$formatBody(obj);
+    const response = await fetch(url, {
+        method: "PUT",
+        body: body,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    if (!response.ok) throw new Error(`PUT ${url} failed with status=${response.status} ${response.statusText}`);
 }
 function $b9bc8a0ec4119218$export$7277dfbfac8fea1c(url) {
     $b9bc8a0ec4119218$var$serviceUrl = url || $b9bc8a0ec4119218$var$defaultUrl;
+}
+async function $b9bc8a0ec4119218$export$6f093cfa640b7166(path) {
+    const url = $b9bc8a0ec4119218$var$formatUrl(path, $b9bc8a0ec4119218$var$serviceUrl);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`GET ${url} failed with status=${response.status} ${response.statusText}`);
+    const result = await response.text();
+    return result;
+}
+function $b9bc8a0ec4119218$var$combineUrl(url, path) {
+    if (url && path) return `${$b9bc8a0ec4119218$var$rtrim(url, "/")}/${$b9bc8a0ec4119218$var$ltrim(path, "/")}`;
+    else if (url) return url;
+    else if (path) return path;
+    else return "";
+}
+function $b9bc8a0ec4119218$var$formatBody(obj) {
+    if (typeof obj === "object") return JSON.stringify(obj);
+    else if (typeof obj === "string") return obj;
+    else return undefined;
+}
+function $b9bc8a0ec4119218$var$formatUrl(path, baseUrl) {
+    if ($b9bc8a0ec4119218$var$isAbsoluteUrl(path)) return path;
+    else return $b9bc8a0ec4119218$var$combineUrl(baseUrl, path);
+}
+function $b9bc8a0ec4119218$var$isAbsoluteUrl(url) {
+    return url.startsWith("http://") || url.startsWith("https://");
+}
+function $b9bc8a0ec4119218$var$ltrim(text, pattern) {
+    while(text.startsWith(pattern))text = text.slice(pattern.length);
+    return text;
+}
+function $b9bc8a0ec4119218$var$rtrim(text, pattern) {
+    while(text.endsWith(pattern))text = text.slice(0, -1 * pattern.length);
+    return text;
 }
 
 
@@ -24032,7 +24093,7 @@ async function $80e77e55da602fd0$export$1674e6ab029f92dd(html, context = "") {
 }
 async function $80e77e55da602fd0$export$bef1f36f5486a6a3(data) {
     try {
-        await $b9bc8a0ec4119218$export$299ba2dee77727e9("log", data);
+        await $b9bc8a0ec4119218$export$c776284ef4b1209a("log", data);
         return true;
     } catch (err) {
         return false;
@@ -24041,80 +24102,28 @@ async function $80e77e55da602fd0$export$bef1f36f5486a6a3(data) {
 async function $80e77e55da602fd0$export$aafa59e2e03f2942(file) {
     if (file.startsWith("/")) file = file.slice(1);
     const { url: url  } = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(`template/${file}`);
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`Unable to read template $/${file}. GET ${url} returned status ${response.status}.`);
-    const content = await response.text();
+    const content = await $b9bc8a0ec4119218$export$6f093cfa640b7166(url);
     return content;
+}
+async function $80e77e55da602fd0$export$9b1a70d8e05b0fa6(file) {
+    if (file.startsWith("/")) file = file.slice(1);
+    const data = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(`template/${file}`);
+    const { url: url , contract: contract  } = data;
+    const template = await $b9bc8a0ec4119218$export$6f093cfa640b7166(url);
+    return {
+        template: template,
+        contract: contract
+    };
 }
 async function $80e77e55da602fd0$export$68d8715fc104d294(file, content) {
     if (file.startsWith("/")) file = file.slice(1);
     const { url: url  } = await $b9bc8a0ec4119218$export$7b419323e6ed4f31(`template/${file}?write`);
-    const response = await fetch(url, {
-        method: "PUT",
-        body: content,
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
-    if (!response.ok) throw new Error(`Unable to update template $/${file}. PUT ${url} returned status ${response.status}.`);
-    const result = await response.text();
-    console.log(result);
+    await $b9bc8a0ec4119218$export$d9ed129193d2f249(url, content);
 }
 
 
 
 
-
-
-const $bfee1339be77dabb$export$eae686c5662f0382 = /*#__PURE__*/ (0, (/*@__PURE__*/$parcel$interopDefault($d4J5n))).createContext({
-    contractFile: "",
-    setContractFile: ()=>{},
-    contractLoading: false,
-    contractError: "",
-    contract: undefined
-});
-function $bfee1339be77dabb$export$f8ba26717a2a2005({ children: children  }) {
-    const [contractFile, setContractFile] = (0, $d4J5n.useState)("");
-    const [contractLoading, setContractLoading] = (0, $d4J5n.useState)(false);
-    const [contractError, setContractError] = (0, $d4J5n.useState)("");
-    const [contract, setContract] = (0, $d4J5n.useState)();
-    (0, $d4J5n.useEffect)(()=>{
-        (async ()=>{
-            setContract(undefined);
-            if (contractFile) {
-                setContractLoading(true);
-                try {
-                    const json = await (0, $80e77e55da602fd0$exports).read(contractFile);
-                    const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(json);
-                    if (contract) setContract(contract);
-                    else setContractError("Format of contract JSON is invalid.");
-                } catch (err) {
-                    debugger;
-                    setContractError(err instanceof Error ? err.message : JSON.stringify(err));
-                }
-            }
-        })();
-        setContractLoading(false);
-    }, [
-        contractFile
-    ]);
-    const value = {
-        contractFile: contractFile,
-        setContractFile: setContractFile,
-        contractLoading: contractLoading,
-        contractError: contractError,
-        contract: contract
-    };
-    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($bfee1339be77dabb$export$eae686c5662f0382.Provider, {
-        value: value,
-        children: children
-    });
-}
-
-
-
-
-var $d4J5n = parcelRequire("d4J5n");
 
 
 
@@ -24169,7 +24178,7 @@ const $d19803726287b231$export$58d75f9829cbe158 = /*#__PURE__*/ (0, (/*@__PURE__
 });
 function $d19803726287b231$export$43c6ed89e8a21a35({ children: children  }) {
     const { autoRefresh: autoRefresh  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { template: json , contract: contract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
+    const { template: json , contract: contractJson  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [extract, setExtract] = (0, $d4J5n.useState)();
     const [refreshing, setRefreshing] = (0, $d4J5n.useState)(false);
     (0, $d4J5n.useEffect)(()=>{
@@ -24187,6 +24196,7 @@ function $d19803726287b231$export$43c6ed89e8a21a35({ children: children  }) {
             setRefreshing(true);
             if (reload) await (0, $af9fac753574b590$exports).inspectedWindow.reload();
             const url = await (0, $af9fac753574b590$exports).inspectedWindow.url();
+            const contract = (0, $93c68b80015d5f0a$export$798eca59d671408d)(contractJson);
             const result = await (0, $72b699ca83b4a379$export$f78a296632f66e69)({
                 template: template,
                 contract: contract,
@@ -24265,16 +24275,21 @@ const $f9d66397304cae7a$export$150b486c2606fb1 = /*#__PURE__*/ (0, (/*@__PURE__*
     template: "",
     setTemplate: ()=>{},
     templateFile: "",
-    setTemplateFile: ()=>{}
+    setTemplateFile: ()=>{},
+    contract: "",
+    setContract: ()=>{}
 });
 function $f9d66397304cae7a$export$5abfb1150fa6da6a({ children: children  }) {
     const [template, setTemplate] = (0, $d4J5n.useState)("");
     const [templateFile, setTemplateFile] = (0, $d4J5n.useState)("");
+    const [contract, setContract] = (0, $d4J5n.useState)("");
     const value = {
         template: template,
         setTemplate: setTemplate,
         templateFile: templateFile,
-        setTemplateFile: setTemplateFile
+        setTemplateFile: setTemplateFile,
+        contract: contract,
+        setContract: setContract
     };
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)($f9d66397304cae7a$export$150b486c2606fb1.Provider, {
         value: value,
@@ -24289,14 +24304,11 @@ parcelRequire("d4J5n");
 
 
 
-
 var $82ac1358084decf3$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $70b9f154fd713d70$export$fe72a86dd2b9e6e2), {
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9d66397304cae7a$export$5abfb1150fa6da6a), {
-            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bfee1339be77dabb$export$f8ba26717a2a2005), {
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $746f51ebc403c25a$export$83e2089132ea77d6), {
-                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d19803726287b231$export$43c6ed89e8a21a35), {
-                        children: children
-                    })
+            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $746f51ebc403c25a$export$83e2089132ea77d6), {
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d19803726287b231$export$43c6ed89e8a21a35), {
+                    children: children
                 })
             })
         })
@@ -24306,7 +24318,7 @@ var $82ac1358084decf3$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 function $c1a28ccf972eabfc$export$5c3a5f48c762cb34() {
     const context = {
-        ...(0, $d4J5n.useContext)((0, $bfee1339be77dabb$export$eae686c5662f0382)),
+        //...useContext(ContractContext),
         ...(0, $d4J5n.useContext)((0, $d19803726287b231$export$58d75f9829cbe158)),
         ...(0, $d4J5n.useContext)((0, $70b9f154fd713d70$export$26cd2de697ec4bb5)),
         ...(0, $d4J5n.useContext)((0, $746f51ebc403c25a$export$9a1b410c76d0e146)),
@@ -46003,7 +46015,8 @@ var $d4J5n = parcelRequire("d4J5n");
 
 var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose  })=>{
     const { autoOpen: autoOpen  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { setTemplateFile: setTemplateFile , setTemplate: setTemplate , setContractFile: setContractFile , setExtract: setExtract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
+    //const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
+    const { setTemplateFile: setTemplateFile , setTemplate: setTemplate , setContract: setContract , setExtract: setExtract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [files, setFiles] = (0, $d4J5n.useState)([]);
     const [error, setError] = (0, $d4J5n.useState)("");
     const [loading, setLoading] = (0, $d4J5n.useState)(false);
@@ -46031,7 +46044,8 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
         try {
             setOpening(true);
             setExtract(undefined);
-            const json = await (0, $80e77e55da602fd0$exports).read(file);
+            //const json = await cloud.read(file);
+            const { template: json , contract: contract  } = await (0, $80e77e55da602fd0$exports).getTemplate(file);
             const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
             if (autoOpen) {
                 const url = await template.expandUrl();
@@ -46042,10 +46056,15 @@ var $1f8d5321e219cf73$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
             }
             setTemplate(template.json());
             setTemplateFile(file);
-            const dirname = (0, $89382e3cfd90d03a$exports).dirname(file);
-            const contractFile = (0, $89382e3cfd90d03a$exports).resolve(dirname, "contract.json");
-            const contractExists = files.some((file)=>file === contractFile);
-            setContractFile(contractExists ? contractFile : "");
+            setContract(contract || "");
+            //TODO: consider
+            //const { contract, error } = tryParseContract(contractJson) as Schema | undefined;
+            //setContract(contract);
+            //setError(error);
+            //const dirname = path.dirname(file);
+            //const contractFile = path.resolve(dirname, "contract.json");
+            //const contractExists = files.some(file => file === contractFile);
+            //setContractFile(contractExists ? contractFile : "");
             onClose(event);
             setOpening(false);
             setError("");
@@ -46709,8 +46728,9 @@ var $163aeff49cb93c90$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 var $87ef8a643ef21af0$export$2e2bcd8739ae039 = ()=>{
     const { mode: mode , setMode: setMode  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
-    const { templateFile: templateFile  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
+    const { template: json , templateFile: templateFile  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const [sidebarOpen, setSidebarOpen] = (0, $d4J5n.useState)(false);
+    const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $f91a29ece8374974$export$2e2bcd8739ae039), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $398720e75a8dc768$export$2e2bcd8739ae039), {
@@ -46871,6 +46891,30 @@ parcelRequire("d4J5n");
 
 
 
+
+
+
+var $bff80b61d3d114da$export$2e2bcd8739ae039 = ()=>{
+    const { contract: contract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
+    return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
+        multiline: true,
+        fullWidth: true,
+        value: contract ? JSON.stringify((0, $93c68b80015d5f0a$export$798eca59d671408d)(contract), null, 2) : "",
+        variant: "outlined",
+        size: "small",
+        InputProps: {
+            style: {
+                fontSize: "x-small"
+            }
+        }
+    });
+};
+
+
+
+parcelRequire("d4J5n");
+
+
 var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
     const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     return extract?.errors ? /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d21e7ab88a61fec$export$2e2bcd8739ae039), {
@@ -46980,8 +47024,6 @@ parcelRequire("d4J5n");
 
 
 
-
-
 var $a71c5db2600073d4$export$2e2bcd8739ae039 = ()=>{
     const { extract: extract  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     const keys = extract && (0, $9cab6e567be87881$export$a6cdc56e425d0d0a)(extract.data) ? Object.keys(extract.data) : [];
@@ -47016,18 +47058,6 @@ var $d4J5n = parcelRequire("d4J5n");
 
 
 
-var $4a39d82b58b72568$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM4 12c0-4.4 3.6-8 8-8 1.8 0 3.5.6 4.9 1.7L5.7 16.9C4.6 15.5 4 13.8 4 12zm8 8c-1.8 0-3.5-.6-4.9-1.7L18.3 7.1C19.4 8.5 20 10.2 20 12c0 4.4-3.6 8-8 8z"
-}), "DoDisturb");
-
-
-
-var $244e4efd21d39d5d$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
-    d: "M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"
-}), "GridOn");
-
-
-
 var $2fa39c758beb1829$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)([
     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
         d: "M7 19c-1.1 0-2 .9-2 2h14c0-1.1-.9-2-2-2h-4v-2h3c1.1 0 2-.9 2-2h-8c-1.66 0-3-1.34-3-3 0-1.09.59-2.04 1.46-2.56C8.17 9.03 8 8.54 8 8c0-.21.04-.42.09-.62C6.28 8.13 5 9.92 5 12c0 2.76 2.24 5 5 5v2H7z"
@@ -47044,6 +47074,18 @@ var $2fa39c758beb1829$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 
 
 
+var $4a39d82b58b72568$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM4 12c0-4.4 3.6-8 8-8 1.8 0 3.5.6 4.9 1.7L5.7 16.9C4.6 15.5 4 13.8 4 12zm8 8c-1.8 0-3.5-.6-4.9-1.7L18.3 7.1C19.4 8.5 20 10.2 20 12c0 4.4-3.6 8-8 8z"
+}), "DoDisturb");
+
+
+
+var $244e4efd21d39d5d$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"
+}), "GridOn");
+
+
+
 var $ea5eca716117fce3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M6.5 9H3v6h1.5v-2h1.1l.9 2H8l-.9-2.1c.5-.3.9-.8.9-1.4v-1C8 9.7 7.3 9 6.5 9zm0 2.5h-2v-1h2v1zM10.25 9l-1.5 6h1.5l.38-1.5h1.75l.37 1.5h1.5l-1.5-6h-2.5zm.75 3 .25-1h.5l.25 1h-1zm8.98-3-.74 3-.74-3h-1.52l-.74 3-.74-3H14l1.5 6h1.48l.76-3.04.76 3.04h1.48l1.5-6z"
 }), "RawOn");
@@ -47053,6 +47095,12 @@ var $ea5eca716117fce3$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2b
 var $dd58ec53e901ec5b$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
 }), "ReportProblem");
+
+
+
+var $b42590ec41d05a50$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
+    d: "M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"
+}), "VerifiedUser");
 
 
 var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChange  })=>{
@@ -47149,6 +47197,17 @@ var $bb01957673566bdf$export$2e2bcd8739ae039 = ({ mode: mode , onChange: onChang
                         })
                     }),
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "contract",
+                        onClick: (event)=>onChange(event, "contract"),
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
+                            size: "small",
+                            color: mode === "contract" ? "primary" : "default",
+                            children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $b42590ec41d05a50$export$2e2bcd8739ae039), {
+                                fontSize: "small"
+                            })
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
                         title: "log",
                         onClick: (event)=>onChange(event, "log"),
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
@@ -47219,6 +47278,11 @@ var $e322818ad30de054$export$2e2bcd8739ae039 = ()=>{
                 component: "div",
                 display: mode === "json" ? "block" : "none",
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $239f53bd6025a4d3$export$2e2bcd8739ae039), {})
+            }),
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                component: "div",
+                display: mode === "contract" ? "block" : "none",
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bff80b61d3d114da$export$2e2bcd8739ae039), {})
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 component: "div",
@@ -50402,9 +50466,19 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
     ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         children: [
-            template.error && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c4319dabadcb67cb$export$2e2bcd8739ae039), {
-                severity: "error",
-                children: template.error
+            template.obj.error && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                title: template.obj.error,
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c4319dabadcb67cb$export$2e2bcd8739ae039), {
+                    severity: "error",
+                    sx: {
+                        mb: 2
+                    },
+                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                        fontSize: "small",
+                        noWrap: true,
+                        children: template.obj.error
+                    })
+                })
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ed19a9323b6d50c$export$2e2bcd8739ae039), {
                 expanded: expanded,

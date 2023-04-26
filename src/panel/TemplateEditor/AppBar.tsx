@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
 import { useApp, useTemplate } from "./context";
 import { SplitPane } from "./components";
-import { path } from "./lib";
+import { path, Template } from "./lib";
 
 import {
-    Box,
     Chip,
     IconButton,
     Stack,
@@ -23,8 +22,10 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { templateFile } = useTemplate();
+    const { template: json, templateFile } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const template = new Template(json);
 
     return (
         <SplitPane>

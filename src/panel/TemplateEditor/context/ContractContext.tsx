@@ -1,3 +1,4 @@
+/*
 import React, { useEffect, useState } from "react";
 import { Schema } from "jsonschema";
 import { cloud, tryParseJson } from "../lib";
@@ -60,3 +61,4 @@ export function ContractProvider({ children }: { children: JSX.Element }) {
         </ContractContext.Provider>
     );
 }
+*/
