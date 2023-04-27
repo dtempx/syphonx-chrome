@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-//import { ContractContext, ContractState } from "./ContractContext";
 import { DataContext, DataState } from "./DataContext";
 import { DebugContext, DebugState } from "./DebugContext";
 import { PageContext, PageState } from "./PageContext";
@@ -10,7 +9,6 @@ export type ComposedTemplateState = /*ContractState &*/ DataState & DebugState &
 
 export function useTemplate(): ComposedTemplateState {
     const context = {
-        //...useContext(ContractContext),
         ...useContext(DataContext),
         ...useContext(DebugContext),
         ...useContext(PageContext),

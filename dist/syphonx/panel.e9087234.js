@@ -23561,9 +23561,12 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
     async expandUrl() {
         try {
             let url = this.obj.url;
-            if ((0, $299b35aeb8608453$export$37932bc064813fd0)(url)) url = await (0, $299b35aeb8608453$export$6614160a7506204e)(url.slice(1, -1).trim(), {
-                params: this.obj.params
-            });
+            if ((0, $299b35aeb8608453$export$37932bc064813fd0)(url)) {
+                const params = this.obj.params || {};
+                url = await (0, $299b35aeb8608453$export$6614160a7506204e)(url.slice(1, -1).trim(), {
+                    params: params
+                });
+            }
             return url;
         } catch (err) {
             if (err instanceof Error) this.obj.error = err.message;
@@ -24318,7 +24321,6 @@ var $82ac1358084decf3$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 function $c1a28ccf972eabfc$export$5c3a5f48c762cb34() {
     const context = {
-        //...useContext(ContractContext),
         ...(0, $d4J5n.useContext)((0, $d19803726287b231$export$58d75f9829cbe158)),
         ...(0, $d4J5n.useContext)((0, $70b9f154fd713d70$export$26cd2de697ec4bb5)),
         ...(0, $d4J5n.useContext)((0, $746f51ebc403c25a$export$9a1b410c76d0e146)),

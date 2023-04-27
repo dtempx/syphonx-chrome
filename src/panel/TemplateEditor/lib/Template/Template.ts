@@ -124,8 +124,10 @@ export class Template {
     async expandUrl(): Promise<string | undefined> {
         try {
             let url = this.obj.url;
-            if (isFormula(url))
-                url = await evaluateFormula(url!.slice(1, -1).trim(), { params: this.obj.params });
+            if (isFormula(url)) {
+                const params = this.obj.params || {};
+                url = await evaluateFormula(url!.slice(1, -1).trim(), { params });
+            }
             return url;
         }
         catch (err) {
