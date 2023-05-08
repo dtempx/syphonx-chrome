@@ -3,11 +3,15 @@ Log output window needs a search textbox with next/previous to be really useful!
 Fetch directories individually, not all at once
 Require API key to access pricespider templates
 
+Default eye open
 
-Data contract matching (product-page, search-page, etc.)
+
+DONE: Data contract matching (product-page, search-page, etc.)
 Add selectors without typing names
 Data explorer
 Formulas not working in chrome extension
+
+Need different function signatures for transform actions
 
 Multi backslash in split adds second backlash workaround remove second backslag
 
@@ -33,7 +37,7 @@ iframes
 
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
 
-hightlighting selectors on page when hovering over tree
+DONE: hightlighting selectors on page when hovering over tree
 
 query builder: selectMultiple
 query builder: text selection (:has doesn't work)
@@ -86,10 +90,6 @@ toolbar should not scroll offscreen
 default select action with auto-populated selectors from contract
 cut/paste nodes in editor tree
 
-
-middle mouse button not always working
-dialog pulsing on justin's template was jarring
-
 select.query is optional when type=object
 save manifest version in template
 
@@ -106,7 +106,6 @@ copy data to clipboard
 view debug log output in data panel
 DOM highlighting in data panel
 
-highlight dom on hover over tree or query
 select steps to run in action tree
 
 implement VariantField

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
-import { background, cloud, path, sleep, Template } from "../lib";
+import { background, sleep, Template } from "../lib";
 import { useApp, useTemplate } from "../context";
 
 export interface Props {
@@ -9,7 +10,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { autoOpen } = useApp();
+    const { apiKey, autoOpen, serviceUrl } = useApp();
     //const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
     const { setTemplateFile, setTemplate, setContract, setExtract } = useTemplate();
 
@@ -23,7 +24,8 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const directory = await cloud.directory();
+                    const api = new SyphonXApi(apiKey, serviceUrl);
+                    const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                         .map(file => file.name);
@@ -44,8 +46,8 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             setExtract(undefined);
-            //const json = await cloud.read(file);
-            const { template: json, contract } = await cloud.getTemplate(file);
+            const api = new SyphonXApi(apiKey, serviceUrl);
+            const { template: json, contract } = await api.template(file);
             const template = new Template(json);
 
             if (autoOpen) {

@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
+import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
-import { useTemplate } from "../context";
-import { cloud, Template } from "../lib";
+import { useApp, useTemplate } from "../context";
+import { Template } from "../lib";
 
 export interface Props {
     open: boolean;
@@ -9,6 +10,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
+    const { apiKey, serviceUrl } = useApp();
     const { template: json, templateFile, setTemplateFile } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
@@ -25,7 +27,8 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const directory = await cloud.directory();
+                    const api = new SyphonXApi(apiKey, serviceUrl);
+                    const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
                         .map(file => file.name);
@@ -46,7 +49,8 @@ export default ({ open, onClose }: Props) => {
         try {
             setSaving(true);
             const json = template.file();
-            await cloud.write(file, json);
+            const api = new SyphonXApi(apiKey, serviceUrl);
+            await api.write(file, json);
             setTemplateFile(file);
             setSaving(false);
             setError("");

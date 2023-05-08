@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { background, cloud } from "./lib";
+import { background } from "./lib";
 import { TrackButton } from "./components";
 import SelectorOutput from "./SelectorOutput";
 

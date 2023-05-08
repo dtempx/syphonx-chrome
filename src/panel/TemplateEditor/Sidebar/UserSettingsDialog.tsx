@@ -1,9 +1,9 @@
 import React from "react";
-import { useApp, useTemplate } from "../context";
+import { useApp } from "../context";
 import { regexp } from "../lib";
 
 import {
-    PropertyGrid,
+    AdvancedPropertyGrid,
     TitleBar,
     TransitionUp,
     ValidateField
@@ -37,13 +37,10 @@ export default ({ open, onClose }: Props) => {
         debug,
         setDebug,
         email,
-        setEmail
-    } = useApp();
-
-    const {
+        setEmail,
         serviceUrl,
         setServiceUrl
-    } = useTemplate();
+    } = useApp();
 
     return (
         <Dialog
@@ -57,7 +54,7 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
 
             <DialogContent sx={{ p: 0 }}>
-                <PropertyGrid
+                <AdvancedPropertyGrid
                     columns={[{ width: 400 }]}
                     items={[
                         [
@@ -72,7 +69,9 @@ export default ({ open, onClose }: Props) => {
                                 onChange={(event, value) => setEmail(value)}
                                 onValidate={(event, value) => value ? regexp.email.test(value) : true}
                                 inputProps={{ maxLength: 64 }}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
                             <Tooltip title="A system generated API key used to grant access.">
@@ -81,11 +80,13 @@ export default ({ open, onClose }: Props) => {
                             <ValidateField
                                 variant="standard"
                                 size="small"
+                                fullWidth
                                 value={apiKey}
                                 onChange={(event, value) => setApiKey(value)}
                                 onValidate={(event, value) => value ? regexp.apiKey.test(value) : true}
-                                inputProps={{ maxLength: 20 }}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
                             <Tooltip title="Automatically open the template default URL if enabled.">
@@ -95,7 +96,9 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 checked={autoOpen}
                                 onChange={() => setAutoOpen(!autoOpen)}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
                             <Tooltip title="Automatically scroll the target element into view on the page when hovering over the tree view.">
@@ -105,7 +108,9 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 checked={autoScroll}
                                 onChange={() => setAutoScroll(!autoScroll)}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
                             <Tooltip title="Show or hide advanced settings.">
@@ -115,17 +120,21 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 checked={advanced}
                                 onChange={() => setAdvanced(!advanced)}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
-                            <Tooltip title="Show or hide additional debug info.">
-                                <Typography>Debug mode</Typography>
+                            <Tooltip title="Show or hide additional developer info.">
+                                <Typography>Developer mode</Typography>
                             </Tooltip>,
                             <Switch
                                 size="small"
                                 checked={debug}
                                 onChange={() => setDebug(!debug)}
-                            />
+                            />,
+                            "",
+                            true
                         ],
                         [
                             <Tooltip title="Override the cloud service URL for development and testing purposes.">
@@ -135,10 +144,13 @@ export default ({ open, onClose }: Props) => {
                                 variant="standard"
                                 size="small"
                                 fullWidth
+                                placeholder="http://localhost:8080"
                                 value={serviceUrl}
                                 onChange={(event, value) => setServiceUrl(value)}
                                 onValidate={(event, value) => value ? regexp.url.test(value) : true}
-                            />
+                            />,
+                            "",
+                            debug || !!serviceUrl
                         ]
                     ]}
                 />

@@ -19,6 +19,8 @@ export interface AppState {
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     mode: AppMode;
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
+    serviceUrl: string;
+    setServiceUrl: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function useApp() {
@@ -34,6 +36,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const [debug, setDebug] = useState(false);
     const [email, setEmail] = useState("");
     const [mode, setMode] = useState<AppMode>("visual-editor");
+    const [serviceUrl, setServiceUrl] = useState("");
 
     useEffect(() => {
         chrome.storage.local.get(
@@ -44,7 +47,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                 "autoOpen",
                 "autoRefresh",
                 "debug",
-                "email"
+                "email",
+                "serviceUrl"
             ],
             ({
                 advanced,
@@ -53,7 +57,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                 autoOpen,
                 autoRefresh,
                 debug,
-                email
+                email,
+                serviceUrl
             }) => {
                 if (advanced !== undefined)
                     setAdvanced(advanced);
@@ -69,6 +74,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                     setDebug(debug);
                 if (email !== undefined)
                     setEmail(email);
+                if (serviceUrl !== undefined)
+                    setServiceUrl(serviceUrl);
             }
         );
     }, []);
@@ -81,7 +88,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             autoOpen,
             autoRefresh,
             debug,
-            email
+            email,
+            serviceUrl
         });
     }, [
         advanced,
@@ -90,7 +98,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         autoOpen,
         autoRefresh,
         debug,
-        email
+        email,
+        serviceUrl
     ]);
 
     const value = {
@@ -109,7 +118,9 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         email,
         setEmail,
         mode,
-        setMode
+        setMode,
+        serviceUrl,
+        setServiceUrl
     };
 
     return (

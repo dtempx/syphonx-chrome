@@ -1,6 +1,6 @@
 {
     "name": "SyphonX",
-    "version": "0.9.8",
+    "version": "0.9.9",
     "manifest_version": 3,
     "minimum_chrome_version": "10.0",
     "icons": {

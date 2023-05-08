@@ -51,15 +51,7 @@ yarn install
 
 
 # Deploy
-1. Update version number in manifest.json
-2. Zip the dist directory
-3. Goto https://github.com/dtempx/syphonx-chrome/releases/
-4. Click **Draft new release**
-5. Set tag to `beta`
-6. Set name to the version number
-7. Add zip file
-8. Check **Set as a pre-release**
-8. Click **Publish release**
+1. Run `yarn deploy` to publish a release
 
 
 # Links
