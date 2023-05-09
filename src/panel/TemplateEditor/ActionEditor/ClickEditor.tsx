@@ -66,12 +66,13 @@ export default ({ item, onChange }: Props) => {
                         onChange(event);
                     }}
                 />,
-                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                "Determines whether the click is optional or required, producing an error if no click target is found on the page.",
                 true
             ],
             [
                 "retry",
                 <NumberField
+                    fullWidth
                     value={obj.retry}
                     onChange={(event, value) => {
                         obj.retry = value;
@@ -119,7 +120,7 @@ export default ({ item, onChange }: Props) => {
                         onChange(event);
                     }}
                 />,
-                "A formula that determines whether the click is evaluated or bypassed.",
+                "A formula that determines whether the click is evaluated or bypassed.  A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ],
             /*

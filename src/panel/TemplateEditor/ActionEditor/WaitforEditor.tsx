@@ -127,7 +127,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                    "Determines whether the click is optional or required, producing an error if no click target is found on the page.",
                     obj.required !== undefined
                 ],
                 [
@@ -146,6 +146,7 @@ export default ({ item, onChange }: Props) => {
                     "timeout",
                     <Stack direction="row">
                         <NumberField
+                            fullWidth
                             value={obj.timeout}
                             onChange={(event, value) => {
                                 obj.timeout = value;
@@ -166,7 +167,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A formula that determines whether the click is evaluated or bypassed.",
+                    "A formula that determines whether the waitfor is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
                 ],
                 /*

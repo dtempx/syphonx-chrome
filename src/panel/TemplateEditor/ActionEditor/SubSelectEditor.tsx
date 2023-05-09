@@ -68,6 +68,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "limit",
                     <NumberField
+                        fullWidth
                         value={obj.limit}
                         onChange={(event, value) => {
                             obj.limit = value;
@@ -123,7 +124,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A formula that determines whether the select is evaluated or bypassed.",
+                    "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
                 ],
                 /*

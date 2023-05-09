@@ -24952,7 +24952,7 @@ var $0c0a4695417faf18$export$2e2bcd8739ae039 = ({ value: value , validation: val
 
 parcelRequire("d4J5n");
 
-var $4a7b7dec0d54b2ca$export$2e2bcd8739ae039 = ({ value: value , min: min , max: max , type: type = "float" , onChange: onChange , sx: sx  })=>{
+var $4a7b7dec0d54b2ca$export$2e2bcd8739ae039 = ({ value: value , min: min , max: max , type: type = "float" , fullWidth: fullWidth , onChange: onChange , sx: sx  })=>{
     function handleChange(event, value) {
         if (onChange) {
             const num = type === "float" ? parseFloat(value) : parseInt(value);
@@ -24970,13 +24970,11 @@ var $4a7b7dec0d54b2ca$export$2e2bcd8739ae039 = ({ value: value , min: min , max:
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
         variant: "standard",
         size: "small",
+        fullWidth: fullWidth,
         value: value,
         onChange: handleChange,
         onValidate: handleValidate,
-        sx: {
-            width: 50,
-            ...sx
-        }
+        sx: sx
     });
 };
 
@@ -26970,6 +26968,7 @@ var $e629e483c13aa557$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                fullWidth: true,
                 value: value1,
                 onChange: onValue1Changed,
                 min: 0,
@@ -26986,6 +26985,7 @@ var $e629e483c13aa557$export$2e2bcd8739ae039 = ({ value: value , onChange: onCha
                 children: "to"
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                fullWidth: true,
                 value: value2,
                 onChange: onValue2Changed,
                 min: value1 || 0,
@@ -48160,7 +48160,7 @@ var $d5bb3179a5128f7c$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether to break out of the current loop.",
+                "A formula that determines whether to break out of the current loop. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -48218,12 +48218,13 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                "Determines whether the click is optional or required, producing an error if no click target is found on the page.",
                 true
             ],
             [
                 "retry",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.retry,
                     onChange: (event, value)=>{
                         obj.retry = value;
@@ -48281,7 +48282,7 @@ var $fd14d1b8ed549e2f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the click is evaluated or bypassed.",
+                "A formula that determines whether the click is evaluated or bypassed.  A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -48351,7 +48352,7 @@ var $ba74450b53ad4694$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the each loop is performed. Each loop is performed unconditionally if not specified.",
+                "A formula that determines whether the each loop is performed. Performs the each loop unconditionally if not specified. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ],
             [
@@ -48431,6 +48432,7 @@ var $b516851a7c38229b$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "level",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.level,
                     onChange: (event, value)=>{
                         obj.level = value;
@@ -48513,6 +48515,7 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "limit",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.limit,
                     onChange: (event, value)=>{
                         obj.limit = value;
@@ -48526,6 +48529,7 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "errors",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.errors,
                     onChange: (event, value)=>{
                         obj.errors = value;
@@ -48545,7 +48549,7 @@ var $9415fe1f85866126$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether to perform the repeat actions, performs the repeat actions unconditionally if not specified.",
+                "A formula that determines whether to perform the repeat actions. Performs the repeat actions unconditionally if not specified. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -48692,7 +48696,7 @@ var $5336a1e77bfac892$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the select is evaluated or bypassed.",
+                "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -48810,6 +48814,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "limit",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.limit,
                     onChange: (event, value)=>{
                         obj.limit = value;
@@ -48865,7 +48870,7 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the select is evaluated or bypassed.",
+                "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -48932,6 +48937,7 @@ var $0141884a14923ee1$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
             [
                 "limit",
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                    fullWidth: true,
                     value: obj.limit,
                     onChange: (event, value)=>{
                         obj.limit = value;
@@ -48987,7 +48993,7 @@ var $0141884a14923ee1$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the select is evaluated or bypassed.",
+                "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -49085,7 +49091,7 @@ var $3adf854178975e9e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the transform is evaluated.",
+                "A formula that determines whether the transform is evaluated. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -49217,7 +49223,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "Determines whether the click is optional or required, producing if no click target is found on the page.",
+                "Determines whether the click is optional or required, producing an error if no click target is found on the page.",
                 obj.required !== undefined
             ],
             [
@@ -49238,6 +49244,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     direction: "row",
                     children: [
                         /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4a7b7dec0d54b2ca$export$2e2bcd8739ae039), {
+                            fullWidth: true,
                             value: obj.timeout,
                             onChange: (event, value)=>{
                                 obj.timeout = value;
@@ -49266,7 +49273,7 @@ var $a51eec4df4627b90$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "A formula that determines whether the click is evaluated or bypassed.",
+                "A formula that determines whether the waitfor is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
             ]
         ]
@@ -49310,7 +49317,7 @@ var $a9b5db3d2d3d0819$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                             onChange(event);
                         }
                     }),
-                    "A formula that determines whether to yield, or yields unconditionally if unspecified.",
+                    "A formula that determines whether to yield, or yields unconditionally if unspecified. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     true
                 ],
                 [

@@ -4,14 +4,15 @@ import { ValidateField } from ".";
 
 export interface Props {
     value: number | undefined | null;
-    onChange: (event: React.SyntheticEvent, value: number | undefined) => void
+    onChange: (event: React.SyntheticEvent, value: number | undefined) => void;
+    fullWidth?: boolean;
     min?: number;
     max?: number;
     type? : "integer" | "float";
     sx?: SxProps<Theme>;
 }
 
-export default ({ value, min, max, type = "float", onChange, sx }: Props) => {
+export default ({ value, min, max, type = "float", fullWidth, onChange, sx }: Props) => {
     function handleChange(event: React.SyntheticEvent, value: string): void {
         if (onChange) {
             const num = type === "float" ? parseFloat(value) : parseInt(value);
@@ -36,10 +37,11 @@ export default ({ value, min, max, type = "float", onChange, sx }: Props) => {
         <ValidateField
             variant="standard"
             size="small"
+            fullWidth={fullWidth}
             value={value}
             onChange={handleChange}
             onValidate={handleValidate}
-            sx={{ width: 50, ...sx }}
+            sx={sx}
         />
     );
 }

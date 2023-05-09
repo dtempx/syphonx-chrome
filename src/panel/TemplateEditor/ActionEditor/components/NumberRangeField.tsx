@@ -70,6 +70,7 @@ export default ({ value, onChange }: Props) => {
                 <Button variant={!range ? "outlined" : "contained"} onClick={onSetRange} sx={{ fontSize: "x-small" }}>range</Button>
             </ButtonGroup>
             <NumberField
+                fullWidth
                 value={value1}
                 onChange={onValue1Changed}
                 min={0}
@@ -78,6 +79,7 @@ export default ({ value, onChange }: Props) => {
             />
             <Typography sx={{ display: !range ? "none": undefined }}>to</Typography>
             <NumberField
+                fullWidth
                 value={value2}
                 onChange={onValue2Changed}
                 min={value1 || 0}

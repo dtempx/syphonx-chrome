@@ -72,6 +72,7 @@ export default ({ item, onChange }: Props) => {
                 [
                     "level",
                     <NumberField
+                        fullWidth
                         value={obj.level}
                         onChange={(event, value) => {
                             obj.level = value;
