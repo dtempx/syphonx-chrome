@@ -11627,8 +11627,10 @@ function $8b7b51be8d8975df$var$unwrap(obj) {
         var target = {};
         for(var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++){
             var key = _a[_i];
-            if ((0, $ap5HU.isObject)(source[key]) && typeof source[key].hasOwnProperty === "function" && source[key].hasOwnProperty("value")) target[key] = $8b7b51be8d8975df$var$unwrap(source[key].value);
-            else target[key] = $8b7b51be8d8975df$var$unwrap(source[key]);
+            if ((0, $ap5HU.isObject)(source[key])) {
+                if (source[key].value !== undefined) target[key] = $8b7b51be8d8975df$var$unwrap(source[key].value);
+                else target[key] = null;
+            } else target[key] = null;
         }
         return target;
     } else return obj;

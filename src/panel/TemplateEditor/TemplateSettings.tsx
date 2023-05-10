@@ -2,7 +2,7 @@ import React from "react";
 import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
 import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
-import { background, evaluateFormula, isFormula, regexp, validateFormula, Template } from "./lib";
+import { background, isFormula, regexp, validateFormula, Template } from "./lib";
 import { PropertyGrid, SwitchedObjectEditor, ValidateField } from "./components";
 
 export default () => {

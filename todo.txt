@@ -1,3 +1,28 @@
+formula evaluations don't work in chrome extension (mv3 sandbox issue)
+
+switch action
+negate option for selector
+remove nulls option for selector
+
+add cookies interface to template settings
+remove key from template settings
+locator action
+limit as a formula not working (also update limit in chrome extension)
+
+
+
+remove nulls from arrays
+remove key from template settings
+array icon is confusing with hamburger icon
+default query for object container (body)
+add label to scroll action (top, bottom, element)
+allow a selector with no query and no value so long as there is a sub-select with a query or a value (body workaround)
+
+
+working on home depot, see last 5 crawls, did they all work?
+
+
+
 Switch selectElements function to use jQuery, or use syphonx.extract instead
 Log output window needs a search textbox with next/previous to be really useful!
 Fetch directories individually, not all at once
@@ -28,14 +53,10 @@ add selector dialog uses data contract when available (user doesn't have to type
 
 ability to save contracts
 autoopen syphonx template url params
-open template based on inspected window's url
+open template based on inspected window's url **** 5/10
 
 
 BUG: a directory that only contains sub-directories (i.e. no files) is not visible in the file open/save dialogs
-
-iframes
-
-formula evaluations don't work in chrome extension (mv3 sandbox issue)
 
 DONE: hightlighting selectors on page when hovering over tree
 
@@ -46,7 +67,6 @@ ability to edit schema from the extension
 automated testing for chrome extension
 
 URL param to autoopen extension
-case action { "case": [ { "when": "...", "actions": [...] } ] }
 sendkeys action for example to hit escape key to close a dialog
 
 

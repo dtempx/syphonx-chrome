@@ -22,9 +22,6 @@
     "background": {
         "service_worker": "service_worker.js"
     },
-    "sandbox": {
-        "pages": ["sandbox.html"]
-    },
     "devtools_page": "devtools.html",
     "action": {}
 }
