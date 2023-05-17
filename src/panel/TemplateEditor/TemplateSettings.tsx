@@ -49,24 +49,6 @@ export default () => {
                     </Stack>
                 ],
                 [
-                    <Tooltip title="A key that uniquely identifies this template. Typically used by the host crawling environment to identify context for the data.">
-                        <Typography>key</Typography>
-                    </Tooltip>,
-                    <ValidateField
-                        variant="standard"
-                        size="small"
-                        fullWidth
-                        value={template.obj.key}
-                        onChange={(event, value) => {
-                            template.obj.key = value || undefined;
-                            setTemplate(template.json());
-                        }}
-                        onValidate={(event, value) => {
-                            return value ? /^\/([a-z0-9-]+\/)*[a-z0-9-]+$/.test(value) : true;
-                        }}
-                    />
-                ],
-                [
                     <Tooltip title="Template parameters that can be referenced from within a formula providing dynamic, data-driven control of template evaluation.">
                         <Typography>params</Typography>
                     </Tooltip>,

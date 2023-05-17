@@ -45,8 +45,9 @@ export default ({ item, onChange }: Props) => {
                 [
                     "message",
                     <VariantField
-                        variants={["string", "dynamic-string"]}
+                        variants={["string", "string-formula"]}
                         value={obj.message}
+                        fullWidth
                         onChange={(event, value) => {
                             obj.message = value || "";
                             onChange(event);

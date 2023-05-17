@@ -12,4 +12,5 @@ export { default as SplitPane } from "./SplitPane";
 export { default as TitleBar } from "./TitleBar";
 export { default as ValidateField } from "./ValidateField";
 
+export { ListItemType } from "./List";
 export { TransitionUp } from "./transitions";

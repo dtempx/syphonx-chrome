@@ -16,13 +16,14 @@ import {
     ReportProblem as ErrorIcon,
     DataObject as JsonIcon,
     Biotech as LogIcon,
+    MapsHomeWork as PortalIcon,
     RawOn as RawIcon,
     Autorenew as RefreshIcon,
     DoDisturb as ResetIcon,
     GridOn as TableIcon
 } from "@mui/icons-material";
 
-export type DataViewMode = "table" | "json" | "contract" | "errors" | "log" | "raw";
+export type DataViewMode = "table" | "json" | "contract" | "errors" | "log" | "raw" | "portal";
 
 export interface Props {
     mode: DataViewMode;
@@ -30,7 +31,7 @@ export interface Props {
 }
 
 export default ({ mode, onChange } : Props) => {
-    const { autoRefresh, setAutoRefresh } = useApp();
+    const { autoRefresh, setAutoRefresh, portal } = useApp();
     const { template: json, extract, setExtract, refresh, refreshing } = useTemplate();
 
     const errors = useMemo(() => extract?.errors ? extract.errors.length : 0, [extract]);
@@ -105,6 +106,15 @@ export default ({ mode, onChange } : Props) => {
                     />
                 )}
             </Stack>
+            {!!portal?.views?.full &&
+            <Stack direction="row">
+                <Tooltip title="portal" onClick={event => onChange(event, "portal")}>
+                    <IconButton size="small" color={mode === "portal" ? "primary" : "default"}>
+                        <PortalIcon fontSize="small" />
+                    </IconButton>
+                </Tooltip>
+            </Stack>
+            }
         </Stack>
     );
 };

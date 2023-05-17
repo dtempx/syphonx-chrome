@@ -4,6 +4,45 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.syphonx = {}));
 })(this, (function (exports) { 'use strict';
 
+    function unwrap(obj) {
+        if (obj instanceof Array) {
+            return obj.map(item => unwrap(item));
+        }
+        else if (isObject(obj) && obj.hasOwnProperty("value")) {
+            return unwrap(obj.value);
+        }
+        else if (isObject(obj)) {
+            const source = obj;
+            const target = {};
+            for (const key of Object.keys(obj)) {
+                if (isObject(source[key])) {
+                    if (source[key].value !== undefined)
+                        target[key] = unwrap(source[key].value);
+                    else
+                        target[key] = null;
+                }
+                else {
+                    target[key] = null;
+                }
+            }
+            return target;
+        }
+        else {
+            return obj;
+        }
+    }
+    function isObject(obj) {
+        return typeof obj === "object" && obj !== null && !(obj instanceof Array) && !(obj instanceof Date);
+    }
+
+    function evaluateFormula(formula, scope = {}) {
+        const keys = Object.keys(scope);
+        const values = keys.map(key => scope[key]);
+        const fn = new Function(...keys, `return ${formula}`);
+        const result = fn(...values);
+        return result;
+    }
+
     async function extract(state) {
         function collapseWhitespace(text, newlines = true) {
             if (typeof text === "string" && text.trim().length === 0) {
@@ -593,6 +632,9 @@
                 else if (action.hasOwnProperty("snooze")) {
                     await this.snooze(action.snooze);
                 }
+                else if (action.hasOwnProperty("switch")) {
+                    await this.switch(action.switch);
+                }
                 else if (action.hasOwnProperty("transform")) {
                     await this.transform(action.transform);
                 }
@@ -701,7 +743,11 @@
                     return typeof result === "boolean" ? result : null;
                 }
             }
-            formatResult(result, type, all, limit, format = "multiline", pattern) {
+            evaluateNumber(input, params = {}) {
+                const result = this.evaluate(input, params);
+                return typeof result === "number" ? result : 0;
+            }
+            formatResult(result, type, all, limit, format = "multiline", pattern, negate, removeNulls) {
                 const $ = this.jquery;
                 const regexp = createRegExp(pattern);
                 if (!type) {
@@ -745,6 +791,15 @@
                 }
                 else if (type === "number") {
                     result.value = coerceValue(result.value, "number");
+                }
+                if (negate) {
+                    if (typeof result.value === "boolean")
+                        result.value = !result.value;
+                    else if (result.value instanceof Array && result.value.every(value => typeof value === "boolean"))
+                        result.value = result.value.map(value => !value);
+                }
+                if (removeNulls && result.value instanceof Array) {
+                    result.value = result.value.filter(value => value !== null && value !== undefined);
                 }
                 return result;
             }
@@ -876,7 +931,7 @@
                 }
                 this.log(`>>> ${this.contextKeyInfo()} [${this.nodeKey(stack[stack.length - 1].nodes)}] ${trunc(stack[stack.length - 1].value)} ${stack.length}`);
             }
-            query({ query, type, repeated = false, all = false, format, pattern, limit, hits }) {
+            query({ query, type, repeated = false, all = false, format, pattern, limit, hits, negate, removeNulls }) {
                 if (query instanceof Array && query.every(stage => stage instanceof Array) && query[0].length > 0 && !!query[0][0]) {
                     if (limit === undefined && type === "string" && !repeated && !all) {
                         limit = 1;
@@ -887,7 +942,7 @@
                     let hit = 0;
                     let result = undefined;
                     for (const stage of query) {
-                        const subresult = this.resolveQuery({ query: stage, type, repeated, all, limit, format, pattern, result });
+                        const subresult = this.resolveQuery({ query: stage, type, repeated, all, limit, format, pattern, negate, removeNulls, result });
                         if (subresult) {
                             result = this.mergeQueryResult(result, subresult);
                             if (subresult.nodes.length > 0) {
@@ -947,9 +1002,13 @@
                 }
                 return [pass, result];
             }
-            async repeat({ name = "", actions, limit = 100, errors = 1, when, active = true }) {
+            async repeat({ name = "", actions, limit, errors = 1, when, active = true }) {
                 if (name)
                     name = " " + name;
+                if (limit === undefined)
+                    limit = 10;
+                else if (typeof limit === "string")
+                    limit = this.evaluateNumber(limit);
                 if (active) {
                     if (this.when(when, `REPEAT${name}`)) {
                         const state = this.acquireRepeatState();
@@ -1006,14 +1065,23 @@
                     }
                 }
             }
-            resolveQuery({ query, type, repeated, all, limit, format, pattern, result }) {
+            resolveQuery({ query, type, repeated, all, limit, format, pattern, negate, removeNulls, result }) {
+                if (!(query instanceof Array)) {
+                    this.appendError("eval-error", "Invalid selector query, query is not an array", 0);
+                    return undefined;
+                }
                 const $ = this.jquery;
                 let selector = query[0];
                 const ops = query.slice(1);
                 const context = this.context();
                 let nodes;
                 let value;
-                if (selector === "." && context) {
+                if (typeof selector !== "string") {
+                    nodes = $();
+                    value = null;
+                    this.appendError("eval-error", "Invalid selector query, first element is not a string", 0);
+                }
+                else if (selector === "." && context) {
                     nodes = $(context.nodes);
                     value = context.value;
                     this.log(`QUERY $(".", [${this.nodeKey(context.nodes)}]) -> ${trunc(value)} (${nodes.length} nodes)`);
@@ -1064,7 +1132,7 @@
                 }
                 if (ops.length > 0 && nodes.length > 0) {
                     try {
-                        return this.resolveQueryOps({ ops, nodes, type, repeated, all, limit, format, pattern, value });
+                        return this.resolveQueryOps({ ops, nodes, type, repeated, all, limit, format, pattern, negate, removeNulls, value });
                     }
                     catch (err) {
                         this.appendError("eval-error", `Failed to resolve operation for "${$statement(query)}": ${err instanceof Error ? err.message : JSON.stringify(err)}`, 0);
@@ -1072,14 +1140,18 @@
                     }
                 }
                 else if (type === "boolean") {
+                    let value = !repeated ? nodes.length > 0 : [nodes.length > 0];
+                    if (negate) {
+                        value = !value;
+                    }
                     return {
                         nodes,
                         key: this.contextKey(),
-                        value: !repeated ? nodes.length > 0 : [nodes.length > 0]
+                        value
                     };
                 }
                 else if (nodes.length > 0) {
-                    return this.formatResult({ nodes, key: this.contextKey(), value }, type, all, limit, format, pattern);
+                    return this.formatResult({ nodes, key: this.contextKey(), value }, type, all, limit, format, pattern, negate, removeNulls);
                 }
                 else {
                     return undefined;
@@ -1096,7 +1168,7 @@
                     return target;
                 }
             }
-            resolveQueryOps({ ops, nodes, type, repeated, all, limit, format, pattern, value }) {
+            resolveQueryOps({ ops, nodes, type, repeated, all, limit, format, pattern, negate, removeNulls, value }) {
                 const $ = this.jquery;
                 const result = { nodes, key: this.contextKey(), value };
                 if (!this.validateOperators(ops)) {
@@ -1365,7 +1437,7 @@
                         break;
                     }
                 }
-                return this.formatResult(result, type, all, limit, format, pattern);
+                return this.formatResult(result, type, all, limit, format, pattern, negate, removeNulls);
             }
             async run(actions, label = "", wraparound = false) {
                 if (label)
@@ -1632,6 +1704,24 @@
             async snooze(interval) {
                 this.log(`SNOOZE ${interval[0]}s`);
                 await sleep(interval[0] * 1000);
+            }
+            async switch(switches) {
+                let i = 0;
+                for (const { when, name, query, actions } of switches) {
+                    const label = `SWITCH CASE ${++i}/${switches.length}${name ? ` ${name}` : ""}`;
+                    if (this.when(when, label)) {
+                        const result = query ? this.query({ query, type: "boolean", repeated: false }) : { value: true };
+                        if (result?.value === true) {
+                            this.log(`${label} SELECTED`);
+                            await this.run(actions, label, true);
+                            return;
+                        }
+                        else {
+                            this.log(`${label} SKIPPED`);
+                        }
+                    }
+                }
+                this.log("SWITCH: NONE SELECTED");
             }
             text(nodes, format) {
                 const $ = this.jquery;
@@ -1900,6 +1990,8 @@
         return obj.state;
     }
 
+    exports.evaluateFormula = evaluateFormula;
     exports.extract = extract;
+    exports.unwrap = unwrap;
 
 }));

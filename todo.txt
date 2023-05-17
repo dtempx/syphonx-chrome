@@ -1,14 +1,17 @@
+locator action
+switch action
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
 
-switch action
-negate option for selector
-remove nulls option for selector
+DONE: negate option for selector
+DONE: remove nulls option for selector
 
 add cookies interface to template settings
 remove key from template settings
-locator action
+add waitUntil to template settings
+allow dot format for selector names
 limit as a formula not working (also update limit in chrome extension)
-
+indicate unsaved template changes
+add default empty second parameter to replace function
 
 
 remove nulls from arrays

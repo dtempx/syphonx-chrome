@@ -3,6 +3,7 @@ import ContractView from "./ContractView";
 import ErrorView from "./ErrorView";
 import JsonView from "./JsonView";
 import LogView from "./LogView";
+import PortalView from "./PortalView";
 import ResponseView from "./ResponseView";
 import TableView from "./TableView";
 import Toolbar, { DataViewMode } from "./Toolbar";
@@ -34,6 +35,9 @@ export default () => {
             </Box>
             <Box component="div" display={mode === "errors" ? "block" : "none"}>
                 <ErrorView />
+            </Box>
+            <Box component="div" display={mode === "portal" ? "block" : "none"}>
+                <PortalView />
             </Box>
         </Stack>
 );

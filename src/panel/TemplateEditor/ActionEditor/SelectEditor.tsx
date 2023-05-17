@@ -1,5 +1,5 @@
 import React from "react";
-import { TemplateItem } from "../lib";
+import { isFormula, TemplateItem } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 import {
@@ -10,7 +10,6 @@ import {
     AdvancedPropertyGrid,
     FormulaField,
     QueryEditorField,
-    NumberField,
     RegexpField,
     SelectFormatDropdown,
     SelectTypeField,
@@ -70,6 +69,19 @@ export default ({ item, onChange }: Props) => {
                     obj.type === "object" && !obj.select && !obj.pivot && !obj.union ? "Choose whether to create a sub-select or a union." : ""
                 ],
                 [
+                    "invert",
+                    <Switch
+                        size="small"
+                        checked={obj.invert ?? false}
+                        onChange={(event, value) => {
+                            obj.invert = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Inverts a boolean result.",
+                    obj.invert !== undefined
+                ],
+                [
                     "repeated",
                     <Switch
                         size="small"
@@ -100,6 +112,7 @@ export default ({ item, onChange }: Props) => {
                     <VariantField
                         variants={["string", "number", "boolean", "formula", "json"]}
                         value={obj.value}
+                        fullWidth
                         onChange={(event, value) => {
                             obj.value = value || undefined;
                             onChange(event);
@@ -123,11 +136,12 @@ export default ({ item, onChange }: Props) => {
                 ],
                 [
                     "limit",
-                    <NumberField
-                        fullWidth
+                    <VariantField
+                        variants={["number", "formula"]}
                         value={obj.limit}
+                        fullWidth
                         onChange={(event, value) => {
-                            obj.limit = value;
+                            obj.limit = isFormula(value) ? value : parseInt(value);
                             onChange(event);
                         }}
                     />,

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { SyphonXApi } from "syphonx-lib";
+import { Portal } from "./Portal";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
@@ -21,6 +23,8 @@ export interface AppState {
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     serviceUrl: string;
     setServiceUrl: React.Dispatch<React.SetStateAction<string>>;
+    portal: Portal | undefined;
+    setPortal: React.Dispatch<React.SetStateAction<Portal | undefined>>;
 }
 
 export function useApp() {
@@ -37,6 +41,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const [email, setEmail] = useState("");
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [serviceUrl, setServiceUrl] = useState("");
+    const [portal, setPortal] = useState<Portal | undefined>(undefined);
 
     useEffect(() => {
         chrome.storage.local.get(
@@ -81,6 +86,21 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     }, []);
 
     useEffect(() => {
+        (async () => {
+            try {
+                const api = new SyphonXApi(apiKey, serviceUrl);
+                const auth = await api.auth();
+                setPortal(auth.portal);
+            }
+            catch(err) {
+                debugger;
+                console.error(err);
+                setPortal(undefined);
+            }
+        })();
+    }, [apiKey, serviceUrl]);
+
+    useEffect(() => {
         chrome.storage.local.set({
             advanced,
             apiKey,
@@ -120,7 +140,9 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         mode,
         setMode,
         serviceUrl,
-        setServiceUrl
+        setServiceUrl,
+        portal,
+        setPortal
     };
 
     return (

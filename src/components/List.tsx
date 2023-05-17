@@ -11,8 +11,10 @@ import {
     Theme
 } from "@mui/material";
 
+export type ListItemType = [string, JSX.Element, (event: React.MouseEvent) => void] | null;
+
 export interface Props {
-    items: Array<[string, JSX.Element, (event: React.MouseEvent) => void] | null>;
+    items: ListItemType[];
     sx?: SxProps<Theme>;
 }
 
