@@ -37,7 +37,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "Specifies the name for the locator output result.",
+                    "Specifies the name for the locator output result. Must start with an underscore and contain only lower-case letters, numbers and underscores.",
                     true,
                     !obj.name ? "A name must be specified" : ""
                 ],

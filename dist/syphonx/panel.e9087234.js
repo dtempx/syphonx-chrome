@@ -49434,7 +49434,7 @@ var $e77690f62223d66e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "Specifies the name for the locator output result.",
+                "Specifies the name for the locator output result. Must start with an underscore and contain only lower-case letters, numbers and underscores.",
                 true,
                 !obj.name ? "A name must be specified" : ""
             ],
