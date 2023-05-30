@@ -63,7 +63,7 @@ export default ({ item, onChange }: Props) => {
                         variant="standard"
                         size="small"
                         placeholder="CSS Selector"
-                        value={obj.selector}
+                        value={obj.frame}
                         onChange={event => {
                             obj.frame = event.target.value || undefined;
                             onChange(event);

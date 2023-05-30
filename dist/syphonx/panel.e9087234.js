@@ -49460,7 +49460,7 @@ var $e77690f62223d66e$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                     variant: "standard",
                     size: "small",
                     placeholder: "CSS Selector",
-                    value: obj.selector,
+                    value: obj.frame,
                     onChange: (event)=>{
                         obj.frame = event.target.value || undefined;
                         onChange(event);
