@@ -54,6 +54,12 @@ yarn install
 1. Run `yarn deploy` to publish a release
 
 
+# Re-Deploy
+1. Run `gh release delete v0.9.9` to delete an existing release
+2. Run `git tag -d v0.9.9` to delete the corresponding tag
+3. Run `yarn deploy` to re-publish an existing release
+
+
 # Links
 * [Material UI Documentation](https://v4.mui.com/)
 * [Chrome Extending DevTools](https://developer.chrome.com/docs/extensions/mv3/devtools/)

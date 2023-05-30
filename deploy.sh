@@ -13,15 +13,15 @@ if [ -z "$version" ]; then
 fi
 
 # exit if version is not updated
-if [ "v$version" = "$last_tag" ]; then
-  echo "Update version in manifest.json."
+if [ "v$version" = "$last_tag" ] && [ "$1" != "-f" ]; then
+  echo "Update version in manifest.json. Use -f to bypass this check."
   exit 1
 fi
 
 # exit if there are uncommitted changes
 git_status=$(git status --porcelain)
-if [ -n "$git_status" ]; then
-    echo "There are uncommitted changes in the repository."
+if [ -n "$git_status" ] && [ "$1" != "-f" ]; then
+    echo "There are uncommitted changes in the repository. Use -f to bypass this check."
     exit 1
 fi
 
