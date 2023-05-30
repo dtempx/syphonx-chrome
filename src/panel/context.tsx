@@ -9,8 +9,6 @@ export interface AppState {
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
     apiKey: string;
     setApiKey: React.Dispatch<React.SetStateAction<string>>;
-    autoScroll: boolean;
-    setAutoScroll: React.Dispatch<React.SetStateAction<boolean>>;
     autoOpen: boolean;
     setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     autoRefresh: boolean;
@@ -19,6 +17,8 @@ export interface AppState {
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
+    hotTracking: boolean;
+    setHotTracking: React.Dispatch<React.SetStateAction<boolean>>;
     mode: AppMode;
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     serviceUrl: string;
@@ -34,11 +34,11 @@ export function useApp() {
 export function AppProvider({ children }: { children: JSX.Element }) {
     const [advanced, setAdvanced] = useState(false);
     const [apiKey, setApiKey] = useState("");
-    const [autoScroll, setAutoScroll] = useState(true);
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
     const [debug, setDebug] = useState(false);
     const [email, setEmail] = useState("");
+    const [hotTracking, setHotTracking] = useState(true);
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [serviceUrl, setServiceUrl] = useState("");
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
@@ -48,17 +48,17 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             [
                 "advanced",
                 "apiKey",
-                "autoScroll",
                 "autoOpen",
                 "autoRefresh",
                 "debug",
                 "email",
+                "hotTracking",
                 "serviceUrl"
             ],
             ({
                 advanced,
                 apiKey,
-                autoScroll,
+                hotTracking,
                 autoOpen,
                 autoRefresh,
                 debug,
@@ -69,8 +69,6 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                     setAdvanced(advanced);
                 if (apiKey !== undefined)
                     setApiKey(apiKey);
-                if (autoScroll !== undefined)
-                    setAutoScroll(autoScroll);
                 if (autoOpen !== undefined)
                     setAutoOpen(autoOpen);
                 if (autoRefresh !== undefined)
@@ -79,6 +77,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                     setDebug(debug);
                 if (email !== undefined)
                     setEmail(email);
+                if (hotTracking !== undefined)
+                    setHotTracking(hotTracking);
                 if (serviceUrl !== undefined)
                     setServiceUrl(serviceUrl);
             }
@@ -104,21 +104,21 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         chrome.storage.local.set({
             advanced,
             apiKey,
-            autoScroll,
             autoOpen,
             autoRefresh,
             debug,
             email,
+            hotTracking,
             serviceUrl
         });
     }, [
         advanced,
         apiKey,
-        autoScroll,
         autoOpen,
         autoRefresh,
         debug,
         email,
+        hotTracking,
         serviceUrl
     ]);
 
@@ -127,8 +127,6 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         setAdvanced,
         apiKey,
         setApiKey,
-        autoScroll,
-        setAutoScroll,
         autoOpen,
         setAutoOpen,
         autoRefresh,
@@ -137,6 +135,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         setDebug,
         email,
         setEmail,
+        hotTracking,
+        setHotTracking,
         mode,
         setMode,
         serviceUrl,

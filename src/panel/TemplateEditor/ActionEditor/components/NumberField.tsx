@@ -1,9 +1,10 @@
 import React from "react";
 import { SxProps, Theme } from "@mui/material";
 import { ValidateField } from ".";
+import { isFormula } from "./lib";
 
 export interface Props {
-    value: number | undefined | null;
+    value: string | number | undefined | null;
     onChange: (event: React.SyntheticEvent, value: number | undefined) => void;
     fullWidth?: boolean;
     min?: number;
@@ -22,6 +23,8 @@ export default ({ value, min, max, type = "float", fullWidth, onChange, sx }: Pr
 
     function handleValidate(event: React.ChangeEvent<HTMLInputElement>, value: string): boolean {
         if (!value)
+            return true;
+        if (isFormula(value))
             return true;
         const num = parseFloat(value);
         if (isNaN(num))

@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export default function ActionTreeItem({ item }: Props) {
-    const { autoScroll } = useApp();
+    const { hotTracking } = useApp();
     const { template: json } = useTemplate();
     const template = new Template(json);
 
@@ -17,8 +17,10 @@ export default function ActionTreeItem({ item }: Props) {
         <TreeItem
             nodeId={item.key}
             label={<ActionTreeItemLabel item={item} />}
-            onMouseOver={() => hiliteItem(item, autoScroll)}
-            onMouseOut={() => hiliteItem(template.selected(), autoScroll)}
+            onMouseOver={() => {
+                if (hotTracking)
+                    hiliteItem(item);
+            }}
         >
             {item.children?.map(subitem => (<ActionTreeItem item={subitem} />))}
         </TreeItem>

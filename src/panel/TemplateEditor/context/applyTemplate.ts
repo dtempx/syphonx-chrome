@@ -26,10 +26,10 @@ export async function applyTemplate({ template, contract, url, debug }: ApplyTem
             return result!;
         }
         catch (err) {
-            return { errors: [{ message: err instanceof Error ? err.message : JSON.stringify(err) }]} as syphonx.ExtractResult;
+            return { errors: [{ message: err instanceof Error ? err.message : JSON.stringify(err) }]} as unknown as syphonx.ExtractResult;
         }
     }
     else {
-        return { data: { title: "Example Domain", href: "https://www.example.com/" }} as syphonx.ExtractResult;
+        return { data: { title: "Example Domain", href: "https://www.example.com/" }} as unknown as syphonx.ExtractResult;
     }
 }

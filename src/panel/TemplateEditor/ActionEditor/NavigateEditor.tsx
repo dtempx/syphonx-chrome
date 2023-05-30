@@ -9,7 +9,8 @@ import {
 import {
     AdvancedPropertyGrid,
     FormulaField,
-    NumberField
+    VariantField,
+    WaitUntilDropdown
 } from "./components";
 
 export interface Props {
@@ -18,7 +19,7 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    const obj = item?.obj as syphonx.Repeat;
+    const obj = item?.obj as syphonx.Navigate;
     return obj ? (
         <AdvancedPropertyGrid
             items={[
@@ -35,47 +36,46 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "An optional descriptive name briefly summarizing the repeat action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
+                    "An optional descriptive name briefly summarizing the navigation action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
                     true
                 ],
                 [
-                    "limit",
-                    <NumberField
+                    "url",
+                    <VariantField
+                        variants={["string", "formula"]}
+                        value={obj.url}
                         fullWidth
-                        value={obj.limit}
                         onChange={(event, value) => {
-                            obj.limit = value;
+                            obj.url = value || undefined;
                             onChange(event);
                         }}
-                        min={0}
                     />,
-                    "Limits the number of repeat iterations.",
-                    true
+                    "The URL to naviate to. Can be a string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: ```{`https://${origin}/${data.name}`}```",
+                    true,
+                    !obj.url ? "A url must be specified" : ""
                 ],
                 [
-                    "errors",
-                    <NumberField
-                        fullWidth
-                        value={obj.errors}
+                    "waitUntil",
+                    <WaitUntilDropdown
+                        value={obj.waitUntil}
                         onChange={(event, value) => {
-                            obj.errors = value;
+                            obj.waitUntil = value;
                             onChange(event);
                         }}
-                        min={1}
                     />,
-                    "Maximum number of errors before aborting the repeat loop. (default=1)",
-                    obj.errors !== undefined
+                    "When to consider the browser navigation for the navigate action to be complete.",
+                    obj.waitUntil !== undefined
                 ],
                 [
                     "when",
                     <FormulaField
                         value={obj.when}
                         onChange={(event, value) => {
-                            obj.when = value;
+                            obj.when = value || undefined;
                             onChange(event);
                         }}
                     />,
-                    "A formula that determines whether to perform the repeat actions. Performs the repeat actions unconditionally if not specified. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
+                    "A formula that determines whether the navigate action is triggered or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
                 ]
             ]}

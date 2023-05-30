@@ -62,7 +62,7 @@ export default ({ open, onClose }: Props) => {
                 maxWidth="sm"
             >
                 <DialogTitle>
-                    <Typography>Add Action</Typography>
+                    <Typography>ADD ACTION</Typography>
                     <IconButton
                         onClick={event => onClose(event)}
                         sx={{

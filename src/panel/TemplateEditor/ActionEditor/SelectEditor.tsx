@@ -12,7 +12,7 @@ import {
     QueryEditorField,
     RegexpField,
     SelectFormatDropdown,
-    SelectTypeField,
+    SelectTypeDropdown,
     NameField,
     VariantField
 } from "./components";
@@ -23,6 +23,11 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
+
+    function onChangeType(event: React.SyntheticEvent<Element, Event>, value: syphonx.SelectType | undefined) {
+
+    }
+
     const obj = item?.obj as syphonx.Select;
     return obj ? (
         <AdvancedPropertyGrid
@@ -60,26 +65,129 @@ export default ({ item, onChange }: Props) => {
                 ],
                 [
                     "type",
-                    <SelectTypeField
-                        item={item}
-                        onChange={onChange}
+                    <SelectTypeDropdown
+                        value={obj.type}
+                        onChange={(event, value) => {
+                            if (value === "object") {
+                                obj.type = value;
+                                obj.select = [{}];
+                                obj.union = undefined;
+                            }
+                            else {
+                                obj.select = undefined;
+                                obj.union = undefined;
+                                obj.pivot = undefined; // legacy
+                            }
+                            onChange(event);
+                        }}
                     />,
                     "Determines the type of the property value.",
                     true,
                     obj.type === "object" && !obj.select && !obj.pivot && !obj.union ? "Choose whether to create a sub-select or a union." : ""
                 ],
                 [
-                    "invert",
-                    <Switch
-                        size="small"
-                        checked={obj.invert ?? false}
+                    "value",
+                    <VariantField
+                        variants={["string", "number", "boolean", "formula", "json"]}
+                        value={obj.value}
+                        fullWidth
                         onChange={(event, value) => {
-                            obj.invert = value;
+                            obj.value = value || undefined;
                             onChange(event);
                         }}
                     />,
-                    "Inverts a boolean result.",
-                    obj.invert !== undefined
+                    "A predetermined or a formula. If a query is also present then this value will be evaluated after the query, and the result of the query can be accessed in a formula value.",
+                    obj.value !== undefined
+                ],
+                [
+                    "all",
+                    <Switch
+                        size="small"
+                        checked={obj.all ?? false}
+                        onChange={(event, value) => {
+                            obj.all = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
+                    obj.all !== undefined
+                ],
+                [
+                    "collate",
+                    <Switch
+                        size="small"
+                        checked={obj.collate ?? false}
+                        onChange={(event, value) => {
+                            obj.collate = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Combines all selected nodes into a single value.",
+                    obj.collate !== undefined
+                ],
+                [
+                    "format",
+                    <SelectFormatDropdown
+                        value={obj.format}
+                        onChange={(event, value) => {
+                            obj.format = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Determines how the selected value is formatted.",
+                    obj.format !== undefined
+                ],
+                [
+                    "distinct",
+                    <Switch
+                        size="small"
+                        checked={obj.distinct ?? false}
+                        onChange={(event, value) => {
+                            obj.distinct = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Removes duplicate values from an array.",
+                    obj.distinct !== undefined
+                ],
+                [
+                    "limit",
+                    <VariantField
+                        variants={["number", "formula"]}
+                        value={obj.limit}
+                        fullWidth
+                        onChange={(event, value) => {
+                            obj.limit = isFormula(value) ? value : parseInt(value);
+                            onChange(event);
+                        }}
+                    />,
+                    "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                    obj.limit !== undefined
+                ],
+                [
+                    "negate",
+                    <Switch
+                        size="small"
+                        checked={obj.negate ?? false}
+                        onChange={(event, value) => {
+                            obj.negate = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Negates a boolean query result, inverting a false result to true and vice-versa.",
+                    obj.negate !== undefined
+                ],
+                [
+                    "pattern",
+                    <RegexpField
+                        value={obj.pattern}
+                        onChange={(event, value) => {
+                            obj.pattern = value || undefined;
+                            onChange(event);
+                        }}
+                    />,
+                    "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
+                    obj.pattern !== undefined
                 ],
                 [
                     "repeated",
@@ -108,82 +216,25 @@ export default ({ item, onChange }: Props) => {
                     obj.required !== undefined
                 ],
                 [
-                    "value",
-                    <VariantField
-                        variants={["string", "number", "boolean", "formula", "json"]}
-                        value={obj.value}
-                        fullWidth
-                        onChange={(event, value) => {
-                            obj.value = value || undefined;
-                            onChange(event);
-                        }}
-                    />,
-                    "A predetermined or computed value, only used if a DOM query is unspecified.",
-                    obj.value !== undefined
-                ],
-                [
-                    "all",
+                    "union",
                     <Switch
                         size="small"
-                        checked={obj.all ?? false}
-                        onChange={(event, value) => {
-                            obj.all = value;
+                        checked={obj.union !== undefined}
+                        onChange={(event, checked) => {
+                            const subitem = (obj.select||[])[0] || obj.pivot || (obj.union||[])[0] || {};
+                            if (checked) {
+                                obj.select = undefined;
+                                obj.union = [subitem];
+                            }
+                            else {
+                                obj.select = [subitem];
+                                obj.union = undefined;
+                            }
                             onChange(event);
                         }}
                     />,
-                    "Determines whether to evaluate all query stages, or stop at the first stage that produces a value.",
-                    obj.all !== undefined
-                ],
-                [
-                    "limit",
-                    <VariantField
-                        variants={["number", "formula"]}
-                        value={obj.limit}
-                        fullWidth
-                        onChange={(event, value) => {
-                            obj.limit = isFormula(value) ? value : parseInt(value);
-                            onChange(event);
-                        }}
-                    />,
-                    "Limits the number of DOM nodes to be selected, unlimited if not specified.",
-                    obj.limit !== undefined
-                ],
-                [
-                    "format",
-                    <SelectFormatDropdown
-                        value={obj.format}
-                        onChange={(event, value) => {
-                            obj.format = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Determines how the selected value is formatted.",
-                    obj.format !== undefined
-                ],
-                [
-                    "pattern",
-                    <RegexpField
-                        value={obj.pattern}
-                        onChange={(event, value) => {
-                            obj.pattern = value || undefined;
-                            onChange(event);
-                        }}
-                    />,
-                    "A regex pattern for validation, an error will be produced if the value does not match the pattern.",
-                    obj.pattern !== undefined
-                ],
-                [
-                    "collate",
-                    <Switch
-                        size="small"
-                        checked={obj.collate ?? false}
-                        onChange={(event, value) => {
-                            obj.collate = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Combines all selected nodes into a single value.",
-                    obj.collate !== undefined
+                    "Create a union of multiple selector object cases.",
+                    obj.union !== undefined
                 ],
                 [
                     "when",
@@ -196,22 +247,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
-                ],
-                /*
-                [
-                    "active",
-                    <Switch
-                        size="small"
-                        checked={obj.active ?? true}
-                        onChange={(event, value) => {
-                            obj.active = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Determines whether the property is active or bypassed",
-                    obj.active !== undefined
                 ]
-                */
             ]}
         />
     ) : null;

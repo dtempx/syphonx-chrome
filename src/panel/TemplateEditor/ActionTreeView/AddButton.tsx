@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { useTemplate } from "../context";
 import { Template } from "../lib";
-import AddActionDialog from "./AddActionDialog";
-import AddSelectorDialog from "./AddSelectorDialog";
 
 import {
-    Fab,
+    AddActionDialog,
+    AddSelectorDialog
+} from "./components";
+
+import {
+    Box,
+    Button,
     SxProps,
     Theme,
-    Tooltip
+    Typography
 } from "@mui/material";
 
 import {
@@ -19,17 +23,32 @@ export interface Props {
     sx?: SxProps<Theme>;
 }
 
-export default (props?: Props) => {
-    const { template: json } = useTemplate();
+const buttonLabelMap: Record<string, string> = {
+    "case": "Add Case",
+    "locator": "Add Locator",
+    "placeholder": "Add Selector",
+    "select": "Add Selector",
+    "transform": "Add Transform",
+    "union": "Add Union"
+};
+
+export default ({ sx }: Props) => {
+    const { template: json, setTemplate } = useTemplate();
     const [actionDialogOpen, setActionDialogOpen] = useState(false);
     const [selectorDialogOpen, setSelectorDialogOpen] = useState(false);
 
     const template = new Template(json);
+    const selected = template.selected();
+    const label = buttonLabelMap[selected?.type!] || "Add Action";
 
     function onAdd(event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void {
         const selected = template.selected();
         if (selected?.type === "select") {
             setSelectorDialogOpen(true);
+        }
+        else if (Object.keys(buttonLabelMap).includes(selected?.type!)) {
+            template.addItem();
+            setTemplate(template.json());
         }
         else {
             setActionDialogOpen(true);
@@ -37,43 +56,23 @@ export default (props?: Props) => {
     }
 
     return (
-        <>
-            <Tooltip
-                arrow
-                placement="left"
-                title="Click here to add the first action"
-                //open={template.empty()}
-                sx={{
-                    animation: "pulse 1s infinite ease-in-out",
-                    "@keyframes pulse": {
-                        "0%": {
-                            opacity: 0.5
-                        },
-                        "100%": {
-                            opacity: 1.0
-                        }
-                    }
-                }}
+        <Box sx={sx}>
+            <Button
+                variant="contained"
+                size="small"
+                startIcon={<AddIcon />}
+                onClick={onAdd}
             >
-                <Fab
-                    {...props}
-                    size="small"
-                    color="secondary"
-                    onClick={onAdd}
-                >
-                    <AddIcon />
-                </Fab>
-            </Tooltip>
-
+                <Typography fontSize="small">{label}</Typography>
+            </Button>
             <AddActionDialog
                 open={actionDialogOpen}
                 onClose={() => setActionDialogOpen(false)}
             />
-
             <AddSelectorDialog
                 open={selectorDialogOpen}
                 onClose={() => setSelectorDialogOpen(false)}
             />
-        </>
+        </Box>
     );
 }

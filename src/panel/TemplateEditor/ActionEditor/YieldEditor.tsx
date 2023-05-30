@@ -62,22 +62,7 @@ export default ({ item, onChange }: Props) => {
                         />,
                         "Specifies parameters to pass back to the host enviornment. Used for page renavigations, triggering screenshots and other tasks that require host intervention.",
                         true
-                    ],
-                    /*
-                    [
-                        "active",
-                        <Switch
-                            size="small"
-                            checked={obj.active ?? true}
-                            onChange={(event, value) => {
-                                obj.active = value;
-                                onChange(event);
-                            }}
-                        />,
-                        "Determines whether the property is active or bypassed.",
-                        obj.active !== undefined
                     ]
-                    */
                 ]}
             />
         </>

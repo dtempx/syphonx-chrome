@@ -33,9 +33,10 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
     const [select, setSelect] = useState<syphonx.SelectQuery[]>([[""]]);
     const [index, setIndex] = useState(0);
 
-    useEffect(() =>
-        setSelect(value || [[""]]),
-    [value]);
+    useEffect(() => {
+        setSelect(value || [[""]]);
+        setIndex(0);
+    }, [value]);
 
     function onAddQuery() {
         const obj = clone(select);

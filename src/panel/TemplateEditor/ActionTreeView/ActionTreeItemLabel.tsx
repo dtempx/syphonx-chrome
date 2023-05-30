@@ -13,9 +13,8 @@ import {
 
 import {
     WarningAmberOutlined as AlertIcon,
-    LowPriority as ConditionalIcon,
-    DoNotDisturb as DisabledIcon,
-    FormatListNumberedRtl as RepeatedIcon,
+    Traffic as ConditionalIcon,
+    MoreVert as RepeatedIcon,
     PivotTableChart as PivotIcon,
     Mediation as UnionIcon
 } from "@mui/icons-material";
@@ -56,7 +55,6 @@ export default ({ item }: Props) => {
                 {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
-                {item.active === false && <Tooltip title="disabled"><DisabledIcon color="warning" fontSize="small" sx={{ position: "relative", top: 4 }} /></Tooltip>}
                 <ActionTreeItemMenu item={item} sx={{ visibility: selected?.key === item.key ? "visible" : "hidden" }} />
             </Stack>
         </Stack>

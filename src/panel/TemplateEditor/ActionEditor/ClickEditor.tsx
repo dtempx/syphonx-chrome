@@ -67,7 +67,7 @@ export default ({ item, onChange }: Props) => {
                     }}
                 />,
                 "Determines whether the click is optional or required, producing an error if no click target is found on the page.",
-                true
+                obj.required !== undefined
             ],
             [
                 "retry",
@@ -96,7 +96,20 @@ export default ({ item, onChange }: Props) => {
                     <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
                 </Stack>,
                 "Number of seconds to snooze before the click.",
-                false
+                obj.snooze !== undefined
+            ],
+            [
+                "yield",
+                <Switch
+                    size="small"
+                    checked={!!obj.yield}
+                    onChange={(event, value) => {
+                        obj.yield = value || undefined;
+                        onChange(event);
+                    }}
+                />,
+                "Yield after the click. Use this option if a page renavigation may occur when the click happens.",
+                obj.yield !== undefined
             ],
             [
                 "waitfor",
@@ -120,24 +133,9 @@ export default ({ item, onChange }: Props) => {
                         onChange(event);
                     }}
                 />,
-                "A formula that determines whether the click is evaluated or bypassed.  A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
+                "A formula that determines whether the click action is triggered or bypassed.  A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                 obj.when !== undefined
-            ],
-            /*
-            [
-                "active",
-                <Switch
-                    size="small"
-                    checked={obj.active ?? true}
-                    onChange={(event, value) => {
-                        obj.active = value;
-                        onChange(event);
-                    }}
-                />,
-                "Determines whether the property is active or bypassed.",
-                obj.active !== undefined
             ]
-            */
         ]} />
     ) : null;
 };

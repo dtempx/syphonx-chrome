@@ -243,17 +243,29 @@ export class Template {
         else if (action === "click")
             obj = { click: {} };
         else if (action === "each")
-            obj = { each: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
+            obj = { each: { actions: [{ select: [{ name: "value1", query: [["h1"]] }] }] } };
         else if (action === "error")
             obj = { error: {} };
+        else if (action === "goback")
+            obj = { goback: {} };
+        else if (action === "locator")
+            obj = { locator: [{}] };
+        else if (action === "navigate")
+            obj = { navigate: {} };
+        else if (action === "reload")
+            obj = { reload: {} };
         else if (action === "repeat")
-            obj = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }]}] } };
+            obj = { repeat: { actions: [{ select: [{ name: "value1", query: [["h1"]] }] }] } };
+        else if (action === "screenshot")
+            obj = { screenshot: {} };
         else if (action === "scroll")
             obj = { scroll: {} };
         else if (action === "select")
             obj = !defaultValue ? { select: [] } : { select: [{ name: "value1", query: [["h1"]] }] };
         else if (action === "snooze")
             obj = { snooze: [1, 2] };
+        else if (action === "switch")
+            obj = { switch: [{ actions: [{ select: [{ name: "value1", query: [["h1"]] }] }] }] };
         else if (action === "transform")
             obj = { transform: [{}] };
         else if (action === "yield")
@@ -296,7 +308,13 @@ export class Template {
                 this.setSelected(obj);
                 return true;
             }
-            else if (["transform", "union"].includes(item.type) && item.collection) {
+            else if (item.type === "case" && item.collection) {
+                const obj = { actions: [{ select: [{ name: "value1", query: [["h1"]] }] }] };
+                item.collection.push(obj);
+                this.setSelected(obj);
+                return true;
+            }
+            else if (["locator", "transform", "union"].includes(item.type) && item.collection) {
                 const obj = {};
                 item.collection.push(obj);
                 this.setSelected(obj);
@@ -334,7 +352,6 @@ export class Template {
                 if (name === "break") {
                     const breakObj = obj as syphonx.Break;
                     item.conditional = !!breakObj.when;
-                    item.active = breakObj.active;
                 }
                 else if (name === "click") {
                     const clickObj = obj as syphonx.Click;
@@ -342,7 +359,6 @@ export class Template {
                     if (!clickObj.query && !clickObj.waitfor)
                         item.alert = "A query or waitfor must be specified.";
                     item.conditional = !!clickObj.when;
-                    item.active = clickObj.active;
                 }
                 else if (name === "each") {
                     const eachObj = obj as syphonx.Each;
@@ -356,15 +372,31 @@ export class Template {
                     if (!eachObj.query)
                         item.alert = "A query must be specified.";
                     item.conditional = !!eachObj.when;
-                    item.active = eachObj.active;
                 }
                 else if (name === "error") {
                     const errorObj = obj as syphonx.Error;
-                    if (!errorObj.message) {
+                    if (!errorObj.message)
                         item.alert = "A message must be specified.";
-                    }
                     item.conditional = !!errorObj.when;
-                    item.active = errorObj.active;
+                }
+                else if (name === "goback") {
+                    const gobackObj = obj as syphonx.GoBack;
+                    item.conditional = !!gobackObj.when;
+                }
+                else if (name === "locator") {
+                    const locatorObj = obj as syphonx.Locator[];
+                    item.children = this.renderLocator(locatorObj, item);
+                    item.conditional = item.children ? item.children.some(child => child.conditional) : false;
+                }
+                else if (name === "navigate") {
+                    const navigateObj = obj as syphonx.Navigate;
+                    if (!navigateObj.url)
+                        item.alert = "A url must be specified.";
+                    item.conditional = !!navigateObj.when;
+                }
+                else if (name === "reload") {
+                    const reloadObj = obj as syphonx.Reload;
+                    item.conditional = !!reloadObj.when;
                 }
                 else if (name === "repeat") {
                     const repeatObj = obj as syphonx.Repeat;
@@ -393,6 +425,10 @@ export class Template {
                 else if (name === "snooze") {
                     // nothing to do
                 }
+                else if (name === "switch") {
+                    const switchObj = obj as syphonx.Switch[];
+                    item.children = this.renderSwitch(switchObj, item);
+                }
                 else if (name === "transform") {
                     const transformObj = obj as syphonx.Transform[];
                     item.children = this.renderTransform(transformObj, item);
@@ -404,12 +440,10 @@ export class Template {
                     if (!waitforObj.query && !waitforObj.select)
                         item.alert = "A query or select must be specified.";
                     item.conditional = !!waitforObj.when;
-                    item.active = waitforObj.active;
                 }
                 else if (name === "yield") {
                     const yieldObj = obj as syphonx.Yield;
                     item.conditional = !!yieldObj.when;
-                    item.active = yieldObj.active;
                 }
 
                 if (item.children && item.children.some(child => child.alert)) {
@@ -437,7 +471,38 @@ export class Template {
         item.children = this.renderSelect(waitfor.select, item);
         return item;
     }
-    
+
+    private renderLocator(collection: syphonx.Locator[] | undefined, parent: TemplateItem): TemplateItem[] {
+        if (collection instanceof Array)
+            return collection.map((locator, index) => {
+                const key = `${parent.key}.${index}`;
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name: "locator",
+                    type: "locator",
+                    icon: "locator",
+                    parent,
+                    collection,
+                    unit: locator,
+                    obj: locator,
+                    index,
+                    num: index + 1
+                });
+
+                if (!locator.name)
+                    item.alert = "A name must be specified.";
+                else if (!locator.selector)
+                    item.alert = "A selector must be specified.";
+                else if (!locator.method)
+                    item.alert = "A method must be specified.";
+
+                return item;
+            });
+        else
+            return [];
+    }
+
     private renderPivot(obj: syphonx.SelectTarget, parent: TemplateItem): TemplateItem {
         const key = `${parent.key}.pivot`;
         const item = new TemplateItem({
@@ -484,8 +549,7 @@ export class Template {
                     collection,
                     unit: select,
                     obj: select,
-                    index,
-                    active: select.active
+                    index
                 });
 
                 item.children = this.renderSubselect(select, item);
@@ -523,6 +587,45 @@ export class Template {
         }
     }
 
+    private renderSwitch(collection: syphonx.Switch[] | undefined, parent: TemplateItem): TemplateItem[] {
+        if (collection instanceof Array)
+            return collection.map((switchObj, index) => {
+                const key = `${parent.key}.${index}`;
+                const item = new TemplateItem({
+                    template: this,
+                    key,
+                    name: "case",
+                    type: "case",
+                    icon: "case",
+                    step: parent ? `${parent.step}.${index + 1}` : `${index + 1}`,
+                    parent,
+                    collection,
+                    unit: switchObj,
+                    obj: switchObj,
+                    index,
+                    num: index + 1
+                });
+
+                if (switchObj.actions instanceof Array) {
+                    item.children = this.renderActions(switchObj.actions, item);
+                }
+                else {
+                    item.children = [new Placeholder(item)];
+                    item.alert = "At least one action must be specified.";
+                }
+
+                //if (!obj.query && (collection.length === 1 || collection.indexOf(obj) !== collection.length - 1))
+                    //item.alert = "A query must be specified.";
+
+                if (item.children && item.children.some(child => child.alert))
+                    item.alert = "One or more child items has an alert.";
+
+                return item;
+            });
+        else
+            return [];
+    }
+
     private renderTransform(collection: syphonx.Transform[] | undefined, parent: TemplateItem): TemplateItem[] {
         if (collection instanceof Array)
             return collection.map((transform, index) => {
@@ -538,8 +641,7 @@ export class Template {
                     unit: transform,
                     obj: transform,
                     index,
-                    num: index + 1,
-                    active: transform.active
+                    num: index + 1
                 });
 
                 if (!transform.query)
@@ -568,8 +670,7 @@ export class Template {
                 unit: obj,
                 obj,
                 index,
-                num: index + 1,
-                active: obj.active
+                num: index + 1
             });
 
             item.children = this.renderSubselect(obj, item);
@@ -590,17 +691,23 @@ export class Template {
 }
 
 export type TemplateAction =
-    "break" |
-    "click" |
-    "each" |
-    "error" |
-    "item" |
-    "repeat" |
-    "select" |
-    "scroll" |
-    "snooze" |
-    "transform" |
-    "waitfor" |
-    "yield";
+      "break"
+    | "click"
+    | "each"
+    | "error"
+    | "goback"
+    | "item"
+    | "locator"
+    | "navigate"
+    | "reload"
+    | "repeat"
+    | "screenshot"
+    | "scroll"
+    | "select"
+    | "snooze"
+    | "switch"
+    | "transform"
+    | "waitfor"
+    | "yield";
 
 export * from "./TemplateItem";

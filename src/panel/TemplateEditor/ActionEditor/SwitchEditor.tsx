@@ -9,7 +9,7 @@ import {
 import {
     AdvancedPropertyGrid,
     FormulaField,
-    NumberField
+    QueryEditorField
 } from "./components";
 
 export interface Props {
@@ -18,7 +18,7 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    const obj = item?.obj as syphonx.Repeat;
+    const obj = item?.obj as syphonx.Switch;
     return obj ? (
         <AdvancedPropertyGrid
             items={[
@@ -29,53 +29,38 @@ export default ({ item, onChange }: Props) => {
                         size="small"
                         placeholder="Name for this action"
                         inputProps={{ maxLength: 32 }}    
-                        value={obj.name}
+                        value={obj.name || ""}
                         onChange={event => {
                             obj.name = event.target.value || undefined;
                             onChange(event);
                         }}
                     />,
-                    "An optional descriptive name briefly summarizing the repeat action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
+                    "An optional descriptive name briefly summarizing the switch action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
                     true
                 ],
                 [
-                    "limit",
-                    <NumberField
-                        fullWidth
-                        value={obj.limit}
+                    "query",
+                    <QueryEditorField
+                        name="switch"
+                        query={obj.query}
                         onChange={(event, value) => {
-                            obj.limit = value;
+                            obj.query = value && value.length > 0 ? value : undefined;
                             onChange(event);
                         }}
-                        min={0}
                     />,
-                    "Limits the number of repeat iterations.",
+                    "A CSS selector or jQuery expression that determines whether to select this case.",
                     true
-                ],
-                [
-                    "errors",
-                    <NumberField
-                        fullWidth
-                        value={obj.errors}
-                        onChange={(event, value) => {
-                            obj.errors = value;
-                            onChange(event);
-                        }}
-                        min={1}
-                    />,
-                    "Maximum number of errors before aborting the repeat loop. (default=1)",
-                    obj.errors !== undefined
                 ],
                 [
                     "when",
                     <FormulaField
                         value={obj.when}
                         onChange={(event, value) => {
-                            obj.when = value;
+                            obj.when = value || undefined;
                             onChange(event);
                         }}
                     />,
-                    "A formula that determines whether to perform the repeat actions. Performs the repeat actions unconditionally if not specified. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
+                    "A formula that determines whether the switch action is triggered or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
                 ]
             ]}

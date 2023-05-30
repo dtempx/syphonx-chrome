@@ -30,9 +30,34 @@
         "help": "Raise an error."
     },
     {
+        "name": "goback",
+        "advanced": true,
+        "help": "Go back to the previous page in the browser."
+    },
+    {
+        "name": "locator",
+        "advanced": true,
+        "help": "Accesses data within a shadow-root or iframe using a locator."
+    },
+    {
+        "name": "navigate",
+        "advanced": true,
+        "help": "Navigate browser to a new page."
+    },
+    {
+        "name": "reload",
+        "advanced": true,
+        "help": "Reload the current page in the browser."
+    },
+    {
         "name": "repeat",
         "advanced": true,
         "help": "Repeat a set of actions until a condition is met."
+    },
+    {
+        "name": "screenshot",
+        "advanced": true,
+        "help": "Take a screenshot of the page or a selected area of the page."
     },
     {
         "name": "scroll",
@@ -45,6 +70,11 @@
         "help": "Snooze for a set period of time."
     },
     {
+        "name": "switch",
+        "advanced": true,
+        "help": "Switch to an action within set of actions based on a condition."
+    },
+    {
         "name": "transform",
         "advanced": true,
         "help": "Transform content on the page."
@@ -52,6 +82,6 @@
     {
         "name": "yield",
         "advanced": true,
-        "help": "Yield back to the host, for example after a click that renavigates the page."
+        "help": "Yield back to the host. Use as directed by development."
     }
 ]

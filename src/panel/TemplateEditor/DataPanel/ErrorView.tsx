@@ -1,5 +1,6 @@
 import React from "react";
 import { useTemplate } from "./context";
+import * as syphonx from "syphonx-lib";
 
 import {
     Table,
@@ -12,7 +13,8 @@ import {
 
 export default () => {
     const { extract } = useTemplate();
-    return extract?.errors ? (
+    const errors = extract?.errors as syphonx.ExtractError[]; // WORKAROUND https://github.com/microsoft/TypeScript/issues/36981
+    return errors ? (
         <TableContainer>
             <Table size="small">
                 <TableHead>
@@ -22,7 +24,8 @@ export default () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {extract.errors.map(error => (
+                    // WORKAROUND: TypeScript doesn't like the type of `extract.errors` so we have to cast it.
+                    {errors.map(error => (
                         <TableRow>
                             <TableCell>{error.message}</TableCell>
                             <TableCell>{error.code}</TableCell>

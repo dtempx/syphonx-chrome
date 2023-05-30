@@ -2,6 +2,10 @@ locator action
 switch action
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
 
+add on to ErrorEditor
+add dropdown to code in ErrorEditor
+add dropdown to level in ErrorEditor
+
 DONE: negate option for selector
 DONE: remove nulls option for selector
 

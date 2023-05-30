@@ -4,7 +4,7 @@ import { useTemplate } from "./context";
 
 export default () => {
     const { extract } = useTemplate();
-    const { actions, log, ...response } = extract || {};
+    const { actions, log, ...response } = extract || { actions: [], log: "" };
     return (
         <TextField
             multiline

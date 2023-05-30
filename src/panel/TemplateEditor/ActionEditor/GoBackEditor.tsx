@@ -8,8 +8,7 @@ import {
 
 import {
     AdvancedPropertyGrid,
-    FormulaField,
-    SingleQueryEditorField
+    FormulaField
 } from "./components";
 
 export interface Props {
@@ -18,7 +17,7 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-    const obj = item?.obj as syphonx.Transform;
+    const obj = item?.obj as syphonx.Reload;
     return obj ? (
         <AdvancedPropertyGrid
             items={[
@@ -35,20 +34,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "An optional descriptive name briefly summarizing the transform action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
-                    true
-                ],
-                [
-                    "query",
-                    <SingleQueryEditorField
-                        name="transform"
-                        query={obj.query}
-                        onChange={(event, value) => {
-                            obj.query = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "A CSS selector or jQuery expression that defines the transform.",
+                    "An optional descriptive name briefly summarizing the goback action. Name appears in the action tree and status output, enhances readibility of the template if specified.",
                     true
                 ],
                 [
@@ -60,7 +46,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A formula that determines whether the transform is evaluated. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
+                    "A formula that determines whether the goback action is triggered or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
                 ]
             ]}

@@ -43,21 +43,6 @@ export default ({ item, onChange }: Props) => {
                     true
                 ],
                 [
-                    "message",
-                    <VariantField
-                        variants={["string", "string-formula"]}
-                        value={obj.message}
-                        fullWidth
-                        onChange={(event, value) => {
-                            obj.message = value || "";
-                            onChange(event);
-                        }}
-                    />,
-                    "Defines the message for an error that is produced if triggered by when or query, or unconditionally if neither is specified.",
-                    true,
-                    !obj.message ? "message required" : ""
-                ],
-                [
                     "code",
                     <NameField
                         validation="kebab-case"
@@ -69,6 +54,21 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "Defines an error-code for programatically identifying the error.",
                     obj.code !== undefined
+                ],
+                [
+                    "message",
+                    <VariantField
+                        variants={["string", "string-formula"]}
+                        value={obj.message}
+                        fullWidth
+                        onChange={(event, value) => {
+                            obj.message = value || "";
+                            onChange(event);
+                        }}
+                    />,
+                    "A human readable error message.",
+                    true,
+                    !obj.message ? "Specify a human readable message for the error." : ""
                 ],
                 [
                     "level",
@@ -85,6 +85,19 @@ export default ({ item, onChange }: Props) => {
                     obj.level !== undefined
                 ],
                 [
+                    "negate",
+                    <Switch
+                        size="small"
+                        checked={obj.negate ?? false}
+                        onChange={(event, value) => {
+                            obj.negate = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Negates a boolean query result, inverting a false result to true and vice-versa.",
+                    obj.negate !== undefined
+                ],
+                [
                     "query",
                     <QueryEditorField
                         name="error"
@@ -94,9 +107,9 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A CSS selector or jQuery expression that determines whether an error is produced. An error is produced unconditionally if not specified.",
+                    "A CSS selector or jQuery expression that determines whether an error is produced. If specified, an error is produced if the query finds no element. An error is produced unconditionally if not specified.",
                     true
-                ],    
+                ],
                 [
                     "stop",
                     <Switch
@@ -119,24 +132,9 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A formula returning a true or false result that determines whether an error is produced.",
+                    "A formula returning a true or false result that determines whether the error is triggered or bypassed.",
                     obj.when !== undefined
-                ],
-                /*
-                [
-                    "active",
-                    <Switch
-                        size="small"
-                        checked={obj.active ?? true}
-                        onChange={(event, value) => {
-                            obj.active = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Determines whether the property is active or bypassed.",
-                    obj.active !== undefined
                 ]
-                */
             ]}
         />
     ) : null;

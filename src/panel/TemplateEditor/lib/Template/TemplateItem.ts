@@ -1,7 +1,17 @@
 import { Template } from "./Template";
+import { isObject } from "../../lib";
 import * as syphonx from "syphonx-lib";
 
-export type TemplateItemType = "action" | "pivot" | "placeholder" | "select" | "transform" | "union";
+export type TemplateItemType =
+      "action"
+    | "case"
+    | "locator"
+    | "pivot"
+    | "placeholder"
+    | "select"
+    | "switch"
+    | "transform"
+    | "union";
 
 /**
  * Adapts an item within a template document, adding state and behavior for manipulation by a UI editor.
@@ -114,11 +124,6 @@ export class TemplateItem {
      */
     index?: number;
 
-    /**
-     * Indicates whether the item is active or disabled.
-     */
-    active?: boolean;
-
     constructor(item: TemplateItem) {
         this.template = item.template;
         this.key = item.key;
@@ -136,7 +141,6 @@ export class TemplateItem {
         this.index = item.index;
         this.step = item.step;
         this.num = item.num;
-        this.active = item.active;
 
         if (this.type === "select" && !this.name) {
             if (this.repeated)
@@ -147,8 +151,8 @@ export class TemplateItem {
                 this.name = "(value)";
         }
 
-        if (this.type === "action" && typeof this.obj === "object" && this.obj !== null && !(this.obj instanceof Array)) {
-            this.caption = (this.obj as Record<string, string>).name;
-        }
+        const name = isObject(this.obj) ? (this.obj as Record<string, string>).name : undefined;
+        if (name && name !== this.name)
+            this.caption = name;
     }
 }

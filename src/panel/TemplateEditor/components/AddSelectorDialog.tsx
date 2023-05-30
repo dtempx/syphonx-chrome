@@ -83,7 +83,7 @@ export default ({ open, onClose, addNewSelectAction }: Props) => {
             maxWidth="sm"
         >
             <DialogTitle>
-                <Typography>Add Action</Typography>
+                <Typography>ADD SELECTOR</Typography>
                 <IconButton
                     onClick={handleClose}
                     sx={{

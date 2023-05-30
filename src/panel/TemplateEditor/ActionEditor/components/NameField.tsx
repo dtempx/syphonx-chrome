@@ -3,7 +3,7 @@ import { BaseTextFieldProps } from "@mui/material";
 import { ValidateField } from ".";
 import { regexp } from "./lib";
 
-export type ValidationTypes = "kebab-case" | "snake-case" | "selector-name";
+export type ValidationTypes = "intermediate-name" | "kebab-case" | "snake-case" | "selector-name";
 
 export interface Props extends BaseTextFieldProps {
     value: string | undefined;
@@ -14,6 +14,7 @@ export interface Props extends BaseTextFieldProps {
 }
 
 const regexps = {
+    "intermediate-name": regexp.intermediateName,
     "kebab-case": regexp.kebabCase,
     "selector-name": regexp.selectorName,
     "snake-case": regexp.snakeCase

@@ -49,7 +49,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A predetermined or computed value, only used if a DOM query is unspecified.",
+                    "A predetermined or a formula. If a query is also present then this value will be evaluated after the query, and the result of the query can be accessed in a formula value.",
                     obj.value !== undefined
                 ],
                 [
@@ -66,17 +66,30 @@ export default ({ item, onChange }: Props) => {
                     obj.all !== undefined
                 ],
                 [
-                    "limit",
-                    <NumberField
-                        fullWidth
-                        value={obj.limit}
+                    "collate",
+                    <Switch
+                        size="small"
+                        checked={obj.collate ?? false}
                         onChange={(event, value) => {
-                            obj.limit = value;
+                            obj.collate = value;
                             onChange(event);
                         }}
                     />,
-                    "Limits the number of DOM nodes to be selected, unlimited if not specified.",
-                    obj.limit !== undefined
+                    "Combines all selected nodes into a single value.",
+                    obj.collate !== undefined
+                ],
+                [
+                    "distinct",
+                    <Switch
+                        size="small"
+                        checked={obj.distinct ?? false}
+                        onChange={(event, value) => {
+                            obj.distinct = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Removes duplicate values from an array.",
+                    obj.distinct !== undefined
                 ],
                 [
                     "format",
@@ -91,6 +104,32 @@ export default ({ item, onChange }: Props) => {
                     obj.format !== undefined
                 ],
                 [
+                    "limit",
+                    <NumberField
+                        fullWidth
+                        value={obj.limit}
+                        onChange={(event, value) => {
+                            obj.limit = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Limits the number of DOM nodes to be selected, unlimited if not specified.",
+                    obj.limit !== undefined
+                ],
+                [
+                    "negate",
+                    <Switch
+                        size="small"
+                        checked={obj.negate ?? false}
+                        onChange={(event, value) => {
+                            obj.negate = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Negates a boolean query result, inverting a false result to true and vice-versa.",
+                    obj.negate !== undefined
+                ],
+                [
                     "pattern",
                     <RegexpField
                         value={obj.pattern}
@@ -103,19 +142,6 @@ export default ({ item, onChange }: Props) => {
                     obj.pattern !== undefined
                 ],
                 [
-                    "collate",
-                    <Switch
-                        size="small"
-                        checked={obj.collate ?? false}
-                        onChange={(event, value) => {
-                            obj.collate = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Combines all selected nodes into a single value.",
-                    obj.collate !== undefined
-                ],
-                [
                     "when",
                     <FormulaField
                         value={obj.when}
@@ -126,22 +152,7 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "A formula that determines whether the select is evaluated or bypassed. A formula is a Javascript expression enclosed in curly braces that returns a boolean true/false result. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: `{data.price !== null}`",
                     obj.when !== undefined
-                ],
-                /*
-                [
-                    "active",
-                    <Switch
-                        size="small"
-                        checked={obj.active ?? true}
-                        onChange={(event, value) => {
-                            obj.active = value;
-                            onChange(event);
-                        }}
-                    />,
-                    "Determines whether the property is active or bypassed",
-                    obj.active !== undefined
                 ]
-                */
             ]}
         />
     ) : null;

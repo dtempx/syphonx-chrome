@@ -315,12 +315,6 @@
         "args": []
     },
     {
-        "key": "length",
-        "advanced": true,
-        "help": "Returns the number of matched elements.",
-        "args": []
-    },
-    {
         "key": "map",
         "advanced": false,
         "help": "Map the set of matched elements using a specified formula.",

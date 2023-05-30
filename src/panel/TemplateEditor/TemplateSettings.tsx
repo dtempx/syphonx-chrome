@@ -1,9 +1,32 @@
 import React from "react";
-import { IconButton, Paper, Stack, Tooltip, Typography } from "@mui/material";
-import { Launch as LaunchIcon } from "@mui/icons-material";
 import { useTemplate } from "./context";
-import { background, isFormula, regexp, validateFormula, Template } from "./lib";
-import { PropertyGrid, SwitchedObjectEditor, ValidateField } from "./components";
+
+import {
+    IconButton,
+    Paper,
+    Stack,
+    Tooltip,
+    Typography
+} from "@mui/material";
+
+import {
+    Launch as LaunchIcon
+} from "@mui/icons-material";
+
+import {
+    background,
+    isFormula,
+    regexp,
+    validateFormula,
+    Template
+} from "./lib";
+
+import {
+    PropertyGrid,
+    SwitchedObjectEditor,
+    ValidateField,
+    WaitUntilDropdown
+} from "./components";
 
 export default () => {
     const { template: json, setTemplate } = useTemplate();
@@ -61,13 +84,25 @@ export default () => {
                     />
                 ],
                 [
-                    <Tooltip title="Specific HTTP headers such as cookies or other request info that may be required by a site.">
+                    <Tooltip title="Specify HTTP headers such as cookies or other request info needed to unblock access to a site.">
                         <Typography>headers</Typography>
                     </Tooltip>,
                     <SwitchedObjectEditor
                         obj={template.obj.headers}
                         onChange={(event, obj) => {
                             template.obj.headers = obj;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="When to consider the browser navigation to be complete.">
+                        <Typography>waitUntil</Typography>
+                    </Tooltip>,
+                    <WaitUntilDropdown
+                        value={template.obj.waitUntil}
+                        onChange={(event, value) => {
+                            template.obj.waitUntil = value;
                             setTemplate(template.json());
                         }}
                     />

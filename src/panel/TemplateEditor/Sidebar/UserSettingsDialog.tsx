@@ -30,8 +30,6 @@ export default ({ open, onClose }: Props) => {
         setAdvanced,
         apiKey,
         setApiKey,
-        autoScroll,
-        setAutoScroll,
         autoOpen,
         setAutoOpen,
         debug,
@@ -96,18 +94,6 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 checked={autoOpen}
                                 onChange={() => setAutoOpen(!autoOpen)}
-                            />,
-                            "",
-                            true
-                        ],
-                        [
-                            <Tooltip title="Automatically scroll the target element into view on the page when hovering over the tree view.">
-                                <Typography>Auto-scroll target into view</Typography>
-                            </Tooltip>,
-                            <Switch
-                                size="small"
-                                checked={autoScroll}
-                                onChange={() => setAutoScroll(!autoScroll)}
                             />,
                             "",
                             true

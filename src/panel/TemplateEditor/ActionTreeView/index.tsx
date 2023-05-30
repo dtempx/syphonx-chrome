@@ -3,6 +3,7 @@ import { TreeView } from "@mui/lab";
 import { useApp, useTemplate } from "../context";
 import { hiliteItem, Template } from "../lib";
 import ActionTreeItem from "./ActionTreeItem";
+import ActionTreeToolbar from "./ActionTreeToolbar";
 
 import {
     Alert,
@@ -17,7 +18,7 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
-    const { autoScroll } = useApp();
+    const { hotTracking } = useApp();
     const [expanded, setExpanded] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
 
@@ -38,13 +39,13 @@ export default () => {
 
     return (
         <Box>
+            <ActionTreeToolbar />
             {template.obj.error && (
                 <Tooltip title={template.obj.error}>
                     <Alert severity="error" sx={{ mb: 2 }}>
                         <Typography fontSize="small" noWrap>{template.obj.error}</Typography>
                     </Alert>
-                </Tooltip>
-                
+                </Tooltip>                
             )}
             <TreeView
                 expanded={expanded}
@@ -55,7 +56,8 @@ export default () => {
                 onNodeSelect={(event: any, value: any) => {
                     const item = template.setSelected(value);
                     setTemplate(template.json());
-                    hiliteItem(item, autoScroll);
+                    if (hotTracking)
+                        hiliteItem(item);
                 }}
             >
                 {template?.children?.map(item => <ActionTreeItem item={item} />)}
