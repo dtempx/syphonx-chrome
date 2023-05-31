@@ -24,7 +24,6 @@ export default () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    // WORKAROUND: TypeScript doesn't like the type of `extract.errors` so we have to cast it.
                     {errors.map(error => (
                         <TableRow>
                             <TableCell>{error.message}</TableCell>

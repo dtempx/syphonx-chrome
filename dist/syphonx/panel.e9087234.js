@@ -48284,20 +48284,17 @@ var $d7ff981b1d360305$export$2e2bcd8739ae039 = ()=>{
                         ]
                     })
                 }),
-                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
-                    children: [
-                        "// WORKAROUND: TypeScript doesn't like the type of `extract.errors` so we have to cast it.",
-                        errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
-                                children: [
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                        children: error.message
-                                    }),
-                                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
-                                        children: error.code
-                                    })
-                                ]
-                            }))
-                    ]
+                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c90d18d433fbb5ef$export$2e2bcd8739ae039), {
+                    children: errors.map((error)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ed3a5e9ae5a5bf88$export$2e2bcd8739ae039), {
+                            children: [
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                    children: error.message
+                                }),
+                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4288686d451c9d61$export$2e2bcd8739ae039), {
+                                    children: error.code
+                                })
+                            ]
+                        }))
                 })
             ]
         })
@@ -49966,8 +49963,8 @@ var $091ebf7d4ef406ba$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                 /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ded3d70a75b9f5a$export$2e2bcd8739ae039), {
                     value: obj.type,
                     onChange: (event, value)=>{
+                        obj.type = value;
                         if (value === "object") {
-                            obj.type = value;
                             obj.select = [
                                 {}
                             ];
@@ -52408,6 +52405,9 @@ var $3c4c2a279f4f7c8a$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
 
 
 
+
+
+
 var $1cd45ff28d900260$export$2e2bcd8739ae039 = (0, $609ea7e81f06e10a$export$2e2bcd8739ae039)(/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("path", {
     d: "M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
 }), "GpsFixed");
@@ -52432,7 +52432,10 @@ var $718ee160725a9576$export$2e2bcd8739ae039 = ()=>{
                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $fa1dfc78f8375ab9$export$2e2bcd8739ae039), {
                         size: "small",
                         color: hotTracking ? "primary" : "default",
-                        onClick: ()=>setHotTracking(!hotTracking),
+                        onClick: ()=>{
+                            setHotTracking(!hotTracking);
+                            (0, $2ee5c5620cf2e834$export$603f730ef4e341c1)();
+                        },
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1cd45ff28d900260$export$2e2bcd8739ae039), {
                             fontSize: "small"
                         })

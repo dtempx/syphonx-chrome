@@ -68,8 +68,8 @@ export default ({ item, onChange }: Props) => {
                     <SelectTypeDropdown
                         value={obj.type}
                         onChange={(event, value) => {
+                            obj.type = value;
                             if (value === "object") {
-                                obj.type = value;
                                 obj.select = [{}];
                                 obj.union = undefined;
                             }

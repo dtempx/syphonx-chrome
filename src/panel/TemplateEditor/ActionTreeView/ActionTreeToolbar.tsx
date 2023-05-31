@@ -1,6 +1,7 @@
 import React from "react";
 import { useApp } from "./context";
 import AddButton from "./AddButton";
+import { unhiliteAll } from "./lib";
 
 import {
     IconButton,
@@ -26,7 +27,10 @@ export default () => {
                     <IconButton
                         size="small"
                         color={hotTracking ? "primary" : "default"}
-                        onClick={() => setHotTracking(!hotTracking)}
+                        onClick={() => {
+                            setHotTracking(!hotTracking);
+                            unhiliteAll();
+                        }}
                     >
                         <HotTrackingIcon fontSize="small" />
                     </IconButton>
