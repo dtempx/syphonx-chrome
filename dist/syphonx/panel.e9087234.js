@@ -48726,7 +48726,7 @@ var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
             items: [
                 [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "A default URL for the template.",
+                        title: "An optional default URL for the template. Can be a plain string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference `params` to build a dynamic URL. Example: ```{`https://${origin}/${params.sku}`}```",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                             children: "url"
                         })
@@ -48737,6 +48737,7 @@ var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1808d8a09151f49f$export$2e2bcd8739ae039), {
                                 variant: "standard",
                                 size: "small",
+                                placeholder: "",
                                 fullWidth: true,
                                 value: template.obj.url,
                                 onChange: (event, value)=>{
@@ -48799,7 +48800,39 @@ var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
                 ],
                 [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                        title: "When to consider the browser navigation to be complete.",
+                        title: "Determines whether to use incognito mode.",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            children: "incognito"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                        size: "small",
+                        checked: template.obj.incognito ?? true,
+                        onChange: (event, value)=>{
+                            template.obj.incognito = value;
+                            setTemplate(template.json());
+                        }
+                    })
+                ],
+                [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Determines whether to use stealth mode.",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                            children: "stealth"
+                        })
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d30118e660fee7dd$export$2e2bcd8739ae039), {
+                        size: "small",
+                        checked: template.obj.stealth ?? false,
+                        onChange: (event, value)=>{
+                            template.obj.stealth = value;
+                            setTemplate(template.json());
+                        }
+                    })
+                ],
+                [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
+                        title: "Determines when to consider the initial page navigation to be complete.",
                         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                             children: "waitUntil"
                         })
@@ -49553,7 +49586,7 @@ var $e6663b9836ff0f3f$export$2e2bcd8739ae039 = ({ item: item , onChange: onChang
                         onChange(event);
                     }
                 }),
-                "The URL to naviate to. Can be a string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: ```{`https://${origin}/${data.name}`}```",
+                "The URL to naviate to. Can be a plain string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: ```{`https://${origin}/${data.name}`}```",
                 true,
                 !obj.url ? "A url must be specified" : ""
             ],

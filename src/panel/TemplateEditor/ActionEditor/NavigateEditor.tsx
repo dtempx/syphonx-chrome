@@ -50,7 +50,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "The URL to naviate to. Can be a string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: ```{`https://${origin}/${data.name}`}```",
+                    "The URL to naviate to. Can be a plain string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference a selector result via `data.name`, where name is the name of any previously evaluated selector. Example: ```{`https://${origin}/${data.name}`}```",
                     true,
                     !obj.url ? "A url must be specified" : ""
                 ],

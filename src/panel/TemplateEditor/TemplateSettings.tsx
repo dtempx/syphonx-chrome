@@ -5,6 +5,7 @@ import {
     IconButton,
     Paper,
     Stack,
+    Switch,
     Tooltip,
     Typography
 } from "@mui/material";
@@ -35,13 +36,14 @@ export default () => {
         <Paper elevation={3} className="panel" sx={{ width: 1, height: 300 }}>
             <PropertyGrid items={[
                 [
-                    <Tooltip title="A default URL for the template.">
+                    <Tooltip title="An optional default URL for the template. Can be a plain string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference `params` to build a dynamic URL. Example: ```{`https://${origin}/${params.sku}`}```">
                         <Typography>url</Typography>
                     </Tooltip>,
                     <Stack direction="row">
                         <ValidateField
                             variant="standard"
                             size="small"
+                            placeholder=""
                             fullWidth
                             value={template.obj.url}
                             onChange={(event, value) => {
@@ -96,7 +98,33 @@ export default () => {
                     />
                 ],
                 [
-                    <Tooltip title="When to consider the browser navigation to be complete.">
+                    <Tooltip title="Determines whether to use incognito mode.">
+                        <Typography>incognito</Typography>
+                    </Tooltip>,
+                    <Switch
+                        size="small"
+                        checked={template.obj.incognito ?? true}
+                        onChange={(event, value) => {
+                            template.obj.incognito = value;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Determines whether to use stealth mode.">
+                        <Typography>stealth</Typography>
+                    </Tooltip>,
+                    <Switch
+                        size="small"
+                        checked={template.obj.stealth ?? false}
+                        onChange={(event, value) => {
+                            template.obj.stealth = value;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Determines when to consider the initial page navigation to be complete.">
                         <Typography>waitUntil</Typography>
                     </Tooltip>,
                     <WaitUntilDropdown

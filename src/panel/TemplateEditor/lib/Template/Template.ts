@@ -25,6 +25,8 @@ interface AddSelectResult {
 interface TemplateObj extends Partial<syphonx.Template> {
     selected?: string;
     tests?: TemplateTest[];
+    incognito?: boolean;
+    stealth?: boolean;
     error?: string;
 }
 
