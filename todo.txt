@@ -1,44 +1,45 @@
-locator action
-switch action
+DONE: locator action
+DONE switch action
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
 
-add on to ErrorEditor
+typing filter for add action dialog
+new shadow jQuery extension function
+typing filter for open file should go across entire directory tree
+
+indicate unsaved template changes
+keep template open between sessions
+push current inpected page
+support dot format for selector names
+
+add label to scroll action (top, bottom, element)
+
+default query for object container (body)
+allow a selector with no query and no value so long as there is a sub-select with a query or a value (body workaround)
+
+
 add dropdown to code in ErrorEditor
 add dropdown to level in ErrorEditor
 
 DONE: negate option for selector
+DONE: negate option for ErrorEditor
 DONE: remove nulls option for selector
 
-add cookies interface to template settings
-remove key from template settings
-add waitUntil to template settings
-allow dot format for selector names
-limit as a formula not working (also update limit in chrome extension)
-indicate unsaved template changes
-add default empty second parameter to replace function
+DONE: add cookies interface to template settings
+DONE: remove key from template settings
+DONE: add waitUntil to template settings
+DONE: limit as a formula not working (also update limit in chrome extension)
+DONE: add default empty second parameter to replace function
 
-
-remove nulls from arrays
-remove key from template settings
-array icon is confusing with hamburger icon
-default query for object container (body)
-add label to scroll action (top, bottom, element)
-allow a selector with no query and no value so long as there is a sub-select with a query or a value (body workaround)
-
-
-working on home depot, see last 5 crawls, did they all work?
-
-
+DONE: remove nulls from arrays
+DONE: array icon is confusing with hamburger icon
 
 Switch selectElements function to use jQuery, or use syphonx.extract instead
 Log output window needs a search textbox with next/previous to be really useful!
 Fetch directories individually, not all at once
-Require API key to access pricespider templates
 
-Default eye open
-
-
+DONE: Default eye open
 DONE: Data contract matching (product-page, search-page, etc.)
+
 Add selectors without typing names
 Data explorer
 Formulas not working in chrome extension

@@ -18,6 +18,6 @@ export default ({ value, onChange }: Props) => (
         <MenuItem value="allInnerTexts">allInnerTexts</MenuItem>
         <MenuItem value="click">click</MenuItem>
         <MenuItem value="getAttribute">getAttribute</MenuItem>
-        <MenuItem value="screenshot">screenshot</MenuItem>
+        <MenuItem value="innerHTML">innerHTML</MenuItem>
     </Select>
 );

@@ -18,6 +18,14 @@
         "waitfor-timeout": "Timeout waiting for selector."
     };
 
+    function parseBoolean(value) {
+        if (typeof value === "boolean")
+            return value;
+        else if (typeof value === "string")
+            return value !== "" && value.toLowerCase() !== "false" && value.toLowerCase() !== "0";
+        else
+            return undefined;
+    }
     function parseNumber(value) {
         if (typeof value === "number") {
             return !isNaN(value) ? value : undefined;
@@ -32,6 +40,17 @@
             return !isNaN(result) ? result : undefined;
         }
         return undefined;
+    }
+    function parseUrl(url) {
+        if (typeof url === "string" && /^https?:\/\//.test(url)) {
+            const [protocol, , host] = url.split("/");
+            const a = host.split(":")[0].split(".").reverse();
+            return {
+                domain: a.length >= 3 && a[0].length === 2 && a[1].length === 2 ? `${a[2]}.${a[1]}.${a[0]}` : a.length >= 2 ? `${a[1]}.${a[0]}` : undefined,
+                origin: protocol && host ? `${protocol}//${host}` : undefined
+            };
+        }
+        return {};
     }
 
     function coerceValue(value, type, repeated) {
@@ -270,18 +289,6 @@
         }
     }
 
-    function parseUrl(url) {
-        if (typeof url === "string" && /^https?:\/\//.test(url)) {
-            const [protocol, , host] = url.split("/");
-            const a = host.split(":")[0].split(".").reverse();
-            return {
-                domain: a.length >= 3 && a[0].length === 2 && a[1].length === 2 ? `${a[2]}.${a[1]}.${a[0]}` : a.length >= 2 ? `${a[1]}.${a[0]}` : undefined,
-                origin: protocol && host ? `${protocol}//${host}` : undefined
-            };
-        }
-        return {};
-    }
-
     function createRegExp(value) {
         if (typeof value === "string" && value.startsWith("/")) {
             const i = value.lastIndexOf("/");
@@ -461,7 +468,7 @@
                 state.data = merge(state.data, state.__locator);
                 state.__locator = undefined;
             }
-            const version = "1.2.23";
+            const version = "1.2.26";
             this.state = {
                 params: {},
                 errors: [],
@@ -1143,6 +1150,7 @@
                         frame: locator.frame,
                         selector: locator.selector,
                         promote: locator.promote,
+                        method: locator.method,
                         arg0: locator.params ? locator.params[0] : undefined
                     }
                 });
@@ -1506,6 +1514,16 @@
                             result.value = result.value.map(value => value.trim()).filter(value => value.length > 0);
                         }
                     }
+                }
+                else if (operator === "shadow") {
+                    result.nodes = $(result.nodes.toArray().map(element => element.shadowRoot).filter(obj => !!obj));
+                }
+                else if (operator === "slot") {
+                    if (!this.validateOperands(operator, operands, [], ["boolean"])) {
+                        break;
+                    }
+                    const flatten = parseBoolean(operands[0]);
+                    result.nodes = $(result.nodes.toArray().map(element => element.assignedElements({ flatten })).filter(obj => !!obj));
                 }
                 else if (operator === "text" && operands[0] === "inline") {
                     result.value = result.nodes.toArray().map((element) => Array.from(element.childNodes)

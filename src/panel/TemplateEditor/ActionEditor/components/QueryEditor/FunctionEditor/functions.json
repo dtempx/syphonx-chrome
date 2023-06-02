@@ -649,6 +649,12 @@
         "args": []
     },
     {
+        "key": "shadow",
+        "advanced": true,
+        "help": "Access the shadow roots of the current set of matched element.",
+        "args": []
+    },
+    {
         "key": "siblings",
         "advanced": true,
         "help": "Return the siblings of each element in the set of matched elements, optionally filtered by a selector.",
@@ -681,6 +687,18 @@
                 "name": "End",
                 "type": "number",
                 "help": "An integer indicating the 0-based position at which the elements stop being selected. If negative, it indicates an offset from the end of the set."
+            }
+        ]
+    },
+    {
+        "key": "slot",
+        "advanced": true,
+        "help": "Access elements assigned to a slot element.",
+        "args": [
+            {
+                "name": "flatten",
+                "type": "boolean",
+                "help": "Returns a sequence of both the elements assigned to this slot, as well as the elements assigned to any other slots that are descendants of this slot."
             }
         ]
     },

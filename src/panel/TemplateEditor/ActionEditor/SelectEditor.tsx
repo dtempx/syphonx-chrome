@@ -190,6 +190,19 @@ export default ({ item, onChange }: Props) => {
                     obj.pattern !== undefined
                 ],
                 [
+                    <>remove&nbsp;nulls</>,
+                    <Switch
+                        size="small"
+                        checked={obj.removeNulls ?? false}
+                        onChange={(event, value) => {
+                            obj.removeNulls = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Removes null values from an array.",
+                    obj.removeNulls !== undefined
+                ],
+                [
                     "repeated",
                     <Switch
                         size="small"
