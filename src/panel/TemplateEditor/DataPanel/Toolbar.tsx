@@ -106,7 +106,7 @@ export default ({ mode, onChange } : Props) => {
                     />
                 )}
             </Stack>
-            {!!portal?.views?.full &&
+            {!!portal?.views?.panel &&
             <Stack direction="row">
                 <Tooltip title="portal" onClick={event => onChange(event, "portal")}>
                     <IconButton size="small" color={mode === "portal" ? "primary" : "default"}>

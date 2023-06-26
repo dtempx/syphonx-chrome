@@ -1,39 +1,36 @@
-DONE: locator action
-DONE switch action
+Taylor bug
+
+
+
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
+new shadow jQuery extension function
+switch selectElements function to use jQuery, or use syphonx.extract instead
+
+prevent .sx-select from ever showing up as a selector
+
+freeze add ribbon to top of tree panel
+support dot format for selector names
+subselect object is omitted when adding an object from the dialog
 
 typing filter for add action dialog
-new shadow jQuery extension function
 typing filter for open file should go across entire directory tree
 
+revision history
+disallow saving template that's changed on storage since it was loaded
 indicate unsaved template changes
 keep template open between sessions
-push current inpected page
-support dot format for selector names
+push current inpected page to panel data
 
 add label to scroll action (top, bottom, element)
 
 default query for object container (body)
 allow a selector with no query and no value so long as there is a sub-select with a query or a value (body workaround)
 
+typing filter in open template dialog would be more useful if it could search subdirectories
 
 add dropdown to code in ErrorEditor
 add dropdown to level in ErrorEditor
 
-DONE: negate option for selector
-DONE: negate option for ErrorEditor
-DONE: remove nulls option for selector
-
-DONE: add cookies interface to template settings
-DONE: remove key from template settings
-DONE: add waitUntil to template settings
-DONE: limit as a formula not working (also update limit in chrome extension)
-DONE: add default empty second parameter to replace function
-
-DONE: remove nulls from arrays
-DONE: array icon is confusing with hamburger icon
-
-Switch selectElements function to use jQuery, or use syphonx.extract instead
 Log output window needs a search textbox with next/previous to be really useful!
 Fetch directories individually, not all at once
 
@@ -267,4 +264,22 @@ sub-items
     pivot DONE
     union DONE
     finalize FAB selection context DONE
+
+
+
+DONE: locator action
+DONE: switch action
+
+DONE: negate option for selector
+DONE: negate option for ErrorEditor
+DONE: remove nulls option for selector
+
+DONE: add cookies interface to template settings
+DONE: remove key from template settings
+DONE: add waitUntil to template settings
+DONE: limit as a formula not working (also update limit in chrome extension)
+DONE: add default empty second parameter to replace function
+
+DONE: remove nulls from arrays
+DONE: array icon is confusing with hamburger icon
 

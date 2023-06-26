@@ -10,7 +10,8 @@ import {
 import {
     Dialog,
     DialogContent,
-    DialogTitle
+    DialogTitle,
+    Typography
 } from "@mui/material";
 
 export interface Props {
@@ -19,10 +20,16 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal } = useApp();
+    const { portal, debug, inspectedWindowUrl } = useApp();
     const { template: json, templateFile } = useTemplate();
     const template = new Template(json);
-    const params = new URLSearchParams({ ...template.obj.params, template: templateFile }).toString();
+    const obj = portal?.views?.full ? Object.fromEntries(new URL(portal.views.full).searchParams) : undefined;
+    const params = new URLSearchParams({
+        ...obj,
+        ...template.obj.params,
+        template: templateFile,
+        url: inspectedWindowUrl
+    }).toString();
     const url = `${portal?.views?.full}?${params}`;
 
     return (
@@ -38,6 +45,7 @@ export default ({ open, onClose }: Props) => {
 
             <DialogContent>
                 <iframe src={url} width="100%" height="100%" />
+                {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
             </DialogContent>
         </Dialog>
     );

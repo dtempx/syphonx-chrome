@@ -20,7 +20,7 @@ export const DataContext = React.createContext<DataState>({
 });
 
 export function DataProvider({ children }: { children: JSX.Element }) {
-    const { autoRefresh } = useApp();
+    const { autoRefresh, inspectedWindowUrl } = useApp();
     const { template: json, contract: contractJson } = useTemplate();
     const [extract, setExtract] = useState<syphonx.ExtractResult | undefined>();
     const [refreshing, setRefreshing] = useState(false);
@@ -40,9 +40,8 @@ export function DataProvider({ children }: { children: JSX.Element }) {
             if (reload)
                 await background.inspectedWindow.reload();
 
-            const url = await background.inspectedWindow.url();
             const contract = tryParseJson(contractJson) as Schema | undefined;
-            const result = await applyTemplate({ template, contract, url, debug: true });
+            const result = await applyTemplate({ template, contract, url: inspectedWindowUrl, debug: true });
             setExtract(result);
         }
         setRefreshing(false);

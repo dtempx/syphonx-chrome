@@ -107,7 +107,7 @@ export default ({ item, onChange }: Props) => {
                             onChange(event);
                         }}
                     />,
-                    "A CSS selector or jQuery expression that determines whether an error is produced. If specified, an error is produced if the query finds no element. An error is produced unconditionally if not specified.",
+                    "A CSS selector or jQuery expression that determines whether an error is raised. If specified, an error is raised if the query produces a negative result (i.e. if something IS NOT there). To raise an error on a positive result (i.e. if something IS there), simply flip the negate switch. An error is raised unconditionally if not specified.",
                     true
                 ],
                 [

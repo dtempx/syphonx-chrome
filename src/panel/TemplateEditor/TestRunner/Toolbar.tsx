@@ -1,6 +1,6 @@
 import React from "react";
-import { useTemplate } from "../context";
-import { background, Template } from "../lib";
+import { useApp, useTemplate } from "../context";
+import { Template } from "../lib";
 
 import {
     IconButton,
@@ -13,21 +13,23 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
+    const { inspectedWindowUrl } = useApp();
     const { template: json, setTemplate } = useTemplate();
-
-    async function onAdd() {
-        const template = new Template(json);
-        const tab = await background.inspectedWindow.activeTab();
-        if (tab.url) {
-            template.addTest({ url: tab.url });
-            setTemplate(template.json());
-        }
-    }
 
     return (
         <Stack direction="row">
             <Tooltip title="Add url">
-                <IconButton size="small" onClick={onAdd}><AddIcon fontSize="small" /></IconButton>
+                <IconButton
+                    size="small"
+                    onClick={() => {
+                        if (inspectedWindowUrl) {
+                            const template = new Template(json);
+                            template.addTest({ url: inspectedWindowUrl });
+                            setTemplate(template.json());
+                        }
+                    }}>
+                    <AddIcon fontSize="small" />
+                </IconButton>
             </Tooltip>
         </Stack>
     );

@@ -3,12 +3,10 @@ import { useTemplate } from "../context";
 import { background, Template } from "../lib";
 
 import {
-    Checkbox,
     IconButton,
     List,
     ListItem,
     ListItemButton,
-    ListItemIcon,
     ListItemText,
     Stack,
     SxProps,

@@ -1,15 +1,25 @@
 import React from "react";
 import { useApp, useTemplate } from "../context";
 import { Template } from "../lib";
+import { Box, Typography } from "@mui/material";
 
 export default () => {
-    const { portal } = useApp();
+    const { portal, debug, inspectedWindowUrl } = useApp();
     const { template: json, templateFile } = useTemplate();
     const template = new Template(json);
-    const params = new URLSearchParams({ ...template.obj.params, template: templateFile }).toString();
+    const obj = portal?.views?.panel ? Object.fromEntries(new URL(portal.views.panel).searchParams) : undefined;
+    const params = new URLSearchParams({
+        ...obj,
+        ...template.obj.params,
+        template: templateFile,
+        url: inspectedWindowUrl
+    }).toString();
     const url = `${portal?.views?.panel}?${params}`;
 
     return (
-        <iframe src={url} width="100%" height="100%" />
+        <Box>
+            <iframe src={url} width="100%" height="100%" />
+            {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
+        </Box>
     );
 }

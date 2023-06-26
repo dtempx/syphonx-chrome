@@ -25,6 +25,7 @@ export interface AppState {
     setServiceUrl: React.Dispatch<React.SetStateAction<string>>;
     portal: Portal | undefined;
     setPortal: React.Dispatch<React.SetStateAction<Portal | undefined>>;
+    inspectedWindowUrl: string;
 }
 
 export function useApp() {
@@ -42,6 +43,25 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [serviceUrl, setServiceUrl] = useState("");
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
+    const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const tabId = chrome.devtools.inspectedWindow.tabId;
+                const tab = await chrome.tabs.get(tabId);
+                if (tab?.url)
+                    setInspectedWindowUrl(tab.url);
+            }
+            catch (err) {
+                debugger;
+                console.error(err);
+            }
+        })();
+    }, []);
+
+    chrome.devtools.network.onNavigated.addListener(url =>
+        setInspectedWindowUrl(url));
 
     useEffect(() => {
         chrome.storage.local.get(
@@ -142,7 +162,8 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         serviceUrl,
         setServiceUrl,
         portal,
-        setPortal
+        setPortal,
+        inspectedWindowUrl
     };
 
     return (
