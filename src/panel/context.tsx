@@ -45,6 +45,11 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
 
+    // update inspectedWindowUrl when the inspected window is re-navigated
+    chrome.devtools.network.onNavigated.addListener(url => {
+        setInspectedWindowUrl(url)
+    });
+
     useEffect(() => {
         (async () => {
             try {
@@ -59,9 +64,6 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             }
         })();
     }, []);
-
-    chrome.devtools.network.onNavigated.addListener(url =>
-        setInspectedWindowUrl(url));
 
     useEffect(() => {
         chrome.storage.local.get(

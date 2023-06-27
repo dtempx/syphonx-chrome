@@ -22998,6 +22998,10 @@ function $bda87eb62dcce197$export$c7dacf3845253dcf({ children: children  }) {
     const [serviceUrl, setServiceUrl] = (0, $d4J5n.useState)("");
     const [portal, setPortal] = (0, $d4J5n.useState)(undefined);
     const [inspectedWindowUrl, setInspectedWindowUrl] = (0, $d4J5n.useState)("");
+    // update inspectedWindowUrl when the inspected window is re-navigated
+    chrome.devtools.network.onNavigated.addListener((url)=>{
+        setInspectedWindowUrl(url);
+    });
     (0, $d4J5n.useEffect)(()=>{
         (async ()=>{
             try {
@@ -23010,7 +23014,6 @@ function $bda87eb62dcce197$export$c7dacf3845253dcf({ children: children  }) {
             }
         })();
     }, []);
-    chrome.devtools.network.onNavigated.addListener((url)=>setInspectedWindowUrl(url));
     (0, $d4J5n.useEffect)(()=>{
         chrome.storage.local.get([
             "advanced",
@@ -40946,10 +40949,6 @@ var $d4J5n = parcelRequire("d4J5n");
 var $d4J5n = parcelRequire("d4J5n");
 
 
-var $d4J5n = parcelRequire("d4J5n");
-
-
-
 async function $299b35aeb8608453$export$6614160a7506204e(formula, params = {}) {
     const script = $299b35aeb8608453$var$iffy($299b35aeb8608453$var$_evaluateFormula, formula, params);
     const result = await (0, $af9fac753574b590$exports).inspectedWindow.evaluate(script);
@@ -41813,6 +41812,26 @@ class $7182cf99d95db7c1$export$14416b8d99d47caa {
 
 
 
+function $5c9a0bdede8f3aa3$export$95d0815810fa2c63() {
+    // watch for a new tab being created where the url ends with "#syphonx"
+    chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)=>{
+        if (tab.url) {
+            const i = tab.url.indexOf("#syphonx");
+            if (i > 0) {
+                const url = tab.url.substring(0, i);
+                await chrome.tabs.remove(tabId);
+                await (0, $af9fac753574b590$exports).inspectedWindow.navigate(url);
+            }
+        }
+    });
+}
+
+
+
+
+var $d4J5n = parcelRequire("d4J5n");
+
+
 
 var $fSWog = parcelRequire("fSWog");
 
@@ -41974,6 +41993,7 @@ var $82ac1358084decf3$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
 
 
 function $c1a28ccf972eabfc$export$5c3a5f48c762cb34() {
+    (0, $5c9a0bdede8f3aa3$export$95d0815810fa2c63)();
     const context = {
         ...(0, $d4J5n.useContext)((0, $d19803726287b231$export$58d75f9829cbe158)),
         ...(0, $d4J5n.useContext)((0, $746f51ebc403c25a$export$9a1b410c76d0e146)),
