@@ -18,20 +18,11 @@ function $parcel$exportWildcard(dest, source) {
 function $parcel$export(e, n, v, s) {
   Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
-var $cbed4e9154d137c9$exports = {};
-var $01621980ace9efc3$exports = {};
+var $c87da5d7c68b75f5$exports = {};
+var $8cdb1712ec29f242$exports = {};
 
-$parcel$export($01621980ace9efc3$exports, "applyTemplate", () => $01621980ace9efc3$export$f78a296632f66e69);
-async function $01621980ace9efc3$export$f78a296632f66e69(template) {
-    const result = await syphonx.extract(template);
-    return result;
-}
-
-
-var $2e55ed3d8b90d5bb$exports = {};
-
-$parcel$export($2e55ed3d8b90d5bb$exports, "queryTracking", () => $2e55ed3d8b90d5bb$export$225ea495d1fa0d5);
-function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5({ className: className , nthOfTypeRunLimit: nthOfTypeRunLimit = 3  }) {
+$parcel$export($8cdb1712ec29f242$exports, "queryTracking", () => $8cdb1712ec29f242$export$225ea495d1fa0d5);
+function $8cdb1712ec29f242$export$225ea495d1fa0d5({ className: className , nthOfTypeRunLimit: nthOfTypeRunLimit = 3  }) {
     const result = [];
     const targetElement = document.querySelector(`.${className}`);
     if (targetElement) {
@@ -114,10 +105,10 @@ function $2e55ed3d8b90d5bb$export$225ea495d1fa0d5({ className: className , nthOf
 }
 
 
-var $f29204d28571a071$exports = {};
+var $ffe3c7192d2650f5$exports = {};
 
-$parcel$export($f29204d28571a071$exports, "selectElements", () => $f29204d28571a071$export$f2909722c7f0f932);
-function $f29204d28571a071$export$f2909722c7f0f932({ selectors: selectors , className: className , limit: limit = 100 , scrollIntoView: scrollIntoView = true  }) {
+$parcel$export($ffe3c7192d2650f5$exports, "selectElements", () => $ffe3c7192d2650f5$export$f2909722c7f0f932);
+function $ffe3c7192d2650f5$export$f2909722c7f0f932({ selectors: selectors , className: className , limit: limit = 100 , scrollIntoView: scrollIntoView = true  }) {
     document.querySelectorAll(`.${className}`).forEach((element)=>element.classList.remove(className));
     const result = [];
     for (const selector of selectors)if (selector && result.length <= limit) document.querySelectorAll(selector).forEach((element)=>{
@@ -138,10 +129,10 @@ function $f29204d28571a071$export$f2909722c7f0f932({ selectors: selectors , clas
 }
 
 
-var $859ab05ff1145d6e$exports = {};
+var $1890a324f309be77$exports = {};
 
-$parcel$export($859ab05ff1145d6e$exports, "sliceHtml", () => $859ab05ff1145d6e$export$ff5493406baa93c1);
-function $859ab05ff1145d6e$export$ff5493406baa93c1({ selector: selector , up: up = 3 , down: down = 3  }) {
+$parcel$export($1890a324f309be77$exports, "sliceHtml", () => $1890a324f309be77$export$ff5493406baa93c1);
+function $1890a324f309be77$export$ff5493406baa93c1({ selector: selector , up: up = 3 , down: down = 3  }) {
     const elements = mark();
     const output = [];
     render(document.documentElement);
@@ -225,11 +216,11 @@ function $859ab05ff1145d6e$export$ff5493406baa93c1({ selector: selector , up: up
 }
 
 
-var $f112e3412bcef94d$exports = {};
+var $5b2302174baa9f09$exports = {};
 
-$parcel$export($f112e3412bcef94d$exports, "disableTracking", () => $f112e3412bcef94d$export$e684be5f4b22cc14);
-$parcel$export($f112e3412bcef94d$exports, "enableTracking", () => $f112e3412bcef94d$export$1f8ffc6fd33b1d16);
-function $f112e3412bcef94d$export$e684be5f4b22cc14() {
+$parcel$export($5b2302174baa9f09$exports, "disableTracking", () => $5b2302174baa9f09$export$e684be5f4b22cc14);
+$parcel$export($5b2302174baa9f09$exports, "enableTracking", () => $5b2302174baa9f09$export$1f8ffc6fd33b1d16);
+function $5b2302174baa9f09$export$e684be5f4b22cc14() {
     syphonx.tracking = false;
     document.querySelectorAll(".sx-hover").forEach((element)=>{
         element.classList.remove("sx-hover");
@@ -244,7 +235,7 @@ function $f112e3412bcef94d$export$e684be5f4b22cc14() {
         syphonx.reset = undefined;
     }
 }
-function $f112e3412bcef94d$export$1f8ffc6fd33b1d16() {
+function $5b2302174baa9f09$export$1f8ffc6fd33b1d16() {
     syphonx.tracking = true;
     syphonx.reset = ()=>{
         document.removeEventListener("click", onClick);
@@ -298,11 +289,10 @@ function $f112e3412bcef94d$export$1f8ffc6fd33b1d16() {
 }
 
 
-$parcel$exportWildcard($cbed4e9154d137c9$exports, $01621980ace9efc3$exports);
-$parcel$exportWildcard($cbed4e9154d137c9$exports, $2e55ed3d8b90d5bb$exports);
-$parcel$exportWildcard($cbed4e9154d137c9$exports, $f29204d28571a071$exports);
-$parcel$exportWildcard($cbed4e9154d137c9$exports, $859ab05ff1145d6e$exports);
-$parcel$exportWildcard($cbed4e9154d137c9$exports, $f112e3412bcef94d$exports);
+$parcel$exportWildcard($c87da5d7c68b75f5$exports, $8cdb1712ec29f242$exports);
+$parcel$exportWildcard($c87da5d7c68b75f5$exports, $ffe3c7192d2650f5$exports);
+$parcel$exportWildcard($c87da5d7c68b75f5$exports, $1890a324f309be77$exports);
+$parcel$exportWildcard($c87da5d7c68b75f5$exports, $5b2302174baa9f09$exports);
 
 
 /**
@@ -355,8 +345,9 @@ $parcel$exportWildcard($cbed4e9154d137c9$exports, $f112e3412bcef94d$exports);
 async function $a84d1809a4222847$var$injectAll(tabId) {
     const injected = await $a84d1809a4222847$var$executeScript(tabId, ()=>typeof window.syphonx === "object");
     if (!injected) {
-        await $a84d1809a4222847$var$executeScriptFile(tabId, "jquery.slim.js");
-        await $a84d1809a4222847$var$executeScriptFile(tabId, "syphonx.js");
+        //await executeScriptFile(tabId, "jquery.slim.js");
+        //await executeScriptFile(tabId, "syphonx.js");
+        await $a84d1809a4222847$var$executeScript(tabId, ()=>window.syphonx = {}); // set inclusion guard
         await chrome.scripting.insertCSS({
             target: {
                 tabId: tabId
@@ -365,7 +356,7 @@ async function $a84d1809a4222847$var$injectAll(tabId) {
                 "syphonx.css"
             ]
         });
-        console.log(`BACKGROUND sx injected tabId=${tabId}`);
+    //console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }
 function $a84d1809a4222847$var$waitForNavigation() {
@@ -379,6 +370,22 @@ function $a84d1809a4222847$var$waitForNavigation() {
         chrome.webNavigation.onCompleted.addListener(onCompleted);
     });
 }
+// This method listens for updates to tabs.
+// It is triggered every time a tab is updated, which can be caused by various events such as loading a page, changing the URL, the tab reloading, etc.
+// The listener receives the tabId, an object containing details about the change (changeInfo), and an object with info about the tab (tabInfo).
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab)=>{
+    if (changeInfo.status === "complete" && tab.active) // forward messages from the DOM window into the chrome runtime
+    await $a84d1809a4222847$var$executeScript(tabId, ()=>{
+        window.addEventListener("message", (event)=>{
+            if (event.source === window && event.data.direction === "syphonx") chrome.runtime.sendMessage({
+                syphonx: event.data.message
+            });
+        });
+    });
+});
+// This method listens for messages that are sent from either content scripts or other parts of your extension (like a popup script or background script).
+// It's primarily used for inter-component communication within your extension.
+// This could include sending data between your background and content scripts, triggering specific actions in response to certain messages, etc.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     if (message.log) {
         console.log("MESSAGE", message.log);
@@ -436,7 +443,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
             });
         })();
         return true; // response will be sent asynchronously
-    } else if (!Object.keys($cbed4e9154d137c9$exports).includes(message.key)) {
+    } else if (!Object.keys($c87da5d7c68b75f5$exports).includes(message.key)) {
         console.warn("MESSAGE", {
             message: message,
             sender: sender,
@@ -447,7 +454,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     (async ()=>{
         try {
             await $a84d1809a4222847$var$injectAll(message.tabId);
-            const script = $cbed4e9154d137c9$exports[message.key];
+            const script = $c87da5d7c68b75f5$exports[message.key];
             const result = await $a84d1809a4222847$var$executeScript(message.tabId, script, ...message.params);
             //const result = await executeScript(message.tabId, scripts[message.key] as () => void, ...message.params);
             console.log("MESSAGE", message.key, {
@@ -471,7 +478,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
     })();
     return true; // response will be sent asynchronously
 });
-console.log("BACKGROUND ready");
 
 })();
 //# sourceMappingURL=service_worker.js.map

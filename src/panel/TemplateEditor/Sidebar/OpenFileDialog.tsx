@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
-import { background, sleep, Template } from "../lib";
+import { inspectedWindow, sleep, Template } from "../lib";
 import { useApp, useTemplate } from "../context";
 
 export interface Props {
@@ -53,7 +53,7 @@ export default ({ open, onClose }: Props) => {
             if (autoOpen) {
                 const url = await template.expandUrl();
                 if (url) {
-                    background.inspectedWindow.navigate(url);
+                    inspectedWindow.navigate(url);
                     await sleep(1000); // give some time for page to navigate before setting template    
                 }
             }

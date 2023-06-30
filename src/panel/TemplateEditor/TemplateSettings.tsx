@@ -15,7 +15,7 @@ import {
 } from "@mui/icons-material";
 
 import {
-    background,
+    inspectedWindow,
     isFormula,
     regexp,
     validateFormula,
@@ -63,7 +63,7 @@ export default () => {
                             onClick={async () => {
                                 const url = await template.expandUrl();
                                 if (url)
-                                    background.inspectedWindow.navigate(url);
+                                    inspectedWindow.navigate(url);
                             }}
                             sx={{ visibility: template.obj.url ? "visible" : "hidden" }}
                         >

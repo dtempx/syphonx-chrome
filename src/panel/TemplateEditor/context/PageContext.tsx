@@ -26,7 +26,8 @@ export function PageProvider({ children }: { children: JSX.Element }) {
     };
 
     chrome.runtime.onMessage.addListener(message => {
-        setClick(message.click);
+        if (message.click)
+            setClick(message.click);
     });
 
     return (

@@ -1,4 +1,4 @@
-import { background } from "../lib";
+import { inspectedWindow } from "../lib";
 
 export function addListeners() {
     // watch for a new tab being created where the url ends with "#syphonx"
@@ -8,7 +8,7 @@ export function addListeners() {
             if (i > 0) {
                 const url = tab.url.substring(0, i);
                 await chrome.tabs.remove(tabId);
-                await background.inspectedWindow.navigate(url);
+                await inspectedWindow.navigate(url);
             }
         }
     });
