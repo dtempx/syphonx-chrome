@@ -7,12 +7,11 @@ import {
 } from "@mui/material";
 
 interface Props {
-    children: React.ReactNode;
     fullWidth?: boolean;
     sx?: SxProps<Theme>;
 }
 
-export default ({ children, fullWidth, sx }: Props) => (
+export default ({ children, fullWidth, sx }: React.PropsWithChildren<Props>) => (
     <Box
         sx={{
             ...sx,

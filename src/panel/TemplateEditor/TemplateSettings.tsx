@@ -33,7 +33,15 @@ export default () => {
     const { template: json, setTemplate } = useTemplate();
     const template = new Template(json);
     return (
-        <Paper elevation={3} className="panel" sx={{ width: 1, height: 300 }}>
+        <Paper
+            elevation={3}
+            sx={{
+                width: 1,
+                height: 300,
+                m: 1,
+                p: 1
+            }}
+        >
             <PropertyGrid items={[
                 [
                     <Tooltip title="An optional default URL for the template. Can be a plain string or a formula. A formula is a Javascript expression enclosed in curly braces that returns a string. The formula can reference `params` to build a dynamic URL. Example: ```{`https://${origin}/${params.sku}`}```">

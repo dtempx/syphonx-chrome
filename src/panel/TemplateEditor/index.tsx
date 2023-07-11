@@ -23,18 +23,28 @@ export default () => {
             }}
         >
             <TemplateProvider>
-                <Box sx={{ minWidth: 500 }}>
+                <Box
+                    sx={{
+                        overflow: "hidden",
+                        minWidth: 500
+                    }}
+                >
                     <AppBar />
                     <AppFrame>
-                        <>
-                            {mode === "visual-editor" && <VisualEditor />}
-                            {mode === "code-editor" && <CodeEditor />}
-                            {mode === "test-runner" && <TestRunner />}
-                            {mode === "template-settings" && <TemplateSettings />}
-                            <Paper elevation={3} className="panel" sx={{ width: 1, minHeight: 250 }}>
-                                <DataPanel />
-                            </Paper>
-                        </>
+                        {mode === "visual-editor" && <VisualEditor />}
+                        {mode === "code-editor" && <CodeEditor />}
+                        {mode === "test-runner" && <TestRunner />}
+                        {mode === "template-settings" && <TemplateSettings />}
+                        <Paper
+                            elevation={3}
+                            sx={{
+                                width: 1,
+                                m: 1,
+                                p: 1
+                            }}
+                        >
+                            <DataPanel />
+                        </Paper>
                     </AppFrame>
                 </Box>
             </TemplateProvider>

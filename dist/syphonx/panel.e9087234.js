@@ -70296,7 +70296,7 @@ var $4e7dac6bc7f95008$export$2e2bcd8739ae039 = ({ open: open , onClose: onClose 
                                     sx: {
                                         height: 300,
                                         maxHeight: 300,
-                                        overflowY: "scroll"
+                                        overflow: "auto"
                                     },
                                     children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $1c5dc86d237135ad$export$2e2bcd8739ae039), {
                                         expanded: expanded,
@@ -70812,8 +70812,7 @@ var $815f6225cac30e41$export$2e2bcd8739ae039 = ({ error: error , resetErrorBound
                                     backgroundColor: "#eee",
                                     fontFamily: "monospace",
                                     fontSize: "xx-small",
-                                    overflowX: "scroll",
-                                    overflowY: "scroll",
+                                    overflow: "auto",
                                     padding: "8px"
                                 },
                                 children: error.stack
@@ -71924,20 +71923,13 @@ var $4e6279b9ecb1b8f5$export$2e2bcd8739ae039 = ({ children: children  })=>/*#__P
             backgroundColor: "#ebedf0",
             width: 1,
             height: 1,
-            minWidth: 500,
-            overflowX: "scroll",
-            p: 2
+            p: 2,
+            minWidth: 500
         },
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
             sx: {
                 display: "flex",
-                flexWrap: "wrap",
-                "& .panel": {
-                    position: "relative",
-                    overflow: "scroll",
-                    m: 1,
-                    p: 1
-                }
+                flexWrap: "wrap"
             },
             children: children
         })
@@ -71964,20 +71956,24 @@ var $f9ff0d55efab4341$export$2e2bcd8739ae039 = ()=>{
     ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
-        className: "panel",
         sx: {
             width: 1,
-            height: 300
+            height: 300,
+            m: 1,
+            p: 1
         },
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e00f995e0f3cc83a$export$2e2bcd8739ae039), {
-            variant: "outlined",
+            variant: "standard",
             size: "small",
             multiline: true,
             fullWidth: true,
             value: code,
             sx: {
                 height: "100%",
-                overflow: "scroll"
+                overflow: "auto"
+            },
+            InputProps: {
+                disableUnderline: true
             }
         })
     });
@@ -72002,9 +71998,10 @@ var $bff80b61d3d114da$export$2e2bcd8739ae039 = ()=>{
         multiline: true,
         fullWidth: true,
         value: contract ? JSON.stringify((0, $93c68b80015d5f0a$export$798eca59d671408d)(contract), null, 2) : "",
-        variant: "outlined",
+        variant: "standard",
         size: "small",
         InputProps: {
+            disableUnderline: true,
             style: {
                 fontSize: "x-small"
             }
@@ -72066,9 +72063,10 @@ var $239f53bd6025a4d3$export$2e2bcd8739ae039 = ()=>{
         multiline: true,
         fullWidth: true,
         value: extract && extract.data ? JSON.stringify($f416d917bf40aa13$exports.unwrap(extract.data), null, 2) : "",
-        variant: "outlined",
+        variant: "standard",
         size: "small",
         InputProps: {
+            disableUnderline: true,
             style: {
                 fontSize: "x-small"
             }
@@ -72090,9 +72088,10 @@ var $f491160ee07900ae$export$2e2bcd8739ae039 = ()=>{
         multiline: true,
         fullWidth: true,
         value: log,
-        variant: "outlined",
+        variant: "standard",
         size: "small",
         InputProps: {
+            disableUnderline: true,
             style: {
                 fontSize: "x-small"
             }
@@ -72149,9 +72148,10 @@ var $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039 = ()=>{
         multiline: true,
         fullWidth: true,
         value: response ? JSON.stringify(response, null, 2) : "",
-        variant: "outlined",
+        variant: "standard",
         size: "small",
         InputProps: {
+            disableUnderline: true,
             style: {
                 fontSize: "x-small"
             }
@@ -72420,45 +72420,56 @@ var $e322818ad30de054$export$2e2bcd8739ae039 = ()=>{
     const [mode, setMode] = (0, $d4J5n.useState)("table");
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "column",
+        sx: {
+            height: 400
+        },
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bb01957673566bdf$export$2e2bcd8739ae039), {
                 mode: mode,
                 onChange: (event, mode)=>setMode(mode)
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "table" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a71c5db2600073d4$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "json" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $239f53bd6025a4d3$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "contract" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bff80b61d3d114da$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "log" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f491160ee07900ae$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "raw" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "errors" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7ff981b1d360305$export$2e2bcd8739ae039), {})
-            }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
-                component: "div",
-                display: mode === "portal" ? "block" : "none",
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c09cf268b7c9b4a6$export$2e2bcd8739ae039), {})
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    height: 365,
+                    overflow: "auto"
+                },
+                children: [
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "table" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a71c5db2600073d4$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "json" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $239f53bd6025a4d3$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "contract" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bff80b61d3d114da$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "log" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f491160ee07900ae$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "raw" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $6d63cf3d0b5dd5c6$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "errors" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d7ff981b1d360305$export$2e2bcd8739ae039), {})
+                    }),
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        component: "div",
+                        display: mode === "portal" ? "block" : "none",
+                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $c09cf268b7c9b4a6$export$2e2bcd8739ae039), {})
+                    })
+                ]
             })
         ]
     });
@@ -72483,10 +72494,11 @@ var $ddd1a4f7472c759d$export$2e2bcd8739ae039 = ()=>{
     const template = new (0, $7182cf99d95db7c1$export$14416b8d99d47caa)(json);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
-        className: "panel",
         sx: {
             width: 1,
-            height: 300
+            height: 300,
+            m: 1,
+            p: 1
         },
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $71b55ed5fcc7e1a3$export$2e2bcd8739ae039), {
             items: [
@@ -72725,10 +72737,12 @@ var $581f65c901be6788$export$2e2bcd8739ae039 = ({ sx: sx  })=>{
 var $e39c2ccebfc12579$export$2e2bcd8739ae039 = ()=>{
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
         elevation: 3,
-        className: "panel",
         sx: {
             width: 1,
-            height: 300
+            height: 300,
+            m: 1,
+            p: 1,
+            overflow: "auto"
         },
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
             direction: "column",
@@ -76310,28 +76324,34 @@ var $982e4648bf1953fa$export$2e2bcd8739ae039 = ()=>{
                     })
                 })
             }),
-            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ed19a9323b6d50c$export$2e2bcd8739ae039), {
-                expanded: expanded,
-                selected: selected,
-                defaultCollapseIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3152ee484e1d7499$export$2e2bcd8739ae039), {
-                    sx: {
-                        color: "primary.light"
-                    }
-                }),
-                defaultExpandIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d26849bb34d8b0e4$export$2e2bcd8739ae039), {
-                    sx: {
-                        color: "primary.light"
-                    }
-                }),
-                onNodeToggle: (event, nodeIds)=>setExpanded(nodeIds),
-                onNodeSelect: (event, value)=>{
-                    const item = template.setSelected(value);
-                    setTemplate(template.json());
-                    if (hotTracking) (0, $2ee5c5620cf2e834$export$d990cc7a148f038f)(item);
+            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                sx: {
+                    height: 230,
+                    overflow: "auto"
                 },
-                children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ec7899798df4c4f5$export$2e2bcd8739ae039), {
-                        item: item
-                    }))
+                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4ed19a9323b6d50c$export$2e2bcd8739ae039), {
+                    expanded: expanded,
+                    selected: selected,
+                    defaultCollapseIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $3152ee484e1d7499$export$2e2bcd8739ae039), {
+                        sx: {
+                            color: "primary.light"
+                        }
+                    }),
+                    defaultExpandIcon: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $d26849bb34d8b0e4$export$2e2bcd8739ae039), {
+                        sx: {
+                            color: "primary.light"
+                        }
+                    }),
+                    onNodeToggle: (event, nodeIds)=>setExpanded(nodeIds),
+                    onNodeSelect: (event, value)=>{
+                        const item = template.setSelected(value);
+                        setTemplate(template.json());
+                        if (hotTracking) (0, $2ee5c5620cf2e834$export$d990cc7a148f038f)(item);
+                    },
+                    children: template?.children?.map((item)=>/*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ec7899798df4c4f5$export$2e2bcd8739ae039), {
+                            item: item
+                        }))
+                })
             })
         ]
     });
@@ -76345,21 +76365,24 @@ var $23d5c3b2516abd1b$export$2e2bcd8739ae039 = ()=>/*#__PURE__*/ (0, $17b288f07e
         },
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                className: "panel",
                 elevation: 3,
                 sx: {
                     position: "relative",
                     height: 300,
-                    width: 500
+                    width: 500,
+                    m: 1,
+                    p: 1
                 },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $982e4648bf1953fa$export$2e2bcd8739ae039), {})
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                className: "panel",
                 elevation: 3,
                 sx: {
                     height: 300,
-                    width: 1
+                    width: 1,
+                    m: 1,
+                    p: 1,
+                    overflowY: "auto"
                 },
                 children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $a14b100ac6e4875e$export$2e2bcd8739ae039), {})
             })
@@ -76379,28 +76402,27 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
         children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $82ac1358084decf3$export$2e2bcd8739ae039), {
             children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 sx: {
+                    overflow: "hidden",
                     minWidth: 500
                 },
                 children: [
                     /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $87ef8a643ef21af0$export$2e2bcd8739ae039), {}),
-                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
-                        children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $17b288f07ec57b56$exports.Fragment), {
-                            children: [
-                                mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
-                                mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
-                                mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
-                                mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
-                                /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
-                                    elevation: 3,
-                                    className: "panel",
-                                    sx: {
-                                        width: 1,
-                                        minHeight: 250
-                                    },
-                                    children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
-                                })
-                            ]
-                        })
+                    /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $4e6279b9ecb1b8f5$export$2e2bcd8739ae039), {
+                        children: [
+                            mode === "visual-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $23d5c3b2516abd1b$export$2e2bcd8739ae039), {}),
+                            mode === "code-editor" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f9ff0d55efab4341$export$2e2bcd8739ae039), {}),
+                            mode === "test-runner" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e39c2ccebfc12579$export$2e2bcd8739ae039), {}),
+                            mode === "template-settings" && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $ddd1a4f7472c759d$export$2e2bcd8739ae039), {}),
+                            /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
+                                elevation: 3,
+                                sx: {
+                                    width: 1,
+                                    m: 1,
+                                    p: 1
+                                },
+                                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e322818ad30de054$export$2e2bcd8739ae039), {})
+                            })
+                        ]
                     })
                 ]
             })

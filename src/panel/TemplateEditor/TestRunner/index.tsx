@@ -9,7 +9,16 @@ import {
 
 export default () => {
     return (
-        <Paper elevation={3} className="panel" sx={{ width: 1, height: 300 }}>
+        <Paper
+            elevation={3}
+            sx={{
+                width: 1,
+                height: 300,
+                m: 1,
+                p: 1,
+                overflow: "auto"
+            }}
+        >
             <Stack direction="column">
                 <Toolbar />
                 <ListView sx={{ mt: 1 }} />

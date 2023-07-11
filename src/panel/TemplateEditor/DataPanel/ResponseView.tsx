@@ -10,9 +10,10 @@ export default () => {
             multiline
             fullWidth
             value={response ? JSON.stringify(response, null, 2) : ""}
-            variant="outlined"
+            variant="standard"
             size="small"
             InputProps={{
+                disableUnderline: true,
                 style: { fontSize: "x-small" }
             }}
         />

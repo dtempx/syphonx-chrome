@@ -16,29 +16,41 @@ import {
 export default () => {
     const [mode, setMode] = useState<DataViewMode>("table");
     return (
-        <Stack direction="column">
+        <Stack
+            direction="column"
+            sx={{
+                height: 400
+            }}
+        >
             <Toolbar mode={mode} onChange={(event, mode) => setMode(mode)} />
-            <Box component="div" display={mode === "table" ? "block" : "none"}>
-                <TableView />
-            </Box>
-            <Box component="div" display={mode === "json" ? "block" : "none"}>
-                <JsonView />
-            </Box>
-            <Box component="div" display={mode === "contract" ? "block" : "none"}>
-                <ContractView />
-            </Box>
-            <Box component="div" display={mode === "log" ? "block" : "none"}>
-                <LogView />
-            </Box>
-            <Box component="div" display={mode === "raw" ? "block" : "none"}>
-                <ResponseView />
-            </Box>
-            <Box component="div" display={mode === "errors" ? "block" : "none"}>
-                <ErrorView />
-            </Box>
-            <Box component="div" display={mode === "portal" ? "block" : "none"}>
-                <PortalView />
+            <Box
+                sx={{
+                    height: 365,
+                    overflow: "auto"
+                }}
+            >
+                <Box component="div" display={mode === "table" ? "block" : "none"}>
+                    <TableView />
+                </Box>
+                <Box component="div" display={mode === "json" ? "block" : "none"}>
+                    <JsonView />
+                </Box>
+                <Box component="div" display={mode === "contract" ? "block" : "none"}>
+                    <ContractView />
+                </Box>
+                <Box component="div" display={mode === "log" ? "block" : "none"}>
+                    <LogView />
+                </Box>
+                <Box component="div" display={mode === "raw" ? "block" : "none"}>
+                    <ResponseView />
+                </Box>
+                <Box component="div" display={mode === "errors" ? "block" : "none"}>
+                    <ErrorView />
+                </Box>
+                <Box component="div" display={mode === "portal" ? "block" : "none"}>
+                    <PortalView />
+                </Box>
             </Box>
         </Stack>
-);
+    );
 }

@@ -10,9 +10,10 @@ export default () => {
             multiline
             fullWidth
             value={extract && extract.data ? JSON.stringify(syphonx.unwrap(extract.data), null, 2) : ""}
-            variant="outlined"
+            variant="standard"
             size="small"
             InputProps={{
+                disableUnderline: true,
                 style: { fontSize: "x-small" }
             }}
         />
