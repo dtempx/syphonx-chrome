@@ -14,7 +14,7 @@ export default () => {
             size="small"
             InputProps={{
                 disableUnderline: true,
-                style: { fontSize: "x-small" }
+                style: { fontSize: "small" }
             }}
         />
     );

@@ -26,7 +26,8 @@ export default () => {
             <Box
                 sx={{
                     height: 365,
-                    overflow: "auto"
+                    overflow: "auto",
+                    m: 1
                 }}
             >
                 <Box component="div" display={mode === "table" ? "block" : "none"}>
