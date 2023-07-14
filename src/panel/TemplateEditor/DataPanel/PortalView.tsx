@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useApp, useTemplate } from "../context";
 import { Template } from "../lib";
 import { Box, Typography } from "@mui/material";
+import { load } from '../../../lib/looker';
 
 export default () => {
     const { portal, debug, inspectedWindowUrl } = useApp();
@@ -18,11 +19,18 @@ export default () => {
     
     const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : '';
     const look_id = templateFile?.match('product_search') ? '1459' : '1458'; // 1458 = product_page, 1459 = product_search
-    const url = `${portal?.views?.panel}&hide_filter=Retailer+ID`.replace('look_id', look_id).replace('seller_id', seller_id);
+    const url = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace('look_id', look_id).replace(/seller_id/g, seller_id);
+
+    useEffect(() => {
+        (async () => {
+            await load();
+        })();
+    }, []);
 
     return (
         <Box>
             <iframe src={url} width="100%" height="600px" />
+            {/* <iframe src={`https://pricespiderstaging.cloud.looker.com/embed/dashboards/1464?Seller+ID=${seller_id}&hide_filter=Seller+ID`} width="100%" height="600px" /> */}
             {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
         </Box>
     );

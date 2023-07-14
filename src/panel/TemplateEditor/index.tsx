@@ -31,7 +31,7 @@ export default () => {
                             {mode === "code-editor" && <CodeEditor />}
                             {mode === "test-runner" && <TestRunner />}
                             {mode === "template-settings" && <TemplateSettings />}
-                            <Paper elevation={3} className="panel" sx={{ width: 1, minHeight: 250 }}>
+                            <Paper elevation={3} className="panel" sx={{ width: 1, minheight: 600 }}>
                                 <DataPanel />
                             </Paper>
                         </>
