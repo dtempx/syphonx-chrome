@@ -38,6 +38,7 @@ export default () => {
                         <Paper
                             elevation={3}
                             sx={{
+                                minHeight: 800,
                                 width: 1,
                                 m: 1,
                                 p: 1
