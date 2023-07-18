@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTemplate } from "../context";
-import { background, Template } from "../lib";
+import { inspectedWindow, Template } from "../lib";
 
 import {
     IconButton,
@@ -56,7 +56,7 @@ export default ({ sx }: Props) => {
                     <ListItemButton
                         dense
                         onClick={async () => {
-                            await background.inspectedWindow.navigate(url);
+                            await inspectedWindow.navigate(url);
                             await refresh(false);
                         }}
                     >

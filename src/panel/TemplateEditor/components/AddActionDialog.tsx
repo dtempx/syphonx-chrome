@@ -81,7 +81,7 @@ export default ({ open, onClose }: Props) => {
                             sx={{
                                 height: 300,
                                 maxHeight: 300,
-                                overflowY: "scroll"
+                                overflow: "auto"
                             }}
                         >
                             <AddActionMenu

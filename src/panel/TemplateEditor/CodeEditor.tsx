@@ -13,14 +13,28 @@ export default () => {
     }, [json]);
 
     return (
-        <Paper elevation={3} className="panel" sx={{ width: 1, height: 300 }}>
+        <Paper
+            elevation={3}
+            sx={{
+                width: 1,
+                height: 300,
+                m: 1,
+                p: 1
+            }}
+        >
             <TextField
-                variant="outlined"
+                variant="standard"
                 size="small"
                 multiline
                 fullWidth
                 value={code}
-                sx={{ height: "100%", overflow: "scroll" }}
+                sx={{
+                    height: "100%",
+                    overflow: "auto"
+                }}
+                InputProps={{
+                    disableUnderline: true
+                }}
             />
         </Paper>
     );

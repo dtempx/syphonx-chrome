@@ -47,21 +47,28 @@ export default () => {
                     </Alert>
                 </Tooltip>                
             )}
-            <TreeView
-                expanded={expanded}
-                selected={selected}
-                defaultCollapseIcon={<CollapseIcon sx={{ color: "primary.light" }} />}
-                defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
-                onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
-                onNodeSelect={(event: any, value: any) => {
-                    const item = template.setSelected(value);
-                    setTemplate(template.json());
-                    if (hotTracking)
-                        hiliteItem(item);
+            <Box
+                sx={{
+                    height: 230,
+                    overflow: "auto"
                 }}
             >
-                {template?.children?.map(item => <ActionTreeItem item={item} />)}
-            </TreeView>
+                <TreeView
+                    expanded={expanded}
+                    selected={selected}
+                    defaultCollapseIcon={<CollapseIcon sx={{ color: "primary.light" }} />}
+                    defaultExpandIcon={<ExpandIcon sx={{ color: "primary.light" }} />}
+                    onNodeToggle={(event, nodeIds) => setExpanded(nodeIds)}
+                    onNodeSelect={(event: any, value: any) => {
+                        const item = template.setSelected(value);
+                        setTemplate(template.json());
+                        if (hotTracking)
+                            hiliteItem(item);
+                    }}
+                >
+                    {template?.children?.map(item => <ActionTreeItem item={item} />)}
+                </TreeView>
+            </Box>
         </Box>
     );
 }

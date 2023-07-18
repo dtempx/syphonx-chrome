@@ -32,7 +32,7 @@ export function useApp() {
     return React.useContext(AppContext);
 }
 
-export function AppProvider({ children }: { children: JSX.Element }) {
+export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [advanced, setAdvanced] = useState(false);
     const [apiKey, setApiKey] = useState("");
     const [autoOpen, setAutoOpen] = useState(true);

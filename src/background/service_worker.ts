@@ -1,4 +1,4 @@
-import * as scripts from "./service_worker_scripts";
+import * as scripts from "./page-scripts";
 
 /**
  * Executes a function in the context of the page corresponding to a tabId.
@@ -55,10 +55,11 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
 async function injectAll(tabId: number): Promise<void> {
     const injected = await executeScript<boolean>(tabId, () => typeof window.syphonx === "object");
     if (!injected) {
-        await executeScriptFile(tabId, "jquery.slim.js");
-        await executeScriptFile(tabId, "syphonx.js");
+        //await executeScriptFile(tabId, "jquery.slim.js");
+        //await executeScriptFile(tabId, "syphonx.js");
+        await executeScript(tabId, () => (window as {syphonx: {}}).syphonx = {}); // set inclusion guard
         await chrome.scripting.insertCSS({ target: { tabId }, files: ["syphonx.css"] });
-        console.log(`BACKGROUND sx injected tabId=${tabId}`);
+        //console.log(`BACKGROUND sx injected tabId=${tabId}`);
     }
 }
 
@@ -74,6 +75,27 @@ function waitForNavigation(): Promise<void> {
     });
 }
 
+// This method listens for updates to tabs.
+// It is triggered every time a tab is updated, which can be caused by various events such as loading a page, changing the URL, the tab reloading, etc.
+// The listener receives the tabId, an object containing details about the change (changeInfo), and an object with info about the tab (tabInfo).
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+    if (changeInfo.status === "complete" && tab.active) {
+        // forward messages from the DOM window into the chrome runtime
+        await executeScript(tabId, () => {
+            window.addEventListener("message", event => {
+                if (event.source === window && event.data.direction === "syphonx") {
+                    chrome.runtime.sendMessage({
+                        syphonx: (event as any).data.message
+                    });
+                }
+            });
+        });
+    }
+});
+
+// This method listens for messages that are sent from either content scripts or other parts of your extension (like a popup script or background script).
+// It's primarily used for inter-component communication within your extension.
+// This could include sending data between your background and content scripts, triggering specific actions in response to certain messages, etc.
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.log) {
         console.log("MESSAGE", message.log);
@@ -138,5 +160,3 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     return true; // response will be sent asynchronously
 });
-
-console.log("BACKGROUND ready");

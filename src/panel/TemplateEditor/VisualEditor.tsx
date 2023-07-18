@@ -11,23 +11,26 @@ export default () => (
         }}
     >
         <Paper
-            className="panel"
             elevation={3}
             sx={{
                 position: "relative",
                 height: 300,
-                width: 500
+                width: 500,
+                m: 1,
+                p: 1
             }}
         >
             <ActionTreeView />
         </Paper>
 
         <Paper
-            className="panel"
             elevation={3}
             sx={{
                 height: 300,
-                width: 1
+                width: 1,
+                m: 1,
+                p: 1,
+                overflowY: "auto"
             }}
         >
             <ActionEditor />

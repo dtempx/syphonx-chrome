@@ -4,21 +4,21 @@ import {
     QueryTrackingOptions,
     SelectElementsOptions,
     SliceHtmlOptions
-} from "./service_worker_scripts"
+} from "./page-scripts"
 
 export const active = typeof chrome === "object" && chrome.devtools;
 
 export async function applyTemplate(template: syphonx.Template & { debug?: boolean }): Promise<syphonx.ExtractResult | undefined> {
-    const { result } = await sendMessage<{ result: syphonx.ExtractResult }>("applyTemplate", template);
+    const { result } = await sendBackgroundMessage<{ result: syphonx.ExtractResult }>("applyTemplate", template);
     return result;
 }
 
 export async function disableTracking(): Promise<void> {
-    await sendMessage("disableTracking");
+    await sendBackgroundMessage("disableTracking");
 }
 
 export async function enableTracking(): Promise<void> {
-    await sendMessage("enableTracking");
+    await sendBackgroundMessage("enableTracking");
 }
 
 export function log(message: string): void {
@@ -29,21 +29,21 @@ export function log(message: string): void {
 }
 
 export async function queryTracking(options: QueryTrackingOptions): Promise<string[]> {
-    const { result } = await sendMessage<{ result: string[] }>("queryTracking", options);
+    const { result } = await sendBackgroundMessage<{ result: string[] }>("queryTracking", options);
     return result || [];
 }
 
 export async function selectElements(options: SelectElementsOptions): Promise<Array<string | null>> {
-    const { result } = await sendMessage<{ result: Array<string | null> }>("selectElements", options);
+    const { result } = await sendBackgroundMessage<{ result: Array<string | null> }>("selectElements", options);
     return result || [];
 }
 
 export async function sliceHtml(options: SliceHtmlOptions): Promise<string> {
-    const { result } = await sendMessage<{ result: string }>("sliceHtml", options);
+    const { result } = await sendBackgroundMessage<{ result: string }>("sliceHtml", options);
     return result;
 }
 
-function sendMessage<T = unknown>(key: string, ...params: unknown[]): Promise<T> {
+export function sendBackgroundMessage<T = unknown>(key: string, ...params: unknown[]): Promise<T> {
     return new Promise<T>((resolve, reject) => {
         const tabId = chrome.devtools.inspectedWindow.tabId;
         chrome.runtime.sendMessage(
@@ -58,35 +58,4 @@ function sendMessage<T = unknown>(key: string, ...params: unknown[]): Promise<T>
             }
         );
     });
-}
-
-export namespace inspectedWindow {
-    export async function activeTab(): Promise<Partial<chrome.tabs.Tab>> {
-        const { tab } = await sendMessage<{ tab: chrome.tabs.Tab }>("tab");
-        return tab;
-    }
-
-    export function evaluate<T = any>(expression: string): Promise<T> {
-        return new Promise<T>((resolve, reject) => {
-            chrome.devtools.inspectedWindow.eval(expression, (result, err) => {
-                if (err)
-                    reject(err);
-                else
-                    resolve(result as T);
-            });
-        });
-    }
-
-    export async function navigate(url: string): Promise<void> {
-        await sendMessage("navigate", url);
-    }
-
-    export async function reload(): Promise<void> {
-        await sendMessage("reload");
-    }
-
-    export async function url(): Promise<string> {
-        const tab = await activeTab();
-        return tab.url || "";
-    }
 }

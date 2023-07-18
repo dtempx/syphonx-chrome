@@ -62,7 +62,16 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
                     </Alert>
                     {expanded && (
                         <Box sx={{ mt: 1 }}>
-                            <pre style={{ height: 150, backgroundColor: "#eee", fontFamily: "monospace", fontSize: "xx-small", overflowX: "scroll", overflowY: "scroll", padding: "8px" }}>{error.stack}</pre>
+                            <pre style={{
+                                height: 150,
+                                backgroundColor: "#eee",
+                                fontFamily: "monospace",
+                                fontSize: "xx-small",
+                                overflow: "auto",
+                                padding: "8px"
+                            }}>
+                                {error.stack}
+                            </pre>
                         </Box>
                     )}
                     <TextField

@@ -10,10 +10,11 @@ export default () => {
             multiline
             fullWidth
             value={log}
-            variant="outlined"
+            variant="standard"
             size="small"
             InputProps={{
-                style: { fontSize: "x-small" }
+                disableUnderline: true,
+                style: { fontSize: "small" }
             }}
         />
     );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useApp, useTemplate } from "../context";
-import { background, tryParseJson, Template } from "../lib";
-import { applyTemplate } from "./applyTemplate";
+import { inspectedWindow, tryParseJson, Template } from "../lib";
 import { Schema } from "jsonschema";
 import * as syphonx from "syphonx-lib";
 
@@ -26,6 +25,17 @@ export function DataProvider({ children }: { children: JSX.Element }) {
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
+        // message is sent from the content script that forwards the message from the DOM window
+        chrome.runtime.onMessage.addListener(listener);
+        return () => chrome.runtime.onMessage.removeListener(listener);
+
+        function listener(message: any): void {
+            if (message.syphonx)
+                setExtract(message.syphonx);
+        }
+    }, []);
+
+    useEffect(() => {
         const template = new Template(json);
         const simple = template.simple();
         if (autoRefresh && simple) // only auto refresh if there is a single select action
@@ -38,15 +48,23 @@ export function DataProvider({ children }: { children: JSX.Element }) {
         if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
             setRefreshing(true);
             if (reload)
-                await background.inspectedWindow.reload();
+                await inspectedWindow.reload();
 
             const contract = tryParseJson(contractJson) as Schema | undefined;
-            const result = await applyTemplate({ template, contract, url: inspectedWindowUrl, debug: true });
-            setExtract(result);
+            applyTemplate(template, contract, inspectedWindowUrl);
         }
         setRefreshing(false);
     }
- 
+
+    async function applyTemplate(template: Template, contract: Schema | undefined, url: string): Promise<void> {
+        const script = `(async () => {
+            const result = await ${syphonx.script}(${JSON.stringify({ ...template.obj, url, debug: true })})
+            window.postMessage({ direction: "syphonx", message: result });
+        })()`;
+
+        await inspectedWindow.evaluate(script);
+    }
+
     const value = {
         extract,
         setExtract,
