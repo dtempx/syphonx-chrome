@@ -19,7 +19,6 @@ import {
     Delete as DeleteIcon
 } from "@mui/icons-material";
 
-
 import ValidateField from "./ValidateField";
 
 export interface Props {
