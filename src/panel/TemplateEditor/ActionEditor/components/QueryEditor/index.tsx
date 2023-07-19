@@ -5,6 +5,7 @@ import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";
 import SelectorAssistant from "./SelectorAssistant";
+import { useApp } from "./context";
 
 import {
     Box,
@@ -38,6 +39,7 @@ export interface Props {
 }
 
 export default ({ value, open, name, type, repeated, single, onClose, onChange }: Props) => {
+    const { serviceUrl } = useApp();
     const [select, setSelect] = useState<syphonx.SelectQuery[]>([[""]]);
     const [index, setIndex] = useState(0);
 
@@ -129,6 +131,7 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
 
                     </Box>
 
+                    {serviceUrl && (
                     <Box alignSelf="flex-end" sx={{ width: 1 }}>
                         <Divider sx={{ mt: 5 }} />
                         <SelectorAssistant
@@ -139,6 +142,7 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
                             sx={{ mt: 2 }}
                         />
                     </Box>
+                    )}
 
                 </Stack>
 

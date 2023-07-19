@@ -85334,7 +85334,9 @@ var $fb9c53ace3a81d4f$export$2e2bcd8739ae039 = ({ query: query , sx: sx  })=>{
 
 
 
+
 var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , name: name , type: type , repeated: repeated , single: single , onClose: onClose , onChange: onChange  })=>{
+    const { serviceUrl: serviceUrl  } = (0, $bda87eb62dcce197$export$fca13ab91e1a6240)();
     const [select, setSelect] = (0, $d4J5n.useState)([
         [
             ""
@@ -85470,7 +85472,7 @@ var $8c0e9d9f446adfc8$export$2e2bcd8739ae039 = ({ value: value , open: open , na
                                 })
                             ]
                         }),
-                        /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
+                        serviceUrl && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                             alignSelf: "flex-end",
                             sx: {
                                 width: 1
@@ -88696,17 +88698,19 @@ var $c09cf268b7c9b4a6$export$2e2bcd8739ae039 = ()=>{
         url: inspectedWindowUrl
     }).toString();
     const url = `${portal?.views?.panel}?${params}`;
+    const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : "";
+    const tempUrl = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace(/seller_id/g, seller_id);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)("iframe", {
-                src: url,
+                src: tempUrl,
                 width: "100%",
-                height: "100%"
+                height: "800px"
             }),
             debug && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
                 variant: "caption",
                 fontSize: "small",
-                children: url
+                children: tempUrl
             })
         ]
     });
@@ -89000,7 +89004,7 @@ var $e322818ad30de054$export$2e2bcd8739ae039 = ()=>{
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "column",
         sx: {
-            height: 400
+            height: "auto"
         },
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $bb01957673566bdf$export$2e2bcd8739ae039), {
@@ -89009,7 +89013,8 @@ var $e322818ad30de054$export$2e2bcd8739ae039 = ()=>{
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $7f9bf0f8ac9034c0$export$2e2bcd8739ae039), {
                 sx: {
-                    height: 365,
+                    height: "auto",
+                    minHeight: 365,
                     overflow: "auto",
                     m: 1
                 },
@@ -92996,6 +93001,7 @@ var $2064a1938eec2dc2$export$2e2bcd8739ae039 = ()=>{
                             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $e1c08ee9f6edce16$export$2e2bcd8739ae039), {
                                 elevation: 3,
                                 sx: {
+                                    minHeight: 800,
                                     width: 1,
                                     m: 1,
                                     p: 1
