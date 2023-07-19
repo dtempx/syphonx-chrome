@@ -10,7 +10,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { apiKey, serviceUrl } = useApp();
+    const { user, serviceUrl } = useApp();
     const { template: json, templateFile, setTemplateFile } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
@@ -27,7 +27,7 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const api = new SyphonXApi(apiKey, serviceUrl);
+                    const api = new SyphonXApi(`u/${user?.id}`, serviceUrl);
                     const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
@@ -49,7 +49,7 @@ export default ({ open, onClose }: Props) => {
         try {
             setSaving(true);
             const json = template.file();
-            const api = new SyphonXApi(apiKey, serviceUrl);
+            const api = new SyphonXApi(`u/${user?.id}`, serviceUrl);
             await api.write(file, json);
             setTemplateFile(file);
             setSaving(false);

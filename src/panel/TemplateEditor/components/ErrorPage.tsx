@@ -20,7 +20,7 @@ import {
 type Status = "unsent" | "sending" | "sent" | "error";
 
 export default ({ error, resetErrorBoundary }: FallbackProps) => {
-    const { apiKey, email, serviceUrl } = useApp();
+    const { user, email, serviceUrl } = useApp();
     const [expanded, setExpanded] = useState(false);
     const [comments, setComments] = useState("");
     const [status, setStatus] = useState<Status>("unsent");
@@ -34,7 +34,8 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
     async function reportError() {
         const manifest = chrome.runtime.getManifest();
         setStatus("sending");
-        const api = new SyphonXApi(apiKey, serviceUrl);
+        const token = user?.id ? `u/${user.id}` : undefined;
+        const api = new SyphonXApi(token, serviceUrl);
         const ok = await api.log({
             key: "error",
             version: manifest.version,

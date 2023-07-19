@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { Portal } from "./Portal";
+import { User, validateSession, } from "./TemplateEditor/lib/cloud";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
 export interface AppState {
     advanced: boolean;
     setAdvanced: React.Dispatch<React.SetStateAction<boolean>>;
-    apiKey: string;
-    setApiKey: React.Dispatch<React.SetStateAction<string>>;
     autoOpen: boolean;
     setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     autoRefresh: boolean;
@@ -26,6 +25,10 @@ export interface AppState {
     portal: Portal | undefined;
     setPortal: React.Dispatch<React.SetStateAction<Portal | undefined>>;
     inspectedWindowUrl: string;
+    user: User | undefined;
+    setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+    verified: boolean;
+    setVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function useApp() {
@@ -34,16 +37,17 @@ export function useApp() {
 
 export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [advanced, setAdvanced] = useState(false);
-    const [apiKey, setApiKey] = useState("");
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
     const [debug, setDebug] = useState(false);
     const [email, setEmail] = useState("");
     const [hotTracking, setHotTracking] = useState(true);
     const [mode, setMode] = useState<AppMode>("visual-editor");
-    const [serviceUrl, setServiceUrl] = useState("");
+    const [serviceUrl, setServiceUrl] = useState("http://localhost:8080");
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
+    const [user, setUser] = useState<User | undefined>(undefined);
+    const [verified, setVerified] = useState<boolean>(false);
 
     // update inspectedWindowUrl when the inspected window is re-navigated
     chrome.devtools.network.onNavigated.addListener(url => {
@@ -69,7 +73,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         chrome.storage.local.get(
             [
                 "advanced",
-                "apiKey",
                 "autoOpen",
                 "autoRefresh",
                 "debug",
@@ -79,7 +82,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             ],
             ({
                 advanced,
-                apiKey,
                 hotTracking,
                 autoOpen,
                 autoRefresh,
@@ -89,8 +91,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             }) => {
                 if (advanced !== undefined)
                     setAdvanced(advanced);
-                if (apiKey !== undefined)
-                    setApiKey(apiKey);
                 if (autoOpen !== undefined)
                     setAutoOpen(autoOpen);
                 if (autoRefresh !== undefined)
@@ -101,7 +101,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                     setEmail(email);
                 if (hotTracking !== undefined)
                     setHotTracking(hotTracking);
-                if (serviceUrl !== undefined)
+                if (serviceUrl !== undefined && serviceUrl?.length)
                     setServiceUrl(serviceUrl);
             }
         );
@@ -110,22 +110,52 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     useEffect(() => {
         (async () => {
             try {
-                const api = new SyphonXApi(apiKey, serviceUrl);
+                const token = user?.id ? `u/${user.id}` : undefined;
+                const api = new SyphonXApi(token, serviceUrl);
                 const auth = await api.auth();
                 setPortal(auth.portal);
-            }
-            catch(err) {
+            } catch(err) {
                 debugger;
                 console.error(err);
                 setPortal(undefined);
             }
         })();
-    }, [apiKey, serviceUrl]);
+    }, [user, serviceUrl]);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                if (user && validateSession(user)) {
+                    alert(`user ${JSON.stringify(user)}`);
+                    setVerified(true);
+                } else if (email) {
+                    // const baseUrl = process.env.NODE_ENV === 'production' ? 'xxx' : `http://localhost:8080/user`;
+                    const baseUrl = `http://localhost:8080/user`;
+                    const response = await fetch(`${baseUrl}?email=${email}`);
+                    const result = await response.json() as User;
+    
+                    if (result) {
+                        alert(`result ${JSON.stringify(result)}`);
+                        setUser(result); // this will recursively call this useEffect, setting then verified and validate...
+    
+                        if (validateSession(result)) {
+                            setVerified(true);
+                        }
+                    } else {
+                        setVerified(false); // this will open the Login dialog...
+                    }
+                }
+            } catch(err) {
+                debugger;
+                console.error(err);
+                setVerified(false);
+            }
+        })();
+    }, [ email, ]);
 
     useEffect(() => {
         chrome.storage.local.set({
             advanced,
-            apiKey,
             autoOpen,
             autoRefresh,
             debug,
@@ -135,7 +165,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         });
     }, [
         advanced,
-        apiKey,
         autoOpen,
         autoRefresh,
         debug,
@@ -147,8 +176,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const value = {
         advanced,
         setAdvanced,
-        apiKey,
-        setApiKey,
         autoOpen,
         setAutoOpen,
         autoRefresh,
@@ -165,7 +192,11 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         setServiceUrl,
         portal,
         setPortal,
-        inspectedWindowUrl
+        inspectedWindowUrl,
+        user,
+        setUser,
+        verified,
+        setVerified
     };
 
     return (

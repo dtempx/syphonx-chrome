@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { List, ListItemType } from "../components";
 import { useApp, useTemplate } from "../context";
 
@@ -7,6 +7,7 @@ import OpenFileDialog from "./OpenFileDialog";
 import PortalDialog from "./PortalDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
+import LoginDialog from "./LoginDialog";
 
 import {
     Box,
@@ -20,7 +21,8 @@ import {
     CloudUpload as FileSaveIcon,
     CloudOff as FileCloseIcon,
     MapsHomeWork as PortalIcon,
-    ManageAccounts as SettingsIcon 
+    ManageAccounts as SettingsIcon,
+    Person as UserIcon,
 } from "@mui/icons-material";
 
 export interface Props {
@@ -29,13 +31,24 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal } = useApp();
+    const { portal, user, verified, } = useApp();
     const { setTemplate, setExtract } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
     const [userSettingsOpen, setUserSettingsOpen] = useState(false);
     const [portalOpen, setPortalOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
+
+    useEffect(() => {
+        (async () => {
+            if (!user || !verified) {
+                setLoginOpen(true);
+            } else if (user && verified) {
+                setLoginOpen(false);
+            }
+        })();
+    }, [verified]);
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
@@ -57,6 +70,10 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         null,
+        ["Login", <UserIcon />, event => {
+            setLoginOpen(true);
+            onClose(event);
+        }],
         ["User Settings", <SettingsIcon />, event => {
             setUserSettingsOpen(true);
             onClose(event);
@@ -82,6 +99,8 @@ export default ({ open, onClose }: Props) => {
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
         {!!portal?.views?.full && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
+        {/* {!user && <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />} */}
+        <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />
 
         <Drawer
             anchor="left"

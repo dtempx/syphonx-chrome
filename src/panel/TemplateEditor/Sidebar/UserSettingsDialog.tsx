@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useApp } from "../context";
 import { regexp } from "../lib";
+
+import LoginDialog from "./LoginDialog";
 
 import {
     AdvancedPropertyGrid,
@@ -14,6 +16,8 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
+    Link,
+    Stack,
     Switch,
     Tooltip,
     Typography
@@ -28,17 +32,17 @@ export default ({ open, onClose }: Props) => {
     const {
         advanced,
         setAdvanced,
-        apiKey,
-        setApiKey,
         autoOpen,
         setAutoOpen,
         debug,
         setDebug,
         email,
-        setEmail,
         serviceUrl,
-        setServiceUrl
+        setServiceUrl,
+        user,
     } = useApp();
+
+    const [loginOpen, setLoginOpen] = useState(false);
 
     return (
         <Dialog
@@ -47,6 +51,8 @@ export default ({ open, onClose }: Props) => {
             onClose={onClose}
             TransitionComponent={TransitionUp}
         >
+            <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />
+
             <DialogTitle sx={{ p: 0 }}>
                 <TitleBar title="User Settings" onClose={onClose} />
             </DialogTitle>
@@ -59,30 +65,24 @@ export default ({ open, onClose }: Props) => {
                             <Tooltip title="An email address used to identity your changes.">
                                 <Typography>Email</Typography>
                             </Tooltip>,
-                            <ValidateField
-                                variant="standard"
-                                size="small"
-                                fullWidth
-                                value={email}
-                                onChange={(event, value) => setEmail(value)}
-                                onValidate={(event, value) => value ? regexp.email.test(value) : true}
-                                inputProps={{ maxLength: 64 }}
-                            />,
+                            <Stack direction="row" spacing={2}>
+                                <Typography>{email}</Typography>
+                                <Link
+                                    component="button"
+                                    variant="body2"
+                                    onClick={() => setLoginOpen(true)}
+                                    >
+                                    Change Email
+                                </Link>
+                            </Stack>,
                             "",
                             true
                         ],
                         [
-                            <Tooltip title="A system generated API key used to grant access.">
-                                <Typography>API Key</Typography>
+                            <Tooltip title="A system generated access token used to grant access.">
+                                <Typography>Access Token</Typography>
                             </Tooltip>,
-                            <ValidateField
-                                variant="standard"
-                                size="small"
-                                fullWidth
-                                value={apiKey}
-                                onChange={(event, value) => setApiKey(value)}
-                                onValidate={(event, value) => value ? regexp.apiKey.test(value) : true}
-                            />,
+                            <Typography>{user?.id}</Typography>,
                             "",
                             true
                         ],
@@ -141,6 +141,7 @@ export default ({ open, onClose }: Props) => {
                     ]}
                 />
             </DialogContent>
+
 
             <DialogActions>
             </DialogActions>
