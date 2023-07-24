@@ -15,13 +15,15 @@ import {
     VerifiedUser as ContractIcon,
     ReportProblem as ErrorIcon,
     DataObject as JsonIcon,
-    Biotech as LogIcon,
+    Troubleshoot as TroubleshootIcon,
     MapsHomeWork as PortalIcon,
     RawOn as RawIcon,
     Autorenew as RefreshIcon,
     DoDisturb as ResetIcon,
     GridOn as TableIcon
 } from "@mui/icons-material";
+
+import RunStatusRibbon from "./RunStatusRibbon";
 
 export type DataViewMode = "table" | "json" | "contract" | "errors" | "log" | "raw" | "portal";
 
@@ -32,9 +34,9 @@ export interface Props {
 
 export default ({ mode, onChange } : Props) => {
     const { autoRefresh, setAutoRefresh, portal } = useApp();
-    const { template: json, extract, setExtract, refresh, refreshing } = useTemplate();
+    const { template: json, extractState, resetExtractStatus, refresh, refreshing } = useTemplate();
 
-    const errors = useMemo(() => extract?.errors ? extract.errors.length : 0, [extract]);
+    const errors = useMemo(() => extractState?.errors ? extractState.errors.length : 0, [extractState]);
     const template = new Template(json);
     const simple = template.simple();
 
@@ -70,7 +72,7 @@ export default ({ mode, onChange } : Props) => {
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="clear">
-                    <IconButton size="small" onClick={() => setExtract(undefined)}>
+                    <IconButton size="small" onClick={() => resetExtractStatus()}>
                         <ResetIcon fontSize="small" />
                     </IconButton>
                 </Tooltip>
@@ -86,7 +88,7 @@ export default ({ mode, onChange } : Props) => {
                     <IconButton size="small" color={mode === "contract" ? "primary" : "default"}><ContractIcon fontSize="small" /></IconButton>
                 </Tooltip>
                 <Tooltip title="log" onClick={event => onChange(event, "log")}>
-                    <IconButton size="small" color={mode === "log" ? "primary" : "default"}><LogIcon fontSize="small" /></IconButton>
+                    <IconButton size="small" color={mode === "log" ? "primary" : "default"}><TroubleshootIcon fontSize="small" /></IconButton>
                 </Tooltip>
                 <Tooltip title="raw" onClick={event => onChange(event, "raw")}>
                     <IconButton size="small" color={mode === "raw" ? "primary" : "default"}><RawIcon fontSize="small" /></IconButton>
@@ -115,6 +117,7 @@ export default ({ mode, onChange } : Props) => {
                 </Tooltip>
             </Stack>
             }
+            <RunStatusRibbon />
         </Stack>
     );
 };

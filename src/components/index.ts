@@ -1,4 +1,5 @@
 export { default as AlertBar } from "./AlertBar";
+export { default as CountdownTimer } from "./CountdownTimer";
 export { default as DataTable } from "./DataTable";
 export { default as EditorField } from "./EditorField";
 export { default as FileDialog } from "./FileDialog";

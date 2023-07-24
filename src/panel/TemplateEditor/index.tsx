@@ -13,13 +13,13 @@ import VisualEditor from "./VisualEditor";
 
 export default () => {
     const { mode } = useApp();
-    const { setTemplate, setExtract } = useTemplate();
+    const { setTemplate, resetExtractStatus } = useTemplate();
     return (
         <ErrorBoundary
             FallbackComponent={ErrorPage}
             onReset={() => {
                 setTemplate("");
-                setExtract(undefined);
+                resetExtractStatus();
             }}
         >
             <TemplateProvider>

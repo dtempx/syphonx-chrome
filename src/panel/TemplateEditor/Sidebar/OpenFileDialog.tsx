@@ -11,8 +11,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { apiKey, autoOpen, serviceUrl } = useApp();
-    //const { setTemplateFile, setTemplate, setContractFile, setExtract } = useTemplate();
-    const { setTemplateFile, setTemplate, setContract, setExtract } = useTemplate();
+    const { setTemplateFile, setTemplate, setContract, resetExtractStatus } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -45,7 +44,7 @@ export default ({ open, onClose }: Props) => {
     async function onSelectFile(event: React.SyntheticEvent, file: string): Promise<boolean> {
         try {
             setOpening(true);
-            setExtract(undefined);
+            resetExtractStatus();
             const api = new SyphonXApi(apiKey, serviceUrl);
             const { template: json, contract } = await api.template(file);
             const template = new Template(json);
