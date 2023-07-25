@@ -129,7 +129,6 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         })();
     }, [user, serviceUrl]);
 
-
     useEffect(() => {
         (async () => {
             if (email?.length) {
