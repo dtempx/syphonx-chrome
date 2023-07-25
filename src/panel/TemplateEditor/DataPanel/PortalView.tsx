@@ -29,7 +29,7 @@ export default () => {
 
     return (
         <Box>
-            <iframe src={url} width="100%" height="100%" />
+            <iframe src={url} width="100%" height="800px" />
             {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
         </Box>
     );

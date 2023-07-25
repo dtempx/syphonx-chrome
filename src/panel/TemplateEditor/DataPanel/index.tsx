@@ -19,13 +19,13 @@ export default () => {
         <Stack
             direction="column"
             sx={{
-                height: 400
+                height: 800
             }}
         >
             <Toolbar mode={mode} onChange={(event, mode) => setMode(mode)} />
             <Box
                 sx={{
-                    height: 365,
+                    height: 800,
                     overflow: "auto",
                     m: 1
                 }}
