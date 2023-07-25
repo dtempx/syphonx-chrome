@@ -12,7 +12,7 @@ import LoginDialog from "./LoginDialog";
 import {
     Box,
     Divider,
-    Drawer,
+    Drawer
 } from "@mui/material";
 
 import {
@@ -22,7 +22,7 @@ import {
     CloudUpload as FileSaveIcon,
     CloudOff as FileCloseIcon,
     MapsHomeWork as PortalIcon,
-    ManageAccounts as SettingsIcon,
+    ManageAccounts as SettingsIcon
 } from "@mui/icons-material";
 
 export interface Props {

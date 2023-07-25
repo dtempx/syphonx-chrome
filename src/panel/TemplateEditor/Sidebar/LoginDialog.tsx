@@ -3,10 +3,10 @@ import React, { useEffect, useState, } from "react";
 
 import { useApp, } from "../context";
 import { regexp } from "../lib";
-import { getUser, validateSession, watchUser, } from "../lib/cloud";
+import { getUser, validateSession, watchUser } from "../lib/cloud";
 
 import {
-    TransitionUp,
+    TransitionUp
 } from "../components";
 
 import {
@@ -17,13 +17,12 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    Stack,
     Typography,
-    TextField,
+    TextField
 } from "@mui/material";
 
 import {
-    Close as CloseIcon,
+    Close as CloseIcon
 } from "@mui/icons-material"
 
 export interface Props {
@@ -32,20 +31,17 @@ export interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const label = "VERIFY EMAIL";
+export default ({ open, onClose, setOpen }: Props) => {
+    const { email, serviceUrl, setEmail, setUser, user, verified } = useApp();
 
-export default ({ open, onClose, setOpen, }: Props) => {
-    const { email, setEmail, setUser, user, verified, } = useApp();
-
-    const [ submit, setSubmit, ] = useState<boolean>(false);
-    const [ valid, setValid, ] = useState<boolean>(false);
-    const [ value, setValue, ] = useState<string>(email);
+    const [ submit, setSubmit ] = useState<boolean>(false);
+    const [ valid, setValid ] = useState<boolean>(false);
+    const [ value, setValue ] = useState<string>(email);
 
     const submitEmail = async (): Promise<void> => {
         if (valid) {
-            setEmail(value.toLowerCase());
-
-            const user = await getUser(value.toLowerCase());
+            setEmail(value);
+            const user = await getUser(value, serviceUrl);
             if (user?.id) {
                 setSubmit(true);
             }
@@ -112,7 +108,7 @@ export default ({ open, onClose, setOpen, }: Props) => {
                     variant="standard"
                     size="small"
                     fullWidth
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => setValue(e.target.value?.toLowerCase())}
                     onKeyDown={validate}
                     value={value}
                     error={!!value?.length && !valid}

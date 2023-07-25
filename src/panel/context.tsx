@@ -43,7 +43,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [email, setEmail] = useState("");
     const [hotTracking, setHotTracking] = useState(true);
     const [mode, setMode] = useState<AppMode>("visual-editor");
-    const [serviceUrl, setServiceUrl] = useState("http://localhost:8080");
+    const [serviceUrl, setServiceUrl] = useState("");
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
     const [user, setUser] = useState<User | undefined>(undefined);
@@ -101,7 +101,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                     setEmail(email);
                 if (hotTracking !== undefined)
                     setHotTracking(hotTracking);
-                if (serviceUrl !== undefined && serviceUrl?.length)
+                if (serviceUrl !== undefined)
                     setServiceUrl(serviceUrl);
             }
         );
@@ -133,7 +133,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     useEffect(() => {
         (async () => {
             if (email?.length) {
-                const user = await getUser(email);
+                const user = await getUser(email, serviceUrl);
                 if (user)
                     setUser(user);
             } else if (email?.length === 0) {

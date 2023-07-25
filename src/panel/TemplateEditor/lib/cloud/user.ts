@@ -5,7 +5,7 @@ import {
     query,
     where,
     limit,
-    onSnapshot,
+    onSnapshot
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 
@@ -17,22 +17,22 @@ export interface User {
 }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBLP29REMuAreqc5xYPIDPTwHcqrKitq_E",
-  authDomain: "syphonx.firebaseapp.com",
-  projectId: "syphonx",
-  storageBucket: "syphonx.appspot.com",
-  messagingSenderId: "178110420185",
-  appId: "1:178110420185:web:1c513f816451726398dac8"
+    apiKey: "AIzaSyBLP29REMuAreqc5xYPIDPTwHcqrKitq_E",
+    authDomain: "syphonx.firebaseapp.com",
+    projectId: "syphonx",
+    storageBucket: "syphonx.appspot.com",
+    messagingSenderId: "178110420185",
+    appId: "1:178110420185:web:1c513f816451726398dac8"
 };
 
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const maxSessionLengthSeconds = 259200; // 3 days
 
-export async function getUser(email: string): Promise<User> {
-    // const baseUrl = process.env.NODE_ENV === 'production' ? 'xxx' : `http://localhost:8080/user`;
-    const baseUrl = `http://localhost:8080/user`;
-    const response = await fetch(`${baseUrl}?email=${email}`);
+// https://us-central1-syphonx.cloudfunctions.net/syphonx
+// https://syphonx-35w5m5egbq-uc.a.run.app
+export async function getUser(email: string, serviceUrl = "https://us-central1-syphonx.cloudfunctions.net/syphonx"): Promise<User> {
+    const response = await fetch(`${serviceUrl}/user/email?email=${email}`);
     const result = await response.json() as User;
 
     return result;

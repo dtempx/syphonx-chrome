@@ -39,7 +39,7 @@ export default ({ open, onClose }: Props) => {
         email,
         serviceUrl,
         setServiceUrl,
-        user,
+        user
     } = useApp();
 
     const [loginOpen, setLoginOpen] = useState(false);
@@ -141,7 +141,6 @@ export default ({ open, onClose }: Props) => {
                     ]}
                 />
             </DialogContent>
-
 
             <DialogActions>
             </DialogActions>
