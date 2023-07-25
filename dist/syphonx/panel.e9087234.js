@@ -51366,7 +51366,7 @@ var $03d60e97dca119aa$export$2e2bcd8739ae039 = $03d60e97dca119aa$var$CircularPro
 
 
 var $f19c312504146f35$export$2e2bcd8739ae039 = (props)=>{
-    const { seconds: seconds , size: size , thickness: thickness , sx: sx  } = props;
+    const { seconds: seconds , size: size , thickness: thickness , flip: flip , sx: sx , key: key = seconds  } = props;
     const [value, setValue] = (0, $d4J5n.useState)(seconds);
     const progress = seconds > 0 ? 100 * value / seconds : 0;
     (0, $d4J5n.useEffect)(()=>{
@@ -51377,13 +51377,16 @@ var $f19c312504146f35$export$2e2bcd8739ae039 = (props)=>{
             clearInterval(timer);
         };
     }, [
-        props
+        key
     ]);
     return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $03d60e97dca119aa$export$2e2bcd8739ae039), {
         variant: "determinate",
         size: size,
         thickness: thickness,
         value: progress,
+        style: flip ? {
+            transform: "scaleX(-1) rotate(-90deg"
+        } : undefined,
         sx: sx
     });
 };
@@ -66499,16 +66502,30 @@ function $d19803726287b231$export$43c6ed89e8a21a35({ children: children  }) {
     }
     async function onUpdateExtract(state) {
         if (state.yield) {
-            if (state.yield.params?.goback) //todo consider how to implement timeout, waitUntil
+            const params = state.yield.params || {};
+            if (params.goback) //todo consider how to implement timeout, waitUntil
             await (0, $d545318b8326245e$exports).goBack();
-            else if (state.yield.params?.locators) ;
-            else if (state.yield.params?.navigate) //todo consider how to implement timeout, waitUntil
-            await (0, $d545318b8326245e$exports).navigate(state.yield.params.navigate.url);
-            else if (state.yield.params?.reload) //todo consider how to implement timeout, waitUntil
+            else if (params.locators) {
+                //todo consider how to implement locators
+                const locator = params.locator;
+                if (locator.name?.startsWith("_") && locator.selector && locator.method) {
+                    let value = "";
+                    if (locator.method?.startsWith("all")) value = [];
+                    state.vars._value = value;
+                }
+            } else if (params.navigate) //todo consider how to implement timeout, waitUntil
+            await (0, $d545318b8326245e$exports).navigate(params.navigate.url);
+            else if (params.reload) //todo consider how to implement timeout, waitUntil
             await (0, $d545318b8326245e$exports).reload();
-            else if (state.yield.params?.waitUntil) //todo consider how to implement waitUntil
-            await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000);
-            else await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000);
+            else {
+                // todo consider how to implement waitUntil
+                await (0, $c3cebfc3ffd3af63$export$e772c8ff12451969)(1000);
+                if (params.action === "locator") {
+                    let value = "";
+                    if (params.method?.startsWith("all")) value = [];
+                    state.vars._value = value;
+                }
+            }
             const script = `${$f416d917bf40aa13$exports.script}(${JSON.stringify({
                 ...state,
                 debug: true
@@ -89191,8 +89208,13 @@ var $c1482647f246ce57$export$2e2bcd8739ae039 = ()=>{
     const { extractStatus: status , refreshing: refreshing  } = (0, $c1a28ccf972eabfc$export$5c3a5f48c762cb34)();
     if (refreshing && status) return /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $ff1b9c20c47218e6$export$2e2bcd8739ae039), {
         direction: "row",
+        sx: {
+            position: "relative",
+            top: 6
+        },
         children: [
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsxs)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                variant: "caption",
                 noWrap: true,
                 children: [
                     "STEP ",
@@ -89200,6 +89222,7 @@ var $c1482647f246ce57$export$2e2bcd8739ae039 = ()=>{
                 ]
             }),
             /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                variant: "caption",
                 color: "primary",
                 noWrap: true,
                 sx: {
@@ -89207,30 +89230,27 @@ var $c1482647f246ce57$export$2e2bcd8739ae039 = ()=>{
                 },
                 children: status.action
             }),
-            status.timeout && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f19c312504146f35$export$2e2bcd8739ae039), {
-                seconds: status.timeout,
-                size: 16,
-                thickness: 8,
+            status.name && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
+                variant: "caption",
+                color: "primary.light",
+                fontStyle: "italic",
+                noWrap: true,
                 sx: {
-                    position: "relative",
-                    top: 4,
-                    left: 4
-                }
+                    ml: 1
+                },
+                children: status.name
             }),
-            status.name && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $16d648c397460623$export$2e2bcd8739ae039), {
-                title: status.name,
-                children: /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $8588119983b778db$export$2e2bcd8739ae039), {
-                    variant: "caption",
-                    color: "primary.light",
-                    noWrap: true,
-                    sx: {
-                        ml: 1,
-                        position: "relative",
-                        top: 4
-                    },
-                    children: status.name
-                })
-            })
+            status.timeout && /*#__PURE__*/ (0, $17b288f07ec57b56$exports.jsx)((0, $f19c312504146f35$export$2e2bcd8739ae039), {
+                seconds: status.timeout || 0,
+                size: 12,
+                thickness: 24,
+                flip: true,
+                sx: {
+                    ml: 1,
+                    position: "relative",
+                    top: 4
+                }
+            }, status.step)
         ]
     });
     else return null;

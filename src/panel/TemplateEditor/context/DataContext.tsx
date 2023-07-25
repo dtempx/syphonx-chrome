@@ -93,27 +93,38 @@ export function DataProvider({ children }: { children: JSX.Element }) {
 
     async function onUpdateExtract(state: syphonx.ExtractState): Promise<void> {
         if (state.yield) {
-            if (state.yield.params?.goback) {
+            const params: Record<string, any> = state.yield.params || {};
+            if (params.goback) {
                 //todo consider how to implement timeout, waitUntil
                 await inspectedWindow.goBack();
             }
-            else if (state.yield.params?.locators) {
+            else if (params.locators) {
                 //todo consider how to implement locators
+                const locator = params.locator;
+                if (locator.name?.startsWith("_") && locator.selector && locator.method) {
+                    let value: any = "";
+                    if (locator.method?.startsWith("all"))
+                        value = [];
+                    state.vars._value = value;
+                }
             }
-            else if (state.yield.params?.navigate) {
+            else if (params.navigate) {
                 //todo consider how to implement timeout, waitUntil
-                await inspectedWindow.navigate(state.yield.params.navigate.url);
+                await inspectedWindow.navigate(params.navigate.url);
             }
-            else if (state.yield.params?.reload) {
+            else if (params.reload) {
                 //todo consider how to implement timeout, waitUntil
                 await inspectedWindow.reload();
             }
-            else if (state.yield.params?.waitUntil) {
-                //todo consider how to implement waitUntil
-                await sleep(1000);
-            }
             else {
+                // todo consider how to implement waitUntil
                 await sleep(1000);
+                if (params.action === "locator") {
+                    let value: any = "";
+                    if (params.method?.startsWith("all"))
+                        value = [];
+                    state.vars._value = value;
+                }
             }
             const script = `${syphonx.script}(${JSON.stringify({ ...state, debug: true })})`;
             await inspectedWindow.evaluate(script);
