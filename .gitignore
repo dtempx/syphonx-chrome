@@ -9,7 +9,4 @@ node_modules
 .parcel-cache
 .DS_Store
 Thumbs.db
-dist/syphonx*.zip
-!dist/syphonx/*.js
-!dist/syphonx/*.js.map
-!src/scripts/syphonx.d.ts
+dist
