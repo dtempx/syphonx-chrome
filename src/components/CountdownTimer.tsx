@@ -10,11 +10,13 @@ export interface Props {
     seconds: number;
     size?: number;
     thickness?: number;
+    flip?: boolean;
     sx?: SxProps<Theme>;
+    key?: string;
 }
 
 export default (props: Props) => {
-    const { seconds, size, thickness, sx } = props;
+    const { seconds, size, thickness, flip, sx, key = seconds } = props;
     const [value, setValue] = useState(seconds);
     const progress = seconds > 0 ? 100 * value / seconds : 0;
 
@@ -26,7 +28,7 @@ export default (props: Props) => {
         return () => {
             clearInterval(timer);
         };
-    }, [props]);
+    }, [key]);
 
     return (
         <CircularProgress
@@ -34,6 +36,7 @@ export default (props: Props) => {
             size={size}
             thickness={thickness}
             value={progress}
+            style={flip ? { transform: "scaleX(-1) rotate(-90deg" } : undefined}
             sx={sx}
         />
     );
