@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { List, ListItemType } from "../components";
+import { List, ListItemType, Logout } from "../components";
 import { useApp, useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
@@ -11,7 +11,8 @@ import LoginDialog from "./LoginDialog";
 
 import {
     Box,
-    Drawer
+    Divider,
+    Drawer,
 } from "@mui/material";
 
 import {
@@ -22,7 +23,6 @@ import {
     CloudOff as FileCloseIcon,
     MapsHomeWork as PortalIcon,
     ManageAccounts as SettingsIcon,
-    Person as UserIcon,
 } from "@mui/icons-material";
 
 export interface Props {
@@ -48,7 +48,7 @@ export default ({ open, onClose }: Props) => {
                 setLoginOpen(false);
             }
         })();
-    }, [verified]);
+    }, [user, verified]);
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
@@ -57,12 +57,22 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         ["Open Template", <FileOpenIcon />, event => {
-            setFileOpenOpen(true);
-            onClose(event);
+            if (!user || !verified) {
+                setLoginOpen(true);
+                onClose(event);
+            } else {
+                setFileOpenOpen(true);
+                onClose(event);
+            }
         }],
         ["Save Template", <FileSaveIcon />, event => {
-            setFileSaveOpen(true);
-            onClose(event);
+            if (!user || !verified) {
+                setLoginOpen(true);
+                onClose(event);
+            } else {
+                setFileSaveOpen(true);
+                onClose(event);
+            }
         }],
         ["Close Template", <FileCloseIcon />, event => {
             setTemplate("");
@@ -70,10 +80,6 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         null,
-        ["Login", <UserIcon />, event => {
-            setLoginOpen(true);
-            onClose(event);
-        }],
         ["User Settings", <SettingsIcon />, event => {
             setUserSettingsOpen(true);
             onClose(event);
@@ -81,7 +87,7 @@ export default ({ open, onClose }: Props) => {
         ["About", <AboutIcon />, event => {
             setAboutOpen(true);
             onClose(event);
-        }]
+        }],
     ];
     if (portal?.views?.panel) {
         items.push(null);
@@ -99,7 +105,6 @@ export default ({ open, onClose }: Props) => {
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
         {!!portal?.views?.full && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
-        {/* {!user && <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />} */}
         <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />
 
         <Drawer
@@ -114,6 +119,8 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={items} />
+                <Divider />
+                <Logout />
             </Box>
         </Drawer>
     </>);

@@ -65,14 +65,14 @@ export default ({ open, onClose }: Props) => {
                             <Tooltip title="An email address used to identity your changes.">
                                 <Typography>Email</Typography>
                             </Tooltip>,
-                            <Stack direction="row" spacing={2}>
+                            <Stack direction="row" spacing={email ? 2 : 0}>
                                 <Typography>{email}</Typography>
                                 <Link
                                     component="button"
                                     variant="body2"
                                     onClick={() => setLoginOpen(true)}
                                     >
-                                    Change Email
+                                    {user ? "Change Email" : "Login"}
                                 </Link>
                             </Stack>,
                             "",

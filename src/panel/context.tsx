@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { Portal } from "./Portal";
-import { User, validateSession, } from "./TemplateEditor/lib/cloud";
+import { getUser, User, validateSession } from "./TemplateEditor/lib/cloud";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
@@ -110,48 +110,37 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     useEffect(() => {
         (async () => {
             try {
-                const token = user?.id ? `u/${user.id}` : undefined;
-                const api = new SyphonXApi(token, serviceUrl);
-                const auth = await api.auth();
-                setPortal(auth.portal);
+                if (!portal) { // to prevent repetitive calls...
+                    const token = user?.id ? `u/${user.id}` : undefined;
+                    const api = new SyphonXApi(token, serviceUrl);
+                    const auth = await api.auth();
+                    setPortal(auth.portal);
+                }
             } catch(err) {
                 debugger;
                 console.error(err);
                 setPortal(undefined);
             }
+
+            if (user)
+                setVerified(validateSession(user));
+            else
+                setVerified(false);
         })();
     }, [user, serviceUrl]);
 
+
     useEffect(() => {
         (async () => {
-            try {
-                if (user && validateSession(user)) {
-                    alert(`user ${JSON.stringify(user)}`);
-                    setVerified(true);
-                } else if (email) {
-                    // const baseUrl = process.env.NODE_ENV === 'production' ? 'xxx' : `http://localhost:8080/user`;
-                    const baseUrl = `http://localhost:8080/user`;
-                    const response = await fetch(`${baseUrl}?email=${email}`);
-                    const result = await response.json() as User;
-    
-                    if (result) {
-                        alert(`result ${JSON.stringify(result)}`);
-                        setUser(result); // this will recursively call this useEffect, setting then verified and validate...
-    
-                        if (validateSession(result)) {
-                            setVerified(true);
-                        }
-                    } else {
-                        setVerified(false); // this will open the Login dialog...
-                    }
-                }
-            } catch(err) {
-                debugger;
-                console.error(err);
-                setVerified(false);
+            if (email?.length) {
+                const user = await getUser(email);
+                if (user)
+                    setUser(user);
+            } else if (email?.length === 0) {
+                setUser(undefined);
             }
         })();
-    }, [ email, ]);
+    }, [email]);
 
     useEffect(() => {
         chrome.storage.local.set({
