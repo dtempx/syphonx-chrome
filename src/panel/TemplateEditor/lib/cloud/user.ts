@@ -8,6 +8,7 @@ import {
     onSnapshot
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
+import { defaultUrl } from "./constants";
 
 export interface User {
     createdAt: string;
@@ -29,10 +30,8 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const maxSessionLengthSeconds = 259200; // 3 days
 
-// https://us-central1-syphonx.cloudfunctions.net/syphonx
-// https://syphonx-35w5m5egbq-uc.a.run.app
-export async function getUser(email: string, serviceUrl = "https://us-central1-syphonx.cloudfunctions.net/syphonx"): Promise<User> {
-    const response = await fetch(`${serviceUrl}/user/email?email=${email}`);
+export async function getUser(email: string, apiUrl = defaultUrl): Promise<User> {
+    const response = await fetch(`${apiUrl}/user/email?email=${email}`);
     const result = await response.json() as User;
 
     return result;
