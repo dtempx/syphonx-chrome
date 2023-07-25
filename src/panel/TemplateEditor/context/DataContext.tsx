@@ -1,37 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useApp, useTemplate } from "../context";
-import { inspectedWindow, tryParseJson, Template } from "../lib";
+import { inspectedWindow, sleep, tryParseJson, validateContract, Template } from "../lib";
 import { Schema } from "jsonschema";
 import * as syphonx from "syphonx-lib";
 
 export interface DataState {
-    extract: syphonx.ExtractResult | undefined;
-    setExtract: React.Dispatch<React.SetStateAction<syphonx.ExtractResult | undefined>>;
+    extractState: syphonx.ExtractState | undefined;
+    extractStatus: syphonx.ExtractStatus | undefined;
     refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
+    resetExtractStatus: () => void;
 }
 
 export const DataContext = React.createContext<DataState>({
-    extract: undefined,
-    setExtract: () => {},
+    extractState: undefined,
+    extractStatus: undefined,
     refresh: async () => {},
-    refreshing: false
+    refreshing: false,
+    resetExtractStatus: () => {}
 });
 
 export function DataProvider({ children }: { children: JSX.Element }) {
-    const { autoRefresh, inspectedWindowUrl } = useApp();
+    const { autoRefresh } = useApp();
     const { template: json, contract: contractJson } = useTemplate();
-    const [extract, setExtract] = useState<syphonx.ExtractResult | undefined>();
+    const [extractState, setExtractState] = useState<syphonx.ExtractState | undefined>();
+    const [extractStatus, setExtractStatus] = useState<syphonx.ExtractStatus | undefined>();
     const [refreshing, setRefreshing] = useState(false);
+    const contractJsonRef = useRef(contractJson);
 
     useEffect(() => {
-        // message is sent from the content script that forwards the message from the DOM window
+        contractJsonRef.current = contractJson; // update the ref each time contractJson changes
+    }, [contractJson]);
+
+    useEffect(() => {
+        // message is sent from backgroud service_worker script which forwards the message from the DOM window
         chrome.runtime.onMessage.addListener(listener);
         return () => chrome.runtime.onMessage.removeListener(listener);
 
         function listener(message: any): void {
-            if (message.syphonx)
-                setExtract(message.syphonx);
+            if (message.syphonx) {
+                if (message.syphonx.key === "extract-status") {
+                    setExtractStatus(message.syphonx);
+                }
+                else if (message.syphonx.key === "extract-state") {
+                    setExtractState(message.syphonx);
+                    onUpdateExtract(message.syphonx);
+                }
+            }
         }
     }, []);
 
@@ -43,33 +58,83 @@ export function DataProvider({ children }: { children: JSX.Element }) {
     }, [json, autoRefresh]);
 
     async function refresh(reload: boolean) {
-        setExtract(undefined);
-        const template = new Template(json);
-        if (template.obj.actions instanceof Array && template.obj.actions.length > 0) {
-            setRefreshing(true);
-            if (reload)
-                await inspectedWindow.reload();
-
-            const contract = tryParseJson(contractJson) as Schema | undefined;
-            applyTemplate(template, contract, inspectedWindowUrl);
+        try {
+            const template = new Template(json); // loads a default template if no json
+            if (template.obj.actions instanceof Array && template.obj.actions.length > 0)
+                await onBeginExtract(template, reload);
         }
-        setRefreshing(false);
+        catch (err) {
+            console.error(err);
+        }
     }
 
-    async function applyTemplate(template: Template, contract: Schema | undefined, url: string): Promise<void> {
-        const script = `(async () => {
-            const result = await ${syphonx.script}(${JSON.stringify({ ...template.obj, url, debug: true })})
-            window.postMessage({ direction: "syphonx", message: result });
-        })()`;
+    function resetExtractStatus() {
+        setExtractState(undefined);
+        setExtractStatus(undefined);
+        setRefreshing(false);        
+    }
 
+    async function onBeginExtract(template: Template, reload: boolean): Promise<void> {
+        setExtractState(undefined);
+        setExtractStatus(undefined);
+
+        // make sure there's a url otherwise it will hang because the listener won't have been added in the service_worker
+        const url = await inspectedWindow.url();
+        if (!url)
+            return; // todo set extract status 
+
+        setRefreshing(true);
+        if (reload)
+            await inspectedWindow.reload();
+
+        const script = `${syphonx.script}(${JSON.stringify({ ...template.obj, url, debug: true })})`;
         await inspectedWindow.evaluate(script);
     }
 
+    async function onUpdateExtract(state: syphonx.ExtractState): Promise<void> {
+        if (state.yield) {
+            if (state.yield.params?.goback) {
+                //todo consider how to implement timeout, waitUntil
+                await inspectedWindow.goBack();
+            }
+            else if (state.yield.params?.locators) {
+                //todo consider how to implement locators
+            }
+            else if (state.yield.params?.navigate) {
+                //todo consider how to implement timeout, waitUntil
+                await inspectedWindow.navigate(state.yield.params.navigate.url);
+            }
+            else if (state.yield.params?.reload) {
+                //todo consider how to implement timeout, waitUntil
+                await inspectedWindow.reload();
+            }
+            else if (state.yield.params?.waitUntil) {
+                //todo consider how to implement waitUntil
+                await sleep(1000);
+            }
+            else {
+                await sleep(1000);
+            }
+            const script = `${syphonx.script}(${JSON.stringify({ ...state, debug: true })})`;
+            await inspectedWindow.evaluate(script);
+        }
+        else {
+            const contract = tryParseJson(contractJsonRef.current) as Schema | undefined;
+            if (contract) {
+                const obj = { ...state };
+                validateContract(contract, obj);
+                setExtractState(obj);
+            }
+            setRefreshing(false);
+        }
+    }
+
     const value = {
-        extract,
-        setExtract,
+        extractState,
+        extractStatus,
         refresh,
-        refreshing
+        refreshing,
+        resetExtractStatus
     };
 
     return (

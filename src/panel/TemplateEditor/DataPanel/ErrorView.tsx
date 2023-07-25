@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 
 export default () => {
-    const { extract } = useTemplate();
-    const errors = extract?.errors as syphonx.ExtractError[]; // WORKAROUND https://github.com/microsoft/TypeScript/issues/36981
+    const { extractState } = useTemplate();
+    const errors = extractState?.errors as syphonx.ExtractError[]; // WORKAROUND https://github.com/microsoft/TypeScript/issues/36981
     if (errors && errors.length > 0)
         return (
             <TableContainer>
