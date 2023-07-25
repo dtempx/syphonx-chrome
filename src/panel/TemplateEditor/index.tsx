@@ -13,13 +13,13 @@ import VisualEditor from "./VisualEditor";
 
 export default () => {
     const { mode } = useApp();
-    const { setTemplate, setExtract } = useTemplate();
+    const { setTemplate, resetExtractStatus } = useTemplate();
     return (
         <ErrorBoundary
             FallbackComponent={ErrorPage}
             onReset={() => {
                 setTemplate("");
-                setExtract(undefined);
+                resetExtractStatus();
             }}
         >
             <TemplateProvider>
@@ -38,6 +38,7 @@ export default () => {
                         <Paper
                             elevation={3}
                             sx={{
+                                minHeight: 800,
                                 width: 1,
                                 m: 1,
                                 p: 1

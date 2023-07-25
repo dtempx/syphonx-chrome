@@ -5,4 +5,5 @@ export { default as AddSelectorDialog } from "./AddSelectorDialog";
 export { default as ErrorPage } from "./ErrorPage";
 export { default as Logout } from "./Logout";
 export { default as SwitchedObjectEditor } from "./SwitchedObjectEditor";
+export { default as SwitchedStringListEditor } from "./SwitchedStringListEditor";
 export { default as WaitUntilDropdown } from "./WaitUntilDropdown";

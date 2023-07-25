@@ -25,6 +25,7 @@ import {
 import {
     PropertyGrid,
     SwitchedObjectEditor,
+    SwitchedStringListEditor,
     ValidateField,
     WaitUntilDropdown
 } from "./components";
@@ -36,6 +37,7 @@ export default () => {
         <Paper
             elevation={3}
             sx={{
+                overflow: "auto",
                 width: 1,
                 height: 300,
                 m: 1,
@@ -106,6 +108,18 @@ export default () => {
                     />
                 ],
                 [
+                    <Tooltip title="Revert functions that have been monkey patched on a page.">
+                        <Typography>unpatch</Typography>
+                    </Tooltip>,
+                    <SwitchedStringListEditor
+                        list={template.obj.unpatch}
+                        onChange={(event, list) => {
+                            template.obj.unpatch = list;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
                     <Tooltip title="Determines whether to use incognito mode.">
                         <Typography>incognito</Typography>
                     </Tooltip>,
@@ -142,7 +156,7 @@ export default () => {
                             setTemplate(template.json());
                         }}
                     />
-                ]
+                ]                
             ]} />
         </Paper>
     );

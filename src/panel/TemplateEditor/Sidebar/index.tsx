@@ -32,7 +32,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { portal, user, verified, } = useApp();
-    const { setTemplate, setExtract } = useTemplate();
+    const { setTemplate, resetExtractStatus } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
@@ -53,7 +53,7 @@ export default ({ open, onClose }: Props) => {
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
             setTemplate("");
-            setExtract(undefined);
+            resetExtractStatus();
             onClose(event);
         }],
         ["Open Template", <FileOpenIcon />, event => {
@@ -76,7 +76,7 @@ export default ({ open, onClose }: Props) => {
         }],
         ["Close Template", <FileCloseIcon />, event => {
             setTemplate("");
-            setExtract(undefined);
+            resetExtractStatus();
             onClose(event);
         }],
         null,

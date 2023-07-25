@@ -83,15 +83,15 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         // forward messages from the DOM window into the chrome runtime
         await executeScript(tabId, () => {
             window.addEventListener("message", event => {
-                if (event.source === window && event.data.direction === "syphonx") {
-                    chrome.runtime.sendMessage({
-                        syphonx: (event as any).data.message
-                    });
-                }
+                if (event.source === window && event.data.direction === "syphonx")
+                    chrome.runtime.sendMessage({ syphonx: (event as any).data.message });
             });
+            console.log("window.addEventListener");
         });
     }
+    console.log("chrome.tabs.onUpdated.addListener");
 });
+console.log("service_worker");
 
 // This method listens for messages that are sent from either content scripts or other parts of your extension (like a popup script or background script).
 // It's primarily used for inter-component communication within your extension.
@@ -112,10 +112,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return false; // immediate synchronous response
     }
 
+    const tabId = message.tabId as number;
     if (message.key === "navigate") {
         console.log("MESSAGE", message.key, { message, sender });
         (async () => {
-            await chrome.tabs.update({ url: message.params[0] });
+            await chrome.tabs.update(tabId, { url: message.params[0] });
             await waitForNavigation();
             sendResponse();
         })();
@@ -124,15 +125,30 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     else if (message.key === "reload") {
         console.log("MESSAGE", message.key, { message, sender });
         (async () => {
-            await chrome.tabs.reload();
-            await waitForNavigation();
+            const tab = await chrome.tabs.get(tabId);
+            if (tab.active && tab.url) {
+                await chrome.tabs.reload(tabId);
+                await waitForNavigation();
+            }
+            sendResponse();
+        })();
+        return true; // response will be sent asynchronously
+    }
+    else if (message.key === "goback") {
+        console.log("MESSAGE", message.key, { message, sender });
+        (async () => {
+            const tab = await chrome.tabs.get(tabId);
+            if (tab.active && tab.url) {
+                await chrome.tabs.goBack(tabId);
+                await waitForNavigation();
+            }
             sendResponse();
         })();
         return true; // response will be sent asynchronously
     }
     else if (message.key === "tab") {
         (async () => {
-            const tab = await chrome.tabs.get(message.tabId);
+            const tab = await chrome.tabs.get(tabId);
             sendResponse({ tab });
             console.log("MESSAGE", message.key, { message, sender, tab });
         })();

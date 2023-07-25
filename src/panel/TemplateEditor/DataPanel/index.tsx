@@ -19,7 +19,7 @@ export default () => {
         <Stack
             direction="column"
             sx={{
-                height: 800
+                height: "auto"
             }}
         >
             <Toolbar mode={mode} onChange={(event, mode) => setMode(mode)} />
@@ -30,27 +30,13 @@ export default () => {
                     m: 1
                 }}
             >
-                <Box component="div" display={mode === "table" ? "block" : "none"}>
-                    <TableView />
-                </Box>
-                <Box component="div" display={mode === "json" ? "block" : "none"}>
-                    <JsonView />
-                </Box>
-                <Box component="div" display={mode === "contract" ? "block" : "none"}>
-                    <ContractView />
-                </Box>
-                <Box component="div" display={mode === "log" ? "block" : "none"}>
-                    <LogView />
-                </Box>
-                <Box component="div" display={mode === "raw" ? "block" : "none"}>
-                    <ResponseView />
-                </Box>
-                <Box component="div" display={mode === "errors" ? "block" : "none"}>
-                    <ErrorView />
-                </Box>
-                <Box component="div" display={mode === "portal" ? "block" : "none"}>
-                    <PortalView />
-                </Box>
+                { mode === "table"    && <TableView />    }
+                { mode === "json"     && <JsonView />     }
+                { mode === "contract" && <ContractView /> }
+                { mode === "log"      && <LogView />      }
+                { mode === "raw"      && <ResponseView /> }
+                { mode === "errors"   && <ErrorView />    }
+                { mode === "portal"   && <PortalView />   }
             </Box>
         </Stack>
     );
