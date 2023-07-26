@@ -15,17 +15,13 @@ export default () => {
         template: templateFile,
         url: inspectedWindowUrl
     }).toString();
-    // const url = `${portal?.views?.panel}?${params}`;
-    
-    // const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : '';
-    // const look_id = templateFile?.match('product_search') ? '1459' : '1458'; // 1458 = product_page, 1459 = product_search
-    // const url = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace('look_id', look_id).replace(/seller_id/g, seller_id);
+    const url = `${portal?.views?.panel}?${params}`;
 
-    useEffect(() => {
-        (async () => {
-            await load();
-        })();
-    }, []);
+    // useEffect(() => { // pending - requires SyphonX Looker credentials
+    //     (async () => {
+    //         await load();
+    //     })();
+    // }, []);
 
     const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : '';
     const tempUrl = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace(/seller_id/g, seller_id);
