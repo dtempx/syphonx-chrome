@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { Portal } from "./Portal";
-import { getUser, User, validateSession } from "./TemplateEditor/lib/cloud";
+import { getUser, User, validateSession, watchUser } from "./TemplateEditor/lib/cloud";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
@@ -27,6 +27,8 @@ export interface AppState {
     inspectedWindowUrl: string;
     user: User | undefined;
     setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+    initialUserRequestComplete: boolean;
+    setInitialUserRequestComplete: React.Dispatch<boolean>;
     verified: boolean;
     setVerified: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -47,6 +49,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
     const [user, setUser] = useState<User | undefined>(undefined);
+    const [initialUserRequestComplete, setInitialUserRequestComplete] = useState<boolean>(false);
     const [verified, setVerified] = useState<boolean>(false);
 
     // update inspectedWindowUrl when the inspected window is re-navigated
@@ -132,12 +135,23 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     useEffect(() => {
         (async () => {
             if (email?.length) {
-                const user = await getUser(email, serviceUrl);
-                if (user)
+                const user = await getUser(email, serviceUrl || undefined);
+                if (user) {
                     setUser(user);
-            } else if (email?.length === 0) {
+                    watchUser(email, result => {
+                        if (result && JSON.stringify(user) !== JSON.stringify(result)) {
+                            setUser(result);    
+                            if (validateSession(result))
+                                setVerified(validateSession(result));
+                            else
+                                setVerified(false);
+                        }
+                    });
+                }
+            } else if (email?.length === 0)
                 setUser(undefined);
-            }
+
+            setInitialUserRequestComplete(true);
         })();
     }, [email]);
 
@@ -183,6 +197,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         inspectedWindowUrl,
         user,
         setUser,
+        initialUserRequestComplete,
+        setInitialUserRequestComplete,
         verified,
         setVerified
     };

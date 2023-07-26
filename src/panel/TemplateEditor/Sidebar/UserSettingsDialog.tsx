@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useApp } from "../context";
 import { regexp } from "../lib";
 
-import LoginDialog from "./LoginDialog";
+// import VerificationDialog from "./VerificationDialog";
 
 import {
     AdvancedPropertyGrid,
@@ -42,7 +42,7 @@ export default ({ open, onClose }: Props) => {
         user
     } = useApp();
 
-    const [loginOpen, setLoginOpen] = useState(false);
+    // const [verificationOpen, setVerificationOpen] = useState(false);
 
     return (
         <Dialog
@@ -51,7 +51,7 @@ export default ({ open, onClose }: Props) => {
             onClose={onClose}
             TransitionComponent={TransitionUp}
         >
-            <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />
+            {/* <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} /> */}
 
             <DialogTitle sx={{ p: 0 }}>
                 <TitleBar title="User Settings" onClose={onClose} />
@@ -67,13 +67,13 @@ export default ({ open, onClose }: Props) => {
                             </Tooltip>,
                             <Stack direction="row" spacing={email ? 2 : 0}>
                                 <Typography>{email}</Typography>
-                                <Link
+                                {/* <Link
                                     component="button"
                                     variant="body2"
-                                    onClick={() => setLoginOpen(true)}
+                                    onClick={() => setVerificationOpen(true)}
                                     >
                                     {user ? "Change Email" : "Login"}
-                                </Link>
+                                </Link> */}
                             </Stack>,
                             "",
                             true

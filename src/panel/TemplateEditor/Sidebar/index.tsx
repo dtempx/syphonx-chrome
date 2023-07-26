@@ -7,7 +7,7 @@ import OpenFileDialog from "./OpenFileDialog";
 import PortalDialog from "./PortalDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
-import LoginDialog from "./LoginDialog";
+import VerificationDialog from "./VerificationDialog";
 
 import {
     Box,
@@ -31,24 +31,27 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, user, verified, } = useApp();
+    const { initialUserRequestComplete, portal, user, verified, } = useApp();
     const { setTemplate, resetExtractStatus } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
     const [userSettingsOpen, setUserSettingsOpen] = useState(false);
     const [portalOpen, setPortalOpen] = useState(false);
-    const [loginOpen, setLoginOpen] = useState(false);
+    const [verificationOpen, setVerificationOpen] = useState(false);
 
     useEffect(() => {
         (async () => {
-            if (!user || !verified) {
-                setLoginOpen(true);
-            } else if (user && verified) {
-                setLoginOpen(false);
+            if (initialUserRequestComplete && (!user || !verified)) {
+                setVerificationOpen(true);
+            } 
+            else if (user && verified) {
+                setTimeout(() => {
+                    setVerificationOpen(false);
+                }, 3000);
             }
         })();
-    }, [user, verified]);
+    }, [initialUserRequestComplete, user, verified]);
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
@@ -57,8 +60,8 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         ["Open Template", <FileOpenIcon />, event => {
-            if (!user || !verified) {
-                setLoginOpen(true);
+            if (initialUserRequestComplete && (!user || !verified)) {
+                setVerificationOpen(true);
                 onClose(event);
             } else {
                 setFileOpenOpen(true);
@@ -66,8 +69,8 @@ export default ({ open, onClose }: Props) => {
             }
         }],
         ["Save Template", <FileSaveIcon />, event => {
-            if (!user || !verified) {
-                setLoginOpen(true);
+            if (initialUserRequestComplete && (!user || !verified)) {
+                setVerificationOpen(true);
                 onClose(event);
             } else {
                 setFileSaveOpen(true);
@@ -105,7 +108,7 @@ export default ({ open, onClose }: Props) => {
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
         {!!portal?.views?.full && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
-        <LoginDialog open={loginOpen} setOpen={setLoginOpen} onClose={() => setLoginOpen(false)} />
+        <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} />
 
         <Drawer
             anchor="left"
