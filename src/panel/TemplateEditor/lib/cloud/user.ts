@@ -31,7 +31,7 @@ const firestore = getFirestore(app);
 const maxSessionLengthSeconds = 259200; // 3 days
 
 export async function getUser(email: string, apiUrl = defaultUrl): Promise<User> {
-    const response = await fetch(`${apiUrl}/user/email?email=${email}`);
+    const response = await fetch(`${apiUrl}/user?email=${email}`);
     const result = await response.json() as User;
 
     return result;
