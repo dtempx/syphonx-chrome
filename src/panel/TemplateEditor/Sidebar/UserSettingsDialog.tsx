@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useApp } from "../context";
 import { regexp } from "../lib";
-
-// import VerificationDialog from "./VerificationDialog";
 
 import {
     AdvancedPropertyGrid,
@@ -16,7 +14,6 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Link,
     Stack,
     Switch,
     Tooltip,
@@ -42,8 +39,6 @@ export default ({ open, onClose }: Props) => {
         user
     } = useApp();
 
-    // const [verificationOpen, setVerificationOpen] = useState(false);
-
     return (
         <Dialog
             fullScreen
@@ -51,8 +46,6 @@ export default ({ open, onClose }: Props) => {
             onClose={onClose}
             TransitionComponent={TransitionUp}
         >
-            {/* <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} /> */}
-
             <DialogTitle sx={{ p: 0 }}>
                 <TitleBar title="User Settings" onClose={onClose} />
             </DialogTitle>
@@ -67,13 +60,6 @@ export default ({ open, onClose }: Props) => {
                             </Tooltip>,
                             <Stack direction="row" spacing={email ? 2 : 0}>
                                 <Typography>{email}</Typography>
-                                {/* <Link
-                                    component="button"
-                                    variant="body2"
-                                    onClick={() => setVerificationOpen(true)}
-                                    >
-                                    {user ? "Change Email" : "Login"}
-                                </Link> */}
                             </Stack>,
                             "",
                             true

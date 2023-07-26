@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { List, ListItemType, Logout } from "../components";
+import { List, ListItemType } from "../components";
 import { useApp, useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
@@ -122,8 +122,6 @@ export default ({ open, onClose }: Props) => {
                 onKeyDown={event => onClose(event)}
             >
                 <List items={items} />
-                <Divider />
-                <Logout />
             </Box>
         </Drawer>
     </>);
