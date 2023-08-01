@@ -1,5 +1,5 @@
 import React from "react";
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
 
 import {
@@ -20,8 +20,9 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, debug, inspectedWindowUrl } = useApp();
+    const { debug, inspectedWindowUrl } = useApp();
     const { template: json, templateFile } = useTemplate();
+    const { portal } = useUser();
     const template = new Template(json);
     const obj = portal?.views?.full ? Object.fromEntries(new URL(portal.views.full).searchParams) : undefined;
     const params = new URLSearchParams({

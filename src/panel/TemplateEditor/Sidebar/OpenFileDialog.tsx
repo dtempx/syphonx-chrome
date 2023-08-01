@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
 import { inspectedWindow, sleep, Template } from "../lib";
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate, useUser } from "../context";
 
 export interface Props {
     open: boolean;
@@ -10,7 +10,8 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { user, autoOpen, serviceUrl } = useApp();
+    const { autoOpen, serviceUrl } = useApp();
+    const { user } = useUser();
     const { setTemplateFile, setTemplate, setContract, resetExtractStatus } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);

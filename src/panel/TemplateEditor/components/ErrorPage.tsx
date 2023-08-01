@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FallbackProps } from "react-error-boundary";
 import { LoadingButton } from "@mui/lab";
-import { useApp } from "../context";
+import { useApp, useUser } from "../context";
 
 import {
     Alert,
@@ -20,7 +20,8 @@ import {
 type Status = "unsent" | "sending" | "sent" | "error";
 
 export default ({ error, resetErrorBoundary }: FallbackProps) => {
-    const { user, email, serviceUrl } = useApp();
+    const { serviceUrl } = useApp();
+    const { user } = useUser();
     const [expanded, setExpanded] = useState(false);
     const [comments, setComments] = useState("");
     const [status, setStatus] = useState<Status>("unsent");
@@ -40,7 +41,7 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
             key: "error",
             version: manifest.version,
             error: error.stack || error.message || JSON.stringify(error),
-            email,
+            email: user?.email,
             comments
         });
         if (ok)

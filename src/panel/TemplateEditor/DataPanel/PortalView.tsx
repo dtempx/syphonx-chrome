@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useApp, useTemplate } from "../context";
+import React from "react";
+import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
 import { Box, Typography } from "@mui/material";
-import { load } from '../../../lib/looker';
 
 export default () => {
-    const { portal, debug, inspectedWindowUrl } = useApp();
+    const { debug, inspectedWindowUrl } = useApp();
+    const { portal } = useUser();
     const { template: json, templateFile } = useTemplate();
     const template = new Template(json);
     const obj = portal?.views?.panel ? Object.fromEntries(new URL(portal.views.panel).searchParams) : undefined;
@@ -16,13 +16,6 @@ export default () => {
         url: inspectedWindowUrl
     }).toString();
     const url = `${portal?.views?.panel}?${params}`;
-
-    // useEffect(() => { // pending - requires SyphonX Looker credentials
-    //     (async () => {
-    //         await load();
-    //     })();
-    // }, []);
-
     const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : '';
     const tempUrl = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace(/seller_id/g, seller_id);
 

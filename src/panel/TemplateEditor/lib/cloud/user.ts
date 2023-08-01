@@ -11,9 +11,9 @@ import { initializeApp } from "firebase/app";
 import { defaultUrl } from "./constants";
 
 export interface User {
-    createdAt: string;
+    createdAt?: string;
     email: string;
-    id: string;
+    id?: string;
     lastSeen?: string;
 }
 

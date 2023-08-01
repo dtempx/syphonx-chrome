@@ -1,5 +1,5 @@
 import React from "react";
-import { useApp } from "../context";
+import { useApp, useUser } from "../context";
 import { regexp } from "../lib";
 
 import {
@@ -14,7 +14,6 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    Stack,
     Switch,
     Tooltip,
     Typography
@@ -33,11 +32,10 @@ export default ({ open, onClose }: Props) => {
         setAutoOpen,
         debug,
         setDebug,
-        email,
         serviceUrl,
-        setServiceUrl,
-        user
+        setServiceUrl
     } = useApp();
+    const { user } = useUser();
 
     return (
         <Dialog
@@ -58,9 +56,7 @@ export default ({ open, onClose }: Props) => {
                             <Tooltip title="An email address used to identity your changes.">
                                 <Typography>Email</Typography>
                             </Tooltip>,
-                            <Stack direction="row" spacing={email ? 2 : 0}>
-                                <Typography>{email}</Typography>
-                            </Stack>,
+                            <Typography>{user?.email}</Typography>,
                             "",
                             true
                         ],

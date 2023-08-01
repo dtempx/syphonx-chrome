@@ -1,8 +1,9 @@
 
 import React, { useEffect, useState, } from "react";
 
-import { useApp, } from "../context";
+import { useApp, useUser } from "../context";
 import { regexp } from "../lib";
+import { getUser, watchUser, validateSession } from "../lib/cloud";
 
 import {
     TransitionUp
@@ -10,9 +11,7 @@ import {
 
 import {
     Alert,
-    Box,
     Button,
-    CircularProgress,
     Dialog,
     DialogActions,
     DialogContent,
@@ -33,23 +32,32 @@ export interface Props {
 }
 
 export default ({ open, onClose, setOpen }: Props) => {
-    const { email, initialUserRequestComplete, setEmail, user, verified } = useApp();
+    const { serviceUrl } = useApp();
+    const { user, setUser, verified, setVerified } = useUser();
 
-    const [ loading, setLoading ] = useState<boolean>(true);
     const [ message, setMessage ] = useState<{ severity: "info" | "success"; message: string; }>({ severity: "info", "message": "" });
     const [ submit, setSubmit ] = useState<boolean>(false);
     const [ valid, setValid ] = useState<boolean>(false);
-    const [ value, setValue ] = useState<string>(email);
-
-    useEffect(() => {
-        if (initialUserRequestComplete)
-            setLoading(false);
-    }, [initialUserRequestComplete]);
+    const [ value, setValue ] = useState<string>(user?.email ? user.email : "");
 
     const submitEmail = async (): Promise<void> => {
         if (valid) {
-            setEmail(value);
+            setUser({ email: value });
             setSubmit(true);
+
+            const user = await getUser(value, serviceUrl || undefined);
+            if (user) {
+                setUser(user);
+                watchUser(value, result => {
+                    if (result && JSON.stringify(user) !== JSON.stringify(result)) {
+                        setUser(result);    
+                        if (validateSession(result))
+                            setVerified(validateSession(result));
+                        else
+                            setVerified(false);
+                    }
+                });
+            }
         }
     }
 
@@ -88,66 +96,54 @@ export default ({ open, onClose, setOpen }: Props) => {
             TransitionComponent={TransitionUp}
             maxWidth="sm"
         >
-            {loading && 
-                <DialogContent>
-                    <Box sx={{ display: "flex", minHeight: "320px", justifyContent: "center", alignItems: "center" }}>
-                        <CircularProgress />
-                    </Box>
+            <DialogTitle>
+                <Typography>WHAT IS YOUR EMAIL?</Typography>
+                <IconButton
+                    onClick={onClose}
+                    sx={{
+                        position: "absolute",
+                        top: theme => theme.spacing(1),
+                        right: theme => theme.spacing(1),
+                        color: theme => theme.palette.grey[500]
+                    }}
+                >
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+
+            <DialogContent>
+                <Typography fontSize="medium" pt={2} pb={4}>
+                    Your email address is required to validate access and to track any revisions made by you. Please enter your email address below and we'll send you a verification link you can use to gain access to the system.
+                </Typography>
+
+                <TextField
+                    variant="standard"
+                    size="small"
+                    fullWidth
+                    onChange={(e) => setValue(e.target.value?.toLowerCase())}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitEmail(); else validate(); }}
+                    value={value}
+                    error={!!value?.length && !valid}
+                    placeholder="user@example.com"
+                />
+
+                {!!message?.message &&
+                    <Alert severity={message.severity} sx={{ marginY: 4 }}>
+                        {message.message}
+                    </Alert>
+                }
+
                 </DialogContent>
-            }
-
-            {!loading &&
-                <>
-                    <DialogTitle>
-                        <Typography>WHAT IS YOUR EMAIL?</Typography>
-                        <IconButton
-                            onClick={onClose}
-                            sx={{
-                                position: "absolute",
-                                top: theme => theme.spacing(1),
-                                right: theme => theme.spacing(1),
-                                color: theme => theme.palette.grey[500]
-                            }}
-                        >
-                            <CloseIcon />
-                        </IconButton>
-                    </DialogTitle>
-
-                    <DialogContent>
-                        <Typography fontSize="medium" pt={2} pb={4}>
-                            Your email address is required to validate access and to track any revisions made by you. Please enter your email address below and we'll send you a verification link you can use to gain access to the system.
-                        </Typography>
-
-                        <TextField
-                            variant="standard"
-                            size="small"
-                            fullWidth
-                            onChange={(e) => setValue(e.target.value?.toLowerCase())}
-                            onKeyDown={(e) => { if (e.key === "Enter") submitEmail(); else validate(); }}
-                            value={value}
-                            error={!!value?.length && !valid}
-                            placeholder="user@example.com"
-                        />
-
-                        {!!message?.message &&
-                            <Alert severity={message.severity} sx={{ marginY: 4 }}>
-                                {message.message}
-                            </Alert>
-                        }
-
-                        </DialogContent>
-                        <DialogActions>
-                        <Button
-                            onClick={onClose}
-                            disabled={!valid || submit}
-                        >CANCEL</Button>
-                        <Button
-                            onClick={submitEmail}
-                            disabled={!valid || submit}
-                        >VERIFY</Button>
-                    </DialogActions>
-                </>
-            }
+                <DialogActions>
+                <Button
+                    onClick={onClose}
+                    disabled={!valid || submit}
+                >CANCEL</Button>
+                <Button
+                    onClick={submitEmail}
+                    disabled={!valid || submit}
+                >VERIFY</Button>
+            </DialogActions>
         </Dialog>
     );
 };

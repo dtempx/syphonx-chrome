@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { List, ListItemType } from "../components";
-import { useApp, useTemplate } from "../context";
+import { useTemplate, useUser } from "../context";
 
 import AboutDialog from "./AboutDialog";
 import OpenFileDialog from "./OpenFileDialog";
@@ -11,7 +11,6 @@ import VerificationDialog from "./VerificationDialog";
 
 import {
     Box,
-    Divider,
     Drawer
 } from "@mui/material";
 
@@ -31,7 +30,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { initialUserRequestComplete, portal, user, verified, } = useApp();
+    const { portal, user, verified, } = useUser();
     const { setTemplate, resetExtractStatus } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
@@ -40,18 +39,6 @@ export default ({ open, onClose }: Props) => {
     const [portalOpen, setPortalOpen] = useState(false);
     const [verificationOpen, setVerificationOpen] = useState(false);
 
-    useEffect(() => {
-        (async () => {
-            if (initialUserRequestComplete && (!user || !verified)) {
-                setVerificationOpen(true);
-            } 
-            else if (user && verified) {
-                setTimeout(() => {
-                    setVerificationOpen(false);
-                }, 3000);
-            }
-        })();
-    }, [initialUserRequestComplete, user, verified]);
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
@@ -60,7 +47,7 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         ["Open Template", <FileOpenIcon />, event => {
-            if (initialUserRequestComplete && (!user || !verified)) {
+            if (!user || !verified) {
                 setVerificationOpen(true);
                 onClose(event);
             } else {
@@ -69,7 +56,7 @@ export default ({ open, onClose }: Props) => {
             }
         }],
         ["Save Template", <FileSaveIcon />, event => {
-            if (initialUserRequestComplete && (!user || !verified)) {
+            if (!user || !verified) {
                 setVerificationOpen(true);
                 onClose(event);
             } else {
