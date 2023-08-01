@@ -1,5 +1,5 @@
 import React from "react";
-import { useApp } from "../context";
+import { useApp, useUser } from "../context";
 import { regexp } from "../lib";
 
 import {
@@ -28,17 +28,14 @@ export default ({ open, onClose }: Props) => {
     const {
         advanced,
         setAdvanced,
-        apiKey,
-        setApiKey,
         autoOpen,
         setAutoOpen,
         debug,
         setDebug,
-        email,
-        setEmail,
         serviceUrl,
         setServiceUrl
     } = useApp();
+    const { user } = useUser();
 
     return (
         <Dialog
@@ -59,30 +56,15 @@ export default ({ open, onClose }: Props) => {
                             <Tooltip title="An email address used to identity your changes.">
                                 <Typography>Email</Typography>
                             </Tooltip>,
-                            <ValidateField
-                                variant="standard"
-                                size="small"
-                                fullWidth
-                                value={email}
-                                onChange={(event, value) => setEmail(value)}
-                                onValidate={(event, value) => value ? regexp.email.test(value) : true}
-                                inputProps={{ maxLength: 64 }}
-                            />,
+                            <Typography>{user?.email}</Typography>,
                             "",
                             true
                         ],
                         [
-                            <Tooltip title="A system generated API key used to grant access.">
-                                <Typography>API Key</Typography>
+                            <Tooltip title="A system generated access token used to grant access.">
+                                <Typography>Access Token</Typography>
                             </Tooltip>,
-                            <ValidateField
-                                variant="standard"
-                                size="small"
-                                fullWidth
-                                value={apiKey}
-                                onChange={(event, value) => setApiKey(value)}
-                                onValidate={(event, value) => value ? regexp.apiKey.test(value) : true}
-                            />,
+                            <Typography>{user?.id}</Typography>,
                             "",
                             true
                         ],

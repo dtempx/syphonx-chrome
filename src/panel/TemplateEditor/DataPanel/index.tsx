@@ -25,8 +25,7 @@ export default () => {
             <Toolbar mode={mode} onChange={(event, mode) => setMode(mode)} />
             <Box
                 sx={{
-                    height: "auto",
-                    minHeight: 365,
+                    height: 800,
                     overflow: "auto",
                     m: 1
                 }}

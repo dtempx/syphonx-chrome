@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
 import { inspectedWindow, sleep, Template } from "../lib";
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate, useUser } from "../context";
 
 export interface Props {
     open: boolean;
@@ -10,7 +10,8 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { apiKey, autoOpen, serviceUrl } = useApp();
+    const { autoOpen, serviceUrl } = useApp();
+    const { user } = useUser();
     const { setTemplateFile, setTemplate, setContract, resetExtractStatus } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
@@ -23,7 +24,8 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const api = new SyphonXApi(apiKey, serviceUrl);
+                    const token = user?.id ? `u/${user.id}` : undefined;
+                    const api = new SyphonXApi(token, serviceUrl);
                     const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
@@ -45,7 +47,8 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             resetExtractStatus();
-            const api = new SyphonXApi(apiKey, serviceUrl);
+            const token = user?.id ? `u/${user.id}` : undefined;
+            const api = new SyphonXApi(token, serviceUrl);
             const { template: json, contract } = await api.template(file);
             const template = new Template(json);
 
