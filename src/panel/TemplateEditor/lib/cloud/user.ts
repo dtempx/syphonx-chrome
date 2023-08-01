@@ -1,11 +1,8 @@
 
 import {
     getFirestore,
-    collection,
-    query,
-    where,
-    limit,
-    onSnapshot
+    onSnapshot,
+    doc
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import { defaultUrl } from "./constants";
@@ -52,16 +49,15 @@ export function validateSession(user: User): boolean {
     return true;
 }
 
-export async function watchUser(email: string, callback: (user: User) => void) {
-    const usersCollection = collection(firestore, "users");
-    const q = query(usersCollection, where("email", "==", email), limit(1));
+export async function watchUser(id: string, callback: (user: User) => void) {
+    const docRef = doc(firestore, `users/${id}`);
 
-    onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+    onSnapshot(docRef, doc => {
+        if (doc?.id) {
             const result = doc.data() as User;
 
             if (result)
                 callback({ ...result, id: doc.id, });
-        });
+        }
     });
 }

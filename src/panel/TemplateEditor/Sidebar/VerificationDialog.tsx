@@ -46,15 +46,13 @@ export default ({ open, onClose, setOpen }: Props) => {
             setSubmit(true);
 
             const user = await getUser(value, serviceUrl || undefined);
-            if (user) {
+            if (user?.id) {
                 setUser(user);
-                watchUser(value, result => {
+                watchUser(user.id, result => {
                     if (result && JSON.stringify(user) !== JSON.stringify(result)) {
                         setUser(result);    
-                        if (validateSession(result))
-                            setVerified(validateSession(result));
-                        else
-                            setVerified(false);
+                        const v = validateSession(result);
+                        setVerified(v);
                     }
                 });
             }
