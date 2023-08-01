@@ -30,7 +30,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, user, verified, } = useUser();
+    const { portal, user, verified } = useUser();
     const { setTemplate, resetExtractStatus } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);

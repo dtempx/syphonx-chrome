@@ -35,7 +35,7 @@ export async function getUser(email: string, apiUrl = defaultUrl): Promise<User>
 }
 
 export function validateSession(user: User): boolean {
-    const { lastSeen, } = user;
+    const { lastSeen } = user;
 
     if (!lastSeen)
         return false;
@@ -57,7 +57,7 @@ export async function watchUser(id: string, callback: (user: User) => void) {
             const result = doc.data() as User;
 
             if (result)
-                callback({ ...result, id: doc.id, });
+                callback({ ...result, id: doc.id });
         }
     });
 }

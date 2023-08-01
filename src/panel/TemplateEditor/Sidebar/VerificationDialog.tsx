@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState, } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useApp, useUser } from "../context";
 import { regexp } from "../lib";
@@ -84,7 +84,7 @@ export default ({ open, onClose, setOpen }: Props) => {
         } else {
             setMessage({ severity: "info", message: "" });
         }
-    }, [ verified, ]);
+    }, [ verified ]);
 
     return (
         <Dialog
