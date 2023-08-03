@@ -3,7 +3,8 @@ import * as syphonx from "syphonx-lib";
 import {
     QueryTrackingOptions,
     SelectElementsOptions,
-    SliceHtmlOptions
+    SliceHtmlOptions,
+    SliceHtmlResult
 } from "./page-scripts"
 
 export const active = typeof chrome === "object" && chrome.devtools;
@@ -38,8 +39,8 @@ export async function selectElements(options: SelectElementsOptions): Promise<Ar
     return result || [];
 }
 
-export async function sliceHtml(options: SliceHtmlOptions): Promise<string> {
-    const { result } = await sendBackgroundMessage<{ result: string }>("sliceHtml", options);
+export async function sliceHtml(options: SliceHtmlOptions): Promise<SliceHtmlResult> {
+    const { result } = await sendBackgroundMessage<{ result: SliceHtmlResult }>("sliceHtml", options);
     return result;
 }
 

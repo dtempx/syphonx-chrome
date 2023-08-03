@@ -50,6 +50,7 @@ export function enableTracking(): void {
         if (syphonx.tracking) {
             if (event.target instanceof HTMLElement) {
                 event.target.classList.add("sx-click");
+                // send click message to PageContext component
                 chrome.runtime.sendMessage({
                     click: {
                         altKey: event.altKey,

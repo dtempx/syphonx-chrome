@@ -1,38 +1,24 @@
 import * as request from "./request";
-import { defaultUrl } from "./constants";
 
-export interface CreateChatConversationOptions {
-    apiKey?: string;
-    apiUrl?: string;
-}
-
+// https://platform.openai.com/docs/api-reference/chat
 export interface ChatMessage {
-    role: string;
+    role: "assistant" | "user" | "system";
     content: string;
+    name?: string; // [A-Za-z0-9_]{1,64}
 }
 
 export interface ChatConversation {
-    apiKey: string;
-    apiUrl: string;
     messages: ChatMessage[];
 }
 
-export async function chat(question: string, conversation: ChatConversation): Promise<void> {
-    conversation.messages.push({
-        role: "user",
-        content: question
-    });
-    const headers = { "Authorization": `Bearer ${conversation.apiKey}` };
-    const url = `${conversation.apiUrl}/chat`;
+export async function chat(conversation: ChatConversation): Promise<void> {
     const obj = { messages: conversation.messages };
-    const response = await request.postJson(url, obj, { headers });
+    const response = await request.postJson("/chat", obj);
     conversation.messages = response.messages;
 }
 
-export function createChatConversation({ apiKey = "", apiUrl = defaultUrl }: CreateChatConversationOptions = {}): ChatConversation {
+export function createChatConversation(): ChatConversation {
     return {
-        apiKey,
-        apiUrl,
         messages: []
     };
 }

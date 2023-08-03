@@ -86,12 +86,9 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
                 if (event.source === window && event.data.direction === "syphonx")
                     chrome.runtime.sendMessage({ syphonx: (event as any).data.message });
             });
-            console.log("window.addEventListener");
         });
     }
-    console.log("chrome.tabs.onUpdated.addListener");
 });
-console.log("service_worker");
 
 // This method listens for messages that are sent from either content scripts or other parts of your extension (like a popup script or background script).
 // It's primarily used for inter-component communication within your extension.

@@ -11,19 +11,36 @@ export interface SliceHtmlOptions {
      * The number of child elements to include in the slice.
      */
     down?: number;
+    /**
+     * Whether to number the lines in the slice.
+     */
+    number?: boolean;
+}
+
+export interface SliceHtmlResult {
+    /*
+     * The HTML slice.
+     */
+    html: string;
+    /*
+     * The line numbers of the selected target elements.
+     */
+    targets: number[];
 }
 
 /**
  * Slices the HTML document to include the specified element and its ancestors and descendants.
- * @param options The options for the HTML slice.
- * @returns A string containing the HTML slice.
  */
-export function sliceHtml({ selector, up = 3, down = 3 }: SliceHtmlOptions): string {
+export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHtmlOptions): SliceHtmlResult {
     const elements = mark();
-    const output: string[] = [];
+    const lines: string[] = [];
+    const targets: number[] = [];
+
     render(document.documentElement);
     unmark();
-    return output.join("\n");
+
+    const html = lines.map((line, index) => number ? `${targets.includes(index) ? "> " : "  "}${(index + 1).toString().padStart(4, "0")} ${line}` : line).join("\n");
+    return { html, targets };
 
     function mark(): Element[] {
         const elements = Array.from(document.querySelectorAll(selector));
@@ -62,29 +79,30 @@ export function sliceHtml({ selector, up = 3, down = 3 }: SliceHtmlOptions): str
         const container = !["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"].includes(tag);
         const attributes = renderAttributes(element.attributes);
         const marked = element.hasAttribute("marked");
-        if (elements.includes(element) && marked) {
-            output.push(`<!---->`);
-        }
+        
         if (!container && marked) {
-            output.push(`<${tag}${attributes}>`);
+            lines.push(`<${tag}${attributes}>`);
         }
         else if (element.children.length > 0) {
             if (marked)
-                output.push(`<${tag}${attributes}>`);
+                lines.push(`<${tag}${attributes}>`);
             const children = Array.from(element.children)
                 .filter(child => !exclude.includes(child.tagName.toLocaleLowerCase()));
             for (const child of children)
                 render(child);
             if (marked)
-                output.push(`</${tag}>`);
+                lines.push(`</${tag}>`);
         }
         else if (element.textContent !== null && element.textContent.trim().length > 0 && marked) {
             const text = trunc(element.textContent.trim().replace(/\s+/gm, " "));
-            output.push(`<${tag}${attributes}>${text}</${tag}>`);
+            lines.push(`<${tag}${attributes}>${text}</${tag}>`);
         }
         else if (marked) {
-            output.push(`<${tag}${attributes}></${tag}>`);
+            lines.push(`<${tag}${attributes}></${tag}>`);
         }
+
+        if (marked && elements.includes(element))
+            targets.push(lines.length - 1);
     
         function renderAttributes(attributes: NamedNodeMap): string {
             const text = Array.from(element.attributes)
@@ -97,8 +115,8 @@ export function sliceHtml({ selector, up = 3, down = 3 }: SliceHtmlOptions): str
         function trunc(text: string, max = 80): string {
             if (text.length > max) {
                 const k = Math.floor(max / 2);
-                const i = Math.max(text.slice(0, k).lastIndexOf(" "), k);
-                const j = Math.max(k - text.slice(-k).indexOf(" "), k);
+                const i = Math.min(text.slice(0, k).lastIndexOf(" "), k);
+                const j = Math.min(k - text.slice(-k).indexOf(" " + 1), k);
                 text = text.slice(0, i) + " … " + text.slice(-j);
             }
             return text;

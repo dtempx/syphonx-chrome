@@ -106,6 +106,10 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         serviceUrl
     ]);
 
+    useEffect(() => {
+        (global as any).serviceUrl = serviceUrl;
+    }, [serviceUrl]);
+
     const value = {
         advanced,
         setAdvanced,

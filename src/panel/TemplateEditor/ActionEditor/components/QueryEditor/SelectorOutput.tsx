@@ -30,7 +30,10 @@ export default ({ output, html, sx }: Props) => {
                 style={{
                     marginTop: "16px",
                     width: "100%",
+                    height: "100px",
                     overflow: "scroll",
+                    fontSize: "10px",
+                    whiteSpace: "nowrap",
                     backgroundColor: "LightGray"
                 }}
             />
