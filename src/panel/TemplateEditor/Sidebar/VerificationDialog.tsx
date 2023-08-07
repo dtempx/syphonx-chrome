@@ -45,7 +45,7 @@ export default ({ open, onClose, setOpen }: Props) => {
             setUser({ email: value });
             setSubmit(true);
 
-            const user = await getUser(value, serviceUrl || undefined);
+            const user = await getUser(value);
             if (user?.id) {
                 setUser(user);
                 watchUser(user.id, result => {
