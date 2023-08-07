@@ -4,8 +4,8 @@ import { clone } from "./lib";
 import RawQueryEditor from "./RawQueryEditor";
 import SelectorEditor from "./SelectorEditor/index";
 import QueryPager from "./QueryPager";
-import SelectorAssistant from "./SelectorAssistant";
-import { useApp } from "./context";
+import SelectorAssistant from "./AIAssistant";
+import { useApp, PageProvider } from "./context";
 
 import {
     Box,
@@ -75,87 +75,89 @@ export default ({ value, open, name, type, repeated, single, onClose, onChange }
     }
 
     return (
-        <Dialog
-            fullScreen
-            open={open}
-            onClose={onClose}
-            sx={{ minWidth: 600 }}
-            TransitionComponent={TransitionUp}
-        >
-            <DialogTitle sx={{ p: 0 }}>
-                <TitleBar title="Query Builder" onClose={onClose} />
-            </DialogTitle>
+        <PageProvider>
+            <Dialog
+                fullScreen
+                open={open}
+                onClose={onClose}
+                sx={{ minWidth: 600 }}
+                TransitionComponent={TransitionUp}
+            >
+                <DialogTitle sx={{ p: 0 }}>
+                    <TitleBar title="Query Builder" onClose={onClose} />
+                </DialogTitle>
 
-            <DialogContent sx={{ mt: 2 }}>
+                <DialogContent sx={{ mt: 2 }}>
 
-                <Stack
-                    direction="column"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    spacing={2}
-                >
-                    <Box sx={{ width: 1 }}>
-                        <SplitPane
-                            fullWidth
-                            sx={{
-                                bgcolor: "background.paper",
-                                borderRadius: 1,
-                                p: 1,
-                                m: 1
-                            }}
-                        >
-                            <Stack direction="row">
-                                {name && <>
-                                    {type && <ActionIcon name={type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />}
-                                    <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{name || "(array)"}</Typography>
-                                    {repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
-                                </>}
-                            </Stack>
-                            {!single &&
-                                <QueryPager
-                                    selects={select}
-                                    index={index}
-                                    onChange={(event, index) => setIndex(index)}
-                                    onAdd={onAddQuery}
-                                    onDelete={onDeleteQuery}
-                                />
-                            }
-                        </SplitPane>
+                    <Stack
+                        direction="column"
+                        justifyContent="space-between"
+                        alignItems="center"
+                        spacing={2}
+                    >
+                        <Box sx={{ width: 1 }}>
+                            <SplitPane
+                                fullWidth
+                                sx={{
+                                    bgcolor: "background.paper",
+                                    borderRadius: 1,
+                                    p: 1,
+                                    m: 1
+                                }}
+                            >
+                                <Stack direction="row">
+                                    {name && <>
+                                        {type && <ActionIcon name={type || "string"} sx={{ color: "primary.light", position: "relative", top: "4px" }} />}
+                                        <Typography variant="caption" fontSize="large" sx={{ ml: 1 }}>{name || "(array)"}</Typography>
+                                        {repeated ? <ActionIcon name="repeated" sx={{ color: "primary.light", ml: 1, position: "relative", top: "4px" }} /> : null}
+                                    </>}
+                                </Stack>
+                                {!single &&
+                                    <QueryPager
+                                        selects={select}
+                                        index={index}
+                                        onChange={(event, index) => setIndex(index)}
+                                        onAdd={onAddQuery}
+                                        onDelete={onDeleteQuery}
+                                    />
+                                }
+                            </SplitPane>
 
-                        <Divider sx={{ mt: 1, mb: 2 }} />
-                        <SelectorEditor
-                            value={select[index]}
-                            onChange={onChangeQuery}
-                            context={name}
-                        />
+                            <Divider sx={{ mt: 1, mb: 2 }} />
+                            <SelectorEditor
+                                value={select[index]}
+                                onChange={onChangeQuery}
+                                context={name}
+                            />
 
-                    </Box>
+                        </Box>
 
-                    {serviceUrl && (
-                    <Box alignSelf="flex-end" sx={{ width: 1 }}>
-                        <Divider sx={{ mt: 5 }} />
-                        <SelectorAssistant
-                            query={select[index]}
-                            type={type}
-                            repeated={repeated}
-                            name={name}
-                            sx={{ mt: 2 }}
-                        />
-                    </Box>
-                    )}
+                        {serviceUrl && (
+                        <Box alignSelf="flex-end" sx={{ width: 1 }}>
+                            <Divider sx={{ mt: 5 }} />
+                            <SelectorAssistant
+                                query={select[index]}
+                                type={type}
+                                repeated={repeated}
+                                name={name}
+                                sx={{ mt: 2 }}
+                            />
+                        </Box>
+                        )}
 
-                </Stack>
+                    </Stack>
 
-            </DialogContent>
+                </DialogContent>
 
-            <DialogActions>
-                <Tooltip title="Edit the raw jQuery code, or copy/paste a jQuery expression here" placement="top-start">
-                    <RawQueryEditor query={select[index]} onChange={onChangeQuery} />
-                </Tooltip>
-                <Tooltip title="Closes the dialog and saves changes" placement="left">
-                    <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>OK</Button>
-                </Tooltip>
-            </DialogActions>
-        </Dialog>
+                <DialogActions>
+                    <Tooltip title="Edit the raw jQuery code, or copy/paste a jQuery expression here" placement="top-start">
+                        <RawQueryEditor query={select[index]} onChange={onChangeQuery} />
+                    </Tooltip>
+                    <Tooltip title="Closes the dialog and saves changes" placement="left">
+                        <Button variant="contained" sx={{ ml: 1 }} onClick={onSave}>OK</Button>
+                    </Tooltip>
+                </DialogActions>
+            </Dialog>
+        </PageProvider>
     );
 };

@@ -5,7 +5,7 @@ import {
     doc
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
-import { defaultUrl } from "./constants";
+import * as request from "./request";
 
 export interface User {
     createdAt?: string;
@@ -27,11 +27,9 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 const maxSessionLengthSeconds = 259200; // 3 days
 
-export async function getUser(email: string, apiUrl = defaultUrl): Promise<User> {
-    const response = await fetch(`${apiUrl}/user?email=${email}`);
-    const result = await response.json() as User;
-
-    return result;
+export async function getUser(email: string): Promise<User> {
+    const user = await request.json(`/user?email=${email}`);
+    return user;
 }
 
 export function validateSession(user: User): boolean {

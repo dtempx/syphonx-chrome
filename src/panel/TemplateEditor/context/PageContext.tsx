@@ -25,6 +25,7 @@ export function PageProvider({ children }: { children: JSX.Element }) {
         clearClick: () => setClick(undefined)
     };
 
+    // NOTE: click message is sent from enableTracking page-script in background context
     chrome.runtime.onMessage.addListener(message => {
         if (message.click)
             setClick(message.click);
