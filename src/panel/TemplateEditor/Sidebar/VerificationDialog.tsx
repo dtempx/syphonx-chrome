@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useApp, useUser } from "../context";
+import { useUser } from "../context";
 import { regexp } from "../lib";
 import { getUser, watchUser, validateSession } from "../lib/cloud";
 
@@ -32,7 +32,6 @@ export interface Props {
 }
 
 export default ({ open, onClose, setOpen }: Props) => {
-    const { serviceUrl } = useApp();
     const { user, setUser, verified, setVerified } = useUser();
 
     const [ message, setMessage ] = useState<{ severity: "info" | "success"; message: string; }>({ severity: "info", "message": "" });
