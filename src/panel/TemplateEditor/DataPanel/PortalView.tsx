@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
 import { Box, Typography } from "@mui/material";
-import { load } from "../../../lib/looker";
+import { load } from "../lib/cloud/looker";
 
 export default () => {
     const { debug, inspectedWindowUrl } = useApp();
@@ -26,7 +26,7 @@ export default () => {
                 if (lookId) {
                     const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : "";
                     const filters = seller_id ? { "Retailer ID": seller_id, "Seller ID": seller_id } : undefined;
-                    const url = await load(lookId, filters as { [key: string ]: string });
+                    const url = await load(lookId, filters);
                     if (url)
                         setEmbedUrl(url);
                 }

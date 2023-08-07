@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
-import { load } from "../../../lib/looker";
+import { load } from "../lib/cloud/looker";
 
 import {
     TitleBar,
