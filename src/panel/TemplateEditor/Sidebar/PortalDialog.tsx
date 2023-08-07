@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
+import { load } from "../../../lib/looker";
 
 import {
     TitleBar,
@@ -31,7 +32,22 @@ export default ({ open, onClose }: Props) => {
         template: templateFile,
         url: inspectedWindowUrl
     }).toString();
-    const url = `${portal?.views?.full}?${params}`;
+    const lookId = portal?.looks?.full;
+    const url = /looker/.test(portal?.views?.full || "") ? portal?.views?.full : `${portal?.views?.full}?${params}`;
+    const [ embedUrl, setEmbedUrl ] = useState<string>(!lookId && url ? url : "");
+    
+    useEffect(() => {
+        (async () => {
+            try {
+                if (lookId) {
+                    const url = await load(lookId);
+                    if (url)
+                        setEmbedUrl(url)
+                }
+            } catch (e) {
+            }
+        })()
+    }, []);
 
     return (
         <Dialog
@@ -45,8 +61,12 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
 
             <DialogContent>
-                <iframe src={url} width="100%" height="100%" />
-                {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
+                {embedUrl &&
+                    <>
+                        <iframe src={embedUrl} width="100%" height="100%" />
+                        {debug && <Typography variant="caption" fontSize="small">{embedUrl}</Typography>}
+                    </>
+                }
             </DialogContent>
         </Dialog>
     );

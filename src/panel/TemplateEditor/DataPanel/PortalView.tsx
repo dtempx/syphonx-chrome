@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useApp, useTemplate, useUser } from "../context";
 import { Template } from "../lib";
 import { Box, Typography } from "@mui/material";
+import { load } from "../../../lib/looker";
 
 export default () => {
     const { debug, inspectedWindowUrl } = useApp();
@@ -15,14 +16,29 @@ export default () => {
         template: templateFile,
         url: inspectedWindowUrl
     }).toString();
-    const url = `${portal?.views?.panel}?${params}`;
-    const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : '';
-    const tempUrl = `${portal?.views?.panel}&hide_filter=Retailer+ID,Seller+ID`.replace(/seller_id/g, seller_id);
+    const lookId = portal?.looks?.panel;
+    const url = /looker/.test(portal?.views?.panel || "") ? portal?.views?.panel : `${portal?.views?.panel}?${params}`;
+    const [ embedUrl, setEmbedUrl ] = useState(!lookId && url ? url : "");
+
+    useEffect(() => {
+        (async () => {
+            try {
+                if (lookId) {
+                    const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : "";
+                    const filters = seller_id ? { "Retailer ID": seller_id, "Seller ID": seller_id } : undefined;
+                    const url = await load(lookId, filters as { [key: string ]: string });
+                    if (url)
+                        setEmbedUrl(url);
+                }
+            } catch (e) {
+            }
+        })()
+    }, [templateFile]);
 
     return (
         <Box>
-            <iframe src={tempUrl} width="100%" height="800px" />
-            {debug && <Typography variant="caption" fontSize="small">{tempUrl}</Typography>}
+            <iframe src={embedUrl} width="100%" height="800px" />
+            {debug && <Typography variant="caption" fontSize="small">{embedUrl}</Typography>}
         </Box>
     );
 }
