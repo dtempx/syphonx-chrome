@@ -16,19 +16,21 @@ export default () => {
         template: templateFile,
         url: inspectedWindowUrl
     }).toString();
-    const lookId = portal?.looks?.panel;
-    const url = /looker/.test(portal?.views?.panel || "") ? portal?.views?.panel : `${portal?.views?.panel}?${params}`;
-    const [ embedUrl, setEmbedUrl ] = useState(!lookId && url ? url : "");
+    const [ embedUrl, setEmbedUrl ] = useState<string>();
 
     useEffect(() => {
         (async () => {
             try {
+                const lookId = portal?.looks?.panel;
                 if (lookId) {
                     const seller_id = !!template?.obj?.params?.seller_id ? String(template?.obj?.params?.seller_id) : "";
                     const filters = seller_id ? { "Retailer ID": seller_id, "Seller ID": seller_id } : undefined;
                     const url = await load(lookId, filters);
                     if (url)
                         setEmbedUrl(url);
+                } else {
+                    const url = /looker/.test(portal?.views?.panel || "") ? portal?.views?.panel : `${portal?.views?.panel}?${params}`;
+                    setEmbedUrl(url);
                 }
             } catch (e) {
             }

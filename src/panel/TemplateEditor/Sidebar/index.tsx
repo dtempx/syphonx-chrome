@@ -94,7 +94,7 @@ export default ({ open, onClose }: Props) => {
         <OpenFileDialog open={fileOpenOpen} onClose={() => setFileOpenOpen(false)} />
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
-        {(!!portal?.views?.full || !!portal?.looks?.full) && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
+        {((!!portal?.views?.full || !!portal?.looks?.full) && portalOpen) && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
         <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} />
 
         <Drawer

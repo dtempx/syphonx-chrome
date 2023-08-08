@@ -32,17 +32,19 @@ export default ({ open, onClose }: Props) => {
         template: templateFile,
         url: inspectedWindowUrl
     }).toString();
-    const lookId = portal?.looks?.full;
-    const url = /looker/.test(portal?.views?.full || "") ? portal?.views?.full : `${portal?.views?.full}?${params}`;
-    const [ embedUrl, setEmbedUrl ] = useState<string>(!lookId && url ? url : "");
+    const [ embedUrl, setEmbedUrl ] = useState<string>();
     
     useEffect(() => {
         (async () => {
             try {
+                const lookId = portal?.looks?.full;
                 if (lookId) {
                     const url = await load(lookId);
                     if (url)
-                        setEmbedUrl(url)
+                        setEmbedUrl(url);
+                } else {
+                    const url = /looker/.test(portal?.views?.full || "") ? portal?.views?.full : `${portal?.views?.full}?${params}`;
+                    setEmbedUrl(url);
                 }
             } catch (e) {
             }
