@@ -34,8 +34,8 @@ export default ({ onChange, sx }: Props) => {
                     onChange(new Event("change"), selectors);
             }
             catch (err) {
-                console.error(err);
                 debugger;
+                console.error(err);
             }
         })();
     }, [click]);

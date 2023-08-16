@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FallbackProps } from "react-error-boundary";
 import { LoadingButton } from "@mui/lab";
-import { useApp, useUser } from "../context";
+import { useApp, useTemplate } from "../context";
+import { validateSession } from "../lib/cloud";
 
 import {
     Alert,
@@ -21,7 +22,7 @@ type Status = "unsent" | "sending" | "sent" | "error";
 
 export default ({ error, resetErrorBoundary }: FallbackProps) => {
     const { serviceUrl } = useApp();
-    const { user } = useUser();
+    const { user } = useTemplate();
     const [expanded, setExpanded] = useState(false);
     const [comments, setComments] = useState("");
     const [status, setStatus] = useState<Status>("unsent");
@@ -35,7 +36,7 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
     async function reportError() {
         const manifest = chrome.runtime.getManifest();
         setStatus("sending");
-        const token = user?.id ? `u/${user.id}` : undefined;
+        const token = validateSession(user) ? `u/${user?.id}` : undefined;
         const api = new SyphonXApi(token, serviceUrl);
         const ok = await api.log({
             key: "error",

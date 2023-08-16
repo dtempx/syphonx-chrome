@@ -2,16 +2,37 @@
 import {
     getFirestore,
     onSnapshot,
-    doc
+    doc,
+    Timestamp
 } from "firebase/firestore";
 import { initializeApp } from "firebase/app";
 import * as request from "./request";
+
+function formatDocument(obj: unknown): unknown {
+    if (typeof obj === "object" && obj !== null) {
+        const result: Record<string, unknown> = {};
+        for (const key of Object.keys(obj)) {
+            const value = (obj as Record<string, unknown>)[key];
+            if (value instanceof Timestamp)
+                result[key] = value.toDate();
+            else if (typeof value === "object" && value !== null)
+                result[key] = formatDocument(value as Record<string, unknown>);
+            else
+                result[key] = value;
+        }
+        return result;
+    }
+    else {
+        return obj;
+    }
+}
 
 export interface User {
     createdAt?: string;
     email: string;
     id?: string;
     lastSeen?: string;
+    emailSent?: string;
 }
 
 const firebaseConfig = {
@@ -32,7 +53,10 @@ export async function getUser(email: string): Promise<User> {
     return user;
 }
 
-export function validateSession(user: User): boolean {
+export function validateSession(user?: User): boolean {
+    if (!user?.id)
+        return false;
+        
     const { lastSeen } = user;
 
     if (!lastSeen)
@@ -52,10 +76,12 @@ export async function watchUser(id: string, callback: (user: User) => void) {
 
     onSnapshot(docRef, doc => {
         if (doc?.id) {
-            const result = doc.data() as User;
+            const data = doc.data() as User;
 
-            if (result)
+            if (data) {
+                const result = formatDocument(data) as User;
                 callback({ ...result, id: doc.id });
+            }
         }
     });
 }

@@ -23,10 +23,6 @@ export const UserContext = React.createContext<UserState>({
     setVerified: () => {},
 });
 
-export function useUser() {
-    return React.useContext(UserContext);
-}
-
 export function UserProvider({ children }: { children: JSX.Element }) {
     const { serviceUrl } = useApp();
     const [portal, setPortal] = useState<Portal | undefined>(undefined);
@@ -35,34 +31,36 @@ export function UserProvider({ children }: { children: JSX.Element }) {
 
     useEffect(() => {
         chrome.storage.local.get(
-            [ "user" ],
-            ({ user }) => {
-                if (user !== undefined) {
-                    const data = JSON.parse(user);
+            [ "email" ],
+            ({ email }) => {
+                if (email !== undefined) {
                     (async () => {
-                        if (data?.email) {
-                            const result = await getUser(data.email);
-                            if (result)
-                                setUser(result);
-                        }
+                        const result = await getUser(email);
+                        if (result)
+                            setUser(result);
                     })();
+                } else {
+                    setUser(undefined);
                 }
             }
         );
     }, []);
 
     useEffect(() => {
-        if (user)
-            chrome.storage.local.set({ user: JSON.stringify(user) });
+        const email = user?.email;
+        if (email)
+            chrome.storage.local.set({ email });
         else
-            chrome.storage.local.remove("user");
+            chrome.storage.local.remove("email");
+
+        setVerified(user ? validateSession(user) : false);
     }, [user]);
 
     useEffect(() => {
         (async () => {
             try {
                 if (!portal) { // to prevent repetitive calls...
-                    const token = user?.id ? `u/${user.id}` : undefined;
+                    const token = validateSession(user) ? `u/${user?.id}` : undefined;
                     const api = new SyphonXApi(token, serviceUrl);
                     const auth = await api.auth();
                     setPortal(auth.portal);
@@ -72,11 +70,6 @@ export function UserProvider({ children }: { children: JSX.Element }) {
                 console.error(err);
                 setPortal(undefined);
             }
-
-            if (user)
-                setVerified(validateSession(user));
-            else
-                setVerified(false);
         })();
     }, [user, serviceUrl]);
 
