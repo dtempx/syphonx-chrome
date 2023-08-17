@@ -1,5 +1,5 @@
 import React from "react";
-import { useApp, useUser } from "../context";
+import { useApp, useTemplate } from "../context";
 import { regexp } from "../lib";
 
 import {
@@ -35,7 +35,7 @@ export default ({ open, onClose }: Props) => {
         serviceUrl,
         setServiceUrl
     } = useApp();
-    const { user } = useUser();
+    const { user } = useTemplate();
 
     return (
         <Dialog

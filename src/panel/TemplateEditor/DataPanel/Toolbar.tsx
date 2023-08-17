@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useApp, useTemplate, useUser } from "./context";
+import { useApp, useTemplate } from "./context";
 import { Template } from "./lib";
 
 import {
@@ -34,8 +34,7 @@ export interface Props {
 
 export default ({ mode, onChange } : Props) => {
     const { autoRefresh, setAutoRefresh } = useApp();
-    const { portal } = useUser();
-    const { template: json, extractState, resetExtractStatus, refresh, refreshing } = useTemplate();
+    const { template: json, extractState, portal, resetExtractStatus, refresh, refreshing } = useTemplate();
 
     const errors = useMemo(() => extractState?.errors ? extractState.errors.length : 0, [extractState]);
     const template = new Template(json);

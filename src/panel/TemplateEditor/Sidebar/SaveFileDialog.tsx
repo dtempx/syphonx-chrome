@@ -3,6 +3,7 @@ import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
 import { useApp, useTemplate } from "../context";
 import { Template } from "../lib";
+import { validateSession } from "../lib/cloud";
 
 export interface Props {
     open: boolean;
@@ -10,8 +11,8 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { user, serviceUrl } = useApp();
-    const { template: json, templateFile, setTemplateFile } = useTemplate();
+    const { serviceUrl } = useApp();
+    const { template: json, templateFile, setTemplateFile, user } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -27,7 +28,8 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const api = new SyphonXApi(`u/${user?.id}`, serviceUrl);
+                    const token = validateSession(user) ? `u/${user?.id}` : undefined;
+                    const api = new SyphonXApi(token, serviceUrl);
                     const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
@@ -49,7 +51,8 @@ export default ({ open, onClose }: Props) => {
         try {
             setSaving(true);
             const json = template.file();
-            const api = new SyphonXApi(`u/${user?.id}`, serviceUrl);
+            const token = validateSession(user) ? `u/${user?.id}` : undefined;
+            const api = new SyphonXApi(token, serviceUrl);
             await api.write(file, json);
             setTemplateFile(file);
             setSaving(false);

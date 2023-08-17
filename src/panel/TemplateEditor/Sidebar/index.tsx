@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { List, ListItemType } from "../components";
-import { useTemplate, useUser } from "../context";
+import { useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
 import OpenFileDialog from "./OpenFileDialog";
@@ -30,8 +30,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, user, verified } = useUser();
-    const { setTemplate, resetExtractStatus } = useTemplate();
+    const { portal, resetExtractStatus, setTemplate, verified } = useTemplate();
     const [aboutOpen, setAboutOpen] = useState(false);
     const [fileOpenOpen, setFileOpenOpen] = useState(false);
     const [fileSaveOpen, setFileSaveOpen] = useState(false);
@@ -47,7 +46,7 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         ["Open Template", <FileOpenIcon />, event => {
-            if (!user || !verified) {
+            if (!verified) {
                 setVerificationOpen(true);
                 onClose(event);
             } else {
@@ -56,7 +55,7 @@ export default ({ open, onClose }: Props) => {
             }
         }],
         ["Save Template", <FileSaveIcon />, event => {
-            if (!user || !verified) {
+            if (!verified) {
                 setVerificationOpen(true);
                 onClose(event);
             } else {
@@ -94,8 +93,8 @@ export default ({ open, onClose }: Props) => {
         <OpenFileDialog open={fileOpenOpen} onClose={() => setFileOpenOpen(false)} />
         <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
         <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
-        {!!portal?.views?.full && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
-        <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} />
+        {(!!portal?.views?.full && portalOpen) && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
+        {verificationOpen && <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} />}
 
         <Drawer
             anchor="left"

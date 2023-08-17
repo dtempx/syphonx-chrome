@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "../components";
 import { inspectedWindow, sleep, Template } from "../lib";
-import { useApp, useTemplate, useUser } from "../context";
+import { validateSession } from "../lib/cloud";
+
+import { useApp, useTemplate } from "../context";
 
 export interface Props {
     open: boolean;
@@ -11,8 +13,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { autoOpen, serviceUrl } = useApp();
-    const { user } = useUser();
-    const { setTemplateFile, setTemplate, setContract, resetExtractStatus } = useTemplate();
+    const { setTemplateFile, setTemplate, setContract, resetExtractStatus, user } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -24,7 +25,7 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const token = user?.id ? `u/${user.id}` : undefined;
+                    const token = validateSession(user) ? `u/${user?.id}` : undefined;
                     const api = new SyphonXApi(token, serviceUrl);
                     const directory = await api.directory();
                     const files = directory
@@ -47,7 +48,7 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             resetExtractStatus();
-            const token = user?.id ? `u/${user.id}` : undefined;
+            const token = validateSession(user) ? `u/${user?.id}` : undefined;
             const api = new SyphonXApi(token, serviceUrl);
             const { template: json, contract } = await api.template(file);
             const template = new Template(json);

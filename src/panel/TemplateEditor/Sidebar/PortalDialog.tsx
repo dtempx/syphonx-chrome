@@ -1,6 +1,5 @@
 import React from "react";
-import { useApp, useTemplate, useUser } from "../context";
-import { Template } from "../lib";
+import { useApp, useTemplate } from "../context";
 
 import {
     TitleBar,
@@ -20,18 +19,8 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { debug, inspectedWindowUrl } = useApp();
-    const { template: json, templateFile } = useTemplate();
-    const { portal } = useUser();
-    const template = new Template(json);
-    const obj = portal?.views?.full ? Object.fromEntries(new URL(portal.views.full).searchParams) : undefined;
-    const params = new URLSearchParams({
-        ...obj,
-        ...template.obj.params,
-        template: templateFile,
-        url: inspectedWindowUrl
-    }).toString();
-    const url = `${portal?.views?.full}?${params}`;
+    const { debug } = useApp();
+    const { dialogUrl } = useTemplate();
 
     return (
         <Dialog
@@ -45,8 +34,8 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
 
             <DialogContent>
-                <iframe src={url} width="100%" height="100%" />
-                {debug && <Typography variant="caption" fontSize="small">{url}</Typography>}
+                <iframe src={dialogUrl} width="100%" height="100%" />
+                {debug && <Typography variant="caption" fontSize="small">{dialogUrl}</Typography>}
             </DialogContent>
         </Dialog>
     );

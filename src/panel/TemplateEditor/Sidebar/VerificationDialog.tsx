@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useApp, useUser } from "../context";
+import { useTemplate } from "../context";
 import { regexp } from "../lib";
-import { getUser, watchUser, validateSession } from "../lib/cloud";
+import { getUser, validateSession, watchUser } from "../lib/cloud";
 
 import {
     TransitionUp
@@ -32,59 +32,52 @@ export interface Props {
 }
 
 export default ({ open, onClose, setOpen }: Props) => {
-    const { serviceUrl } = useApp();
-    const { user, setUser, verified, setVerified } = useUser();
+    const { user, setUser, verified } = useTemplate();
 
-    const [ message, setMessage ] = useState<{ severity: "info" | "success"; message: string; }>({ severity: "info", "message": "" });
+    const [ message, setMessage ] = useState<{ severity: "success" | "info" | "warning" | "error"; message: string; }>({ severity: "info", "message": "" });
     const [ submit, setSubmit ] = useState<boolean>(false);
-    const [ valid, setValid ] = useState<boolean>(false);
-    const [ value, setValue ] = useState<string>(user?.email ? user.email : "");
+    const [ email, setEmail ] = useState<string>(user?.email ? user.email : "");
 
-    const submitEmail = async (): Promise<void> => {
-        if (valid) {
-            setUser({ email: value });
-            setSubmit(true);
 
-            const user = await getUser(value, serviceUrl || undefined);
-            if (user?.id) {
-                setUser(user);
-                watchUser(user.id, result => {
-                    if (result && JSON.stringify(user) !== JSON.stringify(result)) {
-                        setUser(result);    
-                        const v = validateSession(result);
-                        setVerified(v);
-                    }
-                });
+    function isValidEmail() {
+        const result = !!email?.length && regexp.email.test(email);
+        return result;
+    }
+
+    async function submitEmail() {
+        if (isValidEmail()) {
+            const data = await getUser(email);
+            if (data) {
+                setUser(data);
+
+                if (data?.id) {
+                    watchUser(data.id, result => {
+                        if (result && JSON.stringify(user) !== JSON.stringify(result)) {
+                            setUser(result);
+                            if (validateSession(result)) {
+                                setMessage({ severity: "success", message: "Your email has been verified. Enjoy working in SyphonX!" });
+                                setTimeout(() => {
+                                    setMessage({ severity: "info", message: "" });
+                                    setSubmit(false);
+                                    setEmail("");
+                                    setOpen(false);
+                                }, 3000);
+                            }
+                        }
+                    });
+                }
+
+                if (!validateSession(user))
+                    setMessage({ severity: "info", message: "An email has been sent to the address above, please verify." });
             }
         }
     }
 
-    const validate = () => {
-        const bool = !!value?.length && regexp.email.test(value);
-        setValid(bool);
-    }
-
     useEffect(() => {
-        const message = submit ? "Great! An email has been sent to the address above, please verify." : "";
-        setMessage({ severity: "info", message });
-    }, [ submit ]);
+        if (!validateSession(user) && isValidEmail())
+            submitEmail();
+    }, []);
 
-    useEffect(() => {
-        if (user && verified && !submit) {
-            setMessage({ severity: "info", message: `Welcome back, ${user?.email}, enjoy working in SyphonX!` });
-        } else if (user && verified && submit) {
-            setMessage({ severity: "success", message: "Thanks for verifying your email, enjoy working in SyphonX!" });
-            setTimeout(() => {
-                setMessage({ severity: "info", message: "" });
-                setSubmit(false);
-                setValid(false);
-                setValue("");
-                setOpen(false);
-            }, 3000);
-        } else {
-            setMessage({ severity: "info", message: "" });
-        }
-    }, [ verified ]);
 
     return (
         <Dialog
@@ -118,10 +111,10 @@ export default ({ open, onClose, setOpen }: Props) => {
                     variant="standard"
                     size="small"
                     fullWidth
-                    onChange={(e) => setValue(e.target.value?.toLowerCase())}
-                    onKeyDown={(e) => { if (e.key === "Enter") submitEmail(); else validate(); }}
-                    value={value}
-                    error={!!value?.length && !valid}
+                    onChange={(e) => setEmail(e.target.value?.toLowerCase())}
+                    onKeyDown={(e) => { if (e.key === "Enter") submitEmail(); }}
+                    value={email}
+                    error={!!email?.length && !isValidEmail()}
                     placeholder="user@example.com"
                 />
 
@@ -135,11 +128,11 @@ export default ({ open, onClose, setOpen }: Props) => {
                 <DialogActions>
                 <Button
                     onClick={onClose}
-                    disabled={!valid || submit}
+                    disabled={!isValidEmail() || submit}
                 >CANCEL</Button>
                 <Button
                     onClick={submitEmail}
-                    disabled={!valid || submit}
+                    disabled={!isValidEmail() || submit}
                 >VERIFY</Button>
             </DialogActions>
         </Dialog>
