@@ -1,5 +1,4 @@
 import React from "react";
-import { useApp } from "./context";
 
 import {
     Box,
@@ -9,18 +8,13 @@ import {
 } from "@mui/material";
 
 export interface Props {
-    output: Array<string | null>;
-    html: string;
+    text: string | null;
+    html?: string;
     sx?: SxProps<Theme>;
 }
 
-export default ({ output, html, sx }: Props) => {
-    const { debug } = useApp();
-
-    let value = output.map(line => line?.trim() || "").join("\n");
-    if (debug)
-        value += "\n\n" + html;
-
+export default ({ text, html, sx }: Props) => {
+    const value = text === null ? "∅" : html ? `${text}\n\n${html}` : text;
     return (
         <Box sx={sx}>
             <TextareaAutosize

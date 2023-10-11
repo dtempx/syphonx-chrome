@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { useApp, useTemplate } from "./context";
 import { Template } from "./lib";
+import { SxSpin } from "./components";
 
 import {
     Chip,
@@ -40,18 +41,6 @@ export default ({ mode, onChange } : Props) => {
     const template = new Template(json);
     const simple = template.simple();
 
-    const spinAnimation = {
-        animation: "spin 2s linear infinite",
-        "@keyframes spin": {
-          "0%": {
-            transform: "rotate(0deg)",
-          },
-          "100%": {
-            transform: "rotate(360deg)",
-          }
-        }            
-    };
-
     return (
         <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={2}>
             <Stack direction="row">
@@ -68,7 +57,7 @@ export default ({ mode, onChange } : Props) => {
                 </Tooltip>
                 <Tooltip title="refresh now">
                     <IconButton size="small" onClick={() => refresh(true)}>
-                        <RefreshIcon fontSize="small" sx={refreshing ? spinAnimation : undefined} />
+                        <RefreshIcon fontSize="small" sx={refreshing ? SxSpin : undefined} />
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="clear">

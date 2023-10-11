@@ -54,7 +54,7 @@ export default ({ query, name, onChange }: Props) => {
                     }}
             />
             <QueryEditor
-                value={query ? [query] : []}
+                query={query ? [query] : []}
                 name={name}
                 open={open}
                 single

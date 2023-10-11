@@ -1,5 +1,6 @@
 import { expect } from "chai";
-import { jsdomFromFile, findFlaggedElements } from "./lib";
+import { jsdomFromFile } from "./jsdom";
+import { findFlaggedElements } from "./utilities";
 import { queryTracking } from "./queryTracking";
 
 function jsdomFromTestFile(file: string, className: string): void {

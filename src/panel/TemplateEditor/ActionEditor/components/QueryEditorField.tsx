@@ -70,7 +70,7 @@ export default ({ query, name, type, repeated, onChange }: Props) => {
                     }}
             />
             <QueryEditor
-                value={query}
+                query={query}
                 open={open}
                 name={name}
                 type={type}

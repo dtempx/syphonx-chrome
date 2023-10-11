@@ -1,10 +1,41 @@
-Taylor bug
 
 
+
+query builder showing 0 for all fields
+make errors more prominent when viewing the datagrid
+warn against saving when there are errors
+
+add template dialog
+datagrid explorer
+add json function for parsing JSON data to support schema.org
+
+BUG: more expander doesn't work if menu is taller than container
+
+
+persist last opened directory
+change snooze random to a switch
+
+email verifications don't expire (can click on an old one and it lets you in)
+user level access (both ps and ik)
+clicking verify should change to a new dialog
+
+render non-string params
+
+clicking dropdown in query builder after lightbulb doesn't stick (repro: sgrlaw)
+split on \n doesn't always work (repro: sgrlaw)
+cut second argment needs to be defined as a number not a string
+templates with array output don't render properly in the datagrid (ikaun people/practices/industries)
 
 formula evaluations don't work in chrome extension (mv3 sandbox issue)
 new shadow jQuery extension function
 switch selectElements function to use jQuery, or use syphonx.extract instead
+
+add selector dialog doesn't clear state from last use
+selector with type=object doesn't have a subselector in the tree when added from the add selector dialog
+    workaround 1: switch to another type and then back to object
+    workaround 2: toggle union flag
+
+persist last open template
 
 prevent .sx-select from ever showing up as a selector
 

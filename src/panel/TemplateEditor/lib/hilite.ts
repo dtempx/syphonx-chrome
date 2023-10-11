@@ -1,9 +1,9 @@
-import { background } from ".";
 import { TemplateItem } from ".";
+import { proxy } from "../lib";
 import * as syphonx from "syphonx-lib";
 
 export async function hiliteElements(selectors: string[]): Promise<void> {
-    await background.selectElements({
+    await proxy.selectElements({
         selectors,
         className: "sx-select",
         scrollIntoView: true

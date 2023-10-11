@@ -202,13 +202,33 @@
     {
         "key": "extract",
         "advanced": false,
-        "help": "Extract text from the set of matched elements using a regular expression.",
+        "help": "Extract matching text from the set of matched elements using a regular expression. The first string that matches the regular expression is returned for each element.",
         "args": [
             {
                 "name": "Regexp",
                 "type": "string",
                 "help": "A regular expression that matches the text to be extracted. The regular expression must start and end with a slash, and must contain a capturing group in parentheses. Add `g` for global or `i` for case insenstive matches after the ending slash. Example: `/^([a-z0-9]+)/`",
                 "required": true
+            }
+        ]
+    },
+    {
+        "key": "extractAll",
+        "advanced": true,
+        "help": "Extract text from the set of matched elements using a regular expression. All strings that match the regular expression are returned for each element, either newline seperated or by a specified delimiter.",
+        "args": [
+            {
+                "name": "Regexp",
+                "type": "string",
+                "help": "A regular expression that matches the text to be extracted. The regular expression must start and end with a slash, and must contain a capturing group in parentheses. Add `i` for case insenstive matches after the ending slash. The global option `g` is implicit. Example: `/^([a-z0-9]+)/`",
+                "required": true
+            },
+            {
+                "name": "delim",
+                "type": "string",
+                "help": "Delimiter to insert between each matched string. (default=newline)",
+                "required": false,
+                "advanced": true
             }
         ]
     },
@@ -305,6 +325,19 @@
                 "type": "string",
                 "help": "A CSS selector that targets the elements to be matched.",
                 "required": true
+            }
+        ]
+    },
+    {
+        "key": "json",
+        "advanced": true,
+        "help": "Parse JSON data within the set of matched elements, applying a formula that drills into the object to return the desired output value.",
+        "args": [
+            {
+                "name": "Formula",
+                "type": "string",
+                "help": "A formula applied to each element in the set of matched elements to return the desired output value. The formula can reference the current `value` (which contains the result of parsing the JSON data), or any previous property value using `data.name`, where name is the name of any previously evaluated property. A formula must start and end with curly braces and contain a valid Javascript expression within the curly braces.\n\nExample: `{ value['@type'] === 'Product' ? value.name : null }`",
+                "required": false
             }
         ]
     },

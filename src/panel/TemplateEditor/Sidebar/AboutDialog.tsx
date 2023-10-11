@@ -1,11 +1,15 @@
 import React from "react";
 import { TitleBar, TransitionUp } from "../components";
+import icon from "../../../assets/app-icon.png";
 
 import {
     Dialog,
     DialogContent,
     DialogTitle,
     Link,
+    Table,
+    TableRow,
+    TableCell,
     Typography
 } from "@mui/material";
 
@@ -28,8 +32,17 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
 
             <DialogContent sx={{ mt: 4 }}>
-                <Typography>Version {manifest.version}</Typography>
-                <Link href="https://github.com/dtempx/syphonx-chrome" target="_blank">https://github.com/dtempx/syphonx-chrome</Link>
+                <Table>
+                    <TableRow>
+                        <TableCell>
+                            <img src={icon} width="128" />
+                        </TableCell>
+                        <TableCell width="100%">
+                            <Typography>Version {manifest.version}</Typography>
+                            <Link href="https://github.com/dtempx/syphonx-chrome" target="_blank">https://github.com/dtempx/syphonx-chrome</Link>
+                        </TableCell>
+                    </TableRow>
+                </Table>
             </DialogContent>
         </Dialog>
     );

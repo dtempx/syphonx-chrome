@@ -25,7 +25,7 @@ export interface SliceHtmlResult {
     /*
      * The line numbers of the selected target elements.
      */
-    targets: number[];
+    linenums: number[];
 }
 
 /**
@@ -34,13 +34,13 @@ export interface SliceHtmlResult {
 export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHtmlOptions): SliceHtmlResult {
     const elements = mark();
     const lines: string[] = [];
-    const targets: number[] = [];
+    const linenums: number[] = [];
 
     render(document.documentElement);
     unmark();
 
-    const html = lines.map((line, index) => number ? `${targets.includes(index) ? "> " : "  "}${(index + 1).toString().padStart(4, "0")} ${line}` : line).join("\n");
-    return { html, targets };
+    const html = lines.map((line, index) => number ? `${linenums.includes(index + 1) ? "> " : "  "}${(index + 1).toString().padStart(4, "0")} ${line}` : line).join("\n");
+    return { html, linenums };
 
     function mark(): Element[] {
         const elements = Array.from(document.querySelectorAll(selector));
@@ -58,14 +58,14 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
     }
 
     function traverseUp(element: Element, n = 0): void {
-        if (element.parentElement && n <= up) {
+        if (element.parentElement && n < up) {
             element.parentElement.setAttribute("marked", "");
             traverseUp(element.parentElement, n + 1);
         }            
     }
     
     function traverseDown(element: Element, level = Infinity, n = 0): void {
-        if (--level >= 0 && n <= down) {
+        if (--level >= 0 && n < down) {
             for (const child of element.children) {
                 child.setAttribute("marked", "");
                 traverseDown(child, level, n + 1);
@@ -79,7 +79,10 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
         const container = !["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"].includes(tag);
         const attributes = renderAttributes(element.attributes);
         const marked = element.hasAttribute("marked");
-        
+
+        if (marked && elements.includes(element))
+            linenums.push(lines.length + 1);
+
         if (!container && marked) {
             lines.push(`<${tag}${attributes}>`);
         }
@@ -101,9 +104,6 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
             lines.push(`<${tag}${attributes}></${tag}>`);
         }
 
-        if (marked && elements.includes(element))
-            targets.push(lines.length - 1);
-    
         function renderAttributes(attributes: NamedNodeMap): string {
             const text = Array.from(element.attributes)
                 .filter(attr => attr.value && attr.name !== "marked" && !attr.name.startsWith("sx-"))
@@ -111,8 +111,8 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
                 .join(" ");
             return text ? " " + text : "";
         }
-    
-        function trunc(text: string, max = 80): string {
+
+        function trunc(text: string, max = 40): string {
             if (text.length > max) {
                 const k = Math.floor(max / 2);
                 const i = Math.min(text.slice(0, k).lastIndexOf(" "), k);

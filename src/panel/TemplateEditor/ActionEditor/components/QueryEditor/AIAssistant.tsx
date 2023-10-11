@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
-import * as syphonx from "syphonx-lib";
+import { renderJQuery, SelectQuery, SelectType } from "syphonx-lib";
 import { cloud } from "./lib";
-import { useApp, usePage } from "./context";
+import { useApp, useQueryBuilder } from "./context";
 
 import {
     Box,
@@ -16,10 +16,10 @@ import {
 } from "@mui/material";
 
 export interface Props {
-    query: syphonx.SelectQuery;
+    query: SelectQuery;
     repeated?: boolean;
     name?: string;
-    type?: syphonx.SelectType;
+    type?: SelectType;
     sx?: SxProps<Theme>;
 }
 
@@ -28,7 +28,7 @@ export default ({ query, sx }: Props) => {
     const [busy, setBusy] = useState(false);
     const [conversation, setConversation] = useState<cloud.ChatConversation>();
     const [error, setError] = useState("");
-    const { html, targets } = usePage();
+    const { activeQueryResult } = useQueryBuilder();
     const { debug } = useApp();
 
     useEffect(() => {
@@ -64,11 +64,12 @@ export default ({ query, sx }: Props) => {
     }
 
     function addContext(conversation: cloud.ChatConversation): void {
-        let content = `SELECTOR: \`${syphonx.renderJQuery(query)}\``;
-        if (html) {
-            if (targets.length > 0)
-                content += `GOAL: Write a CSS selector that targets the element on line ${targets.map(target => `#${target}`).join(", ")} in the HTML below.\n`;
-            content += `\n\nHTML:\n\`\`\`\n${html}\n\`\`\`\n`;
+        let content = `SELECTOR: \`${renderJQuery(query)}\``;
+        const [output] = activeQueryResult;
+
+        if (output?.html) {
+            content += `GOAL: Write a CSS selector that targets the element on line ${output.linenums?.map(linenum => `#${linenum}`).join(", ")} in the HTML below.\n`;
+            content += `\n\nHTML:\n\`\`\`\n${output.html}\n\`\`\`\n`;
             content += "Please note the line numbers are not part of the HTML document and are added here solely to make it easier to refer to specific elements in the HTML code.\n";
         }
         conversation.messages.push({

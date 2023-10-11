@@ -1,3 +1,8 @@
+declare const syphonx: {
+    tracking?: boolean;
+    reset?: () => void;
+};
+
 export function disableTracking(): void {
     syphonx.tracking = false;
 

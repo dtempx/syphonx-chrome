@@ -4589,15 +4589,15 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-syphonx-core@^1.2.53:
-  version "1.2.54"
-  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.54.tgz#a1a8e91e1ace0a17f9190b75a410890df2d971a2"
-  integrity sha512-Phki09W2jPl+5xI/k4SBkpY8o9VLCGe5HkfhS5PQCSa4+gL/Xg/sKOcQ0p+tK3bkEOJZ1Ovz5znruD969Ud2PQ==
+syphonx-core@^1.2.59:
+  version "1.2.59"
+  resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.59.tgz#df9adf48f0fde79f8b4cfd8473e78a9066466dd8"
+  integrity sha512-WTH2L1YtsqRyn2wmR/aLd1S5e7909paRHwNDpy4Ctp2rkiTy+H3JDObHHobTuPSJMxX7d/uTvhxaeDrXl6un4w==
 
-syphonx-lib@1.2.53:
-  version "1.2.53"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.53.tgz#e55ecf62a1a2d7d0571522add5e398de5657ff0e"
-  integrity sha512-NrUwG0dVt1kywzsxRHQGdYnuk2zhvQ/1mphSsJcJeuofO6FIchjeJC+QVYdBYTkIGmrKVRHO1qm+1pXiRkF/OA==
+syphonx-lib@1.2.59:
+  version "1.2.59"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.59.tgz#af0bead53cec5f13a6f85be11056e88e71955ae2"
+  integrity sha512-2Qh+BP/u6wOOsEy6yWwVV+tFdZ1qpfIiDoh0CTlE7e63pWPShHPe73l7Ac7LHBnVIVYTne6RrepsiBACGfbrUw==
   dependencies:
     "@types/json-schema" "^7.0.12"
     cheerio "^1.0.0-rc.12"
@@ -4605,7 +4605,7 @@ syphonx-lib@1.2.53:
     jsep "^1.3.7"
     json5 "^2.2.1"
     jsonschema "^1.4.1"
-    syphonx-core "^1.2.53"
+    syphonx-core "^1.2.59"
 
 term-size@^2.2.1:
   version "2.2.1"

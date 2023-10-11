@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
-import * as syphonx from "syphonx-lib";
+import { SelectQuery, SelectQueryOp } from "syphonx-lib";
 import { clone } from "../lib";
+import { useQueryBuilder } from "../context";
+
 import FunctionEditor from "../FunctionEditor/index";
 import SelectorField from "../SelectorField";
 
@@ -11,14 +13,16 @@ import {
 } from "@mui/material";
 
 export interface Props {
-    value: syphonx.SelectQuery;
-    onChange: (event: React.SyntheticEvent, value: syphonx.SelectQuery) => void;
+    query: SelectQuery;
+    onChange: (event: React.SyntheticEvent, value: SelectQuery) => void;
     context?: string;
     sx?: SxProps<Theme>;
 }
 
-export default ({ value, onChange, context, sx }: Props) => {
-    const select = useMemo(() => value || [""], [value]);
+export default ({ query, onChange, context, sx }: Props) => {
+    const { activeQueryResult } = useQueryBuilder();
+    const select = useMemo(() => query || [""], [query]);
+    const output = useMemo(() => activeQueryResult.map(obj => ({ text: obj.text, html: obj.html })), [activeQueryResult]);
 
     function onChangeSelector(event: Event | React.SyntheticEvent, value: string) {
         const obj = clone(select);
@@ -26,13 +30,13 @@ export default ({ value, onChange, context, sx }: Props) => {
         onChange(event as React.SyntheticEvent, obj);
     }
 
-    function onChangeQueryOp(event: Event | React.SyntheticEvent, value: syphonx.SelectQueryOp, i: number) {
+    function onChangeQueryOp(event: Event | React.SyntheticEvent, value: SelectQueryOp, i: number) {
         const obj = clone(select);
         obj[i] = value;
         onChange(event as React.SyntheticEvent, obj);
     }
 
-    function onDeleteQueryOp(event: React.MouseEvent<HTMLButtonElement, MouseEvent>, i: number) {
+    function onDeleteQueryOp(event: React.SyntheticEvent, i: number) {
         const obj = clone(select);
         obj.splice(i, 1);
         onChange(event, obj);
@@ -52,7 +56,8 @@ export default ({ value, onChange, context, sx }: Props) => {
                 <Box>
                     {select.slice(1).map((obj, i) =>
                         <FunctionEditor
-                            value={obj as syphonx.SelectQueryOp}
+                            query={obj as SelectQueryOp}
+                            output={output[i + 1]}
                             onChange={(event, obj) => onChangeQueryOp(event, obj, i + 1)}
                             onDelete={event => onDeleteQueryOp(event, i + 1)}
                             sx={{ mt: 1 }}

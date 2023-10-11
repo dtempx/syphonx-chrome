@@ -15,4 +15,5 @@ export { default as TitleBar } from "./TitleBar";
 export { default as ValidateField } from "./ValidateField";
 
 export { ListItemType } from "./List";
+export { SxSpin } from "./SxSpin";
 export { TransitionUp } from "./transitions";

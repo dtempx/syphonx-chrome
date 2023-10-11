@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { usePage } from "./context";
+import { useQueryBuilder } from "./context";
 import { TrackButton } from "./components";
 import SelectorOutput from "./SelectorOutput";
 
@@ -28,14 +28,16 @@ export interface Props {
 
 export default ({ value, onChange, context, ...props }: Props) => {
     const [showOutput, setShowOutput] = useState(false);
-    const { html, output, selectors, setSelectors } = usePage();
+    const [autoselect, setAutoselect] = useState<string[]>([]);
+    const { activeQueryResult } = useQueryBuilder();
+    const [output] = activeQueryResult;
 
     return (
         <Stack direction="column" {...props}>
             <Stack direction="row" spacing={0}>
                 <TrackButton
                     onChange={(event, selectors) => {
-                        setSelectors(selectors);
+                        setAutoselect(selectors);
                         onChange(event, selectors[0]);
                     }}
                 />
@@ -47,9 +49,9 @@ export default ({ value, onChange, context, ...props }: Props) => {
                         openOnFocus
                         size="small"
                         value={value}
-                        options={selectors}
+                        options={autoselect}
                         sx={{ ml: 1 }}
-                        filterOptions={() => selectors}
+                        filterOptions={() => autoselect}
                         renderInput={params =>
                             <TextField
                                 {...params}
@@ -61,10 +63,10 @@ export default ({ value, onChange, context, ...props }: Props) => {
                     />
                 </Tooltip>
 
-                {value && (
+                {value && output?.nodes && (
                     <Chip
                         color="primary"
-                        label={output.length}
+                        label={output.nodes.length}
                         size="small"
                         sx={{
                             position: "relative",
@@ -79,12 +81,7 @@ export default ({ value, onChange, context, ...props }: Props) => {
                     </IconButton>
                 </Tooltip>
             </Stack>
-            {showOutput && (
-                <SelectorOutput
-                    output={output}
-                    html={html}
-                />
-            )}
+            {showOutput && output && <SelectorOutput text={output.text} html={output.html} />}
         </Stack>
     );
 };

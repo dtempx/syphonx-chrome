@@ -11,6 +11,11 @@ export function evaluate<T = any>(expression: string): Promise<T> {
     });
 }
 
+export async function call(fn: Function, ...params: unknown[]) {
+    const result = await evaluate(`(${fn.toString()})(${JSON.stringify(params).slice(1, -1)})`);
+    return result;
+}
+
 // NOTE:  The chrome.tabs.* API is not exposed to the Developer Tools extension pages due to security considerations.
 // So it is necessary to pass the tab ID to the background page and invoke the chrome.tabs.* API functions from there.
 // https://developer.chrome.com/docs/extensions/reference/devtools_inspectedWindow/

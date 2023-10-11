@@ -52,14 +52,18 @@ function executeScriptFile<T = unknown>(tabId: number, file: string): Promise<T>
     );
 }
 
+declare global {
+    interface Window {
+        syphonx: unknown;
+    }
+}
+
 async function injectAll(tabId: number): Promise<void> {
     const injected = await executeScript<boolean>(tabId, () => typeof window.syphonx === "object");
     if (!injected) {
-        //await executeScriptFile(tabId, "jquery.slim.js");
-        //await executeScriptFile(tabId, "syphonx.js");
         await executeScript(tabId, () => (window as {syphonx: {}}).syphonx = {}); // set inclusion guard
         await chrome.scripting.insertCSS({ target: { tabId }, files: ["syphonx.css"] });
-        //console.log(`BACKGROUND sx injected tabId=${tabId}`);
+        console.log(`BACKGROUND sx injected syphonx.css tabId=${tabId}`);
     }
 }
 
@@ -101,6 +105,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     if (message.click) {
         console.log("MESSAGE", "click", { message, sender });
+        return false; // immediate synchronous response
+    }
+
+    if (message.syphonx) {
+        console.log("MESSAGE", "syphonx", { message, sender });
         return false; // immediate synchronous response
     }
 
@@ -151,6 +160,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         })();
         return true; // response will be sent asynchronously
     }
+    else if (message.key === "navigated") {
+        const [url] = message.params;
+        console.log("MESSAGE", message.key, url, { message, sender });
+        injectAll(message.tabId);
+        return false; // immediate synchronous response
+    }
     else if (!Object.keys(scripts).includes(message.key)) {
         console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });
         return false; // immediate synchronous response
@@ -158,7 +173,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     (async () => {
         try {
-            await injectAll(message.tabId);
             const script = (scripts as unknown as Record<string, () => void>)[message.key];
             const result = await executeScript(message.tabId, script, ...message.params);
             //const result = await executeScript(message.tabId, scripts[message.key] as () => void, ...message.params);

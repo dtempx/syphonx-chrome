@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { background } from "./lib";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
@@ -36,7 +37,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
 
     // update inspectedWindowUrl when the inspected window is re-navigated
     chrome.devtools.network.onNavigated.addListener(url => {
-        setInspectedWindowUrl(url)
+        setInspectedWindowUrl(url);
+        background.sendBackgroundMessage("navigated", url);
     });
 
     useEffect(() => {
@@ -44,8 +46,10 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             try {
                 const tabId = chrome.devtools.inspectedWindow.tabId;
                 const tab = await chrome.tabs.get(tabId);
-                if (tab?.url)
+                if (tab?.url) {
                     setInspectedWindowUrl(tab.url);
+                    background.sendBackgroundMessage("navigated", tab.url);
+                }
             }
             catch (err) {
                 debugger;

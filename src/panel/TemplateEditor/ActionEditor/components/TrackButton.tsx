@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { background } from "./lib";
-import { useTemplate } from "./context";
+import { background, proxy } from "./lib";
+import { usePage } from "./context";
 
 import {
     Button,
@@ -20,13 +20,13 @@ export interface Props {
 }
 
 export default ({ onChange, sx }: Props) => {
-    const { click } = useTemplate();
+    const { click } = usePage();
     const [tracking, setTracking] = useState(false);
 
     useEffect(() => {
         (async () => {
             try {
-                const selectors = await background.queryTracking({
+                const selectors = await proxy.queryTracking({
                     className: "sx-click",
                     nthOfTypeRunLimit: 3
                 });
