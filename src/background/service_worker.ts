@@ -120,9 +120,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     const tabId = message.tabId as number;
     if (message.key === "navigate") {
-        console.log("MESSAGE", message.key, { message, sender });
+        const [url] = message.params;
+        console.log("MESSAGE", message.key, url, { message, sender });
         (async () => {
-            await chrome.tabs.update(tabId, { url: message.params[0] });
+            await chrome.tabs.update(tabId, { url });
             await waitForNavigation();
             sendResponse();
         })();

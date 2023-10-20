@@ -3,6 +3,7 @@ import { List, ListItemType } from "../components";
 import { useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
+import AuditDialog from "./AuditDialog";
 import OpenFileDialog from "./OpenFileDialog";
 import PortalDialog from "./PortalDialog";
 import SaveFileDialog from "./SaveFileDialog";
@@ -16,6 +17,7 @@ import {
 
 import {
     Info as AboutIcon,
+    AdsClick as AuditIcon,
     NoteAdd as FileNewIcon,
     CloudDownload as FileOpenIcon,
     CloudUpload as FileSaveIcon,
@@ -31,13 +33,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { portal, resetExtractStatus, setTemplate, verified } = useTemplate();
-    const [aboutOpen, setAboutOpen] = useState(false);
-    const [fileOpenOpen, setFileOpenOpen] = useState(false);
-    const [fileSaveOpen, setFileSaveOpen] = useState(false);
-    const [userSettingsOpen, setUserSettingsOpen] = useState(false);
-    const [portalOpen, setPortalOpen] = useState(false);
-    const [verificationOpen, setVerificationOpen] = useState(false);
-
+    const [dialog, setDialog] = useState("");
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
@@ -47,19 +43,19 @@ export default ({ open, onClose }: Props) => {
         }],
         ["Open Template", <FileOpenIcon />, event => {
             if (!verified) {
-                setVerificationOpen(true);
+                setDialog("verify");
                 onClose(event);
             } else {
-                setFileOpenOpen(true);
+                setDialog("open");
                 onClose(event);
             }
         }],
         ["Save Template", <FileSaveIcon />, event => {
             if (!verified) {
-                setVerificationOpen(true);
+                setDialog("verify");
                 onClose(event);
             } else {
-                setFileSaveOpen(true);
+                setDialog("save");
                 onClose(event);
             }
         }],
@@ -70,31 +66,36 @@ export default ({ open, onClose }: Props) => {
         }],
         null,
         ["User Settings", <SettingsIcon />, event => {
-            setUserSettingsOpen(true);
+            setDialog("settings");
             onClose(event);
         }],
         ["About", <AboutIcon />, event => {
-            setAboutOpen(true);
+            setDialog("about");
             onClose(event);
         }],
+        null,
+        ["Audit", <AuditIcon />, event => {
+            setDialog("audit");
+            onClose(event);
+        }]
     ];
-    if (portal?.views?.panel) {
-        items.push(null);
+
+    if (portal?.views?.panel)
         items.push(
             ["Portal", <PortalIcon />, event => {
-                setPortalOpen(true);
+                setDialog("portal");
                 onClose(event);
             }]
         );
-    }
 
     return (<>
-        <AboutDialog open={aboutOpen} onClose={() => setAboutOpen(false)} />
-        <OpenFileDialog open={fileOpenOpen} onClose={() => setFileOpenOpen(false)} />
-        <SaveFileDialog open={fileSaveOpen} onClose={() => setFileSaveOpen(false)} />
-        <UserSettingsDialog open={userSettingsOpen} onClose={() => setUserSettingsOpen(false)} />
-        {(!!portal?.views?.full && portalOpen) && <PortalDialog open={portalOpen} onClose={() => setPortalOpen(false)} />}
-        {verificationOpen && <VerificationDialog open={verificationOpen} setOpen={setVerificationOpen} onClose={() => setVerificationOpen(false)} />}
+        <AboutDialog open={dialog === "about"} onClose={() => setDialog("")} />
+        <AuditDialog open={dialog === "audit"} onClose={() => setDialog("")} />
+        <OpenFileDialog open={dialog === "open"} onClose={() => setDialog("")} />
+        <SaveFileDialog open={dialog === "save"} onClose={() => setDialog("")} />
+        <UserSettingsDialog open={dialog === "settings"} onClose={() => setDialog("")} />
+        <PortalDialog open={dialog === "portal"} onClose={() => setDialog("")} />
+        <VerificationDialog open={dialog === "verify"} setOpen={() => setDialog("verify")} onClose={() => setDialog("")} />
 
         <Drawer
             anchor="left"

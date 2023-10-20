@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { background } from "./lib";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
@@ -21,6 +21,11 @@ export interface AppState {
     inspectedWindowUrl: string;
 }
 
+interface WebNavigationCallbackDetails {
+    tabId: number;
+    frameId: number;
+}
+
 export function useApp() {
     return React.useContext(AppContext);
 }
@@ -34,29 +39,59 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [serviceUrl, setServiceUrl] = useState("");
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
+    const inspectedWindowUrlRef = useRef(inspectedWindowUrl);
+    const lastEventTimeRef = useRef(0);
 
-    // update inspectedWindowUrl when the inspected window is re-navigated
-    chrome.devtools.network.onNavigated.addListener(url => {
-        setInspectedWindowUrl(url);
-        background.sendBackgroundMessage("navigated", url);
-    });
-
+    /*
+        Goals:
+        - Ensure the onNavigated event updates only once per navigation
+        - Update the background if the page is refreshed with the same URL
+        - Use refs to capture state within the async handler inside the useEffect closure, otherwise it only the initial state is captured
+        - Unhook the event handler when the component unmounts
+    */
     useEffect(() => {
-        (async () => {
-            try {
-                const tabId = chrome.devtools.inspectedWindow.tabId;
-                const tab = await chrome.tabs.get(tabId);
+        const handleNavigationCompleted = async ({ frameId, tabId }: WebNavigationCallbackDetails) => {
+            if (frameId !== 0)
+                return; // skip if not the top-level frame
+            if (Date.now() - lastEventTimeRef.current < 2000)
+                return; // skip spurious events that happen on some pages
+            // if the tabId matches the inspected window and the URL is different, update the URL
+            if (tabId === chrome.devtools.inspectedWindow.tabId) {
+                const tab = await chrome.tabs.get(chrome.devtools.inspectedWindow.tabId);
                 if (tab?.url) {
+                    // check for page reload case where url is the same
+                    if (tab.url === inspectedWindowUrlRef.current)
+                        setInspectedWindowUrl(""); // set an intermediate empty state to force the other useEffect to be retriggered with the same url
                     setInspectedWindowUrl(tab.url);
-                    background.sendBackgroundMessage("navigated", tab.url);
+                    inspectedWindowUrlRef.current = tab.url;
+                    lastEventTimeRef.current = Date.now();
                 }
             }
-            catch (err) {
-                debugger;
-                console.error(err);
+        };
+
+        // attach the webNavigation.onCompleted event listener.
+        chrome.webNavigation.onCompleted.addListener(handleNavigationCompleted);
+
+        // set the initial page
+        (async () => {
+            const tabId = chrome.devtools.inspectedWindow.tabId;
+            const tab = await chrome.tabs.get(tabId);
+            if (tab?.url) {
+                setInspectedWindowUrl(tab.url);
+                inspectedWindowUrlRef.current = tab.url;
             }
         })();
+
+        // detach the event listener when component unmounts.
+        return () => {
+            chrome.webNavigation.onCompleted.removeListener(handleNavigationCompleted);
+        };
     }, []);
+
+    useEffect(() => {
+        if (inspectedWindowUrl)
+            background.sendBackgroundMessage("navigated", inspectedWindowUrl);
+    }, [inspectedWindowUrl]);
 
     useEffect(() => {
         chrome.storage.local.get(

@@ -750,11 +750,6 @@
                 "name": "Limit",
                 "type": "number",
                 "help": "The maximum number of elements to return."
-            },
-            {
-                "name": "Trim",
-                "type": "boolean",
-                "help": "Whether to trim the elements."
             }
         ]
     },
