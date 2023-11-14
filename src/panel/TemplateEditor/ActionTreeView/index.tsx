@@ -18,7 +18,7 @@ import {
 } from "@mui/icons-material";
 
 export default () => {
-    const { hotTracking } = useApp();
+    const { editTracking } = useApp();
     const [expanded, setExpanded] = useState<string[]>([]);
     const [selected, setSelected] = useState<string[]>([]);
 
@@ -62,7 +62,7 @@ export default () => {
                     onNodeSelect={(event: any, value: any) => {
                         const item = template.setSelected(value);
                         setTemplate(template.json());
-                        if (hotTracking)
+                        if (editTracking)
                             hiliteItem(item);
                     }}
                 >

@@ -1,13 +1,9 @@
-
 import React, { useEffect, useState } from "react";
-
-import { useTemplate } from "../context";
-import { regexp } from "../lib";
+import { useTemplate } from "./context";
+import { regexp } from "./lib";
 import { getUser, validateSession, watchUser } from "../lib/cloud";
 
-import {
-    TransitionUp
-} from "../components";
+import { TransitionUp } from "./components";
 
 import {
     Alert,

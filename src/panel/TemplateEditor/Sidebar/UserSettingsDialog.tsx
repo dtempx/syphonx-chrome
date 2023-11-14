@@ -1,13 +1,13 @@
 import React from "react";
-import { useApp, useTemplate } from "../context";
-import { regexp } from "../lib";
+import { useApp, useTemplate } from "./context";
+import { regexp } from "./lib";
 
 import {
     AdvancedPropertyGrid,
     TitleBar,
     TransitionUp,
     ValidateField
-} from "../components";
+} from "./components";
 
 import {
     Dialog,

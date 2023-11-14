@@ -12,18 +12,15 @@ export interface AppState {
     setAutoRefresh: React.Dispatch<React.SetStateAction<boolean>>;
     debug: boolean;
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
-    hotTracking: boolean;
-    setHotTracking: React.Dispatch<React.SetStateAction<boolean>>;
+    editTracking: boolean;
+    setEditTracking: React.Dispatch<React.SetStateAction<boolean>>;
+    pageTracking: boolean;
+    setPageTracking: React.Dispatch<React.SetStateAction<boolean>>;
     mode: AppMode;
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     serviceUrl: string;
     setServiceUrl: React.Dispatch<React.SetStateAction<string>>;
     inspectedWindowUrl: string;
-}
-
-interface WebNavigationCallbackDetails {
-    tabId: number;
-    frameId: number;
 }
 
 export function useApp() {
@@ -35,7 +32,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
     const [debug, setDebug] = useState(false);
-    const [hotTracking, setHotTracking] = useState(true);
+    const [editTracking, setEditTracking] = useState(true);
+    const [pageTracking, setPageTracking] = useState(false);
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [serviceUrl, setServiceUrl] = useState("");
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
@@ -43,14 +41,14 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const lastEventTimeRef = useRef(0);
 
     /*
-        Goals:
+        NOTES:
         - Ensure the onNavigated event updates only once per navigation
         - Update the background if the page is refreshed with the same URL
         - Use refs to capture state within the async handler inside the useEffect closure, otherwise it only the initial state is captured
         - Unhook the event handler when the component unmounts
     */
     useEffect(() => {
-        const handleNavigationCompleted = async ({ frameId, tabId }: WebNavigationCallbackDetails) => {
+        const handleNavigationCompleted = async ({ frameId, tabId }: chrome.webNavigation.WebNavigationFramedCallbackDetails) => {
             if (frameId !== 0)
                 return; // skip if not the top-level frame
             if (Date.now() - lastEventTimeRef.current < 2000)
@@ -90,8 +88,15 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
 
     useEffect(() => {
         if (inspectedWindowUrl)
-            background.sendBackgroundMessage("navigated", inspectedWindowUrl);
+            background.navigated(inspectedWindowUrl, pageTracking);
     }, [inspectedWindowUrl]);
+
+    useEffect(() => {
+        if (pageTracking)
+            background.enableTracking();
+        else
+            background.disableTracking();
+    }, [pageTracking]);
 
     useEffect(() => {
         chrome.storage.local.get(
@@ -100,15 +105,15 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                 "autoOpen",
                 "autoRefresh",
                 "debug",
-                "hotTracking",
+                "editTracking",
                 "serviceUrl"
             ],
             ({
                 advanced,
-                hotTracking,
                 autoOpen,
                 autoRefresh,
                 debug,
+                editTracking,
                 serviceUrl
             }) => {
                 if (advanced !== undefined)
@@ -119,8 +124,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                     setAutoRefresh(autoRefresh);
                 if (debug !== undefined)
                     setDebug(debug);
-                if (hotTracking !== undefined)
-                    setHotTracking(hotTracking);
+                if (editTracking !== undefined)
+                    setEditTracking(editTracking);
                 if (serviceUrl !== undefined)
                     setServiceUrl(serviceUrl);
             }
@@ -133,7 +138,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             autoOpen,
             autoRefresh,
             debug,
-            hotTracking,
+            editTracking,
             serviceUrl,
         });
     }, [
@@ -141,7 +146,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         autoOpen,
         autoRefresh,
         debug,
-        hotTracking,
+        editTracking,
         serviceUrl
     ]);
 
@@ -158,8 +163,10 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         setAutoRefresh,
         debug,
         setDebug,
-        hotTracking,
-        setHotTracking,
+        pageTracking,
+        setPageTracking,
+        editTracking,
+        setEditTracking,
         mode,
         setMode,
         serviceUrl,

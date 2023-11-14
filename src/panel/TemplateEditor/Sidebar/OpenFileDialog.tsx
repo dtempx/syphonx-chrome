@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
-import { FileDialog } from "../components";
-import { inspectedWindow, sleep, Template } from "../lib";
+import { FileDialog } from "./components";
+import { inspectedWindow, sleep, Template } from "./lib";
 import { validateSession } from "../lib/cloud";
 
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate } from "./context";
 
 export interface Props {
     open: boolean;

@@ -58,19 +58,21 @@ declare global {
     }
 }
 
-async function injectAll(tabId: number): Promise<void> {
+async function injectAll(tabId: number, tracking: boolean): Promise<void> {
     const injected = await executeScript<boolean>(tabId, () => typeof window.syphonx === "object");
     if (!injected) {
         await executeScript(tabId, () => (window as {syphonx: {}}).syphonx = {}); // set inclusion guard
+        if (tracking)
+            await executeScript(tabId, scripts.enableTracking);
         await chrome.scripting.insertCSS({ target: { tabId }, files: ["syphonx.css"] });
-        console.log(`BACKGROUND sx injected syphonx.css tabId=${tabId}`);
+        console.log(`BACKGROUND css injected, tracking=${tracking ? "enabled" : "disabled"}, tabId=${tabId}`);
     }
 }
 
 function waitForNavigation(): Promise<void> {
     return new Promise<void>(resolve => {
-        function onCompleted(details: chrome.webNavigation.WebNavigationFramedCallbackDetails) {
-            if (details.frameId === 0) {
+        function onCompleted({ frameId }: chrome.webNavigation.WebNavigationFramedCallbackDetails) {
+            if (frameId === 0) {
                 chrome.webNavigation.onCompleted.removeListener(onCompleted);
                 resolve();
             }
@@ -162,10 +164,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         return true; // response will be sent asynchronously
     }
     else if (message.key === "navigated") {
-        const [url] = message.params;
-        console.log("MESSAGE", message.key, url, { message, sender });
-        injectAll(message.tabId);
-        return false; // immediate synchronous response
+        const [url, tracking] = message.params;
+        console.log("MESSAGE", message.key, `${url} (tracking ${tracking ? "enabled" : "disabled"})`, { message, sender });
+        (async () => {
+            await injectAll(tabId, tracking);
+            sendResponse();
+        })();
+        return true; // response will be sent asynchronously
     }
     else if (!Object.keys(scripts).includes(message.key)) {
         console.warn("MESSAGE", { message, sender, error: `Property "key" is invalid: "${message.key}"` });

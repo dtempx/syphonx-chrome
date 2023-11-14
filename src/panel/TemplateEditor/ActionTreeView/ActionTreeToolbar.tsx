@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 
 import {
-    GpsFixed as HotTrackingIcon
+    GpsFixed as TrackingIcon
 } from "@mui/icons-material";
 
 import {
@@ -18,7 +18,7 @@ import {
 } from "./components";
 
 export default () => {
-    const { hotTracking, setHotTracking } = useApp();
+    const { editTracking, setEditTracking } = useApp();
     return (
         <SplitPane sx={{ p: 1, mb: 1, backgroundColor: "#f5f5f5" }}>
             <AddButton />
@@ -26,13 +26,13 @@ export default () => {
                 <Tooltip title="Enable or disable hot-tracking mode which scrolls the target element into view on the page when hovering over the tree view.">
                     <IconButton
                         size="small"
-                        color={hotTracking ? "primary" : "default"}
+                        color={editTracking ? "primary" : "default"}
                         onClick={() => {
-                            setHotTracking(!hotTracking);
+                            setEditTracking(!editTracking);
                             unhiliteAll();
                         }}
                     >
-                        <HotTrackingIcon fontSize="small" />
+                        <TrackingIcon fontSize="small" />
                     </IconButton>
                 </Tooltip>
             </Stack>

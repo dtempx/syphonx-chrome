@@ -9,7 +9,7 @@ export interface Props {
 }
 
 export default function ActionTreeItem({ item }: Props) {
-    const { hotTracking } = useApp();
+    const { editTracking } = useApp();
     const { template: json } = useTemplate();
     const template = new Template(json);
 
@@ -18,7 +18,7 @@ export default function ActionTreeItem({ item }: Props) {
             nodeId={item.key}
             label={<ActionTreeItemLabel item={item} />}
             onMouseOver={() => {
-                if (hotTracking)
+                if (editTracking)
                     hiliteItem(item);
             }}
         >

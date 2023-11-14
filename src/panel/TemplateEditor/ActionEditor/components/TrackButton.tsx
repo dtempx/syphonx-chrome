@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { background, proxy } from "./lib";
-import { usePage } from "./context";
+import { proxy } from "./lib";
+import { useApp, usePage } from "./context";
 
 import {
     Button,
@@ -20,8 +20,10 @@ export interface Props {
 }
 
 export default ({ onChange, sx }: Props) => {
+    const { setPageTracking } = useApp();
     const { click } = usePage();
     const [tracking, setTracking] = useState(false);
+    const { } = usePage();
 
     useEffect(() => {
         (async () => {
@@ -41,13 +43,8 @@ export default ({ onChange, sx }: Props) => {
     }, [click]);
 
     useEffect(() => {
-        if (tracking)
-            background.enableTracking();
-        else
-            background.disableTracking();
-        return () => {
-            background.disableTracking();
-        }
+        setPageTracking(tracking);
+        return () => setPageTracking(false);
     }, [tracking]);
 
     return (

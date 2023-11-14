@@ -1,10 +1,10 @@
 import React from "react";
-import { useApp, useTemplate } from "../context";
+import { useApp, useTemplate } from "./context";
 
 import {
     TitleBar,
     TransitionUp
-} from "../components";
+} from "./components";
 
 import {
     Dialog,

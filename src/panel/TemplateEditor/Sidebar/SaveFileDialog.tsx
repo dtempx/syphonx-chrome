@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { SyphonXApi } from "syphonx-lib";
-import { FileDialog } from "../components";
-import { useApp, useTemplate } from "../context";
-import { Template } from "../lib";
+import { FileDialog } from "./components";
+import { useApp, useTemplate } from "./context";
+import { Template } from "./lib";
 import { validateSession } from "../lib/cloud";
 
 export interface Props {
