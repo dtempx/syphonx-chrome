@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { inspectedWindow, proxy } from "./lib";
+
+import {
+    inspectedWindow,
+    proxy
+} from "./lib";
 
 import {
     useApp,
@@ -50,10 +54,12 @@ const AuditDialog = ({ open, onClose }: Props) => {
     useEffect(() => {
         if (open) {
             setPageTracking(true);
+            setSelector("");
             nextAudit();
         }
         else {
             setPageTracking(false);
+            setSelector("");
             setAudit(undefined);
         }
         return () => setPageTracking(false);
@@ -66,20 +72,45 @@ const AuditDialog = ({ open, onClose }: Props) => {
         }
     }, [audit]);
 
-    useEffect(() => {
-        (async () => {
-            const [selector] = await proxy.queryTracking({
-                className: "sx-click",
-                nthOfTypeRunLimit: 3
-            });
+    useEffect(() => {           
+        (async target => {
+            const [selector] = await proxy.querySelectorPath(".sx-click");
+            if (click?.shiftKey === true) {
+                if (target) {
+                    if (!target.alt_clicks)
+                        target.alt_clicks = [];
+                    target.alt_clicks.push(selector);
+                }
+                return; // do nothing if shift key is down
+            }
             setSelector(selector);
-        })();
+        })(target);
     }, [click]);
 
     useEffect(() => {
         if (audit && target && selector) {
-            target.selector = selector;
-            setAudit({ ...audit });
+            (async (audit, target) => {
+                await proxy.deselectElements("sx-click"); // remove hilights before taking screenshot
+
+                const tab = await inspectedWindow.tab();
+                const imageuri = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
+                const { html, linenums } = await proxy.sliceHtml({ selector, up: 6, down: 3 });
+                const [ screenshot_rect ] = await proxy.boundingClientRect("body");
+                const selector_rect = await proxy.boundingClientRect(selector);
+
+                target.selector = selector;
+                target.html = html;
+                target.html_linenums = linenums;
+                target.screenshot = imageuri;
+                target.screenshot_rect = screenshot_rect;
+                target.selector_rect = selector_rect;
+
+                if (!audit.html)
+                    audit.html = await proxy.queryHtml();
+
+                setAudit({ ...audit });
+                setSelector("");
+            })(audit, target);
         }
     }, [selector]);
 

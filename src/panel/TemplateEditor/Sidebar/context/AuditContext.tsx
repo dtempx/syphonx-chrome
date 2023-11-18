@@ -1,5 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { RestApi } from "../lib";
+
+import {
+    BoundingRect,
+    RestApi
+} from "../lib";
 
 const api = new RestApi("http://localhost:8080");
 
@@ -10,6 +14,7 @@ export interface Audit {
     selectors: AuditSelector[];
     status: string;
     comment?: string;
+    html?: string;
 }
 
 export interface AuditSelector {
@@ -19,7 +24,12 @@ export interface AuditSelector {
     selector?: string;
     status?: string;
     comment?: string;
-    metadata?: string;
+    html?: string;
+    html_linenums?: number[];
+    screenshot?: string;
+    screenshot_rect?: BoundingRect;
+    selector_rect?: BoundingRect[];
+    alt_clicks?: string[];
 }
 
 export type AuditStatus = "serving" | "submitting" | "ready" | "empty" | "error";
@@ -52,6 +62,7 @@ export function AuditProvider({ children }: { children: JSX.Element }) {
     const [error, setError] = useState<string | undefined>();
  
     useEffect(() => {
+        setError(undefined);
         if (audit) {
             // if all selectors are set then auto-submit...
             if (!!audit.status || audit.selectors.every(target => !!target.selector || !!target.status)) {

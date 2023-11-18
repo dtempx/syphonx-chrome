@@ -12,4 +12,4 @@ This is the Chrome Extension editor/runner for SyphonX—the easiest way to extr
 
 To use the extension, hit F12 from any tab to open devtools and select the SyphonX panel.
 
-> The extension must be re-installed after every system restart as manually loaded Chrome extensions do not persist across shutdowns.
+> The extension must be re-installed after every system restart as manually loaded MV3 extensions do not persist across shutdowns.

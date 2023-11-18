@@ -79,7 +79,8 @@ export function DataProvider({ children }: { children: JSX.Element }) {
         setExtractStatus(undefined);
 
         // make sure there's a url otherwise it will hang because the listener won't have been added in the service_worker
-        const url = await inspectedWindow.url();
+        const tab = await inspectedWindow.tab();
+        const url = tab.url;
         if (!url)
             return; // todo set extract status 
 

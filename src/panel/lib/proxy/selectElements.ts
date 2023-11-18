@@ -46,3 +46,12 @@ export function selectElements({ selectors, className, limit = 100, scrollIntoVi
     
     return result;
 }
+
+/**
+ * Removes the specified class name from all elements.
+ * @param className The class name to remove.
+ */
+export function deselectElements(className: string): void {
+    document.querySelectorAll(`.${className}`).forEach(element =>
+        element.classList.remove(className));
+}

@@ -22,7 +22,7 @@ export async function call(fn: Function, ...params: unknown[]) {
 // sendBackgroundMessage sends a message to perform the work from the service_worker
 
 export async function goBack(): Promise<void> {
-    await sendBackgroundMessage("goback", url);
+    await sendBackgroundMessage("goback");
 }
 
 export async function navigate(url: string): Promise<void> {
@@ -33,7 +33,7 @@ export async function reload(): Promise<void> {
     await sendBackgroundMessage("reload");
 }
 
-export async function url(): Promise<string> {
+export async function tab(): Promise<chrome.tabs.Tab> {
     const { tab } = await sendBackgroundMessage<{ tab: chrome.tabs.Tab }>("tab");
-    return tab?.url || "";
+    return tab;
 }

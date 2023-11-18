@@ -23,20 +23,20 @@ git clone https://github.com/dtempx/syphonx-chrome.git
 cd syphonx-chrome
 yarn install
 ```
+> On Windows run yarn from within **WSL: Ubuntu**
 
 ## Build/Test
-* `yarn build-test` to build for tests
 * `yarn test` to run tests
 
 ## Build/Package
 * `yarn build` to build Chrome Extension package
-* `yarn start` to test UI outside of Chrome
 * `yarn upgrade syphonx-lib --latest` to update dependencies
 
 ## Test Chrome Extension
 1. Open Chrome web-browser
 2. Goto `chrome://extensions` to open the **Extensions** page
 3. Click `Load unpacked` and navigate to `dist` folder to load Chrome Extension
+> On Windows look under **Linux / Ubuntu**
 
 ## Install Chrome Extension
 1. Open Chrome and navigate to **chrome://extensions**

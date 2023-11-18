@@ -12,9 +12,13 @@ export interface SliceHtmlOptions {
      */
     down?: number;
     /**
+     * Max string size before truncation.
+     */
+    maxStringLength?: number;
+    /**
      * Whether to number the lines in the slice.
      */
-    number?: boolean;
+    linenumbers?: boolean;
 }
 
 export interface SliceHtmlResult {
@@ -31,7 +35,7 @@ export interface SliceHtmlResult {
 /**
  * Slices the HTML document to include the specified element and its ancestors and descendants.
  */
-export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHtmlOptions): SliceHtmlResult {
+export function sliceHtml({ selector, up = 3, down = 3, linenumbers, maxStringLength = 100 }: SliceHtmlOptions): SliceHtmlResult {
     const elements = mark();
     const lines: string[] = [];
     const linenums: number[] = [];
@@ -39,7 +43,7 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
     render(document.documentElement);
     unmark();
 
-    const html = lines.map((line, index) => number ? `${linenums.includes(index + 1) ? "> " : "  "}${(index + 1).toString().padStart(4, "0")} ${line}` : line).join("\n");
+    const html = lines.map((line, index) => linenumbers ? `${linenums.includes(index + 1) ? "> " : "  "}${(index + 1).toString().padStart(4, "0")} ${line}` : line).join("\n");
     return { html, linenums };
 
     function mark(): Element[] {
@@ -97,7 +101,7 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
                 lines.push(`</${tag}>`);
         }
         else if (element.textContent !== null && element.textContent.trim().length > 0 && marked) {
-            const text = trunc(element.textContent.trim().replace(/\s+/gm, " "));
+            const text = trunc(element.textContent.trim().replace(/\s+/gm, " "), maxStringLength);
             lines.push(`<${tag}${attributes}>${text}</${tag}>`);
         }
         else if (marked) {
@@ -107,12 +111,12 @@ export function sliceHtml({ selector, up = 3, down = 3, number = true }: SliceHt
         function renderAttributes(attributes: NamedNodeMap): string {
             const text = Array.from(element.attributes)
                 .filter(attr => attr.value && attr.name !== "marked" && !attr.name.startsWith("sx-"))
-                .map(attr => `${attr.name}="${trunc(attr.value.replace(/"/g,'\"'))}"`)
+                .map(attr => `${attr.name}="${trunc(attr.value.replace(/"/g,'\"'), maxStringLength)}"`)
                 .join(" ");
             return text ? " " + text : "";
         }
 
-        function trunc(text: string, max = 40): string {
+        function trunc(text: string, max: number): string {
             if (text.length > max) {
                 const k = Math.floor(max / 2);
                 const i = Math.min(text.slice(0, k).lastIndexOf(" "), k);

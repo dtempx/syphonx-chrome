@@ -82,8 +82,5 @@ async function sliceHtml(selector: string) {
 }
 
 export async function deselectAll(): Promise<void> {
-    await proxy.selectElements({
-        selectors: [],
-        className: "sx-select"
-    });
+    await proxy.deselectElements("sx-select");
 }
