@@ -1,7 +1,7 @@
 import { inspectedWindow } from "..";
-import { queryTracking as _queryTracking, QueryTrackingOptions } from "./queryTracking";
+import { queryTracking as f, QueryTrackingOptions } from "./queryTracking";
 
 export async function queryTracking(options: QueryTrackingOptions): Promise<string[]> {
-    const result = await inspectedWindow.call(_queryTracking, options);
+    const result = await inspectedWindow.call(f, options);
     return result;
 }

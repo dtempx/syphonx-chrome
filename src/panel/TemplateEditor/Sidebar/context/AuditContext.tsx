@@ -26,6 +26,7 @@ export interface AuditSelector {
     comment?: string;
     html?: string;
     html_linenums?: number[];
+    text?: string;
     screenshot?: string;
     screenshot_rect?: BoundingRect;
     selector_rect?: BoundingRect[];

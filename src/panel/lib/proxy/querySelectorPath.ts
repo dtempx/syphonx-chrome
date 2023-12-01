@@ -1,4 +1,4 @@
-export function querySelectorPath(selector: string): string[] {
+export function querySelectorPath(selector: string, fullpath = false): string[] {
     const selectors: string[] = [];
     const elements = Array.from(document.querySelectorAll(selector));
 
@@ -21,7 +21,8 @@ export function querySelectorPath(selector: string): string[] {
             else {
                 const id = element.id || "";
                 const [className] = element.className?.split(" ").filter(name => selector.startsWith(".") ? name !== selector.slice(1) : true) || [];
-                const n = Array.from(element.parentElement.children).indexOf(element) + 1;
+                const a = Array.from(element.parentElement.children);
+                const n = a.indexOf(element) + 1;
         
                 const uniqueId = /^[A-Za-z0-9_-]+$/.test(id) ? document.querySelectorAll(`#${id}`).length === 1 : false;
                 const uniqueClassName = tag && /^[A-Za-z0-9_-]+$/.test(className) ? document.querySelectorAll(`${tag}.${className}`).length === 1 : false;
@@ -37,7 +38,10 @@ export function querySelectorPath(selector: string): string[] {
                 else if (onlyClassName)
                     path.push(`${tag}.${className}`);
                 else
-                    path.push(`${tag}:nth-child(${n})`);
+                    path.push(n === 1 ? `${tag}:first-child` : n === a.length ? `${tag}:last-child` : `${tag}:nth-child(${n})`);
+
+                if (!fullpath && (uniqueId || uniqueClassName))
+                    break;
             }
 
             element = element.parentElement;

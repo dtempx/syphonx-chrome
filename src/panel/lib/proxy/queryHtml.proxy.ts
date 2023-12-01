@@ -1,7 +1,7 @@
 import { inspectedWindow } from "..";
-import { queryHtml as _queryHtml } from "./queryHtml";
+import { queryHtml as f } from "./queryHtml";
 
 export async function queryHtml(selector = "html"): Promise<string> {
-    const html = await inspectedWindow.call(_queryHtml, selector);
+    const html = await inspectedWindow.call(f, selector);
     return html;
 }

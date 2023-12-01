@@ -93,17 +93,16 @@ const AuditDialog = ({ open, onClose }: Props) => {
                 await proxy.deselectElements("sx-click"); // remove hilights before taking screenshot
 
                 const tab = await inspectedWindow.tab();
-                const imageuri = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
                 const { html, linenums } = await proxy.sliceHtml({ selector, up: 6, down: 3 });
                 const [ screenshot_rect ] = await proxy.boundingClientRect("body");
-                const selector_rect = await proxy.boundingClientRect(selector);
 
                 target.selector = selector;
                 target.html = html;
                 target.html_linenums = linenums;
-                target.screenshot = imageuri;
+                target.text = await proxy.queryText(selector);
+                target.screenshot = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
                 target.screenshot_rect = screenshot_rect;
-                target.selector_rect = selector_rect;
+                target.selector_rect = await proxy.boundingClientRect(selector);
 
                 if (!audit.html)
                     audit.html = await proxy.queryHtml();
