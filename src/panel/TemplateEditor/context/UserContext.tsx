@@ -61,7 +61,7 @@ export function UserProvider({ children }: { children: JSX.Element }) {
             try {
                 if (!portal) { // to prevent repetitive calls...
                     const token = validateSession(user) ? `u/${user?.id}` : undefined;
-                    const api = new SyphonXApi(token, serviceUrl);
+                    const api = new SyphonXApi(token, serviceUrl, user?.email);
                     const auth = await api.auth();
                     setPortal(auth.portal);
                 }

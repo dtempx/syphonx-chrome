@@ -37,7 +37,7 @@ export default ({ error, resetErrorBoundary }: FallbackProps) => {
         const manifest = chrome.runtime.getManifest();
         setStatus("sending");
         const token = validateSession(user) ? `u/${user?.id}` : undefined;
-        const api = new SyphonXApi(token, serviceUrl);
+        const api = new SyphonXApi(token, serviceUrl, user?.email);
         const ok = await api.log({
             key: "error",
             version: manifest.version,

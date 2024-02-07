@@ -26,7 +26,7 @@ export default ({ open, onClose }: Props) => {
                 try {
                     setLoading(true);
                     const token = validateSession(user) ? `u/${user?.id}` : undefined;
-                    const api = new SyphonXApi(token, serviceUrl);
+                    const api = new SyphonXApi(token, serviceUrl, user?.email);
                     const directory = await api.directory();
                     const files = directory
                         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
@@ -49,7 +49,7 @@ export default ({ open, onClose }: Props) => {
             setOpening(true);
             resetExtractStatus();
             const token = validateSession(user) ? `u/${user?.id}` : undefined;
-            const api = new SyphonXApi(token, serviceUrl);
+            const api = new SyphonXApi(token, serviceUrl, user?.email);
             const { template: json, contract } = await api.template(file);
             const template = new Template(json);
 

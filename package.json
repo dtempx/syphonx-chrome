@@ -58,7 +58,7 @@
     "react-markdown": "^8.0.7",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
-    "syphonx-lib": "1.2.59",
+    "syphonx-lib": "1.2.61",
     "typescript": "^4.9.5",
     "url": "^0.11.0",
     "util": "^0.12.5"
