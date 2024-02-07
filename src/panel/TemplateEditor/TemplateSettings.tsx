@@ -23,6 +23,7 @@ import {
 } from "./lib";
 
 import {
+    NumberField,
     PropertyGrid,
     SwitchedObjectEditor,
     SwitchedStringListEditor,
@@ -108,18 +109,6 @@ export default () => {
                     />
                 ],
                 [
-                    <Tooltip title="Revert functions that have been monkey patched on a page.">
-                        <Typography>unpatch</Typography>
-                    </Tooltip>,
-                    <SwitchedStringListEditor
-                        list={template.obj.unpatch}
-                        onChange={(event, list) => {
-                            template.obj.unpatch = list;
-                            setTemplate(template.json());
-                        }}
-                    />
-                ],
-                [
                     <Tooltip title="Determines whether to use incognito mode.">
                         <Typography>incognito</Typography>
                     </Tooltip>,
@@ -141,6 +130,30 @@ export default () => {
                         checked={template.obj.stealth ?? false}
                         onChange={(event, value) => {
                             template.obj.stealth = value;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Timeout interval in seconds for page navigation, reload, and goback.">
+                        <Typography>timeout</Typography>
+                    </Tooltip>,
+                    <NumberField
+                        value={template.obj.timeout}
+                        onChange={(event, value) => {
+                            template.obj.timeout = value;
+                            setTemplate(template.json());
+                        }}
+                    />
+                ],
+                [
+                    <Tooltip title="Revert functions that have been monkey patched on a page.">
+                        <Typography>unpatch</Typography>
+                    </Tooltip>,
+                    <SwitchedStringListEditor
+                        list={template.obj.unpatch}
+                        onChange={(event, list) => {
+                            template.obj.unpatch = list;
                             setTemplate(template.json());
                         }}
                     />
