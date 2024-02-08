@@ -53,7 +53,7 @@ export default ({ open, onClose }: Props) => {
             const json = template.file();
             const token = validateSession(user) ? `u/${user?.id}` : undefined;
             const api = new SyphonXApi(token, serviceUrl, user?.email);
-            await api.write(file, JSON.stringify({ ...JSON.parse(json), email: user?.email }));
+            await api.write(file, json);
             setTemplateFile(file);
             setSaving(false);
             setError("");
