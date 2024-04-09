@@ -5,6 +5,7 @@ import { useTemplate } from "../context";
 import AboutDialog from "./AboutDialog";
 import AuditDialog from "./AuditDialog";
 import OpenFileDialog from "./OpenFileDialog";
+import FastOpenFileDialog from "./FastOpenFileDialog";
 import PortalDialog from "./PortalDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
@@ -46,7 +47,7 @@ export default ({ open, onClose }: Props) => {
                 setDialog("verify");
                 onClose(event);
             } else {
-                setDialog("open");
+                setDialog("fast-open");
                 onClose(event);
             }
         }],
@@ -91,6 +92,7 @@ export default ({ open, onClose }: Props) => {
     return (<>
         <AboutDialog open={dialog === "about"} onClose={() => setDialog("")} />
         <AuditDialog open={dialog === "audit"} onClose={() => setDialog("")} />
+        <FastOpenFileDialog open={dialog === "fast-open"} onClose={() => setDialog("")} onBrowse={() => setDialog("open")} />
         <OpenFileDialog open={dialog === "open"} onClose={() => setDialog("")} />
         <SaveFileDialog open={dialog === "save"} onClose={() => setDialog("")} />
         <UserSettingsDialog open={dialog === "settings"} onClose={() => setDialog("")} />

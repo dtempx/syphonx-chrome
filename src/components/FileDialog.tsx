@@ -28,8 +28,8 @@ import {
 
 import {
     AlertBar,
-    FileList,
     FilePathBreadcrumbs,
+    FolderView,
     TitleBar,
     TransitionUp
 } from ".";
@@ -44,20 +44,36 @@ export interface Props {
     opening?: boolean;
     saving?: boolean;
     selectedFile?: string;
+    currentDirectory: string;
+    onCurrentDirectoryChange: React.Dispatch<React.SetStateAction<string>>;
     onSelectFile: (event: React.SyntheticEvent, file: string) => Promise<boolean>;
     onClearError: (event: React.SyntheticEvent) => void;
     onClose: (event: React.SyntheticEvent) => void;
 }
 
-export default ({ files, title, mode, open, loading, opening, saving, error, selectedFile, onSelectFile, onClearError, onClose }: Props) => {
-    const [currentDirectory, setCurrentDirectory] = useState("");
+export default ({
+    files,
+    title,
+    mode,
+    open,
+    loading,
+    opening,
+    saving,
+    error,
+    selectedFile,
+    currentDirectory,
+    onCurrentDirectoryChange,
+    onSelectFile,
+    onClearError,
+    onClose
+}: Props) => {
     const [text, setText] = useState("");
     const [valid, setValid] = useState(true);
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
         setText(selectedFile && validateFilename(selectedFile) ? selectedFile : "");
-        setCurrentDirectory(selectedFile && validateFilename(selectedFile) && selectedFile.lastIndexOf("/") > 0 ? selectedFile?.slice(0, selectedFile?.lastIndexOf("/") + 1) : "/");
+        onCurrentDirectoryChange(selectedFile && validateFilename(selectedFile) && selectedFile.lastIndexOf("/") > 0 ? selectedFile?.slice(0, selectedFile?.lastIndexOf("/") + 1) : "/");
     }, [selectedFile]);
 
     function handleSave(event: React.SyntheticEvent) {
@@ -117,18 +133,16 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
                         visibility: loading || opening || saving ? "visible" : "hidden"
                     }}
                 />
+                <FilePathBreadcrumbs
+                    file={currentDirectory}
+                    onClick={(event, key) => {
+                        onCurrentDirectoryChange(key);
+                        setFilter("");
+                    }}
+                    sx={{ m: 2 }}
+                />
                 {files.length === 0 &&
-                    <Typography sx={{ m: 2 }}>One moment please…</Typography>
-                }
-                {files.length > 0 &&
-                    <FilePathBreadcrumbs
-                        file={currentDirectory}
-                        onClick={(event, key) => {
-                            setCurrentDirectory(key);
-                            setFilter("");
-                        }}
-                        sx={{ m: 2 }}
-                    />
+                    <Typography sx={{ m: 2, fontStyle: "italic" }}>One moment please…</Typography>
                 }
                 {!loading &&
                     <Stack direction="row" sx={{ m: 2 }}>
@@ -168,11 +182,11 @@ export default ({ files, title, mode, open, loading, opening, saving, error, sel
             </DialogTitle>
 
             <DialogContent sx={{ p: 0 }}>
-                <FileList
+                <FolderView
                     files={currentFiles}
                     onSelectFile={handleSelectFile}
                     onSelectFolder={(event, file) => {
-                        setCurrentDirectory(file);
+                        onCurrentDirectoryChange(file);
                         setFilter("");
                     }}
                 />

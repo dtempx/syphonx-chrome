@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "./components";
-import { inspectedWindow, sleep, Template } from "./lib";
-import { validateSession } from "../lib/cloud";
-
+import { inspectedWindow, sleep } from "./lib";
+import { loadTemplateDirectory, openTemplate } from "../lib/cloud";
 import { useApp, useTemplate } from "./context";
 
 export interface Props {
@@ -12,9 +10,8 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { autoOpen, serviceUrl } = useApp();
+    const { autoOpen, currentDirectory, setCurrentDirectory, serviceUrl, updateRecentFiles } = useApp();
     const { setTemplateFile, setTemplate, setContract, resetExtractStatus, user } = useTemplate();
-
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -25,12 +22,7 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const token = validateSession(user) ? `u/${user?.id}` : undefined;
-                    const api = new SyphonXApi(token, serviceUrl, user?.email);
-                    const directory = await api.directory();
-                    const files = directory
-                        .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
-                        .map(file => file.name);
+                    const files = await loadTemplateDirectory({ user, serviceUrl });
                     setFiles(files);
                     setError("");
                     setLoading(false);
@@ -48,11 +40,7 @@ export default ({ open, onClose }: Props) => {
         try {
             setOpening(true);
             resetExtractStatus();
-            const token = validateSession(user) ? `u/${user?.id}` : undefined;
-            const api = new SyphonXApi(token, serviceUrl, user?.email);
-            const { template: json, contract } = await api.template(file);
-            const template = new Template(json);
-
+            const { template, contract } = await openTemplate(file, { user, serviceUrl });
             if (autoOpen) {
                 const url = await template.expandUrl();
                 if (url) {
@@ -64,6 +52,7 @@ export default ({ open, onClose }: Props) => {
             setTemplate(template.json());
             setTemplateFile(file);
             setContract(contract || "");
+            updateRecentFiles(file);
 
             //TODO: consider
             //const { contract, error } = tryParseContract(contractJson) as Schema | undefined;
@@ -97,6 +86,8 @@ export default ({ open, onClose }: Props) => {
             open={open}
             loading={loading}
             opening={opening}
+            currentDirectory={currentDirectory}
+            onCurrentDirectoryChange={setCurrentDirectory}
             onSelectFile={onSelectFile}
             onClearError={() => setError("")}
             onClose={onClose}

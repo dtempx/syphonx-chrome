@@ -10,6 +10,8 @@ export interface AppState {
     setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     autoRefresh: boolean;
     setAutoRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+    currentDirectory: string;
+    setCurrentDirectory: React.Dispatch<React.SetStateAction<string>>;
     debug: boolean;
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
     editTracking: boolean;
@@ -17,6 +19,8 @@ export interface AppState {
     pageTracking: boolean;
     setPageTracking: React.Dispatch<React.SetStateAction<boolean>>;
     mode: AppMode;
+    recentFiles: string[];
+    updateRecentFiles(file: string): void;
     setMode: React.Dispatch<React.SetStateAction<AppMode>>;
     serviceUrl: string;
     setServiceUrl: React.Dispatch<React.SetStateAction<string>>;
@@ -31,10 +35,12 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [advanced, setAdvanced] = useState(false);
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
+    const [currentDirectory, setCurrentDirectory] = useState("");
     const [debug, setDebug] = useState(false);
     const [editTracking, setEditTracking] = useState(true);
     const [pageTracking, setPageTracking] = useState(false);
     const [mode, setMode] = useState<AppMode>("visual-editor");
+    const [recentFiles, setRecentFiles] = useState<string[]>([]);
     const [serviceUrl, setServiceUrl] = useState("");
     const [inspectedWindowUrl, setInspectedWindowUrl] = useState("");
     const inspectedWindowUrlRef = useRef(inspectedWindowUrl);
@@ -104,16 +110,20 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                 "advanced",
                 "autoOpen",
                 "autoRefresh",
+                "currentDirectory",
                 "debug",
                 "editTracking",
+                "recentFiles",
                 "serviceUrl"
             ],
             ({
                 advanced,
                 autoOpen,
                 autoRefresh,
+                currentDirectory,
                 debug,
                 editTracking,
+                recentFiles,
                 serviceUrl
             }) => {
                 if (advanced !== undefined)
@@ -122,10 +132,14 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                     setAutoOpen(autoOpen);
                 if (autoRefresh !== undefined)
                     setAutoRefresh(autoRefresh);
+                if (currentDirectory !== undefined)
+                    setCurrentDirectory(currentDirectory);
                 if (debug !== undefined)
                     setDebug(debug);
                 if (editTracking !== undefined)
                     setEditTracking(editTracking);
+                if (recentFiles !== undefined)
+                    setRecentFiles(recentFiles);
                 if (serviceUrl !== undefined)
                     setServiceUrl(serviceUrl);
             }
@@ -137,22 +151,34 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             advanced,
             autoOpen,
             autoRefresh,
+            currentDirectory,
             debug,
             editTracking,
+            recentFiles,
             serviceUrl,
         });
     }, [
         advanced,
         autoOpen,
         autoRefresh,
+        currentDirectory,
         debug,
         editTracking,
+        recentFiles,
         serviceUrl
     ]);
 
     useEffect(() => {
         (global as any).serviceUrl = serviceUrl;
     }, [serviceUrl]);
+
+    function updateRecentFiles(file: string) {
+        const i = recentFiles.indexOf(file);
+        if (i >= 0)
+            recentFiles.splice(i, 1);
+        recentFiles.unshift(file);
+        setRecentFiles([...recentFiles.slice(0, 50)]);
+    }
 
     const value = {
         advanced,
@@ -161,6 +187,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         setAutoOpen,
         autoRefresh,
         setAutoRefresh,
+        currentDirectory,
+        setCurrentDirectory,
         debug,
         setDebug,
         pageTracking,
@@ -169,6 +197,8 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         setEditTracking,
         mode,
         setMode,
+        recentFiles,
+        updateRecentFiles,
         serviceUrl,
         setServiceUrl,
         inspectedWindowUrl

@@ -1,4 +1,5 @@
-
+copy/paste
+highlight errors
 
 
 query builder showing 0 for all fields
@@ -50,7 +51,7 @@ revision history
 disallow saving template that's changed on storage since it was loaded
 indicate unsaved template changes
 keep template open between sessions
-push current inpected page to panel data
+push current inspected page to panel data
 
 add label to scroll action (top, bottom, element)
 

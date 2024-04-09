@@ -28,13 +28,13 @@ export function queryTracking({ className, nthOfTypeRunLimit = 3 }: QueryTrackin
             append(tag);
 
             const id = element.getAttribute("id");
-            if (id)
+            if (id && /^[A-Za-z]+[\w\-\:\.]*$/.test(id)) // An id attribute name must begin with a letter ([A-Za-z]) and may be followed by any number of letters, digits ([0-9]), hyphens (-), underscores (_), colons (:), and periods (.).
                 append(`#${id}`);
 
             const classes = element.getAttribute("class") ?
                 element.getAttribute("class")!.split(" ")
                     .filter(name => name !== className) // filter out target class name
-                    .filter(name => /^-?[_a-z]+[_a-z0-9-]*$/i.test(name)) // filter out invalid class names
+                    .filter(name => /^-?[_a-z]+[_a-z0-9-]*$/i.test(name)) // A class name must begin with an underscore (_), a hyphen (-), or a letter(a–z), followed by any number of hyphens, underscores, letters, or numbers. If the first character is a hyphen, the second character must be a letter or underscore, and the name must be at least 2 characters long.
                 : [];
             classes.forEach(name => append(`.${name}`));
 

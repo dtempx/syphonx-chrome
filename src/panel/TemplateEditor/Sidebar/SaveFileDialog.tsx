@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { SyphonXApi } from "syphonx-lib";
 import { FileDialog } from "./components";
 import { useApp, useTemplate } from "./context";
 import { Template } from "./lib";
-import { validateSession } from "../lib/cloud";
+import { loadTemplateDirectory, saveTemplate } from "../lib/cloud";
 
 export interface Props {
     open: boolean;
@@ -11,7 +10,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { serviceUrl } = useApp();
+    const { currentDirectory, setCurrentDirectory, serviceUrl, updateRecentFiles } = useApp();
     const { template: json, templateFile, setTemplateFile, user } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
@@ -28,12 +27,7 @@ export default ({ open, onClose }: Props) => {
             (async () => {
                 try {
                     setLoading(true);
-                    const token = validateSession(user) ? `u/${user?.id}` : undefined;
-                    const api = new SyphonXApi(token, serviceUrl, user?.email);
-                    const directory = await api.directory();
-                    const files = directory
-                        .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
-                        .map(file => file.name);
+                    const files = await loadTemplateDirectory({ user, serviceUrl });
                     setFiles(files);
                     setError("");
                     setLoading(false);
@@ -50,13 +44,11 @@ export default ({ open, onClose }: Props) => {
     async function handleSelectFile(event: React.SyntheticEvent, file: string): Promise<boolean> {
         try {
             setSaving(true);
-            const json = template.file();
-            const token = validateSession(user) ? `u/${user?.id}` : undefined;
-            const api = new SyphonXApi(token, serviceUrl, user?.email);
-            await api.write(file, json);
+            await saveTemplate(template, file, { user, serviceUrl });
             setTemplateFile(file);
             setSaving(false);
             setError("");
+            updateRecentFiles(file);
             onClose(event);
             return true;
         }
@@ -78,6 +70,8 @@ export default ({ open, onClose }: Props) => {
             loading={loading}
             saving={saving}
             selectedFile={templateFile}
+            currentDirectory={currentDirectory}
+            onCurrentDirectoryChange={setCurrentDirectory}
             onSelectFile={handleSelectFile}
             onClearError={() => setError("")}
             onClose={onClose}

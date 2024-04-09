@@ -9,6 +9,7 @@ import {
 import {
     AdvancedPropertyGrid,
     FormulaField,
+    PlainTextField,
     QueryEditorField,
     RegexpField,
     SelectFormatDropdown,
@@ -23,11 +24,6 @@ export interface Props {
 }
 
 export default ({ item, onChange }: Props) => {
-
-    function onChangeType(event: React.SyntheticEvent<Element, Event>, value: syphonx.SelectType | undefined) {
-
-    }
-
     const obj = item?.obj as syphonx.Select;
     return obj ? (
         <AdvancedPropertyGrid
@@ -62,6 +58,19 @@ export default ({ item, onChange }: Props) => {
                     "A CSS selector or jQuery expression that determines what data is selected on the page.",
                     true,
                     !obj.query && !obj.value && obj.type !== "object" ? "A query or value must be specified." : ""
+                ],
+                [
+                    "comment",
+                    <PlainTextField
+                        value={obj.comment}
+                        multiline
+                        onChange={(event, value) => {
+                            obj.comment = value ?? undefined;
+                            onChange(event);
+                        }}
+                    />,
+                    "Adds a comment for this selector.",
+                    true
                 ],
                 [
                     "type",
@@ -248,6 +257,19 @@ export default ({ item, onChange }: Props) => {
                     />,
                     "Create a union of multiple selector object cases.",
                     obj.union !== undefined
+                ],
+                [
+                    "waitfor",
+                    <Switch
+                        size="small"
+                        checked={obj.waitfor ?? false}
+                        onChange={(event, value) => {
+                            obj.waitfor = value;
+                            onChange(event);
+                        }}
+                    />,
+                    "Waits for the selector to appear when loading the page.",
+                    obj.waitfor !== undefined
                 ],
                 [
                     "when",

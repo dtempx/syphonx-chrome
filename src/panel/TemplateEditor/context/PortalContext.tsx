@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { useApp, useTemplate } from "./index";
-import { load } from "../../TemplateEditor/lib/cloud";
-import { Template } from "../lib";
+import { cloud, Template } from "../lib";
 
 export interface PortalState {
     dialogUrl: string | undefined;
@@ -44,7 +43,7 @@ export function PortalProvider({ children }: { children: JSX.Element }) {
                     url: inspectedWindowUrl
                 };
 
-                const urls = await load({ params }, user?.id);
+                const urls = await cloud.loadPortal({ params }, user?.id);
 
                 setDialogUrl(urls?.dialogUrl);
                 setPanelUrl(urls?.panelUrl);

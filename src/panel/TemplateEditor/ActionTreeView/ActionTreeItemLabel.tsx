@@ -13,6 +13,7 @@ import {
 
 import {
     WarningAmberOutlined as AlertIcon,
+    ChatBubbleOutline as CommentIcon,
     Traffic as ConditionalIcon,
     MoreVert as RepeatedIcon,
     PivotTableChart as PivotIcon,
@@ -55,6 +56,7 @@ export default ({ item }: Props) => {
                 {item.repeated && <Tooltip title="repeated"><RepeatedIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.union && <Tooltip title="union"><UnionIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
                 {(item.obj as syphonx.Select)?.pivot && <Tooltip title="pivot"><PivotIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
+                {(item.obj as syphonx.Select)?.comment && <Tooltip title={(item.obj as syphonx.Select).comment}><CommentIcon fontSize="small" sx={{ color: "primary.light", position: "relative", top: 4 }} /></Tooltip>}
                 <ActionTreeItemMenu item={item} sx={{ visibility: selected?.key === item.key ? "visible" : "hidden" }} />
             </Stack>
         </Stack>
