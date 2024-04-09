@@ -14,12 +14,17 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
+    IconButton,
     LinearProgress,
-    MenuList,
-    MenuItem,
-    Stack,
+    List,
+    ListItem,
+    Tooltip,
     Typography
 } from "@mui/material";
+
+import {
+    History as RollbackIcon
+} from "@mui/icons-material";
 
 export interface Props {
     open: boolean;
@@ -83,16 +88,26 @@ export default ({ open, onClose }: Props) => {
                 {loading && <Typography sx={{ fontStyle: "italic" }}>One moment please…</Typography>}
                 {!loading && !templateFile && revisions.length === 0 && <Typography sx={{ fontStyle: "italic" }}>No revision history available</Typography>}
                 {!loading && templateFile && revisions.length > 0 &&
-                <Stack>
-                    <Typography sx={{ fontStyle: "italic" }}>Select a revision below to rollback to…</Typography>
-                    <MenuList sx={{ mt: 2 }}>
-                        {revisions.map(revision => (
-                            <MenuItem key={revision.key} onClick={event => selectFile(revision.key!)}>
-                                <Typography fontSize="larger">{revision.modifiedAt?.toString()}{revision.modifiedBy ? ` by ${revision.modifiedBy}` : ""}</Typography>
-                            </MenuItem>
-                        ))}
-                    </MenuList>
-                </Stack>}
+                <List sx={{ mt: 2 }}>
+                    {revisions.map(revision => (
+                        <ListItem
+                            key={revision.key}
+                            secondaryAction={
+                                (revision as any).generation ?
+                                <Tooltip title={`Rollback to ${templateFile}@${revision.key}`}>
+                                    <IconButton
+                                        onClick={() => selectFile(revision.key!)}
+                                        sx={{ color: "primary" }}
+                                    >
+                                        <RollbackIcon fontSize="small" />
+                                    </IconButton>
+                                </Tooltip>: null
+                            }
+                        >
+                            <Typography fontSize="larger">{revision.modifiedAt?.toString()}{revision.modifiedBy ? ` by ${revision.modifiedBy}` : ""}</Typography>
+                        </ListItem>
+                    ))}
+                    </List>}
             </DialogContent>
         </Dialog>
 
