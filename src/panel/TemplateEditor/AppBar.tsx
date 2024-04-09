@@ -45,7 +45,7 @@ export default () => {
                             sx={{ m: 1 }}
                         />
                     </Tooltip>
-                ) : null}                
+                ) : null}
             </Stack>
 
             <Stack direction="row" sx={{ mr: 1 }}>

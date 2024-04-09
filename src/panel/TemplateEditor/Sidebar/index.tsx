@@ -7,6 +7,7 @@ import AuditDialog from "./AuditDialog";
 import OpenFileDialog from "./OpenFileDialog";
 import FastOpenFileDialog from "./FastOpenFileDialog";
 import PortalDialog from "./PortalDialog";
+import RevisionHistoryDialog from "./RevisionHistoryDialog";
 import SaveFileDialog from "./SaveFileDialog";
 import UserSettingsDialog from "./UserSettingsDialog";
 import VerificationDialog from "./VerificationDialog";
@@ -23,6 +24,7 @@ import {
     CloudDownload as FileOpenIcon,
     CloudUpload as FileSaveIcon,
     CloudOff as FileCloseIcon,
+    History as RevisionHistoryIcon,
     MapsHomeWork as PortalIcon,
     ManageAccounts as SettingsIcon
 } from "@mui/icons-material";
@@ -33,12 +35,12 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, resetExtractStatus, setTemplate, verified } = useTemplate();
+    const { portal, resetExtractStatus, setTemplate, closeTemplate, verified } = useTemplate();
     const [dialog, setDialog] = useState("");
 
     const items: ListItemType[] = [
         ["New Template", <FileNewIcon />, event => {
-            setTemplate("");
+            closeTemplate();
             resetExtractStatus();
             onClose(event);
         }],
@@ -60,8 +62,17 @@ export default ({ open, onClose }: Props) => {
                 onClose(event);
             }
         }],
+        ["Revision History", <RevisionHistoryIcon />, event => {
+            if (!verified) {
+                setDialog("verify");
+                onClose(event);
+            } else {
+                setDialog("revision-history");
+                onClose(event);
+            }
+        }],
         ["Close Template", <FileCloseIcon />, event => {
-            setTemplate("");
+            closeTemplate();
             resetExtractStatus();
             onClose(event);
         }],
@@ -94,6 +105,7 @@ export default ({ open, onClose }: Props) => {
         <AuditDialog open={dialog === "audit"} onClose={() => setDialog("")} />
         <FastOpenFileDialog open={dialog === "fast-open"} onClose={() => setDialog("")} onBrowse={() => setDialog("open")} />
         <OpenFileDialog open={dialog === "open"} onClose={() => setDialog("")} />
+        <RevisionHistoryDialog open={dialog === "revision-history"} onClose={() => setDialog("")} />
         <SaveFileDialog open={dialog === "save"} onClose={() => setDialog("")} />
         <UserSettingsDialog open={dialog === "settings"} onClose={() => setDialog("")} />
         <PortalDialog open={dialog === "portal"} onClose={() => setDialog("")} />

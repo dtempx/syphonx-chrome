@@ -104,11 +104,27 @@ export default ({ open, onClose, onBrowse }: Props) => {
                 />
             </DialogTitle>
 
-            <DialogContent sx={{ p: 2, mt: 4 }}>
+            <DialogContent sx={{ p: 2, mt: 2 }}>
+
+                {recentFiles.length > 0 &&
+                <Stack>
+                    <Typography variant="button" color="primary" sx={{ mt: 2 }}>Recent</Typography>
+                    <FileList
+                        files={recentFiles}
+                        onSelectFile={onSelectFile}
+                        sx={{
+                            overflowX: "hidden",
+                            overflowY: "scroll",
+                            maxHeight: 150
+                        }}
+                    />
+                    <Divider sx={{ mt: 2 }} />
+                </Stack>
+                }
 
                 <Stack>
-                    <Typography variant="button" color="primary">Suggested</Typography>
-                    {loading && <Typography sx={{ m: 2, fontStyle: "italic" }}>One moment please…</Typography>}
+                    <Typography variant="button" color="primary" sx={{ mt: 2 }}>Suggested</Typography>
+                    {loading && <Typography sx={{ fontStyle: "italic" }}>One moment please…</Typography>}
                     {!loading && suggestedFiles.length === 0 && <Typography sx={{ m: 2, fontStyle: "italic" }}>No suggestions</Typography>}
                     {!loading && suggestedFiles.length > 0 &&
                         <FileList
@@ -121,26 +137,10 @@ export default ({ open, onClose, onBrowse }: Props) => {
                             }}
                         />
                     }
-                    <Divider sx={{ mt: 4 }} />
+                    <Divider sx={{ mt: 2 }} />
                 </Stack>
 
-                {recentFiles.length > 0 &&
-                <Stack>
-                    <Typography variant="button" color="primary">Recent</Typography>
-                    <FileList
-                        files={recentFiles}
-                        onSelectFile={onSelectFile}
-                        sx={{
-                            overflowX: "hidden",
-                            overflowY: "scroll",
-                            maxHeight: 150
-                        }}
-                    />
-                    <Divider sx={{ mt: 4 }} />
-                </Stack>
-                }
-
-                <Button variant="outlined" onClick={onBrowse} sx={{ mt: 4 }}>Browse...</Button>
+                <Button variant="outlined" onClick={onBrowse} sx={{ mt: 2 }}>Browse...</Button>
             </DialogContent>
 
             <DialogActions>

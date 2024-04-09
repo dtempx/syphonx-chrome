@@ -7,6 +7,7 @@ export interface TemplateState {
     setTemplateFile: React.Dispatch<React.SetStateAction<string>>;
     contract: string;
     setContract: React.Dispatch<React.SetStateAction<string>>;
+    closeTemplate: () => void;
 }
 
 export const TemplateContext = React.createContext<TemplateState>({
@@ -15,7 +16,8 @@ export const TemplateContext = React.createContext<TemplateState>({
     templateFile: "",
     setTemplateFile: () => {},
     contract: "",
-    setContract: () => {}
+    setContract: () => {},
+    closeTemplate: () => {}
 });
 
 export function TemplateProvider({ children }: { children?: JSX.Element }) {
@@ -23,13 +25,20 @@ export function TemplateProvider({ children }: { children?: JSX.Element }) {
     const [templateFile, setTemplateFile] = useState("");
     const [contract, setContract] = useState("");
 
+    function closeTemplate() {
+        setTemplate("");
+        setTemplateFile("");
+        setContract("");
+    }
+
     const value = {
         template,
         setTemplate,
         templateFile,
         setTemplateFile,
         contract,
-        setContract
+        setContract,
+        closeTemplate
     };
 
     return (

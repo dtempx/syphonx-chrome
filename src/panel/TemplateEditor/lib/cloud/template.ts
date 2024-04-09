@@ -1,4 +1,4 @@
-import { SyphonXApi } from "syphonx-lib";
+import { SyphonXApi, FileMetadata } from "syphonx-lib";
 import { Template } from "../Template";
 import { validateSession, User } from "./user";
 
@@ -41,4 +41,17 @@ export async function loadTemplateDirectory({ user, serviceUrl, ...options }: Lo
         .filter(file => file.name?.endsWith(".json") || file.type !== "file") // only .json files for now
         .map(file => file.name);
     return files;
+}
+
+export async function loadTemplateRevisions(file: string, { user, serviceUrl }: TemplateContext): Promise<FileMetadata[]> {
+    const token = validateSession(user) ? `u/${user?.id}` : undefined;
+    const api = new SyphonXApi(token, serviceUrl, user?.email);
+    const result = await api.revisions(file);
+    return result;
+}
+
+export async function rollbackTemplateRevision(file: string, key: string, { user, serviceUrl }: TemplateContext): Promise<void> {
+    const token = validateSession(user) ? `u/${user?.id}` : undefined;
+    const api = new SyphonXApi(token, serviceUrl, user?.email);
+    await api.rollback(file, key);
 }
