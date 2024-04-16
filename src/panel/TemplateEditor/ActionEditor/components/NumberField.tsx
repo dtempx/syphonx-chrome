@@ -5,6 +5,8 @@ import { isFormula } from "./lib";
 
 export interface Props {
     value: string | number | undefined | null;
+    placeholder?: string;
+    label?: string;
     onChange: (event: React.SyntheticEvent, value: number | undefined) => void;
     fullWidth?: boolean;
     min?: number;
@@ -13,7 +15,7 @@ export interface Props {
     sx?: SxProps<Theme>;
 }
 
-export default ({ value, min, max, type = "float", fullWidth, onChange, sx }: Props) => {
+export default ({ value, placeholder, label, min, max, type = "float", fullWidth, onChange, sx }: Props) => {
     function handleChange(event: React.SyntheticEvent, value: string): void {
         if (onChange) {
             const num = type === "float" ? parseFloat(value) : parseInt(value);
@@ -40,6 +42,8 @@ export default ({ value, min, max, type = "float", fullWidth, onChange, sx }: Pr
         <ValidateField
             variant="standard"
             size="small"
+            placeholder={placeholder}
+            label={label}
             fullWidth={fullWidth}
             value={value}
             onChange={handleChange}

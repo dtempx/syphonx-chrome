@@ -18,10 +18,10 @@ export interface LoadTemplateDirectoryOptions extends TemplateContext {
     url?: string;
 }
 
-export async function openTemplate(file: string, { user, serviceUrl }: TemplateContext): Promise<OpenTemplateResult> {
+export async function openTemplate(file: string, { user, serviceUrl }: TemplateContext, revision?: string): Promise<OpenTemplateResult> {
     const token = validateSession(user) ? `u/${user?.id}` : undefined;
     const api = new SyphonXApi(token, serviceUrl, user?.email);
-    const { template: json, contract } = await api.template(file);
+    const [json, , contract] = await api.read(file, revision);
     const template = new Template(json);
     return { template, contract };
 }
@@ -48,10 +48,4 @@ export async function loadTemplateRevisions(file: string, { user, serviceUrl }: 
     const api = new SyphonXApi(token, serviceUrl, user?.email);
     const result = await api.revisions(file);
     return result;
-}
-
-export async function rollbackTemplateRevision(file: string, key: string, { user, serviceUrl }: TemplateContext): Promise<void> {
-    const token = validateSession(user) ? `u/${user?.id}` : undefined;
-    const api = new SyphonXApi(token, serviceUrl, user?.email);
-    await api.rollback(file, key);
 }

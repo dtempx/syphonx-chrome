@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import SidebarMenu from "./Sidebar/index"
-import { useApp, useTemplate } from "./context";
-import { SplitPane } from "./components";
-import { path } from "./lib";
+import { useApp } from "./context";
+import { SplitPane, TemplateChip } from "./components";
 
 import {
-    Chip,
     IconButton,
     Stack,
     Tooltip
@@ -22,7 +20,6 @@ import {
 
 export default () => {
     const { mode, setMode } = useApp();
-    const { templateFile } = useTemplate();
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
@@ -33,19 +30,7 @@ export default () => {
                 <IconButton size="small" onClick={() => setSidebarOpen(true)}>
                     <MenuIcon />
                 </IconButton>
-
-                {templateFile ? (
-                    <Tooltip title={templateFile}>
-                        <Chip
-                            label={path.shorten(templateFile, 60)}
-                            variant="outlined"
-                            color="primary"
-                            size="small"
-                            icon={<FileIcon sx={{ ml: 1 }} />}
-                            sx={{ m: 1 }}
-                        />
-                    </Tooltip>
-                ) : null}
+                <TemplateChip />
             </Stack>
 
             <Stack direction="row" sx={{ mr: 1 }}>

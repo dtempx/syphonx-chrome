@@ -11,7 +11,7 @@ export interface Props {
 
 export default ({ open, onClose }: Props) => {
     const { currentDirectory, setCurrentDirectory, serviceUrl, updateRecentFiles } = useApp();
-    const { template: json, templateFile, setTemplateFile, user } = useTemplate();
+    const { template: json, templateFile, setTemplateFile, setTemplateRevision, user } = useTemplate();
 
     const [files, setFiles] = useState<string[]>([]);
     const [error, setError] = useState("");
@@ -46,6 +46,7 @@ export default ({ open, onClose }: Props) => {
             setSaving(true);
             await saveTemplate(template, file, { user, serviceUrl });
             setTemplateFile(file);
+            setTemplateRevision("");
             setSaving(false);
             setError("");
             updateRecentFiles(file);

@@ -135,11 +135,13 @@ export default () => {
                     />
                 ],
                 [
-                    <Tooltip title="Timeout interval in seconds for page navigation, reload, and goback.">
+                    <Tooltip title="Maximum amount of time within which a template is allowed to run, including all time spent in waitfor, snooze, and navigate actions. (default=30 seconds)">
                         <Typography>timeout</Typography>
                     </Tooltip>,
                     <NumberField
                         value={template.obj.timeout}
+                        placeholder="30"
+                        label="seconds"
                         onChange={(event, value) => {
                             template.obj.timeout = value;
                             setTemplate(template.json());

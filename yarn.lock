@@ -2504,6 +2504,11 @@ data-urls@^4.0.0:
     whatwg-mimetype "^3.0.0"
     whatwg-url "^12.0.0"
 
+date-fns@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.6.0.tgz#f20ca4fe94f8b754951b24240676e8618c0206bf"
+  integrity sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==
+
 debug@4, debug@4.3.4, debug@^4.0.0, debug@^4.1.0:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
@@ -4594,10 +4599,10 @@ syphonx-core@^1.2.67:
   resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.68.tgz#4969845fccf61464a3d667db0b9d58cce661b582"
   integrity sha512-SRhD+Jd8+FIi1k18rNvmpFBSkecrubaehZ6VLddrZ+SPzPMeUxReKS6aED/p+1p6gm+1QLiDpr5Qzq5c3B810w==
 
-syphonx-lib@^1.2.70:
-  version "1.2.70"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.70.tgz#0ec1a23cea1ae4a51bc7ab0407580bd8d0d879e4"
-  integrity sha512-ZV/RCpnWbyQNMG/4pgaZDKWmUj8zr+p9PqrOY8zYC9hcepTetcJ770rfie9qWUNa1JrrlWkNE8JdhqIBiTitUg==
+syphonx-lib@^1.2.73:
+  version "1.2.73"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.73.tgz#974200afcf94e4e4195ef4e436c5fcd33183cfbb"
+  integrity sha512-EbeZ71ln3xwjIEXsi6YG3smFR2Jn7O7/fyIWvD9bjAmIV+hp5NJbXODqsl3ow4NBRP9nuipPXefZoP6pDunoFw==
   dependencies:
     "@types/json-schema" "^7.0.12"
     cheerio "^1.0.0-rc.12"

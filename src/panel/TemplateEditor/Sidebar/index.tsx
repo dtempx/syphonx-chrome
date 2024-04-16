@@ -6,6 +6,7 @@ import AboutDialog from "./AboutDialog";
 import AuditDialog from "./AuditDialog";
 import OpenFileDialog from "./OpenFileDialog";
 import FastOpenFileDialog from "./FastOpenFileDialog";
+import FastSaveFileDialog from "./FastSaveFileDialog";
 import PortalDialog from "./PortalDialog";
 import RevisionHistoryDialog from "./RevisionHistoryDialog";
 import SaveFileDialog from "./SaveFileDialog";
@@ -35,7 +36,7 @@ export interface Props {
 }
 
 export default ({ open, onClose }: Props) => {
-    const { portal, resetExtractStatus, setTemplate, closeTemplate, verified } = useTemplate();
+    const { portal, resetExtractStatus, templateFile, closeTemplate, verified } = useTemplate();
     const [dialog, setDialog] = useState("");
 
     const items: ListItemType[] = [
@@ -57,7 +58,12 @@ export default ({ open, onClose }: Props) => {
             if (!verified) {
                 setDialog("verify");
                 onClose(event);
-            } else {
+            }
+            else if (templateFile) {
+                setDialog("fast-save"); // only use the fast-save dialog if the template has already been saved
+                onClose(event);
+            }
+            else {
                 setDialog("save");
                 onClose(event);
             }
@@ -104,6 +110,7 @@ export default ({ open, onClose }: Props) => {
         <AboutDialog open={dialog === "about"} onClose={() => setDialog("")} />
         <AuditDialog open={dialog === "audit"} onClose={() => setDialog("")} />
         <FastOpenFileDialog open={dialog === "fast-open"} onClose={() => setDialog("")} onBrowse={() => setDialog("open")} />
+        <FastSaveFileDialog open={dialog === "fast-save"} onClose={() => setDialog("")} onBrowse={() => setDialog("save")} />
         <OpenFileDialog open={dialog === "open"} onClose={() => setDialog("")} />
         <RevisionHistoryDialog open={dialog === "revision-history"} onClose={() => setDialog("")} />
         <SaveFileDialog open={dialog === "save"} onClose={() => setDialog("")} />

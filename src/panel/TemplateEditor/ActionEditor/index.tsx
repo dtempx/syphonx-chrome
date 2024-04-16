@@ -4,6 +4,7 @@ import ClickEditor from "./ClickEditor";
 import EachEditor from "./EachEditor";
 import ErrorEditor from "./ErrorEditor";
 import GoBackEditor from "./GoBackEditor";
+import KeypressEditor from "./KeypressEditor";
 import LocatorEditor from "./LocatorEditor";
 import NavigateEditor from "./NavigateEditor";
 import ReloadEditor from "./ReloadEditor";
@@ -59,6 +60,8 @@ export default () => {
                     return <ErrorEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "goback")
                     return <GoBackEditor item={item} onChange={onChange} />;
+                else if (item.type === "action" && item.name === "keypress")
+                    return <KeypressEditor item={item} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "locator" && item.children && item.children[0])
                     return <LocatorEditor item={item.children[0]} onChange={onChange} />;
                 else if (item.type === "action" && item.name === "navigate")

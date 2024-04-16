@@ -177,7 +177,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         if (i >= 0)
             recentFiles.splice(i, 1);
         recentFiles.unshift(file);
-        setRecentFiles([...recentFiles.slice(0, 50)]);
+        setRecentFiles([...recentFiles.slice(0, 100)]);
     }
 
     const value = {

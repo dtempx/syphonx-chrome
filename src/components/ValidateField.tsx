@@ -6,7 +6,8 @@ import {
     IconButton,
     InputAdornment,
     InputProps,
-    TextField
+    TextField,
+    Typography
 } from "@mui/material";
 
 import {
@@ -16,6 +17,8 @@ import {
 
 export interface Props extends BaseTextFieldProps {
     value?: unknown;
+    placeholder?: string;
+    label?: string;
     showCommitButton?: boolean;
     showCancelButton?: boolean;
     onChange?: (event: React.SyntheticEvent, value: string) => void;
@@ -24,7 +27,7 @@ export interface Props extends BaseTextFieldProps {
     InputProps?: Partial<InputProps>;
 }
 
-export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, showCancelButton, InputProps, ...props }: Props) => {
+export default ({ value, placeholder, label, onChange, onValidate, onHitEnterKey, showCommitButton, showCancelButton, InputProps, ...props }: Props) => {
     const [ input, setInput ] = useState<string | undefined>();
     const [ valid, setValid ] = useState(true);
 
@@ -70,40 +73,41 @@ export default ({ value, onChange, onValidate, onHitEnterKey, showCommitButton, 
         }   
     }
 
+    const endAdornment = (
+        <InputAdornment
+            position="end"
+            style={{ visibility: input !== undefined || label ? "visible" : "hidden" }}
+        >
+            {label &&
+                <Typography>{label}</Typography>}
+            {showCommitButton &&
+                <IconButton
+                    size="small"
+                    onClick={commit}
+                    style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
+                >
+                    <CommitIcon fontSize="small" />
+                </IconButton>}
+            {showCancelButton &&
+                <IconButton
+                    size="small"
+                    onClick={cancel}
+                >
+                    <CancelIcon fontSize="small" />
+                </IconButton>}
+        </InputAdornment>
+    );
+
     return (
         <TextField
             {...props}
             error={!valid}
             value={input !== undefined ? input : value !== undefined ? String(value) : ""}
+            placeholder={placeholder}
             onChange={validate}
             onKeyDown={keydown}
             onBlur={commit}
-            InputProps={showCommitButton || showCancelButton ? {
-                ...InputProps,
-                endAdornment:
-                    <InputAdornment
-                        position="end"
-                        style={{ visibility: input !== undefined ? "visible" : "hidden" }}
-                    >
-                        {showCommitButton &&
-                            <IconButton
-                                size="small"
-                                onClick={commit}
-                                style={{ visibility: input !== undefined && valid ? "visible" : "hidden" }}
-                            >
-                                <CommitIcon fontSize="small" />
-                            </IconButton>
-                        }
-                        {showCancelButton &&
-                            <IconButton
-                                size="small"
-                                onClick={cancel}
-                            >
-                                <CancelIcon fontSize="small" />
-                            </IconButton>
-                        }
-                    </InputAdornment>
-            } : InputProps}
+            InputProps={showCommitButton || showCancelButton || label ? { ...InputProps, endAdornment } : InputProps}
         />
     );
 }

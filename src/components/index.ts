@@ -2,6 +2,7 @@ export { default as AlertBar } from "./AlertBar";
 export { default as CountdownTimer } from "./CountdownTimer";
 export { default as ConfirmDialog } from "./ConfirmDialog";
 export { default as DataTable } from "./DataTable";
+export { default as DisplayDate } from "./DisplayDate";
 export { default as EditorField } from "./EditorField";
 export { default as FileDialog } from "./FileDialog";
 export { default as FileList } from "./FileList";

@@ -10,6 +10,7 @@ import {
     GppMaybeOutlined as ErrorIcon,
     ArrowBack as GoBackIcon,
     Abc as ItemIcon,
+    Keyboard as KeypressIcon,
     ReadMore as LocatorIcon,
     NearMeOutlined as NavigateIcon,
     Numbers as NumberTypeIcon,
@@ -54,6 +55,8 @@ export default ({ name, ...props }: Props) => {
         return <GoBackIcon {...props} />;
     else if (name === "item")
         return <ItemIcon {...props} />;
+    else if (name === "keypress")
+        return <KeypressIcon {...props} />;
     else if (name === "locator")
         return <LocatorIcon {...props} />;
     else if (name === "navigate")

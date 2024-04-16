@@ -148,12 +148,12 @@ export default ({ item, onChange }: Props) => {
                         <NumberField
                             fullWidth
                             value={obj.timeout}
+                            label="seconds"
                             onChange={(event, value) => {
                                 obj.timeout = value;
                                 onChange(event);
                             }}
                         />
-                        <Typography fontSize="small" sx={{ ml: 1, mt: 1 }}>seconds</Typography>
                     </Stack>,
                     "Number of seconds to wait before timing out. (default=30)",
                     obj.timeout !== undefined

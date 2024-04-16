@@ -250,6 +250,8 @@ export class Template {
             obj = { error: {} };
         else if (action === "goback")
             obj = { goback: {} };
+        else if (action === "keypress")
+            obj = { keypress: {} };
         else if (action === "locator")
             obj = { locator: [{}] };
         else if (action === "navigate")
@@ -699,6 +701,7 @@ export type TemplateAction =
     | "error"
     | "goback"
     | "item"
+    | "keypress"
     | "locator"
     | "navigate"
     | "reload"

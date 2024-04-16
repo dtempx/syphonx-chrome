@@ -29,7 +29,7 @@ export interface Props {
 
 export default ({ open, onClose, onBrowse }: Props) => {
     const { autoOpen, recentFiles, serviceUrl, updateRecentFiles, inspectedWindowUrl } = useApp();
-    const { setTemplateFile, setTemplate, setContract, resetExtractStatus, user } = useTemplate();
+    const { setTemplateFile, setTemplate, setTemplateRevision, setContract, resetExtractStatus, user } = useTemplate();
     const [suggestedFiles, setSuggestedFiles] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
     const [opening, setOpening] = useState(false);
@@ -43,7 +43,7 @@ export default ({ open, onClose, onBrowse }: Props) => {
                 setSuggestedFiles([]);
                 setLoading(true);
                 const files = await cloud.loadTemplateDirectory({ user, serviceUrl, url: inspectedWindowUrl });
-                setSuggestedFiles(files.slice(0, 50));
+                setSuggestedFiles(files.slice(0, 100));
                 setError("");
                 setLoading(false);
             }
@@ -70,6 +70,7 @@ export default ({ open, onClose, onBrowse }: Props) => {
 
             setTemplate(template.json());
             setTemplateFile(file);
+            setTemplateRevision("");
             setContract(contract || "");
             updateRecentFiles(file);
 
