@@ -1,3 +1,10 @@
+Sync update
+Contract assign issues
+User auth issues
+Select-waitfor timeout display while running
+
+
+
 copy/paste
 highlight errors
 
@@ -314,4 +321,3 @@ DONE: add default empty second parameter to replace function
 
 DONE: remove nulls from arrays
 DONE: array icon is confusing with hamburger icon
-

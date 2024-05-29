@@ -4599,10 +4599,10 @@ syphonx-core@^1.2.67:
   resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.68.tgz#4969845fccf61464a3d667db0b9d58cce661b582"
   integrity sha512-SRhD+Jd8+FIi1k18rNvmpFBSkecrubaehZ6VLddrZ+SPzPMeUxReKS6aED/p+1p6gm+1QLiDpr5Qzq5c3B810w==
 
-syphonx-lib@^1.2.73:
-  version "1.2.73"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.73.tgz#974200afcf94e4e4195ef4e436c5fcd33183cfbb"
-  integrity sha512-EbeZ71ln3xwjIEXsi6YG3smFR2Jn7O7/fyIWvD9bjAmIV+hp5NJbXODqsl3ow4NBRP9nuipPXefZoP6pDunoFw==
+syphonx-lib@^1.2.74:
+  version "1.2.74"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.74.tgz#9c00d159b3da1a5bab404975ba2c4b2f562d32c8"
+  integrity sha512-mJRmtVIc05Eyn6nykgkxUaQsJeNsfNWYAfunwQtNHJTeZOV0dx4ta9uH5+242AgIEVpubViGOJS+fr5+r27sqQ==
   dependencies:
     "@types/json-schema" "^7.0.12"
     cheerio "^1.0.0-rc.12"

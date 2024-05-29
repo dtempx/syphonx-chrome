@@ -22,6 +22,7 @@ graph TD
 git clone https://github.com/dtempx/syphonx-chrome.git
 cd syphonx-chrome
 yarn install
+sudo apt-get install gh
 ```
 > On Windows run yarn from within **WSL: Ubuntu**
 

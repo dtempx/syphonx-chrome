@@ -124,7 +124,7 @@ export default ({ open, onClose }: Props) => {
                         >
                             <Stack direction="row">
                                 <DisplayDate date={file.modifiedAt} fontSize="larger" />
-                                {file.modifiedBy && <Typography fontSize="larger" fontStyle="italic" sx={{ ml: 1 }}>by {file.modifiedBy}</Typography>}
+                                {file.modifiedBy && <Typography fontSize="larger" fontStyle="italic" sx={{ ml: 1 }}>{file.modifiedBy}</Typography>}
                             </Stack>
                         </ListItem>
                     ))}
