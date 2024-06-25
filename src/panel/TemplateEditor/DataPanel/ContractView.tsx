@@ -1,11 +1,18 @@
 import React from "react";
-import { TextField, Typography } from "@mui/material";
 import { useTemplate } from "./context";
 import { tryParseJson } from "./lib";
 
+import {
+    TextField,
+    Typography
+} from "@mui/material";
+
 export default () => {
-    const { contract } = useTemplate();
-    if (contract)
+    const { contract, refreshing } = useTemplate();
+
+    if (refreshing)
+        return <Typography color="primary" fontSize="small">Running...</Typography>;
+    else if (contract)
         return (
             <TextField
                 multiline
@@ -20,5 +27,5 @@ export default () => {
             />
         );
     else
-        return <Typography fontSize="small">No data contract.</Typography>
+        return <Typography color="primary" fontSize="small">No contract.</Typography>;
 }

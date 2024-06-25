@@ -1,6 +1,7 @@
 export interface RequestOptions {
     method?: "GET" | "POST" | "PUT" | "DELETE";
     headers?: Record<string, string>;
+    params?: string;
     obj?: unknown;
 }
 
@@ -15,15 +16,19 @@ export class RestApi {
         this.url = url;
     }
 
-    async json<T = any>(path: string, { method = "GET", headers = {}, obj }: RequestOptions = {}): Promise<T> {
-        const url = combineUrl(this.url, path);
-        const body = formatBody(obj);
+    async json<T = any>(path: string, { method = "GET", headers = {}, params }: RequestOptions = {}): Promise<T> {
+        const url = combineUrl(this.url, params ? `${path}${params}` : path);
         headers["Content-Type"] = "application/json";
-        const response = await fetch(url, { method, body, headers });
-        if (!response.ok)
-            throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
-        const result = await response.json();
-        return result;
+        try {
+            const response = await fetch(url, { method, headers });
+            if (!response.ok)
+                throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+            const result = await response.json();
+            return result;
+        }
+        catch (err) {
+            throw new Error(`${method} ${url} failed with error ${err instanceof Error ? `"${err.message}"` : JSON.stringify(err)}`);
+        }
     }
 
     async postJson<T = any>(path: string, obj: unknown, { headers = {} }: BasicOptions = {}): Promise<T> {
@@ -31,11 +36,16 @@ export class RestApi {
         const body = formatBody(obj);
         const method = "POST";
         headers["Content-Type"] = "application/json";
-        const response = await fetch(url, { method, body, headers });
-        if (!response.ok)
-            throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
-        const result = await response.json();
-        return result;
+        try {
+            const response = await fetch(url, { method, body, headers });
+            if (!response.ok)
+                throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+            const result = await response.json();
+            return result;
+        }
+        catch (err) {
+            throw new Error(`${method} ${url} failed with error ${err instanceof Error ? `"${err.message}"` : JSON.stringify(err)}`);            
+        }
     }
 
     async putJson(path: string, obj: unknown, { headers = {} }: BasicOptions): Promise<void> {
@@ -43,27 +53,41 @@ export class RestApi {
         const body = formatBody(obj);
         const method = "PUT";
         headers["Content-Type"] = "application/json";
-        const response = await fetch(url, { method, body, headers });
-        if (!response.ok)
-            throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+        try {
+            const response = await fetch(url, { method, body, headers });
+            if (!response.ok)
+                throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+        }
+        catch (err) {
+            throw new Error(`${method} ${url} failed with error ${err instanceof Error ? `"${err.message}"` : JSON.stringify(err)}`);            
+        }
     }
 
-    async text(path: string, { method = "GET", headers = {}, obj }: RequestOptions = {}): Promise<string> {
+    async text(path: string, { method = "GET", headers = {} }: RequestOptions = {}): Promise<string> {
         const url = combineUrl(this.url, path);
-        const body = formatBody(obj);
-        const response = await fetch(url, { method, body, headers });
-        if (!response.ok)
-            throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
-        const result = await response.text();
-        return result;
+        try {
+            const response = await fetch(url, { method, headers });
+            if (!response.ok)
+                throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+            const result = await response.text();
+            return result;
+        }
+        catch (err) {
+            throw new Error(`${method} ${url} failed with error ${err instanceof Error ? `"${err.message}"` : JSON.stringify(err)}`);            
+        }
     }
 
     async delete(path: string, { headers = {} }: BasicOptions): Promise<void> {
         const url = combineUrl(this.url, path);
         const method = "DELETE";
-        const response = await fetch(url, { method, headers });
-        if (!response.ok)
-            throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+        try {
+            const response = await fetch(url, { method, headers });
+            if (!response.ok)
+                throw new Error(`${method} ${url} failed with status=${response.status} ${response.statusText}`);
+        }
+        catch (err) {
+            throw new Error(`${method} ${url} failed with error ${err instanceof Error ? `"${err.message}"` : JSON.stringify(err)}`);            
+        }
     }
 }
 

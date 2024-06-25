@@ -1,16 +1,25 @@
 import React from "react";
-import { Table, TableContainer, TableBody, TableCell, TableRow } from "@mui/material";
 import { useTemplate } from "./context";
 import { isObject } from "./lib";
 import * as syphonx from "syphonx-lib";
 
-export default () => {
-    const { extractState } = useTemplate();
+import {
+    Table,
+    TableContainer,
+    TableBody,
+    TableCell,
+    TableRow,
+    Typography
+} from "@mui/material";
 
-    if (extractState) {
-        const keys = isObject(extractState.data) ? Object.keys(extractState.data) : [];
-        const obj = (isObject(extractState.data) ? syphonx.unwrap(extractState.data) : {}) as Record<string, string>;
-    
+export default () => {
+    const { extractState, refreshing } = useTemplate();
+    const keys = extractState && isObject(extractState.data) ? Object.keys(extractState.data) : [];
+    const obj = (extractState && isObject(extractState.data) ? syphonx.unwrap(extractState.data) : {}) as Record<string, string>;
+
+    if (refreshing)
+        return <Typography color="primary" fontSize="small">Running...</Typography>;
+    else if (keys.length > 0)
         return (
             <TableContainer>
                 <Table size="small">
@@ -27,8 +36,6 @@ export default () => {
                 </Table>
             </TableContainer>
         );
-    }
-    else {
-        return null;
-    }
+    else
+        return <Typography color="primary" fontSize="small">No data.</Typography>;
 }

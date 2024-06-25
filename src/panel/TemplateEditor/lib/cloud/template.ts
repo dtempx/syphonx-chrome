@@ -21,11 +21,7 @@ export interface LoadTemplateDirectoryOptions extends TemplateContext {
 export async function openTemplate(file: string, { user, serviceUrl }: TemplateContext, revision?: string): Promise<OpenTemplateResult> {
     const token = validateSession(user) ? `u/${user?.id}` : undefined;
     const { version } = chrome.runtime.getManifest();
-    const options: SyphonXApiOptions = {
-        url: serviceUrl,
-        appVersion: version
-    };
-    const api = new SyphonXApi(token, options);
+    const api = new SyphonXApi(token, { url: serviceUrl, appVersion: version });
     const [json, , contract] = await api.read(file, revision);
     const template = new Template(json);
     return { template, contract };

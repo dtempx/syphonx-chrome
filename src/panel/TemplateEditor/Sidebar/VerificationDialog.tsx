@@ -28,7 +28,7 @@ export interface Props {
 }
 
 export default ({ open, onClose, setOpen }: Props) => {
-    const { user, setUser, verified } = useTemplate();
+    const { user, setUser } = useTemplate();
 
     const [ message, setMessage ] = useState<{ severity: "success" | "info" | "warning" | "error"; message: string; }>({ severity: "info", "message": "" });
     const [ submit, setSubmit ] = useState<boolean>(false);

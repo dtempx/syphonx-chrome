@@ -3,6 +3,7 @@ export * from "./isEmpty";
 export * from "./isObject";
 export * from "./json";
 export * from "./omit";
+export * from "./parse";
 export * from "./restapi";
 export * from "./sleep";
 export * from "./snakeify";

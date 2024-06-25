@@ -1,0 +1,1 @@
+export type DataViewMode = "table" | "json" | "contract" | "errors" | "log" | "raw" | "portal";

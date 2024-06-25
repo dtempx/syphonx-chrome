@@ -4,6 +4,7 @@ import { useTemplate } from "../context";
 
 import AboutDialog from "./AboutDialog";
 import AuditDialog from "./AuditDialog";
+import AutorunDialog from "./AutorunDialog";
 import OpenFileDialog from "./OpenFileDialog";
 import FastOpenFileDialog from "./FastOpenFileDialog";
 import FastSaveFileDialog from "./FastSaveFileDialog";
@@ -20,7 +21,8 @@ import {
 
 import {
     Info as AboutIcon,
-    AdsClick as AuditIcon,
+    ConnectedTv as AutorunIcon,
+    //AdsClick as AuditIcon,
     NoteAdd as FileNewIcon,
     CloudDownload as FileOpenIcon,
     CloudUpload as FileSaveIcon,
@@ -92,10 +94,16 @@ export default ({ open, onClose }: Props) => {
             onClose(event);
         }],
         null,
+        ["Autorun", <AutorunIcon />, event => {
+            setDialog("autorun");
+            onClose(event);
+        }]
+/*
         ["Audit", <AuditIcon />, event => {
             setDialog("audit");
             onClose(event);
         }]
+*/
     ];
 
     if (portal?.views?.panel)
@@ -109,6 +117,7 @@ export default ({ open, onClose }: Props) => {
     return (<>
         <AboutDialog open={dialog === "about"} onClose={() => setDialog("")} />
         <AuditDialog open={dialog === "audit"} onClose={() => setDialog("")} />
+        <AutorunDialog open={dialog === "autorun"} onClose={() => setDialog("")} />
         <FastOpenFileDialog open={dialog === "fast-open"} onClose={() => setDialog("")} onBrowse={() => setDialog("open")} />
         <FastSaveFileDialog open={dialog === "fast-save"} onClose={() => setDialog("")} onBrowse={() => setDialog("save")} />
         <OpenFileDialog open={dialog === "open"} onClose={() => setDialog("")} />

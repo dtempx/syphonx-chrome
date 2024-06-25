@@ -1,7 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { background } from "./lib";
 
+
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
+
+export interface AutorunSettings {
+    mode?: "all" | "include" | "exclude";
+    domains?: string[];
+}
 
 export interface AppState {
     advanced: boolean;
@@ -10,12 +16,16 @@ export interface AppState {
     setAutoOpen: React.Dispatch<React.SetStateAction<boolean>>;
     autoRefresh: boolean;
     setAutoRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+    autorun: AutorunSettings | undefined;
+    setAutorun: React.Dispatch<React.SetStateAction<AutorunSettings | undefined>>;
     currentDirectory: string;
     setCurrentDirectory: React.Dispatch<React.SetStateAction<string>>;
     debug: boolean;
     setDebug: React.Dispatch<React.SetStateAction<boolean>>;
     editTracking: boolean;
     setEditTracking: React.Dispatch<React.SetStateAction<boolean>>;
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
     pageTracking: boolean;
     setPageTracking: React.Dispatch<React.SetStateAction<boolean>>;
     mode: AppMode;
@@ -35,9 +45,11 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [advanced, setAdvanced] = useState(false);
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
+    const [autorun, setAutorun] = useState<AutorunSettings | undefined>();
     const [currentDirectory, setCurrentDirectory] = useState("");
     const [debug, setDebug] = useState(false);
     const [editTracking, setEditTracking] = useState(true);
+    const [email, setEmail] = useState("");
     const [pageTracking, setPageTracking] = useState(false);
     const [mode, setMode] = useState<AppMode>("visual-editor");
     const [recentFiles, setRecentFiles] = useState<string[]>([]);
@@ -113,6 +125,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                 "currentDirectory",
                 "debug",
                 "editTracking",
+                "email",
                 "recentFiles",
                 "serviceUrl"
             ],
@@ -132,12 +145,16 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                     setAutoOpen(autoOpen);
                 if (autoRefresh !== undefined)
                     setAutoRefresh(autoRefresh);
+                if (autorun !== undefined)
+                    setAutorun(autorun);
                 if (currentDirectory !== undefined)
                     setCurrentDirectory(currentDirectory);
                 if (debug !== undefined)
                     setDebug(debug);
                 if (editTracking !== undefined)
                     setEditTracking(editTracking);
+                if (email !== undefined)
+                    setEmail(email);
                 if (recentFiles !== undefined)
                     setRecentFiles(recentFiles);
                 if (serviceUrl !== undefined)
@@ -151,9 +168,11 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
             advanced,
             autoOpen,
             autoRefresh,
+            autorun,
             currentDirectory,
             debug,
             editTracking,
+            email,
             recentFiles,
             serviceUrl,
         });
@@ -161,9 +180,11 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         advanced,
         autoOpen,
         autoRefresh,
+        autorun,
         currentDirectory,
         debug,
         editTracking,
+        email,
         recentFiles,
         serviceUrl
     ]);
@@ -187,10 +208,14 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
         setAutoOpen,
         autoRefresh,
         setAutoRefresh,
+        autorun,
+        setAutorun,
         currentDirectory,
         setCurrentDirectory,
         debug,
         setDebug,
+        email,
+        setEmail,
         pageTracking,
         setPageTracking,
         editTracking,

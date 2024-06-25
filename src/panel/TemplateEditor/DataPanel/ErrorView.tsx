@@ -13,9 +13,12 @@ import {
 } from "@mui/material";
 
 export default () => {
-    const { extractState } = useTemplate();
+    const { extractState, refreshing } = useTemplate();
     const errors = extractState?.errors as syphonx.ExtractError[]; // WORKAROUND https://github.com/microsoft/TypeScript/issues/36981
-    if (errors && errors.length > 0)
+
+    if (refreshing)
+        return <Typography color="primary" fontSize="small">Running...</Typography>;
+    else if (errors && errors.length > 0)
         return (
             <TableContainer>
                 <Table size="small">
@@ -37,5 +40,5 @@ export default () => {
             </TableContainer>
         );
     else
-        return <Typography fontSize="small">No errors.</Typography>
+        return <Typography color="primary" fontSize="small">No errors.</Typography>;
 }

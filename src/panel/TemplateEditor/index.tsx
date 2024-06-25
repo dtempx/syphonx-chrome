@@ -6,7 +6,7 @@ import { useApp, useTemplate, TemplateProvider } from "./context";
 import AppBar from "./AppBar";
 import AppFrame from "./AppFrame";
 import CodeEditor from "./CodeEditor";
-import DataPanel from "./DataPanel";
+import EditorDataPanel from "./DataPanel/EditorDataPanel";
 import TemplateSettings from "./TemplateSettings";
 import TestRunner from "./TestRunner";
 import VisualEditor from "./VisualEditor";
@@ -44,7 +44,7 @@ export default () => {
                                 p: 1
                             }}
                         >
-                            <DataPanel />
+                            <EditorDataPanel />
                         </Paper>
                     </AppFrame>
                 </Box>
