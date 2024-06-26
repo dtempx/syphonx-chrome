@@ -7,15 +7,15 @@ export function isEmpty(obj: unknown): boolean {
     return false;
 }
 
-export function isDeeplyEmpty(obj: unknown, seen = new WeakSet()): boolean {
+export function isEmptyDeep(obj: unknown, seen = new WeakSet()): boolean {
     if (obj === null) return true;
     if (typeof obj === "object") {
         if (seen.has(obj)) return false; // circular reference
         seen.add(obj);
         if (Array.isArray(obj))
-            return obj.length === 0 || obj.every(value => isDeeplyEmpty(value, seen));
+            return obj.length === 0 || obj.every(value => isEmptyDeep(value, seen));
         return Object.keys(obj).length === 0 || 
-            Object.values(obj).every(value => isDeeplyEmpty(value, seen));
+            Object.values(obj).every(value => isEmptyDeep(value, seen));
     }
     if (typeof obj === "string") return obj.length === 0;
     return isEmpty(obj);

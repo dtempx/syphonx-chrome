@@ -1,4 +1,5 @@
 export * from "./clone";
+export * from "./format";
 export * from "./isEmpty";
 export * from "./isObject";
 export * from "./json";

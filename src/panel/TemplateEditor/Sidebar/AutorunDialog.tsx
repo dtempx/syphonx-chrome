@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { TitleBar, TransitionUp } from "./components";
+import { AlertBar, TitleBar, TransitionUp } from "./components";
 import { useApp, useTemplate } from "./context";
-import { isEmpty, isDeeplyEmpty, RestApi } from "./lib";
-import { AlertBar } from "./components";
+import { formatNumber, isEmpty, isEmptyDeep, RestApi } from "./lib";
 import TableView from "../../TemplateEditor/DataPanel/TableView";
 import RunStatusRibbon from "../../TemplateEditor/DataPanel/RunStatusRibbon";
 import AutorunSettingsDialog from "./AutorunSettingsDialog";
 
 import {
     Button,
+    Chip,
     Dialog,
     DialogContent,
     DialogTitle,
@@ -20,7 +20,11 @@ import {
 } from "@mui/material";
 
 import {
-    Settings as SettingsIcon
+    BackHand as BlockedIcon,
+    Help as UnknownIcon,
+    Settings as SettingsIcon,
+    Upload as PostIcon
+
 } from "@mui/icons-material";
 
 const api = new RestApi("http://localhost:8081");
@@ -42,14 +46,19 @@ export default ({ open, onClose }: Props) => {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
-    const [delayed, setDelayed] = useState(false);
+    const [late, setLate] = useState(false);
 
-    const showData = status === "Pausing" || (["Stopping", "Stopped"].includes(status) && id);
+    const error_codes = extractState?.errors.map(error => error.code as string) || [];
+    const empty = isEmptyDeep(extractState?.data);
+    const blocked = error_codes.includes("blocked");
+    const pnf = error_codes.includes("pnf");
 
     function onActiveChange(event: React.ChangeEvent<HTMLInputElement>, value: boolean) {
         setActive(value);
         if (value)
             next();
+        else if (status === "Running" && !late)
+            setStatus("Stopping");
         else
             setStatus("Stopped");
     }
@@ -72,7 +81,7 @@ export default ({ open, onClose }: Props) => {
         else if (status === "Running" && !timer) {
             const value = setTimeout(() => {
                 setTimer(undefined);
-                setDelayed(true);
+                setLate(true);
             }, 35000);
             setTimer(value);
         }
@@ -129,15 +138,11 @@ export default ({ open, onClose }: Props) => {
             setActive(false);
         }
 
-        const error_codes = extractState?.errors.map(error => error.code as string) || [];
-        const empty = isDeeplyEmpty(extractState?.data);
-        const blocked = error_codes.includes("blocked");
-        const pnf = error_codes.includes("pnf");
         if (active && empty && !blocked && !pnf)
             setStatus("Empty");
         else if (active)
             setStatus("Pausing");
-        else if (refreshing)
+        else if (refreshing && !late)
             setStatus("Stopping");
         else
             setStatus("Stopped");
@@ -146,7 +151,7 @@ export default ({ open, onClose }: Props) => {
     async function next() {
         setStatus("Fetching");
         setError("");
-        setDelayed(false);
+        setLate(false);
         try {
             const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
             let params = undefined;
@@ -166,7 +171,6 @@ export default ({ open, onClose }: Props) => {
             else {
                 setStatus("Idle");
                 setError("");
-                setActive(false);
                 setId("");
                 setTimestamp(0);
             }
@@ -205,15 +209,15 @@ export default ({ open, onClose }: Props) => {
             </DialogTitle>
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
                         <Stack direction="row" sx={{ mb: 1 }}>
-                            <Switch size="small" checked={active} onChange={onActiveChange} />
+                            <Switch size="small" checked={active} disabled={status === "Stopping"} onChange={onActiveChange} />
                             <Typography sx={{ ml: 2 }}>{status}</Typography>
                         </Stack>
                         <Stack direction="row">
-                            <Typography sx={{ mt: 1, mr: 2 }}>{postCount} posted</Typography>
-                            <Tooltip title="Settings">
-                                <IconButton onClick={() => setSettingsOpen(true)}>
+                            <Chip variant="filled" color="primary" label={formatNumber(postCount)} icon={<PostIcon fontSize="small" />} size="small" sx={{ mt: 1, mr: 2 }} />
+                            <Tooltip title="Settings to control which domains to gather">
+                                <IconButton disabled={status !== "Stopped"} onClick={() => setSettingsOpen(true)}>
                                     <SettingsIcon fontSize="small" />
                                 </IconButton>
                             </Tooltip>
@@ -221,9 +225,15 @@ export default ({ open, onClose }: Props) => {
                     </Stack>
                     {autorun?.mode === "include" && autorun.domains && autorun.domains.length > 0 && <Typography>Including only {autorun.domains.slice(0, 3).join(", ")} {autorun.domains.length > 3 ? ` (+${autorun.domains.length - 3} more)` : ""}</Typography>}
                     {autorun?.mode === "exclude" && autorun.domains && autorun.domains.length > 0 && <Typography>Excluding {autorun.domains.slice(0, 3).join(", ")} {autorun.domains.length > 3 ? ` (+${autorun.domains.length - 3} more)` : ""}</Typography>}
-                    <Typography sx={{ mt: 2, mb: 2 }}>{id}</Typography>
-                    <RunStatusRibbon />
-                    {showData && <TableView />}
+                    <Chip variant="outlined" color="primary" label={id} sx={{ mt: 2, mb: 2, visibility: id ? "visible" : "hidden" }} />
+                    {status === "Running" && <>
+                        <RunStatusRibbon />
+                        {late && 
+                        <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                            <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
+                            {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
+                        </Stack>}
+                    </>}
                     {status === "Empty" &&
                     <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
                         <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
@@ -231,11 +241,11 @@ export default ({ open, onClose }: Props) => {
                         <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
                         {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
                     </Stack>}
-                    {status === "Running" && delayed &&
-                    <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                        <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
-                        {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
-                    </Stack>}
+                    {["Pausing", "Stopping", "Stopped"].includes(status) && id && !refreshing && <>
+                        <TableView />
+                        {blocked && <Chip label="Blocked" variant="filled" color="error" icon={<BlockedIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
+                        {pnf && <Chip label="Page Not Found" variant="filled" color="warning" icon={<UnknownIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
+                    </>}
                 </Stack>
             </DialogContent>
         </Dialog>

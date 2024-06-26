@@ -29,6 +29,7 @@ export default ({ open, onClose }: Props) => {
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
     const domain = parseDomain(inspectedWindowUrl);
+    const addVisible = !domains.split("\n").includes(domain);
 
     useEffect(() => {
         if (open) {
@@ -43,6 +44,27 @@ export default ({ open, onClose }: Props) => {
             domains: domains.split("\n").map(value => value.trim()).filter(value => value.length > 0)
         });
         onClose(event);
+    }
+
+    function handleAdd() {
+        setDomains(`${domains}\n${domain}`.trim());
+        if (mode === "all")
+            setMode("include");
+    }
+
+    function handleClear() {
+        setDomains("");
+        setMode("all");
+    }
+
+    function handleText(event: React.ChangeEvent<HTMLInputElement>) {
+        const text = event.target.value || "";
+        setDomains(text);
+        const empty = text.trim().length === 0;
+        if (!empty && mode === "all")
+            setMode("include");
+        else if (empty && mode !== "all")
+            setMode("all");
     }
 
     return (
@@ -60,18 +82,18 @@ export default ({ open, onClose }: Props) => {
                     <TextField
                         variant="outlined"
                         value={domains}
-                        onChange={event => setDomains(event.target.value)}
+                        onChange={handleText}
                         placeholder="Enter domain names, one per line"
                         rows={4}
                         multiline
                     />
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
-                        {!domains.split("\n").includes(domain) ? <Link href="#" fontSize="small" onClick={() => setDomains(`${domains}\n${domain}`.trim())}>Add {domain}</Link> : <span />}
+                        {addVisible ? <Link href="#" fontSize="small" onClick={handleAdd}>Add {domain}</Link> : <span />}
                         <Box display="flex" justifyContent="flex-end">
                             <Button
                                 variant="outlined"
                                 size="small"
-                                onClick={() => setDomains("")}
+                                onClick={handleClear}
                                 sx={{ mt: 1, minWidth: "auto" }}>
                                     <Typography fontSize="small">Clear List</Typography>
                             </Button>
