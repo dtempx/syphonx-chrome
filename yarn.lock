@@ -1886,6 +1886,11 @@
   resolved "https://registry.yarnpkg.com/@types/unist/-/unist-2.0.7.tgz#5b06ad6894b236a1d2bd6b2f07850ca5c59cf4d6"
   integrity sha512-cputDpIbFgLUaGQn6Vqg3/YsJwxUwHLO13v3i5ouxT4lat0khip9AEWxtERujXV9wxIB1EyF97BSJFt6vpdI8g==
 
+"@types/uuid@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-10.0.0.tgz#e9c07fe50da0f53dc24970cca94d619ff03f6f6d"
+  integrity sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==
+
 abab@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.6.tgz#41b80f2c871d19686216b82309231cfd3cb3d291"
@@ -4594,15 +4599,15 @@ symbol-tree@^3.2.4:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
   integrity sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==
 
-syphonx-core@^1.2.67:
+syphonx-core@^1.2.68:
   version "1.2.68"
   resolved "https://registry.yarnpkg.com/syphonx-core/-/syphonx-core-1.2.68.tgz#4969845fccf61464a3d667db0b9d58cce661b582"
   integrity sha512-SRhD+Jd8+FIi1k18rNvmpFBSkecrubaehZ6VLddrZ+SPzPMeUxReKS6aED/p+1p6gm+1QLiDpr5Qzq5c3B810w==
 
-syphonx-lib@^1.2.74:
-  version "1.2.74"
-  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.74.tgz#9c00d159b3da1a5bab404975ba2c4b2f562d32c8"
-  integrity sha512-mJRmtVIc05Eyn6nykgkxUaQsJeNsfNWYAfunwQtNHJTeZOV0dx4ta9uH5+242AgIEVpubViGOJS+fr5+r27sqQ==
+syphonx-lib@^1.2.75:
+  version "1.2.75"
+  resolved "https://registry.yarnpkg.com/syphonx-lib/-/syphonx-lib-1.2.75.tgz#8c32dfc824d7bffbe6a08a7df88120926496c015"
+  integrity sha512-3kNUPKqvvQ+jmL0WFtn1ttuc1KDDoKIpB2TxfZFluxqRSWht4Ooky8ByfpvY27nmPw2nc3fqJ/zvYteet677GA==
   dependencies:
     "@types/json-schema" "^7.0.12"
     cheerio "^1.0.0-rc.12"
@@ -4610,7 +4615,7 @@ syphonx-lib@^1.2.74:
     jsep "^1.3.7"
     json5 "^2.2.1"
     jsonschema "^1.4.1"
-    syphonx-core "^1.2.67"
+    syphonx-core "^1.2.68"
 
 term-size@^2.2.1:
   version "2.2.1"
@@ -4791,6 +4796,11 @@ utility-types@^3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.10.0.tgz#ea4148f9a741015f05ed74fd615e1d20e6bed82b"
   integrity sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==
+
+uuid@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
+  integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
 
 uvu@^0.5.0:
   version "0.5.6"

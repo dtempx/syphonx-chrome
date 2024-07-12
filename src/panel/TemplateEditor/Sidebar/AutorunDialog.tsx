@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import * as uuid from "uuid";
 import { AlertBar, TitleBar, TransitionUp } from "./components";
 import { useApp, useTemplate } from "./context";
-import { formatNumber, isEmpty, isEmptyDeep, RestApi } from "./lib";
+import { formatNumber, inspectedWindow, isEmpty, isEmptyDeep, RestApi, cloud } from "./lib";
 import TableView from "../../TemplateEditor/DataPanel/TableView";
 import RunStatusRibbon from "../../TemplateEditor/DataPanel/RunStatusRibbon";
 import AutorunSettingsDialog from "./AutorunSettingsDialog";
@@ -114,22 +115,36 @@ export default ({ open, onClose }: Props) => {
 
     async function post() {
         setStatus("Posting");
-        const data = {
-            id: extractState?.id,
-            data: extractState?.data,
-            url: extractState?.url,
-            originalUrl: extractState?.originalUrl,
-            domain: extractState?.domain,
-            errors: extractState?.errors,
-            version: extractState?.version,
-            duration: new Date().valueOf() - timestamp
-        };
-        const headers: Record<string, string> = {
-            "Authorization": `Bearer u/${user?.id}`,
-            "X-Username": `${user?.email}`
-        };
         try {
-            await api.postJson("/autorun", data, { headers });
+            const capture_id = uuid.v4();
+            const capture_date = new Date();
+    
+            const data = {
+                capture_id,
+                capture_date,
+                id: extractState?.id,
+                data: extractState?.data,
+                url: extractState?.url,
+                originalUrl: extractState?.originalUrl,
+                domain: extractState?.domain,
+                errors: extractState?.errors,
+                version: extractState?.version,
+                duration: new Date().valueOf() - timestamp
+            };
+            const headers: Record<string, string> = {
+                "Authorization": `Bearer u/${user?.id}`,
+                "X-Username": `${user?.email}`
+            };
+
+            const tab = await inspectedWindow.tab();
+            const screenshot = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
+            const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture_id}&capture_date=${capture_date.toString()}` });
+
+            if (s3UploadInformation?.url) {
+                await cloud.uploadScreenshot(s3UploadInformation.url, screenshot);
+            }
+
+            await api.postJson("/autorun", { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
             setPostCount(postCount + 1);
         }
         catch (err) {
