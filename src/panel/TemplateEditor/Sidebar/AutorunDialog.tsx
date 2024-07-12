@@ -141,7 +141,7 @@ export default ({ open, onClose }: Props) => {
             const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture_id}&capture_date=${capture_date.toString()}` });
 
             if (s3UploadInformation?.url) {
-                await cloud.uploadScreenshot(s3UploadInformation.url, screenshot);
+                await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
             }
 
             await api.postJson("/autorun", { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
