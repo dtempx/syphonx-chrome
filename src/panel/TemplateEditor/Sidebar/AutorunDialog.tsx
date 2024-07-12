@@ -28,7 +28,7 @@ import {
 
 } from "@mui/icons-material";
 
-const api = new RestApi("http://localhost:8081");
+const api = new RestApi("https://api.syphonx.io");
 
 export interface Props {
     open: boolean;

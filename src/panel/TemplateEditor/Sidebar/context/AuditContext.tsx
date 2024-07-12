@@ -5,7 +5,7 @@ import {
     RestApi
 } from "../lib";
 
-const api = new RestApi("http://localhost:8080");
+const api = new RestApi("https://api.syphonx.io");
 
 export interface Audit {
     id: string;
