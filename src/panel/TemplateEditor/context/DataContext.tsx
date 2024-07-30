@@ -117,7 +117,7 @@ export function DataProvider({ children }: { children: JSX.Element }) {
             else if (params.locators) {
                 //todo consider how to implement locators
                 const locator = params.locator;
-                if (locator.name?.startsWith("_") && locator.selector && locator.method) {
+                if (locator?.name?.startsWith("_") && locator.selector && locator.method) {
                     let value: any = "";
                     if (locator.method?.startsWith("all"))
                         value = [];
