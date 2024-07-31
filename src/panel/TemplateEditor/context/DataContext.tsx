@@ -11,7 +11,7 @@ export interface DataState {
     extractStatus: syphonx.ExtractStatus | undefined;
     refresh: (reload: boolean) => Promise<void>;
     refreshing: boolean;
-    runTemplate: (template: syphonx.Template | syphonx.ExtractState, url?: string) => void;
+    runTemplate: (template: syphonx.Template | syphonx.ExtractState, url?: string) => Promise<void>;
     resetExtractStatus: () => void;
 }
 
@@ -20,7 +20,7 @@ export const DataContext = React.createContext<DataState>({
     extractStatus: undefined,
     refresh: async () => {},
     refreshing: false,
-    runTemplate: () => {},
+    runTemplate: async () => {},
     resetExtractStatus: () => {}
 });
 
