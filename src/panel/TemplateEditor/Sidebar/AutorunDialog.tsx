@@ -100,17 +100,19 @@ export default ({ open, onClose }: Props) => {
     }, [status, timer]);
 
     useEffect(() => {
-        if (!open) {
-            setActive(false);
-            setId("");
-            setError("");
-            setStatus("Stopped");
-            setTimestamp(0);
-            setPostCount(0);
-        }
-        else if (!refreshing && extractState?.id === id) {
-            post();
-        }
+        (async () => {
+            if (!open) {
+                setActive(false);
+                setId("");
+                setError("");
+                setStatus("Stopped");
+                setTimestamp(0);
+                setPostCount(0);
+            }
+            else if (!refreshing && extractState?.id === id) {
+                await post();
+            }
+        })();
     }, [open, refreshing, extractState]);
 
     async function post() {
@@ -252,8 +254,8 @@ export default ({ open, onClose }: Props) => {
                     {status === "Empty" &&
                     <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
                         <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
-                        <Button variant="outlined" onClick={() => retry()} sx={{ width: 300 }}>Try Again</Button>
-                        <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
+                        <Button variant="outlined" onClick={async () => await retry()} sx={{ width: 300 }}>Try Again</Button>
+                        <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
                         {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
                     </Stack>}
                     {["Pausing", "Stopping", "Stopped"].includes(status) && id && !refreshing && <>
