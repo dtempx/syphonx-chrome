@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useApp } from "./context";
 import { parseDomain } from "./lib";
+import { AutorunWorkstreamSelect } from "./components";
 
 import {
     Box,
@@ -72,6 +73,9 @@ export default ({ open, onClose }: Props) => {
             <DialogTitle>Autorun Settings</DialogTitle>
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <AutorunWorkstreamSelect />
+                    </Stack>
                     <FormControl>
                         <RadioGroup value={mode} onChange={(event, value) => setMode(value as "all" | "include" | "exclude")}>
                             <FormControlLabel value="all" control={<Radio />} label="Include all domains" />
