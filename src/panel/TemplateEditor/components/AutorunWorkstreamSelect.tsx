@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import React from 'react';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,76 +8,56 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
     },
-  },
 };
 
-const names = [
-  'Brand Monitor - Top 10 Sellers',
-  'PROWL - Top 10 Sellers',
-  'WTB - Top 10 Sellers',
-  'Brand Monitor - Strategic Clients',
-  'Brand Monitor - Enterprise Clients',
-  'PROWL - Strategic Clients',
-  'PROWL - Enterprise Clients',
-  'WTB - Strategic Clients',
-  'WTB - Enterprise Clients',
-  'PROWL - Client Priority Sellers - Stanley Black Decker (US)',
-  'Logitech - Amazon (ES) for WTB and Brand Monitor',
-  'Delta Faucet - PROWL'
-];
-
-function getStyles(name: string, personName: string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
+interface Workstream {
+    workstream_id: string;
+    workstream_name: string;
 }
 
-export default () => {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
+interface Props {
+    workstreams: Workstream[];
+    onChange: (workstream: Workstream) => void
+}
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
+export default ({ workstreams, onChange }: Props) => {
+    const handleChange = (event: SelectChangeEvent<string>) => {
+        const { target: { value } } = event;
+        const workstream = workstreams.find(item => item.workstream_id === value)!;
+        setWorkstream(workstream);
+        onChange(workstream);
+    };
+
+    const [workstream, setWorkstream] = React.useState<Workstream>(workstreams[0]);
+
+    return (
+        <div>
+            <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="workstream-label">Workstream</InputLabel>
+                <Select
+                    labelId="workstream-label"
+                    id="workstream-id"
+                    value={workstream.workstream_id}
+                    onChange={handleChange}
+                    input={<OutlinedInput label="Workstream" />}
+                    MenuProps={MenuProps}
+                >
+                    {workstreams.map((workstream) => (
+                        <MenuItem
+                            key={workstream.workstream_id}
+                            value={workstream.workstream_id}
+                        >
+                            {workstream.workstream_name}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
     );
-  };
-
-  return (
-    <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-name-label">Name</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
-        >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </div>
-  );
 }
