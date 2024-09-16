@@ -39,7 +39,7 @@ export default ({ open, onClose }: Props) => {
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
     const domain = parseDomain(inspectedWindowUrl);
-    const addVisible = !domains.split("\n").includes(domain);
+    const addVisible = !domains?.split("\n").includes(domain);
 
     const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
     const [workstream, setWorkstream] = React.useState<Workstream>();
@@ -64,8 +64,8 @@ export default ({ open, onClose }: Props) => {
     function handleSubmit(event: React.MouseEvent<HTMLButtonElement>): void {
         setAutorun({
             mode,
-            domains: domains.split("\n").map(value => value.trim()).filter(value => value.length > 0),
-            workstream: workstream && workstreams.find(item => item.workstream_id === workstream.workstream_id)
+            domains: domains?.split("\n").map((value: string) => value.trim()).filter((value: string) => value.length > 0),
+            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id)
         });
         onClose(event);
     }
