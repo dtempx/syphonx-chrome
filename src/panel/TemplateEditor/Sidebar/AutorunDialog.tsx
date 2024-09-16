@@ -140,13 +140,13 @@ export default ({ open, onClose }: Props) => {
 
             const tab = await inspectedWindow.tab();
             const screenshot = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
-            const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture_id}&capture_date=${capture_date.toString()}` });
+            const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture_id}&capture_date=${capture_date.toString()}` }) || {};
 
             if (s3UploadInformation?.url) {
                 await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
             }
 
-            await api.postJson("/autorun", { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
+            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
             setPostCount(postCount + 1);
         }
         catch (err) {
@@ -171,11 +171,11 @@ export default ({ open, onClose }: Props) => {
         setLate(false);
         try {
             const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
-            let params = undefined;
+            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}`;
             if (autorun?.mode === "include" && !isEmpty(autorun.domains))
-                params = `?include=${encodeURIComponent(autorun.domains!.join(","))}`;
+                params += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
             else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
-                params = `?exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
+                params += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
             const template = await api.json("/autorun", { headers, params });
             if (template?.url) {
                 setStatus("Running");

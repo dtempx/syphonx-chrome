@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useApp } from "./context";
-import { parseDomain } from "./lib";
+import { useApp, useTemplate } from "./context";
+import { parseDomain, RestApi } from "./lib";
+import { AutorunWorkstreamSelect } from "./components";
 
 import {
     Box,
@@ -19,17 +20,29 @@ import {
     Typography
 } from "@mui/material";
 
+const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const default_workstream = { workstream_id: "default", workstream_name: "default" } as Workstream;
+
 export interface Props {
     open: boolean;
     onClose: (event: React.SyntheticEvent) => void;
 }
 
+interface Workstream {
+    workstream_id: string;
+    workstream_name: string;
+}
+
 export default ({ open, onClose }: Props) => {
     const { autorun, setAutorun, inspectedWindowUrl } = useApp();
+    const { user } = useTemplate();
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
     const domain = parseDomain(inspectedWindowUrl);
     const addVisible = !domains.split("\n").includes(domain);
+
+    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
+    const [workstream, setWorkstream] = React.useState<Workstream>();
 
     useEffect(() => {
         if (open) {
@@ -38,10 +51,21 @@ export default ({ open, onClose }: Props) => {
         }
     }, [open, autorun]);
 
+    useEffect(() => {
+        (async () => {
+            if (open && !workstreams?.length) {
+                const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
+                const workstreams = await api.json("/autorun/workstreams", { headers });
+                setWorkstreams(workstreams);
+            }
+        })();
+    }, [open]);
+
     function handleSubmit(event: React.MouseEvent<HTMLButtonElement>): void {
         setAutorun({
             mode,
-            domains: domains.split("\n").map(value => value.trim()).filter(value => value.length > 0)
+            domains: domains.split("\n").map(value => value.trim()).filter(value => value.length > 0),
+            workstream: workstream && workstreams.find(item => item.workstream_id === workstream.workstream_id)
         });
         onClose(event);
     }
@@ -55,6 +79,7 @@ export default ({ open, onClose }: Props) => {
     function handleClear() {
         setDomains("");
         setMode("all");
+        setWorkstream(default_workstream);
     }
 
     function handleText(event: React.ChangeEvent<HTMLInputElement>) {
@@ -67,11 +92,18 @@ export default ({ open, onClose }: Props) => {
             setMode("all");
     }
 
+    function handleWorkstreamSelection(workstream: Workstream) {
+        setWorkstream(workstream);
+    }
+
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Autorun Settings</DialogTitle>
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        {workstreams?.length ? <AutorunWorkstreamSelect workstreams={workstreams} onChange={handleWorkstreamSelection} /> : <></>}
+                    </Stack>
                     <FormControl>
                         <RadioGroup value={mode} onChange={(event, value) => setMode(value as "all" | "include" | "exclude")}>
                             <FormControlLabel value="all" control={<Radio />} label="Include all domains" />

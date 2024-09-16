@@ -4,9 +4,15 @@ import { background } from "./lib";
 
 export type AppMode = "visual-editor" | "code-editor" | "test-runner" | "template-settings";
 
+interface Workstream {
+    workstream_id: string;
+    workstream_name: string;
+}
+
 export interface AutorunSettings {
     mode?: "all" | "include" | "exclude";
     domains?: string[];
+    workstream?: Workstream;
 }
 
 export interface AppState {
