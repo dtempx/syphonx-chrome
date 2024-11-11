@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import * as uuid from "uuid";
 import { AlertBar, TitleBar, TransitionUp } from "./components";
 import { useApp, useTemplate } from "./context";
@@ -35,11 +35,45 @@ export interface Props {
     onClose: (event: React.SyntheticEvent) => void;
 }
 
+interface Capture {
+    id: string;
+    date: string;
+    screenshots: string[];
+}
+
+const cooldownSeconds = [ 0, 10, 30, 60, 300 ];
+
+async function takeScreenshot(format = "png") {
+    const tab = await inspectedWindow.tab();
+    const screenshot = await chrome.tabs.captureVisibleTab(tab.windowId, { format });
+    return screenshot;
+}
+
+async function uploadScreenshots(capture: Capture, headers: Record<string, string>) {
+    const screenshots = [];
+    for (let i = 0; i < capture.screenshots.length; i++) {
+        const screenshot = capture.screenshots[i];
+        const suffix = capture.screenshots.length === 1 ? '' : `-${i}`; // append -i for multiple screenshots...
+        const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture.id}${suffix}&capture_date=${capture.date}` }) || {};
+
+        if (s3UploadInformation?.url) {
+            const uploadResult = await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
+            screenshots.push({ 
+                ...s3UploadInformation,
+                ...( uploadResult || {} ),
+            });
+        }
+    }
+
+    return screenshots;
+}
+
 export default ({ open, onClose }: Props) => {
     const { runTemplate, refreshing, extractState, user } = useTemplate();
     const { autorun, setAutorun } = useApp();
     const [active, setActive] = useState(false);
     const [id, setId] = useState("");
+    const [capture, setCapture] = useState<Capture>();
     const [error, setError] = useState("");
     const [timestamp, setTimestamp] = useState(0);
     const [status, setStatus] = useState("Stopped");
@@ -48,6 +82,12 @@ export default ({ open, onClose }: Props) => {
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
     const [late, setLate] = useState(false);
+    const [cooldown, setCooldown] = useState(0);
+
+    const captureRef = useRef(capture);
+    useEffect(() => {
+        captureRef.current = capture;
+    }, [capture]);
 
     const error_codes = extractState?.errors.map(error => error.code as string) || [];
     const empty = isEmptyDeep(extractState?.data);
@@ -104,6 +144,7 @@ export default ({ open, onClose }: Props) => {
             if (!open) {
                 setActive(false);
                 setId("");
+                setCapture(undefined);
                 setError("");
                 setStatus("Stopped");
                 setTimestamp(0);
@@ -115,11 +156,30 @@ export default ({ open, onClose }: Props) => {
         })();
     }, [open, refreshing, extractState]);
 
+    useEffect(() => {
+        chrome.runtime.onMessage.addListener(listener);
+        return () => chrome.runtime.onMessage.removeListener(listener);
+
+        async function listener(message: any): Promise<void> {
+            if (message.syphonx) {
+                if (message.syphonx.key === "extract-status") {
+                    if (message.syphonx.action === "screenshot" && captureRef.current) {
+                        const screenshot = await takeScreenshot();
+                        setCapture({ ...captureRef.current, screenshots: [ ...captureRef.current.screenshots, screenshot ] });
+                    }
+                }
+            }
+        }
+    }, []);
+
     async function post() {
         setStatus("Posting");
         try {
-            const capture_id = uuid.v4();
-            const capture_date = new Date();
+            if (!capture) {
+                throw new Error(`Error posting, no capture information found.`);
+            }
+            const capture_id = capture.id;
+            const capture_date = capture.date;
     
             const data = {
                 capture_id,
@@ -138,21 +198,27 @@ export default ({ open, onClose }: Props) => {
                 "X-Username": `${user?.email}`
             };
 
-            const tab = await inspectedWindow.tab();
-            const screenshot = await chrome.tabs.captureVisibleTab(tab.windowId, { format: "png" });
-            const s3UploadInformation = await api.json<{ bucket: string; key: string; url: string; }>("/s3", { headers, params: `?capture_id=${capture_id}&capture_date=${capture_date.toString()}` }) || {};
-
-            if (s3UploadInformation?.url) {
-                await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
+            const screenshots = [];
+            if (!capture.screenshots.length) {
+                const screenshot = await takeScreenshot();
+                setCapture({ ...capture, screenshots: [ ...capture.screenshots, screenshot ] });
+                screenshots.push(screenshot);
+            } else {
+                screenshots.push(...(await uploadScreenshots(capture, headers)));
             }
 
-            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
+            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { 
+                ...data,
+                screenshot: screenshots
+            }, { headers });
             setPostCount(postCount + 1);
+            setCooldown(0);
         }
         catch (err) {
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setStatus("Stopped");
             setActive(false);
+            setCooldown(Math.min(cooldown + 1, cooldownSeconds.length - 1 ));
         }
 
         if (active && empty && !blocked && !pnf)
@@ -180,6 +246,7 @@ export default ({ open, onClose }: Props) => {
             if (template?.url) {
                 setStatus("Running");
                 setId(template.id);
+                setCapture({ id: uuid.v4(), date: new Date().toISOString(), screenshots: [] });
                 setTimestamp(new Date().valueOf());
                 template.originalUrl = template.url;
                 setTemplate(template);
@@ -189,18 +256,22 @@ export default ({ open, onClose }: Props) => {
                 setStatus("Idle");
                 setError("");
                 setId("");
+                setCapture(undefined);
                 setTimestamp(0);
+                setCooldown(0);
             }
         }
         catch (err) {
             setStatus("Stopped");
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setActive(false);
+            setCooldown(Math.min(cooldown + 1, cooldownSeconds.length - 1 ));
         }
     }
 
     async function retry() {
         setStatus("Running");
+        setCapture({ id: uuid.v4(), date: new Date().toISOString(), screenshots: [] });
         setTimestamp(new Date().valueOf());
         await runTemplate(template);
     }
