@@ -142,6 +142,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
                 currentDirectory,
                 debug,
                 editTracking,
+                email,
                 recentFiles,
                 serviceUrl
             }) => {
