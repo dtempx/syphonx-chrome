@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 
 const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const apitest = new RestApi("http://localhost:8081");
 const default_workstream = { workstream_id: "default", workstream_name: "default" } as Workstream;
 
 export interface Props {
@@ -38,10 +39,11 @@ export default ({ open, onClose }: Props) => {
     const { user } = useTemplate();
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
+    const [accountKey, setAccountKey] = useState("");
     const domain = parseDomain(inspectedWindowUrl);
     const addVisible = !domains?.split("\n").includes(domain);
 
-    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
+    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([]);
     const [workstream, setWorkstream] = React.useState<Workstream>();
 
     useEffect(() => {
@@ -55,7 +57,7 @@ export default ({ open, onClose }: Props) => {
         (async () => {
             if (open && !workstreams?.length) {
                 const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
-                const workstreams = await api.json("/autorun/workstreams", { headers });
+                const workstreams = await apitest.json("/autorun/workstreams", { headers });
                 setWorkstreams(workstreams);
             }
         })();
@@ -65,7 +67,8 @@ export default ({ open, onClose }: Props) => {
         setAutorun({
             mode,
             domains: domains?.split("\n").map((value: string) => value.trim()).filter((value: string) => value.length > 0),
-            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id)
+            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id),
+            accountKey: accountKey
         });
         onClose(event);
     }
@@ -104,6 +107,20 @@ export default ({ open, onClose }: Props) => {
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
                         {workstreams?.length ? <AutorunWorkstreamSelect workstreams={workstreams} onChange={handleWorkstreamSelection} /> : <></>}
                     </Stack>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <TextField
+                            fullWidth
+                            label="Account Key"
+                            variant="outlined"
+                            value={accountKey}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                setAccountKey(event.target.value);
+                            }}
+                            size="small"
+                            placeholder="Enter account key"
+                            sx={{ m: 1, maxHeight: 48 * 4.5 + 8, width: 300 }}
+                        />
+                    </Stack>
                     <FormControl>
                         <RadioGroup value={mode} onChange={(event, value) => setMode(value as "all" | "include" | "exclude")}>
                             <FormControlLabel value="all" control={<Radio />} label="Include all domains" />
@@ -127,7 +144,7 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 onClick={handleClear}
                                 sx={{ mt: 1, minWidth: "auto" }}>
-                                    <Typography fontSize="small">Clear List</Typography>
+                                <Typography fontSize="small">Clear List</Typography>
                             </Button>
                         </Box>
                     </Stack>

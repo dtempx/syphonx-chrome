@@ -13,6 +13,7 @@ export interface AutorunSettings {
     mode?: "all" | "include" | "exclude";
     domains?: string[];
     workstream?: Workstream;
+    accountKey?: string;
 }
 
 export interface AppState {
