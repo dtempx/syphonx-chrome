@@ -62,11 +62,14 @@ export function DataProvider({ children }: { children: JSX.Element }) {
     }, [json, autoRefresh]);
 
     async function runTemplate(template: syphonx.Template | syphonx.ExtractState, url?: string) {
+        
         if (!url && template.url)
-            url = template.url; 
+            url = template.url;
         else if (!url)
             return;
-
+        if (url && url?.includes('<search_phrase>')) {
+            url = url.replace('<search_phrase>', String(template?.params?.search));
+        }
         url = expandTemplateUrl(url, template.params);
         await inspectedWindow.navigate(url);
         await onBeginExtract(template, false);

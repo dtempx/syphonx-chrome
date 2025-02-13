@@ -107,20 +107,6 @@ export default ({ open, onClose }: Props) => {
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
                         {workstreams?.length ? <AutorunWorkstreamSelect workstreams={workstreams} onChange={handleWorkstreamSelection} /> : <></>}
                     </Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                        <TextField
-                            fullWidth
-                            label="Account Key"
-                            variant="outlined"
-                            value={accountKey}
-                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                                setAccountKey(event.target.value);
-                            }}
-                            size="small"
-                            placeholder="Enter account key"
-                            sx={{ m: 1, maxHeight: 48 * 4.5 + 8, width: 300 }}
-                        />
-                    </Stack>
                     <FormControl>
                         <RadioGroup value={mode} onChange={(event, value) => setMode(value as "all" | "include" | "exclude")}>
                             <FormControlLabel value="all" control={<Radio />} label="Include all domains" />
