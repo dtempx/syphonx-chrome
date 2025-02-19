@@ -43,10 +43,11 @@ export default ({ open, onClose }: Props) => {
     const { user } = useTemplate();
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
+    const [accountKey, setAccountKey] = useState("");
     const domain = parseDomain(inspectedWindowUrl);
     const addVisible = !domains?.split("\n").includes(domain);
 
-    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
+    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([]);
     const [workstream, setWorkstream] = React.useState<Workstream>();
     const [pageType, setPageType] = React.useState<string>("product");
 
@@ -141,7 +142,7 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 onClick={handleClear}
                                 sx={{ mt: 1, minWidth: "auto" }}>
-                                    <Typography fontSize="small">Clear List</Typography>
+                                <Typography fontSize="small">Clear List</Typography>
                             </Button>
                         </Box>
                     </Stack>
