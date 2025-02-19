@@ -28,7 +28,8 @@ import {
 
 } from "@mui/icons-material";
 
-const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+// const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const api = new RestApi("http:localhost:8081");
 
 export interface Props {
     open: boolean;
@@ -171,12 +172,13 @@ export default ({ open, onClose }: Props) => {
         setLate(false);
         try {
             const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
-            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}`;
+            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}&page_type=${encodeURIComponent(autorun?.pageType!)}`;
             if (autorun?.mode === "include" && !isEmpty(autorun.domains))
                 params += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
             else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
                 params += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
             const template = await api.json("/autorun", { headers, params });
+            console.log(template)
             if (template?.url) {
                 setStatus("Running");
                 setId(template.id);

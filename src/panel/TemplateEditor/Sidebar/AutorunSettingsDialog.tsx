@@ -19,8 +19,10 @@ import {
     TextField,
     Typography
 } from "@mui/material";
+import AutorunPageTypeSelect from "../components/AutorunPageTypeSelect";
 
-const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+// const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const api = new RestApi("http://localhost:8081");
 const default_workstream = { workstream_id: "default", workstream_name: "default" } as Workstream;
 
 export interface Props {
@@ -33,6 +35,9 @@ interface Workstream {
     workstream_name: string;
 }
 
+const pageTypes = ['category', 'product', 'search']
+
+
 export default ({ open, onClose }: Props) => {
     const { autorun, setAutorun, inspectedWindowUrl } = useApp();
     const { user } = useTemplate();
@@ -43,6 +48,7 @@ export default ({ open, onClose }: Props) => {
 
     const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
     const [workstream, setWorkstream] = React.useState<Workstream>();
+    const [pageType, setPageType] = React.useState<string>("product");
 
     useEffect(() => {
         if (open) {
@@ -65,7 +71,8 @@ export default ({ open, onClose }: Props) => {
         setAutorun({
             mode,
             domains: domains?.split("\n").map((value: string) => value.trim()).filter((value: string) => value.length > 0),
-            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id)
+            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id),
+            pageType: pageType || "product"
         });
         onClose(event);
     }
@@ -95,6 +102,10 @@ export default ({ open, onClose }: Props) => {
     function handleWorkstreamSelection(workstream: Workstream) {
         setWorkstream(workstream);
     }
+    
+    function handlePagetypeSelection(pageType: string) {
+        setPageType(pageType);
+    }
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -103,6 +114,9 @@ export default ({ open, onClose }: Props) => {
                 <Stack direction="column">
                     <Stack direction="row" justifyContent="space-between" alignItems="center">
                         {workstreams?.length ? <AutorunWorkstreamSelect workstreams={workstreams} onChange={handleWorkstreamSelection} /> : <></>}
+                    </Stack>
+                    <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <AutorunPageTypeSelect pageTypes={pageTypes} onChange={handlePagetypeSelection} />
                     </Stack>
                     <FormControl>
                         <RadioGroup value={mode} onChange={(event, value) => setMode(value as "all" | "include" | "exclude")}>
