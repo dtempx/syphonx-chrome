@@ -66,6 +66,12 @@ export function DataProvider({ children }: { children: JSX.Element }) {
             url = template.url; 
         else if (!url)
             return;
+        
+
+        if (!template.url?.includes("https://")) {
+             console.info(`Template url is missing protocol: ${template.url}`)
+             url = `https://${template.url}`;
+        }
 
         url = expandTemplateUrl(url, template.params);
         await inspectedWindow.navigate(url);
