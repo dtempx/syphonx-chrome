@@ -73,9 +73,11 @@ export function DataProvider({ children }: { children: JSX.Element }) {
              url = `https://${template.url}`;
         }
 
-        if (url && url?.includes('<search_phrase>')) {
+        if (url && url?.includes('<search_phrase>'))
             url = url.replace('<search_phrase>', String(template?.params?.search));
-        }
+
+        if (url && url?.includes('$params.search'))
+            url = url.replace('$params.search', String(template?.params?.search));
         
         url = expandTemplateUrl(url, template.params);
         await inspectedWindow.navigate(url);

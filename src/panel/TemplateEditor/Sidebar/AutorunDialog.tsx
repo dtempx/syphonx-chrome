@@ -152,7 +152,7 @@ export default ({ open, onClose }: Props) => {
         }
         catch (err) {
             setError(err instanceof Error ? err.message : JSON.stringify(err));
-            setStatus("Stopped");
+            setStatus("Empty");
             setActive(false);
         }
 
