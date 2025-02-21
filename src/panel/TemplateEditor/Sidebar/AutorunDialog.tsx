@@ -176,7 +176,6 @@ export default ({ open, onClose }: Props) => {
             else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
                 params += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
             const template = await api.json("/autorun", { headers, params });
-            console.log(template)
             if (template?.url) {
                 setStatus("Running");
                 setId(template.id);
