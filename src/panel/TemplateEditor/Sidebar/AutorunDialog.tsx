@@ -28,7 +28,10 @@ import {
 
 } from "@mui/icons-material";
 
-const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const apiUrl = 'https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service'
+
+const api = new RestApi(apiUrl);
+
 export interface Props {
     open: boolean;
     onClose: (event: React.SyntheticEvent) => void;
@@ -79,6 +82,9 @@ export default ({ open, onClose }: Props) => {
             setTimer(value);            
         }
         else if (status === "Running" && !timer) {
+            if (!active) {
+                setActive(true)
+            }
             const value = setTimeout(() => {
                 setTimer(undefined);
                 setLate(true);
@@ -150,7 +156,7 @@ export default ({ open, onClose }: Props) => {
         }
         catch (err) {
             setError(err instanceof Error ? err.message : JSON.stringify(err));
-            setStatus("Empty");
+            setStatus("Idle");
             setActive(false);
         }
 
@@ -161,7 +167,7 @@ export default ({ open, onClose }: Props) => {
         else if (refreshing && !late)
             setStatus("Stopping");
         else
-            setStatus("Stopped");
+            setStatus("Idle");
     }
 
     async function next() {
@@ -192,7 +198,7 @@ export default ({ open, onClose }: Props) => {
             }
         }
         catch (err) {
-            setStatus("Stopped");
+            setStatus("Idle");
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setActive(false);
         }
@@ -257,7 +263,7 @@ export default ({ open, onClose }: Props) => {
                         <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
                         {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
                     </Stack>}
-                    {["Pausing", "Stopping", "Stopped"].includes(status) && id && !refreshing && <>
+                    {["Pausing", "Stopping", "Stopped", "Idle"].includes(status) && id && !refreshing && <>
                         <TableView />
                         {blocked && <Chip label="Blocked" variant="filled" color="error" icon={<BlockedIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
                         {pnf && <Chip label="Page Not Found" variant="filled" color="warning" icon={<UnknownIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}

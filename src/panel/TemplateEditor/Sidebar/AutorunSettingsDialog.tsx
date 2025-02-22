@@ -21,7 +21,9 @@ import {
 } from "@mui/material";
 import AutorunPageTypeSelect from "../components/AutorunPageTypeSelect";
 
-const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
+const apiUrl = "https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service"
+
+const api = new RestApi(apiUrl);
 
 const default_workstream = { workstream_id: "default", workstream_name: "default" } as Workstream;
 
