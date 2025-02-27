@@ -95,8 +95,13 @@ export default ({ open, onClose }: Props) => {
         }],
         null,
         ["Autorun", <AutorunIcon />, event => {
-            setDialog("autorun");
-            onClose(event);
+            if (!verified) {
+                setDialog("verify");
+                onClose(event);
+            } else {
+                setDialog("autorun");
+                onClose(event);
+            }
         }]
 /*
         ["Audit", <AuditIcon />, event => {

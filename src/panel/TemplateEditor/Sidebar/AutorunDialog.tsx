@@ -50,6 +50,7 @@ export default ({ open, onClose }: Props) => {
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
     const [late, setLate] = useState(false);
+    const [mismatchedPageTypes, setMismatchedPageTypes] = useState<any>(undefined);
 
     const error_codes = extractState?.errors.map(error => error.code as string) || [];
     const empty = isEmptyDeep(extractState?.data);
@@ -58,6 +59,7 @@ export default ({ open, onClose }: Props) => {
 
     function onActiveChange(event: React.ChangeEvent<HTMLInputElement>, value: boolean) {
         setActive(value);
+
         if (value)
             next();
         else if (status === "Running" && !late)
@@ -65,6 +67,16 @@ export default ({ open, onClose }: Props) => {
         else
             setStatus("Stopped");
     }
+
+
+    useEffect(() => {
+        if (mismatchedPageTypes) {
+            setStatus("Stopped")
+        } else {
+            setMismatchedPageTypes(false)
+            setStatus("Running")
+        }
+    }, [mismatchedPageTypes])
 
     useEffect(() => {
         if (status === "Pausing" && !timer) {
@@ -77,14 +89,11 @@ export default ({ open, onClose }: Props) => {
         else if (status === "Idle" && !timer) {
             const value = setTimeout(() => {
                 setTimer(undefined);
-                next();
-            }, 120000);
-            setTimer(value);            
+                next()
+            }, 120000); // 2 minutes = 120000
+            setTimer(value);
         }
         else if (status === "Running" && !timer) {
-            if (!active) {
-                setActive(true)
-            }
             const value = setTimeout(() => {
                 setTimer(undefined);
                 setLate(true);
@@ -95,7 +104,6 @@ export default ({ open, onClose }: Props) => {
             clearTimeout(timer);
             setTimer(undefined);
         }
-
         return () => {
             if (timer) {
                 clearTimeout(timer);
@@ -125,7 +133,7 @@ export default ({ open, onClose }: Props) => {
         try {
             const capture_id = uuid.v4();
             const capture_date = new Date();
-    
+
             const data = {
                 capture_id,
                 capture_date,
@@ -151,7 +159,7 @@ export default ({ open, onClose }: Props) => {
                 await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
             }
 
-            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
+            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] } }, { headers });
             setPostCount(postCount + 1);
         }
         catch (err) {
@@ -168,6 +176,7 @@ export default ({ open, onClose }: Props) => {
             setStatus("Stopping");
         else
             setStatus("Idle");
+        setActive(true)
     }
 
     async function next() {
@@ -176,12 +185,13 @@ export default ({ open, onClose }: Props) => {
         setLate(false);
         try {
             const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
-            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}&page_type=${encodeURIComponent(autorun?.pageType!)}`;
+            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}&workstream_name=${encodeURIComponent(autorun?.workstream?.workstream_name!)}`;
             if (autorun?.mode === "include" && !isEmpty(autorun.domains))
                 params += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
             else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
                 params += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
             const template = await api.json("/autorun", { headers, params });
+
             if (template?.url) {
                 setStatus("Running");
                 setId(template.id);
@@ -232,9 +242,10 @@ export default ({ open, onClose }: Props) => {
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
                     <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
-                        <Stack direction="row" sx={{ mb: 1 }}>
+                        <Stack direction="row" sx={{ mb: 1, alignItems: "center" }}>
                             <Switch size="small" checked={active} disabled={status === "Stopping"} onChange={onActiveChange} />
                             <Typography sx={{ ml: 2 }}>{status}</Typography>
+                            {status === "Idle" && id ? <Chip variant="outlined" color="primary" label={"Retrying in 2 minutes"} sx={{ ml: 2, mb: 0, mt: 0, mr: 0 }} /> : <></>}
                         </Stack>
                         <Stack direction="row">
                             <Chip variant="filled" color="primary" label={formatNumber(postCount)} icon={<PostIcon fontSize="small" />} size="small" sx={{ mt: 1, mr: 2 }} />
@@ -250,19 +261,19 @@ export default ({ open, onClose }: Props) => {
                     <Chip variant="outlined" color="primary" label={id} sx={{ mt: 2, mb: 2, visibility: id ? "visible" : "hidden" }} />
                     {status === "Running" && <>
                         <RunStatusRibbon />
-                        {late && 
-                        <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                            <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
-                            {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
-                        </Stack>}
+                        {late &&
+                            <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                                <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
+                                {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
+                            </Stack>}
                     </>}
                     {status === "Empty" &&
-                    <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                        <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
-                        <Button variant="outlined" onClick={async () => await retry()} sx={{ width: 300 }}>Try Again</Button>
-                        <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
-                        {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
-                    </Stack>}
+                        <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                            <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
+                            <Button variant="outlined" onClick={async () => await retry()} sx={{ width: 300 }}>Try Again</Button>
+                            <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
+                            {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
+                        </Stack>}
                     {["Pausing", "Stopping", "Stopped", "Idle"].includes(status) && id && !refreshing && <>
                         <TableView />
                         {blocked && <Chip label="Blocked" variant="filled" color="error" icon={<BlockedIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
