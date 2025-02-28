@@ -50,7 +50,6 @@ export default ({ open, onClose }: Props) => {
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
     const [late, setLate] = useState(false);
-    const [mismatchedPageTypes, setMismatchedPageTypes] = useState<any>(undefined);
 
     const error_codes = extractState?.errors.map(error => error.code as string) || [];
     const empty = isEmptyDeep(extractState?.data);
@@ -67,16 +66,6 @@ export default ({ open, onClose }: Props) => {
         else
             setStatus("Stopped");
     }
-
-
-    useEffect(() => {
-        if (mismatchedPageTypes) {
-            setStatus("Stopped")
-        } else {
-            setMismatchedPageTypes(false)
-            setStatus("Running")
-        }
-    }, [mismatchedPageTypes])
 
     useEffect(() => {
         if (status === "Pausing" && !timer) {
