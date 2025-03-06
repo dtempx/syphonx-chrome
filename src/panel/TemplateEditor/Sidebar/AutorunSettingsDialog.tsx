@@ -20,7 +20,7 @@ import {
     Typography
 } from "@mui/material";
 
-const apiUrl = "https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service"
+const apiUrl = "http://localhost:8081"
 
 const api = new RestApi(apiUrl);
 
@@ -43,7 +43,6 @@ export default ({ open, onClose }: Props) => {
     const { user } = useTemplate();
     const [mode, setMode] = useState<"all" | "include" | "exclude">(autorun?.mode || "all");
     const [domains, setDomains] = useState(autorun?.domains?.join("\n") || "");
-    const [accountKey, setAccountKey] = useState("");
     const domain = parseDomain(inspectedWindowUrl);
     const addVisible = !domains?.split("\n").includes(domain);
 

@@ -28,7 +28,7 @@ import {
 
 } from "@mui/icons-material";
 
-const apiUrl = 'https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service'
+const apiUrl = 'http://localhost:8081'
 
 const api = new RestApi(apiUrl);
 
@@ -50,11 +50,14 @@ export default ({ open, onClose }: Props) => {
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
     const [late, setLate] = useState(false);
+    const [snooze, setSnoozeThreshold] = useState<number>(120000) // hour
 
     const error_codes = extractState?.errors.map(error => error.code as string) || [];
     const empty = isEmptyDeep(extractState?.data);
     const blocked = error_codes.includes("blocked");
     const pnf = error_codes.includes("pnf");
+
+
 
     function onActiveChange(event: React.ChangeEvent<HTMLInputElement>, value: boolean) {
         setActive(value);
@@ -66,6 +69,30 @@ export default ({ open, onClose }: Props) => {
         else
             setStatus("Stopped");
     }
+
+    const incrementalSnooze = () => {
+        // Instead of a loop, use state to track the current snooze level
+        const currentSnooze = snooze;
+        let newSnooze = currentSnooze;
+
+        // Increment to the next level
+        if (currentSnooze === 120000) {
+            newSnooze = 600000;
+            console.info(`Snooze increased to 10 minutes`);
+        } else if (currentSnooze === 600000) {
+            newSnooze = 1200000;
+            console.info(`Snooze increased to 20 minutes`);
+        } else if (currentSnooze === 1200000) {
+            newSnooze = 3600000;
+            console.info(`Snooze increased to 1 hour`);
+        } else {
+            console.info(`Keeping snooze at ${newSnooze / 60000} minutes`);
+        }
+
+        setSnoozeThreshold(newSnooze);
+
+        return newSnooze;
+    };
 
     useEffect(() => {
         if (status === "Pausing" && !timer) {
@@ -79,7 +106,7 @@ export default ({ open, onClose }: Props) => {
             const value = setTimeout(() => {
                 setTimer(undefined);
                 next()
-            }, 120000); // 2 minutes = 120000
+            }, incrementalSnooze()); // 2 minutes = 120000 up to an hour
             setTimer(value);
         }
         else if (status === "Running" && !timer) {
@@ -148,7 +175,14 @@ export default ({ open, onClose }: Props) => {
                 await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
             }
 
-            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] } }, { headers });
+            let route = `/autorun?workstream=${autorun?.workstream?.workstream_id}&workstream_name=${autorun?.workstream?.workstream_name}`;
+
+            if (autorun?.mode === "include" && !isEmpty(autorun.domains))
+                route += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
+            else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
+                route += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
+
+            await api.postJson(route, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] } }, { headers });
             setPostCount(postCount + 1);
         }
         catch (err) {
