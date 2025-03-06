@@ -20,10 +20,7 @@ import {
     Typography
 } from "@mui/material";
 
-const apiUrl = "http://localhost:8081"
-
-const api = new RestApi(apiUrl);
-
+const api = new RestApi("https://us-central1-ps-bigdata.cloudfunctions.net/syphonx-service");
 const default_workstream = { workstream_id: "default", workstream_name: "default" } as Workstream;
 
 export interface Props {
@@ -36,8 +33,6 @@ interface Workstream {
     workstream_name: string;
 }
 
-
-
 export default ({ open, onClose }: Props) => {
     const { autorun, setAutorun, inspectedWindowUrl } = useApp();
     const { user } = useTemplate();
@@ -46,7 +41,7 @@ export default ({ open, onClose }: Props) => {
     const domain = parseDomain(inspectedWindowUrl);
     const addVisible = !domains?.split("\n").includes(domain);
 
-    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([]);
+    const [workstreams, setWorkstreams] = React.useState<Workstream[]>([ ]);
     const [workstream, setWorkstream] = React.useState<Workstream>();
 
     useEffect(() => {
@@ -70,7 +65,7 @@ export default ({ open, onClose }: Props) => {
         setAutorun({
             mode,
             domains: domains?.split("\n").map((value: string) => value.trim()).filter((value: string) => value.length > 0),
-            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id),
+            workstream: workstream && workstreams.find((item: Workstream) => item.workstream_id === workstream.workstream_id)
         });
         onClose(event);
     }
@@ -100,8 +95,6 @@ export default ({ open, onClose }: Props) => {
     function handleWorkstreamSelection(workstream: Workstream) {
         setWorkstream(workstream);
     }
-    
-
 
     return (
         <Dialog open={open} onClose={onClose}>
@@ -134,7 +127,7 @@ export default ({ open, onClose }: Props) => {
                                 size="small"
                                 onClick={handleClear}
                                 sx={{ mt: 1, minWidth: "auto" }}>
-                                <Typography fontSize="small">Clear List</Typography>
+                                    <Typography fontSize="small">Clear List</Typography>
                             </Button>
                         </Box>
                     </Stack>
