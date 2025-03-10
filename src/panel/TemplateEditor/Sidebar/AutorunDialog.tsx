@@ -68,30 +68,6 @@ export default ({ open, onClose }: Props) => {
             setStatus("Stopped");
     }
 
-    const incrementalSnooze = () => {
-        // Instead of a loop, use state to track the current snooze level
-        const currentSnooze = snooze;
-        let newSnooze = currentSnooze;
-
-        // Increment to the next level
-        if (currentSnooze === 120000) {
-            newSnooze = 600000;
-            console.info(`Snooze increased to 10 minutes`);
-        } else if (currentSnooze === 600000) {
-            newSnooze = 1200000;
-            console.info(`Snooze increased to 20 minutes`);
-        } else if (currentSnooze === 1200000) {
-            newSnooze = 3600000;
-            console.info(`Snooze increased to 1 hour`);
-        } else {
-            console.info(`Keeping snooze at ${newSnooze / 60000} minutes`);
-        }
-
-        setSnoozeThreshold(newSnooze);
-
-        return newSnooze;
-    };
-
     useEffect(() => {
         if (status === "Pausing" && !timer) {
             const value = setTimeout(() => {
@@ -104,7 +80,7 @@ export default ({ open, onClose }: Props) => {
             const value = setTimeout(() => {
                 setTimer(undefined);
                 next()
-            }, incrementalSnooze()); // 2 minutes = 120000 up to an hour
+            }, 120000); // 2 minutes = 120000 up to an hour
             setTimer(value);
         }
         else if (status === "Running" && !timer) {
