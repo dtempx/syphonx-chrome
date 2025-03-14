@@ -54,8 +54,11 @@ export default ({ open, onClose }: Props) => {
     const blocked = error_codes.includes("blocked");
     const pnf = error_codes.includes("pnf");
 
+
+
     function onActiveChange(event: React.ChangeEvent<HTMLInputElement>, value: boolean) {
         setActive(value);
+
         if (value)
             next();
         else if (status === "Running" && !late)
@@ -75,9 +78,9 @@ export default ({ open, onClose }: Props) => {
         else if (status === "Idle" && !timer) {
             const value = setTimeout(() => {
                 setTimer(undefined);
-                next();
+                next()
             }, 120000);
-            setTimer(value);            
+            setTimer(value);
         }
         else if (status === "Running" && !timer) {
             const value = setTimeout(() => {
@@ -90,7 +93,6 @@ export default ({ open, onClose }: Props) => {
             clearTimeout(timer);
             setTimer(undefined);
         }
-
         return () => {
             if (timer) {
                 clearTimeout(timer);
@@ -120,7 +122,7 @@ export default ({ open, onClose }: Props) => {
         try {
             const capture_id = uuid.v4();
             const capture_date = new Date();
-    
+
             const data = {
                 capture_id,
                 capture_date,
@@ -146,12 +148,19 @@ export default ({ open, onClose }: Props) => {
                 await cloud.uploadScreenshot({ url: s3UploadInformation.url, data: screenshot });
             }
 
-            await api.postJson(`/autorun?workstream=${autorun?.workstream?.workstream_id}`, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] }}, { headers });
+            let route = `/autorun?workstream=${autorun?.workstream?.workstream_id}&workstream_name=${autorun?.workstream?.workstream_name}`;
+
+            if (autorun?.mode === "include" && !isEmpty(autorun.domains))
+                route += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
+            else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
+                route += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
+
+            await api.postJson(route, { ...data, screenshot: { ...s3UploadInformation, url: s3UploadInformation?.url?.split("?")?.[0] } }, { headers });
             setPostCount(postCount + 1);
         }
         catch (err) {
             setError(err instanceof Error ? err.message : JSON.stringify(err));
-            setStatus("Stopped");
+            setStatus("Idle");
             setActive(false);
         }
 
@@ -162,7 +171,8 @@ export default ({ open, onClose }: Props) => {
         else if (refreshing && !late)
             setStatus("Stopping");
         else
-            setStatus("Stopped");
+            setStatus("Idle");
+        setActive(true)
     }
 
     async function next() {
@@ -171,12 +181,13 @@ export default ({ open, onClose }: Props) => {
         setLate(false);
         try {
             const headers: Record<string, string> = { Authorization: `Bearer u/${user?.id}`, "X-Username": `${user?.email}` };
-            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}`;
+            let params = `?workstream=${encodeURIComponent(autorun?.workstream?.workstream_id!)}&workstream_name=${encodeURIComponent(autorun?.workstream?.workstream_name!)}`;
             if (autorun?.mode === "include" && !isEmpty(autorun.domains))
                 params += `&include=${encodeURIComponent(autorun.domains!.join(","))}`;
             else if (autorun?.mode === "exclude" && !isEmpty(autorun.domains))
                 params += `&exclude=${encodeURIComponent(autorun.domains!.join(","))}`;
             const template = await api.json("/autorun", { headers, params });
+
             if (template?.url) {
                 setStatus("Running");
                 setId(template.id);
@@ -193,7 +204,7 @@ export default ({ open, onClose }: Props) => {
             }
         }
         catch (err) {
-            setStatus("Stopped");
+            setStatus("Idle");
             setError(err instanceof Error ? err.message : JSON.stringify(err));
             setActive(false);
         }
@@ -209,7 +220,7 @@ export default ({ open, onClose }: Props) => {
         const domains = autorun?.domains || [];
         if (!domains.includes(domain))
             domains.push(domain);
-        setAutorun({ mode: "exclude", domains });
+        setAutorun({ workstream: autorun?.workstream , mode: "exclude", domains });
         setStatus("Pausing");
     }
 
@@ -227,9 +238,10 @@ export default ({ open, onClose }: Props) => {
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
                     <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
-                        <Stack direction="row" sx={{ mb: 1 }}>
+                        <Stack direction="row" sx={{ mb: 1, alignItems: "center" }}>
                             <Switch size="small" checked={active} disabled={status === "Stopping"} onChange={onActiveChange} />
                             <Typography sx={{ ml: 2 }}>{status}</Typography>
+                            {status === "Idle" && id ? <Chip variant="outlined" color="primary" label={"Retrying in 2 minutes"} sx={{ ml: 2, mb: 0, mt: 0, mr: 0 }} /> : <></>}
                         </Stack>
                         <Stack direction="row">
                             <Chip variant="filled" color="primary" label={formatNumber(postCount)} icon={<PostIcon fontSize="small" />} size="small" sx={{ mt: 1, mr: 2 }} />
@@ -245,20 +257,20 @@ export default ({ open, onClose }: Props) => {
                     <Chip variant="outlined" color="primary" label={id} sx={{ mt: 2, mb: 2, visibility: id ? "visible" : "hidden" }} />
                     {status === "Running" && <>
                         <RunStatusRibbon />
-                        {late && 
-                        <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                            <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
-                            {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
-                        </Stack>}
+                        {late &&
+                            <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                                <Button variant="outlined" onClick={() => next()} sx={{ width: 300 }}>Next Page</Button>
+                                {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
+                            </Stack>}
                     </>}
                     {status === "Empty" &&
-                    <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
-                        <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
-                        <Button variant="outlined" onClick={async () => await retry()} sx={{ width: 300 }}>Try Again</Button>
-                        <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
-                        {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
-                    </Stack>}
-                    {["Pausing", "Stopping", "Stopped"].includes(status) && id && !refreshing && <>
+                        <Stack direction="column" alignItems="center" spacing={2} sx={{ mt: 2 }}>
+                            <Typography sx={{ mb: 2 }}>No data was found on the page. If there is a CAPTCHA please solve it and choose <b>Try Again</b>, otherwise choose <b>Next Page</b> to move on to the next page.</Typography>
+                            <Button variant="outlined" onClick={async () => await retry()} sx={{ width: 300 }}>Try Again</Button>
+                            <Button variant="outlined" onClick={async () => await next()} sx={{ width: 300 }}>Next Page</Button>
+                            {extractState?.domain && <Button variant="outlined" onClick={() => skip(extractState?.domain)} sx={{ width: 300 }}>Skip&nbsp;<small>{extractState.domain}</small></Button>}
+                        </Stack>}
+                    {["Pausing", "Stopping", "Stopped", "Idle"].includes(status) && id && !refreshing && <>
                         <TableView />
                         {blocked && <Chip label="Blocked" variant="filled" color="error" icon={<BlockedIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
                         {pnf && <Chip label="Page Not Found" variant="filled" color="warning" icon={<UnknownIcon fontSize="small" />} size="small" sx={{ mt: 1, width: "fit-content" }} />}
