@@ -79,7 +79,7 @@ export default ({ open, onClose }: Props) => {
             const value = setTimeout(() => {
                 setTimer(undefined);
                 next()
-            }, 120000); // 2 minutes = 120000 up to an hour
+            }, 120000);
             setTimer(value);
         }
         else if (status === "Running" && !timer) {
