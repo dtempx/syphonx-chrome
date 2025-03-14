@@ -6,7 +6,6 @@
   "scripts": {
     "build": "bash ./build.sh",
     "deploy": "bash ./deploy.sh",
-    "deploy-branch": "bash ./deploy-branch.sh",
     "clean": "bash ./clean.sh",
     "test": "node --experimental-specifier-resolution=node ./node_modules/mocha/lib/cli/cli.js --config .mocharc.yml"
   },
