@@ -48,7 +48,6 @@ export default ({ open, onClose }: Props) => {
     const [postCount, setPostCount] = useState(0);
     const [template, setTemplate] = useState<any>();
     const [late, setLate] = useState(false);
-    const [snooze, setSnoozeThreshold] = useState<number>(120000) // hour
 
     const error_codes = extractState?.errors.map(error => error.code as string) || [];
     const empty = isEmptyDeep(extractState?.data);
