@@ -68,8 +68,8 @@ export function DataProvider({ children }: { children: JSX.Element }) {
         else if (!url)
             return;        
 
-        if (!template.url?.includes("https://")) {
-             console.info(`Template url is missing protocol: ${template.url}`)
+        // tmp fixes
+        if (template.url?.includes("https://")) {
              url = `https://${template.url}`;
         }
 
