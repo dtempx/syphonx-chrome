@@ -50,10 +50,6 @@ sudo apt-get install gh
 1. Commit and push to main
 2. Run `yarn deploy` to publish a release
 
-## Deploy a specific branch
-1. Commit your changes locally -- update PR with changes
-2. run `yarn deploy-branch <your-branch>` to publish a release for that specific branch
-
 ## Re-Deploy
 1. Run `gh release delete v0.9.9` to delete an existing release
 2. Run `git tag -d v0.9.9` to delete the corresponding tag
