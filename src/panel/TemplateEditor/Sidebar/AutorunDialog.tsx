@@ -220,7 +220,7 @@ export default ({ open, onClose }: Props) => {
         const domains = autorun?.domains || [];
         if (!domains.includes(domain))
             domains.push(domain);
-        setAutorun({ mode: "exclude", domains });
+        setAutorun({ workstream: autorun?.workstream , mode: "exclude", domains });
         setStatus("Pausing");
     }
 
