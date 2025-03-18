@@ -62,16 +62,10 @@ export function DataProvider({ children }: { children: JSX.Element }) {
     }, [json, autoRefresh]);
 
     async function runTemplate(template: syphonx.Template | syphonx.ExtractState, url?: string) {
-        
         if (!url && template.url)
             url = template.url;
         else if (!url)
             return;        
-
-        // tmp fixes
-        if (!template.url?.includes("https://")) {
-             url = `https://${template.url}`;
-        }
 
         if (url && url?.includes('<search_phrase>'))
             url = url.replace('<search_phrase>', String(template?.params?.search));
