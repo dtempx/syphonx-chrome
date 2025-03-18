@@ -69,7 +69,7 @@ export function DataProvider({ children }: { children: JSX.Element }) {
             return;        
 
         // tmp fixes
-        if (template.url?.includes("https://")) {
+        if (!template.url?.includes("https://")) {
              url = `https://${template.url}`;
         }
 
