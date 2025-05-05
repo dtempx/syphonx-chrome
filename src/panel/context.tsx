@@ -51,7 +51,7 @@ export function AppProvider({ children }: React.PropsWithChildren<{}>) {
     const [advanced, setAdvanced] = useState(false);
     const [autoOpen, setAutoOpen] = useState(true);
     const [autoRefresh, setAutoRefresh] = useState(true);
-    const [autorun, setAutorun] = useState<AutorunSettings | undefined>();
+    const [autorun, setAutorun] = useState<AutorunSettings | undefined>({workstream: {workstream_id: "default", workstream_name: "default"}});
     const [currentDirectory, setCurrentDirectory] = useState("");
     const [debug, setDebug] = useState(false);
     const [editTracking, setEditTracking] = useState(true);
