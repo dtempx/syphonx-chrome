@@ -38,7 +38,7 @@ export default ({ workstreams, onChange }: Props) => {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, width: 300 }}>
+            <FormControl sx={{ m: 1, width: '440px' }}>
                 <InputLabel id="workstream-label">Workstream</InputLabel>
                 <Select
                     labelId="workstream-label"

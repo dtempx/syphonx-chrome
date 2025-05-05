@@ -97,7 +97,7 @@ export default ({ open, onClose }: Props) => {
     }
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} sx={{ "& .MuiDialog-paper": { width: "500px" } }}>
             <DialogTitle>Autorun Settings</DialogTitle>
             <DialogContent sx={{ mt: 4 }}>
                 <Stack direction="column">
